@@ -1,0 +1,31 @@
+module SentDm
+  module Resources
+    class Templates
+      def create: (
+        definition: SentDm::TemplateDefinition,
+        ?category: String?,
+        ?language: String?,
+        ?submit_for_review: bool,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::TemplateResponse
+
+      def retrieve: (
+        String id,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::TemplateResponse
+
+      def list: (
+        page: Integer,
+        page_size: Integer,
+        ?category: String?,
+        ?search: String?,
+        ?status: String?,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::TemplateListResponse
+
+      def delete: (String id, ?request_options: SentDm::request_opts) -> nil
+
+      def initialize: (client: SentDm::Client) -> void
+    end
+  end
+end

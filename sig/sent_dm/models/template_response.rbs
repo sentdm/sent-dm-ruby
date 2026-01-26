@@ -1,0 +1,92 @@
+module SentDm
+  module Models
+    type template_response =
+      {
+        id: String,
+        category: String,
+        created_at: Time,
+        definition: SentDm::TemplateDefinition,
+        display_name: String,
+        is_published: bool,
+        language: String,
+        status: String,
+        updated_at: Time?,
+        whatsapp_template_id: String,
+        whatsapp_template_name: String
+      }
+
+    class TemplateResponse < SentDm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader category: String?
+
+      def category=: (String) -> String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader definition: SentDm::TemplateDefinition?
+
+      def definition=: (
+        SentDm::TemplateDefinition
+      ) -> SentDm::TemplateDefinition
+
+      attr_reader display_name: String?
+
+      def display_name=: (String) -> String
+
+      attr_reader is_published: bool?
+
+      def is_published=: (bool) -> bool
+
+      attr_reader language: String?
+
+      def language=: (String) -> String
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_accessor updated_at: Time?
+
+      attr_reader whatsapp_template_id: String?
+
+      def whatsapp_template_id=: (String) -> String
+
+      attr_reader whatsapp_template_name: String?
+
+      def whatsapp_template_name=: (String) -> String
+
+      def initialize: (
+        ?id: String,
+        ?category: String,
+        ?created_at: Time,
+        ?definition: SentDm::TemplateDefinition,
+        ?display_name: String,
+        ?is_published: bool,
+        ?language: String,
+        ?status: String,
+        ?updated_at: Time?,
+        ?whatsapp_template_id: String,
+        ?whatsapp_template_name: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        category: String,
+        created_at: Time,
+        definition: SentDm::TemplateDefinition,
+        display_name: String,
+        is_published: bool,
+        language: String,
+        status: String,
+        updated_at: Time?,
+        whatsapp_template_id: String,
+        whatsapp_template_name: String
+      }
+    end
+  end
+end

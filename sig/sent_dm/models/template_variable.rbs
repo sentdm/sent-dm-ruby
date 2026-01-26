@@ -1,0 +1,87 @@
+module SentDm
+  module Models
+    type template_variable =
+      {
+        id: Integer,
+        name: String,
+        props: SentDm::TemplateVariable::Props,
+        type: String
+      }
+
+    class TemplateVariable < SentDm::Internal::Type::BaseModel
+      attr_reader id: Integer?
+
+      def id=: (Integer) -> Integer
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader props: SentDm::TemplateVariable::Props?
+
+      def props=: (
+        SentDm::TemplateVariable::Props
+      ) -> SentDm::TemplateVariable::Props
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      def initialize: (
+        ?id: Integer,
+        ?name: String,
+        ?props: SentDm::TemplateVariable::Props,
+        ?type: String
+      ) -> void
+
+      def to_hash: -> {
+        id: Integer,
+        name: String,
+        props: SentDm::TemplateVariable::Props,
+        type: String
+      }
+
+      type props =
+        {
+          alt: String?,
+          media_type: String?,
+          sample: String?,
+          short_url: String?,
+          url: String?,
+          variable_type: String?
+        }
+
+      class Props < SentDm::Internal::Type::BaseModel
+        attr_accessor alt: String?
+
+        attr_accessor media_type: String?
+
+        attr_accessor sample: String?
+
+        attr_accessor short_url: String?
+
+        attr_accessor url: String?
+
+        attr_accessor variable_type: String?
+
+        def initialize: (
+          ?alt: String?,
+          ?media_type: String?,
+          ?sample: String?,
+          ?short_url: String?,
+          ?url: String?,
+          ?variable_type: String?
+        ) -> void
+
+        def to_hash: -> {
+          alt: String?,
+          media_type: String?,
+          sample: String?,
+          short_url: String?,
+          url: String?,
+          variable_type: String?
+        }
+      end
+    end
+  end
+end

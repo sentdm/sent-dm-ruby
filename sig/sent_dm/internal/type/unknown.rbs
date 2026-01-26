@@ -1,0 +1,26 @@
+module SentDm
+  module Internal
+    module Type
+      class Unknown
+        extend SentDm::Internal::Type::Converter
+        extend SentDm::Internal::Util::SorbetRuntimeSupport
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          top value,
+          state: SentDm::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def self.dump: (
+          top value,
+          state: SentDm::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def self.to_sorbet_type: -> top
+      end
+    end
+  end
+end

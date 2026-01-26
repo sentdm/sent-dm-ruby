@@ -1,0 +1,43 @@
+module SentDm
+  class ContactListItem = SentDm::Models::ContactListItem
+
+  class ContactListParams = SentDm::Models::ContactListParams
+
+  class ContactRetrieveByPhoneParams = SentDm::Models::ContactRetrieveByPhoneParams
+
+  class ContactRetrieveIDParams = SentDm::Models::ContactRetrieveIDParams
+
+  class MessageRetrieveParams = SentDm::Models::MessageRetrieveParams
+
+  class MessageSendQuickMessageParams = SentDm::Models::MessageSendQuickMessageParams
+
+  class MessageSendToContactParams = SentDm::Models::MessageSendToContactParams
+
+  class MessageSendToPhoneParams = SentDm::Models::MessageSendToPhoneParams
+
+  class NumberLookupRetrieveParams = SentDm::Models::NumberLookupRetrieveParams
+
+  class OrganizationListParams = SentDm::Models::OrganizationListParams
+
+  class OrganizationRetrieveProfilesParams = SentDm::Models::OrganizationRetrieveProfilesParams
+
+  module Organizations = SentDm::Models::Organizations
+
+  class ProfileSummary = SentDm::Models::ProfileSummary
+
+  class TemplateBodyContent = SentDm::Models::TemplateBodyContent
+
+  class TemplateCreateParams = SentDm::Models::TemplateCreateParams
+
+  class TemplateDefinition = SentDm::Models::TemplateDefinition
+
+  class TemplateDeleteParams = SentDm::Models::TemplateDeleteParams
+
+  class TemplateListParams = SentDm::Models::TemplateListParams
+
+  class TemplateResponse = SentDm::Models::TemplateResponse
+
+  class TemplateRetrieveParams = SentDm::Models::TemplateRetrieveParams
+
+  class TemplateVariable = SentDm::Models::TemplateVariable
+end
