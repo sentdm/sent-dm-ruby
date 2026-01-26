@@ -3,10 +3,15 @@
 require_relative "../test_helper"
 
 class SentDm::Test::Resources::MessagesTest < SentDm::Test::ResourceTest
-  def test_retrieve
+  def test_retrieve_required_params
     skip("Prism tests are disabled")
 
-    response = @sent_dm.messages.retrieve("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+    response =
+      @sent_dm.messages.retrieve(
+        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        x_api_key: "",
+        x_sender_id: "00000000-0000-0000-0000-000000000000"
+      )
 
     assert_pattern do
       response => SentDm::Models::MessageRetrieveResponse
@@ -39,7 +44,9 @@ class SentDm::Test::Resources::MessagesTest < SentDm::Test::ResourceTest
     response =
       @sent_dm.messages.send_quick_message(
         custom_message: "Hello, this is a test message!",
-        phone_number: "+1234567890"
+        phone_number: "+1234567890",
+        x_api_key: "",
+        x_sender_id: "00000000-0000-0000-0000-000000000000"
       )
 
     assert_pattern do
@@ -53,7 +60,9 @@ class SentDm::Test::Resources::MessagesTest < SentDm::Test::ResourceTest
     response =
       @sent_dm.messages.send_to_contact(
         contact_id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        x_api_key: "",
+        x_sender_id: "00000000-0000-0000-0000-000000000000"
       )
 
     assert_pattern do
@@ -67,7 +76,9 @@ class SentDm::Test::Resources::MessagesTest < SentDm::Test::ResourceTest
     response =
       @sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        x_api_key: "",
+        x_sender_id: "00000000-0000-0000-0000-000000000000"
       )
 
     assert_pattern do

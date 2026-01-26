@@ -23,10 +23,18 @@ module SentDm
       sig { returns(String) }
       attr_accessor :phone_number
 
+      sig { returns(String) }
+      attr_accessor :x_api_key
+
+      sig { returns(String) }
+      attr_accessor :x_sender_id
+
       sig do
         params(
           custom_message: String,
           phone_number: String,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -36,6 +44,8 @@ module SentDm
         # The phone number to send the message to, in international format (e.g.,
         # +1234567890)
         phone_number:,
+        x_api_key:,
+        x_sender_id:,
         request_options: {}
       )
       end
@@ -45,6 +55,8 @@ module SentDm
           {
             custom_message: String,
             phone_number: String,
+            x_api_key: String,
+            x_sender_id: String,
             request_options: SentDm::RequestOptions
           }
         )

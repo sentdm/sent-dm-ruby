@@ -3,18 +3,24 @@ module SentDm
     class Messages
       def retrieve: (
         String id,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::Models::MessageRetrieveResponse
 
       def send_quick_message: (
         custom_message: String,
         phone_number: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> nil
 
       def send_to_contact: (
         contact_id: String,
         template_id: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?template_variables: ::Hash[Symbol, String]?,
         ?request_options: SentDm::request_opts
       ) -> nil
@@ -22,6 +28,8 @@ module SentDm
       def send_to_phone: (
         phone_number: String,
         template_id: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?template_variables: ::Hash[Symbol, String]?,
         ?request_options: SentDm::request_opts
       ) -> nil

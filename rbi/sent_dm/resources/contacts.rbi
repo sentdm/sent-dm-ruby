@@ -10,14 +10,20 @@ module SentDm
         params(
           page: Integer,
           page_size: Integer,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(SentDm::Models::ContactListResponse)
       end
       def list(
-        # The page number (zero-indexed). Default is 0.
+        # Query param: The page number (zero-indexed). Default is 0.
         page:,
-        # The number of items per page. Default is 20.
+        # Query param: The number of items per page. Default is 20.
         page_size:,
+        # Header param
+        x_api_key:,
+        # Header param
+        x_sender_id:,
         request_options: {}
       )
       end
@@ -28,12 +34,18 @@ module SentDm
       sig do
         params(
           phone_number: String,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(SentDm::ContactListItem)
       end
       def retrieve_by_phone(
-        # The phone number in international format (e.g., +1234567890)
+        # Query param: The phone number in international format (e.g., +1234567890)
         phone_number:,
+        # Header param
+        x_api_key:,
+        # Header param
+        x_sender_id:,
         request_options: {}
       )
       end
@@ -44,12 +56,18 @@ module SentDm
       sig do
         params(
           id: String,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(SentDm::ContactListItem)
       end
       def retrieve_id(
-        # The unique identifier (GUID) of the resource to retrieve
+        # Query param: The unique identifier (GUID) of the resource to retrieve
         id:,
+        # Header param
+        x_api_key:,
+        # Header param
+        x_sender_id:,
         request_options: {}
       )
       end

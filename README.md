@@ -26,11 +26,13 @@ gem "sent-dm", "~> 0.0.1"
 require "bundler/setup"
 require "sent_dm"
 
-sent_dm = SentDm::Client.new(
-  customer_auth_scheme: ENV["SENT_DM_CUSTOMER_AUTH_SCHEME"] # This is the default and can be omitted
-)
+sent_dm = SentDm::Client.new(api_key: "My API Key", sender_id: "My Sender ID")
 
-result = sent_dm.templates.delete("REPLACE_ME")
+result = sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  x_sender_id: "00000000-0000-0000-0000-000000000000"
+)
 
 puts(result)
 ```
@@ -41,7 +43,11 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  template = sent_dm.templates.delete("REPLACE_ME")
+  message = sent_dm.messages.send_to_phone(
+    phone_number: "+1234567890",
+    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    x_sender_id: "00000000-0000-0000-0000-000000000000"
+  )
 rescue SentDm::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -80,11 +86,18 @@ You can use the `max_retries` option to configure or disable this:
 ```ruby
 # Configure the default for all requests:
 sent_dm = SentDm::Client.new(
-  max_retries: 0 # default is 2
+  max_retries: 0, # default is 2
+  api_key: "My API Key",
+  sender_id: "My Sender ID"
 )
 
 # Or, configure per-request:
-sent_dm.templates.delete("REPLACE_ME", request_options: {max_retries: 5})
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  x_sender_id: "00000000-0000-0000-0000-000000000000",
+  request_options: {max_retries: 5}
+)
 ```
 
 ### Timeouts
@@ -94,11 +107,18 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 ```ruby
 # Configure the default for all requests:
 sent_dm = SentDm::Client.new(
-  timeout: nil # default is 60
+  timeout: nil, # default is 60
+  api_key: "My API Key",
+  sender_id: "My Sender ID"
 )
 
 # Or, configure per-request:
-sent_dm.templates.delete("REPLACE_ME", request_options: {timeout: 5})
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  x_sender_id: "00000000-0000-0000-0000-000000000000",
+  request_options: {timeout: 5}
+)
 ```
 
 On timeout, `SentDm::Errors::APITimeoutError` is raised.
@@ -129,8 +149,10 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 
 ```ruby
 result =
-  sent_dm.templates.delete(
-    "REPLACE_ME",
+  sent_dm.messages.send_to_phone(
+    phone_number: "+1234567890",
+    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    x_sender_id: "00000000-0000-0000-0000-000000000000",
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -176,18 +198,30 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-sent_dm.templates.delete("REPLACE_ME")
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  x_sender_id: "00000000-0000-0000-0000-000000000000"
+)
 ```
 
 Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-sent_dm.templates.delete("REPLACE_ME")
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  x_sender_id: "00000000-0000-0000-0000-000000000000"
+)
 
 # You can also splat a full Params class:
-params = SentDm::TemplateDeleteParams.new
-sent_dm.templates.delete("REPLACE_ME", **params)
+params = SentDm::MessageSendToPhoneParams.new(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  x_sender_id: "00000000-0000-0000-0000-000000000000"
+)
+sent_dm.messages.send_to_phone(**params)
 ```
 
 ## Versioning

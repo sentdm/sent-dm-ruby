@@ -50,8 +50,8 @@ class SentDm::Test::SingletonClient < SentDm::Client
   def initialize
     super(
       base_url: SentDm::Test::SingletonClient::TEST_API_BASE_URL,
-      admin_auth_scheme: "My Admin Auth Scheme",
-      customer_auth_scheme: "My Customer Auth Scheme"
+      api_key: "My API Key",
+      sender_id: "My Sender ID"
     )
   end
 end

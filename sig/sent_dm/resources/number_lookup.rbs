@@ -3,6 +3,8 @@ module SentDm
     class NumberLookup
       def retrieve: (
         phone_number: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::Models::NumberLookupRetrieveResponse
 

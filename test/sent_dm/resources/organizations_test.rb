@@ -19,10 +19,15 @@ class SentDm::Test::Resources::OrganizationsTest < SentDm::Test::ResourceTest
     end
   end
 
-  def test_retrieve_profiles
+  def test_retrieve_profiles_required_params
     skip("Prism tests are disabled")
 
-    response = @sent_dm.organizations.retrieve_profiles("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+    response =
+      @sent_dm.organizations.retrieve_profiles(
+        "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+        x_api_key: "",
+        x_sender_id: "00000000-0000-0000-0000-000000000000"
+      )
 
     assert_pattern do
       response => SentDm::Models::OrganizationRetrieveProfilesResponse

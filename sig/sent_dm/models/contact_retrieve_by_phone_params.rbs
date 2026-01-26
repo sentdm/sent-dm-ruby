@@ -1,7 +1,8 @@
 module SentDm
   module Models
     type contact_retrieve_by_phone_params =
-      { phone_number: String } & SentDm::Internal::Type::request_parameters
+      { phone_number: String, x_api_key: String, x_sender_id: String }
+      & SentDm::Internal::Type::request_parameters
 
     class ContactRetrieveByPhoneParams < SentDm::Internal::Type::BaseModel
       extend SentDm::Internal::Type::RequestParameters::Converter
@@ -9,13 +10,21 @@ module SentDm
 
       attr_accessor phone_number: String
 
+      attr_accessor x_api_key: String
+
+      attr_accessor x_sender_id: String
+
       def initialize: (
         phone_number: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> void
 
       def to_hash: -> {
         phone_number: String,
+        x_api_key: String,
+        x_sender_id: String,
         request_options: SentDm::RequestOptions
       }
     end

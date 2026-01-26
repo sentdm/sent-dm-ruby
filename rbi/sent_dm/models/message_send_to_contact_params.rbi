@@ -19,6 +19,12 @@ module SentDm
       sig { returns(String) }
       attr_accessor :template_id
 
+      sig { returns(String) }
+      attr_accessor :x_api_key
+
+      sig { returns(String) }
+      attr_accessor :x_sender_id
+
       # Optional key-value pairs of template variables to replace in the template body.
       # For example, if your template contains "Hello {{name}}", you would provide {
       # "name": "John Doe" }
@@ -29,6 +35,8 @@ module SentDm
         params(
           contact_id: String,
           template_id: String,
+          x_api_key: String,
+          x_sender_id: String,
           template_variables: T.nilable(T::Hash[Symbol, String]),
           request_options: SentDm::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -38,6 +46,8 @@ module SentDm
         contact_id:,
         # The unique identifier of the template to use for the message
         template_id:,
+        x_api_key:,
+        x_sender_id:,
         # Optional key-value pairs of template variables to replace in the template body.
         # For example, if your template contains "Hello {{name}}", you would provide {
         # "name": "John Doe" }
@@ -51,6 +61,8 @@ module SentDm
           {
             contact_id: String,
             template_id: String,
+            x_api_key: String,
+            x_sender_id: String,
             template_variables: T.nilable(T::Hash[Symbol, String]),
             request_options: SentDm::RequestOptions
           }

@@ -18,6 +18,12 @@ module SentDm
       sig { params(definition: SentDm::TemplateDefinition::OrHash).void }
       attr_writer :definition
 
+      sig { returns(String) }
+      attr_accessor :x_api_key
+
+      sig { returns(String) }
+      attr_accessor :x_sender_id
+
       # The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be
       # set when creating a new template. If not provided, will be auto-generated using
       # AI.
@@ -40,6 +46,8 @@ module SentDm
       sig do
         params(
           definition: SentDm::TemplateDefinition::OrHash,
+          x_api_key: String,
+          x_sender_id: String,
           category: T.nilable(String),
           language: T.nilable(String),
           submit_for_review: T::Boolean,
@@ -49,6 +57,8 @@ module SentDm
       def self.new(
         # Template definition containing header, body, footer, and buttons
         definition:,
+        x_api_key:,
+        x_sender_id:,
         # The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be
         # set when creating a new template. If not provided, will be auto-generated using
         # AI.
@@ -67,6 +77,8 @@ module SentDm
         override.returns(
           {
             definition: SentDm::TemplateDefinition,
+            x_api_key: String,
+            x_sender_id: String,
             category: T.nilable(String),
             language: T.nilable(String),
             submit_for_review: T::Boolean,

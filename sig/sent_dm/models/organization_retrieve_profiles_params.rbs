@@ -1,15 +1,28 @@
 module SentDm
   module Models
     type organization_retrieve_profiles_params =
-      {  } & SentDm::Internal::Type::request_parameters
+      { x_api_key: String, x_sender_id: String }
+      & SentDm::Internal::Type::request_parameters
 
     class OrganizationRetrieveProfilesParams < SentDm::Internal::Type::BaseModel
       extend SentDm::Internal::Type::RequestParameters::Converter
       include SentDm::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: SentDm::request_opts) -> void
+      attr_accessor x_api_key: String
 
-      def to_hash: -> { request_options: SentDm::RequestOptions }
+      attr_accessor x_sender_id: String
+
+      def initialize: (
+        x_api_key: String,
+        x_sender_id: String,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        x_api_key: String,
+        x_sender_id: String,
+        request_options: SentDm::RequestOptions
+      }
     end
   end
 end

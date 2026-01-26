@@ -3,6 +3,8 @@ module SentDm
     type template_create_params =
       {
         definition: SentDm::TemplateDefinition,
+        x_api_key: String,
+        x_sender_id: String,
         category: String?,
         language: String?,
         submit_for_review: bool
@@ -15,6 +17,10 @@ module SentDm
 
       attr_accessor definition: SentDm::TemplateDefinition
 
+      attr_accessor x_api_key: String
+
+      attr_accessor x_sender_id: String
+
       attr_accessor category: String?
 
       attr_accessor language: String?
@@ -25,6 +31,8 @@ module SentDm
 
       def initialize: (
         definition: SentDm::TemplateDefinition,
+        x_api_key: String,
+        x_sender_id: String,
         ?category: String?,
         ?language: String?,
         ?submit_for_review: bool,
@@ -33,6 +41,8 @@ module SentDm
 
       def to_hash: -> {
         definition: SentDm::TemplateDefinition,
+        x_api_key: String,
+        x_sender_id: String,
         category: String?,
         language: String?,
         submit_for_review: bool,

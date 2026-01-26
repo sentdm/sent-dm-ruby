@@ -11,10 +11,10 @@ module SentDm
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
     sig { returns(String) }
-    attr_reader :admin_auth_scheme
+    attr_reader :api_key
 
     sig { returns(String) }
-    attr_reader :customer_auth_scheme
+    attr_reader :sender_id
 
     sig { returns(SentDm::Resources::Templates) }
     attr_reader :templates
@@ -31,26 +31,11 @@ module SentDm
     sig { returns(SentDm::Resources::Organizations) }
     attr_reader :organizations
 
-    # @api private
-    sig { override.returns(T::Hash[String, String]) }
-    private def auth_headers
-    end
-
-    # @api private
-    sig { returns(T::Hash[String, String]) }
-    private def admin_authentication_scheme
-    end
-
-    # @api private
-    sig { returns(T::Hash[String, String]) }
-    private def customer_authentication_scheme
-    end
-
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
-        admin_auth_scheme: T.nilable(String),
-        customer_auth_scheme: T.nilable(String),
+        api_key: T.nilable(String),
+        sender_id: T.nilable(String),
         base_url: T.nilable(String),
         max_retries: Integer,
         timeout: Float,
@@ -59,10 +44,10 @@ module SentDm
       ).returns(T.attached_class)
     end
     def self.new(
-      # Defaults to `ENV["SENT_DM_ADMIN_AUTH_SCHEME"]`
-      admin_auth_scheme: ENV["SENT_DM_ADMIN_AUTH_SCHEME"],
-      # Defaults to `ENV["SENT_DM_CUSTOMER_AUTH_SCHEME"]`
-      customer_auth_scheme: ENV["SENT_DM_CUSTOMER_AUTH_SCHEME"],
+      # Defaults to `ENV["SENT_DM_API_KEY"]`
+      api_key: ENV["SENT_DM_API_KEY"],
+      # Defaults to `ENV["SENT_DM_SENDER_ID"]`
+      sender_id: ENV["SENT_DM_SENDER_ID"],
       # Override the default base URL for the API, e.g.,
       # `"https://api.example.com/v2/"`. Defaults to `ENV["SENT_DM_BASE_URL"]`
       base_url: ENV["SENT_DM_BASE_URL"],

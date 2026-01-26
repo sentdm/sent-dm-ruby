@@ -7,11 +7,15 @@ module SentDm
       # server-side pagination with configurable page size. The customer ID is extracted
       # from the authentication token.
       #
-      # @overload list(page:, page_size:, request_options: {})
+      # @overload list(page:, page_size:, x_api_key:, x_sender_id:, request_options: {})
       #
-      # @param page [Integer] The page number (zero-indexed). Default is 0.
+      # @param page [Integer] Query param: The page number (zero-indexed). Default is 0.
       #
-      # @param page_size [Integer] The number of items per page. Default is 20.
+      # @param page_size [Integer] Query param: The number of items per page. Default is 20.
+      #
+      # @param x_api_key [String] Header param
+      #
+      # @param x_sender_id [String] Header param
       #
       # @param request_options [SentDm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -20,10 +24,15 @@ module SentDm
       # @see SentDm::Models::ContactListParams
       def list(params)
         parsed, options = SentDm::ContactListParams.dump_request(params)
+        query_params = [:page, :page_size]
         @client.request(
           method: :get,
           path: "v2/contacts",
-          query: parsed.transform_keys(page_size: "pageSize"),
+          query: parsed.slice(*query_params).transform_keys(page_size: "pageSize"),
+          headers: parsed.except(*query_params).transform_keys(
+            x_api_key: "x-api-key",
+            x_sender_id: "x-sender-id"
+          ),
           model: SentDm::Models::ContactListResponse,
           options: options
         )
@@ -33,9 +42,13 @@ module SentDm
       # number should be in international format (e.g., +1234567890). The customer ID is
       # extracted from the authentication token.
       #
-      # @overload retrieve_by_phone(phone_number:, request_options: {})
+      # @overload retrieve_by_phone(phone_number:, x_api_key:, x_sender_id:, request_options: {})
       #
-      # @param phone_number [String] The phone number in international format (e.g., +1234567890)
+      # @param phone_number [String] Query param: The phone number in international format (e.g., +1234567890)
+      #
+      # @param x_api_key [String] Header param
+      #
+      # @param x_sender_id [String] Header param
       #
       # @param request_options [SentDm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -44,10 +57,15 @@ module SentDm
       # @see SentDm::Models::ContactRetrieveByPhoneParams
       def retrieve_by_phone(params)
         parsed, options = SentDm::ContactRetrieveByPhoneParams.dump_request(params)
+        query_params = [:phone_number]
         @client.request(
           method: :get,
           path: "v2/contacts/phone",
-          query: parsed.transform_keys(phone_number: "phoneNumber"),
+          query: parsed.slice(*query_params).transform_keys(phone_number: "phoneNumber"),
+          headers: parsed.except(*query_params).transform_keys(
+            x_api_key: "x-api-key",
+            x_sender_id: "x-sender-id"
+          ),
           model: SentDm::ContactListItem,
           options: options
         )
@@ -57,9 +75,13 @@ module SentDm
       # customer. The customer ID is extracted from the authentication token. Returns
       # detailed contact information including phone number and creation timestamp.
       #
-      # @overload retrieve_id(id:, request_options: {})
+      # @overload retrieve_id(id:, x_api_key:, x_sender_id:, request_options: {})
       #
-      # @param id [String] The unique identifier (GUID) of the resource to retrieve
+      # @param id [String] Query param: The unique identifier (GUID) of the resource to retrieve
+      #
+      # @param x_api_key [String] Header param
+      #
+      # @param x_sender_id [String] Header param
       #
       # @param request_options [SentDm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -68,10 +90,15 @@ module SentDm
       # @see SentDm::Models::ContactRetrieveIDParams
       def retrieve_id(params)
         parsed, options = SentDm::ContactRetrieveIDParams.dump_request(params)
+        query_params = [:id]
         @client.request(
           method: :get,
           path: "v2/contacts/id",
-          query: parsed,
+          query: parsed.slice(*query_params),
+          headers: parsed.except(*query_params).transform_keys(
+            x_api_key: "x-api-key",
+            x_sender_id: "x-sender-id"
+          ),
           model: SentDm::ContactListItem,
           options: options
         )

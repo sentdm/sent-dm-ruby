@@ -29,20 +29,24 @@ module SentDm
       # Retrieves all sender profiles within an organization that the authenticated user
       # has access to. Returns filtered list based on user's permissions.
       #
-      # @overload retrieve_profiles(org_id, request_options: {})
+      # @overload retrieve_profiles(org_id, x_api_key:, x_sender_id:, request_options: {})
       #
       # @param org_id [String]
+      # @param x_api_key [String]
+      # @param x_sender_id [String]
       # @param request_options [SentDm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [SentDm::Models::OrganizationRetrieveProfilesResponse]
       #
       # @see SentDm::Models::OrganizationRetrieveProfilesParams
-      def retrieve_profiles(org_id, params = {})
+      def retrieve_profiles(org_id, params)
+        parsed, options = SentDm::OrganizationRetrieveProfilesParams.dump_request(params)
         @client.request(
           method: :get,
           path: ["v2/organizations/%1$s/profiles", org_id],
+          headers: parsed.transform_keys(x_api_key: "x-api-key", x_sender_id: "x-sender-id"),
           model: SentDm::Models::OrganizationRetrieveProfilesResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

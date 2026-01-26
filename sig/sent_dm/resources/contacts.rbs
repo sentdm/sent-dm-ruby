@@ -4,16 +4,22 @@ module SentDm
       def list: (
         page: Integer,
         page_size: Integer,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::Models::ContactListResponse
 
       def retrieve_by_phone: (
         phone_number: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::ContactListItem
 
       def retrieve_id: (
         id: String,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::ContactListItem
 

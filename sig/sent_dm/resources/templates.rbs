@@ -3,6 +3,8 @@ module SentDm
     class Templates
       def create: (
         definition: SentDm::TemplateDefinition,
+        x_api_key: String,
+        x_sender_id: String,
         ?category: String?,
         ?language: String?,
         ?submit_for_review: bool,
@@ -11,19 +13,28 @@ module SentDm
 
       def retrieve: (
         String id,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::TemplateResponse
 
       def list: (
         page: Integer,
         page_size: Integer,
+        x_api_key: String,
+        x_sender_id: String,
         ?category: String?,
         ?search: String?,
         ?status: String?,
         ?request_options: SentDm::request_opts
       ) -> SentDm::Models::TemplateListResponse
 
-      def delete: (String id, ?request_options: SentDm::request_opts) -> nil
+      def delete: (
+        String id,
+        x_api_key: String,
+        x_sender_id: String,
+        ?request_options: SentDm::request_opts
+      ) -> nil
 
       def initialize: (client: SentDm::Client) -> void
     end

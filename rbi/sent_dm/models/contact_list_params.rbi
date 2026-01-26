@@ -19,10 +19,18 @@ module SentDm
       sig { returns(Integer) }
       attr_accessor :page_size
 
+      sig { returns(String) }
+      attr_accessor :x_api_key
+
+      sig { returns(String) }
+      attr_accessor :x_sender_id
+
       sig do
         params(
           page: Integer,
           page_size: Integer,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -31,6 +39,8 @@ module SentDm
         page:,
         # The number of items per page. Default is 20.
         page_size:,
+        x_api_key:,
+        x_sender_id:,
         request_options: {}
       )
       end
@@ -40,6 +50,8 @@ module SentDm
           {
             page: Integer,
             page_size: Integer,
+            x_api_key: String,
+            x_sender_id: String,
             request_options: SentDm::RequestOptions
           }
         )

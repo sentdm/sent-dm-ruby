@@ -9,6 +9,8 @@ module SentDm
 
       def retrieve_profiles: (
         String org_id,
+        x_api_key: String,
+        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> SentDm::Models::OrganizationRetrieveProfilesResponse
 

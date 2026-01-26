@@ -22,10 +22,17 @@ module SentDm
       sig do
         params(
           org_id: String,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(SentDm::Models::OrganizationRetrieveProfilesResponse)
       end
-      def retrieve_profiles(org_id, request_options: {})
+      def retrieve_profiles(
+        org_id,
+        x_api_key:,
+        x_sender_id:,
+        request_options: {}
+      )
       end
 
       # @api private

@@ -11,10 +11,12 @@ module SentDm
       sig do
         params(
           id: String,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(SentDm::Models::MessageRetrieveResponse)
       end
-      def retrieve(id, request_options: {})
+      def retrieve(id, x_api_key:, x_sender_id:, request_options: {})
       end
 
       # Sends a message to a phone number using the default template. This endpoint is
@@ -24,15 +26,21 @@ module SentDm
         params(
           custom_message: String,
           phone_number: String,
+          x_api_key: String,
+          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).void
       end
       def send_quick_message(
-        # The custom message content to include in the template
+        # Body param: The custom message content to include in the template
         custom_message:,
-        # The phone number to send the message to, in international format (e.g.,
-        # +1234567890)
+        # Body param: The phone number to send the message to, in international format
+        # (e.g., +1234567890)
         phone_number:,
+        # Header param
+        x_api_key:,
+        # Header param
+        x_sender_id:,
         request_options: {}
       )
       end
@@ -45,18 +53,24 @@ module SentDm
         params(
           contact_id: String,
           template_id: String,
+          x_api_key: String,
+          x_sender_id: String,
           template_variables: T.nilable(T::Hash[Symbol, String]),
           request_options: SentDm::RequestOptions::OrHash
         ).void
       end
       def send_to_contact(
-        # The unique identifier of the contact to send the message to
+        # Body param: The unique identifier of the contact to send the message to
         contact_id:,
-        # The unique identifier of the template to use for the message
+        # Body param: The unique identifier of the template to use for the message
         template_id:,
-        # Optional key-value pairs of template variables to replace in the template body.
-        # For example, if your template contains "Hello {{name}}", you would provide {
-        # "name": "John Doe" }
+        # Header param
+        x_api_key:,
+        # Header param
+        x_sender_id:,
+        # Body param: Optional key-value pairs of template variables to replace in the
+        # template body. For example, if your template contains "Hello {{name}}", you
+        # would provide { "name": "John Doe" }
         template_variables: nil,
         request_options: {}
       )
@@ -70,19 +84,25 @@ module SentDm
         params(
           phone_number: String,
           template_id: String,
+          x_api_key: String,
+          x_sender_id: String,
           template_variables: T.nilable(T::Hash[Symbol, String]),
           request_options: SentDm::RequestOptions::OrHash
         ).void
       end
       def send_to_phone(
-        # The phone number to send the message to, in international format (e.g.,
-        # +1234567890)
+        # Body param: The phone number to send the message to, in international format
+        # (e.g., +1234567890)
         phone_number:,
-        # The unique identifier of the template to use for the message
+        # Body param: The unique identifier of the template to use for the message
         template_id:,
-        # Optional key-value pairs of template variables to replace in the template body.
-        # For example, if your template contains "Hello {{name}}", you would provide {
-        # "name": "John Doe" }
+        # Header param
+        x_api_key:,
+        # Header param
+        x_sender_id:,
+        # Body param: Optional key-value pairs of template variables to replace in the
+        # template body. For example, if your template contains "Hello {{name}}", you
+        # would provide { "name": "John Doe" }
         template_variables: nil,
         request_options: {}
       )
