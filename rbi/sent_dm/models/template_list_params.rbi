@@ -19,12 +19,6 @@ module SentDm
       sig { returns(Integer) }
       attr_accessor :page_size
 
-      sig { returns(String) }
-      attr_accessor :x_api_key
-
-      sig { returns(String) }
-      attr_accessor :x_sender_id
-
       # Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
       sig { returns(T.nilable(String)) }
       attr_accessor :category
@@ -41,8 +35,6 @@ module SentDm
         params(
           page: Integer,
           page_size: Integer,
-          x_api_key: String,
-          x_sender_id: String,
           category: T.nilable(String),
           search: T.nilable(String),
           status: T.nilable(String),
@@ -54,8 +46,6 @@ module SentDm
         page:,
         # The number of items per page (1-1000). Default is 100.
         page_size:,
-        x_api_key:,
-        x_sender_id:,
         # Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
         category: nil,
         # Optional search term to filter templates by name or content
@@ -71,8 +61,6 @@ module SentDm
           {
             page: Integer,
             page_size: Integer,
-            x_api_key: String,
-            x_sender_id: String,
             category: T.nilable(String),
             search: T.nilable(String),
             status: T.nilable(String),

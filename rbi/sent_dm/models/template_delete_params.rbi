@@ -11,31 +11,15 @@ module SentDm
           T.any(SentDm::TemplateDeleteParams, SentDm::Internal::AnyHash)
         end
 
-      sig { returns(String) }
-      attr_accessor :x_api_key
-
-      sig { returns(String) }
-      attr_accessor :x_sender_id
-
       sig do
-        params(
-          x_api_key: String,
-          x_sender_id: String,
-          request_options: SentDm::RequestOptions::OrHash
-        ).returns(T.attached_class)
-      end
-      def self.new(x_api_key:, x_sender_id:, request_options: {})
-      end
-
-      sig do
-        override.returns(
-          {
-            x_api_key: String,
-            x_sender_id: String,
-            request_options: SentDm::RequestOptions
-          }
+        params(request_options: SentDm::RequestOptions::OrHash).returns(
+          T.attached_class
         )
       end
+      def self.new(request_options: {})
+      end
+
+      sig { override.returns({ request_options: SentDm::RequestOptions }) }
       def to_hash
       end
     end

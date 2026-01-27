@@ -4,8 +4,6 @@ module SentDm
       {
         contact_id: String,
         template_id: String,
-        x_api_key: String,
-        x_sender_id: String,
         template_variables: ::Hash[Symbol, String]?
       }
       & SentDm::Internal::Type::request_parameters
@@ -18,17 +16,11 @@ module SentDm
 
       attr_accessor template_id: String
 
-      attr_accessor x_api_key: String
-
-      attr_accessor x_sender_id: String
-
       attr_accessor template_variables: ::Hash[Symbol, String]?
 
       def initialize: (
         contact_id: String,
         template_id: String,
-        x_api_key: String,
-        x_sender_id: String,
         ?template_variables: ::Hash[Symbol, String]?,
         ?request_options: SentDm::request_opts
       ) -> void
@@ -36,8 +28,6 @@ module SentDm
       def to_hash: -> {
         contact_id: String,
         template_id: String,
-        x_api_key: String,
-        x_sender_id: String,
         template_variables: ::Hash[Symbol, String]?,
         request_options: SentDm::RequestOptions
       }

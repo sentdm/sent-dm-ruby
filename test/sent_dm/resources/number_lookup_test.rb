@@ -6,12 +6,7 @@ class SentDm::Test::Resources::NumberLookupTest < SentDm::Test::ResourceTest
   def test_retrieve_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.number_lookup.retrieve(
-        phone_number: "phoneNumber",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.number_lookup.retrieve(phone_number: "phoneNumber")
 
     assert_pattern do
       response => SentDm::Models::NumberLookupRetrieveResponse

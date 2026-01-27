@@ -19,16 +19,6 @@ module SentDm
       #   @return [Integer]
       required :page_size, Integer
 
-      # @!attribute x_api_key
-      #
-      #   @return [String]
-      required :x_api_key, String
-
-      # @!attribute x_sender_id
-      #
-      #   @return [String]
-      required :x_sender_id, String
-
       # @!attribute category
       #   Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
       #
@@ -47,14 +37,10 @@ module SentDm
       #   @return [String, nil]
       optional :status, String, nil?: true
 
-      # @!method initialize(page:, page_size:, x_api_key:, x_sender_id:, category: nil, search: nil, status: nil, request_options: {})
+      # @!method initialize(page:, page_size:, category: nil, search: nil, status: nil, request_options: {})
       #   @param page [Integer] The page number (zero-indexed). Default is 0.
       #
       #   @param page_size [Integer] The number of items per page (1-1000). Default is 100.
-      #
-      #   @param x_api_key [String]
-      #
-      #   @param x_sender_id [String]
       #
       #   @param category [String, nil] Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
       #

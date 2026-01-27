@@ -11,8 +11,6 @@ module SentDm
       sig do
         params(
           definition: SentDm::TemplateDefinition::OrHash,
-          x_api_key: String,
-          x_sender_id: String,
           category: T.nilable(String),
           language: T.nilable(String),
           submit_for_review: T::Boolean,
@@ -20,21 +18,17 @@ module SentDm
         ).returns(SentDm::TemplateResponse)
       end
       def create(
-        # Body param: Template definition containing header, body, footer, and buttons
+        # Template definition containing header, body, footer, and buttons
         definition:,
-        # Header param
-        x_api_key:,
-        # Header param
-        x_sender_id:,
-        # Body param: The template category (e.g., MARKETING, UTILITY, AUTHENTICATION).
-        # Can only be set when creating a new template. If not provided, will be
-        # auto-generated using AI.
+        # The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be
+        # set when creating a new template. If not provided, will be auto-generated using
+        # AI.
         category: nil,
-        # Body param: The template language code (e.g., en_US, es_ES). Can only be set
-        # when creating a new template. If not provided, will be auto-detected using AI.
+        # The template language code (e.g., en_US, es_ES). Can only be set when creating a
+        # new template. If not provided, will be auto-detected using AI.
         language: nil,
-        # Body param: When false, the template will be saved as draft. When true, the
-        # template will be submitted for review.
+        # When false, the template will be saved as draft. When true, the template will be
+        # submitted for review.
         submit_for_review: nil,
         request_options: {}
       )
@@ -47,12 +41,10 @@ module SentDm
       sig do
         params(
           id: String,
-          x_api_key: String,
-          x_sender_id: String,
           request_options: SentDm::RequestOptions::OrHash
         ).returns(SentDm::TemplateResponse)
       end
-      def retrieve(id, x_api_key:, x_sender_id:, request_options: {})
+      def retrieve(id, request_options: {})
       end
 
       # Retrieves all message templates available for the authenticated customer with
@@ -64,8 +56,6 @@ module SentDm
         params(
           page: Integer,
           page_size: Integer,
-          x_api_key: String,
-          x_sender_id: String,
           category: T.nilable(String),
           search: T.nilable(String),
           status: T.nilable(String),
@@ -73,21 +63,15 @@ module SentDm
         ).returns(SentDm::Models::TemplateListResponse)
       end
       def list(
-        # Query param: The page number (zero-indexed). Default is 0.
+        # The page number (zero-indexed). Default is 0.
         page:,
-        # Query param: The number of items per page (1-1000). Default is 100.
+        # The number of items per page (1-1000). Default is 100.
         page_size:,
-        # Header param
-        x_api_key:,
-        # Header param
-        x_sender_id:,
-        # Query param: Optional filter by template category (e.g., MARKETING, UTILITY,
-        # AUTHENTICATION)
+        # Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
         category: nil,
-        # Query param: Optional search term to filter templates by name or content
+        # Optional search term to filter templates by name or content
         search: nil,
-        # Query param: Optional filter by template status (e.g., APPROVED, PENDING,
-        # REJECTED, DRAFT)
+        # Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
         status: nil,
         request_options: {}
       )
@@ -101,18 +85,11 @@ module SentDm
       # customer to be deleted successfully. The customer ID is extracted from the
       # authentication token.
       sig do
-        params(
-          id: String,
-          x_api_key: String,
-          x_sender_id: String,
-          request_options: SentDm::RequestOptions::OrHash
-        ).void
+        params(id: String, request_options: SentDm::RequestOptions::OrHash).void
       end
       def delete(
         # The unique identifier (GUID) of the resource to retrieve
         id,
-        x_api_key:,
-        x_sender_id:,
         request_options: {}
       )
       end

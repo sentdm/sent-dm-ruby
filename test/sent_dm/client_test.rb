@@ -43,9 +43,7 @@ class SentDmTest < Minitest::Test
     assert_raises(SentDm::Errors::InternalServerError) do
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
       )
     end
 
@@ -66,9 +64,7 @@ class SentDmTest < Minitest::Test
     assert_raises(SentDm::Errors::InternalServerError) do
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
       )
     end
 
@@ -85,8 +81,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {max_retries: 3}
       )
     end
@@ -109,8 +103,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {max_retries: 4}
       )
     end
@@ -136,9 +128,7 @@ class SentDmTest < Minitest::Test
     assert_raises(SentDm::Errors::InternalServerError) do
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
       )
     end
 
@@ -165,9 +155,7 @@ class SentDmTest < Minitest::Test
       Thread.current.thread_variable_set(:time_now, Time.now)
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
       )
       Thread.current.thread_variable_set(:time_now, nil)
     end
@@ -194,9 +182,7 @@ class SentDmTest < Minitest::Test
     assert_raises(SentDm::Errors::InternalServerError) do
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
       )
     end
 
@@ -213,9 +199,7 @@ class SentDmTest < Minitest::Test
     assert_raises(SentDm::Errors::InternalServerError) do
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
-        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
       )
     end
 
@@ -234,8 +218,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
@@ -255,8 +237,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
@@ -282,8 +262,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {extra_headers: {}}
       )
     end
@@ -318,8 +296,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {extra_headers: {}}
       )
     end
@@ -349,8 +325,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -383,8 +357,6 @@ class SentDmTest < Minitest::Test
       sent_dm.messages.send_to_phone(
         phone_number: "+1234567890",
         template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000",
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -403,9 +375,7 @@ class SentDmTest < Minitest::Test
 
     sent_dm.messages.send_to_phone(
       phone_number: "+1234567890",
-      template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-      x_api_key: "",
-      x_sender_id: "00000000-0000-0000-0000-000000000000"
+      template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
     )
 
     assert_requested(:any, /./) do |req|

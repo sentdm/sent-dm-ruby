@@ -30,8 +30,7 @@ sent_dm = SentDm::Client.new(api_key: "My API Key", sender_id: "My Sender ID")
 
 result = sent_dm.messages.send_to_phone(
   phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  x_sender_id: "00000000-0000-0000-0000-000000000000"
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
 )
 
 puts(result)
@@ -45,8 +44,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 begin
   message = sent_dm.messages.send_to_phone(
     phone_number: "+1234567890",
-    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-    x_sender_id: "00000000-0000-0000-0000-000000000000"
+    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
   )
 rescue SentDm::Errors::APIConnectionError => e
   puts("The server could not be reached")
@@ -95,7 +93,6 @@ sent_dm = SentDm::Client.new(
 sent_dm.messages.send_to_phone(
   phone_number: "+1234567890",
   template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  x_sender_id: "00000000-0000-0000-0000-000000000000",
   request_options: {max_retries: 5}
 )
 ```
@@ -116,7 +113,6 @@ sent_dm = SentDm::Client.new(
 sent_dm.messages.send_to_phone(
   phone_number: "+1234567890",
   template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  x_sender_id: "00000000-0000-0000-0000-000000000000",
   request_options: {timeout: 5}
 )
 ```
@@ -152,7 +148,6 @@ result =
   sent_dm.messages.send_to_phone(
     phone_number: "+1234567890",
     template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-    x_sender_id: "00000000-0000-0000-0000-000000000000",
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -200,8 +195,7 @@ You can provide typesafe request parameters like so:
 ```ruby
 sent_dm.messages.send_to_phone(
   phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  x_sender_id: "00000000-0000-0000-0000-000000000000"
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
 )
 ```
 
@@ -211,15 +205,13 @@ Or, equivalently:
 # Hashes work, but are not typesafe:
 sent_dm.messages.send_to_phone(
   phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  x_sender_id: "00000000-0000-0000-0000-000000000000"
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
 )
 
 # You can also splat a full Params class:
 params = SentDm::MessageSendToPhoneParams.new(
   phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  x_sender_id: "00000000-0000-0000-0000-000000000000"
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
 )
 sent_dm.messages.send_to_phone(**params)
 ```

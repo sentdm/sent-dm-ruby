@@ -1,12 +1,7 @@
 module SentDm
   module Models
     type message_send_quick_message_params =
-      {
-        custom_message: String,
-        phone_number: String,
-        x_api_key: String,
-        x_sender_id: String
-      }
+      { custom_message: String, phone_number: String }
       & SentDm::Internal::Type::request_parameters
 
     class MessageSendQuickMessageParams < SentDm::Internal::Type::BaseModel
@@ -17,23 +12,15 @@ module SentDm
 
       attr_accessor phone_number: String
 
-      attr_accessor x_api_key: String
-
-      attr_accessor x_sender_id: String
-
       def initialize: (
         custom_message: String,
         phone_number: String,
-        x_api_key: String,
-        x_sender_id: String,
         ?request_options: SentDm::request_opts
       ) -> void
 
       def to_hash: -> {
         custom_message: String,
         phone_number: String,
-        x_api_key: String,
-        x_sender_id: String,
         request_options: SentDm::RequestOptions
       }
     end

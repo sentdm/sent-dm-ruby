@@ -6,13 +6,7 @@ class SentDm::Test::Resources::ContactsTest < SentDm::Test::ResourceTest
   def test_list_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.contacts.list(
-        page: 0,
-        page_size: 0,
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.contacts.list(page: 0, page_size: 0)
 
     assert_pattern do
       response => SentDm::Models::ContactListResponse
@@ -32,12 +26,7 @@ class SentDm::Test::Resources::ContactsTest < SentDm::Test::ResourceTest
   def test_retrieve_by_phone_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.contacts.retrieve_by_phone(
-        phone_number: "phoneNumber",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.contacts.retrieve_by_phone(phone_number: "phoneNumber")
 
     assert_pattern do
       response => SentDm::ContactListItem
@@ -62,12 +51,7 @@ class SentDm::Test::Resources::ContactsTest < SentDm::Test::ResourceTest
   def test_retrieve_id_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.contacts.retrieve_id(
-        id: "id",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.contacts.retrieve_id(id: "id")
 
     assert_pattern do
       response => SentDm::ContactListItem

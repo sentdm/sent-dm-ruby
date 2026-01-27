@@ -4,8 +4,6 @@ module SentDm
       {
         page: Integer,
         page_size: Integer,
-        x_api_key: String,
-        x_sender_id: String,
         category: String?,
         search: String?,
         status: String?
@@ -20,10 +18,6 @@ module SentDm
 
       attr_accessor page_size: Integer
 
-      attr_accessor x_api_key: String
-
-      attr_accessor x_sender_id: String
-
       attr_accessor category: String?
 
       attr_accessor search: String?
@@ -33,8 +27,6 @@ module SentDm
       def initialize: (
         page: Integer,
         page_size: Integer,
-        x_api_key: String,
-        x_sender_id: String,
         ?category: String?,
         ?search: String?,
         ?status: String?,
@@ -44,8 +36,6 @@ module SentDm
       def to_hash: -> {
         page: Integer,
         page_size: Integer,
-        x_api_key: String,
-        x_sender_id: String,
         category: String?,
         search: String?,
         status: String?,

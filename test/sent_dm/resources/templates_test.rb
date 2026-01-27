@@ -6,12 +6,7 @@ class SentDm::Test::Resources::TemplatesTest < SentDm::Test::ResourceTest
   def test_create_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.templates.create(
-        definition: {body: {}},
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.templates.create(definition: {body: {}})
 
     assert_pattern do
       response => SentDm::TemplateResponse
@@ -34,15 +29,10 @@ class SentDm::Test::Resources::TemplatesTest < SentDm::Test::ResourceTest
     end
   end
 
-  def test_retrieve_required_params
+  def test_retrieve
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.templates.retrieve(
-        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.templates.retrieve("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
       response => SentDm::TemplateResponse
@@ -68,13 +58,7 @@ class SentDm::Test::Resources::TemplatesTest < SentDm::Test::ResourceTest
   def test_list_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.templates.list(
-        page: 0,
-        page_size: 0,
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.templates.list(page: 0, page_size: 0)
 
     assert_pattern do
       response => SentDm::Models::TemplateListResponse
@@ -91,15 +75,10 @@ class SentDm::Test::Resources::TemplatesTest < SentDm::Test::ResourceTest
     end
   end
 
-  def test_delete_required_params
+  def test_delete
     skip("Prism tests are disabled")
 
-    response =
-      @sent_dm.templates.delete(
-        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-        x_api_key: "",
-        x_sender_id: "00000000-0000-0000-0000-000000000000"
-      )
+    response = @sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
       response => nil
