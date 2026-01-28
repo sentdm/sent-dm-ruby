@@ -1,0 +1,78 @@
+module SentDm
+  module Models
+    type number_lookup_retrieve_response =
+      {
+        country_code: String,
+        :format_e164 => String,
+        format_international: String,
+        format_national: String,
+        format_rfc: String,
+        number_type: String,
+        phone_number: String,
+        phone_timezones: String,
+        region_code: String
+      }
+
+    class NumberLookupRetrieveResponse < SentDm::Internal::Type::BaseModel
+      attr_reader country_code: String?
+
+      def country_code=: (String) -> String
+
+      attr_reader format_e164: String?
+
+      def format_e164=: (String) -> String
+
+      attr_reader format_international: String?
+
+      def format_international=: (String) -> String
+
+      attr_reader format_national: String?
+
+      def format_national=: (String) -> String
+
+      attr_reader format_rfc: String?
+
+      def format_rfc=: (String) -> String
+
+      attr_reader number_type: String?
+
+      def number_type=: (String) -> String
+
+      attr_reader phone_number: String?
+
+      def phone_number=: (String) -> String
+
+      attr_reader phone_timezones: String?
+
+      def phone_timezones=: (String) -> String
+
+      attr_reader region_code: String?
+
+      def region_code=: (String) -> String
+
+      def initialize: (
+        ?country_code: String,
+        ?format_e164: String,
+        ?format_international: String,
+        ?format_national: String,
+        ?format_rfc: String,
+        ?number_type: String,
+        ?phone_number: String,
+        ?phone_timezones: String,
+        ?region_code: String
+      ) -> void
+
+      def to_hash: -> {
+        country_code: String,
+        :format_e164 => String,
+        format_international: String,
+        format_national: String,
+        format_rfc: String,
+        number_type: String,
+        phone_number: String,
+        phone_timezones: String,
+        region_code: String
+      }
+    end
+  end
+end

@@ -1,0 +1,52 @@
+module SentDm
+  module Models
+    type contact_list_response =
+      {
+        items: ::Array[SentDm::ContactListItem],
+        page: Integer,
+        page_size: Integer,
+        total_count: Integer,
+        total_pages: Integer
+      }
+
+    class ContactListResponse < SentDm::Internal::Type::BaseModel
+      attr_reader items: ::Array[SentDm::ContactListItem]?
+
+      def items=: (
+        ::Array[SentDm::ContactListItem]
+      ) -> ::Array[SentDm::ContactListItem]
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader total_count: Integer?
+
+      def total_count=: (Integer) -> Integer
+
+      attr_reader total_pages: Integer?
+
+      def total_pages=: (Integer) -> Integer
+
+      def initialize: (
+        ?items: ::Array[SentDm::ContactListItem],
+        ?page: Integer,
+        ?page_size: Integer,
+        ?total_count: Integer,
+        ?total_pages: Integer
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[SentDm::ContactListItem],
+        page: Integer,
+        page_size: Integer,
+        total_count: Integer,
+        total_pages: Integer
+      }
+    end
+  end
+end

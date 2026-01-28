@@ -1,0 +1,30 @@
+module SentDm
+  module Models
+    module Organizations
+      type user_list_params =
+        { page: Integer, page_size: Integer }
+        & SentDm::Internal::Type::request_parameters
+
+      class UserListParams < SentDm::Internal::Type::BaseModel
+        extend SentDm::Internal::Type::RequestParameters::Converter
+        include SentDm::Internal::Type::RequestParameters
+
+        attr_accessor page: Integer
+
+        attr_accessor page_size: Integer
+
+        def initialize: (
+          page: Integer,
+          page_size: Integer,
+          ?request_options: SentDm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          page: Integer,
+          page_size: Integer,
+          request_options: SentDm::RequestOptions
+        }
+      end
+    end
+  end
+end

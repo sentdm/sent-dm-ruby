@@ -1,0 +1,40 @@
+# typed: strong
+
+module SentDm
+  module Models
+    class ContactRetrieveByPhoneParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      OrHash =
+        T.type_alias do
+          T.any(SentDm::ContactRetrieveByPhoneParams, SentDm::Internal::AnyHash)
+        end
+
+      # The phone number in international format (e.g., +1234567890)
+      sig { returns(String) }
+      attr_accessor :phone_number
+
+      sig do
+        params(
+          phone_number: String,
+          request_options: SentDm::RequestOptions::OrHash
+        ).returns(T.attached_class)
+      end
+      def self.new(
+        # The phone number in international format (e.g., +1234567890)
+        phone_number:,
+        request_options: {}
+      )
+      end
+
+      sig do
+        override.returns(
+          { phone_number: String, request_options: SentDm::RequestOptions }
+        )
+      end
+      def to_hash
+      end
+    end
+  end
+end

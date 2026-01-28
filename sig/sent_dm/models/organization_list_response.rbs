@@ -1,0 +1,76 @@
+module SentDm
+  module Models
+    type organization_list_response =
+      {
+        organizations: ::Array[SentDm::Models::OrganizationListResponse::Organization]
+      }
+
+    class OrganizationListResponse < SentDm::Internal::Type::BaseModel
+      attr_reader organizations: ::Array[SentDm::Models::OrganizationListResponse::Organization]?
+
+      def organizations=: (
+        ::Array[SentDm::Models::OrganizationListResponse::Organization]
+      ) -> ::Array[SentDm::Models::OrganizationListResponse::Organization]
+
+      def initialize: (
+        ?organizations: ::Array[SentDm::Models::OrganizationListResponse::Organization]
+      ) -> void
+
+      def to_hash: -> {
+        organizations: ::Array[SentDm::Models::OrganizationListResponse::Organization]
+      }
+
+      type organization =
+        {
+          id: String,
+          created_at: Time,
+          description: String?,
+          icon: String?,
+          name: String,
+          profiles: ::Array[SentDm::ProfileSummary]
+        }
+
+      class Organization < SentDm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_accessor description: String?
+
+        attr_accessor icon: String?
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader profiles: ::Array[SentDm::ProfileSummary]?
+
+        def profiles=: (
+          ::Array[SentDm::ProfileSummary]
+        ) -> ::Array[SentDm::ProfileSummary]
+
+        def initialize: (
+          ?id: String,
+          ?created_at: Time,
+          ?description: String?,
+          ?icon: String?,
+          ?name: String,
+          ?profiles: ::Array[SentDm::ProfileSummary]
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          description: String?,
+          icon: String?,
+          name: String,
+          profiles: ::Array[SentDm::ProfileSummary]
+        }
+      end
+    end
+  end
+end

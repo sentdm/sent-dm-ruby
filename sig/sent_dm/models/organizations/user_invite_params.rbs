@@ -1,0 +1,44 @@
+module SentDm
+  module Models
+    module Organizations
+      type user_invite_params =
+        { email: String, invited_by: String?, name: String, role: String }
+        & SentDm::Internal::Type::request_parameters
+
+      class UserInviteParams < SentDm::Internal::Type::BaseModel
+        extend SentDm::Internal::Type::RequestParameters::Converter
+        include SentDm::Internal::Type::RequestParameters
+
+        attr_reader email: String?
+
+        def email=: (String) -> String
+
+        attr_accessor invited_by: String?
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader role: String?
+
+        def role=: (String) -> String
+
+        def initialize: (
+          ?email: String,
+          ?invited_by: String?,
+          ?name: String,
+          ?role: String,
+          ?request_options: SentDm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          email: String,
+          invited_by: String?,
+          name: String,
+          role: String,
+          request_options: SentDm::RequestOptions
+        }
+      end
+    end
+  end
+end
