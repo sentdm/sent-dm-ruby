@@ -1,0 +1,23 @@
+module Sentdm
+  module Resources
+    class Contacts
+      def list: (
+        page: Integer,
+        page_size: Integer,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::ContactListResponse
+
+      def retrieve_by_phone: (
+        phone_number: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::ContactListItem
+
+      def retrieve_id: (
+        id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::ContactListItem
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

@@ -60,7 +60,7 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/sent_dm/version.rb",
+  "version-file": "lib/sentdm/version.rb",
   "extra-files": [
     {
       "type": "ruby-readme",
