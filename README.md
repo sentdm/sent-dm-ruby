@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/sent-dm).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/sentdm).
 
 The REST API documentation can be found on [docs.sent.dm](https://docs.sent.dm).
 
@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "sent-dm", "~> 0.0.1"
+gem "sentdm", "~> 0.0.1"
 ```
 
 <!-- x-release-please-end -->
@@ -26,9 +26,9 @@ gem "sent-dm", "~> 0.0.1"
 
 ```ruby
 require "bundler/setup"
-require "sent_dm"
+require "sentdm"
 
-sent_dm = SentDm::Client.new(
+sent_dm = Sentdm::Client.new(
   api_key: ENV["SENT_DM_API_KEY"], # This is the default and can be omitted
   sender_id: ENV["SENT_DM_SENDER_ID"] # This is the default and can be omitted
 )
@@ -44,7 +44,7 @@ puts(result)
 
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `SentDm::Errors::APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Sentdm::Errors::APIError` will be thrown:
 
 ```ruby
 begin
@@ -53,12 +53,12 @@ begin
     template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
     template_variables: {name: "John Doe", order_id: "12345"}
   )
-rescue SentDm::Errors::APIConnectionError => e
+rescue Sentdm::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
-rescue SentDm::Errors::RateLimitError => e
+rescue Sentdm::Errors::RateLimitError => e
   puts("A 429 status code was received; we should back off a bit.")
-rescue SentDm::Errors::APIStatusError => e
+rescue Sentdm::Errors::APIStatusError => e
   puts("Another non-200-range status code was received")
   puts(e.status)
 end
@@ -90,7 +90,7 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-sent_dm = SentDm::Client.new(
+sent_dm = Sentdm::Client.new(
   max_retries: 0 # default is 2
 )
 
@@ -109,7 +109,7 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-sent_dm = SentDm::Client.new(
+sent_dm = Sentdm::Client.new(
   timeout: nil # default is 60
 )
 
@@ -122,7 +122,7 @@ sent_dm.messages.send_to_phone(
 )
 ```
 
-On timeout, `SentDm::Errors::APITimeoutError` is raised.
+On timeout, `Sentdm::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
@@ -130,7 +130,7 @@ Note that requests that time out are retried by default.
 
 ### BaseModel
 
-All parameter and response objects inherit from `SentDm::Internal::Type::BaseModel`, which provides several conveniences, including:
+All parameter and response objects inherit from `Sentdm::Internal::Type::BaseModel`, which provides several conveniences, including:
 
 1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
 
@@ -184,9 +184,9 @@ response = client.request(
 
 ### Concurrency & connection pooling
 
-The `SentDm::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
+The `Sentdm::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `SentDm::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+Each instance of `Sentdm::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
@@ -217,7 +217,7 @@ sent_dm.messages.send_to_phone(
 )
 
 # You can also splat a full Params class:
-params = SentDm::MessageSendToPhoneParams.new(
+params = Sentdm::MessageSendToPhoneParams.new(
   phone_number: "+1234567890",
   template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
   template_variables: {name: "John Doe", order_id: "12345"}

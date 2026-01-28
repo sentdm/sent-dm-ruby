@@ -1,0 +1,25 @@
+module Sentdm
+  module Models
+    module Organizations
+      type user_retrieve_params =
+        { customer_id: String } & Sentdm::Internal::Type::request_parameters
+
+      class UserRetrieveParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor customer_id: String
+
+        def initialize: (
+          customer_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          customer_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end

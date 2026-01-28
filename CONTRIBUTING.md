@@ -14,7 +14,7 @@ This will install all the required dependencies.
 
 ## Modifying/Adding code
 
-Most of the SDK is generated code. Modifications to code will be persisted between generations, but may result in merge conflicts between manual patches and changes from the generator. The generator will never modify the contents of `lib/sent_dm/helpers/` and `examples/` directory.
+Most of the SDK is generated code. Modifications to code will be persisted between generations, but may result in merge conflicts between manual patches and changes from the generator. The generator will never modify the contents of `lib/sentdm/helpers/` and `examples/` directory.
 
 ## Adding and running examples
 
@@ -24,7 +24,7 @@ All files in the `examples/` directory are not modified by the generator and can
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative "../lib/sent_dm"
+require_relative "../lib/sentdm"
 
 # ...
 ```
@@ -43,7 +43,7 @@ If you’d like to use the repository from source, you can either install from g
 To install via git in your `Gemfile`:
 
 ```ruby
-gem "sent-dm", git: "https://www.github.com/sentdm/sent-dm-ruby"
+gem "sentdm", git: "https://www.github.com/sentdm/sent-dm-ruby"
 ```
 
 Alternatively, reference local copy of the repo:
@@ -53,7 +53,7 @@ $ git clone -- 'https://www.github.com/sentdm/sent-dm-ruby' '<path-to-repo>'
 ```
 
 ```ruby
-gem "sent-dm", path: "<path-to-repo>"
+gem "sentdm", path: "<path-to-repo>"
 ```
 
 ## Running commands

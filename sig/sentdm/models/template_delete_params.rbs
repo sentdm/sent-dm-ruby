@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type template_delete_params =
+      {  } & Sentdm::Internal::Type::request_parameters
+
+    class TemplateDeleteParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Sentdm::request_opts) -> void
+
+      def to_hash: -> { request_options: Sentdm::RequestOptions }
+    end
+  end
+end
