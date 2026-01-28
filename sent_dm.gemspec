@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = SentDm::VERSION
   s.summary = "Ruby library to access the Sent Dm API"
   s.authors = ["Sent Dm"]
-  s.email = ""
+  s.email = "support@sent.dm"
   s.homepage = "https://gemdocs.org/gems/sent-dm"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/sent-dm-ruby"
