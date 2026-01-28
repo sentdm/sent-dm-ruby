@@ -35,89 +35,83 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_default_request_default_retry_attempts
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+      )
     end
 
     assert_requested(:any, /./, times: 3)
   end
 
   def test_client_given_request_default_retry_attempts
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
       SentDm::Client.new(
         base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme",
+        api_key: "My API Key",
+        sender_id: "My Sender ID",
         max_retries: 3
       )
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+      )
     end
 
     assert_requested(:any, /./, times: 4)
   end
 
   def test_client_default_request_given_retry_attempts
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8", request_options: {max_retries: 3})
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        request_options: {max_retries: 3}
+      )
     end
 
     assert_requested(:any, /./, times: 4)
   end
 
   def test_client_given_request_given_retry_attempts
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
       SentDm::Client.new(
         base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme",
+        api_key: "My API Key",
+        sender_id: "My Sender ID",
         max_retries: 3
       )
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8", request_options: {max_retries: 4})
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        request_options: {max_retries: 4}
+      )
     end
 
     assert_requested(:any, /./, times: 5)
   end
 
   def test_client_retry_after_seconds
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 500,
       headers: {"retry-after" => "1.3"},
       body: {}
@@ -126,13 +120,16 @@ class SentDmTest < Minitest::Test
     sent_dm =
       SentDm::Client.new(
         base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme",
+        api_key: "My API Key",
+        sender_id: "My Sender ID",
         max_retries: 1
       )
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+      )
     end
 
     assert_requested(:any, /./, times: 2)
@@ -140,7 +137,7 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_retry_after_date
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 500,
       headers: {"retry-after" => (Time.now + 10).httpdate},
       body: {}
@@ -149,14 +146,17 @@ class SentDmTest < Minitest::Test
     sent_dm =
       SentDm::Client.new(
         base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme",
+        api_key: "My API Key",
+        sender_id: "My Sender ID",
         max_retries: 1
       )
 
     assert_raises(SentDm::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+      )
       Thread.current.thread_variable_set(:time_now, nil)
     end
 
@@ -165,7 +165,7 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_retry_after_ms
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 500,
       headers: {"retry-after-ms" => "1300"},
       body: {}
@@ -174,13 +174,16 @@ class SentDmTest < Minitest::Test
     sent_dm =
       SentDm::Client.new(
         base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme",
+        api_key: "My API Key",
+        sender_id: "My Sender ID",
         max_retries: 1
       )
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+      )
     end
 
     assert_requested(:any, /./, times: 2)
@@ -188,20 +191,16 @@ class SentDmTest < Minitest::Test
   end
 
   def test_retry_count_header
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+      )
     end
 
     3.times do
@@ -210,21 +209,15 @@ class SentDmTest < Minitest::Test
   end
 
   def test_omit_retry_count_header
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete(
-        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
@@ -235,21 +228,15 @@ class SentDmTest < Minitest::Test
   end
 
   def test_overwrite_retry_count_header
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 500,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 500, body: {})
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::InternalServerError) do
-      sent_dm.templates.delete(
-        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
@@ -258,7 +245,7 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_redirect_307
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 307,
       headers: {"location" => "/redirected"},
       body: {}
@@ -269,14 +256,14 @@ class SentDmTest < Minitest::Test
     )
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::APIConnectionError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8", request_options: {extra_headers: {}})
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        request_options: {extra_headers: {}}
+      )
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -292,7 +279,7 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_redirect_303
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 303,
       headers: {"location" => "/redirected"},
       body: {}
@@ -303,14 +290,14 @@ class SentDmTest < Minitest::Test
     )
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::APIConnectionError) do
-      sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8", request_options: {extra_headers: {}})
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+        request_options: {extra_headers: {}}
+      )
     end
 
     assert_requested(:get, "http://localhost/redirected", times: SentDm::Client::MAX_REDIRECTS) do
@@ -321,7 +308,7 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_redirect_auth_keep_same_origin
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 307,
       headers: {"location" => "/redirected"},
       body: {}
@@ -332,15 +319,12 @@ class SentDmTest < Minitest::Test
     )
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::APIConnectionError) do
-      sent_dm.templates.delete(
-        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -356,7 +340,7 @@ class SentDmTest < Minitest::Test
   end
 
   def test_client_redirect_auth_strip_cross_origin
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(
       status: 307,
       headers: {"location" => "https://example.com/redirected"},
       body: {}
@@ -367,15 +351,12 @@ class SentDmTest < Minitest::Test
     )
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
     assert_raises(SentDm::Errors::APIConnectionError) do
-      sent_dm.templates.delete(
-        "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      sent_dm.messages.send_to_phone(
+        phone_number: "+1234567890",
+        template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -387,19 +368,15 @@ class SentDmTest < Minitest::Test
   end
 
   def test_default_headers
-    stub_request(:delete, "http://localhost/v2/templates/7ba7b820-9dad-11d1-80b4-00c04fd430c8").to_return_json(
-      status: 200,
-      body: {}
-    )
+    stub_request(:post, "http://localhost/v2/messages/phone").to_return_json(status: 200, body: {})
 
     sent_dm =
-      SentDm::Client.new(
-        base_url: "http://localhost",
-        admin_auth_scheme: "My Admin Auth Scheme",
-        customer_auth_scheme: "My Customer Auth Scheme"
-      )
+      SentDm::Client.new(base_url: "http://localhost", api_key: "My API Key", sender_id: "My Sender ID")
 
-    sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
+    sent_dm.messages.send_to_phone(
+      phone_number: "+1234567890",
+      template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8"
+    )
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")

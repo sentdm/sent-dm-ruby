@@ -8,6 +8,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/sent-dm).
 
+The REST API documentation can be found on [docs.sent.dm](https://docs.sent.dm).
+
 ## Installation
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
@@ -23,10 +25,15 @@ require "bundler/setup"
 require "sent_dm"
 
 sent_dm = SentDm::Client.new(
-  customer_auth_scheme: ENV["SENT_DM_CUSTOMER_AUTH_SCHEME"] # This is the default and can be omitted
+  api_key: ENV["SENT_DM_API_KEY"], # This is the default and can be omitted
+  sender_id: ENV["SENT_DM_SENDER_ID"] # This is the default and can be omitted
 )
 
-result = sent_dm.templates.delete("REPLACE_ME")
+result = sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  template_variables: {name: "John Doe", order_id: "12345"}
+)
 
 puts(result)
 ```
@@ -37,7 +44,11 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  template = sent_dm.templates.delete("REPLACE_ME")
+  message = sent_dm.messages.send_to_phone(
+    phone_number: "+1234567890",
+    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    template_variables: {name: "John Doe", order_id: "12345"}
+  )
 rescue SentDm::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -80,7 +91,12 @@ sent_dm = SentDm::Client.new(
 )
 
 # Or, configure per-request:
-sent_dm.templates.delete("REPLACE_ME", request_options: {max_retries: 5})
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  template_variables: {name: "John Doe", order_id: "12345"},
+  request_options: {max_retries: 5}
+)
 ```
 
 ### Timeouts
@@ -94,7 +110,12 @@ sent_dm = SentDm::Client.new(
 )
 
 # Or, configure per-request:
-sent_dm.templates.delete("REPLACE_ME", request_options: {timeout: 5})
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  template_variables: {name: "John Doe", order_id: "12345"},
+  request_options: {timeout: 5}
+)
 ```
 
 On timeout, `SentDm::Errors::APITimeoutError` is raised.
@@ -125,8 +146,10 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 
 ```ruby
 result =
-  sent_dm.templates.delete(
-    "REPLACE_ME",
+  sent_dm.messages.send_to_phone(
+    phone_number: "+1234567890",
+    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    template_variables: {name: "John Doe", order_id: "12345"},
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -172,18 +195,30 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-sent_dm.templates.delete("REPLACE_ME")
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  template_variables: {name: "John Doe", order_id: "12345"}
+)
 ```
 
 Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-sent_dm.templates.delete("REPLACE_ME")
+sent_dm.messages.send_to_phone(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  template_variables: {name: "John Doe", order_id: "12345"}
+)
 
 # You can also splat a full Params class:
-params = SentDm::TemplateDeleteParams.new
-sent_dm.templates.delete("REPLACE_ME", **params)
+params = SentDm::MessageSendToPhoneParams.new(
+  phone_number: "+1234567890",
+  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+  template_variables: {name: "John Doe", order_id: "12345"}
+)
+sent_dm.messages.send_to_phone(**params)
 ```
 
 ## Versioning

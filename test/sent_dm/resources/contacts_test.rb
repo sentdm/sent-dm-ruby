@@ -51,7 +51,7 @@ class SentDm::Test::Resources::ContactsTest < SentDm::Test::ResourceTest
   def test_retrieve_id_required_params
     skip("Prism tests are disabled")
 
-    response = @sent_dm.contacts.retrieve_id(id: "id")
+    response = @sent_dm.contacts.retrieve_id(id: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")
 
     assert_pattern do
       response => SentDm::ContactListItem

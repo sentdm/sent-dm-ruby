@@ -8,9 +8,9 @@ module SentDm
 
     DEFAULT_MAX_RETRY_DELAY: Float
 
-    attr_reader admin_auth_scheme: String
+    attr_reader api_key: String
 
-    attr_reader customer_auth_scheme: String
+    attr_reader sender_id: String
 
     attr_reader templates: SentDm::Resources::Templates
 
@@ -24,13 +24,13 @@ module SentDm
 
     private def auth_headers: -> ::Hash[String, String]
 
-    private def admin_authentication_scheme: -> ::Hash[String, String]
+    private def customer_api_key: -> ::Hash[String, String]
 
-    private def customer_authentication_scheme: -> ::Hash[String, String]
+    private def customer_sender_id: -> ::Hash[String, String]
 
     def initialize: (
-      ?admin_auth_scheme: String?,
-      ?customer_auth_scheme: String?,
+      ?api_key: String?,
+      ?sender_id: String?,
       ?base_url: String?,
       ?max_retries: Integer,
       ?timeout: Float,
