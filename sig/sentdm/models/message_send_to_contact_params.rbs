@@ -1,0 +1,36 @@
+module Sentdm
+  module Models
+    type message_send_to_contact_params =
+      {
+        contact_id: String,
+        template_id: String,
+        template_variables: ::Hash[Symbol, String]?
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class MessageSendToContactParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor contact_id: String
+
+      attr_accessor template_id: String
+
+      attr_accessor template_variables: ::Hash[Symbol, String]?
+
+      def initialize: (
+        contact_id: String,
+        template_id: String,
+        ?template_variables: ::Hash[Symbol, String]?,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        contact_id: String,
+        template_id: String,
+        template_variables: ::Hash[Symbol, String]?,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module Sentdm
+  module Resources
+    class Organizations
+      attr_reader users: Sentdm::Resources::Organizations::Users
+
+      def list: (
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::OrganizationListResponse
+
+      def retrieve_profiles: (
+        String org_id,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::OrganizationRetrieveProfilesResponse
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

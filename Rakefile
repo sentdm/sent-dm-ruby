@@ -162,7 +162,7 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- sent_dm.gemspec])
+  sh(*%w[gem build -- sentdm.gemspec])
   rm_rf(ignore_file)
 end
 

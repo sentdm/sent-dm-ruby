@@ -1,0 +1,12 @@
+module Sentdm
+  module Resources
+    class NumberLookup
+      def retrieve: (
+        phone_number: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::NumberLookupRetrieveResponse
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

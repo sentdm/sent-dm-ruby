@@ -1,0 +1,52 @@
+module Sentdm
+  module Models
+    type template_list_response =
+      {
+        items: ::Array[Sentdm::TemplateResponse],
+        page: Integer,
+        page_size: Integer,
+        total_count: Integer,
+        total_pages: Integer
+      }
+
+    class TemplateListResponse < Sentdm::Internal::Type::BaseModel
+      attr_reader items: ::Array[Sentdm::TemplateResponse]?
+
+      def items=: (
+        ::Array[Sentdm::TemplateResponse]
+      ) -> ::Array[Sentdm::TemplateResponse]
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader total_count: Integer?
+
+      def total_count=: (Integer) -> Integer
+
+      attr_reader total_pages: Integer?
+
+      def total_pages=: (Integer) -> Integer
+
+      def initialize: (
+        ?items: ::Array[Sentdm::TemplateResponse],
+        ?page: Integer,
+        ?page_size: Integer,
+        ?total_count: Integer,
+        ?total_pages: Integer
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[Sentdm::TemplateResponse],
+        page: Integer,
+        page_size: Integer,
+        total_count: Integer,
+        total_pages: Integer
+      }
+    end
+  end
+end

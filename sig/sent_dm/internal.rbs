@@ -1,9 +1,0 @@
-module SentDm
-  module Internal
-    extend SentDm::Internal::Util::SorbetRuntimeSupport
-
-    type file_input = Pathname | StringIO | IO | String | SentDm::FilePart
-
-    OMIT: Object
-  end
-end

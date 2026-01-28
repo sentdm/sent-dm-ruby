@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    module Organizations
+      type user_update_role_params =
+        { customer_id: String, role: String }
+        & Sentdm::Internal::Type::request_parameters
+
+      class UserUpdateRoleParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor customer_id: String
+
+        attr_reader role: String?
+
+        def role=: (String) -> String
+
+        def initialize: (
+          customer_id: String,
+          ?role: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          customer_id: String,
+          role: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end
