@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.0.3 (2026-02-04)
+
+Full Changelog: [v0.0.2...v0.0.3](https://github.com/sentdm/sent-dm-ruby/compare/v0.0.2...v0.0.3)
+
+### Bug Fixes
+
+* **client:** always add content-length to post body, even when empty ([8ca90a2](https://github.com/sentdm/sent-dm-ruby/commit/8ca90a2ac5b0e539a79049be404c303429dd0776))
+
+
+### Chores
+
+* **docs:** remove www prefix ([9e13671](https://github.com/sentdm/sent-dm-ruby/commit/9e13671f1324f6963121b724d5afc9e30d7ed03f))
+
 ## 0.0.2 (2026-01-28)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/sentdm/sent-dm-ruby/compare/v0.0.1...v0.0.2)
