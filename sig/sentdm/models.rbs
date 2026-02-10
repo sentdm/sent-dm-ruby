@@ -17,14 +17,6 @@ module Sentdm
 
   class NumberLookupRetrieveParams = Sentdm::Models::NumberLookupRetrieveParams
 
-  class OrganizationListParams = Sentdm::Models::OrganizationListParams
-
-  class OrganizationRetrieveProfilesParams = Sentdm::Models::OrganizationRetrieveProfilesParams
-
-  module Organizations = Sentdm::Models::Organizations
-
-  class ProfileSummary = Sentdm::Models::ProfileSummary
-
   class TemplateBodyContent = Sentdm::Models::TemplateBodyContent
 
   class TemplateCreateParams = Sentdm::Models::TemplateCreateParams
