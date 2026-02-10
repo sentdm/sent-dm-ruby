@@ -2,41 +2,6 @@ module Sentdm
   module Resources
     class Organizations
       class Users
-        def retrieve: (
-          String user_id,
-          customer_id: String,
-          ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Organizations::CustomerUser
-
-        def list: (
-          String customer_id,
-          page: Integer,
-          page_size: Integer,
-          ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Models::Organizations::UserListResponse
-
-        def delete: (
-          String user_id,
-          customer_id: String,
-          ?request_options: Sentdm::request_opts
-        ) -> nil
-
-        def invite: (
-          String customer_id,
-          ?email: String,
-          ?invited_by: String?,
-          ?name: String,
-          ?role: String,
-          ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Organizations::CustomerUser
-
-        def update_role: (
-          String user_id,
-          customer_id: String,
-          ?role: String,
-          ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Organizations::CustomerUser
-
         def initialize: (client: Sentdm::Client) -> void
       end
     end

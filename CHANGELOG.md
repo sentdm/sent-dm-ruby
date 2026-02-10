@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0 (2026-02-10)
+
+Full Changelog: [v0.0.3...v0.1.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.0.3...v0.1.0)
+
+### Features
+
+* **api:** api update ([6cf3a01](https://github.com/sentdm/sent-dm-ruby/commit/6cf3a01e1aba9d12465f2880227871d26d7858d0))
+
+
+### Bug Fixes
+
+* **client:** loosen json header parsing ([91563cf](https://github.com/sentdm/sent-dm-ruby/commit/91563cf9d069d31dd7bb7922d39f58d28723dd17))
+
 ## 0.0.3 (2026-02-04)
 
 Full Changelog: [v0.0.2...v0.0.3](https://github.com/sentdm/sent-dm-ruby/compare/v0.0.2...v0.0.3)
