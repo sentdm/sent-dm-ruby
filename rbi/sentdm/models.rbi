@@ -29,7 +29,7 @@ module Sentdm
 
   TemplateListParams = Sentdm::Models::TemplateListParams
 
-  TemplateResponse = Sentdm::Models::TemplateResponse
+  TemplateResponseV2 = Sentdm::Models::TemplateResponseV2
 
   TemplateRetrieveParams = Sentdm::Models::TemplateRetrieveParams
 

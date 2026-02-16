@@ -1,9 +1,0 @@
-module Sentdm
-  module Resources
-    class Organizations
-      class Users
-        def initialize: (client: Sentdm::Client) -> void
-      end
-    end
-  end
-end

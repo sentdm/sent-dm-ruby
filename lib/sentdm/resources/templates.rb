@@ -24,7 +24,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateResponse]
+      # @return [Sentdm::Models::TemplateResponseV2]
       #
       # @see Sentdm::Models::TemplateCreateParams
       def create(params)
@@ -33,7 +33,7 @@ module Sentdm
           method: :post,
           path: "v2/templates",
           body: parsed,
-          model: Sentdm::TemplateResponse,
+          model: Sentdm::TemplateResponseV2,
           options: options
         )
       end
@@ -48,14 +48,14 @@ module Sentdm
       # @param id [String]
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateResponse]
+      # @return [Sentdm::Models::TemplateResponseV2]
       #
       # @see Sentdm::Models::TemplateRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["v2/templates/%1$s", id],
-          model: Sentdm::TemplateResponse,
+          model: Sentdm::TemplateResponseV2,
           options: params[:request_options]
         )
       end

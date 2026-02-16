@@ -7,12 +7,12 @@ module Sentdm
         ?language: String?,
         ?submit_for_review: bool,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::TemplateResponse
+      ) -> Sentdm::TemplateResponseV2
 
       def retrieve: (
         String id,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::TemplateResponse
+      ) -> Sentdm::TemplateResponseV2
 
       def list: (
         page: Integer,

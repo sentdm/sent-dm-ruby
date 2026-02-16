@@ -1,6 +1,6 @@
 module Sentdm
   module Models
-    type template_response =
+    type template_response_v2 =
       {
         id: String,
         category: String,
@@ -15,7 +15,7 @@ module Sentdm
         whatsapp_template_name: String
       }
 
-    class TemplateResponse < Sentdm::Internal::Type::BaseModel
+    class TemplateResponseV2 < Sentdm::Internal::Type::BaseModel
       attr_reader id: String?
 
       def id=: (String) -> String

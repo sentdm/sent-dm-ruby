@@ -438,11 +438,11 @@ module Sentdm
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `template_body_content` is a `Sentdm::TemplateBodyContent`
-        #   template_body_content => {
-        #     template: template,
-        #     type: type,
-        #     variables: variables
+        #   # `contact_list_item` is a `Sentdm::ContactListItem`
+        #   contact_list_item => {
+        #     id: id,
+        #     available_channels: available_channels,
+        #     country_code: country_code
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

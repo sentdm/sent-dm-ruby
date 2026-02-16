@@ -15,7 +15,7 @@ module Sentdm
           language: T.nilable(String),
           submit_for_review: T::Boolean,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::TemplateResponse)
+        ).returns(Sentdm::TemplateResponseV2)
       end
       def create(
         # Template definition containing header, body, footer, and buttons
@@ -42,7 +42,7 @@ module Sentdm
         params(
           id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::TemplateResponse)
+        ).returns(Sentdm::TemplateResponseV2)
       end
       def retrieve(id, request_options: {})
       end
