@@ -3,8 +3,6 @@
 module Sentdm
   module Test
     module Resources
-      module Organizations
-      end
     end
   end
 end

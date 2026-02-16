@@ -6,8 +6,8 @@ module Sentdm
     class TemplateListResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute items
       #
-      #   @return [Array<Sentdm::Models::TemplateResponse>, nil]
-      optional :items, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateResponse] }
+      #   @return [Array<Sentdm::Models::TemplateResponseV2>, nil]
+      optional :items, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateResponseV2] }
 
       # @!attribute page
       #
@@ -30,7 +30,7 @@ module Sentdm
       optional :total_pages, Integer, api_name: :totalPages
 
       # @!method initialize(items: nil, page: nil, page_size: nil, total_count: nil, total_pages: nil)
-      #   @param items [Array<Sentdm::Models::TemplateResponse>]
+      #   @param items [Array<Sentdm::Models::TemplateResponseV2>]
       #   @param page [Integer]
       #   @param page_size [Integer]
       #   @param total_count [Integer]

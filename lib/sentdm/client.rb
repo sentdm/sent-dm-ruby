@@ -15,16 +15,15 @@ module Sentdm
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
-    # Customer API key for authentication
+    # Customer API key for authentication. Use `sk_live_*` keys for production and
+    # `sk_test_*` keys for sandbox/testing. Pass via the `x-api-key` header.
     # @return [String]
     attr_reader :api_key
 
-    # Customer sender ID (GUID) identifying the customer account
+    # Customer sender ID (UUID) identifying the customer account. Obtain this from
+    # your account settings. Pass via the `x-sender-id` header.
     # @return [String]
     attr_reader :sender_id
-
-    # @return [Sentdm::Resources::Templates]
-    attr_reader :templates
 
     # @return [Sentdm::Resources::Contacts]
     attr_reader :contacts
@@ -32,11 +31,11 @@ module Sentdm
     # @return [Sentdm::Resources::Messages]
     attr_reader :messages
 
+    # @return [Sentdm::Resources::Templates]
+    attr_reader :templates
+
     # @return [Sentdm::Resources::NumberLookup]
     attr_reader :number_lookup
-
-    # @return [Sentdm::Resources::Organizations]
-    attr_reader :organizations
 
     # @api private
     #
@@ -61,9 +60,12 @@ module Sentdm
 
     # Creates and returns a new client for interacting with the API.
     #
-    # @param api_key [String, nil] Customer API key for authentication Defaults to `ENV["SENT_DM_API_KEY"]`
+    # @param api_key [String, nil] Customer API key for authentication. Use `sk_live_*` keys for production and
+    # `sk_test_*` keys for sandbox/testing. Pass via the `x-api-key` header. Defaults
+    # to `ENV["SENT_DM_API_KEY"]`
     #
-    # @param sender_id [String, nil] Customer sender ID (GUID) identifying the customer account Defaults to
+    # @param sender_id [String, nil] Customer sender ID (UUID) identifying the customer account. Obtain this from
+    # your account settings. Pass via the `x-sender-id` header. Defaults to
     # `ENV["SENT_DM_SENDER_ID"]`
     #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
@@ -105,11 +107,10 @@ module Sentdm
         max_retry_delay: max_retry_delay
       )
 
-      @templates = Sentdm::Resources::Templates.new(client: self)
       @contacts = Sentdm::Resources::Contacts.new(client: self)
       @messages = Sentdm::Resources::Messages.new(client: self)
+      @templates = Sentdm::Resources::Templates.new(client: self)
       @number_lookup = Sentdm::Resources::NumberLookup.new(client: self)
-      @organizations = Sentdm::Resources::Organizations.new(client: self)
     end
   end
 end

@@ -8,10 +8,10 @@ module Sentdm
           T.any(Sentdm::Models::TemplateListResponse, Sentdm::Internal::AnyHash)
         end
 
-      sig { returns(T.nilable(T::Array[Sentdm::TemplateResponse])) }
+      sig { returns(T.nilable(T::Array[Sentdm::TemplateResponseV2])) }
       attr_reader :items
 
-      sig { params(items: T::Array[Sentdm::TemplateResponse::OrHash]).void }
+      sig { params(items: T::Array[Sentdm::TemplateResponseV2::OrHash]).void }
       attr_writer :items
 
       sig { returns(T.nilable(Integer)) }
@@ -40,7 +40,7 @@ module Sentdm
 
       sig do
         params(
-          items: T::Array[Sentdm::TemplateResponse::OrHash],
+          items: T::Array[Sentdm::TemplateResponseV2::OrHash],
           page: Integer,
           page_size: Integer,
           total_count: Integer,
@@ -59,7 +59,7 @@ module Sentdm
       sig do
         override.returns(
           {
-            items: T::Array[Sentdm::TemplateResponse],
+            items: T::Array[Sentdm::TemplateResponseV2],
             page: Integer,
             page_size: Integer,
             total_count: Integer,

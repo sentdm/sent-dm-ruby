@@ -2,10 +2,10 @@
 
 module Sentdm
   module Models
-    class TemplateResponse < Sentdm::Internal::Type::BaseModel
+    class TemplateResponseV2 < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(Sentdm::TemplateResponse, Sentdm::Internal::AnyHash)
+          T.any(Sentdm::TemplateResponseV2, Sentdm::Internal::AnyHash)
         end
 
       # The unique identifier of the template

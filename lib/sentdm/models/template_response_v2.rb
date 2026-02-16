@@ -3,7 +3,7 @@
 module Sentdm
   module Models
     # @see Sentdm::Resources::Templates#create
-    class TemplateResponse < Sentdm::Internal::Type::BaseModel
+    class TemplateResponseV2 < Sentdm::Internal::Type::BaseModel
       # @!attribute id
       #   The unique identifier of the template
       #
