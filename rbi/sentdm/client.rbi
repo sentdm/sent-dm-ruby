@@ -10,16 +10,15 @@ module Sentdm
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
-    # Customer API key for authentication
+    # Customer API key for authentication. Use `sk_live_*` keys for production and
+    # `sk_test_*` keys for sandbox/testing. Pass via the `x-api-key` header.
     sig { returns(String) }
     attr_reader :api_key
 
-    # Customer sender ID (GUID) identifying the customer account
+    # Customer sender ID (UUID) identifying the customer account. Obtain this from
+    # your account settings. Pass via the `x-sender-id` header.
     sig { returns(String) }
     attr_reader :sender_id
-
-    sig { returns(Sentdm::Resources::Templates) }
-    attr_reader :templates
 
     sig { returns(Sentdm::Resources::Contacts) }
     attr_reader :contacts
@@ -27,11 +26,11 @@ module Sentdm
     sig { returns(Sentdm::Resources::Messages) }
     attr_reader :messages
 
+    sig { returns(Sentdm::Resources::Templates) }
+    attr_reader :templates
+
     sig { returns(Sentdm::Resources::NumberLookup) }
     attr_reader :number_lookup
-
-    sig { returns(Sentdm::Resources::Organizations) }
-    attr_reader :organizations
 
     # @api private
     sig { override.returns(T::Hash[String, String]) }
@@ -61,9 +60,12 @@ module Sentdm
       ).returns(T.attached_class)
     end
     def self.new(
-      # Customer API key for authentication Defaults to `ENV["SENT_DM_API_KEY"]`
+      # Customer API key for authentication. Use `sk_live_*` keys for production and
+      # `sk_test_*` keys for sandbox/testing. Pass via the `x-api-key` header. Defaults
+      # to `ENV["SENT_DM_API_KEY"]`
       api_key: ENV["SENT_DM_API_KEY"],
-      # Customer sender ID (GUID) identifying the customer account Defaults to
+      # Customer sender ID (UUID) identifying the customer account. Obtain this from
+      # your account settings. Pass via the `x-sender-id` header. Defaults to
       # `ENV["SENT_DM_SENDER_ID"]`
       sender_id: ENV["SENT_DM_SENDER_ID"],
       # Override the default base URL for the API, e.g.,

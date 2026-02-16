@@ -12,15 +12,13 @@ module Sentdm
 
     attr_reader sender_id: String
 
-    attr_reader templates: Sentdm::Resources::Templates
-
     attr_reader contacts: Sentdm::Resources::Contacts
 
     attr_reader messages: Sentdm::Resources::Messages
 
-    attr_reader number_lookup: Sentdm::Resources::NumberLookup
+    attr_reader templates: Sentdm::Resources::Templates
 
-    attr_reader organizations: Sentdm::Resources::Organizations
+    attr_reader number_lookup: Sentdm::Resources::NumberLookup
 
     private def auth_headers: -> ::Hash[String, String]
 
