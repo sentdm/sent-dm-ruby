@@ -1,30 +1,24 @@
 module Sentdm
   module Resources
     class Messages
-      def retrieve: (
+      def retrieve_activities: (
         String id,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::MessageRetrieveResponse
+      ) -> Sentdm::Models::MessageRetrieveActivitiesResponse
 
-      def send_quick_message: (
-        custom_message: String,
-        phone_number: String,
+      def retrieve_status: (
+        String id,
         ?request_options: Sentdm::request_opts
-      ) -> nil
+      ) -> Sentdm::Models::MessageRetrieveStatusResponse
 
-      def send_to_contact: (
-        contact_id: String,
-        template_id: String,
-        ?template_variables: ::Hash[Symbol, String]?,
+      def send_: (
+        ?channel: ::Array[String]?,
+        ?template: Sentdm::MessageSendParams::Template,
+        ?test_mode: bool,
+        ?to: ::Array[String],
+        ?idempotency_key: String,
         ?request_options: Sentdm::request_opts
-      ) -> nil
-
-      def send_to_phone: (
-        phone_number: String,
-        template_id: String,
-        ?template_variables: ::Hash[Symbol, String]?,
-        ?request_options: Sentdm::request_opts
-      ) -> nil
+      ) -> Sentdm::Models::MessageSendResponse
 
       def initialize: (client: Sentdm::Client) -> void
     end

@@ -15,6 +15,31 @@ module Sentdm
       #
       # We can therefore convert string values to Symbols, but can't convert other
       # values safely.
+      #
+      # @example
+      #   # `tcr_brand_relationship` is a `Sentdm::TcrBrandRelationship`
+      #   case tcr_brand_relationship
+      #   when Sentdm::TcrBrandRelationship::BASIC_ACCOUNT
+      #     # ...
+      #   when Sentdm::TcrBrandRelationship::MEDIUM_ACCOUNT
+      #     # ...
+      #   when Sentdm::TcrBrandRelationship::LARGE_ACCOUNT
+      #     # ...
+      #   else
+      #     puts(tcr_brand_relationship)
+      #   end
+      #
+      # @example
+      #   case tcr_brand_relationship
+      #   in :BASIC_ACCOUNT
+      #     # ...
+      #   in :MEDIUM_ACCOUNT
+      #     # ...
+      #   in :LARGE_ACCOUNT
+      #     # ...
+      #   else
+      #     puts(tcr_brand_relationship)
+      #   end
       module Enum
         include Sentdm::Internal::Type::Converter
         include Sentdm::Internal::Util::SorbetRuntimeSupport

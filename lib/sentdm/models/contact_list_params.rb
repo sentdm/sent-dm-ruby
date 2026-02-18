@@ -8,21 +8,44 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       # @!attribute page
-      #   The page number (zero-indexed). Default is 0.
+      #   Page number (1-indexed)
       #
       #   @return [Integer]
       required :page, Integer
 
       # @!attribute page_size
-      #   The number of items per page. Default is 20.
       #
       #   @return [Integer]
       required :page_size, Integer
 
-      # @!method initialize(page:, page_size:, request_options: {})
-      #   @param page [Integer] The page number (zero-indexed). Default is 0.
+      # @!attribute channel
+      #   Optional channel filter (sms, whatsapp)
       #
-      #   @param page_size [Integer] The number of items per page. Default is 20.
+      #   @return [String, nil]
+      optional :channel, String, nil?: true
+
+      # @!attribute phone
+      #   Optional phone number filter (alternative to list view)
+      #
+      #   @return [String, nil]
+      optional :phone, String, nil?: true
+
+      # @!attribute search
+      #   Optional search term for filtering contacts
+      #
+      #   @return [String, nil]
+      optional :search, String, nil?: true
+
+      # @!method initialize(page:, page_size:, channel: nil, phone: nil, search: nil, request_options: {})
+      #   @param page [Integer] Page number (1-indexed)
+      #
+      #   @param page_size [Integer]
+      #
+      #   @param channel [String, nil] Optional channel filter (sms, whatsapp)
+      #
+      #   @param phone [String, nil] Optional phone number filter (alternative to list view)
+      #
+      #   @param search [String, nil] Optional search term for filtering contacts
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end

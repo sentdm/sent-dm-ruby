@@ -1,0 +1,39 @@
+module Sentdm
+  module Models
+    type brand_list_response =
+      {
+        data: ::Array[Sentdm::BrandWithKYC]?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class BrandListResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: ::Array[Sentdm::BrandWithKYC]?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: ::Array[Sentdm::BrandWithKYC]?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: ::Array[Sentdm::BrandWithKYC]?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+    end
+  end
+end

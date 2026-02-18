@@ -48,11 +48,7 @@ class Sentdm::Test::SingletonClient < Sentdm::Client
   TEST_API_BASE_URL = ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010")
 
   def initialize
-    super(
-      base_url: Sentdm::Test::SingletonClient::TEST_API_BASE_URL,
-      api_key: "My API Key",
-      sender_id: "My Sender ID"
-    )
+    super(base_url: Sentdm::Test::SingletonClient::TEST_API_BASE_URL, api_key: "My API Key")
   end
 end
 

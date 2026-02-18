@@ -11,54 +11,75 @@ module Sentdm
           T.any(Sentdm::TemplateCreateParams, Sentdm::Internal::AnyHash)
         end
 
-      # Template definition containing header, body, footer, and buttons
-      sig { returns(Sentdm::TemplateDefinition) }
+      # Template category: MARKETING, UTILITY, AUTHENTICATION (optional, auto-detected
+      # if not provided)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :category
+
+      # Source of template creation (default: from-api)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :creation_source
+
+      # Template definition including header, body, footer, and buttons
+      sig { returns(T.nilable(Sentdm::TemplateDefinition)) }
       attr_reader :definition
 
       sig { params(definition: Sentdm::TemplateDefinition::OrHash).void }
       attr_writer :definition
 
-      # The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be
-      # set when creating a new template. If not provided, will be auto-generated using
-      # AI.
-      sig { returns(T.nilable(String)) }
-      attr_accessor :category
-
-      # The template language code (e.g., en_US, es_ES). Can only be set when creating a
-      # new template. If not provided, will be auto-detected using AI.
+      # Template language code (e.g., en_US) (optional, auto-detected if not provided)
       sig { returns(T.nilable(String)) }
       attr_accessor :language
 
-      # When false, the template will be saved as draft. When true, the template will be
-      # submitted for review.
+      # Whether to submit the template for review after creation (default: false)
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :submit_for_review
 
       sig { params(submit_for_review: T::Boolean).void }
       attr_writer :submit_for_review
 
+      # Test mode flag - when true, the operation is simulated without side effects
+      # Useful for testing integrations without actual execution
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :test_mode
+
+      sig { params(test_mode: T::Boolean).void }
+      attr_writer :test_mode
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :idempotency_key
+
+      sig { params(idempotency_key: String).void }
+      attr_writer :idempotency_key
+
       sig do
         params(
-          definition: Sentdm::TemplateDefinition::OrHash,
           category: T.nilable(String),
+          creation_source: T.nilable(String),
+          definition: Sentdm::TemplateDefinition::OrHash,
           language: T.nilable(String),
           submit_for_review: T::Boolean,
+          test_mode: T::Boolean,
+          idempotency_key: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Template definition containing header, body, footer, and buttons
-        definition:,
-        # The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be
-        # set when creating a new template. If not provided, will be auto-generated using
-        # AI.
+        # Template category: MARKETING, UTILITY, AUTHENTICATION (optional, auto-detected
+        # if not provided)
         category: nil,
-        # The template language code (e.g., en_US, es_ES). Can only be set when creating a
-        # new template. If not provided, will be auto-detected using AI.
+        # Source of template creation (default: from-api)
+        creation_source: nil,
+        # Template definition including header, body, footer, and buttons
+        definition: nil,
+        # Template language code (e.g., en_US) (optional, auto-detected if not provided)
         language: nil,
-        # When false, the template will be saved as draft. When true, the template will be
-        # submitted for review.
+        # Whether to submit the template for review after creation (default: false)
         submit_for_review: nil,
+        # Test mode flag - when true, the operation is simulated without side effects
+        # Useful for testing integrations without actual execution
+        test_mode: nil,
+        idempotency_key: nil,
         request_options: {}
       )
       end
@@ -66,10 +87,13 @@ module Sentdm
       sig do
         override.returns(
           {
-            definition: Sentdm::TemplateDefinition,
             category: T.nilable(String),
+            creation_source: T.nilable(String),
+            definition: Sentdm::TemplateDefinition,
             language: T.nilable(String),
             submit_for_review: T::Boolean,
+            test_mode: T::Boolean,
+            idempotency_key: String,
             request_options: Sentdm::RequestOptions
           }
         )

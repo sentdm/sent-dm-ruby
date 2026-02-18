@@ -1,7 +1,13 @@
 module Sentdm
   module Models
     type contact_list_params =
-      { page: Integer, page_size: Integer }
+      {
+        page: Integer,
+        page_size: Integer,
+        channel: String?,
+        phone: String?,
+        search: String?
+      }
       & Sentdm::Internal::Type::request_parameters
 
     class ContactListParams < Sentdm::Internal::Type::BaseModel
@@ -12,15 +18,27 @@ module Sentdm
 
       attr_accessor page_size: Integer
 
+      attr_accessor channel: String?
+
+      attr_accessor phone: String?
+
+      attr_accessor search: String?
+
       def initialize: (
         page: Integer,
         page_size: Integer,
+        ?channel: String?,
+        ?phone: String?,
+        ?search: String?,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
         page: Integer,
         page_size: Integer,
+        channel: String?,
+        phone: String?,
+        search: String?,
         request_options: Sentdm::RequestOptions
       }
     end

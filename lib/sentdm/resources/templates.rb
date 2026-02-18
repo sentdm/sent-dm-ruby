@@ -6,77 +6,121 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::TemplateCreateParams} for more details.
       #
-      # Creates a new message template for the authenticated customer with comprehensive
-      # template definitions including headers, body, footer, and interactive buttons.
-      # Supports automatic metadata generation using AI (display name, language,
-      # category). Optionally submits the template for WhatsApp review. The customer ID
-      # is extracted from the authentication token.
+      # Creates a new message template with header, body, footer, and buttons. The
+      # template can be submitted for review immediately or saved as draft for later
+      # submission.
       #
-      # @overload create(definition:, category: nil, language: nil, submit_for_review: nil, request_options: {})
+      # @overload create(category: nil, creation_source: nil, definition: nil, language: nil, submit_for_review: nil, test_mode: nil, idempotency_key: nil, request_options: {})
       #
-      # @param definition [Sentdm::Models::TemplateDefinition] Template definition containing header, body, footer, and buttons
+      # @param category [String, nil] Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional, aut
       #
-      # @param category [String, nil] The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be se
+      # @param creation_source [String, nil] Body param: Source of template creation (default: from-api)
       #
-      # @param language [String, nil] The template language code (e.g., en_US, es_ES). Can only be set when creating a
+      # @param definition [Sentdm::Models::TemplateDefinition] Body param: Template definition including header, body, footer, and buttons
       #
-      # @param submit_for_review [Boolean] When false, the template will be saved as draft.
+      # @param language [String, nil] Body param: Template language code (e.g., en_US) (optional, auto-detected if not
+      #
+      # @param submit_for_review [Boolean] Body param: Whether to submit the template for review after creation (default: f
+      #
+      # @param test_mode [Boolean] Body param: Test mode flag - when true, the operation is simulated without side
+      #
+      # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateResponseV2]
+      # @return [Sentdm::Models::APIResponseTemplate]
       #
       # @see Sentdm::Models::TemplateCreateParams
-      def create(params)
+      def create(params = {})
         parsed, options = Sentdm::TemplateCreateParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key"}
         @client.request(
           method: :post,
-          path: "v2/templates",
-          body: parsed,
-          model: Sentdm::TemplateResponseV2,
+          path: "v3/templates",
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
+          model: Sentdm::APIResponseTemplate,
           options: options
         )
       end
 
-      # Retrieves a specific message template by its unique identifier for the
-      # authenticated customer with comprehensive template definitions including
-      # headers, body, footer, and interactive buttons. The customer ID is extracted
-      # from the authentication token.
+      # Retrieves a specific template by its ID. Returns template details including
+      # name, category, language, status, and definition.
       #
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] Template ID from route parameter
+      #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateResponseV2]
+      # @return [Sentdm::Models::APIResponseTemplate]
       #
       # @see Sentdm::Models::TemplateRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
-          path: ["v2/templates/%1$s", id],
-          model: Sentdm::TemplateResponseV2,
+          path: ["v3/templates/%1$s", id],
+          model: Sentdm::APIResponseTemplate,
           options: params[:request_options]
         )
       end
 
-      # Retrieves all message templates available for the authenticated customer with
-      # comprehensive template definitions including headers, body, footer, and
-      # interactive buttons. Supports advanced filtering by search term, status, and
-      # category, plus pagination. The customer ID is extracted from the authentication
-      # token.
+      # Some parameter documentations has been truncated, see
+      # {Sentdm::Models::TemplateUpdateParams} for more details.
+      #
+      # Updates an existing template's name, category, language, definition, or submits
+      # it for review.
+      #
+      # @overload update(id, category: nil, definition: nil, language: nil, name: nil, submit_for_review: nil, test_mode: nil, idempotency_key: nil, request_options: {})
+      #
+      # @param id [String] Path param: Template ID from route parameter
+      #
+      # @param category [String, nil] Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
+      #
+      # @param definition [Sentdm::Models::TemplateDefinition, nil] Body param: Template definition including header, body, footer, and buttons
+      #
+      # @param language [String, nil] Body param: Template language code (e.g., en_US)
+      #
+      # @param name [String, nil] Body param: Template display name
+      #
+      # @param submit_for_review [Boolean] Body param: Whether to submit the template for review after updating (default: f
+      #
+      # @param test_mode [Boolean] Body param: Test mode flag - when true, the operation is simulated without side
+      #
+      # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
+      #
+      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Sentdm::Models::APIResponseTemplate]
+      #
+      # @see Sentdm::Models::TemplateUpdateParams
+      def update(id, params = {})
+        parsed, options = Sentdm::TemplateUpdateParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key"}
+        @client.request(
+          method: :put,
+          path: ["v3/templates/%1$s", id],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
+          model: Sentdm::APIResponseTemplate,
+          options: options
+        )
+      end
+
+      # Retrieves a paginated list of message templates for the authenticated customer.
+      # Supports filtering by status, category, and search term.
       #
       # @overload list(page:, page_size:, category: nil, search: nil, status: nil, request_options: {})
       #
-      # @param page [Integer] The page number (zero-indexed). Default is 0.
+      # @param page [Integer] Page number (1-indexed)
       #
-      # @param page_size [Integer] The number of items per page (1-1000). Default is 100.
+      # @param page_size [Integer]
       #
-      # @param category [String, nil] Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
+      # @param category [String, nil] Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
-      # @param search [String, nil] Optional search term to filter templates by name or content
+      # @param search [String, nil] Optional search term for filtering templates
       #
-      # @param status [String, nil] Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
+      # @param status [String, nil] Optional status filter: APPROVED, PENDING, REJECTED
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -87,24 +131,26 @@ module Sentdm
         parsed, options = Sentdm::TemplateListParams.dump_request(params)
         @client.request(
           method: :get,
-          path: "v2/templates",
+          path: "v3/templates",
           query: parsed.transform_keys(page_size: "pageSize"),
           model: Sentdm::Models::TemplateListResponse,
           options: options
         )
       end
 
-      # Deletes a specific message template by its unique identifier for the
-      # authenticated customer with smart deletion strategy. Deletion behavior: - If
-      # template has NO messages: Permanently deleted from database (hard delete). - If
-      # template has messages: Marked as deleted but preserved for message history (soft
-      # delete with snapshot). The template must exist and belong to the authenticated
-      # customer to be deleted successfully. The customer ID is extracted from the
-      # authentication token.
+      # Some parameter documentations has been truncated, see
+      # {Sentdm::Models::TemplateDeleteParams} for more details.
       #
-      # @overload delete(id, request_options: {})
+      # Deletes a template by ID. Optionally, you can also delete the template from
+      # WhatsApp/Meta by setting delete_from_meta=true.
       #
-      # @param id [String] The unique identifier (GUID) of the resource to retrieve
+      # @overload delete(id, delete_from_meta: nil, test_mode: nil, request_options: {})
+      #
+      # @param id [String] Template ID from route parameter
+      #
+      # @param delete_from_meta [Boolean, nil] Whether to also delete the template from WhatsApp/Meta (optional, defaults to fa
+      #
+      # @param test_mode [Boolean] Test mode flag - when true, the operation is simulated without side effects
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -112,11 +158,14 @@ module Sentdm
       #
       # @see Sentdm::Models::TemplateDeleteParams
       def delete(id, params = {})
+        parsed, options = Sentdm::TemplateDeleteParams.dump_request(params)
         @client.request(
           method: :delete,
-          path: ["v2/templates/%1$s", id],
+          path: ["v3/templates/%1$s", id],
+          headers: {"content-type" => "*/*"},
+          body: parsed,
           model: NilClass,
-          options: params[:request_options]
+          options: options
         )
       end
 

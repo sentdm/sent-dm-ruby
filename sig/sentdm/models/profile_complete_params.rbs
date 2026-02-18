@@ -1,0 +1,36 @@
+module Sentdm
+  module Models
+    type profile_complete_params =
+      { web_hook_url: String, test_mode: bool, idempotency_key: String }
+      & Sentdm::Internal::Type::request_parameters
+
+    class ProfileCompleteParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor web_hook_url: String
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        web_hook_url: String,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        web_hook_url: String,
+        test_mode: bool,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

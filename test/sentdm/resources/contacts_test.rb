@@ -3,6 +3,63 @@
 require_relative "../test_helper"
 
 class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
+  def test_create
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.contacts.create
+
+    assert_pattern do
+      response => Sentdm::APIResponseContact
+    end
+
+    assert_pattern do
+      response => {
+        data: Sentdm::Contact | nil,
+        error: Sentdm::APIError | nil,
+        meta: Sentdm::APIMeta | nil,
+        success: Sentdm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_retrieve
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.contacts.retrieve("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+
+    assert_pattern do
+      response => Sentdm::APIResponseContact
+    end
+
+    assert_pattern do
+      response => {
+        data: Sentdm::Contact | nil,
+        error: Sentdm::APIError | nil,
+        meta: Sentdm::APIMeta | nil,
+        success: Sentdm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_update
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.contacts.update("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+
+    assert_pattern do
+      response => Sentdm::APIResponseContact
+    end
+
+    assert_pattern do
+      response => {
+        data: Sentdm::Contact | nil,
+        error: Sentdm::APIError | nil,
+        meta: Sentdm::APIMeta | nil,
+        success: Sentdm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
   def test_list_required_params
     skip("Prism tests are disabled")
 
@@ -14,62 +71,21 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
 
     assert_pattern do
       response => {
-        items: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::ContactListItem]) | nil,
-        page: Integer | nil,
-        page_size: Integer | nil,
-        total_count: Integer | nil,
-        total_pages: Integer | nil
+        data: Sentdm::Models::ContactListResponse::Data | nil,
+        error: Sentdm::APIError | nil,
+        meta: Sentdm::APIMeta | nil,
+        success: Sentdm::Internal::Type::Boolean | nil
       }
     end
   end
 
-  def test_retrieve_by_phone_required_params
+  def test_delete_required_params
     skip("Prism tests are disabled")
 
-    response = @sent_dm.contacts.retrieve_by_phone(phone_number: "phoneNumber")
+    response = @sent_dm.contacts.delete("6ba7b810-9dad-11d1-80b4-00c04fd430c8", body: {})
 
     assert_pattern do
-      response => Sentdm::ContactListItem
-    end
-
-    assert_pattern do
-      response => {
-        id: String | nil,
-        available_channels: String | nil,
-        country_code: String | nil,
-        default_channel: String | nil,
-        format_e164: String | nil,
-        format_international: String | nil,
-        format_national: String | nil,
-        format_rfc: String | nil,
-        phone_number: String | nil,
-        region_code: String | nil
-      }
-    end
-  end
-
-  def test_retrieve_id_required_params
-    skip("Prism tests are disabled")
-
-    response = @sent_dm.contacts.retrieve_id(id: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")
-
-    assert_pattern do
-      response => Sentdm::ContactListItem
-    end
-
-    assert_pattern do
-      response => {
-        id: String | nil,
-        available_channels: String | nil,
-        country_code: String | nil,
-        default_channel: String | nil,
-        format_e164: String | nil,
-        format_international: String | nil,
-        format_national: String | nil,
-        format_rfc: String | nil,
-        phone_number: String | nil,
-        region_code: String | nil
-      }
+      response => nil
     end
   end
 end

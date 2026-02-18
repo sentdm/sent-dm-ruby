@@ -1,0 +1,168 @@
+module Sentdm
+  module Models
+    type profile_detail =
+      {
+        id: String,
+        created_at: Time,
+        description: String?,
+        email: String?,
+        icon: String?,
+        name: String,
+        organization_id: String?,
+        settings: Sentdm::ProfileDetail::Settings,
+        short_name: String?,
+        status: String,
+        updated_at: Time?
+      }
+
+    class ProfileDetail < Sentdm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_accessor description: String?
+
+      attr_accessor email: String?
+
+      attr_accessor icon: String?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor organization_id: String?
+
+      attr_reader settings: Sentdm::ProfileDetail::Settings?
+
+      def settings=: (
+        Sentdm::ProfileDetail::Settings
+      ) -> Sentdm::ProfileDetail::Settings
+
+      attr_accessor short_name: String?
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_accessor updated_at: Time?
+
+      def initialize: (
+        ?id: String,
+        ?created_at: Time,
+        ?description: String?,
+        ?email: String?,
+        ?icon: String?,
+        ?name: String,
+        ?organization_id: String?,
+        ?settings: Sentdm::ProfileDetail::Settings,
+        ?short_name: String?,
+        ?status: String,
+        ?updated_at: Time?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        description: String?,
+        email: String?,
+        icon: String?,
+        name: String,
+        organization_id: String?,
+        settings: Sentdm::ProfileDetail::Settings,
+        short_name: String?,
+        status: String,
+        updated_at: Time?
+      }
+
+      type settings =
+        {
+          allow_contact_sharing: bool,
+          allow_number_change_during_onboarding: bool?,
+          allow_template_sharing: bool,
+          billing_model: String,
+          inherit_contacts: bool,
+          inherit_tcr_brand: bool,
+          inherit_tcr_campaign: bool,
+          inherit_templates: bool,
+          sending_phone_number: String?,
+          sending_phone_number_profile_id: String?,
+          sending_whatsapp_number_profile_id: String?,
+          whatsapp_phone_number: String?
+        }
+
+      class Settings < Sentdm::Internal::Type::BaseModel
+        attr_reader allow_contact_sharing: bool?
+
+        def allow_contact_sharing=: (bool) -> bool
+
+        attr_accessor allow_number_change_during_onboarding: bool?
+
+        attr_reader allow_template_sharing: bool?
+
+        def allow_template_sharing=: (bool) -> bool
+
+        attr_reader billing_model: String?
+
+        def billing_model=: (String) -> String
+
+        attr_reader inherit_contacts: bool?
+
+        def inherit_contacts=: (bool) -> bool
+
+        attr_reader inherit_tcr_brand: bool?
+
+        def inherit_tcr_brand=: (bool) -> bool
+
+        attr_reader inherit_tcr_campaign: bool?
+
+        def inherit_tcr_campaign=: (bool) -> bool
+
+        attr_reader inherit_templates: bool?
+
+        def inherit_templates=: (bool) -> bool
+
+        attr_accessor sending_phone_number: String?
+
+        attr_accessor sending_phone_number_profile_id: String?
+
+        attr_accessor sending_whatsapp_number_profile_id: String?
+
+        attr_accessor whatsapp_phone_number: String?
+
+        def initialize: (
+          ?allow_contact_sharing: bool,
+          ?allow_number_change_during_onboarding: bool?,
+          ?allow_template_sharing: bool,
+          ?billing_model: String,
+          ?inherit_contacts: bool,
+          ?inherit_tcr_brand: bool,
+          ?inherit_tcr_campaign: bool,
+          ?inherit_templates: bool,
+          ?sending_phone_number: String?,
+          ?sending_phone_number_profile_id: String?,
+          ?sending_whatsapp_number_profile_id: String?,
+          ?whatsapp_phone_number: String?
+        ) -> void
+
+        def to_hash: -> {
+          allow_contact_sharing: bool,
+          allow_number_change_during_onboarding: bool?,
+          allow_template_sharing: bool,
+          billing_model: String,
+          inherit_contacts: bool,
+          inherit_tcr_brand: bool,
+          inherit_tcr_campaign: bool,
+          inherit_templates: bool,
+          sending_phone_number: String?,
+          sending_phone_number_profile_id: String?,
+          sending_whatsapp_number_profile_id: String?,
+          whatsapp_phone_number: String?
+        }
+      end
+    end
+  end
+end

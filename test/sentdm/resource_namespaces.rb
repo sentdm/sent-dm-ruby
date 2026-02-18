@@ -3,6 +3,8 @@
 module Sentdm
   module Test
     module Resources
+      module Brands
+      end
     end
   end
 end

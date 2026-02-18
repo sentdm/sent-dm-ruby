@@ -1,0 +1,82 @@
+module Sentdm
+  module Models
+    module Brands
+      type campaign_data =
+        {
+          description: String,
+          name: String,
+          type: String,
+          use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
+          help_keywords: String?,
+          help_message: String?,
+          message_flow: String?,
+          optin_keywords: String?,
+          optin_message: String?,
+          optout_keywords: String?,
+          optout_message: String?,
+          privacy_policy_link: String?,
+          terms_and_conditions_link: String?
+        }
+
+      class CampaignData < Sentdm::Internal::Type::BaseModel
+        attr_accessor description: String
+
+        attr_accessor name: String
+
+        attr_accessor type: String
+
+        attr_accessor use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData]
+
+        attr_accessor help_keywords: String?
+
+        attr_accessor help_message: String?
+
+        attr_accessor message_flow: String?
+
+        attr_accessor optin_keywords: String?
+
+        attr_accessor optin_message: String?
+
+        attr_accessor optout_keywords: String?
+
+        attr_accessor optout_message: String?
+
+        attr_accessor privacy_policy_link: String?
+
+        attr_accessor terms_and_conditions_link: String?
+
+        def initialize: (
+          description: String,
+          name: String,
+          type: String,
+          use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
+          ?help_keywords: String?,
+          ?help_message: String?,
+          ?message_flow: String?,
+          ?optin_keywords: String?,
+          ?optin_message: String?,
+          ?optout_keywords: String?,
+          ?optout_message: String?,
+          ?privacy_policy_link: String?,
+          ?terms_and_conditions_link: String?
+        ) -> void
+
+        def to_hash: -> {
+          description: String,
+          name: String,
+          type: String,
+          use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
+          help_keywords: String?,
+          help_message: String?,
+          message_flow: String?,
+          optin_keywords: String?,
+          optin_message: String?,
+          optout_keywords: String?,
+          optout_message: String?,
+          privacy_policy_link: String?,
+          terms_and_conditions_link: String?
+        }
+      end
+    end
+  end
+end

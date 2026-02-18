@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+module Sentdm
+  module Models
+    module TcrVertical
+      extend Sentdm::Internal::Type::Enum
+
+      PROFESSIONAL = :PROFESSIONAL
+      REAL_ESTATE = :REAL_ESTATE
+      HEALTHCARE = :HEALTHCARE
+      HUMAN_RESOURCES = :HUMAN_RESOURCES
+      ENERGY = :ENERGY
+      ENTERTAINMENT = :ENTERTAINMENT
+      RETAIL = :RETAIL
+      TRANSPORTATION = :TRANSPORTATION
+      AGRICULTURE = :AGRICULTURE
+      INSURANCE = :INSURANCE
+      POSTAL = :POSTAL
+      EDUCATION = :EDUCATION
+      HOSPITALITY = :HOSPITALITY
+      FINANCIAL = :FINANCIAL
+      POLITICAL = :POLITICAL
+      GAMBLING = :GAMBLING
+      LEGAL = :LEGAL
+      CONSTRUCTION = :CONSTRUCTION
+      NGO = :NGO
+      MANUFACTURING = :MANUFACTURING
+      GOVERNMENT = :GOVERNMENT
+      TECHNOLOGY = :TECHNOLOGY
+      COMMUNICATION = :COMMUNICATION
+
+      # @!method self.values
+      #   @return [Array<Symbol>]
+    end
+  end
+end

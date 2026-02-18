@@ -1,21 +1,95 @@
 module Sentdm
-  class ContactListItem = Sentdm::Models::ContactListItem
+  class APIError = Sentdm::Models::APIError
+
+  class APIMeta = Sentdm::Models::APIMeta
+
+  class APIResponseBrandWithKYC = Sentdm::Models::APIResponseBrandWithKYC
+
+  class APIResponseContact = Sentdm::Models::APIResponseContact
+
+  class APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
+
+  class APIResponseOfUser = Sentdm::Models::APIResponseOfUser
+
+  class APIResponseTemplate = Sentdm::Models::APIResponseTemplate
+
+  class APIResponseWebhook = Sentdm::Models::APIResponseWebhook
+
+  class BrandCreateParams = Sentdm::Models::BrandCreateParams
+
+  class BrandData = Sentdm::Models::BrandData
+
+  class BrandDeleteParams = Sentdm::Models::BrandDeleteParams
+
+  class BrandListParams = Sentdm::Models::BrandListParams
+
+  module Brands = Sentdm::Models::Brands
+
+  class BrandUpdateParams = Sentdm::Models::BrandUpdateParams
+
+  class BrandWithKYC = Sentdm::Models::BrandWithKYC
+
+  class Contact = Sentdm::Models::Contact
+
+  class ContactCreateParams = Sentdm::Models::ContactCreateParams
+
+  class ContactDeleteParams = Sentdm::Models::ContactDeleteParams
 
   class ContactListParams = Sentdm::Models::ContactListParams
 
-  class ContactRetrieveByPhoneParams = Sentdm::Models::ContactRetrieveByPhoneParams
+  class ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
-  class ContactRetrieveIDParams = Sentdm::Models::ContactRetrieveIDParams
+  class ContactUpdateParams = Sentdm::Models::ContactUpdateParams
 
-  class MessageRetrieveParams = Sentdm::Models::MessageRetrieveParams
+  class DestinationCountry = Sentdm::Models::DestinationCountry
 
-  class MessageSendQuickMessageParams = Sentdm::Models::MessageSendQuickMessageParams
+  class LookupRetrievePhoneInfoParams = Sentdm::Models::LookupRetrievePhoneInfoParams
 
-  class MessageSendToContactParams = Sentdm::Models::MessageSendToContactParams
+  class MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
-  class MessageSendToPhoneParams = Sentdm::Models::MessageSendToPhoneParams
+  class MessageRetrieveActivitiesParams = Sentdm::Models::MessageRetrieveActivitiesParams
 
-  class NumberLookupRetrieveParams = Sentdm::Models::NumberLookupRetrieveParams
+  class MessageRetrieveStatusParams = Sentdm::Models::MessageRetrieveStatusParams
+
+  class MessageSendParams = Sentdm::Models::MessageSendParams
+
+  class MutationRequest = Sentdm::Models::MutationRequest
+
+  class PaginationMeta = Sentdm::Models::PaginationMeta
+
+  class ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
+
+  class ProfileCreateParams = Sentdm::Models::ProfileCreateParams
+
+  class ProfileDeleteParams = Sentdm::Models::ProfileDeleteParams
+
+  class ProfileDetail = Sentdm::Models::ProfileDetail
+
+  class ProfileListParams = Sentdm::Models::ProfileListParams
+
+  class ProfileRetrieveParams = Sentdm::Models::ProfileRetrieveParams
+
+  class ProfileSettings = Sentdm::Models::ProfileSettings
+
+  class ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
+
+  class SentDmServicesCommonContractsPocOsAuthenticationConfig = Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
+
+  class SentDmServicesCommonContractsPocOsTemplateBody = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
+
+  class SentDmServicesCommonContractsPocOsTemplateButton = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
+
+  class SentDmServicesCommonContractsPocOsTemplateButtonProps = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
+
+  class SentDmServicesCommonContractsPocOsTemplateFooter = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
+
+  class SentDmServicesCommonContractsPocOsTemplateHeader = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
+
+  module TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
+
+  module TcrVertical = Sentdm::Models::TcrVertical
+
+  class Template = Sentdm::Models::Template
 
   class TemplateBodyContent = Sentdm::Models::TemplateBodyContent
 
@@ -27,9 +101,43 @@ module Sentdm
 
   class TemplateListParams = Sentdm::Models::TemplateListParams
 
-  class TemplateResponseV2 = Sentdm::Models::TemplateResponseV2
-
   class TemplateRetrieveParams = Sentdm::Models::TemplateRetrieveParams
 
+  class TemplateUpdateParams = Sentdm::Models::TemplateUpdateParams
+
   class TemplateVariable = Sentdm::Models::TemplateVariable
+
+  class UserInviteParams = Sentdm::Models::UserInviteParams
+
+  class UserListParams = Sentdm::Models::UserListParams
+
+  class UserRemoveParams = Sentdm::Models::UserRemoveParams
+
+  class UserResponse = Sentdm::Models::UserResponse
+
+  class UserRetrieveParams = Sentdm::Models::UserRetrieveParams
+
+  class UserUpdateRoleParams = Sentdm::Models::UserUpdateRoleParams
+
+  class WebhookCreateParams = Sentdm::Models::WebhookCreateParams
+
+  class WebhookDeleteParams = Sentdm::Models::WebhookDeleteParams
+
+  class WebhookListEventsParams = Sentdm::Models::WebhookListEventsParams
+
+  class WebhookListEventTypesParams = Sentdm::Models::WebhookListEventTypesParams
+
+  class WebhookListParams = Sentdm::Models::WebhookListParams
+
+  class WebhookResponse = Sentdm::Models::WebhookResponse
+
+  class WebhookRetrieveParams = Sentdm::Models::WebhookRetrieveParams
+
+  class WebhookRotateSecretParams = Sentdm::Models::WebhookRotateSecretParams
+
+  class WebhookTestParams = Sentdm::Models::WebhookTestParams
+
+  class WebhookToggleStatusParams = Sentdm::Models::WebhookToggleStatusParams
+
+  class WebhookUpdateParams = Sentdm::Models::WebhookUpdateParams
 end

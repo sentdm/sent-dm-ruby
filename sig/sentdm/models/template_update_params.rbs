@@ -1,0 +1,62 @@
+module Sentdm
+  module Models
+    type template_update_params =
+      {
+        category: String?,
+        definition: Sentdm::TemplateDefinition?,
+        language: String?,
+        name: String?,
+        submit_for_review: bool,
+        test_mode: bool,
+        idempotency_key: String
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class TemplateUpdateParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor category: String?
+
+      attr_accessor definition: Sentdm::TemplateDefinition?
+
+      attr_accessor language: String?
+
+      attr_accessor name: String?
+
+      attr_reader submit_for_review: bool?
+
+      def submit_for_review=: (bool) -> bool
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?category: String?,
+        ?definition: Sentdm::TemplateDefinition?,
+        ?language: String?,
+        ?name: String?,
+        ?submit_for_review: bool,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        category: String?,
+        definition: Sentdm::TemplateDefinition?,
+        language: String?,
+        name: String?,
+        submit_for_review: bool,
+        test_mode: bool,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

@@ -11,26 +11,45 @@ module Sentdm
           T.any(Sentdm::ContactListParams, Sentdm::Internal::AnyHash)
         end
 
-      # The page number (zero-indexed). Default is 0.
+      # Page number (1-indexed)
       sig { returns(Integer) }
       attr_accessor :page
 
-      # The number of items per page. Default is 20.
       sig { returns(Integer) }
       attr_accessor :page_size
+
+      # Optional channel filter (sms, whatsapp)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :channel
+
+      # Optional phone number filter (alternative to list view)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :phone
+
+      # Optional search term for filtering contacts
+      sig { returns(T.nilable(String)) }
+      attr_accessor :search
 
       sig do
         params(
           page: Integer,
           page_size: Integer,
+          channel: T.nilable(String),
+          phone: T.nilable(String),
+          search: T.nilable(String),
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # The page number (zero-indexed). Default is 0.
+        # Page number (1-indexed)
         page:,
-        # The number of items per page. Default is 20.
         page_size:,
+        # Optional channel filter (sms, whatsapp)
+        channel: nil,
+        # Optional phone number filter (alternative to list view)
+        phone: nil,
+        # Optional search term for filtering contacts
+        search: nil,
         request_options: {}
       )
       end
@@ -40,6 +59,9 @@ module Sentdm
           {
             page: Integer,
             page_size: Integer,
+            channel: T.nilable(String),
+            phone: T.nilable(String),
+            search: T.nilable(String),
             request_options: Sentdm::RequestOptions
           }
         )

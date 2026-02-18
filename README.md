@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "sentdm", "~> 0.2.0"
+gem "sentdm", "~> 0.3.0"
 ```
 
 <!-- x-release-please-end -->
@@ -29,17 +29,20 @@ require "bundler/setup"
 require "sentdm"
 
 sent_dm = Sentdm::Client.new(
-  api_key: ENV["SENT_DM_API_KEY"], # This is the default and can be omitted
-  sender_id: ENV["SENT_DM_SENDER_ID"] # This is the default and can be omitted
+  api_key: ENV["SENT_DM_API_KEY"] # This is the default and can be omitted
 )
 
-result = sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+response = sent_dm.messages.send_(
+  channel: ["sms", "whatsapp"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234", "+14155555678"]
 )
 
-puts(result)
+puts(response.data)
 ```
 
 ### Handling errors
@@ -48,10 +51,14 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  message = sent_dm.messages.send_to_phone(
-    phone_number: "+1234567890",
-    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-    template_variables: {name: "John Doe", order_id: "12345"}
+  message = sent_dm.messages.send_(
+    channel: ["sms"],
+    template: {
+      id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      name: "order_confirmation",
+      parameters: {name: "John Doe", order_id: "12345"}
+    },
+    to: ["+14155551234"]
   )
 rescue Sentdm::Errors::APIConnectionError => e
   puts("The server could not be reached")
@@ -95,10 +102,14 @@ sent_dm = Sentdm::Client.new(
 )
 
 # Or, configure per-request:
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"},
+sent_dm.messages.send_(
+  channel: ["sms"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234"],
   request_options: {max_retries: 5}
 )
 ```
@@ -114,10 +125,14 @@ sent_dm = Sentdm::Client.new(
 )
 
 # Or, configure per-request:
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"},
+sent_dm.messages.send_(
+  channel: ["sms"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234"],
   request_options: {timeout: 5}
 )
 ```
@@ -149,11 +164,15 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-result =
-  sent_dm.messages.send_to_phone(
-    phone_number: "+1234567890",
-    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-    template_variables: {name: "John Doe", order_id: "12345"},
+response =
+  sent_dm.messages.send_(
+    channel: ["sms"],
+    template: {
+      id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      name: "order_confirmation",
+      parameters: {name: "John Doe", order_id: "12345"}
+    },
+    to: ["+14155551234"],
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -161,7 +180,7 @@ result =
     }
   )
 
-puts(result[:my_undocumented_property])
+puts(response[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -199,10 +218,14 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+sent_dm.messages.send_(
+  channel: ["sms", "whatsapp"],
+  template: Sentdm::MessageSendParams::Template.new(
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  ),
+  to: ["+14155551234", "+14155555678"]
 )
 ```
 
@@ -210,19 +233,53 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+sent_dm.messages.send_(
+  channel: ["sms", "whatsapp"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234", "+14155555678"]
 )
 
 # You can also splat a full Params class:
-params = Sentdm::MessageSendToPhoneParams.new(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+params = Sentdm::MessageSendParams.new(
+  channel: ["sms", "whatsapp"],
+  template: Sentdm::MessageSendParams::Template.new(
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  ),
+  to: ["+14155551234", "+14155555678"]
 )
-sent_dm.messages.send_to_phone(**params)
+sent_dm.messages.send_(**params)
+```
+
+### Enums
+
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+
+```ruby
+# :BASIC_ACCOUNT
+puts(Sentdm::TcrBrandRelationship::BASIC_ACCOUNT)
+
+# Revealed type: `T.all(Sentdm::TcrBrandRelationship, Symbol)`
+T.reveal_type(Sentdm::TcrBrandRelationship::BASIC_ACCOUNT)
+```
+
+Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+
+```ruby
+Sentdm::BrandData.new(
+  brand_relationship: Sentdm::TcrBrandRelationship::BASIC_ACCOUNT,
+  # …
+)
+
+Sentdm::BrandData.new(
+  brand_relationship: :BASIC_ACCOUNT,
+  # …
+)
 ```
 
 ## Versioning

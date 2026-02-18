@@ -3,118 +3,83 @@
 module Sentdm
   module Resources
     class Messages
-      # Retrieves comprehensive details about a specific message using the message ID.
-      # Returns complete message data including delivery status, channel information,
-      # template details, contact information, and pricing. The customer ID is extracted
-      # from the authentication token to ensure the message belongs to the authenticated
-      # customer.
+      # Retrieves the activity log for a specific message. Activities track the message
+      # lifecycle including acceptance, processing, sending, delivery, and any errors.
       #
-      # @overload retrieve(id, request_options: {})
+      # @overload retrieve_activities(id, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] Message ID from route parameter
+      #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageRetrieveResponse]
+      # @return [Sentdm::Models::MessageRetrieveActivitiesResponse]
       #
-      # @see Sentdm::Models::MessageRetrieveParams
-      def retrieve(id, params = {})
+      # @see Sentdm::Models::MessageRetrieveActivitiesParams
+      def retrieve_activities(id, params = {})
         @client.request(
           method: :get,
-          path: ["v2/messages/%1$s", id],
-          model: Sentdm::Models::MessageRetrieveResponse,
+          path: ["v3/messages/%1$s/activities", id],
+          model: Sentdm::Models::MessageRetrieveActivitiesResponse,
+          options: params[:request_options]
+        )
+      end
+
+      # Retrieves the current status and details of a message by ID. Includes delivery
+      # status, timestamps, and error information if applicable.
+      #
+      # @overload retrieve_status(id, request_options: {})
+      #
+      # @param id [String] Message ID
+      #
+      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Sentdm::Models::MessageRetrieveStatusResponse]
+      #
+      # @see Sentdm::Models::MessageRetrieveStatusParams
+      def retrieve_status(id, params = {})
+        @client.request(
+          method: :get,
+          path: ["v3/messages/%1$s", id],
+          model: Sentdm::Models::MessageRetrieveStatusResponse,
           options: params[:request_options]
         )
       end
 
       # Some parameter documentations has been truncated, see
-      # {Sentdm::Models::MessageSendQuickMessageParams} for more details.
+      # {Sentdm::Models::MessageSendParams} for more details.
       #
-      # Sends a message to a phone number using the default template. This endpoint is
-      # rate limited to 5 messages per customer per day. The customer ID is extracted
-      # from the authentication token.
+      # Sends a message to one or more recipients using a template. Supports
+      # multi-channel broadcast — when multiple channels are specified (e.g. ["sms",
+      # "whatsapp"]), a separate message is created for each (recipient, channel) pair.
+      # Returns immediately with per-recipient message IDs for async tracking via
+      # webhooks or the GET /messages/{id} endpoint.
       #
-      # @overload send_quick_message(custom_message:, phone_number:, request_options: {})
+      # @overload send_(channel: nil, template: nil, test_mode: nil, to: nil, idempotency_key: nil, request_options: {})
       #
-      # @param custom_message [String] The custom message content to include in the template
+      # @param channel [Array<String>, nil] Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"].
       #
-      # @param phone_number [String] The phone number to send the message to, in international format (e.g., +1234567
+      # @param template [Sentdm::Models::MessageSendParams::Template] Body param: Template reference (by id or name, with optional parameters)
       #
-      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+      # @param test_mode [Boolean] Body param: Test mode flag - when true, the operation is simulated without side
       #
-      # @return [nil]
+      # @param to [Array<String>] Body param: List of recipient phone numbers in E.164 format (multi-recipient fan
       #
-      # @see Sentdm::Models::MessageSendQuickMessageParams
-      def send_quick_message(params)
-        parsed, options = Sentdm::MessageSendQuickMessageParams.dump_request(params)
-        @client.request(
-          method: :post,
-          path: "v2/messages/quick-message",
-          body: parsed,
-          model: NilClass,
-          options: options
-        )
-      end
-
-      # Some parameter documentations has been truncated, see
-      # {Sentdm::Models::MessageSendToContactParams} for more details.
-      #
-      # Sends a message to a specific contact using a template. The message can be sent
-      # via SMS or WhatsApp depending on the contact's capabilities. Optionally specify
-      # a webhook URL to receive delivery status updates. The customer ID is extracted
-      # from the authentication token.
-      #
-      # @overload send_to_contact(contact_id:, template_id:, template_variables: nil, request_options: {})
-      #
-      # @param contact_id [String] The unique identifier of the contact to send the message to
-      #
-      # @param template_id [String] The unique identifier of the template to use for the message
-      #
-      # @param template_variables [Hash{Symbol=>String}, nil] Optional key-value pairs of template variables to replace in the template body.
+      # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [nil]
+      # @return [Sentdm::Models::MessageSendResponse]
       #
-      # @see Sentdm::Models::MessageSendToContactParams
-      def send_to_contact(params)
-        parsed, options = Sentdm::MessageSendToContactParams.dump_request(params)
+      # @see Sentdm::Models::MessageSendParams
+      def send_(params = {})
+        parsed, options = Sentdm::MessageSendParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key"}
         @client.request(
           method: :post,
-          path: "v2/messages/contact",
-          body: parsed,
-          model: NilClass,
-          options: options
-        )
-      end
-
-      # Some parameter documentations has been truncated, see
-      # {Sentdm::Models::MessageSendToPhoneParams} for more details.
-      #
-      # Sends a message to a phone number using a template. The phone number doesn't
-      # need to be a pre-existing contact. The message can be sent via SMS or WhatsApp.
-      # Optionally specify a webhook URL to receive delivery status updates. The
-      # customer ID is extracted from the authentication token.
-      #
-      # @overload send_to_phone(phone_number:, template_id:, template_variables: nil, request_options: {})
-      #
-      # @param phone_number [String] The phone number to send the message to, in international format (e.g., +1234567
-      #
-      # @param template_id [String] The unique identifier of the template to use for the message
-      #
-      # @param template_variables [Hash{Symbol=>String}, nil] Optional key-value pairs of template variables to replace in the template body.
-      #
-      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
-      #
-      # @return [nil]
-      #
-      # @see Sentdm::Models::MessageSendToPhoneParams
-      def send_to_phone(params)
-        parsed, options = Sentdm::MessageSendToPhoneParams.dump_request(params)
-        @client.request(
-          method: :post,
-          path: "v2/messages/phone",
-          body: parsed,
-          model: NilClass,
+          path: "v3/messages",
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
+          model: Sentdm::Models::MessageSendResponse,
           options: options
         )
       end

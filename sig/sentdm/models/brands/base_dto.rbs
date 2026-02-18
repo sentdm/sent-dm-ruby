@@ -1,0 +1,27 @@
+module Sentdm
+  module Models
+    module Brands
+      type base_dto = { id: String, created_at: Time, updated_at: Time? }
+
+      class BaseDto < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_accessor updated_at: Time?
+
+        def initialize: (
+          ?id: String,
+          ?created_at: Time,
+          ?updated_at: Time?
+        ) -> void
+
+        def to_hash: -> { id: String, created_at: Time, updated_at: Time? }
+      end
+    end
+  end
+end

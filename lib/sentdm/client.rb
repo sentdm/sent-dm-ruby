@@ -20,42 +20,38 @@ module Sentdm
     # @return [String]
     attr_reader :api_key
 
-    # Customer sender ID (UUID) identifying the customer account. Obtain this from
-    # your account settings. Pass via the `x-sender-id` header.
-    # @return [String]
-    attr_reader :sender_id
+    # @return [Sentdm::Resources::Webhooks]
+    attr_reader :webhooks
 
-    # @return [Sentdm::Resources::Contacts]
-    attr_reader :contacts
-
-    # @return [Sentdm::Resources::Messages]
-    attr_reader :messages
+    # @return [Sentdm::Resources::Users]
+    attr_reader :users
 
     # @return [Sentdm::Resources::Templates]
     attr_reader :templates
 
-    # @return [Sentdm::Resources::NumberLookup]
-    attr_reader :number_lookup
+    # @return [Sentdm::Resources::Profiles]
+    attr_reader :profiles
+
+    # @return [Sentdm::Resources::Messages]
+    attr_reader :messages
+
+    # @return [Sentdm::Resources::Lookup]
+    attr_reader :lookup
+
+    # @return [Sentdm::Resources::Contacts]
+    attr_reader :contacts
+
+    # @return [Sentdm::Resources::Brands]
+    attr_reader :brands
+
+    # @return [Sentdm::Resources::Me]
+    attr_reader :me
 
     # @api private
     #
     # @return [Hash{String=>String}]
     private def auth_headers
-      {**customer_api_key, **customer_sender_id}
-    end
-
-    # @api private
-    #
-    # @return [Hash{String=>String}]
-    private def customer_api_key
       {"x-api-key" => @api_key}
-    end
-
-    # @api private
-    #
-    # @return [Hash{String=>String}]
-    private def customer_sender_id
-      {"x-sender-id" => @sender_id}
     end
 
     # Creates and returns a new client for interacting with the API.
@@ -63,10 +59,6 @@ module Sentdm
     # @param api_key [String, nil] Customer API key for authentication. Use `sk_live_*` keys for production and
     # `sk_test_*` keys for sandbox/testing. Pass via the `x-api-key` header. Defaults
     # to `ENV["SENT_DM_API_KEY"]`
-    #
-    # @param sender_id [String, nil] Customer sender ID (UUID) identifying the customer account. Obtain this from
-    # your account settings. Pass via the `x-sender-id` header. Defaults to
-    # `ENV["SENT_DM_SENDER_ID"]`
     #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
     # `"https://api.example.com/v2/"`. Defaults to `ENV["SENT_DM_BASE_URL"]`
@@ -80,7 +72,6 @@ module Sentdm
     # @param max_retry_delay [Float]
     def initialize(
       api_key: ENV["SENT_DM_API_KEY"],
-      sender_id: ENV["SENT_DM_SENDER_ID"],
       base_url: ENV["SENT_DM_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
@@ -92,12 +83,8 @@ module Sentdm
       if api_key.nil?
         raise ArgumentError.new("api_key is required, and can be set via environ: \"SENT_DM_API_KEY\"")
       end
-      if sender_id.nil?
-        raise ArgumentError.new("sender_id is required, and can be set via environ: \"SENT_DM_SENDER_ID\"")
-      end
 
       @api_key = api_key.to_s
-      @sender_id = sender_id.to_s
 
       super(
         base_url: base_url,
@@ -107,10 +94,15 @@ module Sentdm
         max_retry_delay: max_retry_delay
       )
 
-      @contacts = Sentdm::Resources::Contacts.new(client: self)
-      @messages = Sentdm::Resources::Messages.new(client: self)
+      @webhooks = Sentdm::Resources::Webhooks.new(client: self)
+      @users = Sentdm::Resources::Users.new(client: self)
       @templates = Sentdm::Resources::Templates.new(client: self)
-      @number_lookup = Sentdm::Resources::NumberLookup.new(client: self)
+      @profiles = Sentdm::Resources::Profiles.new(client: self)
+      @messages = Sentdm::Resources::Messages.new(client: self)
+      @lookup = Sentdm::Resources::Lookup.new(client: self)
+      @contacts = Sentdm::Resources::Contacts.new(client: self)
+      @brands = Sentdm::Resources::Brands.new(client: self)
+      @me = Sentdm::Resources::Me.new(client: self)
     end
   end
 end

@@ -1,0 +1,105 @@
+module Sentdm
+  module Models
+    type message_retrieve_activities_response =
+      {
+        data: Sentdm::Models::MessageRetrieveActivitiesResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class MessageRetrieveActivitiesResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::MessageRetrieveActivitiesResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::MessageRetrieveActivitiesResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::MessageRetrieveActivitiesResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          activities: ::Array[Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity],
+          message_id: String
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader activities: ::Array[Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity]?
+
+        def activities=: (
+          ::Array[Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity]
+        ) -> ::Array[Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity]
+
+        attr_reader message_id: String?
+
+        def message_id=: (String) -> String
+
+        def initialize: (
+          ?activities: ::Array[Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity],
+          ?message_id: String
+        ) -> void
+
+        def to_hash: -> {
+          activities: ::Array[Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity],
+          message_id: String
+        }
+
+        type activity =
+          {
+            content: String?,
+            description: String,
+            status: String,
+            timestamp: Time
+          }
+
+        class Activity < Sentdm::Internal::Type::BaseModel
+          attr_accessor content: String?
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader status: String?
+
+          def status=: (String) -> String
+
+          attr_reader timestamp: Time?
+
+          def timestamp=: (Time) -> Time
+
+          def initialize: (
+            ?content: String?,
+            ?description: String,
+            ?status: String,
+            ?timestamp: Time
+          ) -> void
+
+          def to_hash: -> {
+            content: String?,
+            description: String,
+            status: String,
+            timestamp: Time
+          }
+        end
+      end
+    end
+  end
+end

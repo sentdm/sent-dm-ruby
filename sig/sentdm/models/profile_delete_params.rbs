@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    type profile_delete_params =
+      { body_profile_id: String, test_mode: bool }
+      & Sentdm::Internal::Type::request_parameters
+
+    class ProfileDeleteParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader body_profile_id: String?
+
+      def body_profile_id=: (String) -> String
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      def initialize: (
+        ?body_profile_id: String,
+        ?test_mode: bool,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        body_profile_id: String,
+        test_mode: bool,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

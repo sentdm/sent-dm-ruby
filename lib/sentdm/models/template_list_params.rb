@@ -8,45 +8,44 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       # @!attribute page
-      #   The page number (zero-indexed). Default is 0.
+      #   Page number (1-indexed)
       #
       #   @return [Integer]
       required :page, Integer
 
       # @!attribute page_size
-      #   The number of items per page (1-1000). Default is 100.
       #
       #   @return [Integer]
       required :page_size, Integer
 
       # @!attribute category
-      #   Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
+      #   Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
       #   @return [String, nil]
       optional :category, String, nil?: true
 
       # @!attribute search
-      #   Optional search term to filter templates by name or content
+      #   Optional search term for filtering templates
       #
       #   @return [String, nil]
       optional :search, String, nil?: true
 
       # @!attribute status
-      #   Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
+      #   Optional status filter: APPROVED, PENDING, REJECTED
       #
       #   @return [String, nil]
       optional :status, String, nil?: true
 
       # @!method initialize(page:, page_size:, category: nil, search: nil, status: nil, request_options: {})
-      #   @param page [Integer] The page number (zero-indexed). Default is 0.
+      #   @param page [Integer] Page number (1-indexed)
       #
-      #   @param page_size [Integer] The number of items per page (1-1000). Default is 100.
+      #   @param page_size [Integer]
       #
-      #   @param category [String, nil] Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
+      #   @param category [String, nil] Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
-      #   @param search [String, nil] Optional search term to filter templates by name or content
+      #   @param search [String, nil] Optional search term for filtering templates
       #
-      #   @param status [String, nil] Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
+      #   @param status [String, nil] Optional status filter: APPROVED, PENDING, REJECTED
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end

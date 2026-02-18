@@ -438,11 +438,11 @@ module Sentdm
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `contact_list_item` is a `Sentdm::ContactListItem`
-        #   contact_list_item => {
-        #     id: id,
-        #     available_channels: available_channels,
-        #     country_code: country_code
+        #   # `api_error` is a `Sentdm::APIError`
+        #   api_error => {
+        #     code: code,
+        #     details: details,
+        #     doc_url: doc_url
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

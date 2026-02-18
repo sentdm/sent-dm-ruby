@@ -2,51 +2,64 @@ module Sentdm
   module Models
     type contact_list_response =
       {
-        items: ::Array[Sentdm::ContactListItem],
-        page: Integer,
-        page_size: Integer,
-        total_count: Integer,
-        total_pages: Integer
+        data: Sentdm::Models::ContactListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
       }
 
     class ContactListResponse < Sentdm::Internal::Type::BaseModel
-      attr_reader items: ::Array[Sentdm::ContactListItem]?
+      attr_accessor data: Sentdm::Models::ContactListResponse::Data?
 
-      def items=: (
-        ::Array[Sentdm::ContactListItem]
-      ) -> ::Array[Sentdm::ContactListItem]
+      attr_accessor error: Sentdm::APIError?
 
-      attr_reader page: Integer?
+      attr_reader meta: Sentdm::APIMeta?
 
-      def page=: (Integer) -> Integer
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
 
-      attr_reader page_size: Integer?
+      attr_reader success: bool?
 
-      def page_size=: (Integer) -> Integer
-
-      attr_reader total_count: Integer?
-
-      def total_count=: (Integer) -> Integer
-
-      attr_reader total_pages: Integer?
-
-      def total_pages=: (Integer) -> Integer
+      def success=: (bool) -> bool
 
       def initialize: (
-        ?items: ::Array[Sentdm::ContactListItem],
-        ?page: Integer,
-        ?page_size: Integer,
-        ?total_count: Integer,
-        ?total_pages: Integer
+        ?data: Sentdm::Models::ContactListResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
       ) -> void
 
       def to_hash: -> {
-        items: ::Array[Sentdm::ContactListItem],
-        page: Integer,
-        page_size: Integer,
-        total_count: Integer,
-        total_pages: Integer
+        data: Sentdm::Models::ContactListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
       }
+
+      type data =
+        {
+          contacts: ::Array[Sentdm::Contact],
+          pagination: Sentdm::PaginationMeta
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader contacts: ::Array[Sentdm::Contact]?
+
+        def contacts=: (::Array[Sentdm::Contact]) -> ::Array[Sentdm::Contact]
+
+        attr_reader pagination: Sentdm::PaginationMeta?
+
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+        def initialize: (
+          ?contacts: ::Array[Sentdm::Contact],
+          ?pagination: Sentdm::PaginationMeta
+        ) -> void
+
+        def to_hash: -> {
+          contacts: ::Array[Sentdm::Contact],
+          pagination: Sentdm::PaginationMeta
+        }
+      end
     end
   end
 end

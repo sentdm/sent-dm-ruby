@@ -3,87 +3,68 @@
 module Sentdm
   module Resources
     class Messages
-      # Retrieves comprehensive details about a specific message using the message ID.
-      # Returns complete message data including delivery status, channel information,
-      # template details, contact information, and pricing. The customer ID is extracted
-      # from the authentication token to ensure the message belongs to the authenticated
-      # customer.
+      # Retrieves the activity log for a specific message. Activities track the message
+      # lifecycle including acceptance, processing, sending, delivery, and any errors.
       sig do
         params(
           id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageRetrieveResponse)
+        ).returns(Sentdm::Models::MessageRetrieveActivitiesResponse)
       end
-      def retrieve(id, request_options: {})
-      end
-
-      # Sends a message to a phone number using the default template. This endpoint is
-      # rate limited to 5 messages per customer per day. The customer ID is extracted
-      # from the authentication token.
-      sig do
-        params(
-          custom_message: String,
-          phone_number: String,
-          request_options: Sentdm::RequestOptions::OrHash
-        ).void
-      end
-      def send_quick_message(
-        # The custom message content to include in the template
-        custom_message:,
-        # The phone number to send the message to, in international format (e.g.,
-        # +1234567890)
-        phone_number:,
+      def retrieve_activities(
+        # Message ID from route parameter
+        id,
         request_options: {}
       )
       end
 
-      # Sends a message to a specific contact using a template. The message can be sent
-      # via SMS or WhatsApp depending on the contact's capabilities. Optionally specify
-      # a webhook URL to receive delivery status updates. The customer ID is extracted
-      # from the authentication token.
+      # Retrieves the current status and details of a message by ID. Includes delivery
+      # status, timestamps, and error information if applicable.
       sig do
         params(
-          contact_id: String,
-          template_id: String,
-          template_variables: T.nilable(T::Hash[Symbol, String]),
+          id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).void
+        ).returns(Sentdm::Models::MessageRetrieveStatusResponse)
       end
-      def send_to_contact(
-        # The unique identifier of the contact to send the message to
-        contact_id:,
-        # The unique identifier of the template to use for the message
-        template_id:,
-        # Optional key-value pairs of template variables to replace in the template body.
-        # For example, if your template contains "Hello {{name}}", you would provide {
-        # "name": "John Doe" }
-        template_variables: nil,
+      def retrieve_status(
+        # Message ID
+        id,
         request_options: {}
       )
       end
 
-      # Sends a message to a phone number using a template. The phone number doesn't
-      # need to be a pre-existing contact. The message can be sent via SMS or WhatsApp.
-      # Optionally specify a webhook URL to receive delivery status updates. The
-      # customer ID is extracted from the authentication token.
+      # Sends a message to one or more recipients using a template. Supports
+      # multi-channel broadcast — when multiple channels are specified (e.g. ["sms",
+      # "whatsapp"]), a separate message is created for each (recipient, channel) pair.
+      # Returns immediately with per-recipient message IDs for async tracking via
+      # webhooks or the GET /messages/{id} endpoint.
       sig do
         params(
-          phone_number: String,
-          template_id: String,
-          template_variables: T.nilable(T::Hash[Symbol, String]),
+          channel: T.nilable(T::Array[String]),
+          template: Sentdm::MessageSendParams::Template::OrHash,
+          test_mode: T::Boolean,
+          to: T::Array[String],
+          idempotency_key: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).void
+        ).returns(Sentdm::Models::MessageSendResponse)
       end
-      def send_to_phone(
-        # The phone number to send the message to, in international format (e.g.,
-        # +1234567890)
-        phone_number:,
-        # The unique identifier of the template to use for the message
-        template_id:,
-        # Optional key-value pairs of template variables to replace in the template body.
-        # For example, if your template contains "Hello {{name}}", you would provide {
-        # "name": "John Doe" }
-        template_variables: nil,
+      def send_(
+        # Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel
+        # produces a separate message per recipient. "sent" = auto-detect, "rcs" =
+        # reserved (skipped). Defaults to ["sent"] (auto-detect) if omitted.
+        channel: nil,
+        # Body param: Template reference (by id or name, with optional parameters)
+        template: nil,
+        # Body param: Test mode flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        test_mode: nil,
+        # Body param: List of recipient phone numbers in E.164 format (multi-recipient
+        # fan-out)
+        to: nil,
+        # Header param: Unique key to ensure idempotent request processing. Must be 1-255
+        # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
+        # hours per key per customer.
+        idempotency_key: nil,
         request_options: {}
       )
       end

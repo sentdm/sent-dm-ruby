@@ -4,37 +4,62 @@ module Sentdm
   module Models
     # @see Sentdm::Resources::Templates#list
     class TemplateListResponse < Sentdm::Internal::Type::BaseModel
-      # @!attribute items
+      # @!attribute data
+      #   The response data (null if error)
       #
-      #   @return [Array<Sentdm::Models::TemplateResponseV2>, nil]
-      optional :items, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateResponseV2] }
+      #   @return [Sentdm::Models::TemplateListResponse::Data, nil]
+      optional :data, -> { Sentdm::Models::TemplateListResponse::Data }, nil?: true
 
-      # @!attribute page
+      # @!attribute error
+      #   Error details (null if successful)
       #
-      #   @return [Integer, nil]
-      optional :page, Integer
+      #   @return [Sentdm::Models::APIError, nil]
+      optional :error, -> { Sentdm::APIError }, nil?: true
 
-      # @!attribute page_size
+      # @!attribute meta
+      #   Metadata about the request and response
       #
-      #   @return [Integer, nil]
-      optional :page_size, Integer, api_name: :pageSize
+      #   @return [Sentdm::Models::APIMeta, nil]
+      optional :meta, -> { Sentdm::APIMeta }
 
-      # @!attribute total_count
+      # @!attribute success
+      #   Indicates whether the request was successful
       #
-      #   @return [Integer, nil]
-      optional :total_count, Integer, api_name: :totalCount
+      #   @return [Boolean, nil]
+      optional :success, Sentdm::Internal::Type::Boolean
 
-      # @!attribute total_pages
+      # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
+      #   Standard API response envelope for all v3 endpoints
       #
-      #   @return [Integer, nil]
-      optional :total_pages, Integer, api_name: :totalPages
+      #   @param data [Sentdm::Models::TemplateListResponse::Data, nil] The response data (null if error)
+      #
+      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #
+      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #
+      #   @param success [Boolean] Indicates whether the request was successful
 
-      # @!method initialize(items: nil, page: nil, page_size: nil, total_count: nil, total_pages: nil)
-      #   @param items [Array<Sentdm::Models::TemplateResponseV2>]
-      #   @param page [Integer]
-      #   @param page_size [Integer]
-      #   @param total_count [Integer]
-      #   @param total_pages [Integer]
+      # @see Sentdm::Models::TemplateListResponse#data
+      class Data < Sentdm::Internal::Type::BaseModel
+        # @!attribute pagination
+        #   Pagination metadata
+        #
+        #   @return [Sentdm::Models::PaginationMeta, nil]
+        optional :pagination, -> { Sentdm::PaginationMeta }
+
+        # @!attribute templates
+        #   List of templates
+        #
+        #   @return [Array<Sentdm::Models::Template>, nil]
+        optional :templates, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Template] }
+
+        # @!method initialize(pagination: nil, templates: nil)
+        #   The response data (null if error)
+        #
+        #   @param pagination [Sentdm::Models::PaginationMeta] Pagination metadata
+        #
+        #   @param templates [Array<Sentdm::Models::Template>] List of templates
+      end
     end
   end
 end

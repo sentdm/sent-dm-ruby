@@ -11,23 +11,22 @@ module Sentdm
           T.any(Sentdm::TemplateListParams, Sentdm::Internal::AnyHash)
         end
 
-      # The page number (zero-indexed). Default is 0.
+      # Page number (1-indexed)
       sig { returns(Integer) }
       attr_accessor :page
 
-      # The number of items per page (1-1000). Default is 100.
       sig { returns(Integer) }
       attr_accessor :page_size
 
-      # Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
+      # Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       sig { returns(T.nilable(String)) }
       attr_accessor :category
 
-      # Optional search term to filter templates by name or content
+      # Optional search term for filtering templates
       sig { returns(T.nilable(String)) }
       attr_accessor :search
 
-      # Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
+      # Optional status filter: APPROVED, PENDING, REJECTED
       sig { returns(T.nilable(String)) }
       attr_accessor :status
 
@@ -42,15 +41,14 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # The page number (zero-indexed). Default is 0.
+        # Page number (1-indexed)
         page:,
-        # The number of items per page (1-1000). Default is 100.
         page_size:,
-        # Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
+        # Optional category filter: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Optional search term to filter templates by name or content
+        # Optional search term for filtering templates
         search: nil,
-        # Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
+        # Optional status filter: APPROVED, PENDING, REJECTED
         status: nil,
         request_options: {}
       )

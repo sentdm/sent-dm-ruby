@@ -39,23 +39,103 @@ module Sentdm
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
-  ContactListItem = Sentdm::Models::ContactListItem
+  APIError = Sentdm::Models::APIError
+
+  APIMeta = Sentdm::Models::APIMeta
+
+  APIResponseBrandWithKYC = Sentdm::Models::APIResponseBrandWithKYC
+
+  APIResponseContact = Sentdm::Models::APIResponseContact
+
+  APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
+
+  APIResponseOfUser = Sentdm::Models::APIResponseOfUser
+
+  APIResponseTemplate = Sentdm::Models::APIResponseTemplate
+
+  APIResponseWebhook = Sentdm::Models::APIResponseWebhook
+
+  BrandCreateParams = Sentdm::Models::BrandCreateParams
+
+  BrandData = Sentdm::Models::BrandData
+
+  BrandDeleteParams = Sentdm::Models::BrandDeleteParams
+
+  BrandListParams = Sentdm::Models::BrandListParams
+
+  Brands = Sentdm::Models::Brands
+
+  BrandUpdateParams = Sentdm::Models::BrandUpdateParams
+
+  BrandWithKYC = Sentdm::Models::BrandWithKYC
+
+  Contact = Sentdm::Models::Contact
+
+  ContactCreateParams = Sentdm::Models::ContactCreateParams
+
+  ContactDeleteParams = Sentdm::Models::ContactDeleteParams
 
   ContactListParams = Sentdm::Models::ContactListParams
 
-  ContactRetrieveByPhoneParams = Sentdm::Models::ContactRetrieveByPhoneParams
+  ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
-  ContactRetrieveIDParams = Sentdm::Models::ContactRetrieveIDParams
+  ContactUpdateParams = Sentdm::Models::ContactUpdateParams
 
-  MessageRetrieveParams = Sentdm::Models::MessageRetrieveParams
+  DestinationCountry = Sentdm::Models::DestinationCountry
 
-  MessageSendQuickMessageParams = Sentdm::Models::MessageSendQuickMessageParams
+  LookupRetrievePhoneInfoParams = Sentdm::Models::LookupRetrievePhoneInfoParams
 
-  MessageSendToContactParams = Sentdm::Models::MessageSendToContactParams
+  MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
-  MessageSendToPhoneParams = Sentdm::Models::MessageSendToPhoneParams
+  MessageRetrieveActivitiesParams = Sentdm::Models::MessageRetrieveActivitiesParams
 
-  NumberLookupRetrieveParams = Sentdm::Models::NumberLookupRetrieveParams
+  MessageRetrieveStatusParams = Sentdm::Models::MessageRetrieveStatusParams
+
+  MessageSendParams = Sentdm::Models::MessageSendParams
+
+  MutationRequest = Sentdm::Models::MutationRequest
+
+  PaginationMeta = Sentdm::Models::PaginationMeta
+
+  ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
+
+  ProfileCreateParams = Sentdm::Models::ProfileCreateParams
+
+  ProfileDeleteParams = Sentdm::Models::ProfileDeleteParams
+
+  ProfileDetail = Sentdm::Models::ProfileDetail
+
+  ProfileListParams = Sentdm::Models::ProfileListParams
+
+  ProfileRetrieveParams = Sentdm::Models::ProfileRetrieveParams
+
+  ProfileSettings = Sentdm::Models::ProfileSettings
+
+  ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
+
+  SentDmServicesCommonContractsPocOsAuthenticationConfig =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
+
+  SentDmServicesCommonContractsPocOsTemplateBody =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
+
+  SentDmServicesCommonContractsPocOsTemplateButton =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
+
+  SentDmServicesCommonContractsPocOsTemplateButtonProps =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
+
+  SentDmServicesCommonContractsPocOsTemplateFooter =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
+
+  SentDmServicesCommonContractsPocOsTemplateHeader =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
+
+  TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
+
+  TcrVertical = Sentdm::Models::TcrVertical
+
+  Template = Sentdm::Models::Template
 
   TemplateBodyContent = Sentdm::Models::TemplateBodyContent
 
@@ -67,9 +147,43 @@ module Sentdm
 
   TemplateListParams = Sentdm::Models::TemplateListParams
 
-  TemplateResponseV2 = Sentdm::Models::TemplateResponseV2
-
   TemplateRetrieveParams = Sentdm::Models::TemplateRetrieveParams
 
+  TemplateUpdateParams = Sentdm::Models::TemplateUpdateParams
+
   TemplateVariable = Sentdm::Models::TemplateVariable
+
+  UserInviteParams = Sentdm::Models::UserInviteParams
+
+  UserListParams = Sentdm::Models::UserListParams
+
+  UserRemoveParams = Sentdm::Models::UserRemoveParams
+
+  UserResponse = Sentdm::Models::UserResponse
+
+  UserRetrieveParams = Sentdm::Models::UserRetrieveParams
+
+  UserUpdateRoleParams = Sentdm::Models::UserUpdateRoleParams
+
+  WebhookCreateParams = Sentdm::Models::WebhookCreateParams
+
+  WebhookDeleteParams = Sentdm::Models::WebhookDeleteParams
+
+  WebhookListEventsParams = Sentdm::Models::WebhookListEventsParams
+
+  WebhookListEventTypesParams = Sentdm::Models::WebhookListEventTypesParams
+
+  WebhookListParams = Sentdm::Models::WebhookListParams
+
+  WebhookResponse = Sentdm::Models::WebhookResponse
+
+  WebhookRetrieveParams = Sentdm::Models::WebhookRetrieveParams
+
+  WebhookRotateSecretParams = Sentdm::Models::WebhookRotateSecretParams
+
+  WebhookTestParams = Sentdm::Models::WebhookTestParams
+
+  WebhookToggleStatusParams = Sentdm::Models::WebhookToggleStatusParams
+
+  WebhookUpdateParams = Sentdm::Models::WebhookUpdateParams
 end

@@ -3,55 +3,103 @@
 module Sentdm
   module Resources
     class Templates
-      # Creates a new message template for the authenticated customer with comprehensive
-      # template definitions including headers, body, footer, and interactive buttons.
-      # Supports automatic metadata generation using AI (display name, language,
-      # category). Optionally submits the template for WhatsApp review. The customer ID
-      # is extracted from the authentication token.
+      # Creates a new message template with header, body, footer, and buttons. The
+      # template can be submitted for review immediately or saved as draft for later
+      # submission.
       sig do
         params(
-          definition: Sentdm::TemplateDefinition::OrHash,
           category: T.nilable(String),
+          creation_source: T.nilable(String),
+          definition: Sentdm::TemplateDefinition::OrHash,
           language: T.nilable(String),
           submit_for_review: T::Boolean,
+          test_mode: T::Boolean,
+          idempotency_key: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::TemplateResponseV2)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def create(
-        # Template definition containing header, body, footer, and buttons
-        definition:,
-        # The template category (e.g., MARKETING, UTILITY, AUTHENTICATION). Can only be
-        # set when creating a new template. If not provided, will be auto-generated using
-        # AI.
+        # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional,
+        # auto-detected if not provided)
         category: nil,
-        # The template language code (e.g., en_US, es_ES). Can only be set when creating a
-        # new template. If not provided, will be auto-detected using AI.
+        # Body param: Source of template creation (default: from-api)
+        creation_source: nil,
+        # Body param: Template definition including header, body, footer, and buttons
+        definition: nil,
+        # Body param: Template language code (e.g., en_US) (optional, auto-detected if not
+        # provided)
         language: nil,
-        # When false, the template will be saved as draft. When true, the template will be
-        # submitted for review.
+        # Body param: Whether to submit the template for review after creation (default:
+        # false)
         submit_for_review: nil,
+        # Body param: Test mode flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        test_mode: nil,
+        # Header param: Unique key to ensure idempotent request processing. Must be 1-255
+        # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
+        # hours per key per customer.
+        idempotency_key: nil,
         request_options: {}
       )
       end
 
-      # Retrieves a specific message template by its unique identifier for the
-      # authenticated customer with comprehensive template definitions including
-      # headers, body, footer, and interactive buttons. The customer ID is extracted
-      # from the authentication token.
+      # Retrieves a specific template by its ID. Returns template details including
+      # name, category, language, status, and definition.
       sig do
         params(
           id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::TemplateResponseV2)
+        ).returns(Sentdm::APIResponseTemplate)
       end
-      def retrieve(id, request_options: {})
+      def retrieve(
+        # Template ID from route parameter
+        id,
+        request_options: {}
+      )
       end
 
-      # Retrieves all message templates available for the authenticated customer with
-      # comprehensive template definitions including headers, body, footer, and
-      # interactive buttons. Supports advanced filtering by search term, status, and
-      # category, plus pagination. The customer ID is extracted from the authentication
-      # token.
+      # Updates an existing template's name, category, language, definition, or submits
+      # it for review.
+      sig do
+        params(
+          id: String,
+          category: T.nilable(String),
+          definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
+          language: T.nilable(String),
+          name: T.nilable(String),
+          submit_for_review: T::Boolean,
+          test_mode: T::Boolean,
+          idempotency_key: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(Sentdm::APIResponseTemplate)
+      end
+      def update(
+        # Path param: Template ID from route parameter
+        id,
+        # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
+        category: nil,
+        # Body param: Template definition including header, body, footer, and buttons
+        definition: nil,
+        # Body param: Template language code (e.g., en_US)
+        language: nil,
+        # Body param: Template display name
+        name: nil,
+        # Body param: Whether to submit the template for review after updating (default:
+        # false)
+        submit_for_review: nil,
+        # Body param: Test mode flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        test_mode: nil,
+        # Header param: Unique key to ensure idempotent request processing. Must be 1-255
+        # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
+        # hours per key per customer.
+        idempotency_key: nil,
+        request_options: {}
+      )
+      end
+
+      # Retrieves a paginated list of message templates for the authenticated customer.
+      # Supports filtering by status, category, and search term.
       sig do
         params(
           page: Integer,
@@ -63,33 +111,38 @@ module Sentdm
         ).returns(Sentdm::Models::TemplateListResponse)
       end
       def list(
-        # The page number (zero-indexed). Default is 0.
+        # Page number (1-indexed)
         page:,
-        # The number of items per page (1-1000). Default is 100.
         page_size:,
-        # Optional filter by template category (e.g., MARKETING, UTILITY, AUTHENTICATION)
+        # Optional category filter: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Optional search term to filter templates by name or content
+        # Optional search term for filtering templates
         search: nil,
-        # Optional filter by template status (e.g., APPROVED, PENDING, REJECTED, DRAFT)
+        # Optional status filter: APPROVED, PENDING, REJECTED
         status: nil,
         request_options: {}
       )
       end
 
-      # Deletes a specific message template by its unique identifier for the
-      # authenticated customer with smart deletion strategy. Deletion behavior: - If
-      # template has NO messages: Permanently deleted from database (hard delete). - If
-      # template has messages: Marked as deleted but preserved for message history (soft
-      # delete with snapshot). The template must exist and belong to the authenticated
-      # customer to be deleted successfully. The customer ID is extracted from the
-      # authentication token.
+      # Deletes a template by ID. Optionally, you can also delete the template from
+      # WhatsApp/Meta by setting delete_from_meta=true.
       sig do
-        params(id: String, request_options: Sentdm::RequestOptions::OrHash).void
+        params(
+          id: String,
+          delete_from_meta: T.nilable(T::Boolean),
+          test_mode: T::Boolean,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).void
       end
       def delete(
-        # The unique identifier (GUID) of the resource to retrieve
+        # Template ID from route parameter
         id,
+        # Whether to also delete the template from WhatsApp/Meta (optional, defaults to
+        # false)
+        delete_from_meta: nil,
+        # Test mode flag - when true, the operation is simulated without side effects
+        # Useful for testing integrations without actual execution
+        test_mode: nil,
         request_options: {}
       )
       end

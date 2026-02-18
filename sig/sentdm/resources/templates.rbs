@@ -2,17 +2,32 @@ module Sentdm
   module Resources
     class Templates
       def create: (
-        definition: Sentdm::TemplateDefinition,
         ?category: String?,
+        ?creation_source: String?,
+        ?definition: Sentdm::TemplateDefinition,
         ?language: String?,
         ?submit_for_review: bool,
+        ?test_mode: bool,
+        ?idempotency_key: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::TemplateResponseV2
+      ) -> Sentdm::APIResponseTemplate
 
       def retrieve: (
         String id,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::TemplateResponseV2
+      ) -> Sentdm::APIResponseTemplate
+
+      def update: (
+        String id,
+        ?category: String?,
+        ?definition: Sentdm::TemplateDefinition?,
+        ?language: String?,
+        ?name: String?,
+        ?submit_for_review: bool,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseTemplate
 
       def list: (
         page: Integer,
@@ -23,7 +38,12 @@ module Sentdm
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::TemplateListResponse
 
-      def delete: (String id, ?request_options: Sentdm::request_opts) -> nil
+      def delete: (
+        String id,
+        ?delete_from_meta: bool?,
+        ?test_mode: bool,
+        ?request_options: Sentdm::request_opts
+      ) -> nil
 
       def initialize: (client: Sentdm::Client) -> void
     end

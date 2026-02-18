@@ -1,0 +1,285 @@
+module Sentdm
+  module Models
+    module Brands
+      type tcr_campaign_with_use_cases =
+        {
+          billed_date: Time?,
+          brand_id: String?,
+          cost: Float?,
+          csp_id: String?,
+          customer_id: String,
+          description: String,
+          help_keywords: String?,
+          help_message: String?,
+          kyc_submission_form_id: String?,
+          message_flow: String?,
+          name: String,
+          optin_keywords: String?,
+          optin_message: String?,
+          optout_keywords: String?,
+          optout_message: String?,
+          privacy_policy_link: String?,
+          reseller_id: String?,
+          sharing_status: Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status?,
+          status: Sentdm::Models::Brands::TcrCampaignWithUseCases::status?,
+          submitted_at: Time?,
+          submitted_to_tcr: bool,
+          tcr_campaign_id: String?,
+          tcr_sync_error: String?,
+          telnyx_campaign_id: String?,
+          terms_and_conditions_link: String?,
+          type: String,
+          upstream_cnp_id: String?,
+          use_cases: ::Array[Sentdm::Brands::TcrCampaignWithUseCases::UseCase]
+        }
+
+      class TcrCampaignWithUseCases < Sentdm::Models::Brands::BaseDto
+        def billed_date: -> Time?
+
+        def billed_date=: (Time? _) -> Time?
+
+        def brand_id: -> String?
+
+        def brand_id=: (String? _) -> String?
+
+        def cost: -> Float?
+
+        def cost=: (Float? _) -> Float?
+
+        def csp_id: -> String?
+
+        def csp_id=: (String? _) -> String?
+
+        def customer_id: -> String?
+
+        def customer_id=: (String _) -> String
+
+        def description: -> String?
+
+        def description=: (String _) -> String
+
+        def help_keywords: -> String?
+
+        def help_keywords=: (String? _) -> String?
+
+        def help_message: -> String?
+
+        def help_message=: (String? _) -> String?
+
+        def kyc_submission_form_id: -> String?
+
+        def kyc_submission_form_id=: (String? _) -> String?
+
+        def message_flow: -> String?
+
+        def message_flow=: (String? _) -> String?
+
+        def name: -> String?
+
+        def name=: (String _) -> String
+
+        def optin_keywords: -> String?
+
+        def optin_keywords=: (String? _) -> String?
+
+        def optin_message: -> String?
+
+        def optin_message=: (String? _) -> String?
+
+        def optout_keywords: -> String?
+
+        def optout_keywords=: (String? _) -> String?
+
+        def optout_message: -> String?
+
+        def optout_message=: (String? _) -> String?
+
+        def privacy_policy_link: -> String?
+
+        def privacy_policy_link=: (String? _) -> String?
+
+        def reseller_id: -> String?
+
+        def reseller_id=: (String? _) -> String?
+
+        def sharing_status: -> Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status?
+
+        def sharing_status=: (
+          Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status? _
+        ) -> Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status?
+
+        def status: -> Sentdm::Models::Brands::TcrCampaignWithUseCases::status?
+
+        def status=: (
+          Sentdm::Models::Brands::TcrCampaignWithUseCases::status? _
+        ) -> Sentdm::Models::Brands::TcrCampaignWithUseCases::status?
+
+        def submitted_at: -> Time?
+
+        def submitted_at=: (Time? _) -> Time?
+
+        def submitted_to_tcr: -> bool?
+
+        def submitted_to_tcr=: (bool _) -> bool
+
+        def tcr_campaign_id: -> String?
+
+        def tcr_campaign_id=: (String? _) -> String?
+
+        def tcr_sync_error: -> String?
+
+        def tcr_sync_error=: (String? _) -> String?
+
+        def telnyx_campaign_id: -> String?
+
+        def telnyx_campaign_id=: (String? _) -> String?
+
+        def terms_and_conditions_link: -> String?
+
+        def terms_and_conditions_link=: (String? _) -> String?
+
+        def `type`: -> String?
+
+        def type=: (String _) -> String
+
+        def upstream_cnp_id: -> String?
+
+        def upstream_cnp_id=: (String? _) -> String?
+
+        def use_cases: -> ::Array[Sentdm::Brands::TcrCampaignWithUseCases::UseCase]?
+
+        def use_cases=: (
+          ::Array[Sentdm::Brands::TcrCampaignWithUseCases::UseCase] _
+        ) -> ::Array[Sentdm::Brands::TcrCampaignWithUseCases::UseCase]
+
+        def initialize: (
+          ?billed_date: Time?,
+          ?brand_id: String?,
+          ?cost: Float?,
+          ?csp_id: String?,
+          ?customer_id: String,
+          ?description: String,
+          ?help_keywords: String?,
+          ?help_message: String?,
+          ?kyc_submission_form_id: String?,
+          ?message_flow: String?,
+          ?name: String,
+          ?optin_keywords: String?,
+          ?optin_message: String?,
+          ?optout_keywords: String?,
+          ?optout_message: String?,
+          ?privacy_policy_link: String?,
+          ?reseller_id: String?,
+          ?sharing_status: Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status?,
+          ?status: Sentdm::Models::Brands::TcrCampaignWithUseCases::status?,
+          ?submitted_at: Time?,
+          ?submitted_to_tcr: bool,
+          ?tcr_campaign_id: String?,
+          ?tcr_sync_error: String?,
+          ?telnyx_campaign_id: String?,
+          ?terms_and_conditions_link: String?,
+          ?type: String,
+          ?upstream_cnp_id: String?,
+          ?use_cases: ::Array[Sentdm::Brands::TcrCampaignWithUseCases::UseCase]
+        ) -> void
+
+        def to_hash: -> {
+          billed_date: Time?,
+          brand_id: String?,
+          cost: Float?,
+          csp_id: String?,
+          customer_id: String,
+          description: String,
+          help_keywords: String?,
+          help_message: String?,
+          kyc_submission_form_id: String?,
+          message_flow: String?,
+          name: String,
+          optin_keywords: String?,
+          optin_message: String?,
+          optout_keywords: String?,
+          optout_message: String?,
+          privacy_policy_link: String?,
+          reseller_id: String?,
+          sharing_status: Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status?,
+          status: Sentdm::Models::Brands::TcrCampaignWithUseCases::status?,
+          submitted_at: Time?,
+          submitted_to_tcr: bool,
+          tcr_campaign_id: String?,
+          tcr_sync_error: String?,
+          telnyx_campaign_id: String?,
+          terms_and_conditions_link: String?,
+          type: String,
+          upstream_cnp_id: String?,
+          use_cases: ::Array[Sentdm::Brands::TcrCampaignWithUseCases::UseCase]
+        }
+
+        type sharing_status = :PENDING | :ACCEPTED | :DECLINED
+
+        module SharingStatus
+          extend Sentdm::Internal::Type::Enum
+
+          PENDING: :PENDING
+          ACCEPTED: :ACCEPTED
+          DECLINED: :DECLINED
+
+          def self?.values: -> ::Array[Sentdm::Models::Brands::TcrCampaignWithUseCases::sharing_status]
+        end
+
+        type status = :SENT_CREATED | :ACTIVE | :EXPIRED
+
+        module Status
+          extend Sentdm::Internal::Type::Enum
+
+          SENT_CREATED: :SENT_CREATED
+          ACTIVE: :ACTIVE
+          EXPIRED: :EXPIRED
+
+          def self?.values: -> ::Array[Sentdm::Models::Brands::TcrCampaignWithUseCases::status]
+        end
+
+        type use_case =
+          {
+            campaign_id: String,
+            customer_id: String,
+            messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
+            sample_messages: ::Array[String]
+          }
+
+        class UseCase < Sentdm::Models::Brands::BaseDto
+          def campaign_id: -> String?
+
+          def campaign_id=: (String _) -> String
+
+          def customer_id: -> String?
+
+          def customer_id=: (String _) -> String
+
+          def messaging_use_case_us: -> Sentdm::Models::Brands::messaging_use_case_us?
+
+          def messaging_use_case_us=: (
+            Sentdm::Models::Brands::messaging_use_case_us _
+          ) -> Sentdm::Models::Brands::messaging_use_case_us
+
+          def sample_messages: -> ::Array[String]?
+
+          def sample_messages=: (::Array[String] _) -> ::Array[String]
+
+          def initialize: (
+            ?campaign_id: String,
+            ?customer_id: String,
+            ?messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
+            ?sample_messages: ::Array[String]
+          ) -> void
+
+          def to_hash: -> {
+            campaign_id: String,
+            customer_id: String,
+            messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
+            sample_messages: ::Array[String]
+          }
+        end
+      end
+    end
+  end
+end
