@@ -1,0 +1,55 @@
+module Sentdm
+  module Models
+    type webhook_test_response =
+      {
+        data: Sentdm::Models::WebhookTestResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class WebhookTestResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::WebhookTestResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::WebhookTestResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::WebhookTestResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data = { message: String, success: bool }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (?message: String, ?success: bool) -> void
+
+        def to_hash: -> { message: String, success: bool }
+      end
+    end
+  end
+end

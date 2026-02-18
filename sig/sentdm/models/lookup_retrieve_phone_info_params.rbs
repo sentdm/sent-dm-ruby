@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type lookup_retrieve_phone_info_params =
+      {  } & Sentdm::Internal::Type::request_parameters
+
+    class LookupRetrievePhoneInfoParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Sentdm::request_opts) -> void
+
+      def to_hash: -> { request_options: Sentdm::RequestOptions }
+    end
+  end
+end

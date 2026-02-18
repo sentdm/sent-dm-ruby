@@ -1,0 +1,34 @@
+module Sentdm
+  module Resources
+    class Brands
+      attr_reader campaigns: Sentdm::Resources::Brands::Campaigns
+
+      def create: (
+        brand: Sentdm::BrandData,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseBrandWithKYC
+
+      def update: (
+        String brand_id,
+        brand: Sentdm::BrandData,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseBrandWithKYC
+
+      def list: (
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::BrandListResponse
+
+      def delete: (
+        String brand_id,
+        body: Sentdm::BrandDeleteParams::Body,
+        ?request_options: Sentdm::request_opts
+      ) -> nil
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

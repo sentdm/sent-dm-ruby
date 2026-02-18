@@ -1,0 +1,108 @@
+module Sentdm
+  module Models
+    type message_send_response =
+      {
+        data: Sentdm::Models::MessageSendResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class MessageSendResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::MessageSendResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::MessageSendResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::MessageSendResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          body: String?,
+          recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+          status: String,
+          template_id: String,
+          template_name: String
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_accessor body: String?
+
+        attr_reader recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]?
+
+        def recipients=: (
+          ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]
+        ) -> ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        attr_reader template_id: String?
+
+        def template_id=: (String) -> String
+
+        attr_reader template_name: String?
+
+        def template_name=: (String) -> String
+
+        def initialize: (
+          ?body: String?,
+          ?recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+          ?status: String,
+          ?template_id: String,
+          ?template_name: String
+        ) -> void
+
+        def to_hash: -> {
+          body: String?,
+          recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+          status: String,
+          template_id: String,
+          template_name: String
+        }
+
+        type recipient = { channel: String?, message_id: String, to: String }
+
+        class Recipient < Sentdm::Internal::Type::BaseModel
+          attr_accessor channel: String?
+
+          attr_reader message_id: String?
+
+          def message_id=: (String) -> String
+
+          attr_reader to: String?
+
+          def to=: (String) -> String
+
+          def initialize: (
+            ?channel: String?,
+            ?message_id: String,
+            ?to: String
+          ) -> void
+
+          def to_hash: -> { channel: String?, message_id: String, to: String }
+        end
+      end
+    end
+  end
+end

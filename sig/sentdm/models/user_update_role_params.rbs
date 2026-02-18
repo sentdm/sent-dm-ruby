@@ -1,0 +1,49 @@
+module Sentdm
+  module Models
+    type user_update_role_params =
+      {
+        role: String,
+        test_mode: bool,
+        body_user_id: String,
+        idempotency_key: String
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class UserUpdateRoleParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader role: String?
+
+      def role=: (String) -> String
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader body_user_id: String?
+
+      def body_user_id=: (String) -> String
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?role: String,
+        ?test_mode: bool,
+        ?body_user_id: String,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        role: String,
+        test_mode: bool,
+        body_user_id: String,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

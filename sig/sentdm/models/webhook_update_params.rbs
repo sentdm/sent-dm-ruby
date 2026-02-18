@@ -1,0 +1,70 @@
+module Sentdm
+  module Models
+    type webhook_update_params =
+      {
+        display_name: String,
+        endpoint_url: String,
+        event_types: ::Array[String],
+        retry_count: Integer,
+        test_mode: bool,
+        timeout_seconds: Integer,
+        idempotency_key: String
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class WebhookUpdateParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader display_name: String?
+
+      def display_name=: (String) -> String
+
+      attr_reader endpoint_url: String?
+
+      def endpoint_url=: (String) -> String
+
+      attr_reader event_types: ::Array[String]?
+
+      def event_types=: (::Array[String]) -> ::Array[String]
+
+      attr_reader retry_count: Integer?
+
+      def retry_count=: (Integer) -> Integer
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader timeout_seconds: Integer?
+
+      def timeout_seconds=: (Integer) -> Integer
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?display_name: String,
+        ?endpoint_url: String,
+        ?event_types: ::Array[String],
+        ?retry_count: Integer,
+        ?test_mode: bool,
+        ?timeout_seconds: Integer,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        display_name: String,
+        endpoint_url: String,
+        event_types: ::Array[String],
+        retry_count: Integer,
+        test_mode: bool,
+        timeout_seconds: Integer,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,42 @@
+module Sentdm
+  class Client < Sentdm::Internal::Transport::BaseClient
+    DEFAULT_MAX_RETRIES: 2
+
+    DEFAULT_TIMEOUT_IN_SECONDS: Float
+
+    DEFAULT_INITIAL_RETRY_DELAY: Float
+
+    DEFAULT_MAX_RETRY_DELAY: Float
+
+    attr_reader api_key: String
+
+    attr_reader webhooks: Sentdm::Resources::Webhooks
+
+    attr_reader users: Sentdm::Resources::Users
+
+    attr_reader templates: Sentdm::Resources::Templates
+
+    attr_reader profiles: Sentdm::Resources::Profiles
+
+    attr_reader messages: Sentdm::Resources::Messages
+
+    attr_reader lookup: Sentdm::Resources::Lookup
+
+    attr_reader contacts: Sentdm::Resources::Contacts
+
+    attr_reader brands: Sentdm::Resources::Brands
+
+    attr_reader me: Sentdm::Resources::Me
+
+    private def auth_headers: -> ::Hash[String, String]
+
+    def initialize: (
+      ?api_key: String?,
+      ?base_url: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
+    ) -> void
+  end
+end

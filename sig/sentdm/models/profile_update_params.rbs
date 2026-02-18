@@ -1,0 +1,122 @@
+module Sentdm
+  module Models
+    type profile_update_params =
+      {
+        allow_contact_sharing: bool?,
+        allow_number_change_during_onboarding: bool?,
+        allow_template_sharing: bool?,
+        billing_model: String?,
+        description: String?,
+        icon: String?,
+        inherit_contacts: bool?,
+        inherit_tcr_brand: bool?,
+        inherit_tcr_campaign: bool?,
+        inherit_templates: bool?,
+        name: String?,
+        body_profile_id: String,
+        sending_phone_number: String?,
+        sending_phone_number_profile_id: String?,
+        sending_whatsapp_number_profile_id: String?,
+        short_name: String?,
+        test_mode: bool,
+        whatsapp_phone_number: String?,
+        idempotency_key: String
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class ProfileUpdateParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor allow_contact_sharing: bool?
+
+      attr_accessor allow_number_change_during_onboarding: bool?
+
+      attr_accessor allow_template_sharing: bool?
+
+      attr_accessor billing_model: String?
+
+      attr_accessor description: String?
+
+      attr_accessor icon: String?
+
+      attr_accessor inherit_contacts: bool?
+
+      attr_accessor inherit_tcr_brand: bool?
+
+      attr_accessor inherit_tcr_campaign: bool?
+
+      attr_accessor inherit_templates: bool?
+
+      attr_accessor name: String?
+
+      attr_reader body_profile_id: String?
+
+      def body_profile_id=: (String) -> String
+
+      attr_accessor sending_phone_number: String?
+
+      attr_accessor sending_phone_number_profile_id: String?
+
+      attr_accessor sending_whatsapp_number_profile_id: String?
+
+      attr_accessor short_name: String?
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_accessor whatsapp_phone_number: String?
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?allow_contact_sharing: bool?,
+        ?allow_number_change_during_onboarding: bool?,
+        ?allow_template_sharing: bool?,
+        ?billing_model: String?,
+        ?description: String?,
+        ?icon: String?,
+        ?inherit_contacts: bool?,
+        ?inherit_tcr_brand: bool?,
+        ?inherit_tcr_campaign: bool?,
+        ?inherit_templates: bool?,
+        ?name: String?,
+        ?body_profile_id: String,
+        ?sending_phone_number: String?,
+        ?sending_phone_number_profile_id: String?,
+        ?sending_whatsapp_number_profile_id: String?,
+        ?short_name: String?,
+        ?test_mode: bool,
+        ?whatsapp_phone_number: String?,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        allow_contact_sharing: bool?,
+        allow_number_change_during_onboarding: bool?,
+        allow_template_sharing: bool?,
+        billing_model: String?,
+        description: String?,
+        icon: String?,
+        inherit_contacts: bool?,
+        inherit_tcr_brand: bool?,
+        inherit_tcr_campaign: bool?,
+        inherit_templates: bool?,
+        name: String?,
+        body_profile_id: String,
+        sending_phone_number: String?,
+        sending_phone_number_profile_id: String?,
+        sending_whatsapp_number_profile_id: String?,
+        short_name: String?,
+        test_mode: bool,
+        whatsapp_phone_number: String?,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end
