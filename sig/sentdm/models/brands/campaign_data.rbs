@@ -6,7 +6,7 @@ module Sentdm
           description: String,
           name: String,
           type: String,
-          use_cases: ::Array[Sentdm::Brands::CampaignData::UseCase],
+          use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
           help_keywords: String?,
           help_message: String?,
           message_flow: String?,
@@ -25,7 +25,7 @@ module Sentdm
 
         attr_accessor type: String
 
-        attr_accessor use_cases: ::Array[Sentdm::Brands::CampaignData::UseCase]
+        attr_accessor use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData]
 
         attr_accessor help_keywords: String?
 
@@ -49,7 +49,7 @@ module Sentdm
           description: String,
           name: String,
           type: String,
-          use_cases: ::Array[Sentdm::Brands::CampaignData::UseCase],
+          use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
           ?help_keywords: String?,
           ?help_message: String?,
           ?message_flow: String?,
@@ -65,7 +65,7 @@ module Sentdm
           description: String,
           name: String,
           type: String,
-          use_cases: ::Array[Sentdm::Brands::CampaignData::UseCase],
+          use_cases: ::Array[Sentdm::Brands::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
           help_keywords: String?,
           help_message: String?,
           message_flow: String?,
@@ -76,28 +76,6 @@ module Sentdm
           privacy_policy_link: String?,
           terms_and_conditions_link: String?
         }
-
-        type use_case =
-          {
-            messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
-            sample_messages: ::Array[String]
-          }
-
-        class UseCase < Sentdm::Internal::Type::BaseModel
-          attr_accessor messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us
-
-          attr_accessor sample_messages: ::Array[String]
-
-          def initialize: (
-            messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
-            sample_messages: ::Array[String]
-          ) -> void
-
-          def to_hash: -> {
-            messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
-            sample_messages: ::Array[String]
-          }
-        end
       end
     end
   end

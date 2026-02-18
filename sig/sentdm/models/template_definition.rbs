@@ -2,257 +2,44 @@ module Sentdm
   module Models
     type template_definition =
       {
-        body: Sentdm::TemplateDefinition::Body,
-        authentication_config: Sentdm::TemplateDefinition::AuthenticationConfig?,
-        buttons: ::Array[Sentdm::TemplateDefinition::Button]?,
+        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
+        authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
+        buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
         definition_version: String?,
-        footer: Sentdm::TemplateDefinition::Footer?,
-        header: Sentdm::TemplateDefinition::Header?
+        footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
+        header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
       }
 
     class TemplateDefinition < Sentdm::Internal::Type::BaseModel
-      attr_accessor body: Sentdm::TemplateDefinition::Body
+      attr_accessor body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody
 
-      attr_accessor authentication_config: Sentdm::TemplateDefinition::AuthenticationConfig?
+      attr_accessor authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?
 
-      attr_accessor buttons: ::Array[Sentdm::TemplateDefinition::Button]?
+      attr_accessor buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?
 
       attr_accessor definition_version: String?
 
-      attr_accessor footer: Sentdm::TemplateDefinition::Footer?
+      attr_accessor footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?
 
-      attr_accessor header: Sentdm::TemplateDefinition::Header?
+      attr_accessor header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
 
       def initialize: (
-        body: Sentdm::TemplateDefinition::Body,
-        ?authentication_config: Sentdm::TemplateDefinition::AuthenticationConfig?,
-        ?buttons: ::Array[Sentdm::TemplateDefinition::Button]?,
+        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
+        ?authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
+        ?buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
         ?definition_version: String?,
-        ?footer: Sentdm::TemplateDefinition::Footer?,
-        ?header: Sentdm::TemplateDefinition::Header?
+        ?footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
+        ?header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
       ) -> void
 
       def to_hash: -> {
-        body: Sentdm::TemplateDefinition::Body,
-        authentication_config: Sentdm::TemplateDefinition::AuthenticationConfig?,
-        buttons: ::Array[Sentdm::TemplateDefinition::Button]?,
+        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
+        authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
+        buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
         definition_version: String?,
-        footer: Sentdm::TemplateDefinition::Footer?,
-        header: Sentdm::TemplateDefinition::Header?
+        footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
+        header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
       }
-
-      type body =
-        {
-          multi_channel: Sentdm::TemplateBodyContent?,
-          sms: Sentdm::TemplateBodyContent?,
-          whatsapp: Sentdm::TemplateBodyContent?
-        }
-
-      class Body < Sentdm::Internal::Type::BaseModel
-        attr_accessor multi_channel: Sentdm::TemplateBodyContent?
-
-        attr_accessor sms: Sentdm::TemplateBodyContent?
-
-        attr_accessor whatsapp: Sentdm::TemplateBodyContent?
-
-        def initialize: (
-          ?multi_channel: Sentdm::TemplateBodyContent?,
-          ?sms: Sentdm::TemplateBodyContent?,
-          ?whatsapp: Sentdm::TemplateBodyContent?
-        ) -> void
-
-        def to_hash: -> {
-          multi_channel: Sentdm::TemplateBodyContent?,
-          sms: Sentdm::TemplateBodyContent?,
-          whatsapp: Sentdm::TemplateBodyContent?
-        }
-      end
-
-      type authentication_config =
-        { add_security_recommendation: bool, code_expiration_minutes: Integer? }
-
-      class AuthenticationConfig < Sentdm::Internal::Type::BaseModel
-        attr_reader add_security_recommendation: bool?
-
-        def add_security_recommendation=: (bool) -> bool
-
-        attr_accessor code_expiration_minutes: Integer?
-
-        def initialize: (
-          ?add_security_recommendation: bool,
-          ?code_expiration_minutes: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          add_security_recommendation: bool,
-          code_expiration_minutes: Integer?
-        }
-      end
-
-      type button =
-        {
-          id: Integer,
-          props: Sentdm::TemplateDefinition::Button::Props,
-          type: String
-        }
-
-      class Button < Sentdm::Internal::Type::BaseModel
-        attr_reader id: Integer?
-
-        def id=: (Integer) -> Integer
-
-        attr_reader props: Sentdm::TemplateDefinition::Button::Props?
-
-        def props=: (
-          Sentdm::TemplateDefinition::Button::Props
-        ) -> Sentdm::TemplateDefinition::Button::Props
-
-        attr_reader type: String?
-
-        def type=: (String) -> String
-
-        def initialize: (
-          ?id: Integer,
-          ?props: Sentdm::TemplateDefinition::Button::Props,
-          ?type: String
-        ) -> void
-
-        def to_hash: -> {
-          id: Integer,
-          props: Sentdm::TemplateDefinition::Button::Props,
-          type: String
-        }
-
-        type props =
-          {
-            active_for: Integer?,
-            autofill_text: String?,
-            country_code: String?,
-            offer_code: String?,
-            otp_type: String?,
-            package_name: String?,
-            phone_number: String?,
-            quick_reply_type: String?,
-            signature_hash: String?,
-            text: String?,
-            url: String?,
-            url_type: String?
-          }
-
-        class Props < Sentdm::Internal::Type::BaseModel
-          attr_accessor active_for: Integer?
-
-          attr_accessor autofill_text: String?
-
-          attr_accessor country_code: String?
-
-          attr_accessor offer_code: String?
-
-          attr_accessor otp_type: String?
-
-          attr_accessor package_name: String?
-
-          attr_accessor phone_number: String?
-
-          attr_accessor quick_reply_type: String?
-
-          attr_accessor signature_hash: String?
-
-          attr_accessor text: String?
-
-          attr_accessor url: String?
-
-          attr_accessor url_type: String?
-
-          def initialize: (
-            ?active_for: Integer?,
-            ?autofill_text: String?,
-            ?country_code: String?,
-            ?offer_code: String?,
-            ?otp_type: String?,
-            ?package_name: String?,
-            ?phone_number: String?,
-            ?quick_reply_type: String?,
-            ?signature_hash: String?,
-            ?text: String?,
-            ?url: String?,
-            ?url_type: String?
-          ) -> void
-
-          def to_hash: -> {
-            active_for: Integer?,
-            autofill_text: String?,
-            country_code: String?,
-            offer_code: String?,
-            otp_type: String?,
-            package_name: String?,
-            phone_number: String?,
-            quick_reply_type: String?,
-            signature_hash: String?,
-            text: String?,
-            url: String?,
-            url_type: String?
-          }
-        end
-      end
-
-      type footer =
-        {
-          template: String,
-          type: String?,
-          variables: ::Array[Sentdm::TemplateVariable]?
-        }
-
-      class Footer < Sentdm::Internal::Type::BaseModel
-        attr_reader template: String?
-
-        def template=: (String) -> String
-
-        attr_accessor type: String?
-
-        attr_accessor variables: ::Array[Sentdm::TemplateVariable]?
-
-        def initialize: (
-          ?template: String,
-          ?type: String?,
-          ?variables: ::Array[Sentdm::TemplateVariable]?
-        ) -> void
-
-        def to_hash: -> {
-          template: String,
-          type: String?,
-          variables: ::Array[Sentdm::TemplateVariable]?
-        }
-      end
-
-      type header =
-        {
-          template: String,
-          type: String?,
-          variables: ::Array[Sentdm::TemplateVariable]?
-        }
-
-      class Header < Sentdm::Internal::Type::BaseModel
-        attr_reader template: String?
-
-        def template=: (String) -> String
-
-        attr_accessor type: String?
-
-        attr_accessor variables: ::Array[Sentdm::TemplateVariable]?
-
-        def initialize: (
-          ?template: String,
-          ?type: String?,
-          ?variables: ::Array[Sentdm::TemplateVariable]?
-        ) -> void
-
-        def to_hash: -> {
-          template: String,
-          type: String?,
-          variables: ::Array[Sentdm::TemplateVariable]?
-        }
-      end
     end
   end
 end

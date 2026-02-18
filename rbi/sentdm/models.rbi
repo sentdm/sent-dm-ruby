@@ -76,6 +76,24 @@ module Sentdm
 
   ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
 
+  SentDmServicesCommonContractsPocOsAuthenticationConfig =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
+
+  SentDmServicesCommonContractsPocOsTemplateBody =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
+
+  SentDmServicesCommonContractsPocOsTemplateButton =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
+
+  SentDmServicesCommonContractsPocOsTemplateButtonProps =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
+
+  SentDmServicesCommonContractsPocOsTemplateFooter =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
+
+  SentDmServicesCommonContractsPocOsTemplateHeader =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
+
   TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 
   TcrVertical = Sentdm::Models::TcrVertical
