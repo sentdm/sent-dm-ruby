@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type template_delete_params =
+      { delete_from_meta: bool?, test_mode: bool }
+      & Sentdm::Internal::Type::request_parameters
+
+    class TemplateDeleteParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor delete_from_meta: bool?
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      def initialize: (
+        ?delete_from_meta: bool?,
+        ?test_mode: bool,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        delete_from_meta: bool?,
+        test_mode: bool,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

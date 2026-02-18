@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type mutation_request = { test_mode: bool }
+
+    class MutationRequest < Sentdm::Internal::Type::BaseModel
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      def initialize: (?test_mode: bool) -> void
+
+      def to_hash: -> { test_mode: bool }
+    end
+  end
+end

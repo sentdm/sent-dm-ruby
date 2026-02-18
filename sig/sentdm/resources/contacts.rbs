@@ -1,0 +1,43 @@
+module Sentdm
+  module Resources
+    class Contacts
+      def create: (
+        ?phone_number: String,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseContact
+
+      def retrieve: (
+        String id,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseContact
+
+      def update: (
+        String id,
+        ?default_channel: String?,
+        ?opt_out: bool?,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseContact
+
+      def list: (
+        page: Integer,
+        page_size: Integer,
+        ?channel: String?,
+        ?phone: String?,
+        ?search: String?,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::ContactListResponse
+
+      def delete: (
+        String id,
+        body: Sentdm::ContactDeleteParams::Body,
+        ?request_options: Sentdm::request_opts
+      ) -> nil
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

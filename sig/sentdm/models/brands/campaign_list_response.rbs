@@ -1,0 +1,41 @@
+module Sentdm
+  module Models
+    module Brands
+      type campaign_list_response =
+        {
+          data: ::Array[Sentdm::Brands::TcrCampaignWithUseCases]?,
+          error: Sentdm::APIError?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+
+      class CampaignListResponse < Sentdm::Internal::Type::BaseModel
+        attr_accessor data: ::Array[Sentdm::Brands::TcrCampaignWithUseCases]?
+
+        attr_accessor error: Sentdm::APIError?
+
+        attr_reader meta: Sentdm::APIMeta?
+
+        def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (
+          ?data: ::Array[Sentdm::Brands::TcrCampaignWithUseCases]?,
+          ?error: Sentdm::APIError?,
+          ?meta: Sentdm::APIMeta,
+          ?success: bool
+        ) -> void
+
+        def to_hash: -> {
+          data: ::Array[Sentdm::Brands::TcrCampaignWithUseCases]?,
+          error: Sentdm::APIError?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+      end
+    end
+  end
+end

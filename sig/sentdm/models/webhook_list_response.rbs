@@ -1,0 +1,67 @@
+module Sentdm
+  module Models
+    type webhook_list_response =
+      {
+        data: Sentdm::Models::WebhookListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class WebhookListResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::WebhookListResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::WebhookListResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::WebhookListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          pagination: Sentdm::PaginationMeta,
+          webhooks: ::Array[Sentdm::WebhookResponse]
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader pagination: Sentdm::PaginationMeta?
+
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+        attr_reader webhooks: ::Array[Sentdm::WebhookResponse]?
+
+        def webhooks=: (
+          ::Array[Sentdm::WebhookResponse]
+        ) -> ::Array[Sentdm::WebhookResponse]
+
+        def initialize: (
+          ?pagination: Sentdm::PaginationMeta,
+          ?webhooks: ::Array[Sentdm::WebhookResponse]
+        ) -> void
+
+        def to_hash: -> {
+          pagination: Sentdm::PaginationMeta,
+          webhooks: ::Array[Sentdm::WebhookResponse]
+        }
+      end
+    end
+  end
+end

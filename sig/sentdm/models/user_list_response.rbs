@@ -1,0 +1,53 @@
+module Sentdm
+  module Models
+    type user_list_response =
+      {
+        data: Sentdm::Models::UserListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class UserListResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::UserListResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::UserListResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::UserListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data = { users: ::Array[Sentdm::UserResponse] }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader users: ::Array[Sentdm::UserResponse]?
+
+        def users=: (
+          ::Array[Sentdm::UserResponse]
+        ) -> ::Array[Sentdm::UserResponse]
+
+        def initialize: (?users: ::Array[Sentdm::UserResponse]) -> void
+
+        def to_hash: -> { users: ::Array[Sentdm::UserResponse] }
+      end
+    end
+  end
+end

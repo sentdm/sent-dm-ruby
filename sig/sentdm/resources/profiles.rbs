@@ -1,0 +1,72 @@
+module Sentdm
+  module Resources
+    class Profiles
+      def create: (
+        ?allow_contact_sharing: bool,
+        ?allow_template_sharing: bool,
+        ?billing_model: String?,
+        ?description: String?,
+        ?icon: String?,
+        ?inherit_contacts: bool?,
+        ?inherit_tcr_brand: bool?,
+        ?inherit_tcr_campaign: bool?,
+        ?inherit_templates: bool?,
+        ?name: String,
+        ?short_name: String?,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfProfileDetail
+
+      def retrieve: (
+        String profile_id,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfProfileDetail
+
+      def update: (
+        String path_profile_id,
+        ?allow_contact_sharing: bool?,
+        ?allow_number_change_during_onboarding: bool?,
+        ?allow_template_sharing: bool?,
+        ?billing_model: String?,
+        ?description: String?,
+        ?icon: String?,
+        ?inherit_contacts: bool?,
+        ?inherit_tcr_brand: bool?,
+        ?inherit_tcr_campaign: bool?,
+        ?inherit_templates: bool?,
+        ?name: String?,
+        ?body_profile_id: String,
+        ?sending_phone_number: String?,
+        ?sending_phone_number_profile_id: String?,
+        ?sending_whatsapp_number_profile_id: String?,
+        ?short_name: String?,
+        ?test_mode: bool,
+        ?whatsapp_phone_number: String?,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfProfileDetail
+
+      def list: (
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::ProfileListResponse
+
+      def delete: (
+        String path_profile_id,
+        ?body_profile_id: String,
+        ?test_mode: bool,
+        ?request_options: Sentdm::request_opts
+      ) -> nil
+
+      def complete: (
+        String profile_id,
+        web_hook_url: String,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> top
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

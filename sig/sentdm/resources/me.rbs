@@ -1,0 +1,11 @@
+module Sentdm
+  module Resources
+    class Me
+      def retrieve: (
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::MeRetrieveResponse
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

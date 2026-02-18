@@ -1,0 +1,65 @@
+module Sentdm
+  module Models
+    type contact_list_response =
+      {
+        data: Sentdm::Models::ContactListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class ContactListResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::ContactListResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::ContactListResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::ContactListResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          contacts: ::Array[Sentdm::Contact],
+          pagination: Sentdm::PaginationMeta
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader contacts: ::Array[Sentdm::Contact]?
+
+        def contacts=: (::Array[Sentdm::Contact]) -> ::Array[Sentdm::Contact]
+
+        attr_reader pagination: Sentdm::PaginationMeta?
+
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+        def initialize: (
+          ?contacts: ::Array[Sentdm::Contact],
+          ?pagination: Sentdm::PaginationMeta
+        ) -> void
+
+        def to_hash: -> {
+          contacts: ::Array[Sentdm::Contact],
+          pagination: Sentdm::PaginationMeta
+        }
+      end
+    end
+  end
+end

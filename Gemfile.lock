@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    sent-dm (0.2.0)
+    sentdm (0.2.0)
       cgi
       connection_pool
 
@@ -214,7 +214,7 @@ DEPENDENCIES
   rbs
   redcarpet
   rubocop
-  sent-dm!
+  sentdm!
   sorbet
   steep
   syntax_tree

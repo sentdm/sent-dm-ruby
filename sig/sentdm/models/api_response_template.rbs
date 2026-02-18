@@ -1,0 +1,39 @@
+module Sentdm
+  module Models
+    type api_response_template =
+      {
+        data: Sentdm::Template?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class APIResponseTemplate < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Template?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Template?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Template?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+    end
+  end
+end

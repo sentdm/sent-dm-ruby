@@ -1,0 +1,38 @@
+module Sentdm
+  module Models
+    type webhook_test_params =
+      { event_type: String, test_mode: bool, idempotency_key: String }
+      & Sentdm::Internal::Type::request_parameters
+
+    class WebhookTestParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader event_type: String?
+
+      def event_type=: (String) -> String
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?event_type: String,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        event_type: String,
+        test_mode: bool,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

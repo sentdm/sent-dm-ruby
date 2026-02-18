@@ -1,0 +1,38 @@
+module Sentdm
+  module Models
+    module Brands
+      type campaign_delete_params =
+        { brand_id: String, body: Sentdm::Brands::CampaignDeleteParams::Body }
+        & Sentdm::Internal::Type::request_parameters
+
+      class CampaignDeleteParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor brand_id: String
+
+        attr_accessor body: Sentdm::Brands::CampaignDeleteParams::Body
+
+        def initialize: (
+          brand_id: String,
+          body: Sentdm::Brands::CampaignDeleteParams::Body,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          brand_id: String,
+          body: Sentdm::Brands::CampaignDeleteParams::Body,
+          request_options: Sentdm::RequestOptions
+        }
+
+        type body = {  }
+
+        class Body < Sentdm::Models::MutationRequest
+          def initialize: -> void
+
+          def to_hash: -> {  }
+        end
+      end
+    end
+  end
+end
