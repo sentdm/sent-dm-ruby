@@ -1,0 +1,186 @@
+# frozen_string_literal: true
+
+require_relative "../test_helper"
+
+class SentDm::Test::Resources::WebhooksTest < SentDm::Test::ResourceTest
+  def test_create
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.create
+
+    assert_pattern do
+      response => SentDm::APIResponseWebhook
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::WebhookResponse | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_retrieve
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.retrieve("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+
+    assert_pattern do
+      response => SentDm::APIResponseWebhook
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::WebhookResponse | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_update
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.update("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+
+    assert_pattern do
+      response => SentDm::APIResponseWebhook
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::WebhookResponse | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_list_required_params
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.list(page: 0, page_size: 0)
+
+    assert_pattern do
+      response => SentDm::Models::WebhookListResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::Models::WebhookListResponse::Data | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_delete
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.delete("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_list_event_types
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.list_event_types
+
+    assert_pattern do
+      response => SentDm::Models::WebhookListEventTypesResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::Models::WebhookListEventTypesResponse::Data | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_list_events_required_params
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", page: 0, page_size: 0)
+
+    assert_pattern do
+      response => SentDm::Models::WebhookListEventsResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::Models::WebhookListEventsResponse::Data | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_rotate_secret_required_params
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.rotate_secret("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", body: {})
+
+    assert_pattern do
+      response => SentDm::Models::WebhookRotateSecretResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::Models::WebhookRotateSecretResponse::Data | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_test_
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.test_("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+
+    assert_pattern do
+      response => SentDm::Models::WebhookTestResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::Models::WebhookTestResponse::Data | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_toggle_status
+    skip("Prism tests are disabled")
+
+    response = @sent_dm.webhooks.toggle_status("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+
+    assert_pattern do
+      response => SentDm::APIResponseWebhook
+    end
+
+    assert_pattern do
+      response => {
+        data: SentDm::WebhookResponse | nil,
+        error: SentDm::APIError | nil,
+        meta: SentDm::APIMeta | nil,
+        success: SentDm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+end

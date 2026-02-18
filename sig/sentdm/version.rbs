@@ -1,3 +1,0 @@
-module Sentdm
-  VERSION: String
-end

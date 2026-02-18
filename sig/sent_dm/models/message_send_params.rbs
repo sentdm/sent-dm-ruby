@@ -1,0 +1,79 @@
+module SentDm
+  module Models
+    type message_send_params =
+      {
+        channel: ::Array[String]?,
+        template: SentDm::MessageSendParams::Template,
+        test_mode: bool,
+        to: ::Array[String],
+        idempotency_key: String
+      }
+      & SentDm::Internal::Type::request_parameters
+
+    class MessageSendParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      attr_accessor channel: ::Array[String]?
+
+      attr_reader template: SentDm::MessageSendParams::Template?
+
+      def template=: (
+        SentDm::MessageSendParams::Template
+      ) -> SentDm::MessageSendParams::Template
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader to: ::Array[String]?
+
+      def to=: (::Array[String]) -> ::Array[String]
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?channel: ::Array[String]?,
+        ?template: SentDm::MessageSendParams::Template,
+        ?test_mode: bool,
+        ?to: ::Array[String],
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        channel: ::Array[String]?,
+        template: SentDm::MessageSendParams::Template,
+        test_mode: bool,
+        to: ::Array[String],
+        idempotency_key: String,
+        request_options: SentDm::RequestOptions
+      }
+
+      type template =
+        { id: String?, name: String?, parameters: ::Hash[Symbol, String]? }
+
+      class Template < SentDm::Internal::Type::BaseModel
+        attr_accessor id: String?
+
+        attr_accessor name: String?
+
+        attr_accessor parameters: ::Hash[Symbol, String]?
+
+        def initialize: (
+          ?id: String?,
+          ?name: String?,
+          ?parameters: ::Hash[Symbol, String]?
+        ) -> void
+
+        def to_hash: -> {
+          id: String?,
+          name: String?,
+          parameters: ::Hash[Symbol, String]?
+        }
+      end
+    end
+  end
+end

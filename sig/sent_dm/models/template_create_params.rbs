@@ -1,0 +1,66 @@
+module SentDm
+  module Models
+    type template_create_params =
+      {
+        category: String?,
+        creation_source: String?,
+        definition: SentDm::TemplateDefinition,
+        language: String?,
+        submit_for_review: bool,
+        test_mode: bool,
+        idempotency_key: String
+      }
+      & SentDm::Internal::Type::request_parameters
+
+    class TemplateCreateParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      attr_accessor category: String?
+
+      attr_accessor creation_source: String?
+
+      attr_reader definition: SentDm::TemplateDefinition?
+
+      def definition=: (
+        SentDm::TemplateDefinition
+      ) -> SentDm::TemplateDefinition
+
+      attr_accessor language: String?
+
+      attr_reader submit_for_review: bool?
+
+      def submit_for_review=: (bool) -> bool
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?category: String?,
+        ?creation_source: String?,
+        ?definition: SentDm::TemplateDefinition,
+        ?language: String?,
+        ?submit_for_review: bool,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        category: String?,
+        creation_source: String?,
+        definition: SentDm::TemplateDefinition,
+        language: String?,
+        submit_for_review: bool,
+        test_mode: bool,
+        idempotency_key: String,
+        request_options: SentDm::RequestOptions
+      }
+    end
+  end
+end

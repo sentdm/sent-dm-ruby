@@ -1,0 +1,46 @@
+module SentDm
+  module Models
+    type template_list_params =
+      {
+        page: Integer,
+        page_size: Integer,
+        category: String?,
+        search: String?,
+        status: String?
+      }
+      & SentDm::Internal::Type::request_parameters
+
+    class TemplateListParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      attr_accessor page: Integer
+
+      attr_accessor page_size: Integer
+
+      attr_accessor category: String?
+
+      attr_accessor search: String?
+
+      attr_accessor status: String?
+
+      def initialize: (
+        page: Integer,
+        page_size: Integer,
+        ?category: String?,
+        ?search: String?,
+        ?status: String?,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        page: Integer,
+        page_size: Integer,
+        category: String?,
+        search: String?,
+        status: String?,
+        request_options: SentDm::RequestOptions
+      }
+    end
+  end
+end

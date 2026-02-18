@@ -1,0 +1,42 @@
+module SentDm
+  module Models
+    module Brands
+      type campaign_create_params =
+        {
+          campaign: SentDm::Brands::CampaignData,
+          test_mode: bool,
+          idempotency_key: String
+        }
+        & SentDm::Internal::Type::request_parameters
+
+      class CampaignCreateParams < SentDm::Internal::Type::BaseModel
+        extend SentDm::Internal::Type::RequestParameters::Converter
+        include SentDm::Internal::Type::RequestParameters
+
+        attr_accessor campaign: SentDm::Brands::CampaignData
+
+        attr_reader test_mode: bool?
+
+        def test_mode=: (bool) -> bool
+
+        attr_reader idempotency_key: String?
+
+        def idempotency_key=: (String) -> String
+
+        def initialize: (
+          campaign: SentDm::Brands::CampaignData,
+          ?test_mode: bool,
+          ?idempotency_key: String,
+          ?request_options: SentDm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          campaign: SentDm::Brands::CampaignData,
+          test_mode: bool,
+          idempotency_key: String,
+          request_options: SentDm::RequestOptions
+        }
+      end
+    end
+  end
+end

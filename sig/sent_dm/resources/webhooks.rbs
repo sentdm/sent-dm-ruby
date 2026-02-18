@@ -1,0 +1,80 @@
+module SentDm
+  module Resources
+    class Webhooks
+      def create: (
+        ?display_name: String,
+        ?endpoint_url: String,
+        ?event_types: ::Array[String],
+        ?retry_count: Integer,
+        ?test_mode: bool,
+        ?timeout_seconds: Integer,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::APIResponseWebhook
+
+      def retrieve: (
+        String id,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::APIResponseWebhook
+
+      def update: (
+        String id,
+        ?display_name: String,
+        ?endpoint_url: String,
+        ?event_types: ::Array[String],
+        ?retry_count: Integer,
+        ?test_mode: bool,
+        ?timeout_seconds: Integer,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::APIResponseWebhook
+
+      def list: (
+        page: Integer,
+        page_size: Integer,
+        ?is_active: bool?,
+        ?search: String?,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::WebhookListResponse
+
+      def delete: (String id, ?request_options: SentDm::request_opts) -> nil
+
+      def list_event_types: (
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::WebhookListEventTypesResponse
+
+      def list_events: (
+        String id,
+        page: Integer,
+        page_size: Integer,
+        ?search: String?,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::WebhookListEventsResponse
+
+      def rotate_secret: (
+        String id,
+        body: SentDm::WebhookRotateSecretParams::Body,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::WebhookRotateSecretResponse
+
+      def test_: (
+        String id,
+        ?event_type: String,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::WebhookTestResponse
+
+      def toggle_status: (
+        String id,
+        ?is_active: bool,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::APIResponseWebhook
+
+      def initialize: (client: SentDm::Client) -> void
+    end
+  end
+end

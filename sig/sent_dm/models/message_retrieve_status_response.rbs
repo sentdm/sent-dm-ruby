@@ -1,0 +1,224 @@
+module SentDm
+  module Models
+    type message_retrieve_status_response =
+      {
+        data: SentDm::Models::MessageRetrieveStatusResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+    class MessageRetrieveStatusResponse < SentDm::Internal::Type::BaseModel
+      attr_accessor data: SentDm::Models::MessageRetrieveStatusResponse::Data?
+
+      attr_accessor error: SentDm::APIError?
+
+      attr_reader meta: SentDm::APIMeta?
+
+      def meta=: (SentDm::APIMeta) -> SentDm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: SentDm::Models::MessageRetrieveStatusResponse::Data?,
+        ?error: SentDm::APIError?,
+        ?meta: SentDm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: SentDm::Models::MessageRetrieveStatusResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          id: String,
+          channel: String,
+          contact_id: String,
+          created_at: Time,
+          customer_id: String,
+          events: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::Event]?,
+          message_body: SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody?,
+          phone: String,
+          phone_international: String,
+          price: Float?,
+          region_code: String,
+          status: String,
+          template_category: String,
+          template_id: String?,
+          template_name: String
+        }
+
+      class Data < SentDm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader channel: String?
+
+        def channel=: (String) -> String
+
+        attr_reader contact_id: String?
+
+        def contact_id=: (String) -> String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader customer_id: String?
+
+        def customer_id=: (String) -> String
+
+        attr_accessor events: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::Event]?
+
+        attr_accessor message_body: SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody?
+
+        attr_reader phone: String?
+
+        def phone=: (String) -> String
+
+        attr_reader phone_international: String?
+
+        def phone_international=: (String) -> String
+
+        attr_accessor price: Float?
+
+        attr_reader region_code: String?
+
+        def region_code=: (String) -> String
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        attr_reader template_category: String?
+
+        def template_category=: (String) -> String
+
+        attr_accessor template_id: String?
+
+        attr_reader template_name: String?
+
+        def template_name=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?channel: String,
+          ?contact_id: String,
+          ?created_at: Time,
+          ?customer_id: String,
+          ?events: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::Event]?,
+          ?message_body: SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody?,
+          ?phone: String,
+          ?phone_international: String,
+          ?price: Float?,
+          ?region_code: String,
+          ?status: String,
+          ?template_category: String,
+          ?template_id: String?,
+          ?template_name: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          channel: String,
+          contact_id: String,
+          created_at: Time,
+          customer_id: String,
+          events: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::Event]?,
+          message_body: SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody?,
+          phone: String,
+          phone_international: String,
+          price: Float?,
+          region_code: String,
+          status: String,
+          template_category: String,
+          template_id: String?,
+          template_name: String
+        }
+
+        type event = { description: String?, status: String, timestamp: Time }
+
+        class Event < SentDm::Internal::Type::BaseModel
+          attr_accessor description: String?
+
+          attr_reader status: String?
+
+          def status=: (String) -> String
+
+          attr_reader timestamp: Time?
+
+          def timestamp=: (Time) -> Time
+
+          def initialize: (
+            ?description: String?,
+            ?status: String,
+            ?timestamp: Time
+          ) -> void
+
+          def to_hash: -> {
+            description: String?,
+            status: String,
+            timestamp: Time
+          }
+        end
+
+        type message_body =
+          {
+            buttons: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Button]?,
+            content: String,
+            footer: String?,
+            header: String?
+          }
+
+        class MessageBody < SentDm::Internal::Type::BaseModel
+          attr_accessor buttons: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Button]?
+
+          attr_reader content: String?
+
+          def content=: (String) -> String
+
+          attr_accessor footer: String?
+
+          attr_accessor header: String?
+
+          def initialize: (
+            ?buttons: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Button]?,
+            ?content: String,
+            ?footer: String?,
+            ?header: String?
+          ) -> void
+
+          def to_hash: -> {
+            buttons: ::Array[SentDm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Button]?,
+            content: String,
+            footer: String?,
+            header: String?
+          }
+
+          type button = { type: String, value: String }
+
+          class Button < SentDm::Internal::Type::BaseModel
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            attr_reader value: String?
+
+            def value=: (String) -> String
+
+            def initialize: (?type: String, ?value: String) -> void
+
+            def to_hash: -> { type: String, value: String }
+          end
+        end
+      end
+    end
+  end
+end

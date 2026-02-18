@@ -40,9 +40,9 @@ Layout/LineLength:
   AllowedPatterns:
     - "^\\s*#.*$"
     - ^require(_relative)?
-    - "Sentdm::Internal::Type::BaseModel$"
+    - "SentDm::Internal::Type::BaseModel$"
     - "^\\s*[A-Z0-9_]+ = :"
-    - "Sentdm::(Models|Resources|Test)::"
+    - "SentDm::(Models|Resources|Test)::"
   Max: 110
 
 Layout/MultilineArrayLineBreaks:

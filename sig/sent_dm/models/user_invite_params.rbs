@@ -1,0 +1,56 @@
+module SentDm
+  module Models
+    type user_invite_params =
+      {
+        email: String,
+        name: String,
+        role: String,
+        test_mode: bool,
+        idempotency_key: String
+      }
+      & SentDm::Internal::Type::request_parameters
+
+    class UserInviteParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      attr_reader email: String?
+
+      def email=: (String) -> String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader role: String?
+
+      def role=: (String) -> String
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?email: String,
+        ?name: String,
+        ?role: String,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        email: String,
+        name: String,
+        role: String,
+        test_mode: bool,
+        idempotency_key: String,
+        request_options: SentDm::RequestOptions
+      }
+    end
+  end
+end

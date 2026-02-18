@@ -1,12 +1,12 @@
 # Sent Dm Ruby API library
 
-The Sent Dm Ruby library provides convenient access to the Sent Dm REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/sentdm/sent-dm-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Sent Dm Ruby library provides convenient access to the Sent Dm REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/sent-dm-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/sentdm).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/sent-dm).
 
 The REST API documentation can be found on [docs.sent.dm](https://docs.sent.dm).
 
@@ -14,51 +14,54 @@ The REST API documentation can be found on [docs.sent.dm](https://docs.sent.dm).
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
-<!-- x-release-please-start-version -->
-
 ```ruby
-gem "sentdm", "~> 0.2.0"
+gem "sent-dm", "~> 0.2.0"
 ```
-
-<!-- x-release-please-end -->
 
 ## Usage
 
 ```ruby
 require "bundler/setup"
-require "sentdm"
+require "sent_dm"
 
-sent_dm = Sentdm::Client.new(
-  api_key: ENV["SENT_DM_API_KEY"], # This is the default and can be omitted
-  sender_id: ENV["SENT_DM_SENDER_ID"] # This is the default and can be omitted
+sent_dm = SentDm::Client.new(
+  api_key: ENV["SENT_DM_API_KEY"] # This is the default and can be omitted
 )
 
-result = sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+response = sent_dm.messages.send_(
+  channel: ["sms", "whatsapp"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234", "+14155555678"]
 )
 
-puts(result)
+puts(response.data)
 ```
 
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Sentdm::Errors::APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `SentDm::Errors::APIError` will be thrown:
 
 ```ruby
 begin
-  message = sent_dm.messages.send_to_phone(
-    phone_number: "+1234567890",
-    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-    template_variables: {name: "John Doe", order_id: "12345"}
+  message = sent_dm.messages.send_(
+    channel: ["sms"],
+    template: {
+      id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      name: "order_confirmation",
+      parameters: {name: "John Doe", order_id: "12345"}
+    },
+    to: ["+14155551234"]
   )
-rescue Sentdm::Errors::APIConnectionError => e
+rescue SentDm::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
-rescue Sentdm::Errors::RateLimitError => e
+rescue SentDm::Errors::RateLimitError => e
   puts("A 429 status code was received; we should back off a bit.")
-rescue Sentdm::Errors::APIStatusError => e
+rescue SentDm::Errors::APIStatusError => e
   puts("Another non-200-range status code was received")
   puts(e.status)
 end
@@ -90,15 +93,19 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-sent_dm = Sentdm::Client.new(
+sent_dm = SentDm::Client.new(
   max_retries: 0 # default is 2
 )
 
 # Or, configure per-request:
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"},
+sent_dm.messages.send_(
+  channel: ["sms"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234"],
   request_options: {max_retries: 5}
 )
 ```
@@ -109,20 +116,24 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-sent_dm = Sentdm::Client.new(
+sent_dm = SentDm::Client.new(
   timeout: nil # default is 60
 )
 
 # Or, configure per-request:
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"},
+sent_dm.messages.send_(
+  channel: ["sms"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234"],
   request_options: {timeout: 5}
 )
 ```
 
-On timeout, `Sentdm::Errors::APITimeoutError` is raised.
+On timeout, `SentDm::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
@@ -130,7 +141,7 @@ Note that requests that time out are retried by default.
 
 ### BaseModel
 
-All parameter and response objects inherit from `Sentdm::Internal::Type::BaseModel`, which provides several conveniences, including:
+All parameter and response objects inherit from `SentDm::Internal::Type::BaseModel`, which provides several conveniences, including:
 
 1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
 
@@ -149,11 +160,15 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-result =
-  sent_dm.messages.send_to_phone(
-    phone_number: "+1234567890",
-    template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-    template_variables: {name: "John Doe", order_id: "12345"},
+response =
+  sent_dm.messages.send_(
+    channel: ["sms"],
+    template: {
+      id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+      name: "order_confirmation",
+      parameters: {name: "John Doe", order_id: "12345"}
+    },
+    to: ["+14155551234"],
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -161,7 +176,7 @@ result =
     }
   )
 
-puts(result[:my_undocumented_property])
+puts(response[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -184,9 +199,9 @@ response = client.request(
 
 ### Concurrency & connection pooling
 
-The `Sentdm::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
+The `SentDm::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `Sentdm::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+Each instance of `SentDm::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
@@ -199,10 +214,14 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+sent_dm.messages.send_(
+  channel: ["sms", "whatsapp"],
+  template: SentDm::MessageSendParams::Template.new(
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  ),
+  to: ["+14155551234", "+14155555678"]
 )
 ```
 
@@ -210,19 +229,53 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-sent_dm.messages.send_to_phone(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+sent_dm.messages.send_(
+  channel: ["sms", "whatsapp"],
+  template: {
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  },
+  to: ["+14155551234", "+14155555678"]
 )
 
 # You can also splat a full Params class:
-params = Sentdm::MessageSendToPhoneParams.new(
-  phone_number: "+1234567890",
-  template_id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
-  template_variables: {name: "John Doe", order_id: "12345"}
+params = SentDm::MessageSendParams.new(
+  channel: ["sms", "whatsapp"],
+  template: SentDm::MessageSendParams::Template.new(
+    id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
+    name: "order_confirmation",
+    parameters: {name: "John Doe", order_id: "12345"}
+  ),
+  to: ["+14155551234", "+14155555678"]
 )
-sent_dm.messages.send_to_phone(**params)
+sent_dm.messages.send_(**params)
+```
+
+### Enums
+
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+
+```ruby
+# :BASIC_ACCOUNT
+puts(SentDm::TcrBrandRelationship::BASIC_ACCOUNT)
+
+# Revealed type: `T.all(SentDm::TcrBrandRelationship, Symbol)`
+T.reveal_type(SentDm::TcrBrandRelationship::BASIC_ACCOUNT)
+```
+
+Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+
+```ruby
+SentDm::BrandData.new(
+  brand_relationship: SentDm::TcrBrandRelationship::BASIC_ACCOUNT,
+  # …
+)
+
+SentDm::BrandData.new(
+  brand_relationship: :BASIC_ACCOUNT,
+  # …
+)
 ```
 
 ## Versioning
@@ -237,4 +290,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/sentdm/sent-dm-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/stainless-sdks/sent-dm-ruby/tree/main/CONTRIBUTING.md).

@@ -1,0 +1,65 @@
+module SentDm
+  module Models
+    type template_list_response =
+      {
+        data: SentDm::Models::TemplateListResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+    class TemplateListResponse < SentDm::Internal::Type::BaseModel
+      attr_accessor data: SentDm::Models::TemplateListResponse::Data?
+
+      attr_accessor error: SentDm::APIError?
+
+      attr_reader meta: SentDm::APIMeta?
+
+      def meta=: (SentDm::APIMeta) -> SentDm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: SentDm::Models::TemplateListResponse::Data?,
+        ?error: SentDm::APIError?,
+        ?meta: SentDm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: SentDm::Models::TemplateListResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          pagination: SentDm::PaginationMeta,
+          templates: ::Array[SentDm::Template]
+        }
+
+      class Data < SentDm::Internal::Type::BaseModel
+        attr_reader pagination: SentDm::PaginationMeta?
+
+        def pagination=: (SentDm::PaginationMeta) -> SentDm::PaginationMeta
+
+        attr_reader templates: ::Array[SentDm::Template]?
+
+        def templates=: (::Array[SentDm::Template]) -> ::Array[SentDm::Template]
+
+        def initialize: (
+          ?pagination: SentDm::PaginationMeta,
+          ?templates: ::Array[SentDm::Template]
+        ) -> void
+
+        def to_hash: -> {
+          pagination: SentDm::PaginationMeta,
+          templates: ::Array[SentDm::Template]
+        }
+      end
+    end
+  end
+end

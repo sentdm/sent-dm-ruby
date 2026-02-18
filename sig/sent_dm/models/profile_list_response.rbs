@@ -1,0 +1,53 @@
+module SentDm
+  module Models
+    type profile_list_response =
+      {
+        data: SentDm::Models::ProfileListResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+    class ProfileListResponse < SentDm::Internal::Type::BaseModel
+      attr_accessor data: SentDm::Models::ProfileListResponse::Data?
+
+      attr_accessor error: SentDm::APIError?
+
+      attr_reader meta: SentDm::APIMeta?
+
+      def meta=: (SentDm::APIMeta) -> SentDm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: SentDm::Models::ProfileListResponse::Data?,
+        ?error: SentDm::APIError?,
+        ?meta: SentDm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: SentDm::Models::ProfileListResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+      type data = { profiles: ::Array[SentDm::ProfileDetail] }
+
+      class Data < SentDm::Internal::Type::BaseModel
+        attr_reader profiles: ::Array[SentDm::ProfileDetail]?
+
+        def profiles=: (
+          ::Array[SentDm::ProfileDetail]
+        ) -> ::Array[SentDm::ProfileDetail]
+
+        def initialize: (?profiles: ::Array[SentDm::ProfileDetail]) -> void
+
+        def to_hash: -> { profiles: ::Array[SentDm::ProfileDetail] }
+      end
+    end
+  end
+end

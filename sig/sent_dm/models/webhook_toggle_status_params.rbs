@@ -1,0 +1,38 @@
+module SentDm
+  module Models
+    type webhook_toggle_status_params =
+      { is_active: bool, test_mode: bool, idempotency_key: String }
+      & SentDm::Internal::Type::request_parameters
+
+    class WebhookToggleStatusParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      attr_reader is_active: bool?
+
+      def is_active=: (bool) -> bool
+
+      attr_reader test_mode: bool?
+
+      def test_mode=: (bool) -> bool
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?is_active: bool,
+        ?test_mode: bool,
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        is_active: bool,
+        test_mode: bool,
+        idempotency_key: String,
+        request_options: SentDm::RequestOptions
+      }
+    end
+  end
+end

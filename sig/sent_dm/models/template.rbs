@@ -1,0 +1,79 @@
+module SentDm
+  module Models
+    type template =
+      {
+        id: String,
+        category: String,
+        channels: ::Array[String]?,
+        created_at: Time,
+        is_published: bool,
+        language: String,
+        name: String,
+        status: String,
+        updated_at: Time?,
+        variables: ::Array[String]?
+      }
+
+    class Template < SentDm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader category: String?
+
+      def category=: (String) -> String
+
+      attr_accessor channels: ::Array[String]?
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader is_published: bool?
+
+      def is_published=: (bool) -> bool
+
+      attr_reader language: String?
+
+      def language=: (String) -> String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_accessor updated_at: Time?
+
+      attr_accessor variables: ::Array[String]?
+
+      def initialize: (
+        ?id: String,
+        ?category: String,
+        ?channels: ::Array[String]?,
+        ?created_at: Time,
+        ?is_published: bool,
+        ?language: String,
+        ?name: String,
+        ?status: String,
+        ?updated_at: Time?,
+        ?variables: ::Array[String]?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        category: String,
+        channels: ::Array[String]?,
+        created_at: Time,
+        is_published: bool,
+        language: String,
+        name: String,
+        status: String,
+        updated_at: Time?,
+        variables: ::Array[String]?
+      }
+    end
+  end
+end
