@@ -1,0 +1,24 @@
+module Sentdm
+  module Models
+    type sent_dm_services_common_contracts_poc_os_authentication_config =
+      { add_security_recommendation: bool, code_expiration_minutes: Integer? }
+
+    class SentDmServicesCommonContractsPocOsAuthenticationConfig < Sentdm::Internal::Type::BaseModel
+      attr_reader add_security_recommendation: bool?
+
+      def add_security_recommendation=: (bool) -> bool
+
+      attr_accessor code_expiration_minutes: Integer?
+
+      def initialize: (
+        ?add_security_recommendation: bool,
+        ?code_expiration_minutes: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        add_security_recommendation: bool,
+        code_expiration_minutes: Integer?
+      }
+    end
+  end
+end

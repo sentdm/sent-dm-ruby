@@ -1,0 +1,27 @@
+module Sentdm
+  module Models
+    module Brands
+      type sent_dm_services_endpoints_customer_ap_iv3_contracts_requests_campaigns_campaign_use_case_data =
+        {
+          messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
+          sample_messages: ::Array[String]
+        }
+
+      class SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData < Sentdm::Internal::Type::BaseModel
+        attr_accessor messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us
+
+        attr_accessor sample_messages: ::Array[String]
+
+        def initialize: (
+          messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
+          sample_messages: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          messaging_use_case_us: Sentdm::Models::Brands::messaging_use_case_us,
+          sample_messages: ::Array[String]
+        }
+      end
+    end
+  end
+end
