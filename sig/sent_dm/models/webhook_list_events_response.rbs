@@ -1,0 +1,146 @@
+module SentDm
+  module Models
+    type webhook_list_events_response =
+      {
+        data: SentDm::Models::WebhookListEventsResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+    class WebhookListEventsResponse < SentDm::Internal::Type::BaseModel
+      attr_accessor data: SentDm::Models::WebhookListEventsResponse::Data?
+
+      attr_accessor error: SentDm::APIError?
+
+      attr_reader meta: SentDm::APIMeta?
+
+      def meta=: (SentDm::APIMeta) -> SentDm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: SentDm::Models::WebhookListEventsResponse::Data?,
+        ?error: SentDm::APIError?,
+        ?meta: SentDm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: SentDm::Models::WebhookListEventsResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          events: ::Array[SentDm::Models::WebhookListEventsResponse::Data::Event],
+          pagination: SentDm::PaginationMeta
+        }
+
+      class Data < SentDm::Internal::Type::BaseModel
+        attr_reader events: ::Array[SentDm::Models::WebhookListEventsResponse::Data::Event]?
+
+        def events=: (
+          ::Array[SentDm::Models::WebhookListEventsResponse::Data::Event]
+        ) -> ::Array[SentDm::Models::WebhookListEventsResponse::Data::Event]
+
+        attr_reader pagination: SentDm::PaginationMeta?
+
+        def pagination=: (SentDm::PaginationMeta) -> SentDm::PaginationMeta
+
+        def initialize: (
+          ?events: ::Array[SentDm::Models::WebhookListEventsResponse::Data::Event],
+          ?pagination: SentDm::PaginationMeta
+        ) -> void
+
+        def to_hash: -> {
+          events: ::Array[SentDm::Models::WebhookListEventsResponse::Data::Event],
+          pagination: SentDm::PaginationMeta
+        }
+
+        type event =
+          {
+            id: String,
+            created_at: Time,
+            delivery_attempts: Integer,
+            delivery_status: String,
+            error_message: String?,
+            event_data: top,
+            event_type: String,
+            http_status_code: Integer?,
+            processing_completed_at: Time?,
+            processing_started_at: Time?,
+            response_body: String?
+          }
+
+        class Event < SentDm::Internal::Type::BaseModel
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_reader delivery_attempts: Integer?
+
+          def delivery_attempts=: (Integer) -> Integer
+
+          attr_reader delivery_status: String?
+
+          def delivery_status=: (String) -> String
+
+          attr_accessor error_message: String?
+
+          attr_reader event_data: top?
+
+          def event_data=: (top) -> top
+
+          attr_reader event_type: String?
+
+          def event_type=: (String) -> String
+
+          attr_accessor http_status_code: Integer?
+
+          attr_accessor processing_completed_at: Time?
+
+          attr_accessor processing_started_at: Time?
+
+          attr_accessor response_body: String?
+
+          def initialize: (
+            ?id: String,
+            ?created_at: Time,
+            ?delivery_attempts: Integer,
+            ?delivery_status: String,
+            ?error_message: String?,
+            ?event_data: top,
+            ?event_type: String,
+            ?http_status_code: Integer?,
+            ?processing_completed_at: Time?,
+            ?processing_started_at: Time?,
+            ?response_body: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            delivery_attempts: Integer,
+            delivery_status: String,
+            error_message: String?,
+            event_data: top,
+            event_type: String,
+            http_status_code: Integer?,
+            processing_completed_at: Time?,
+            processing_started_at: Time?,
+            response_body: String?
+          }
+        end
+      end
+    end
+  end
+end

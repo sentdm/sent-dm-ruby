@@ -1,0 +1,162 @@
+module SentDm
+  module Models
+    type me_retrieve_response =
+      {
+        data: SentDm::Models::MeRetrieveResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+    class MeRetrieveResponse < SentDm::Internal::Type::BaseModel
+      attr_accessor data: SentDm::Models::MeRetrieveResponse::Data?
+
+      attr_accessor error: SentDm::APIError?
+
+      attr_reader meta: SentDm::APIMeta?
+
+      def meta=: (SentDm::APIMeta) -> SentDm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: SentDm::Models::MeRetrieveResponse::Data?,
+        ?error: SentDm::APIError?,
+        ?meta: SentDm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: SentDm::Models::MeRetrieveResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          id: String,
+          created_at: Time,
+          description: String?,
+          icon: String?,
+          name: String,
+          profiles: ::Array[SentDm::Models::MeRetrieveResponse::Data::Profile]?,
+          settings: SentDm::ProfileSettings?,
+          status: String?
+        }
+
+      class Data < SentDm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_accessor description: String?
+
+        attr_accessor icon: String?
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_accessor profiles: ::Array[SentDm::Models::MeRetrieveResponse::Data::Profile]?
+
+        attr_accessor settings: SentDm::ProfileSettings?
+
+        attr_accessor status: String?
+
+        def initialize: (
+          ?id: String,
+          ?created_at: Time,
+          ?description: String?,
+          ?icon: String?,
+          ?name: String,
+          ?profiles: ::Array[SentDm::Models::MeRetrieveResponse::Data::Profile]?,
+          ?settings: SentDm::ProfileSettings?,
+          ?status: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          description: String?,
+          icon: String?,
+          name: String,
+          profiles: ::Array[SentDm::Models::MeRetrieveResponse::Data::Profile]?,
+          settings: SentDm::ProfileSettings?,
+          status: String?
+        }
+
+        type profile =
+          {
+            id: String,
+            created_at: Time,
+            description: String?,
+            icon: String?,
+            name: String,
+            role: String?,
+            settings: SentDm::ProfileSettings,
+            short_name: String?,
+            status: String?
+          }
+
+        class Profile < SentDm::Internal::Type::BaseModel
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_accessor description: String?
+
+          attr_accessor icon: String?
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_accessor role: String?
+
+          attr_reader settings: SentDm::ProfileSettings?
+
+          def settings=: (SentDm::ProfileSettings) -> SentDm::ProfileSettings
+
+          attr_accessor short_name: String?
+
+          attr_accessor status: String?
+
+          def initialize: (
+            ?id: String,
+            ?created_at: Time,
+            ?description: String?,
+            ?icon: String?,
+            ?name: String,
+            ?role: String?,
+            ?settings: SentDm::ProfileSettings,
+            ?short_name: String?,
+            ?status: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            description: String?,
+            icon: String?,
+            name: String,
+            role: String?,
+            settings: SentDm::ProfileSettings,
+            short_name: String?,
+            status: String?
+          }
+        end
+      end
+    end
+  end
+end

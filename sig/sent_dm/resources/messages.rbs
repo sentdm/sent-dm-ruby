@@ -1,0 +1,26 @@
+module SentDm
+  module Resources
+    class Messages
+      def retrieve_activities: (
+        String id,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::MessageRetrieveActivitiesResponse
+
+      def retrieve_status: (
+        String id,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::MessageRetrieveStatusResponse
+
+      def send_: (
+        ?channel: ::Array[String]?,
+        ?template: SentDm::MessageSendParams::Template,
+        ?test_mode: bool,
+        ?to: ::Array[String],
+        ?idempotency_key: String,
+        ?request_options: SentDm::request_opts
+      ) -> SentDm::Models::MessageSendResponse
+
+      def initialize: (client: SentDm::Client) -> void
+    end
+  end
+end

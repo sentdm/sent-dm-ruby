@@ -1,0 +1,41 @@
+module SentDm
+  module Models
+    type api_meta =
+      {
+        request_id: String,
+        response_time_ms: Integer?,
+        timestamp: Time,
+        version: String
+      }
+
+    class APIMeta < SentDm::Internal::Type::BaseModel
+      attr_reader request_id: String?
+
+      def request_id=: (String) -> String
+
+      attr_accessor response_time_ms: Integer?
+
+      attr_reader timestamp: Time?
+
+      def timestamp=: (Time) -> Time
+
+      attr_reader version: String?
+
+      def version=: (String) -> String
+
+      def initialize: (
+        ?request_id: String,
+        ?response_time_ms: Integer?,
+        ?timestamp: Time,
+        ?version: String
+      ) -> void
+
+      def to_hash: -> {
+        request_id: String,
+        response_time_ms: Integer?,
+        timestamp: Time,
+        version: String
+      }
+    end
+  end
+end

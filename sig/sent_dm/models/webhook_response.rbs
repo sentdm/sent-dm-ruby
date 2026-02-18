@@ -1,0 +1,98 @@
+module SentDm
+  module Models
+    type webhook_response =
+      {
+        id: String,
+        consecutive_failures: Integer,
+        created_at: Time,
+        display_name: String,
+        endpoint_url: String,
+        event_types: ::Array[String],
+        is_active: bool,
+        last_delivery_attempt_at: Time?,
+        last_successful_delivery_at: Time?,
+        retry_count: Integer,
+        signing_secret: String?,
+        timeout_seconds: Integer,
+        updated_at: Time?
+      }
+
+    class WebhookResponse < SentDm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader consecutive_failures: Integer?
+
+      def consecutive_failures=: (Integer) -> Integer
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader display_name: String?
+
+      def display_name=: (String) -> String
+
+      attr_reader endpoint_url: String?
+
+      def endpoint_url=: (String) -> String
+
+      attr_reader event_types: ::Array[String]?
+
+      def event_types=: (::Array[String]) -> ::Array[String]
+
+      attr_reader is_active: bool?
+
+      def is_active=: (bool) -> bool
+
+      attr_accessor last_delivery_attempt_at: Time?
+
+      attr_accessor last_successful_delivery_at: Time?
+
+      attr_reader retry_count: Integer?
+
+      def retry_count=: (Integer) -> Integer
+
+      attr_accessor signing_secret: String?
+
+      attr_reader timeout_seconds: Integer?
+
+      def timeout_seconds=: (Integer) -> Integer
+
+      attr_accessor updated_at: Time?
+
+      def initialize: (
+        ?id: String,
+        ?consecutive_failures: Integer,
+        ?created_at: Time,
+        ?display_name: String,
+        ?endpoint_url: String,
+        ?event_types: ::Array[String],
+        ?is_active: bool,
+        ?last_delivery_attempt_at: Time?,
+        ?last_successful_delivery_at: Time?,
+        ?retry_count: Integer,
+        ?signing_secret: String?,
+        ?timeout_seconds: Integer,
+        ?updated_at: Time?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        consecutive_failures: Integer,
+        created_at: Time,
+        display_name: String,
+        endpoint_url: String,
+        event_types: ::Array[String],
+        is_active: bool,
+        last_delivery_attempt_at: Time?,
+        last_successful_delivery_at: Time?,
+        retry_count: Integer,
+        signing_secret: String?,
+        timeout_seconds: Integer,
+        updated_at: Time?
+      }
+    end
+  end
+end

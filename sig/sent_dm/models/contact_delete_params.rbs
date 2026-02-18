@@ -1,0 +1,32 @@
+module SentDm
+  module Models
+    type contact_delete_params =
+      { body: SentDm::ContactDeleteParams::Body }
+      & SentDm::Internal::Type::request_parameters
+
+    class ContactDeleteParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      attr_accessor body: SentDm::ContactDeleteParams::Body
+
+      def initialize: (
+        body: SentDm::ContactDeleteParams::Body,
+        ?request_options: SentDm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        body: SentDm::ContactDeleteParams::Body,
+        request_options: SentDm::RequestOptions
+      }
+
+      type body = {  }
+
+      class Body < SentDm::Models::MutationRequest
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
+    end
+  end
+end

@@ -1,0 +1,164 @@
+module SentDm
+  module Models
+    type brand_data =
+      {
+        brand_relationship: SentDm::Models::tcr_brand_relationship,
+        contact_name: String,
+        vertical: SentDm::Models::tcr_vertical,
+        brand_name: String?,
+        business_legal_name: String?,
+        business_name: String?,
+        business_role: String?,
+        business_url: String?,
+        city: String?,
+        contact_email: String?,
+        contact_phone: String?,
+        contact_phone_country_code: String?,
+        country: String?,
+        country_of_registration: String?,
+        destination_countries: ::Array[SentDm::DestinationCountry]?,
+        entity_type: SentDm::Models::BrandData::entity_type?,
+        expected_messaging_volume: String?,
+        is_tcr_application: bool?,
+        notes: String?,
+        phone_number_prefix: String?,
+        postal_code: String?,
+        primary_use_case: String?,
+        state: String?,
+        street: String?,
+        tax_id: String?,
+        tax_id_type: String?
+      }
+
+    class BrandData < SentDm::Internal::Type::BaseModel
+      attr_accessor brand_relationship: SentDm::Models::tcr_brand_relationship
+
+      attr_accessor contact_name: String
+
+      attr_accessor vertical: SentDm::Models::tcr_vertical
+
+      attr_accessor brand_name: String?
+
+      attr_accessor business_legal_name: String?
+
+      attr_accessor business_name: String?
+
+      attr_accessor business_role: String?
+
+      attr_accessor business_url: String?
+
+      attr_accessor city: String?
+
+      attr_accessor contact_email: String?
+
+      attr_accessor contact_phone: String?
+
+      attr_accessor contact_phone_country_code: String?
+
+      attr_accessor country: String?
+
+      attr_accessor country_of_registration: String?
+
+      attr_accessor destination_countries: ::Array[SentDm::DestinationCountry]?
+
+      attr_accessor entity_type: SentDm::Models::BrandData::entity_type?
+
+      attr_accessor expected_messaging_volume: String?
+
+      attr_accessor is_tcr_application: bool?
+
+      attr_accessor notes: String?
+
+      attr_accessor phone_number_prefix: String?
+
+      attr_accessor postal_code: String?
+
+      attr_accessor primary_use_case: String?
+
+      attr_accessor state: String?
+
+      attr_accessor street: String?
+
+      attr_accessor tax_id: String?
+
+      attr_accessor tax_id_type: String?
+
+      def initialize: (
+        brand_relationship: SentDm::Models::tcr_brand_relationship,
+        contact_name: String,
+        vertical: SentDm::Models::tcr_vertical,
+        ?brand_name: String?,
+        ?business_legal_name: String?,
+        ?business_name: String?,
+        ?business_role: String?,
+        ?business_url: String?,
+        ?city: String?,
+        ?contact_email: String?,
+        ?contact_phone: String?,
+        ?contact_phone_country_code: String?,
+        ?country: String?,
+        ?country_of_registration: String?,
+        ?destination_countries: ::Array[SentDm::DestinationCountry]?,
+        ?entity_type: SentDm::Models::BrandData::entity_type?,
+        ?expected_messaging_volume: String?,
+        ?is_tcr_application: bool?,
+        ?notes: String?,
+        ?phone_number_prefix: String?,
+        ?postal_code: String?,
+        ?primary_use_case: String?,
+        ?state: String?,
+        ?street: String?,
+        ?tax_id: String?,
+        ?tax_id_type: String?
+      ) -> void
+
+      def to_hash: -> {
+        brand_relationship: SentDm::Models::tcr_brand_relationship,
+        contact_name: String,
+        vertical: SentDm::Models::tcr_vertical,
+        brand_name: String?,
+        business_legal_name: String?,
+        business_name: String?,
+        business_role: String?,
+        business_url: String?,
+        city: String?,
+        contact_email: String?,
+        contact_phone: String?,
+        contact_phone_country_code: String?,
+        country: String?,
+        country_of_registration: String?,
+        destination_countries: ::Array[SentDm::DestinationCountry]?,
+        entity_type: SentDm::Models::BrandData::entity_type?,
+        expected_messaging_volume: String?,
+        is_tcr_application: bool?,
+        notes: String?,
+        phone_number_prefix: String?,
+        postal_code: String?,
+        primary_use_case: String?,
+        state: String?,
+        street: String?,
+        tax_id: String?,
+        tax_id_type: String?
+      }
+
+      type entity_type =
+        :PRIVATE_PROFIT
+        | :PUBLIC_PROFIT
+        | :NON_PROFIT
+        | :SOLE_PROPRIETOR
+        | :GOVERNMENT
+
+      module EntityType
+        extend SentDm::Internal::Type::Enum
+
+        PRIVATE_PROFIT: :PRIVATE_PROFIT
+        PUBLIC_PROFIT: :PUBLIC_PROFIT
+        NON_PROFIT: :NON_PROFIT
+        SOLE_PROPRIETOR: :SOLE_PROPRIETOR
+        GOVERNMENT: :GOVERNMENT
+
+        def self?.values: -> ::Array[SentDm::Models::BrandData::entity_type]
+      end
+    end
+  end
+end

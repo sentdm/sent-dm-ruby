@@ -1,0 +1,15 @@
+module SentDm
+  module Models
+    type message_retrieve_status_params =
+      {  } & SentDm::Internal::Type::request_parameters
+
+    class MessageRetrieveStatusParams < SentDm::Internal::Type::BaseModel
+      extend SentDm::Internal::Type::RequestParameters::Converter
+      include SentDm::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: SentDm::request_opts) -> void
+
+      def to_hash: -> { request_options: SentDm::RequestOptions }
+    end
+  end
+end

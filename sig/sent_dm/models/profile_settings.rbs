@@ -1,0 +1,50 @@
+module SentDm
+  module Models
+    type profile_settings =
+      {
+        allow_contact_sharing: bool?,
+        allow_template_sharing: bool?,
+        billing_model: String?,
+        inherit_contacts: bool?,
+        inherit_tcr_brand: bool?,
+        inherit_tcr_campaign: bool?,
+        inherit_templates: bool?
+      }
+
+    class ProfileSettings < SentDm::Internal::Type::BaseModel
+      attr_accessor allow_contact_sharing: bool?
+
+      attr_accessor allow_template_sharing: bool?
+
+      attr_accessor billing_model: String?
+
+      attr_accessor inherit_contacts: bool?
+
+      attr_accessor inherit_tcr_brand: bool?
+
+      attr_accessor inherit_tcr_campaign: bool?
+
+      attr_accessor inherit_templates: bool?
+
+      def initialize: (
+        ?allow_contact_sharing: bool?,
+        ?allow_template_sharing: bool?,
+        ?billing_model: String?,
+        ?inherit_contacts: bool?,
+        ?inherit_tcr_brand: bool?,
+        ?inherit_tcr_campaign: bool?,
+        ?inherit_templates: bool?
+      ) -> void
+
+      def to_hash: -> {
+        allow_contact_sharing: bool?,
+        allow_template_sharing: bool?,
+        billing_model: String?,
+        inherit_contacts: bool?,
+        inherit_tcr_brand: bool?,
+        inherit_tcr_campaign: bool?,
+        inherit_templates: bool?
+      }
+    end
+  end
+end

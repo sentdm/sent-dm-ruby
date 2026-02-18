@@ -1,0 +1,131 @@
+module SentDm
+  class APIError = SentDm::Models::APIError
+
+  class APIMeta = SentDm::Models::APIMeta
+
+  class APIResponseBrandWithKYC = SentDm::Models::APIResponseBrandWithKYC
+
+  class APIResponseContact = SentDm::Models::APIResponseContact
+
+  class APIResponseOfProfileDetail = SentDm::Models::APIResponseOfProfileDetail
+
+  class APIResponseOfUser = SentDm::Models::APIResponseOfUser
+
+  class APIResponseTemplate = SentDm::Models::APIResponseTemplate
+
+  class APIResponseWebhook = SentDm::Models::APIResponseWebhook
+
+  class BrandCreateParams = SentDm::Models::BrandCreateParams
+
+  class BrandData = SentDm::Models::BrandData
+
+  class BrandDeleteParams = SentDm::Models::BrandDeleteParams
+
+  class BrandListParams = SentDm::Models::BrandListParams
+
+  module Brands = SentDm::Models::Brands
+
+  class BrandUpdateParams = SentDm::Models::BrandUpdateParams
+
+  class BrandWithKYC = SentDm::Models::BrandWithKYC
+
+  class Contact = SentDm::Models::Contact
+
+  class ContactCreateParams = SentDm::Models::ContactCreateParams
+
+  class ContactDeleteParams = SentDm::Models::ContactDeleteParams
+
+  class ContactListParams = SentDm::Models::ContactListParams
+
+  class ContactRetrieveParams = SentDm::Models::ContactRetrieveParams
+
+  class ContactUpdateParams = SentDm::Models::ContactUpdateParams
+
+  class DestinationCountry = SentDm::Models::DestinationCountry
+
+  class LookupRetrievePhoneInfoParams = SentDm::Models::LookupRetrievePhoneInfoParams
+
+  class MeRetrieveParams = SentDm::Models::MeRetrieveParams
+
+  class MessageRetrieveActivitiesParams = SentDm::Models::MessageRetrieveActivitiesParams
+
+  class MessageRetrieveStatusParams = SentDm::Models::MessageRetrieveStatusParams
+
+  class MessageSendParams = SentDm::Models::MessageSendParams
+
+  class MutationRequest = SentDm::Models::MutationRequest
+
+  class PaginationMeta = SentDm::Models::PaginationMeta
+
+  class ProfileCompleteParams = SentDm::Models::ProfileCompleteParams
+
+  class ProfileCreateParams = SentDm::Models::ProfileCreateParams
+
+  class ProfileDeleteParams = SentDm::Models::ProfileDeleteParams
+
+  class ProfileDetail = SentDm::Models::ProfileDetail
+
+  class ProfileListParams = SentDm::Models::ProfileListParams
+
+  class ProfileRetrieveParams = SentDm::Models::ProfileRetrieveParams
+
+  class ProfileSettings = SentDm::Models::ProfileSettings
+
+  class ProfileUpdateParams = SentDm::Models::ProfileUpdateParams
+
+  module TcrBrandRelationship = SentDm::Models::TcrBrandRelationship
+
+  module TcrVertical = SentDm::Models::TcrVertical
+
+  class Template = SentDm::Models::Template
+
+  class TemplateBodyContent = SentDm::Models::TemplateBodyContent
+
+  class TemplateCreateParams = SentDm::Models::TemplateCreateParams
+
+  class TemplateDefinition = SentDm::Models::TemplateDefinition
+
+  class TemplateDeleteParams = SentDm::Models::TemplateDeleteParams
+
+  class TemplateListParams = SentDm::Models::TemplateListParams
+
+  class TemplateRetrieveParams = SentDm::Models::TemplateRetrieveParams
+
+  class TemplateUpdateParams = SentDm::Models::TemplateUpdateParams
+
+  class TemplateVariable = SentDm::Models::TemplateVariable
+
+  class UserInviteParams = SentDm::Models::UserInviteParams
+
+  class UserListParams = SentDm::Models::UserListParams
+
+  class UserRemoveParams = SentDm::Models::UserRemoveParams
+
+  class UserResponse = SentDm::Models::UserResponse
+
+  class UserRetrieveParams = SentDm::Models::UserRetrieveParams
+
+  class UserUpdateRoleParams = SentDm::Models::UserUpdateRoleParams
+
+  class WebhookCreateParams = SentDm::Models::WebhookCreateParams
+
+  class WebhookDeleteParams = SentDm::Models::WebhookDeleteParams
+
+  class WebhookListEventsParams = SentDm::Models::WebhookListEventsParams
+
+  class WebhookListEventTypesParams = SentDm::Models::WebhookListEventTypesParams
+
+  class WebhookListParams = SentDm::Models::WebhookListParams
+
+  class WebhookResponse = SentDm::Models::WebhookResponse
+
+  class WebhookRetrieveParams = SentDm::Models::WebhookRetrieveParams
+
+  class WebhookRotateSecretParams = SentDm::Models::WebhookRotateSecretParams
+
+  class WebhookTestParams = SentDm::Models::WebhookTestParams
+
+  class WebhookToggleStatusParams = SentDm::Models::WebhookToggleStatusParams
+
+  class WebhookUpdateParams = SentDm::Models::WebhookUpdateParams
+end

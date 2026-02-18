@@ -1,0 +1,98 @@
+module SentDm
+  module Models
+    type webhook_list_event_types_response =
+      {
+        data: SentDm::Models::WebhookListEventTypesResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+    class WebhookListEventTypesResponse < SentDm::Internal::Type::BaseModel
+      attr_accessor data: SentDm::Models::WebhookListEventTypesResponse::Data?
+
+      attr_accessor error: SentDm::APIError?
+
+      attr_reader meta: SentDm::APIMeta?
+
+      def meta=: (SentDm::APIMeta) -> SentDm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: SentDm::Models::WebhookListEventTypesResponse::Data?,
+        ?error: SentDm::APIError?,
+        ?meta: SentDm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: SentDm::Models::WebhookListEventTypesResponse::Data?,
+        error: SentDm::APIError?,
+        meta: SentDm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          event_types: ::Array[SentDm::Models::WebhookListEventTypesResponse::Data::EventType]
+        }
+
+      class Data < SentDm::Internal::Type::BaseModel
+        attr_reader event_types: ::Array[SentDm::Models::WebhookListEventTypesResponse::Data::EventType]?
+
+        def event_types=: (
+          ::Array[SentDm::Models::WebhookListEventTypesResponse::Data::EventType]
+        ) -> ::Array[SentDm::Models::WebhookListEventTypesResponse::Data::EventType]
+
+        def initialize: (
+          ?event_types: ::Array[SentDm::Models::WebhookListEventTypesResponse::Data::EventType]
+        ) -> void
+
+        def to_hash: -> {
+          event_types: ::Array[SentDm::Models::WebhookListEventTypesResponse::Data::EventType]
+        }
+
+        type event_type =
+          {
+            description: String?,
+            display_name: String,
+            is_active: bool,
+            name: String
+          }
+
+        class EventType < SentDm::Internal::Type::BaseModel
+          attr_accessor description: String?
+
+          attr_reader display_name: String?
+
+          def display_name=: (String) -> String
+
+          attr_reader is_active: bool?
+
+          def is_active=: (bool) -> bool
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          def initialize: (
+            ?description: String?,
+            ?display_name: String,
+            ?is_active: bool,
+            ?name: String
+          ) -> void
+
+          def to_hash: -> {
+            description: String?,
+            display_name: String,
+            is_active: bool,
+            name: String
+          }
+        end
+      end
+    end
+  end
+end
