@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
   def test_retrieve_activities
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.messages.retrieve_activities("8ba7b830-9dad-11d1-80b4-00c04fd430c8")
 
@@ -23,7 +23,7 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
   end
 
   def test_retrieve_status
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.messages.retrieve_status("8ba7b830-9dad-11d1-80b4-00c04fd430c8")
 
@@ -42,7 +42,7 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
   end
 
   def test_send_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.messages.send_
 
