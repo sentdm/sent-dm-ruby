@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 (2026-02-22)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* **internal:** remove mock server code ([01a1560](https://github.com/sentdm/sent-dm-ruby/commit/01a1560c3ade7cc3c97c4934e69620ad5087c9a7))
+* update mock server docs ([477f6d8](https://github.com/sentdm/sent-dm-ruby/commit/477f6d8c6008438f3ad0ea1dda4070a2a82d1eec))
+
 ## 0.3.0 (2026-02-18)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.2.0...v0.3.0)
