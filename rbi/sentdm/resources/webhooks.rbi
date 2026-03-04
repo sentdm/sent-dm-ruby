@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Configure webhook endpoints for real-time event delivery
     class Webhooks
       # Creates a new webhook endpoint for the authenticated customer.
       sig do

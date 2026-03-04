@@ -20,30 +20,38 @@ module Sentdm
     # @return [String]
     attr_reader :api_key
 
+    # Configure webhook endpoints for real-time event delivery
     # @return [Sentdm::Resources::Webhooks]
     attr_reader :webhooks
 
+    # Invite, update, and manage organization users and roles
     # @return [Sentdm::Resources::Users]
     attr_reader :users
 
+    # Manage message templates with variable substitution
     # @return [Sentdm::Resources::Templates]
     attr_reader :templates
 
+    # Manage organization profiles
     # @return [Sentdm::Resources::Profiles]
     attr_reader :profiles
 
+    # Send and track SMS and WhatsApp messages
     # @return [Sentdm::Resources::Messages]
     attr_reader :messages
 
     # @return [Sentdm::Resources::Lookup]
     attr_reader :lookup
 
+    # Create, update, and manage customer contact lists
     # @return [Sentdm::Resources::Contacts]
     attr_reader :contacts
 
+    # Register and manage 10DLC brands for SMS compliance
     # @return [Sentdm::Resources::Brands]
     attr_reader :brands
 
+    # Retrieve account details
     # @return [Sentdm::Resources::Me]
     attr_reader :me
 

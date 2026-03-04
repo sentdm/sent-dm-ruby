@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Send and track SMS and WhatsApp messages
     class Messages
       # Retrieves the activity log for a specific message. Activities track the message
       # lifecycle including acceptance, processing, sending, delivery, and any errors.

@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Manage message templates with variable substitution
     class Templates
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::TemplateCreateParams} for more details.
@@ -129,10 +130,11 @@ module Sentdm
       # @see Sentdm::Models::TemplateListParams
       def list(params)
         parsed, options = Sentdm::TemplateListParams.dump_request(params)
+        query = Sentdm::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "v3/templates",
-          query: parsed.transform_keys(page_size: "pageSize"),
+          query: query.transform_keys(page_size: "pageSize"),
           model: Sentdm::Models::TemplateListResponse,
           options: options
         )

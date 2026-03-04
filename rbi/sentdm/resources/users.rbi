@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Invite, update, and manage organization users and roles
     class Users
       # Retrieves detailed information about a specific user in an organization or
       # profile. Requires developer role or higher.
