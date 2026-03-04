@@ -3,6 +3,7 @@
 module Sentdm
   module Resources
     class Brands
+      # Register and manage 10DLC brands for SMS compliance
       class Campaigns
         # Some parameter documentations has been truncated, see
         # {Sentdm::Models::Brands::CampaignCreateParams} for more details.

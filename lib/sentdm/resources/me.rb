@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Retrieve account details
     class Me
       # Returns the account associated with the API key. For organization API keys,
       # returns the organization with its profiles. For profile API keys, returns the

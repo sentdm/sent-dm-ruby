@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Manage organization profiles
     class Profiles
       # Creates a new sender profile within an organization. Profiles represent
       # different brands, departments, or use cases, each with their own messaging

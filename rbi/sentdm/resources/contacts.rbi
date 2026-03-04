@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Create, update, and manage customer contact lists
     class Contacts
       # Creates a new contact by phone number and associates it with the authenticated
       # customer.

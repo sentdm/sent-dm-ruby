@@ -2,7 +2,9 @@
 
 module Sentdm
   module Resources
+    # Register and manage 10DLC brands for SMS compliance
     class Brands
+      # Register and manage 10DLC brands for SMS compliance
       # @return [Sentdm::Resources::Brands::Campaigns]
       attr_reader :campaigns
 
