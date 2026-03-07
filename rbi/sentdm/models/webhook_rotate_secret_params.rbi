@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::WebhookRotateSecretParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(Sentdm::WebhookRotateSecretParams::Body) }
       attr_reader :body
 
@@ -25,17 +28,19 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           body: Sentdm::WebhookRotateSecretParams::Body::OrHash,
           idempotency_key: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(body:, idempotency_key: nil, request_options: {})
+      def self.new(id:, body:, idempotency_key: nil, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            id: String,
             body: Sentdm::WebhookRotateSecretParams::Body,
             idempotency_key: String,
             request_options: Sentdm::RequestOptions

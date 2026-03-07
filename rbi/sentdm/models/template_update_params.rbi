@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::TemplateUpdateParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Template category: MARKETING, UTILITY, AUTHENTICATION
       sig { returns(T.nilable(String)) }
       attr_accessor :category
@@ -55,6 +58,7 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           category: T.nilable(String),
           definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
           language: T.nilable(String),
@@ -66,6 +70,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Template category: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
         # Template definition including header, body, footer, and buttons
@@ -87,6 +92,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            id: String,
             category: T.nilable(String),
             definition: T.nilable(Sentdm::TemplateDefinition),
             language: T.nilable(String),

@@ -18,6 +18,9 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :brand_id
 
+        sig { returns(String) }
+        attr_accessor :campaign_id
+
         # Request to delete a campaign from a brand
         sig { returns(Sentdm::Brands::CampaignDeleteParams::Body) }
         attr_reader :body
@@ -30,12 +33,14 @@ module Sentdm
         sig do
           params(
             brand_id: String,
+            campaign_id: String,
             body: Sentdm::Brands::CampaignDeleteParams::Body::OrHash,
             request_options: Sentdm::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           brand_id:,
+          campaign_id:,
           # Request to delete a campaign from a brand
           body:,
           request_options: {}
@@ -46,6 +51,7 @@ module Sentdm
           override.returns(
             {
               brand_id: String,
+              campaign_id: String,
               body: Sentdm::Brands::CampaignDeleteParams::Body,
               request_options: Sentdm::RequestOptions
             }

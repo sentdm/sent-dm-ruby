@@ -15,6 +15,9 @@ module Sentdm
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :brand_id
+
         # Campaign data
         sig { returns(Sentdm::Brands::CampaignData) }
         attr_reader :campaign
@@ -38,6 +41,7 @@ module Sentdm
 
         sig do
           params(
+            brand_id: String,
             campaign: Sentdm::Brands::CampaignData::OrHash,
             test_mode: T::Boolean,
             idempotency_key: String,
@@ -45,6 +49,7 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
+          brand_id:,
           # Campaign data
           campaign:,
           # Test mode flag - when true, the operation is simulated without side effects
@@ -58,6 +63,7 @@ module Sentdm
         sig do
           override.returns(
             {
+              brand_id: String,
               campaign: Sentdm::Brands::CampaignData,
               test_mode: T::Boolean,
               idempotency_key: String,

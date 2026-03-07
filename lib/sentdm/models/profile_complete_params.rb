@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute profile_id
+      #
+      #   @return [String]
+      required :profile_id, String
+
       # @!attribute web_hook_url
       #   Webhook URL to call when profile completion finishes (success or failure)
       #
@@ -25,9 +30,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(web_hook_url:, test_mode: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(profile_id:, web_hook_url:, test_mode: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ProfileCompleteParams} for more details.
+      #
+      #   @param profile_id [String]
       #
       #   @param web_hook_url [String] Webhook URL to call when profile completion finishes (success or failure)
       #

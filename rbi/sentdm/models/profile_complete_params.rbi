@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::ProfileCompleteParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :profile_id
+
       # Webhook URL to call when profile completion finishes (success or failure)
       sig { returns(String) }
       attr_accessor :web_hook_url
@@ -31,6 +34,7 @@ module Sentdm
 
       sig do
         params(
+          profile_id: String,
           web_hook_url: String,
           test_mode: T::Boolean,
           idempotency_key: String,
@@ -38,6 +42,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        profile_id:,
         # Webhook URL to call when profile completion finishes (success or failure)
         web_hook_url:,
         # Test mode flag - when true, the operation is simulated without side effects
@@ -51,6 +56,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            profile_id: String,
             web_hook_url: String,
             test_mode: T::Boolean,
             idempotency_key: String,

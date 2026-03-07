@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::ContactUpdateParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Default messaging channel: "sms" or "whatsapp"
       sig { returns(T.nilable(String)) }
       attr_accessor :default_channel
@@ -35,6 +38,7 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           default_channel: T.nilable(String),
           opt_out: T.nilable(T::Boolean),
           test_mode: T::Boolean,
@@ -43,6 +47,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Default messaging channel: "sms" or "whatsapp"
         default_channel: nil,
         # Whether the contact has opted out of messaging
@@ -58,6 +63,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            id: String,
             default_channel: T.nilable(String),
             opt_out: T.nilable(T::Boolean),
             test_mode: T::Boolean,

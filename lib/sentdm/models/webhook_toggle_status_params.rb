@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute is_active
       #
       #   @return [Boolean, nil]
@@ -24,9 +29,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(is_active: nil, test_mode: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(id:, is_active: nil, test_mode: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookToggleStatusParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param is_active [Boolean]
       #

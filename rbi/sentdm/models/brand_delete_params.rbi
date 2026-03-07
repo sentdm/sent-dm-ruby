@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::BrandDeleteParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # Request to delete a brand
       sig { returns(Sentdm::BrandDeleteParams::Body) }
       attr_reader :body
@@ -20,11 +23,13 @@ module Sentdm
 
       sig do
         params(
+          brand_id: String,
           body: Sentdm::BrandDeleteParams::Body::OrHash,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        brand_id:,
         # Request to delete a brand
         body:,
         request_options: {}
@@ -34,6 +39,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            brand_id: String,
             body: Sentdm::BrandDeleteParams::Body,
             request_options: Sentdm::RequestOptions
           }

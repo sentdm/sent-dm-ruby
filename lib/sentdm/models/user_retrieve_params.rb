@@ -7,7 +7,13 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      # @!method initialize(request_options: {})
+      # @!attribute user_id
+      #
+      #   @return [String]
+      required :user_id, String
+
+      # @!method initialize(user_id:, request_options: {})
+      #   @param user_id [String]
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end
   end

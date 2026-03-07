@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute path_profile_id
+      #
+      #   @return [String]
+      required :path_profile_id, String
+
       # @!attribute body_profile_id
       #   Profile ID from route parameter
       #
@@ -20,9 +25,11 @@ module Sentdm
       #   @return [Boolean, nil]
       optional :test_mode, Sentdm::Internal::Type::Boolean
 
-      # @!method initialize(body_profile_id: nil, test_mode: nil, request_options: {})
+      # @!method initialize(path_profile_id:, body_profile_id: nil, test_mode: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ProfileDeleteParams} for more details.
+      #
+      #   @param path_profile_id [String]
       #
       #   @param body_profile_id [String] Profile ID from route parameter
       #

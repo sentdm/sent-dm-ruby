@@ -13,14 +13,21 @@ module Sentdm
         #   @return [String]
         required :brand_id, String
 
+        # @!attribute campaign_id
+        #
+        #   @return [String]
+        required :campaign_id, String
+
         # @!attribute body
         #   Request to delete a campaign from a brand
         #
         #   @return [Sentdm::Models::Brands::CampaignDeleteParams::Body]
         required :body, -> { Sentdm::Brands::CampaignDeleteParams::Body }
 
-        # @!method initialize(brand_id:, body:, request_options: {})
+        # @!method initialize(brand_id:, campaign_id:, body:, request_options: {})
         #   @param brand_id [String]
+        #
+        #   @param campaign_id [String]
         #
         #   @param body [Sentdm::Models::Brands::CampaignDeleteParams::Body] Request to delete a campaign from a brand
         #
