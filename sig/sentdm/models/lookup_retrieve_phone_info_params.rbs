@@ -1,15 +1,23 @@
 module Sentdm
   module Models
     type lookup_retrieve_phone_info_params =
-      {  } & Sentdm::Internal::Type::request_parameters
+      { phone_number: String } & Sentdm::Internal::Type::request_parameters
 
     class LookupRetrievePhoneInfoParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Sentdm::request_opts) -> void
+      attr_accessor phone_number: String
 
-      def to_hash: -> { request_options: Sentdm::RequestOptions }
+      def initialize: (
+        phone_number: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        phone_number: String,
+        request_options: Sentdm::RequestOptions
+      }
     end
   end
 end

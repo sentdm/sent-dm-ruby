@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type template_update_params =
       {
+        id: String,
         category: String?,
         definition: Sentdm::TemplateDefinition?,
         language: String?,
@@ -15,6 +16,8 @@ module Sentdm
     class TemplateUpdateParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor category: String?
 
@@ -37,6 +40,7 @@ module Sentdm
       def idempotency_key=: (String) -> String
 
       def initialize: (
+        id: String,
         ?category: String?,
         ?definition: Sentdm::TemplateDefinition?,
         ?language: String?,
@@ -48,6 +52,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        id: String,
         category: String?,
         definition: Sentdm::TemplateDefinition?,
         language: String?,

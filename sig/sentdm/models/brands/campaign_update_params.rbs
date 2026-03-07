@@ -4,6 +4,7 @@ module Sentdm
       type campaign_update_params =
         {
           brand_id: String,
+          campaign_id: String,
           campaign: Sentdm::Brands::CampaignData,
           test_mode: bool,
           idempotency_key: String
@@ -15,6 +16,8 @@ module Sentdm
         include Sentdm::Internal::Type::RequestParameters
 
         attr_accessor brand_id: String
+
+        attr_accessor campaign_id: String
 
         attr_accessor campaign: Sentdm::Brands::CampaignData
 
@@ -28,6 +31,7 @@ module Sentdm
 
         def initialize: (
           brand_id: String,
+          campaign_id: String,
           campaign: Sentdm::Brands::CampaignData,
           ?test_mode: bool,
           ?idempotency_key: String,
@@ -36,6 +40,7 @@ module Sentdm
 
         def to_hash: -> {
           brand_id: String,
+          campaign_id: String,
           campaign: Sentdm::Brands::CampaignData,
           test_mode: bool,
           idempotency_key: String,

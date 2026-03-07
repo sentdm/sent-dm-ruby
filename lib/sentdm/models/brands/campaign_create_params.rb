@@ -8,6 +8,11 @@ module Sentdm
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
+        # @!attribute brand_id
+        #
+        #   @return [String]
+        required :brand_id, String
+
         # @!attribute campaign
         #   Campaign data
         #
@@ -26,9 +31,11 @@ module Sentdm
         #   @return [String, nil]
         optional :idempotency_key, String
 
-        # @!method initialize(campaign:, test_mode: nil, idempotency_key: nil, request_options: {})
+        # @!method initialize(brand_id:, campaign:, test_mode: nil, idempotency_key: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Brands::CampaignCreateParams} for more details.
+        #
+        #   @param brand_id [String]
         #
         #   @param campaign [Sentdm::Models::Brands::CampaignData] Campaign data
         #

@@ -3,6 +3,7 @@ module Sentdm
     module Brands
       type campaign_create_params =
         {
+          brand_id: String,
           campaign: Sentdm::Brands::CampaignData,
           test_mode: bool,
           idempotency_key: String
@@ -12,6 +13,8 @@ module Sentdm
       class CampaignCreateParams < Sentdm::Internal::Type::BaseModel
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor brand_id: String
 
         attr_accessor campaign: Sentdm::Brands::CampaignData
 
@@ -24,6 +27,7 @@ module Sentdm
         def idempotency_key=: (String) -> String
 
         def initialize: (
+          brand_id: String,
           campaign: Sentdm::Brands::CampaignData,
           ?test_mode: bool,
           ?idempotency_key: String,
@@ -31,6 +35,7 @@ module Sentdm
         ) -> void
 
         def to_hash: -> {
+          brand_id: String,
           campaign: Sentdm::Brands::CampaignData,
           test_mode: bool,
           idempotency_key: String,

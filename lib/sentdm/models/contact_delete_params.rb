@@ -7,13 +7,20 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute body
       #   Request to delete/dissociate a contact
       #
       #   @return [Sentdm::Models::ContactDeleteParams::Body]
       required :body, -> { Sentdm::ContactDeleteParams::Body }
 
-      # @!method initialize(body:, request_options: {})
+      # @!method initialize(id:, body:, request_options: {})
+      #   @param id [String]
+      #
       #   @param body [Sentdm::Models::ContactDeleteParams::Body] Request to delete/dissociate a contact
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]

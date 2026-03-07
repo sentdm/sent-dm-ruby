@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::ContactDeleteParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Request to delete/dissociate a contact
       sig { returns(Sentdm::ContactDeleteParams::Body) }
       attr_reader :body
@@ -20,11 +23,13 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           body: Sentdm::ContactDeleteParams::Body::OrHash,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Request to delete/dissociate a contact
         body:,
         request_options: {}
@@ -34,6 +39,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            id: String,
             body: Sentdm::ContactDeleteParams::Body,
             request_options: Sentdm::RequestOptions
           }

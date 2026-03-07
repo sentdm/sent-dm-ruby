@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type profile_update_params =
       {
+        path_profile_id: String,
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
@@ -27,6 +28,8 @@ module Sentdm
     class ProfileUpdateParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor path_profile_id: String
 
       attr_accessor allow_contact_sharing: bool?
 
@@ -73,6 +76,7 @@ module Sentdm
       def idempotency_key=: (String) -> String
 
       def initialize: (
+        path_profile_id: String,
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
@@ -96,6 +100,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        path_profile_id: String,
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,

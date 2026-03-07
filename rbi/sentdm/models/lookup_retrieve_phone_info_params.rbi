@@ -14,15 +14,23 @@ module Sentdm
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :phone_number
+
       sig do
-        params(request_options: Sentdm::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          phone_number: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(phone_number:, request_options: {})
       end
 
-      sig { override.returns({ request_options: Sentdm::RequestOptions }) }
+      sig do
+        override.returns(
+          { phone_number: String, request_options: Sentdm::RequestOptions }
+        )
+      end
       def to_hash
       end
     end

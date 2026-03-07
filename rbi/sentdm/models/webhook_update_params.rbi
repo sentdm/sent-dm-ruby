@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::WebhookUpdateParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(String)) }
       attr_reader :display_name
 
@@ -57,6 +60,7 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           display_name: String,
           endpoint_url: String,
           event_types: T::Array[String],
@@ -68,6 +72,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         display_name: nil,
         endpoint_url: nil,
         event_types: nil,
@@ -84,6 +89,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            id: String,
             display_name: String,
             endpoint_url: String,
             event_types: T::Array[String],

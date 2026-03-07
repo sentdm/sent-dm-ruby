@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute brand_id
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute brand
       #   Brand and KYC information
       #
@@ -25,9 +30,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(brand:, test_mode: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(brand_id:, brand:, test_mode: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::BrandUpdateParams} for more details.
+      #
+      #   @param brand_id [String]
       #
       #   @param brand [Sentdm::Models::BrandData] Brand and KYC information
       #

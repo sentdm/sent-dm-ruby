@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute delete_from_meta
       #   Whether to also delete the template from WhatsApp/Meta (optional, defaults to
       #   false)
@@ -21,9 +26,11 @@ module Sentdm
       #   @return [Boolean, nil]
       optional :test_mode, Sentdm::Internal::Type::Boolean
 
-      # @!method initialize(delete_from_meta: nil, test_mode: nil, request_options: {})
+      # @!method initialize(id:, delete_from_meta: nil, test_mode: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateDeleteParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param delete_from_meta [Boolean, nil] Whether to also delete the template from WhatsApp/Meta (optional, defaults to fa
       #

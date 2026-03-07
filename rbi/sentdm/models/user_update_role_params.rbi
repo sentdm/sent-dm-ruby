@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::UserUpdateRoleParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :path_user_id
+
       # User role: admin, billing, or developer (required)
       sig { returns(T.nilable(String)) }
       attr_reader :role
@@ -41,6 +44,7 @@ module Sentdm
 
       sig do
         params(
+          path_user_id: String,
           role: String,
           test_mode: T::Boolean,
           body_user_id: String,
@@ -49,6 +53,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        path_user_id:,
         # User role: admin, billing, or developer (required)
         role: nil,
         # Test mode flag - when true, the operation is simulated without side effects
@@ -64,6 +69,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            path_user_id: String,
             role: String,
             test_mode: T::Boolean,
             body_user_id: String,

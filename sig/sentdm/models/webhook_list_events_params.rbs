@@ -1,12 +1,14 @@
 module Sentdm
   module Models
     type webhook_list_events_params =
-      { page: Integer, page_size: Integer, search: String? }
+      { id: String, page: Integer, page_size: Integer, search: String? }
       & Sentdm::Internal::Type::request_parameters
 
     class WebhookListEventsParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor page: Integer
 
@@ -15,6 +17,7 @@ module Sentdm
       attr_accessor search: String?
 
       def initialize: (
+        id: String,
         page: Integer,
         page_size: Integer,
         ?search: String?,
@@ -22,6 +25,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        id: String,
         page: Integer,
         page_size: Integer,
         search: String?,

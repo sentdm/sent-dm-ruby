@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::UserRemoveParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :path_user_id
+
       # Test mode flag - when true, the operation is simulated without side effects
       # Useful for testing integrations without actual execution
       sig { returns(T.nilable(T::Boolean)) }
@@ -28,12 +31,14 @@ module Sentdm
 
       sig do
         params(
+          path_user_id: String,
           test_mode: T::Boolean,
           body_user_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        path_user_id:,
         # Test mode flag - when true, the operation is simulated without side effects
         # Useful for testing integrations without actual execution
         test_mode: nil,
@@ -46,6 +51,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            path_user_id: String,
             test_mode: T::Boolean,
             body_user_id: String,
             request_options: Sentdm::RequestOptions

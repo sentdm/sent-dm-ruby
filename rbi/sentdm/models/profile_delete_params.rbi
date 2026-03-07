@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::ProfileDeleteParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :path_profile_id
+
       # Profile ID from route parameter
       sig { returns(T.nilable(String)) }
       attr_reader :body_profile_id
@@ -28,12 +31,14 @@ module Sentdm
 
       sig do
         params(
+          path_profile_id: String,
           body_profile_id: String,
           test_mode: T::Boolean,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        path_profile_id:,
         # Profile ID from route parameter
         body_profile_id: nil,
         # Test mode flag - when true, the operation is simulated without side effects
@@ -46,6 +51,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            path_profile_id: String,
             body_profile_id: String,
             test_mode: T::Boolean,
             request_options: Sentdm::RequestOptions

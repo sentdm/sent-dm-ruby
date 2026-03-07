@@ -1,12 +1,14 @@
 module Sentdm
   module Models
     type user_remove_params =
-      { test_mode: bool, body_user_id: String }
+      { path_user_id: String, test_mode: bool, body_user_id: String }
       & Sentdm::Internal::Type::request_parameters
 
     class UserRemoveParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor path_user_id: String
 
       attr_reader test_mode: bool?
 
@@ -17,12 +19,14 @@ module Sentdm
       def body_user_id=: (String) -> String
 
       def initialize: (
+        path_user_id: String,
         ?test_mode: bool,
         ?body_user_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
+        path_user_id: String,
         test_mode: bool,
         body_user_id: String,
         request_options: Sentdm::RequestOptions
