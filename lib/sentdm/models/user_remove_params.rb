@@ -32,7 +32,7 @@ module Sentdm
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
 
-      class Body < Sentdm::Models::MutationRequest
+      class Body < Sentdm::Models::MutationRequestBase
         # @!method initialize
         #   Request to remove a user from an organization
       end

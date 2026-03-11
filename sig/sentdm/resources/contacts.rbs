@@ -7,13 +7,13 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::APIResponseContact
+      ) -> Sentdm::APIResponseOfContact
 
       def retrieve: (
         String id,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::APIResponseContact
+      ) -> Sentdm::APIResponseOfContact
 
       def update: (
         String id,
@@ -23,7 +23,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::APIResponseContact
+      ) -> Sentdm::APIResponseOfContact
 
       def list: (
         page: Integer,

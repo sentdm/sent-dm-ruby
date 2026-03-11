@@ -31,19 +31,17 @@ module Sentdm
     sig { returns(Sentdm::Resources::Profiles) }
     attr_reader :profiles
 
+    # Manage and lookup phone numbers
+    sig { returns(Sentdm::Resources::Numbers) }
+    attr_reader :numbers
+
     # Send and track SMS and WhatsApp messages
     sig { returns(Sentdm::Resources::Messages) }
     attr_reader :messages
 
-    sig { returns(Sentdm::Resources::Lookup) }
-    attr_reader :lookup
-
     # Create, update, and manage customer contact lists
     sig { returns(Sentdm::Resources::Contacts) }
     attr_reader :contacts
-
-    sig { returns(Sentdm::Resources::Brands) }
-    attr_reader :brands
 
     # Retrieve account details
     sig { returns(Sentdm::Resources::Me) }

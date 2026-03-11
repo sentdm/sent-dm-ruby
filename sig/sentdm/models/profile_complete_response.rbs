@@ -1,5 +1,0 @@
-module Sentdm
-  module Models
-    ProfileCompleteResponse: Sentdm::Internal::Type::Converter
-  end
-end

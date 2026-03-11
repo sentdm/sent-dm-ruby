@@ -1,0 +1,42 @@
+module Sentdm
+  module Resources
+    class Profiles
+      class Campaigns
+        def create: (
+          String profile_id,
+          campaign: Sentdm::Profiles::CampaignData,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases
+
+        def update: (
+          String campaign_id,
+          profile_id: String,
+          campaign: Sentdm::Profiles::CampaignData,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases
+
+        def list: (
+          String profile_id,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Models::Profiles::CampaignListResponse
+
+        def delete: (
+          String campaign_id,
+          profile_id: String,
+          body: Sentdm::Profiles::CampaignDeleteParams::Body,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> nil
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

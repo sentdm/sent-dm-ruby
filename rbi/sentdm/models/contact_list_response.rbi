@@ -84,10 +84,10 @@ module Sentdm
           end
 
         # List of contacts
-        sig { returns(T.nilable(T::Array[Sentdm::Contact])) }
+        sig { returns(T.nilable(T::Array[Sentdm::ContactResponse])) }
         attr_reader :contacts
 
-        sig { params(contacts: T::Array[Sentdm::Contact::OrHash]).void }
+        sig { params(contacts: T::Array[Sentdm::ContactResponse::OrHash]).void }
         attr_writer :contacts
 
         # Pagination metadata
@@ -100,7 +100,7 @@ module Sentdm
         # The response data (null if error)
         sig do
           params(
-            contacts: T::Array[Sentdm::Contact::OrHash],
+            contacts: T::Array[Sentdm::ContactResponse::OrHash],
             pagination: Sentdm::PaginationMeta::OrHash
           ).returns(T.attached_class)
         end
@@ -115,7 +115,7 @@ module Sentdm
         sig do
           override.returns(
             {
-              contacts: T::Array[Sentdm::Contact],
+              contacts: T::Array[Sentdm::ContactResponse],
               pagination: Sentdm::PaginationMeta
             }
           )

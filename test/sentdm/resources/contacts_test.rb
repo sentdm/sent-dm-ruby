@@ -9,12 +9,12 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     response = @sent_dm.contacts.create
 
     assert_pattern do
-      response => Sentdm::APIResponseContact
+      response => Sentdm::APIResponseOfContact
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Contact | nil,
+        data: Sentdm::ContactResponse | nil,
         error: Sentdm::APIError | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -28,12 +28,12 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     response = @sent_dm.contacts.retrieve("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::APIResponseContact
+      response => Sentdm::APIResponseOfContact
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Contact | nil,
+        data: Sentdm::ContactResponse | nil,
         error: Sentdm::APIError | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -47,12 +47,12 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     response = @sent_dm.contacts.update("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::APIResponseContact
+      response => Sentdm::APIResponseOfContact
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Contact | nil,
+        data: Sentdm::ContactResponse | nil,
         error: Sentdm::APIError | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

@@ -22,7 +22,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseContact]
+      # @return [Sentdm::Models::APIResponseOfContact]
       #
       # @see Sentdm::Models::ContactCreateParams
       def create(params = {})
@@ -33,7 +33,7 @@ module Sentdm
           path: "v3/contacts",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseContact,
+          model: Sentdm::APIResponseOfContact,
           options: options
         )
       end
@@ -53,7 +53,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseContact]
+      # @return [Sentdm::Models::APIResponseOfContact]
       #
       # @see Sentdm::Models::ContactRetrieveParams
       def retrieve(id, params = {})
@@ -62,7 +62,7 @@ module Sentdm
           method: :get,
           path: ["v3/contacts/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseContact,
+          model: Sentdm::APIResponseOfContact,
           options: options
         )
       end
@@ -89,7 +89,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseContact]
+      # @return [Sentdm::Models::APIResponseOfContact]
       #
       # @see Sentdm::Models::ContactUpdateParams
       def update(id, params = {})
@@ -100,7 +100,7 @@ module Sentdm
           path: ["v3/contacts/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseContact,
+          model: Sentdm::APIResponseOfContact,
           options: options
         )
       end
