@@ -3,10 +3,11 @@ module Sentdm
     type message_send_params =
       {
         channel: ::Array[String]?,
+        sandbox: bool,
         template: Sentdm::MessageSendParams::Template,
-        test_mode: bool,
         to: ::Array[String],
-        idempotency_key: String
+        idempotency_key: String,
+        x_profile_id: String
       }
       & Sentdm::Internal::Type::request_parameters
 
@@ -16,15 +17,15 @@ module Sentdm
 
       attr_accessor channel: ::Array[String]?
 
+      attr_reader sandbox: bool?
+
+      def sandbox=: (bool) -> bool
+
       attr_reader template: Sentdm::MessageSendParams::Template?
 
       def template=: (
         Sentdm::MessageSendParams::Template
       ) -> Sentdm::MessageSendParams::Template
-
-      attr_reader test_mode: bool?
-
-      def test_mode=: (bool) -> bool
 
       attr_reader to: ::Array[String]?
 
@@ -34,21 +35,27 @@ module Sentdm
 
       def idempotency_key=: (String) -> String
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         ?channel: ::Array[String]?,
+        ?sandbox: bool,
         ?template: Sentdm::MessageSendParams::Template,
-        ?test_mode: bool,
         ?to: ::Array[String],
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
         channel: ::Array[String]?,
+        sandbox: bool,
         template: Sentdm::MessageSendParams::Template,
-        test_mode: bool,
         to: ::Array[String],
         idempotency_key: String,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
 

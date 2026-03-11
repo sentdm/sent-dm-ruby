@@ -23,16 +23,30 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :search
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
         params(
           id: String,
           page: Integer,
           page_size: Integer,
           search: T.nilable(String),
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, page:, page_size:, search: nil, request_options: {})
+      def self.new(
+        id:,
+        page:,
+        page_size:,
+        search: nil,
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       sig do
@@ -42,6 +56,7 @@ module Sentdm
             page: Integer,
             page_size: Integer,
             search: T.nilable(String),
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

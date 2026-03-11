@@ -3,22 +3,54 @@ module Sentdm
     type profile_detail =
       {
         id: String,
+        allow_contact_sharing: bool,
+        allow_number_change_during_onboarding: bool?,
+        allow_template_sharing: bool,
+        billing_contact: Sentdm::ProfileDetail::BillingContact?,
+        billing_model: String,
+        brand: Sentdm::BrandWithKYC?,
         created_at: Time,
         description: String?,
         email: String?,
         icon: String?,
+        inherit_contacts: bool,
+        inherit_tcr_brand: bool,
+        inherit_tcr_campaign: bool,
+        inherit_templates: bool,
         name: String,
         organization_id: String?,
-        settings: Sentdm::ProfileDetail::Settings,
+        sending_phone_number: String?,
+        sending_phone_number_profile_id: String?,
+        sending_whatsapp_number_profile_id: String?,
         short_name: String?,
         status: String,
-        updated_at: Time?
+        updated_at: Time?,
+        waba_id: String?,
+        whatsapp_phone_number: String?
       }
 
     class ProfileDetail < Sentdm::Internal::Type::BaseModel
       attr_reader id: String?
 
       def id=: (String) -> String
+
+      attr_reader allow_contact_sharing: bool?
+
+      def allow_contact_sharing=: (bool) -> bool
+
+      attr_accessor allow_number_change_during_onboarding: bool?
+
+      attr_reader allow_template_sharing: bool?
+
+      def allow_template_sharing=: (bool) -> bool
+
+      attr_accessor billing_contact: Sentdm::ProfileDetail::BillingContact?
+
+      attr_reader billing_model: String?
+
+      def billing_model=: (String) -> String
+
+      attr_accessor brand: Sentdm::BrandWithKYC?
 
       attr_reader created_at: Time?
 
@@ -30,17 +62,33 @@ module Sentdm
 
       attr_accessor icon: String?
 
+      attr_reader inherit_contacts: bool?
+
+      def inherit_contacts=: (bool) -> bool
+
+      attr_reader inherit_tcr_brand: bool?
+
+      def inherit_tcr_brand=: (bool) -> bool
+
+      attr_reader inherit_tcr_campaign: bool?
+
+      def inherit_tcr_campaign=: (bool) -> bool
+
+      attr_reader inherit_templates: bool?
+
+      def inherit_templates=: (bool) -> bool
+
       attr_reader name: String?
 
       def name=: (String) -> String
 
       attr_accessor organization_id: String?
 
-      attr_reader settings: Sentdm::ProfileDetail::Settings?
+      attr_accessor sending_phone_number: String?
 
-      def settings=: (
-        Sentdm::ProfileDetail::Settings
-      ) -> Sentdm::ProfileDetail::Settings
+      attr_accessor sending_phone_number_profile_id: String?
+
+      attr_accessor sending_whatsapp_number_profile_id: String?
 
       attr_accessor short_name: String?
 
@@ -50,117 +98,90 @@ module Sentdm
 
       attr_accessor updated_at: Time?
 
+      attr_accessor waba_id: String?
+
+      attr_accessor whatsapp_phone_number: String?
+
       def initialize: (
         ?id: String,
+        ?allow_contact_sharing: bool,
+        ?allow_number_change_during_onboarding: bool?,
+        ?allow_template_sharing: bool,
+        ?billing_contact: Sentdm::ProfileDetail::BillingContact?,
+        ?billing_model: String,
+        ?brand: Sentdm::BrandWithKYC?,
         ?created_at: Time,
         ?description: String?,
         ?email: String?,
         ?icon: String?,
+        ?inherit_contacts: bool,
+        ?inherit_tcr_brand: bool,
+        ?inherit_tcr_campaign: bool,
+        ?inherit_templates: bool,
         ?name: String,
         ?organization_id: String?,
-        ?settings: Sentdm::ProfileDetail::Settings,
+        ?sending_phone_number: String?,
+        ?sending_phone_number_profile_id: String?,
+        ?sending_whatsapp_number_profile_id: String?,
         ?short_name: String?,
         ?status: String,
-        ?updated_at: Time?
+        ?updated_at: Time?,
+        ?waba_id: String?,
+        ?whatsapp_phone_number: String?
       ) -> void
 
       def to_hash: -> {
         id: String,
+        allow_contact_sharing: bool,
+        allow_number_change_during_onboarding: bool?,
+        allow_template_sharing: bool,
+        billing_contact: Sentdm::ProfileDetail::BillingContact?,
+        billing_model: String,
+        brand: Sentdm::BrandWithKYC?,
         created_at: Time,
         description: String?,
         email: String?,
         icon: String?,
+        inherit_contacts: bool,
+        inherit_tcr_brand: bool,
+        inherit_tcr_campaign: bool,
+        inherit_templates: bool,
         name: String,
         organization_id: String?,
-        settings: Sentdm::ProfileDetail::Settings,
+        sending_phone_number: String?,
+        sending_phone_number_profile_id: String?,
+        sending_whatsapp_number_profile_id: String?,
         short_name: String?,
         status: String,
-        updated_at: Time?
+        updated_at: Time?,
+        waba_id: String?,
+        whatsapp_phone_number: String?
       }
 
-      type settings =
-        {
-          allow_contact_sharing: bool,
-          allow_number_change_during_onboarding: bool?,
-          allow_template_sharing: bool,
-          billing_model: String,
-          inherit_contacts: bool,
-          inherit_tcr_brand: bool,
-          inherit_tcr_campaign: bool,
-          inherit_templates: bool,
-          sending_phone_number: String?,
-          sending_phone_number_profile_id: String?,
-          sending_whatsapp_number_profile_id: String?,
-          whatsapp_phone_number: String?
-        }
+      type billing_contact =
+        { address: String?, email: String?, name: String?, phone: String? }
 
-      class Settings < Sentdm::Internal::Type::BaseModel
-        attr_reader allow_contact_sharing: bool?
+      class BillingContact < Sentdm::Internal::Type::BaseModel
+        attr_accessor address: String?
 
-        def allow_contact_sharing=: (bool) -> bool
+        attr_accessor email: String?
 
-        attr_accessor allow_number_change_during_onboarding: bool?
+        attr_accessor name: String?
 
-        attr_reader allow_template_sharing: bool?
-
-        def allow_template_sharing=: (bool) -> bool
-
-        attr_reader billing_model: String?
-
-        def billing_model=: (String) -> String
-
-        attr_reader inherit_contacts: bool?
-
-        def inherit_contacts=: (bool) -> bool
-
-        attr_reader inherit_tcr_brand: bool?
-
-        def inherit_tcr_brand=: (bool) -> bool
-
-        attr_reader inherit_tcr_campaign: bool?
-
-        def inherit_tcr_campaign=: (bool) -> bool
-
-        attr_reader inherit_templates: bool?
-
-        def inherit_templates=: (bool) -> bool
-
-        attr_accessor sending_phone_number: String?
-
-        attr_accessor sending_phone_number_profile_id: String?
-
-        attr_accessor sending_whatsapp_number_profile_id: String?
-
-        attr_accessor whatsapp_phone_number: String?
+        attr_accessor phone: String?
 
         def initialize: (
-          ?allow_contact_sharing: bool,
-          ?allow_number_change_during_onboarding: bool?,
-          ?allow_template_sharing: bool,
-          ?billing_model: String,
-          ?inherit_contacts: bool,
-          ?inherit_tcr_brand: bool,
-          ?inherit_tcr_campaign: bool,
-          ?inherit_templates: bool,
-          ?sending_phone_number: String?,
-          ?sending_phone_number_profile_id: String?,
-          ?sending_whatsapp_number_profile_id: String?,
-          ?whatsapp_phone_number: String?
+          ?address: String?,
+          ?email: String?,
+          ?name: String?,
+          ?phone: String?
         ) -> void
 
         def to_hash: -> {
-          allow_contact_sharing: bool,
-          allow_number_change_during_onboarding: bool?,
-          allow_template_sharing: bool,
-          billing_model: String,
-          inherit_contacts: bool,
-          inherit_tcr_brand: bool,
-          inherit_tcr_campaign: bool,
-          inherit_templates: bool,
-          sending_phone_number: String?,
-          sending_phone_number_profile_id: String?,
-          sending_whatsapp_number_profile_id: String?,
-          whatsapp_phone_number: String?
+          address: String?,
+          email: String?,
+          name: String?,
+          phone: String?
         }
       end
     end

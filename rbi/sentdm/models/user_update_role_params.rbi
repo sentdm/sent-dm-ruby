@@ -12,7 +12,7 @@ module Sentdm
         end
 
       sig { returns(String) }
-      attr_accessor :path_user_id
+      attr_accessor :user_id
 
       # User role: admin, billing, or developer (required)
       sig { returns(T.nilable(String)) }
@@ -21,20 +21,13 @@ module Sentdm
       sig { params(role: String).void }
       attr_writer :role
 
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
+      # Sandbox flag - when true, the operation is simulated without side effects Useful
+      # for testing integrations without actual execution
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
+      attr_reader :sandbox
 
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
-
-      # User ID from route parameter
-      sig { returns(T.nilable(String)) }
-      attr_reader :body_user_id
-
-      sig { params(body_user_id: String).void }
-      attr_writer :body_user_id
+      sig { params(sandbox: T::Boolean).void }
+      attr_writer :sandbox
 
       sig { returns(T.nilable(String)) }
       attr_reader :idempotency_key
@@ -42,26 +35,31 @@ module Sentdm
       sig { params(idempotency_key: String).void }
       attr_writer :idempotency_key
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
         params(
-          path_user_id: String,
+          user_id: String,
           role: String,
-          test_mode: T::Boolean,
-          body_user_id: String,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        path_user_id:,
+        user_id:,
         # User role: admin, billing, or developer (required)
         role: nil,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
-        # User ID from route parameter
-        body_user_id: nil,
+        # Sandbox flag - when true, the operation is simulated without side effects Useful
+        # for testing integrations without actual execution
+        sandbox: nil,
         idempotency_key: nil,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -69,11 +67,11 @@ module Sentdm
       sig do
         override.returns(
           {
-            path_user_id: String,
+            user_id: String,
             role: String,
-            test_mode: T::Boolean,
-            body_user_id: String,
+            sandbox: T::Boolean,
             idempotency_key: String,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

@@ -26,15 +26,28 @@ module Sentdm
       sig { params(idempotency_key: String).void }
       attr_writer :idempotency_key
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
         params(
           id: String,
           body: Sentdm::WebhookRotateSecretParams::Body::OrHash,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, body:, idempotency_key: nil, request_options: {})
+      def self.new(
+        id:,
+        body:,
+        idempotency_key: nil,
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       sig do
@@ -43,6 +56,7 @@ module Sentdm
             id: String,
             body: Sentdm::WebhookRotateSecretParams::Body,
             idempotency_key: String,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

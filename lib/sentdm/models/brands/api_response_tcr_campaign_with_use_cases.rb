@@ -3,7 +3,6 @@
 module Sentdm
   module Models
     module Brands
-      # @see Sentdm::Resources::Brands::Campaigns#create
       class APIResponseTcrCampaignWithUseCases < Sentdm::Internal::Type::BaseModel
         # @!attribute data
         #   The response data (null if error)

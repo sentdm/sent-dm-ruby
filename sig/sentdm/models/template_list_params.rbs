@@ -5,8 +5,10 @@ module Sentdm
         page: Integer,
         page_size: Integer,
         category: String?,
+        is_welcome_playground: bool?,
         search: String?,
-        status: String?
+        status: String?,
+        x_profile_id: String
       }
       & Sentdm::Internal::Type::request_parameters
 
@@ -20,16 +22,24 @@ module Sentdm
 
       attr_accessor category: String?
 
+      attr_accessor is_welcome_playground: bool?
+
       attr_accessor search: String?
 
       attr_accessor status: String?
+
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
 
       def initialize: (
         page: Integer,
         page_size: Integer,
         ?category: String?,
+        ?is_welcome_playground: bool?,
         ?search: String?,
         ?status: String?,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
@@ -37,8 +47,10 @@ module Sentdm
         page: Integer,
         page_size: Integer,
         category: String?,
+        is_welcome_playground: bool?,
         search: String?,
         status: String?,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

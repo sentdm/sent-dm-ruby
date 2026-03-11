@@ -35,13 +35,13 @@ module Sentdm
       sig { params(retry_count: Integer).void }
       attr_writer :retry_count
 
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
+      # Sandbox flag - when true, the operation is simulated without side effects Useful
+      # for testing integrations without actual execution
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
+      attr_reader :sandbox
 
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
+      sig { params(sandbox: T::Boolean).void }
+      attr_writer :sandbox
 
       sig { returns(T.nilable(Integer)) }
       attr_reader :timeout_seconds
@@ -55,15 +55,22 @@ module Sentdm
       sig { params(idempotency_key: String).void }
       attr_writer :idempotency_key
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
         params(
           display_name: String,
           endpoint_url: String,
           event_types: T::Array[String],
           retry_count: Integer,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           timeout_seconds: Integer,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -72,11 +79,12 @@ module Sentdm
         endpoint_url: nil,
         event_types: nil,
         retry_count: nil,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
+        # Sandbox flag - when true, the operation is simulated without side effects Useful
+        # for testing integrations without actual execution
+        sandbox: nil,
         timeout_seconds: nil,
         idempotency_key: nil,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -88,9 +96,10 @@ module Sentdm
             endpoint_url: String,
             event_types: T::Array[String],
             retry_count: Integer,
-            test_mode: T::Boolean,
+            sandbox: T::Boolean,
             timeout_seconds: Integer,
             idempotency_key: String,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

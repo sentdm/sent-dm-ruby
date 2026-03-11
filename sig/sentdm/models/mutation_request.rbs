@@ -1,15 +1,15 @@
 module Sentdm
   module Models
-    type mutation_request = { test_mode: bool }
+    type mutation_request = { sandbox: bool }
 
     class MutationRequest < Sentdm::Internal::Type::BaseModel
-      attr_reader test_mode: bool?
+      attr_reader sandbox: bool?
 
-      def test_mode=: (bool) -> bool
+      def sandbox=: (bool) -> bool
 
-      def initialize: (?test_mode: bool) -> void
+      def initialize: (?sandbox: bool) -> void
 
-      def to_hash: -> { test_mode: bool }
+      def to_hash: -> { sandbox: bool }
     end
   end
 end

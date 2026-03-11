@@ -9,21 +9,26 @@ module Sentdm
       sig do
         params(
           phone_number: String,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseContact)
       end
       def create(
         # Body param: Phone number of the contact to create
         phone_number: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -34,12 +39,16 @@ module Sentdm
       sig do
         params(
           id: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseContact)
       end
       def retrieve(
         # Contact ID from route parameter
         id,
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -51,8 +60,9 @@ module Sentdm
           id: String,
           default_channel: T.nilable(String),
           opt_out: T.nilable(T::Boolean),
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseContact)
       end
@@ -63,13 +73,17 @@ module Sentdm
         default_channel: nil,
         # Body param: Whether the contact has opted out of messaging
         opt_out: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -83,19 +97,25 @@ module Sentdm
           channel: T.nilable(String),
           phone: T.nilable(String),
           search: T.nilable(String),
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::Models::ContactListResponse)
       end
       def list(
-        # Page number (1-indexed)
+        # Query param: Page number (1-indexed)
         page:,
+        # Query param: Number of items per page
         page_size:,
-        # Optional channel filter (sms, whatsapp)
+        # Query param: Optional channel filter (sms, whatsapp)
         channel: nil,
-        # Optional phone number filter (alternative to list view)
+        # Query param: Optional phone number filter (alternative to list view)
         phone: nil,
-        # Optional search term for filtering contacts
+        # Query param: Optional search term for filtering contacts
         search: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -106,14 +126,19 @@ module Sentdm
         params(
           id: String,
           body: Sentdm::ContactDeleteParams::Body::OrHash,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).void
       end
       def delete(
-        # Contact ID from route parameter
+        # Path param: Contact ID from route parameter
         id,
-        # Request to delete/dissociate a contact
+        # Body param: Request to delete/dissociate a contact
         body:,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end

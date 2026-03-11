@@ -3,13 +3,15 @@ module Sentdm
     class Contacts
       def create: (
         ?phone_number: String,
-        ?test_mode: bool,
+        ?sandbox: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseContact
 
       def retrieve: (
         String id,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseContact
 
@@ -17,8 +19,9 @@ module Sentdm
         String id,
         ?default_channel: String?,
         ?opt_out: bool?,
-        ?test_mode: bool,
+        ?sandbox: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseContact
 
@@ -28,12 +31,14 @@ module Sentdm
         ?channel: String?,
         ?phone: String?,
         ?search: String?,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::ContactListResponse
 
       def delete: (
         String id,
         body: Sentdm::ContactDeleteParams::Body,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil
 

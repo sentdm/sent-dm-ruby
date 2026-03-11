@@ -69,6 +69,9 @@ module Sentdm
         attr_accessor :media_type
 
         sig { returns(T.nilable(String)) }
+        attr_accessor :regex
+
+        sig { returns(T.nilable(String)) }
         attr_accessor :sample
 
         sig { returns(T.nilable(String)) }
@@ -84,6 +87,7 @@ module Sentdm
           params(
             alt: T.nilable(String),
             media_type: T.nilable(String),
+            regex: T.nilable(String),
             sample: T.nilable(String),
             short_url: T.nilable(String),
             url: T.nilable(String),
@@ -93,6 +97,7 @@ module Sentdm
         def self.new(
           alt: nil,
           media_type: nil,
+          regex: nil,
           sample: nil,
           short_url: nil,
           url: nil,
@@ -105,6 +110,7 @@ module Sentdm
             {
               alt: T.nilable(String),
               media_type: T.nilable(String),
+              regex: T.nilable(String),
               sample: T.nilable(String),
               short_url: T.nilable(String),
               url: T.nilable(String),

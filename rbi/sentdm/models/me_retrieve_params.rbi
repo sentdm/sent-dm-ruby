@@ -11,15 +11,26 @@ module Sentdm
           T.any(Sentdm::MeRetrieveParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
-        params(request_options: Sentdm::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(x_profile_id: nil, request_options: {})
       end
 
-      sig { override.returns({ request_options: Sentdm::RequestOptions }) }
+      sig do
+        override.returns(
+          { x_profile_id: String, request_options: Sentdm::RequestOptions }
+        )
+      end
       def to_hash
       end
     end

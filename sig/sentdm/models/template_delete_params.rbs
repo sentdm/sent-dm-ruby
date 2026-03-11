@@ -1,7 +1,12 @@
 module Sentdm
   module Models
     type template_delete_params =
-      { id: String, delete_from_meta: bool?, test_mode: bool }
+      {
+        id: String,
+        delete_from_meta: bool?,
+        sandbox: bool,
+        x_profile_id: String
+      }
       & Sentdm::Internal::Type::request_parameters
 
     class TemplateDeleteParams < Sentdm::Internal::Type::BaseModel
@@ -12,21 +17,27 @@ module Sentdm
 
       attr_accessor delete_from_meta: bool?
 
-      attr_reader test_mode: bool?
+      attr_reader sandbox: bool?
 
-      def test_mode=: (bool) -> bool
+      def sandbox=: (bool) -> bool
+
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
 
       def initialize: (
         id: String,
         ?delete_from_meta: bool?,
-        ?test_mode: bool,
+        ?sandbox: bool,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
         id: String,
         delete_from_meta: bool?,
-        test_mode: bool,
+        sandbox: bool,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

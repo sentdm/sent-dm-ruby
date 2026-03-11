@@ -1,36 +1,46 @@
 module Sentdm
   module Models
     type profile_delete_params =
-      { path_profile_id: String, body_profile_id: String, test_mode: bool }
+      {
+        profile_id: String,
+        body: Sentdm::ProfileDeleteParams::Body,
+        x_profile_id: String
+      }
       & Sentdm::Internal::Type::request_parameters
 
     class ProfileDeleteParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      attr_accessor path_profile_id: String
+      attr_accessor profile_id: String
 
-      attr_reader body_profile_id: String?
+      attr_accessor body: Sentdm::ProfileDeleteParams::Body
 
-      def body_profile_id=: (String) -> String
+      attr_reader x_profile_id: String?
 
-      attr_reader test_mode: bool?
-
-      def test_mode=: (bool) -> bool
+      def x_profile_id=: (String) -> String
 
       def initialize: (
-        path_profile_id: String,
-        ?body_profile_id: String,
-        ?test_mode: bool,
+        profile_id: String,
+        body: Sentdm::ProfileDeleteParams::Body,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
-        path_profile_id: String,
-        body_profile_id: String,
-        test_mode: bool,
+        profile_id: String,
+        body: Sentdm::ProfileDeleteParams::Body,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
+
+      type body = {  }
+
+      class Body < Sentdm::Models::MutationRequest
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
     end
   end
 end

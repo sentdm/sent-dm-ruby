@@ -12,38 +12,34 @@ module Sentdm
         end
 
       sig { returns(String) }
-      attr_accessor :path_user_id
+      attr_accessor :user_id
 
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
-      sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
+      # Request to remove a user from an organization
+      sig { returns(Sentdm::UserRemoveParams::Body) }
+      attr_reader :body
 
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
+      sig { params(body: Sentdm::UserRemoveParams::Body::OrHash).void }
+      attr_writer :body
 
-      # User ID from route parameter
       sig { returns(T.nilable(String)) }
-      attr_reader :body_user_id
+      attr_reader :x_profile_id
 
-      sig { params(body_user_id: String).void }
-      attr_writer :body_user_id
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
 
       sig do
         params(
-          path_user_id: String,
-          test_mode: T::Boolean,
-          body_user_id: String,
+          user_id: String,
+          body: Sentdm::UserRemoveParams::Body::OrHash,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        path_user_id:,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
-        # User ID from route parameter
-        body_user_id: nil,
+        user_id:,
+        # Request to remove a user from an organization
+        body:,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -51,14 +47,30 @@ module Sentdm
       sig do
         override.returns(
           {
-            path_user_id: String,
-            test_mode: T::Boolean,
-            body_user_id: String,
+            user_id: String,
+            body: Sentdm::UserRemoveParams::Body,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )
       end
       def to_hash
+      end
+
+      class Body < Sentdm::Models::MutationRequest
+        OrHash =
+          T.type_alias do
+            T.any(Sentdm::UserRemoveParams::Body, Sentdm::Internal::AnyHash)
+          end
+
+        # Request to remove a user from an organization
+        sig { returns(T.attached_class) }
+        def self.new
+        end
+
+        sig { override.returns({}) }
+        def to_hash
+        end
       end
     end
   end
