@@ -4,6 +4,10 @@ module Sentdm
   module Resources
     # Manage organization profiles
     class Profiles
+      # Manage organization profiles
+      sig { returns(Sentdm::Resources::Profiles::Campaigns) }
+      attr_reader :campaigns
+
       # Creates a new sender profile within an organization. Profiles represent
       # different brands, departments, or use cases, each with their own messaging
       # configuration and settings. Requires admin role in the organization.
@@ -44,10 +48,9 @@ module Sentdm
         params(
           allow_contact_sharing: T::Boolean,
           allow_template_sharing: T::Boolean,
-          billing_contact:
-            T.nilable(Sentdm::ProfileCreateParams::BillingContact::OrHash),
+          billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
-          brand: T.nilable(Sentdm::BrandData::OrHash),
+          brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
           description: T.nilable(String),
           icon: T.nilable(String),
           inherit_contacts: T.nilable(T::Boolean),
@@ -55,8 +58,7 @@ module Sentdm
           inherit_tcr_campaign: T.nilable(T::Boolean),
           inherit_templates: T.nilable(T::Boolean),
           name: String,
-          payment_details:
-            T.nilable(Sentdm::ProfileCreateParams::PaymentDetails::OrHash),
+          payment_details: T.nilable(Sentdm::PaymentDetails::OrHash),
           sandbox: T::Boolean,
           short_name: T.nilable(String),
           whatsapp_business_account:
@@ -180,10 +182,9 @@ module Sentdm
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_number_change_during_onboarding: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
-          billing_contact:
-            T.nilable(Sentdm::ProfileUpdateParams::BillingContact::OrHash),
+          billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
-          brand: T.nilable(Sentdm::BrandData::OrHash),
+          brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
           description: T.nilable(String),
           icon: T.nilable(String),
           inherit_contacts: T.nilable(T::Boolean),
@@ -191,8 +192,7 @@ module Sentdm
           inherit_tcr_campaign: T.nilable(T::Boolean),
           inherit_templates: T.nilable(T::Boolean),
           name: T.nilable(String),
-          payment_details:
-            T.nilable(Sentdm::ProfileUpdateParams::PaymentDetails::OrHash),
+          payment_details: T.nilable(Sentdm::PaymentDetails::OrHash),
           sandbox: T::Boolean,
           sending_phone_number: T.nilable(String),
           sending_phone_number_profile_id: T.nilable(String),
@@ -349,7 +349,7 @@ module Sentdm
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.anything)
       end
-      def complete(
+      def complete_setup(
         # Path param: Profile ID from route
         profile_id,
         # Body param: Webhook URL to call when profile completion finishes (success or

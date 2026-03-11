@@ -36,19 +36,17 @@ module Sentdm
     # @return [Sentdm::Resources::Profiles]
     attr_reader :profiles
 
+    # Manage and lookup phone numbers
+    # @return [Sentdm::Resources::Numbers]
+    attr_reader :numbers
+
     # Send and track SMS and WhatsApp messages
     # @return [Sentdm::Resources::Messages]
     attr_reader :messages
 
-    # @return [Sentdm::Resources::Lookup]
-    attr_reader :lookup
-
     # Create, update, and manage customer contact lists
     # @return [Sentdm::Resources::Contacts]
     attr_reader :contacts
-
-    # @return [Sentdm::Resources::Brands]
-    attr_reader :brands
 
     # Retrieve account details
     # @return [Sentdm::Resources::Me]
@@ -105,10 +103,9 @@ module Sentdm
       @users = Sentdm::Resources::Users.new(client: self)
       @templates = Sentdm::Resources::Templates.new(client: self)
       @profiles = Sentdm::Resources::Profiles.new(client: self)
+      @numbers = Sentdm::Resources::Numbers.new(client: self)
       @messages = Sentdm::Resources::Messages.new(client: self)
-      @lookup = Sentdm::Resources::Lookup.new(client: self)
       @contacts = Sentdm::Resources::Contacts.new(client: self)
-      @brands = Sentdm::Resources::Brands.new(client: self)
       @me = Sentdm::Resources::Me.new(client: self)
     end
   end

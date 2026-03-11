@@ -8,7 +8,7 @@ module Sentdm
         allow_template_sharing: bool,
         billing_contact: Sentdm::ProfileDetail::BillingContact?,
         billing_model: String,
-        brand: Sentdm::BrandWithKYC?,
+        brand: Sentdm::ProfileDetail::Brand?,
         created_at: Time,
         description: String?,
         email: String?,
@@ -50,7 +50,7 @@ module Sentdm
 
       def billing_model=: (String) -> String
 
-      attr_accessor brand: Sentdm::BrandWithKYC?
+      attr_accessor brand: Sentdm::ProfileDetail::Brand?
 
       attr_reader created_at: Time?
 
@@ -109,7 +109,7 @@ module Sentdm
         ?allow_template_sharing: bool,
         ?billing_contact: Sentdm::ProfileDetail::BillingContact?,
         ?billing_model: String,
-        ?brand: Sentdm::BrandWithKYC?,
+        ?brand: Sentdm::ProfileDetail::Brand?,
         ?created_at: Time,
         ?description: String?,
         ?email: String?,
@@ -137,7 +137,7 @@ module Sentdm
         allow_template_sharing: bool,
         billing_contact: Sentdm::ProfileDetail::BillingContact?,
         billing_model: String,
-        brand: Sentdm::BrandWithKYC?,
+        brand: Sentdm::ProfileDetail::Brand?,
         created_at: Time,
         description: String?,
         email: String?,
@@ -183,6 +183,291 @@ module Sentdm
           name: String?,
           phone: String?
         }
+      end
+
+      type brand =
+        {
+          id: String,
+          business: Sentdm::ProfileDetail::Brand::Business?,
+          compliance: Sentdm::ProfileDetail::Brand::Compliance?,
+          contact: Sentdm::ProfileDetail::Brand::Contact?,
+          created_at: Time,
+          csp_id: String?,
+          identity_status: Sentdm::Models::ProfileDetail::Brand::identity_status?,
+          is_inherited: bool,
+          status: Sentdm::Models::ProfileDetail::Brand::status?,
+          submitted_at: Time?,
+          submitted_to_tcr: bool,
+          tcr_brand_id: String?,
+          universal_ein: String?,
+          updated_at: Time?
+        }
+
+      class Brand < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_accessor business: Sentdm::ProfileDetail::Brand::Business?
+
+        attr_accessor compliance: Sentdm::ProfileDetail::Brand::Compliance?
+
+        attr_accessor contact: Sentdm::ProfileDetail::Brand::Contact?
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_accessor csp_id: String?
+
+        attr_accessor identity_status: Sentdm::Models::ProfileDetail::Brand::identity_status?
+
+        attr_reader is_inherited: bool?
+
+        def is_inherited=: (bool) -> bool
+
+        attr_accessor status: Sentdm::Models::ProfileDetail::Brand::status?
+
+        attr_accessor submitted_at: Time?
+
+        attr_reader submitted_to_tcr: bool?
+
+        def submitted_to_tcr=: (bool) -> bool
+
+        attr_accessor tcr_brand_id: String?
+
+        attr_accessor universal_ein: String?
+
+        attr_accessor updated_at: Time?
+
+        def initialize: (
+          ?id: String,
+          ?business: Sentdm::ProfileDetail::Brand::Business?,
+          ?compliance: Sentdm::ProfileDetail::Brand::Compliance?,
+          ?contact: Sentdm::ProfileDetail::Brand::Contact?,
+          ?created_at: Time,
+          ?csp_id: String?,
+          ?identity_status: Sentdm::Models::ProfileDetail::Brand::identity_status?,
+          ?is_inherited: bool,
+          ?status: Sentdm::Models::ProfileDetail::Brand::status?,
+          ?submitted_at: Time?,
+          ?submitted_to_tcr: bool,
+          ?tcr_brand_id: String?,
+          ?universal_ein: String?,
+          ?updated_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          business: Sentdm::ProfileDetail::Brand::Business?,
+          compliance: Sentdm::ProfileDetail::Brand::Compliance?,
+          contact: Sentdm::ProfileDetail::Brand::Contact?,
+          created_at: Time,
+          csp_id: String?,
+          identity_status: Sentdm::Models::ProfileDetail::Brand::identity_status?,
+          is_inherited: bool,
+          status: Sentdm::Models::ProfileDetail::Brand::status?,
+          submitted_at: Time?,
+          submitted_to_tcr: bool,
+          tcr_brand_id: String?,
+          universal_ein: String?,
+          updated_at: Time?
+        }
+
+        type business =
+          {
+            city: String?,
+            country: String?,
+            country_of_registration: String?,
+            entity_type: String?,
+            legal_name: String?,
+            postal_code: String?,
+            state: String?,
+            street: String?,
+            tax_id: String?,
+            tax_id_type: String?,
+            url: String?
+          }
+
+        class Business < Sentdm::Internal::Type::BaseModel
+          attr_accessor city: String?
+
+          attr_accessor country: String?
+
+          attr_accessor country_of_registration: String?
+
+          attr_accessor entity_type: String?
+
+          attr_accessor legal_name: String?
+
+          attr_accessor postal_code: String?
+
+          attr_accessor state: String?
+
+          attr_accessor street: String?
+
+          attr_accessor tax_id: String?
+
+          attr_accessor tax_id_type: String?
+
+          attr_accessor url: String?
+
+          def initialize: (
+            ?city: String?,
+            ?country: String?,
+            ?country_of_registration: String?,
+            ?entity_type: String?,
+            ?legal_name: String?,
+            ?postal_code: String?,
+            ?state: String?,
+            ?street: String?,
+            ?tax_id: String?,
+            ?tax_id_type: String?,
+            ?url: String?
+          ) -> void
+
+          def to_hash: -> {
+            city: String?,
+            country: String?,
+            country_of_registration: String?,
+            entity_type: String?,
+            legal_name: String?,
+            postal_code: String?,
+            state: String?,
+            street: String?,
+            tax_id: String?,
+            tax_id_type: String?,
+            url: String?
+          }
+        end
+
+        type compliance =
+          {
+            brand_relationship: Sentdm::Models::tcr_brand_relationship?,
+            destination_countries: ::Array[Sentdm::DestinationCountry],
+            expected_messaging_volume: String?,
+            is_tcr_application: bool,
+            notes: String?,
+            phone_number_prefix: String?,
+            primary_use_case: String?,
+            vertical: Sentdm::Models::tcr_vertical?
+          }
+
+        class Compliance < Sentdm::Internal::Type::BaseModel
+          attr_accessor brand_relationship: Sentdm::Models::tcr_brand_relationship?
+
+          attr_reader destination_countries: ::Array[Sentdm::DestinationCountry]?
+
+          def destination_countries=: (
+            ::Array[Sentdm::DestinationCountry]
+          ) -> ::Array[Sentdm::DestinationCountry]
+
+          attr_accessor expected_messaging_volume: String?
+
+          attr_reader is_tcr_application: bool?
+
+          def is_tcr_application=: (bool) -> bool
+
+          attr_accessor notes: String?
+
+          attr_accessor phone_number_prefix: String?
+
+          attr_accessor primary_use_case: String?
+
+          attr_accessor vertical: Sentdm::Models::tcr_vertical?
+
+          def initialize: (
+            ?brand_relationship: Sentdm::Models::tcr_brand_relationship?,
+            ?destination_countries: ::Array[Sentdm::DestinationCountry],
+            ?expected_messaging_volume: String?,
+            ?is_tcr_application: bool,
+            ?notes: String?,
+            ?phone_number_prefix: String?,
+            ?primary_use_case: String?,
+            ?vertical: Sentdm::Models::tcr_vertical?
+          ) -> void
+
+          def to_hash: -> {
+            brand_relationship: Sentdm::Models::tcr_brand_relationship?,
+            destination_countries: ::Array[Sentdm::DestinationCountry],
+            expected_messaging_volume: String?,
+            is_tcr_application: bool,
+            notes: String?,
+            phone_number_prefix: String?,
+            primary_use_case: String?,
+            vertical: Sentdm::Models::tcr_vertical?
+          }
+        end
+
+        type contact =
+          {
+            business_name: String?,
+            email: String?,
+            name: String,
+            phone: String?,
+            phone_country_code: String?,
+            role: String?
+          }
+
+        class Contact < Sentdm::Internal::Type::BaseModel
+          attr_accessor business_name: String?
+
+          attr_accessor email: String?
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_accessor phone: String?
+
+          attr_accessor phone_country_code: String?
+
+          attr_accessor role: String?
+
+          def initialize: (
+            ?business_name: String?,
+            ?email: String?,
+            ?name: String,
+            ?phone: String?,
+            ?phone_country_code: String?,
+            ?role: String?
+          ) -> void
+
+          def to_hash: -> {
+            business_name: String?,
+            email: String?,
+            name: String,
+            phone: String?,
+            phone_country_code: String?,
+            role: String?
+          }
+        end
+
+        type identity_status =
+          :SELF_DECLARED | :UNVERIFIED | :VERIFIED | :VETTED_VERIFIED
+
+        module IdentityStatus
+          extend Sentdm::Internal::Type::Enum
+
+          SELF_DECLARED: :SELF_DECLARED
+          UNVERIFIED: :UNVERIFIED
+          VERIFIED: :VERIFIED
+          VETTED_VERIFIED: :VETTED_VERIFIED
+
+          def self?.values: -> ::Array[Sentdm::Models::ProfileDetail::Brand::identity_status]
+        end
+
+        type status = :ACTIVE | :INACTIVE | :SUSPENDED
+
+        module Status
+          extend Sentdm::Internal::Type::Enum
+
+          ACTIVE: :ACTIVE
+          INACTIVE: :INACTIVE
+          SUSPENDED: :SUSPENDED
+
+          def self?.values: -> ::Array[Sentdm::Models::ProfileDetail::Brand::status]
+        end
       end
     end
   end

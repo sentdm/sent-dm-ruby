@@ -3,7 +3,7 @@ module Sentdm
 
   class APIMeta = Sentdm::Models::APIMeta
 
-  class APIResponseContact = Sentdm::Models::APIResponseContact
+  class APIResponseOfContact = Sentdm::Models::APIResponseOfContact
 
   class APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
 
@@ -13,19 +13,19 @@ module Sentdm
 
   class APIResponseWebhook = Sentdm::Models::APIResponseWebhook
 
-  class BrandData = Sentdm::Models::BrandData
+  class BaseDto = Sentdm::Models::BaseDto
 
-  module Brands = Sentdm::Models::Brands
+  class BillingContactInfo = Sentdm::Models::BillingContactInfo
 
-  class BrandWithKYC = Sentdm::Models::BrandWithKYC
-
-  class Contact = Sentdm::Models::Contact
+  class BrandsBrandData = Sentdm::Models::BrandsBrandData
 
   class ContactCreateParams = Sentdm::Models::ContactCreateParams
 
   class ContactDeleteParams = Sentdm::Models::ContactDeleteParams
 
   class ContactListParams = Sentdm::Models::ContactListParams
+
+  class ContactResponse = Sentdm::Models::ContactResponse
 
   class ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
@@ -41,11 +41,15 @@ module Sentdm
 
   class MessageSendParams = Sentdm::Models::MessageSendParams
 
-  class MutationRequest = Sentdm::Models::MutationRequest
+  class MutationRequestBase = Sentdm::Models::MutationRequestBase
+
+  class NumberLookupParams = Sentdm::Models::NumberLookupParams
 
   class PaginationMeta = Sentdm::Models::PaginationMeta
 
-  class ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
+  class PaymentDetails = Sentdm::Models::PaymentDetails
+
+  class ProfileCompleteSetupParams = Sentdm::Models::ProfileCompleteSetupParams
 
   class ProfileCreateParams = Sentdm::Models::ProfileCreateParams
 
@@ -57,21 +61,11 @@ module Sentdm
 
   class ProfileRetrieveParams = Sentdm::Models::ProfileRetrieveParams
 
+  module Profiles = Sentdm::Models::Profiles
+
   class ProfileSettings = Sentdm::Models::ProfileSettings
 
   class ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
-
-  class SentDmServicesCommonContractsPocOsAuthenticationConfig = Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
-
-  class SentDmServicesCommonContractsPocOsTemplateBody = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
-
-  class SentDmServicesCommonContractsPocOsTemplateButton = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
-
-  class SentDmServicesCommonContractsPocOsTemplateButtonProps = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
-
-  class SentDmServicesCommonContractsPocOsTemplateFooter = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
-
-  class SentDmServicesCommonContractsPocOsTemplateHeader = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
 
   module TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 

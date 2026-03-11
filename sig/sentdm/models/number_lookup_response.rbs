@@ -1,0 +1,100 @@
+module Sentdm
+  module Models
+    type number_lookup_response =
+      {
+        data: Sentdm::Models::NumberLookupResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class NumberLookupResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::NumberLookupResponse::Data?
+
+      attr_accessor error: Sentdm::APIError?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::NumberLookupResponse::Data?,
+        ?error: Sentdm::APIError?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::NumberLookupResponse::Data?,
+        error: Sentdm::APIError?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          carrier_name: String?,
+          country_code: String?,
+          is_ported: bool?,
+          is_valid: bool,
+          is_voip: bool?,
+          line_type: String?,
+          mobile_country_code: String?,
+          mobile_network_code: String?,
+          phone_number: String
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_accessor carrier_name: String?
+
+        attr_accessor country_code: String?
+
+        attr_accessor is_ported: bool?
+
+        attr_reader is_valid: bool?
+
+        def is_valid=: (bool) -> bool
+
+        attr_accessor is_voip: bool?
+
+        attr_accessor line_type: String?
+
+        attr_accessor mobile_country_code: String?
+
+        attr_accessor mobile_network_code: String?
+
+        attr_reader phone_number: String?
+
+        def phone_number=: (String) -> String
+
+        def initialize: (
+          ?carrier_name: String?,
+          ?country_code: String?,
+          ?is_ported: bool?,
+          ?is_valid: bool,
+          ?is_voip: bool?,
+          ?line_type: String?,
+          ?mobile_country_code: String?,
+          ?mobile_network_code: String?,
+          ?phone_number: String
+        ) -> void
+
+        def to_hash: -> {
+          carrier_name: String?,
+          country_code: String?,
+          is_ported: bool?,
+          is_valid: bool,
+          is_voip: bool?,
+          line_type: String?,
+          mobile_country_code: String?,
+          mobile_network_code: String?,
+          phone_number: String
+        }
+      end
+    end
+  end
+end

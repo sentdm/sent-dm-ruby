@@ -3,7 +3,7 @@
 module Sentdm
   module Test
     module Resources
-      module Brands
+      module Profiles
       end
     end
   end

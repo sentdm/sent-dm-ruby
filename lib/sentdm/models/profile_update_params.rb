@@ -35,8 +35,8 @@ module Sentdm
       #   "profile_and_organization" and no billing contact has been configured yet.
       #   Identifies who receives invoices and who is responsible for payment.
       #
-      #   @return [Sentdm::Models::ProfileUpdateParams::BillingContact, nil]
-      optional :billing_contact, -> { Sentdm::ProfileUpdateParams::BillingContact }, nil?: true
+      #   @return [Sentdm::Models::BillingContactInfo, nil]
+      optional :billing_contact, -> { Sentdm::BillingContactInfo }, nil?: true
 
       # @!attribute billing_model
       #   Billing model: profile, organization, or profile_and_organization (optional).
@@ -56,8 +56,8 @@ module Sentdm
       #   inherit_tcr_brand is true. Once a brand has been submitted to TCR it cannot be
       #   modified.
       #
-      #   @return [Sentdm::Models::BrandData, nil]
-      optional :brand, -> { Sentdm::BrandData }, nil?: true
+      #   @return [Sentdm::Models::BrandsBrandData, nil]
+      optional :brand, -> { Sentdm::BrandsBrandData }, nil?: true
 
       # @!attribute description
       #   Profile description (optional)
@@ -106,8 +106,8 @@ module Sentdm
       #   "profile" or "profile_and_organization". Not persisted on our servers —
       #   forwarded to the payment processor.
       #
-      #   @return [Sentdm::Models::ProfileUpdateParams::PaymentDetails, nil]
-      optional :payment_details, -> { Sentdm::ProfileUpdateParams::PaymentDetails }, nil?: true
+      #   @return [Sentdm::Models::PaymentDetails, nil]
+      optional :payment_details, -> { Sentdm::PaymentDetails }, nil?: true
 
       # @!attribute sandbox
       #   Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -170,11 +170,11 @@ module Sentdm
       #
       #   @param allow_template_sharing [Boolean, nil] Whether templates are shared across profiles (optional)
       #
-      #   @param billing_contact [Sentdm::Models::ProfileUpdateParams::BillingContact, nil] Billing contact for this profile. Required when billing_model is "profile" or "p
+      #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact for this profile. Required when billing_model is "profile" or "p
       #
       #   @param billing_model [String, nil] Billing model: profile, organization, or profile_and_organization (optional).
       #
-      #   @param brand [Sentdm::Models::BrandData, nil] Brand and KYC information for this profile (optional).
+      #   @param brand [Sentdm::Models::BrandsBrandData, nil] Brand and KYC information for this profile (optional).
       #
       #   @param description [String, nil] Profile description (optional)
       #
@@ -190,7 +190,7 @@ module Sentdm
       #
       #   @param name [String, nil] Profile name (optional)
       #
-      #   @param payment_details [Sentdm::Models::ProfileUpdateParams::PaymentDetails, nil] Payment card details for this profile (optional).
+      #   @param payment_details [Sentdm::Models::PaymentDetails, nil] Payment card details for this profile (optional).
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
@@ -209,88 +209,6 @@ module Sentdm
       #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
-
-      class BillingContact < Sentdm::Internal::Type::BaseModel
-        # @!attribute email
-        #   Email address where invoices will be sent (required)
-        #
-        #   @return [String]
-        required :email, String
-
-        # @!attribute name
-        #   Full name of the billing contact or company (required)
-        #
-        #   @return [String]
-        required :name, String
-
-        # @!attribute address
-        #   Billing address (optional). Free-form text including street, city, state, postal
-        #   code, and country.
-        #
-        #   @return [String, nil]
-        optional :address, String, nil?: true
-
-        # @!attribute phone
-        #   Phone number for the billing contact (optional)
-        #
-        #   @return [String, nil]
-        optional :phone, String, nil?: true
-
-        # @!method initialize(email:, name:, address: nil, phone: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Sentdm::Models::ProfileUpdateParams::BillingContact} for more details.
-        #
-        #   Billing contact for this profile. Required when billing_model is "profile" or
-        #   "profile_and_organization" and no billing contact has been configured yet.
-        #   Identifies who receives invoices and who is responsible for payment.
-        #
-        #   @param email [String] Email address where invoices will be sent (required)
-        #
-        #   @param name [String] Full name of the billing contact or company (required)
-        #
-        #   @param address [String, nil] Billing address (optional). Free-form text including street, city, state, postal
-        #
-        #   @param phone [String, nil] Phone number for the billing contact (optional)
-      end
-
-      class PaymentDetails < Sentdm::Internal::Type::BaseModel
-        # @!attribute card_number
-        #   Card number (digits only, 13–19 characters)
-        #
-        #   @return [String]
-        required :card_number, String
-
-        # @!attribute cvc
-        #   Card security code (3–4 digits)
-        #
-        #   @return [String]
-        required :cvc, String
-
-        # @!attribute expiry
-        #   Card expiry date in MM/YY format (e.g. "09/27")
-        #
-        #   @return [String]
-        required :expiry, String
-
-        # @!attribute zip_code
-        #   Billing ZIP / postal code associated with the card
-        #
-        #   @return [String]
-        required :zip_code, String
-
-        # @!method initialize(card_number:, cvc:, expiry:, zip_code:)
-        #   Payment card details for this profile (optional). Accepted when billing_model is
-        #   "profile" or "profile_and_organization". Not persisted on our servers —
-        #   forwarded to the payment processor.
-        #
-        #   @param card_number [String] Card number (digits only, 13–19 characters)
-        #
-        #   @param cvc [String] Card security code (3–4 digits)
-        #
-        #   @param expiry [String] Card expiry date in MM/YY format (e.g. "09/27")
-        #
-        #   @param zip_code [String] Billing ZIP / postal code associated with the card
-      end
     end
   end
 end

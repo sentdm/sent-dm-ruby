@@ -265,32 +265,6 @@ params = Sentdm::MessageSendParams.new(
 sent_dm.messages.send_(**params)
 ```
 
-### Enums
-
-Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
-
-```ruby
-# :SELF_DECLARED
-puts(Sentdm::BrandWithKYC::IdentityStatus::SELF_DECLARED)
-
-# Revealed type: `T.all(Sentdm::BrandWithKYC::IdentityStatus, Symbol)`
-T.reveal_type(Sentdm::BrandWithKYC::IdentityStatus::SELF_DECLARED)
-```
-
-Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
-
-```ruby
-Sentdm::BrandWithKYC.new(
-  identity_status: Sentdm::BrandWithKYC::IdentityStatus::SELF_DECLARED,
-  # …
-)
-
-Sentdm::BrandWithKYC.new(
-  identity_status: :SELF_DECLARED,
-  # …
-)
-```
-
 ## Versioning
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.

@@ -1,7 +1,0 @@
-module Sentdm
-  module Resources
-    class Lookup
-      def initialize: (client: Sentdm::Client) -> void
-    end
-  end
-end

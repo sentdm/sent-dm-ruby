@@ -5,7 +5,7 @@ module Sentdm
 
   APIMeta = Sentdm::Models::APIMeta
 
-  APIResponseContact = Sentdm::Models::APIResponseContact
+  APIResponseOfContact = Sentdm::Models::APIResponseOfContact
 
   APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
 
@@ -15,19 +15,19 @@ module Sentdm
 
   APIResponseWebhook = Sentdm::Models::APIResponseWebhook
 
-  BrandData = Sentdm::Models::BrandData
+  BaseDto = Sentdm::Models::BaseDto
 
-  Brands = Sentdm::Models::Brands
+  BillingContactInfo = Sentdm::Models::BillingContactInfo
 
-  BrandWithKYC = Sentdm::Models::BrandWithKYC
-
-  Contact = Sentdm::Models::Contact
+  BrandsBrandData = Sentdm::Models::BrandsBrandData
 
   ContactCreateParams = Sentdm::Models::ContactCreateParams
 
   ContactDeleteParams = Sentdm::Models::ContactDeleteParams
 
   ContactListParams = Sentdm::Models::ContactListParams
+
+  ContactResponse = Sentdm::Models::ContactResponse
 
   ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
@@ -44,11 +44,15 @@ module Sentdm
 
   MessageSendParams = Sentdm::Models::MessageSendParams
 
-  MutationRequest = Sentdm::Models::MutationRequest
+  MutationRequestBase = Sentdm::Models::MutationRequestBase
+
+  NumberLookupParams = Sentdm::Models::NumberLookupParams
 
   PaginationMeta = Sentdm::Models::PaginationMeta
 
-  ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
+  PaymentDetails = Sentdm::Models::PaymentDetails
+
+  ProfileCompleteSetupParams = Sentdm::Models::ProfileCompleteSetupParams
 
   ProfileCreateParams = Sentdm::Models::ProfileCreateParams
 
@@ -60,27 +64,11 @@ module Sentdm
 
   ProfileRetrieveParams = Sentdm::Models::ProfileRetrieveParams
 
+  Profiles = Sentdm::Models::Profiles
+
   ProfileSettings = Sentdm::Models::ProfileSettings
 
   ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
-
-  SentDmServicesCommonContractsPocOsAuthenticationConfig =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
-
-  SentDmServicesCommonContractsPocOsTemplateBody =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
-
-  SentDmServicesCommonContractsPocOsTemplateButton =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
-
-  SentDmServicesCommonContractsPocOsTemplateButtonProps =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
-
-  SentDmServicesCommonContractsPocOsTemplateFooter =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
-
-  SentDmServicesCommonContractsPocOsTemplateHeader =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
 
   TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 

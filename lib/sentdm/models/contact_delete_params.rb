@@ -32,7 +32,7 @@ module Sentdm
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
 
-      class Body < Sentdm::Models::MutationRequest
+      class Body < Sentdm::Models::MutationRequestBase
         # @!method initialize
         #   Request to delete/dissociate a contact
       end

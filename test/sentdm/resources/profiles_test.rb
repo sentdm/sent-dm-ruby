@@ -89,11 +89,11 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_complete_required_params
+  def test_complete_setup_required_params
     skip("Mock server tests are disabled")
 
     response =
-      @sent_dm.profiles.complete(
+      @sent_dm.profiles.complete_setup(
         "660e8400-e29b-41d4-a716-446655440000",
         web_hook_url: "https://your-app.com/webhook/profile-complete"
       )
