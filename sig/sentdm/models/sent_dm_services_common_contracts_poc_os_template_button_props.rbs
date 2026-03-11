@@ -1,0 +1,75 @@
+module Sentdm
+  module Models
+    type sent_dm_services_common_contracts_poc_os_template_button_props =
+      {
+        active_for: Integer?,
+        autofill_text: String?,
+        country_code: String?,
+        offer_code: String?,
+        otp_type: String?,
+        package_name: String?,
+        phone_number: String?,
+        quick_reply_type: String?,
+        signature_hash: String?,
+        text: String?,
+        url: String?,
+        url_type: String?
+      }
+
+    class SentDmServicesCommonContractsPocOsTemplateButtonProps < Sentdm::Internal::Type::BaseModel
+      attr_accessor active_for: Integer?
+
+      attr_accessor autofill_text: String?
+
+      attr_accessor country_code: String?
+
+      attr_accessor offer_code: String?
+
+      attr_accessor otp_type: String?
+
+      attr_accessor package_name: String?
+
+      attr_accessor phone_number: String?
+
+      attr_accessor quick_reply_type: String?
+
+      attr_accessor signature_hash: String?
+
+      attr_accessor text: String?
+
+      attr_accessor url: String?
+
+      attr_accessor url_type: String?
+
+      def initialize: (
+        ?active_for: Integer?,
+        ?autofill_text: String?,
+        ?country_code: String?,
+        ?offer_code: String?,
+        ?otp_type: String?,
+        ?package_name: String?,
+        ?phone_number: String?,
+        ?quick_reply_type: String?,
+        ?signature_hash: String?,
+        ?text: String?,
+        ?url: String?,
+        ?url_type: String?
+      ) -> void
+
+      def to_hash: -> {
+        active_for: Integer?,
+        autofill_text: String?,
+        country_code: String?,
+        offer_code: String?,
+        otp_type: String?,
+        package_name: String?,
+        phone_number: String?,
+        quick_reply_type: String?,
+        signature_hash: String?,
+        text: String?,
+        url: String?,
+        url_type: String?
+      }
+    end
+  end
+end

@@ -1,0 +1,89 @@
+module Sentdm
+  module Models
+    type sent_dm_services_endpoints_customer_ap_iv3_contracts_requests_brands_brand_business_info =
+      {
+        city: String?,
+        country: String?,
+        country_of_registration: String?,
+        entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?,
+        legal_name: String?,
+        postal_code: String?,
+        state: String?,
+        street: String?,
+        tax_id: String?,
+        tax_id_type: String?,
+        url: String?
+      }
+
+    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo < Sentdm::Internal::Type::BaseModel
+      attr_accessor city: String?
+
+      attr_accessor country: String?
+
+      attr_accessor country_of_registration: String?
+
+      attr_accessor entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?
+
+      attr_accessor legal_name: String?
+
+      attr_accessor postal_code: String?
+
+      attr_accessor state: String?
+
+      attr_accessor street: String?
+
+      attr_accessor tax_id: String?
+
+      attr_accessor tax_id_type: String?
+
+      attr_accessor url: String?
+
+      def initialize: (
+        ?city: String?,
+        ?country: String?,
+        ?country_of_registration: String?,
+        ?entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?,
+        ?legal_name: String?,
+        ?postal_code: String?,
+        ?state: String?,
+        ?street: String?,
+        ?tax_id: String?,
+        ?tax_id_type: String?,
+        ?url: String?
+      ) -> void
+
+      def to_hash: -> {
+        city: String?,
+        country: String?,
+        country_of_registration: String?,
+        entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?,
+        legal_name: String?,
+        postal_code: String?,
+        state: String?,
+        street: String?,
+        tax_id: String?,
+        tax_id_type: String?,
+        url: String?
+      }
+
+      type entity_type =
+        :PRIVATE_PROFIT
+        | :PUBLIC_PROFIT
+        | :NON_PROFIT
+        | :SOLE_PROPRIETOR
+        | :GOVERNMENT
+
+      module EntityType
+        extend Sentdm::Internal::Type::Enum
+
+        PRIVATE_PROFIT: :PRIVATE_PROFIT
+        PUBLIC_PROFIT: :PUBLIC_PROFIT
+        NON_PROFIT: :NON_PROFIT
+        SOLE_PROPRIETOR: :SOLE_PROPRIETOR
+        GOVERNMENT: :GOVERNMENT
+
+        def self?.values: -> ::Array[Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type]
+      end
+    end
+  end
+end

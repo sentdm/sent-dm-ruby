@@ -26,7 +26,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "sentdm", "~> 0.5.0"
+gem "sentdm", "~> 0.6.0"
 ```
 
 <!-- x-release-please-end -->
@@ -263,6 +263,36 @@ params = Sentdm::MessageSendParams.new(
   to: ["+14155551234", "+14155555678"]
 )
 sent_dm.messages.send_(**params)
+```
+
+### Enums
+
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+
+```ruby
+# :PRIVATE_PROFIT
+puts(
+  Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::PRIVATE_PROFIT
+)
+
+# Revealed type: `T.all(Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, Symbol)`
+T.reveal_type(
+  Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::PRIVATE_PROFIT
+)
+```
+
+Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+
+```ruby
+Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo.new(
+  entity_type: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::PRIVATE_PROFIT,
+  # …
+)
+
+Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo.new(
+  entity_type: :PRIVATE_PROFIT,
+  # …
+)
 ```
 
 ## Versioning
