@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.7.0 (2026-03-11)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([ca96b29](https://github.com/sentdm/sent-dm-ruby/commit/ca96b2943f08c60dcbe3c7d9b2f4afe8af9b14d6))
+* **api:** manual updates ([df62aff](https://github.com/sentdm/sent-dm-ruby/commit/df62affd4c31572d0fb8a4bc6b2787cfaabea4f2))
+* **api:** manual updates ([843dfa8](https://github.com/sentdm/sent-dm-ruby/commit/843dfa8613623db67382955ee3ba5f116f945f21))
+
+
+### Bug Fixes
+
+* properly mock time in ruby ci tests ([4c4ebe0](https://github.com/sentdm/sent-dm-ruby/commit/4c4ebe03e980346d3ecc508e2740ad2ded666a8e))
+
+
+### Chores
+
+* **ci:** add build step ([e67706a](https://github.com/sentdm/sent-dm-ruby/commit/e67706ab8895b76ca683a3e2e47244650be6aca0))
+* **ci:** skip uploading artifacts on stainless-internal branches ([1d6bb94](https://github.com/sentdm/sent-dm-ruby/commit/1d6bb94d3b4eb5b4383827200ead9f557c39c72f))
+* **internal:** codegen related update ([0dd8713](https://github.com/sentdm/sent-dm-ruby/commit/0dd871352c089d8e40788912ba5c1eec907f4640))
+* **internal:** codegen related update ([7b3ead8](https://github.com/sentdm/sent-dm-ruby/commit/7b3ead8de1ffc36ea448af5eed97ac1fc4f462bb))
+
 ## 0.6.0 (2026-03-11)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.5.0...v0.6.0)
