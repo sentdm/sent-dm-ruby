@@ -1,14 +1,25 @@
 module Sentdm
   module Models
-    type user_list_params = {  } & Sentdm::Internal::Type::request_parameters
+    type user_list_params =
+      { x_profile_id: String } & Sentdm::Internal::Type::request_parameters
 
     class UserListParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Sentdm::request_opts) -> void
+      attr_reader x_profile_id: String?
 
-      def to_hash: -> { request_options: Sentdm::RequestOptions }
+      def x_profile_id=: (String) -> String
+
+      def initialize: (
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        x_profile_id: String,
+        request_options: Sentdm::RequestOptions
+      }
     end
   end
 end

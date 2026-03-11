@@ -25,7 +25,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")
+    response = @sent_dm.profiles.retrieve("profileId")
 
     assert_pattern do
       response => Sentdm::APIResponseOfProfileDetail
@@ -44,7 +44,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_update
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")
+    response = @sent_dm.profiles.update("profileId")
 
     assert_pattern do
       response => Sentdm::APIResponseOfProfileDetail
@@ -79,10 +79,10 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_delete
+  def test_delete_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.delete("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")
+    response = @sent_dm.profiles.delete("profileId", body: {})
 
     assert_pattern do
       response => nil

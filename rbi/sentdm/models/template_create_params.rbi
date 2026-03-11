@@ -31,6 +31,14 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :language
 
+      # Sandbox flag - when true, the operation is simulated without side effects Useful
+      # for testing integrations without actual execution
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :sandbox
+
+      sig { params(sandbox: T::Boolean).void }
+      attr_writer :sandbox
+
       # Whether to submit the template for review after creation (default: false)
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :submit_for_review
@@ -38,19 +46,17 @@ module Sentdm
       sig { params(submit_for_review: T::Boolean).void }
       attr_writer :submit_for_review
 
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
-      sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
-
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
-
       sig { returns(T.nilable(String)) }
       attr_reader :idempotency_key
 
       sig { params(idempotency_key: String).void }
       attr_writer :idempotency_key
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
 
       sig do
         params(
@@ -58,9 +64,10 @@ module Sentdm
           creation_source: T.nilable(String),
           definition: Sentdm::TemplateDefinition::OrHash,
           language: T.nilable(String),
+          sandbox: T::Boolean,
           submit_for_review: T::Boolean,
-          test_mode: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -74,12 +81,13 @@ module Sentdm
         definition: nil,
         # Template language code (e.g., en_US) (optional, auto-detected if not provided)
         language: nil,
+        # Sandbox flag - when true, the operation is simulated without side effects Useful
+        # for testing integrations without actual execution
+        sandbox: nil,
         # Whether to submit the template for review after creation (default: false)
         submit_for_review: nil,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
         idempotency_key: nil,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -91,9 +99,10 @@ module Sentdm
             creation_source: T.nilable(String),
             definition: Sentdm::TemplateDefinition,
             language: T.nilable(String),
+            sandbox: T::Boolean,
             submit_for_review: T::Boolean,
-            test_mode: T::Boolean,
             idempotency_key: String,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

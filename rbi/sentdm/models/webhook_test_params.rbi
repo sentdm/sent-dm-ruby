@@ -20,13 +20,13 @@ module Sentdm
       sig { params(event_type: String).void }
       attr_writer :event_type
 
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
+      # Sandbox flag - when true, the operation is simulated without side effects Useful
+      # for testing integrations without actual execution
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
+      attr_reader :sandbox
 
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
+      sig { params(sandbox: T::Boolean).void }
+      attr_writer :sandbox
 
       sig { returns(T.nilable(String)) }
       attr_reader :idempotency_key
@@ -34,22 +34,30 @@ module Sentdm
       sig { params(idempotency_key: String).void }
       attr_writer :idempotency_key
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
         params(
           id: String,
           event_type: String,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         id:,
         event_type: nil,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
+        # Sandbox flag - when true, the operation is simulated without side effects Useful
+        # for testing integrations without actual execution
+        sandbox: nil,
         idempotency_key: nil,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -59,8 +67,9 @@ module Sentdm
           {
             id: String,
             event_type: String,
-            test_mode: T::Boolean,
+            sandbox: T::Boolean,
             idempotency_key: String,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

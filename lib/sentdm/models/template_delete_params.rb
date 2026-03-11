@@ -19,14 +19,19 @@ module Sentdm
       #   @return [Boolean, nil]
       optional :delete_from_meta, Sentdm::Internal::Type::Boolean, nil?: true
 
-      # @!attribute test_mode
-      #   Test mode flag - when true, the operation is simulated without side effects
-      #   Useful for testing integrations without actual execution
+      # @!attribute sandbox
+      #   Sandbox flag - when true, the operation is simulated without side effects Useful
+      #   for testing integrations without actual execution
       #
       #   @return [Boolean, nil]
-      optional :test_mode, Sentdm::Internal::Type::Boolean
+      optional :sandbox, Sentdm::Internal::Type::Boolean
 
-      # @!method initialize(id:, delete_from_meta: nil, test_mode: nil, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(id:, delete_from_meta: nil, sandbox: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateDeleteParams} for more details.
       #
@@ -34,7 +39,9 @@ module Sentdm
       #
       #   @param delete_from_meta [Boolean, nil] Whether to also delete the template from WhatsApp/Meta (optional, defaults to fa
       #
-      #   @param test_mode [Boolean] Test mode flag - when true, the operation is simulated without side effects
+      #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
+      #
+      #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -11,9 +11,10 @@ module Sentdm
           endpoint_url: String,
           event_types: T::Array[String],
           retry_count: Integer,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           timeout_seconds: Integer,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseWebhook)
       end
@@ -26,15 +27,19 @@ module Sentdm
         event_types: nil,
         # Body param
         retry_count: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Body param
         timeout_seconds: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -43,10 +48,17 @@ module Sentdm
       sig do
         params(
           id: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseWebhook)
       end
-      def retrieve(id, request_options: {})
+      def retrieve(
+        id,
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       # Updates an existing webhook for the authenticated customer.
@@ -57,9 +69,10 @@ module Sentdm
           endpoint_url: String,
           event_types: T::Array[String],
           retry_count: Integer,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           timeout_seconds: Integer,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseWebhook)
       end
@@ -74,15 +87,19 @@ module Sentdm
         event_types: nil,
         # Body param
         retry_count: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Body param
         timeout_seconds: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -94,32 +111,57 @@ module Sentdm
           page_size: Integer,
           is_active: T.nilable(T::Boolean),
           search: T.nilable(String),
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::Models::WebhookListResponse)
       end
       def list(
+        # Query param
         page:,
+        # Query param
         page_size:,
+        # Query param
         is_active: nil,
+        # Query param
         search: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
 
       # Deletes a webhook for the authenticated customer.
       sig do
-        params(id: String, request_options: Sentdm::RequestOptions::OrHash).void
+        params(
+          id: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).void
       end
-      def delete(id, request_options: {})
+      def delete(
+        id,
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       # Retrieves all available webhook event types that can be subscribed to.
       sig do
-        params(request_options: Sentdm::RequestOptions::OrHash).returns(
-          Sentdm::Models::WebhookListEventTypesResponse
-        )
+        params(
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(Sentdm::Models::WebhookListEventTypesResponse)
       end
-      def list_event_types(request_options: {})
+      def list_event_types(
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       # Retrieves a paginated list of delivery events for the specified webhook.
@@ -129,10 +171,25 @@ module Sentdm
           page: Integer,
           page_size: Integer,
           search: T.nilable(String),
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::Models::WebhookListEventsResponse)
       end
-      def list_events(id, page:, page_size:, search: nil, request_options: {})
+      def list_events(
+        # Path param
+        id,
+        # Query param
+        page:,
+        # Query param
+        page_size:,
+        # Query param
+        search: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       # Generates a new signing secret for the specified webhook. The old secret is
@@ -142,6 +199,7 @@ module Sentdm
           id: String,
           body: Sentdm::WebhookRotateSecretParams::Body::OrHash,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::Models::WebhookRotateSecretResponse)
       end
@@ -154,6 +212,10 @@ module Sentdm
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -163,8 +225,9 @@ module Sentdm
         params(
           id: String,
           event_type: String,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::Models::WebhookTestResponse)
       end
@@ -173,13 +236,17 @@ module Sentdm
         id,
         # Body param
         event_type: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -189,8 +256,9 @@ module Sentdm
         params(
           id: String,
           is_active: T::Boolean,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseWebhook)
       end
@@ -199,13 +267,17 @@ module Sentdm
         id,
         # Body param
         is_active: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end

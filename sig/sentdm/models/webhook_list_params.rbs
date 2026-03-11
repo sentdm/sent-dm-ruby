@@ -1,7 +1,13 @@
 module Sentdm
   module Models
     type webhook_list_params =
-      { page: Integer, page_size: Integer, is_active: bool?, search: String? }
+      {
+        page: Integer,
+        page_size: Integer,
+        is_active: bool?,
+        search: String?,
+        x_profile_id: String
+      }
       & Sentdm::Internal::Type::request_parameters
 
     class WebhookListParams < Sentdm::Internal::Type::BaseModel
@@ -16,11 +22,16 @@ module Sentdm
 
       attr_accessor search: String?
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         page: Integer,
         page_size: Integer,
         ?is_active: bool?,
         ?search: String?,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
@@ -29,6 +40,7 @@ module Sentdm
         page_size: Integer,
         is_active: bool?,
         search: String?,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

@@ -4,11 +4,28 @@ module Sentdm
   module Resources
     # Retrieve account details
     class Me
-      # Returns the account associated with the API key. For organization API keys,
-      # returns the organization with its profiles. For profile API keys, returns the
-      # profile with its settings.
+      # Some parameter documentations has been truncated, see
+      # {Sentdm::Models::MeRetrieveParams} for more details.
       #
-      # @overload retrieve(request_options: {})
+      # Returns the account associated with the provided API key. The response includes
+      # account identity, contact information, messaging channel configuration, and —
+      # depending on the account type — either a list of child profiles or the profile's
+      # own settings.
+      #
+      # **Account types:**
+      #
+      # - `organization` — Has child profiles. The `profiles` array is populated.
+      # - `user` — Standalone account with no profiles.
+      # - `profile` — Child of an organization. Includes `organization_id`,
+      #   `short_name`, `status`, and `settings`.
+      #
+      # **Channels:** The `channels` object always includes `sms`, `whatsapp`, and
+      # `rcs`. Each channel has a `configured` boolean. Configured channels expose
+      # additional details such as `phone_number`.
+      #
+      # @overload retrieve(x_profile_id: nil, request_options: {})
+      #
+      # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -16,11 +33,13 @@ module Sentdm
       #
       # @see Sentdm::Models::MeRetrieveParams
       def retrieve(params = {})
+        parsed, options = Sentdm::MeRetrieveParams.dump_request(params)
         @client.request(
           method: :get,
           path: "v3/me",
+          headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
           model: Sentdm::Models::MeRetrieveResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

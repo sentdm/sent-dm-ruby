@@ -14,6 +14,7 @@ module Sentdm
       required :page, Integer
 
       # @!attribute page_size
+      #   Number of items per page
       #
       #   @return [Integer]
       required :page_size, Integer
@@ -23,6 +24,12 @@ module Sentdm
       #
       #   @return [String, nil]
       optional :category, String, nil?: true
+
+      # @!attribute is_welcome_playground
+      #   Optional filter by welcome playground flag
+      #
+      #   @return [Boolean, nil]
+      optional :is_welcome_playground, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute search
       #   Optional search term for filtering templates
@@ -36,16 +43,25 @@ module Sentdm
       #   @return [String, nil]
       optional :status, String, nil?: true
 
-      # @!method initialize(page:, page_size:, category: nil, search: nil, status: nil, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(page:, page_size:, category: nil, is_welcome_playground: nil, search: nil, status: nil, x_profile_id: nil, request_options: {})
       #   @param page [Integer] Page number (1-indexed)
       #
-      #   @param page_size [Integer]
+      #   @param page_size [Integer] Number of items per page
       #
       #   @param category [String, nil] Optional category filter: MARKETING, UTILITY, AUTHENTICATION
+      #
+      #   @param is_welcome_playground [Boolean, nil] Optional filter by welcome playground flag
       #
       #   @param search [String, nil] Optional search term for filtering templates
       #
       #   @param status [String, nil] Optional status filter: APPROVED, PENDING, REJECTED
+      #
+      #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end

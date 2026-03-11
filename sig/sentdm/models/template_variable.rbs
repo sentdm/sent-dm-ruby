@@ -45,6 +45,7 @@ module Sentdm
         {
           alt: String?,
           media_type: String?,
+          regex: String?,
           sample: String?,
           short_url: String?,
           url: String?,
@@ -55,6 +56,8 @@ module Sentdm
         attr_accessor alt: String?
 
         attr_accessor media_type: String?
+
+        attr_accessor regex: String?
 
         attr_accessor sample: String?
 
@@ -67,6 +70,7 @@ module Sentdm
         def initialize: (
           ?alt: String?,
           ?media_type: String?,
+          ?regex: String?,
           ?sample: String?,
           ?short_url: String?,
           ?url: String?,
@@ -76,6 +80,7 @@ module Sentdm
         def to_hash: -> {
           alt: String?,
           media_type: String?,
+          regex: String?,
           sample: String?,
           short_url: String?,
           url: String?,

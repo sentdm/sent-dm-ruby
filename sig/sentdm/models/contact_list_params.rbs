@@ -6,7 +6,8 @@ module Sentdm
         page_size: Integer,
         channel: String?,
         phone: String?,
-        search: String?
+        search: String?,
+        x_profile_id: String
       }
       & Sentdm::Internal::Type::request_parameters
 
@@ -24,12 +25,17 @@ module Sentdm
 
       attr_accessor search: String?
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         page: Integer,
         page_size: Integer,
         ?channel: String?,
         ?phone: String?,
         ?search: String?,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
@@ -39,6 +45,7 @@ module Sentdm
         channel: String?,
         phone: String?,
         search: String?,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

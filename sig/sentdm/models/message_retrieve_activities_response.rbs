@@ -64,18 +64,21 @@ module Sentdm
 
         type activity =
           {
-            content: String?,
+            active_contact_price: String?,
             description: String,
+            price: String?,
             status: String,
             timestamp: Time
           }
 
         class Activity < Sentdm::Internal::Type::BaseModel
-          attr_accessor content: String?
+          attr_accessor active_contact_price: String?
 
           attr_reader description: String?
 
           def description=: (String) -> String
+
+          attr_accessor price: String?
 
           attr_reader status: String?
 
@@ -86,15 +89,17 @@ module Sentdm
           def timestamp=: (Time) -> Time
 
           def initialize: (
-            ?content: String?,
+            ?active_contact_price: String?,
             ?description: String,
+            ?price: String?,
             ?status: String,
             ?timestamp: Time
           ) -> void
 
           def to_hash: -> {
-            content: String?,
+            active_contact_price: String?,
             description: String,
+            price: String?,
             status: String,
             timestamp: Time
           }

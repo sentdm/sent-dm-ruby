@@ -12,38 +12,34 @@ module Sentdm
         end
 
       sig { returns(String) }
-      attr_accessor :path_profile_id
+      attr_accessor :profile_id
 
-      # Profile ID from route parameter
+      # Request to delete a profile
+      sig { returns(Sentdm::ProfileDeleteParams::Body) }
+      attr_reader :body
+
+      sig { params(body: Sentdm::ProfileDeleteParams::Body::OrHash).void }
+      attr_writer :body
+
       sig { returns(T.nilable(String)) }
-      attr_reader :body_profile_id
+      attr_reader :x_profile_id
 
-      sig { params(body_profile_id: String).void }
-      attr_writer :body_profile_id
-
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
-      sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
-
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
 
       sig do
         params(
-          path_profile_id: String,
-          body_profile_id: String,
-          test_mode: T::Boolean,
+          profile_id: String,
+          body: Sentdm::ProfileDeleteParams::Body::OrHash,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        path_profile_id:,
-        # Profile ID from route parameter
-        body_profile_id: nil,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
+        profile_id:,
+        # Request to delete a profile
+        body:,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -51,14 +47,30 @@ module Sentdm
       sig do
         override.returns(
           {
-            path_profile_id: String,
-            body_profile_id: String,
-            test_mode: T::Boolean,
+            profile_id: String,
+            body: Sentdm::ProfileDeleteParams::Body,
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )
       end
       def to_hash
+      end
+
+      class Body < Sentdm::Models::MutationRequest
+        OrHash =
+          T.type_alias do
+            T.any(Sentdm::ProfileDeleteParams::Body, Sentdm::Internal::AnyHash)
+          end
+
+        # Request to delete a profile
+        sig { returns(T.attached_class) }
+        def self.new
+        end
+
+        sig { override.returns({}) }
+        def to_hash
+        end
       end
     end
   end

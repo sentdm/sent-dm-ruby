@@ -14,6 +14,7 @@ module Sentdm
       required :page, Integer
 
       # @!attribute page_size
+      #   Number of items per page
       #
       #   @return [Integer]
       required :page_size, Integer
@@ -36,16 +37,23 @@ module Sentdm
       #   @return [String, nil]
       optional :search, String, nil?: true
 
-      # @!method initialize(page:, page_size:, channel: nil, phone: nil, search: nil, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(page:, page_size:, channel: nil, phone: nil, search: nil, x_profile_id: nil, request_options: {})
       #   @param page [Integer] Page number (1-indexed)
       #
-      #   @param page_size [Integer]
+      #   @param page_size [Integer] Number of items per page
       #
       #   @param channel [String, nil] Optional channel filter (sms, whatsapp)
       #
       #   @param phone [String, nil] Optional phone number filter (alternative to list view)
       #
       #   @param search [String, nil] Optional search term for filtering contacts
+      #
+      #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -6,9 +6,10 @@ module Sentdm
         creation_source: String?,
         definition: Sentdm::TemplateDefinition,
         language: String?,
+        sandbox: bool,
         submit_for_review: bool,
-        test_mode: bool,
-        idempotency_key: String
+        idempotency_key: String,
+        x_profile_id: String
       }
       & Sentdm::Internal::Type::request_parameters
 
@@ -28,26 +29,31 @@ module Sentdm
 
       attr_accessor language: String?
 
+      attr_reader sandbox: bool?
+
+      def sandbox=: (bool) -> bool
+
       attr_reader submit_for_review: bool?
 
       def submit_for_review=: (bool) -> bool
 
-      attr_reader test_mode: bool?
-
-      def test_mode=: (bool) -> bool
-
       attr_reader idempotency_key: String?
 
       def idempotency_key=: (String) -> String
+
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
 
       def initialize: (
         ?category: String?,
         ?creation_source: String?,
         ?definition: Sentdm::TemplateDefinition,
         ?language: String?,
+        ?sandbox: bool,
         ?submit_for_review: bool,
-        ?test_mode: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
@@ -56,9 +62,10 @@ module Sentdm
         creation_source: String?,
         definition: Sentdm::TemplateDefinition,
         language: String?,
+        sandbox: bool,
         submit_for_review: bool,
-        test_mode: bool,
         idempotency_key: String,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

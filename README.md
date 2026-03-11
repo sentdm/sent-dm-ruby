@@ -270,23 +270,23 @@ sent_dm.messages.send_(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :BASIC_ACCOUNT
-puts(Sentdm::TcrBrandRelationship::BASIC_ACCOUNT)
+# :SELF_DECLARED
+puts(Sentdm::BrandWithKYC::IdentityStatus::SELF_DECLARED)
 
-# Revealed type: `T.all(Sentdm::TcrBrandRelationship, Symbol)`
-T.reveal_type(Sentdm::TcrBrandRelationship::BASIC_ACCOUNT)
+# Revealed type: `T.all(Sentdm::BrandWithKYC::IdentityStatus, Symbol)`
+T.reveal_type(Sentdm::BrandWithKYC::IdentityStatus::SELF_DECLARED)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
-Sentdm::BrandData.new(
-  brand_relationship: Sentdm::TcrBrandRelationship::BASIC_ACCOUNT,
+Sentdm::BrandWithKYC.new(
+  identity_status: Sentdm::BrandWithKYC::IdentityStatus::SELF_DECLARED,
   # …
 )
 
-Sentdm::BrandData.new(
-  brand_relationship: :BASIC_ACCOUNT,
+Sentdm::BrandWithKYC.new(
+  identity_status: :SELF_DECLARED,
   # …
 )
 ```

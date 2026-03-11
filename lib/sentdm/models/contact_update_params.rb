@@ -24,19 +24,24 @@ module Sentdm
       #   @return [Boolean, nil]
       optional :opt_out, Sentdm::Internal::Type::Boolean, nil?: true
 
-      # @!attribute test_mode
-      #   Test mode flag - when true, the operation is simulated without side effects
-      #   Useful for testing integrations without actual execution
+      # @!attribute sandbox
+      #   Sandbox flag - when true, the operation is simulated without side effects Useful
+      #   for testing integrations without actual execution
       #
       #   @return [Boolean, nil]
-      optional :test_mode, Sentdm::Internal::Type::Boolean
+      optional :sandbox, Sentdm::Internal::Type::Boolean
 
       # @!attribute idempotency_key
       #
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(id:, default_channel: nil, opt_out: nil, test_mode: nil, idempotency_key: nil, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(id:, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ContactUpdateParams} for more details.
       #
@@ -46,9 +51,11 @@ module Sentdm
       #
       #   @param opt_out [Boolean, nil] Whether the contact has opted out of messaging
       #
-      #   @param test_mode [Boolean] Test mode flag - when true, the operation is simulated without side effects
+      #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
       #   @param idempotency_key [String]
+      #
+      #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end

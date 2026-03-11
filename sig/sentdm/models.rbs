@@ -3,8 +3,6 @@ module Sentdm
 
   class APIMeta = Sentdm::Models::APIMeta
 
-  class APIResponseBrandWithKYC = Sentdm::Models::APIResponseBrandWithKYC
-
   class APIResponseContact = Sentdm::Models::APIResponseContact
 
   class APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
@@ -15,17 +13,9 @@ module Sentdm
 
   class APIResponseWebhook = Sentdm::Models::APIResponseWebhook
 
-  class BrandCreateParams = Sentdm::Models::BrandCreateParams
-
   class BrandData = Sentdm::Models::BrandData
 
-  class BrandDeleteParams = Sentdm::Models::BrandDeleteParams
-
-  class BrandListParams = Sentdm::Models::BrandListParams
-
   module Brands = Sentdm::Models::Brands
-
-  class BrandUpdateParams = Sentdm::Models::BrandUpdateParams
 
   class BrandWithKYC = Sentdm::Models::BrandWithKYC
 
@@ -42,8 +32,6 @@ module Sentdm
   class ContactUpdateParams = Sentdm::Models::ContactUpdateParams
 
   class DestinationCountry = Sentdm::Models::DestinationCountry
-
-  class LookupRetrievePhoneInfoParams = Sentdm::Models::LookupRetrievePhoneInfoParams
 
   class MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 

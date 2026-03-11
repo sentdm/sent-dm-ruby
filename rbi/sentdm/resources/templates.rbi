@@ -13,9 +13,10 @@ module Sentdm
           creation_source: T.nilable(String),
           definition: Sentdm::TemplateDefinition::OrHash,
           language: T.nilable(String),
+          sandbox: T::Boolean,
           submit_for_review: T::Boolean,
-          test_mode: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseTemplate)
       end
@@ -30,16 +31,20 @@ module Sentdm
         # Body param: Template language code (e.g., en_US) (optional, auto-detected if not
         # provided)
         language: nil,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
         # Body param: Whether to submit the template for review after creation (default:
         # false)
         submit_for_review: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
-        # effects Useful for testing integrations without actual execution
-        test_mode: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -49,12 +54,16 @@ module Sentdm
       sig do
         params(
           id: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseTemplate)
       end
       def retrieve(
         # Template ID from route parameter
         id,
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -68,9 +77,10 @@ module Sentdm
           definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
           language: T.nilable(String),
           name: T.nilable(String),
+          sandbox: T::Boolean,
           submit_for_review: T::Boolean,
-          test_mode: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseTemplate)
       end
@@ -85,16 +95,20 @@ module Sentdm
         language: nil,
         # Body param: Template display name
         name: nil,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
         # Body param: Whether to submit the template for review after updating (default:
         # false)
         submit_for_review: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
-        # effects Useful for testing integrations without actual execution
-        test_mode: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -106,21 +120,30 @@ module Sentdm
           page: Integer,
           page_size: Integer,
           category: T.nilable(String),
+          is_welcome_playground: T.nilable(T::Boolean),
           search: T.nilable(String),
           status: T.nilable(String),
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::Models::TemplateListResponse)
       end
       def list(
-        # Page number (1-indexed)
+        # Query param: Page number (1-indexed)
         page:,
+        # Query param: Number of items per page
         page_size:,
-        # Optional category filter: MARKETING, UTILITY, AUTHENTICATION
+        # Query param: Optional category filter: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Optional search term for filtering templates
+        # Query param: Optional filter by welcome playground flag
+        is_welcome_playground: nil,
+        # Query param: Optional search term for filtering templates
         search: nil,
-        # Optional status filter: APPROVED, PENDING, REJECTED
+        # Query param: Optional status filter: APPROVED, PENDING, REJECTED
         status: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -131,19 +154,24 @@ module Sentdm
         params(
           id: String,
           delete_from_meta: T.nilable(T::Boolean),
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).void
       end
       def delete(
-        # Template ID from route parameter
+        # Path param: Template ID from route parameter
         id,
-        # Whether to also delete the template from WhatsApp/Meta (optional, defaults to
-        # false)
+        # Body param: Whether to also delete the template from WhatsApp/Meta (optional,
+        # defaults to false)
         delete_from_meta: nil,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end

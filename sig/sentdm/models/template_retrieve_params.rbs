@@ -1,7 +1,8 @@
 module Sentdm
   module Models
     type template_retrieve_params =
-      { id: String } & Sentdm::Internal::Type::request_parameters
+      { id: String, x_profile_id: String }
+      & Sentdm::Internal::Type::request_parameters
 
     class TemplateRetrieveParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
@@ -9,12 +10,21 @@ module Sentdm
 
       attr_accessor id: String
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         id: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
-      def to_hash: -> { id: String, request_options: Sentdm::RequestOptions }
+      def to_hash: -> {
+        id: String,
+        x_profile_id: String,
+        request_options: Sentdm::RequestOptions
+      }
     end
   end
 end

@@ -62,17 +62,25 @@ module Sentdm
         #   @param message_id [String] The message ID these activities belong to
 
         class Activity < Sentdm::Internal::Type::BaseModel
-          # @!attribute content
-          #   Additional content or payload for the activity (e.g., channel response)
+          # @!attribute active_contact_price
+          #   Active contact markup applied on top of the channel cost, formatted to 4 decimal
+          #   places.
           #
           #   @return [String, nil]
-          optional :content, String, nil?: true
+          optional :active_contact_price, String, nil?: true
 
           # @!attribute description
           #   Human-readable description of the activity
           #
           #   @return [String, nil]
           optional :description, String
+
+          # @!attribute price
+          #   Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
+          #   4 decimal places.
+          #
+          #   @return [String, nil]
+          optional :price, String, nil?: true
 
           # @!attribute status
           #   Activity status (e.g., ACCEPTED, PROCESSED, SENT, DELIVERED, FAILED)
@@ -86,12 +94,18 @@ module Sentdm
           #   @return [Time, nil]
           optional :timestamp, Time
 
-          # @!method initialize(content: nil, description: nil, status: nil, timestamp: nil)
+          # @!method initialize(active_contact_price: nil, description: nil, price: nil, status: nil, timestamp: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity} for more
+          #   details.
+          #
           #   A single message activity event for v3 API
           #
-          #   @param content [String, nil] Additional content or payload for the activity (e.g., channel response)
+          #   @param active_contact_price [String, nil] Active contact markup applied on top of the channel cost, formatted to 4 decimal
           #
           #   @param description [String] Human-readable description of the activity
+          #
+          #   @param price [String, nil] Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
           #
           #   @param status [String] Activity status (e.g., ACCEPTED, PROCESSED, SENT, DELIVERED, FAILED)
           #

@@ -13,10 +13,6 @@ module Sentdm
       sig { params(request_id: String).void }
       attr_writer :request_id
 
-      # Response time in milliseconds (optional)
-      sig { returns(T.nilable(Integer)) }
-      attr_accessor :response_time_ms
-
       # Server timestamp when the response was generated
       sig { returns(T.nilable(Time)) }
       attr_reader :timestamp
@@ -33,18 +29,13 @@ module Sentdm
 
       # Request and response metadata
       sig do
-        params(
-          request_id: String,
-          response_time_ms: T.nilable(Integer),
-          timestamp: Time,
-          version: String
-        ).returns(T.attached_class)
+        params(request_id: String, timestamp: Time, version: String).returns(
+          T.attached_class
+        )
       end
       def self.new(
         # Unique identifier for this request (for tracing and support)
         request_id: nil,
-        # Response time in milliseconds (optional)
-        response_time_ms: nil,
         # Server timestamp when the response was generated
         timestamp: nil,
         # API version used for this request
@@ -54,12 +45,7 @@ module Sentdm
 
       sig do
         override.returns(
-          {
-            request_id: String,
-            response_time_ms: T.nilable(Integer),
-            timestamp: Time,
-            version: String
-          }
+          { request_id: String, timestamp: Time, version: String }
         )
       end
       def to_hash

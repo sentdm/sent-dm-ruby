@@ -169,9 +169,10 @@ module Sentdm
               )
             end
 
-          # Additional content or payload for the activity (e.g., channel response)
+          # Active contact markup applied on top of the channel cost, formatted to 4 decimal
+          # places.
           sig { returns(T.nilable(String)) }
-          attr_accessor :content
+          attr_accessor :active_contact_price
 
           # Human-readable description of the activity
           sig { returns(T.nilable(String)) }
@@ -179,6 +180,11 @@ module Sentdm
 
           sig { params(description: String).void }
           attr_writer :description
+
+          # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
+          # 4 decimal places.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :price
 
           # Activity status (e.g., ACCEPTED, PROCESSED, SENT, DELIVERED, FAILED)
           sig { returns(T.nilable(String)) }
@@ -197,17 +203,22 @@ module Sentdm
           # A single message activity event for v3 API
           sig do
             params(
-              content: T.nilable(String),
+              active_contact_price: T.nilable(String),
               description: String,
+              price: T.nilable(String),
               status: String,
               timestamp: Time
             ).returns(T.attached_class)
           end
           def self.new(
-            # Additional content or payload for the activity (e.g., channel response)
-            content: nil,
+            # Active contact markup applied on top of the channel cost, formatted to 4 decimal
+            # places.
+            active_contact_price: nil,
             # Human-readable description of the activity
             description: nil,
+            # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
+            # 4 decimal places.
+            price: nil,
             # Activity status (e.g., ACCEPTED, PROCESSED, SENT, DELIVERED, FAILED)
             status: nil,
             # When this activity occurred
@@ -218,8 +229,9 @@ module Sentdm
           sig do
             override.returns(
               {
-                content: T.nilable(String),
+                active_contact_price: T.nilable(String),
                 description: String,
+                price: T.nilable(String),
                 status: String,
                 timestamp: Time
               }
