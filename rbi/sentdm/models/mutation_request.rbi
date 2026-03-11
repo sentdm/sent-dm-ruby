@@ -8,23 +8,23 @@ module Sentdm
           T.any(Sentdm::MutationRequest, Sentdm::Internal::AnyHash)
         end
 
-      # Test mode flag - when true, the operation is simulated without side effects
-      # Useful for testing integrations without actual execution
+      # Sandbox flag - when true, the operation is simulated without side effects Useful
+      # for testing integrations without actual execution
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :test_mode
+      attr_reader :sandbox
 
-      sig { params(test_mode: T::Boolean).void }
-      attr_writer :test_mode
+      sig { params(sandbox: T::Boolean).void }
+      attr_writer :sandbox
 
-      sig { params(test_mode: T::Boolean).returns(T.attached_class) }
+      sig { params(sandbox: T::Boolean).returns(T.attached_class) }
       def self.new(
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil
+        # Sandbox flag - when true, the operation is simulated without side effects Useful
+        # for testing integrations without actual execution
+        sandbox: nil
       )
       end
 
-      sig { override.returns({ test_mode: T::Boolean }) }
+      sig { override.returns({ sandbox: T::Boolean }) }
       def to_hash
       end
     end

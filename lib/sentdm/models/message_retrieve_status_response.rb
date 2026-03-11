@@ -46,6 +46,11 @@ module Sentdm
         #   @return [String, nil]
         optional :id, String
 
+        # @!attribute active_contact_price
+        #
+        #   @return [Float, nil]
+        optional :active_contact_price, Float, nil?: true
+
         # @!attribute channel
         #
         #   @return [String, nil]
@@ -122,13 +127,15 @@ module Sentdm
         #   @return [String, nil]
         optional :template_name, String
 
-        # @!method initialize(id: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
+        # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MessageRetrieveStatusResponse::Data} for more details.
         #
         #   The response data (null if error)
         #
         #   @param id [String]
+        #
+        #   @param active_contact_price [Float, nil]
         #
         #   @param channel [String]
         #

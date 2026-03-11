@@ -15,6 +15,7 @@ module Sentdm
       sig { returns(Integer) }
       attr_accessor :page
 
+      # Number of items per page
       sig { returns(Integer) }
       attr_accessor :page_size
 
@@ -30,6 +31,12 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :search
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_profile_id
+
+      sig { params(x_profile_id: String).void }
+      attr_writer :x_profile_id
+
       sig do
         params(
           page: Integer,
@@ -37,12 +44,14 @@ module Sentdm
           channel: T.nilable(String),
           phone: T.nilable(String),
           search: T.nilable(String),
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # Page number (1-indexed)
         page:,
+        # Number of items per page
         page_size:,
         # Optional channel filter (sms, whatsapp)
         channel: nil,
@@ -50,6 +59,7 @@ module Sentdm
         phone: nil,
         # Optional search term for filtering contacts
         search: nil,
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -62,6 +72,7 @@ module Sentdm
             channel: T.nilable(String),
             phone: T.nilable(String),
             search: T.nilable(String),
+            x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
         )

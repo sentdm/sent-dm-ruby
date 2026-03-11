@@ -6,9 +6,10 @@ module Sentdm
         endpoint_url: String,
         event_types: ::Array[String],
         retry_count: Integer,
-        test_mode: bool,
+        sandbox: bool,
         timeout_seconds: Integer,
-        idempotency_key: String
+        idempotency_key: String,
+        x_profile_id: String
       }
       & Sentdm::Internal::Type::request_parameters
 
@@ -32,9 +33,9 @@ module Sentdm
 
       def retry_count=: (Integer) -> Integer
 
-      attr_reader test_mode: bool?
+      attr_reader sandbox: bool?
 
-      def test_mode=: (bool) -> bool
+      def sandbox=: (bool) -> bool
 
       attr_reader timeout_seconds: Integer?
 
@@ -44,14 +45,19 @@ module Sentdm
 
       def idempotency_key=: (String) -> String
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         ?display_name: String,
         ?endpoint_url: String,
         ?event_types: ::Array[String],
         ?retry_count: Integer,
-        ?test_mode: bool,
+        ?sandbox: bool,
         ?timeout_seconds: Integer,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
@@ -60,9 +66,10 @@ module Sentdm
         endpoint_url: String,
         event_types: ::Array[String],
         retry_count: Integer,
-        test_mode: bool,
+        sandbox: bool,
         timeout_seconds: Integer,
         idempotency_key: String,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

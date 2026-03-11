@@ -1,7 +1,12 @@
 module Sentdm
   module Models
     type contact_create_params =
-      { phone_number: String, test_mode: bool, idempotency_key: String }
+      {
+        phone_number: String,
+        sandbox: bool,
+        idempotency_key: String,
+        x_profile_id: String
+      }
       & Sentdm::Internal::Type::request_parameters
 
     class ContactCreateParams < Sentdm::Internal::Type::BaseModel
@@ -12,25 +17,31 @@ module Sentdm
 
       def phone_number=: (String) -> String
 
-      attr_reader test_mode: bool?
+      attr_reader sandbox: bool?
 
-      def test_mode=: (bool) -> bool
+      def sandbox=: (bool) -> bool
 
       attr_reader idempotency_key: String?
 
       def idempotency_key=: (String) -> String
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         ?phone_number: String,
-        ?test_mode: bool,
+        ?sandbox: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
         phone_number: String,
-        test_mode: bool,
+        sandbox: bool,
         idempotency_key: String,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

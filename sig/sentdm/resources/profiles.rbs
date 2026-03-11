@@ -4,7 +4,9 @@ module Sentdm
       def create: (
         ?allow_contact_sharing: bool,
         ?allow_template_sharing: bool,
+        ?billing_contact: Sentdm::ProfileCreateParams::BillingContact?,
         ?billing_model: String?,
+        ?brand: Sentdm::BrandData?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -12,23 +14,29 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String,
+        ?payment_details: Sentdm::ProfileCreateParams::PaymentDetails?,
+        ?sandbox: bool,
         ?short_name: String?,
-        ?test_mode: bool,
+        ?whatsapp_business_account: Sentdm::ProfileCreateParams::WhatsappBusinessAccount?,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseOfProfileDetail
 
       def retrieve: (
         String profile_id,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseOfProfileDetail
 
       def update: (
-        String path_profile_id,
+        String profile_id,
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
+        ?billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
         ?billing_model: String?,
+        ?brand: Sentdm::BrandData?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -36,33 +44,36 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String?,
-        ?body_profile_id: String,
+        ?payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        ?sandbox: bool,
         ?sending_phone_number: String?,
         ?sending_phone_number_profile_id: String?,
         ?sending_whatsapp_number_profile_id: String?,
         ?short_name: String?,
-        ?test_mode: bool,
         ?whatsapp_phone_number: String?,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseOfProfileDetail
 
       def list: (
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::ProfileListResponse
 
       def delete: (
-        String path_profile_id,
-        ?body_profile_id: String,
-        ?test_mode: bool,
+        String profile_id,
+        body: Sentdm::ProfileDeleteParams::Body,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil
 
       def complete: (
         String profile_id,
         web_hook_url: String,
-        ?test_mode: bool,
+        ?sandbox: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> top
 

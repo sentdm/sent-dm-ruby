@@ -38,6 +38,7 @@ module Sentdm
       type data =
         {
           id: String,
+          active_contact_price: Float?,
           channel: String,
           contact_id: String,
           created_at: Time,
@@ -58,6 +59,8 @@ module Sentdm
         attr_reader id: String?
 
         def id=: (String) -> String
+
+        attr_accessor active_contact_price: Float?
 
         attr_reader channel: String?
 
@@ -109,6 +112,7 @@ module Sentdm
 
         def initialize: (
           ?id: String,
+          ?active_contact_price: Float?,
           ?channel: String,
           ?contact_id: String,
           ?created_at: Time,
@@ -127,6 +131,7 @@ module Sentdm
 
         def to_hash: -> {
           id: String,
+          active_contact_price: Float?,
           channel: String,
           contact_id: String,
           created_at: Time,

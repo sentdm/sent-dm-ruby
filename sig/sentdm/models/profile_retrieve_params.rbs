@@ -1,7 +1,8 @@
 module Sentdm
   module Models
     type profile_retrieve_params =
-      { profile_id: String } & Sentdm::Internal::Type::request_parameters
+      { profile_id: String, x_profile_id: String }
+      & Sentdm::Internal::Type::request_parameters
 
     class ProfileRetrieveParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
@@ -9,13 +10,19 @@ module Sentdm
 
       attr_accessor profile_id: String
 
+      attr_reader x_profile_id: String?
+
+      def x_profile_id=: (String) -> String
+
       def initialize: (
         profile_id: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
         profile_id: String,
+        x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
     end

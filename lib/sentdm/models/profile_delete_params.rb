@@ -7,35 +7,35 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      # @!attribute path_profile_id
+      # @!attribute profile_id
       #
       #   @return [String]
-      required :path_profile_id, String
+      required :profile_id, String
 
-      # @!attribute body_profile_id
-      #   Profile ID from route parameter
+      # @!attribute body
+      #   Request to delete a profile
+      #
+      #   @return [Sentdm::Models::ProfileDeleteParams::Body]
+      required :body, -> { Sentdm::ProfileDeleteParams::Body }
+
+      # @!attribute x_profile_id
       #
       #   @return [String, nil]
-      optional :body_profile_id, String, api_name: :profile_id
+      optional :x_profile_id, String
 
-      # @!attribute test_mode
-      #   Test mode flag - when true, the operation is simulated without side effects
-      #   Useful for testing integrations without actual execution
+      # @!method initialize(profile_id:, body:, x_profile_id: nil, request_options: {})
+      #   @param profile_id [String]
       #
-      #   @return [Boolean, nil]
-      optional :test_mode, Sentdm::Internal::Type::Boolean
-
-      # @!method initialize(path_profile_id:, body_profile_id: nil, test_mode: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::ProfileDeleteParams} for more details.
+      #   @param body [Sentdm::Models::ProfileDeleteParams::Body] Request to delete a profile
       #
-      #   @param path_profile_id [String]
-      #
-      #   @param body_profile_id [String] Profile ID from route parameter
-      #
-      #   @param test_mode [Boolean] Test mode flag - when true, the operation is simulated without side effects
+      #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
+
+      class Body < Sentdm::Models::MutationRequest
+        # @!method initialize
+        #   Request to delete a profile
+      end
     end
   end
 end

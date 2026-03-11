@@ -47,7 +47,6 @@ module Sentdm
     # @return [Sentdm::Resources::Contacts]
     attr_reader :contacts
 
-    # Register and manage 10DLC brands for SMS compliance
     # @return [Sentdm::Resources::Brands]
     attr_reader :brands
 

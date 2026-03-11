@@ -41,6 +41,11 @@ module Sentdm
         #   @return [String, nil]
         optional :media_type, String, api_name: :mediaType, nil?: true
 
+        # @!attribute regex
+        #
+        #   @return [String, nil]
+        optional :regex, String, nil?: true
+
         # @!attribute sample
         #
         #   @return [String, nil]
@@ -61,9 +66,10 @@ module Sentdm
         #   @return [String, nil]
         optional :variable_type, String, api_name: :variableType, nil?: true
 
-        # @!method initialize(alt: nil, media_type: nil, sample: nil, short_url: nil, url: nil, variable_type: nil)
+        # @!method initialize(alt: nil, media_type: nil, regex: nil, sample: nil, short_url: nil, url: nil, variable_type: nil)
         #   @param alt [String, nil]
         #   @param media_type [String, nil]
+        #   @param regex [String, nil]
         #   @param sample [String, nil]
         #   @param short_url [String, nil]
         #   @param url [String, nil]

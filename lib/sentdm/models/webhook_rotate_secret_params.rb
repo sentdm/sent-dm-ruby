@@ -22,10 +22,16 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(id:, body:, idempotency_key: nil, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(id:, body:, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   @param id [String]
       #   @param body [Sentdm::Models::WebhookRotateSecretParams::Body]
       #   @param idempotency_key [String]
+      #   @param x_profile_id [String]
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
 
       class Body < Sentdm::Models::MutationRequest

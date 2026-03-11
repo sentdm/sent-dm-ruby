@@ -9,21 +9,34 @@ module Sentdm
       sig do
         params(
           user_id: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseOfUser)
       end
-      def retrieve(user_id, request_options: {})
+      def retrieve(
+        user_id,
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       # Retrieves all users who have access to the organization or profile identified by
       # the API key, including their roles and status. Shows invited users (pending
       # acceptance) and active users. Requires developer role or higher.
       sig do
-        params(request_options: Sentdm::RequestOptions::OrHash).returns(
-          Sentdm::Models::UserListResponse
-        )
+        params(
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(Sentdm::Models::UserListResponse)
       end
-      def list(request_options: {})
+      def list(
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
       end
 
       # Sends an invitation to a user to join the organization or profile with a
@@ -34,8 +47,9 @@ module Sentdm
           email: String,
           name: String,
           role: String,
-          test_mode: T::Boolean,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseOfUser)
       end
@@ -46,13 +60,17 @@ module Sentdm
         name: nil,
         # Body param: User role: admin, billing, or developer (required)
         role: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -61,19 +79,21 @@ module Sentdm
       # cannot remove yourself or remove the last admin.
       sig do
         params(
-          path_user_id: String,
-          test_mode: T::Boolean,
-          body_user_id: String,
+          user_id: String,
+          body: Sentdm::UserRemoveParams::Body::OrHash,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).void
       end
       def remove(
-        path_user_id,
-        # Test mode flag - when true, the operation is simulated without side effects
-        # Useful for testing integrations without actual execution
-        test_mode: nil,
-        # User ID from route parameter
-        body_user_id: nil,
+        # Path param
+        user_id,
+        # Body param: Request to remove a user from an organization
+        body:,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end
@@ -82,28 +102,30 @@ module Sentdm
       # cannot change your own role or demote the last admin.
       sig do
         params(
-          path_user_id: String,
+          user_id: String,
           role: String,
-          test_mode: T::Boolean,
-          body_user_id: String,
+          sandbox: T::Boolean,
           idempotency_key: String,
+          x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(Sentdm::APIResponseOfUser)
       end
       def update_role(
         # Path param
-        path_user_id,
+        user_id,
         # Body param: User role: admin, billing, or developer (required)
         role: nil,
-        # Body param: Test mode flag - when true, the operation is simulated without side
+        # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
-        test_mode: nil,
-        # Body param: User ID from route parameter
-        body_user_id: nil,
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.
         idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
         request_options: {}
       )
       end

@@ -6,14 +6,16 @@ module Sentdm
         ?creation_source: String?,
         ?definition: Sentdm::TemplateDefinition,
         ?language: String?,
+        ?sandbox: bool,
         ?submit_for_review: bool,
-        ?test_mode: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseTemplate
 
       def retrieve: (
         String id,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseTemplate
 
@@ -23,9 +25,10 @@ module Sentdm
         ?definition: Sentdm::TemplateDefinition?,
         ?language: String?,
         ?name: String?,
+        ?sandbox: bool,
         ?submit_for_review: bool,
-        ?test_mode: bool,
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::APIResponseTemplate
 
@@ -33,15 +36,18 @@ module Sentdm
         page: Integer,
         page_size: Integer,
         ?category: String?,
+        ?is_welcome_playground: bool?,
         ?search: String?,
         ?status: String?,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::TemplateListResponse
 
       def delete: (
         String id,
         ?delete_from_meta: bool?,
-        ?test_mode: bool,
+        ?sandbox: bool,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil
 

@@ -75,7 +75,7 @@ module Sentdm
         sig do
           returns(
             T.nilable(
-              Sentdm::Brands::TcrCampaignWithUseCases::SharingStatus::TaggedSymbol
+              Sentdm::Brands::TcrCampaignWithUseCases::SharingStatus::OrSymbol
             )
           )
         end
@@ -83,9 +83,7 @@ module Sentdm
 
         sig do
           returns(
-            T.nilable(
-              Sentdm::Brands::TcrCampaignWithUseCases::Status::TaggedSymbol
-            )
+            T.nilable(Sentdm::Brands::TcrCampaignWithUseCases::Status::OrSymbol)
           )
         end
         attr_accessor :status
@@ -230,11 +228,11 @@ module Sentdm
               reseller_id: T.nilable(String),
               sharing_status:
                 T.nilable(
-                  Sentdm::Brands::TcrCampaignWithUseCases::SharingStatus::TaggedSymbol
+                  Sentdm::Brands::TcrCampaignWithUseCases::SharingStatus::OrSymbol
                 ),
               status:
                 T.nilable(
-                  Sentdm::Brands::TcrCampaignWithUseCases::Status::TaggedSymbol
+                  Sentdm::Brands::TcrCampaignWithUseCases::Status::OrSymbol
                 ),
               submitted_at: T.nilable(Time),
               submitted_to_tcr: T::Boolean,
@@ -349,7 +347,7 @@ module Sentdm
           attr_writer :customer_id
 
           sig do
-            returns(T.nilable(Sentdm::Brands::MessagingUseCaseUs::TaggedSymbol))
+            returns(T.nilable(Sentdm::Brands::MessagingUseCaseUs::OrSymbol))
           end
           attr_reader :messaging_use_case_us
 
@@ -390,7 +388,7 @@ module Sentdm
                 campaign_id: String,
                 customer_id: String,
                 messaging_use_case_us:
-                  Sentdm::Brands::MessagingUseCaseUs::TaggedSymbol,
+                  Sentdm::Brands::MessagingUseCaseUs::OrSymbol,
                 sample_messages: T::Array[String]
               }
             )

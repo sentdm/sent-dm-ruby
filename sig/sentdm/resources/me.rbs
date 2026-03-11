@@ -2,6 +2,7 @@ module Sentdm
   module Resources
     class Me
       def retrieve: (
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::MeRetrieveResponse
 

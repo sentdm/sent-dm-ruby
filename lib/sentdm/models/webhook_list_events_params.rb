@@ -27,11 +27,17 @@ module Sentdm
       #   @return [String, nil]
       optional :search, String, nil?: true
 
-      # @!method initialize(id:, page:, page_size:, search: nil, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(id:, page:, page_size:, search: nil, x_profile_id: nil, request_options: {})
       #   @param id [String]
       #   @param page [Integer]
       #   @param page_size [Integer]
       #   @param search [String, nil]
+      #   @param x_profile_id [String]
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end
   end

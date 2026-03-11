@@ -38,13 +38,18 @@ module Sentdm
       type data =
         {
           id: String,
+          channels: Sentdm::Models::MeRetrieveResponse::Data::Channels,
           created_at: Time,
           description: String?,
+          email: String?,
           icon: String?,
           name: String,
-          profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]?,
+          organization_id: String?,
+          profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
           settings: Sentdm::ProfileSettings?,
-          status: String?
+          short_name: String?,
+          status: String?,
+          type: String
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
@@ -52,11 +57,19 @@ module Sentdm
 
         def id=: (String) -> String
 
+        attr_reader channels: Sentdm::Models::MeRetrieveResponse::Data::Channels?
+
+        def channels=: (
+          Sentdm::Models::MeRetrieveResponse::Data::Channels
+        ) -> Sentdm::Models::MeRetrieveResponse::Data::Channels
+
         attr_reader created_at: Time?
 
         def created_at=: (Time) -> Time
 
         attr_accessor description: String?
+
+        attr_accessor email: String?
 
         attr_accessor icon: String?
 
@@ -64,33 +77,147 @@ module Sentdm
 
         def name=: (String) -> String
 
-        attr_accessor profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]?
+        attr_accessor organization_id: String?
+
+        attr_reader profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]?
+
+        def profiles=: (
+          ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]
+        ) -> ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]
 
         attr_accessor settings: Sentdm::ProfileSettings?
 
+        attr_accessor short_name: String?
+
         attr_accessor status: String?
+
+        attr_reader type: String?
+
+        def type=: (String) -> String
 
         def initialize: (
           ?id: String,
+          ?channels: Sentdm::Models::MeRetrieveResponse::Data::Channels,
           ?created_at: Time,
           ?description: String?,
+          ?email: String?,
           ?icon: String?,
           ?name: String,
-          ?profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]?,
+          ?organization_id: String?,
+          ?profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
           ?settings: Sentdm::ProfileSettings?,
-          ?status: String?
+          ?short_name: String?,
+          ?status: String?,
+          ?type: String
         ) -> void
 
         def to_hash: -> {
           id: String,
+          channels: Sentdm::Models::MeRetrieveResponse::Data::Channels,
           created_at: Time,
           description: String?,
+          email: String?,
           icon: String?,
           name: String,
-          profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]?,
+          organization_id: String?,
+          profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
           settings: Sentdm::ProfileSettings?,
-          status: String?
+          short_name: String?,
+          status: String?,
+          type: String
         }
+
+        type channels =
+          {
+            rcs: Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs,
+            sms: Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS,
+            whatsapp: Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp
+          }
+
+        class Channels < Sentdm::Internal::Type::BaseModel
+          attr_reader rcs: Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs?
+
+          def rcs=: (
+            Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs
+          ) -> Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs
+
+          attr_reader sms: Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS?
+
+          def sms=: (
+            Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS
+          ) -> Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS
+
+          attr_reader whatsapp: Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp?
+
+          def whatsapp=: (
+            Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp
+          ) -> Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp
+
+          def initialize: (
+            ?rcs: Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs,
+            ?sms: Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS,
+            ?whatsapp: Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp
+          ) -> void
+
+          def to_hash: -> {
+            rcs: Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs,
+            sms: Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS,
+            whatsapp: Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp
+          }
+
+          type rcs = { configured: bool, phone_number: String? }
+
+          class Rcs < Sentdm::Internal::Type::BaseModel
+            attr_reader configured: bool?
+
+            def configured=: (bool) -> bool
+
+            attr_accessor phone_number: String?
+
+            def initialize: (?configured: bool, ?phone_number: String?) -> void
+
+            def to_hash: -> { configured: bool, phone_number: String? }
+          end
+
+          type sms = { configured: bool, phone_number: String? }
+
+          class SMS < Sentdm::Internal::Type::BaseModel
+            attr_reader configured: bool?
+
+            def configured=: (bool) -> bool
+
+            attr_accessor phone_number: String?
+
+            def initialize: (?configured: bool, ?phone_number: String?) -> void
+
+            def to_hash: -> { configured: bool, phone_number: String? }
+          end
+
+          type whatsapp =
+            { business_name: String?, configured: bool, phone_number: String? }
+
+          class Whatsapp < Sentdm::Internal::Type::BaseModel
+            attr_accessor business_name: String?
+
+            attr_reader configured: bool?
+
+            def configured=: (bool) -> bool
+
+            attr_accessor phone_number: String?
+
+            def initialize: (
+              ?business_name: String?,
+              ?configured: bool,
+              ?phone_number: String?
+            ) -> void
+
+            def to_hash: -> {
+              business_name: String?,
+              configured: bool,
+              phone_number: String?
+            }
+          end
+        end
 
         type profile =
           {

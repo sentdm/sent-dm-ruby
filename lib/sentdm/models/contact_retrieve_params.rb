@@ -12,8 +12,14 @@ module Sentdm
       #   @return [String]
       required :id, String
 
-      # @!method initialize(id:, request_options: {})
+      # @!attribute x_profile_id
+      #
+      #   @return [String, nil]
+      optional :x_profile_id, String
+
+      # @!method initialize(id:, x_profile_id: nil, request_options: {})
       #   @param id [String]
+      #   @param x_profile_id [String]
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
     end
   end

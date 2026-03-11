@@ -3,20 +3,23 @@ module Sentdm
     class Messages
       def retrieve_activities: (
         String id,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::MessageRetrieveActivitiesResponse
 
       def retrieve_status: (
         String id,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::MessageRetrieveStatusResponse
 
       def send_: (
         ?channel: ::Array[String]?,
+        ?sandbox: bool,
         ?template: Sentdm::MessageSendParams::Template,
-        ?test_mode: bool,
         ?to: ::Array[String],
         ?idempotency_key: String,
+        ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> Sentdm::Models::MessageSendResponse
 

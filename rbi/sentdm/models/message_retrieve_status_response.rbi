@@ -101,6 +101,9 @@ module Sentdm
         sig { params(id: String).void }
         attr_writer :id
 
+        sig { returns(T.nilable(Float)) }
+        attr_accessor :active_contact_price
+
         sig { returns(T.nilable(String)) }
         attr_reader :channel
 
@@ -203,6 +206,7 @@ module Sentdm
         sig do
           params(
             id: String,
+            active_contact_price: T.nilable(Float),
             channel: String,
             contact_id: String,
             created_at: Time,
@@ -229,6 +233,7 @@ module Sentdm
         end
         def self.new(
           id: nil,
+          active_contact_price: nil,
           channel: nil,
           contact_id: nil,
           created_at: nil,
@@ -252,6 +257,7 @@ module Sentdm
           override.returns(
             {
               id: String,
+              active_contact_price: T.nilable(Float),
               channel: String,
               contact_id: String,
               created_at: Time,
