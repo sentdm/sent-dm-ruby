@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Sentdm::Test::Resources::BrandsTest < Sentdm::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response =
       @sent_dm.brands.create(
@@ -26,7 +26,7 @@ class Sentdm::Test::Resources::BrandsTest < Sentdm::Test::ResourceTest
   end
 
   def test_update_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response =
       @sent_dm.brands.update(
@@ -49,7 +49,7 @@ class Sentdm::Test::Resources::BrandsTest < Sentdm::Test::ResourceTest
   end
 
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.brands.list
 
@@ -68,7 +68,7 @@ class Sentdm::Test::Resources::BrandsTest < Sentdm::Test::ResourceTest
   end
 
   def test_delete_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.brands.delete("a1b2c3d4-e5f6-7890-abcd-ef1234567890", body: {})
 

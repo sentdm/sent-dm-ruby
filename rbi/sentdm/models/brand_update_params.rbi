@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::BrandUpdateParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # Brand and KYC information
       sig { returns(Sentdm::BrandData) }
       attr_reader :brand
@@ -34,6 +37,7 @@ module Sentdm
 
       sig do
         params(
+          brand_id: String,
           brand: Sentdm::BrandData::OrHash,
           test_mode: T::Boolean,
           idempotency_key: String,
@@ -41,6 +45,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        brand_id:,
         # Brand and KYC information
         brand:,
         # Test mode flag - when true, the operation is simulated without side effects
@@ -54,6 +59,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            brand_id: String,
             brand: Sentdm::BrandData,
             test_mode: T::Boolean,
             idempotency_key: String,

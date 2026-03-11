@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_create
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.create
 
@@ -23,7 +23,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_retrieve
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.retrieve("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
@@ -42,7 +42,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_update
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.update("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
@@ -61,7 +61,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_list_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.list(page: 0, page_size: 0)
 
@@ -80,7 +80,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.delete("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
@@ -90,7 +90,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_list_event_types
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.list_event_types
 
@@ -109,7 +109,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_list_events_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", page: 0, page_size: 0)
 
@@ -128,7 +128,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_rotate_secret_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.rotate_secret("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", body: {})
 
@@ -147,7 +147,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_test_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.test_("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
@@ -166,7 +166,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   end
 
   def test_toggle_status
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.webhooks.toggle_status("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 

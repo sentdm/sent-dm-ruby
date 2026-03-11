@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Sentdm::Test::Resources::LookupTest < Sentdm::Test::ResourceTest
   def test_retrieve_phone_info
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.lookup.retrieve_phone_info("phoneNumber")
 

@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::WebhookToggleStatusParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :is_active
 
@@ -33,6 +36,7 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           is_active: T::Boolean,
           test_mode: T::Boolean,
           idempotency_key: String,
@@ -40,6 +44,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         is_active: nil,
         # Test mode flag - when true, the operation is simulated without side effects
         # Useful for testing integrations without actual execution
@@ -52,6 +57,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            id: String,
             is_active: T::Boolean,
             test_mode: T::Boolean,
             idempotency_key: String,

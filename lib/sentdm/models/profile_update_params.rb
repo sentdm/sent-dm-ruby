@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute path_profile_id
+      #
+      #   @return [String]
+      required :path_profile_id, String
+
       # @!attribute allow_contact_sharing
       #   Whether contacts are shared across profiles (optional)
       #
@@ -121,9 +126,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(allow_contact_sharing: nil, allow_number_change_during_onboarding: nil, allow_template_sharing: nil, billing_model: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, body_profile_id: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, sending_whatsapp_number_profile_id: nil, short_name: nil, test_mode: nil, whatsapp_phone_number: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(path_profile_id:, allow_contact_sharing: nil, allow_number_change_during_onboarding: nil, allow_template_sharing: nil, billing_model: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, body_profile_id: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, sending_whatsapp_number_profile_id: nil, short_name: nil, test_mode: nil, whatsapp_phone_number: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ProfileUpdateParams} for more details.
+      #
+      #   @param path_profile_id [String]
       #
       #   @param allow_contact_sharing [Boolean, nil] Whether contacts are shared across profiles (optional)
       #

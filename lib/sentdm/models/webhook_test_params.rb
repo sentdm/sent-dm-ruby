@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute event_type
       #
       #   @return [String, nil]
@@ -24,9 +29,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(event_type: nil, test_mode: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(id:, event_type: nil, test_mode: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookTestParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param event_type [String]
       #

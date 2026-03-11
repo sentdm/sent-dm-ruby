@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Create, update, and manage customer contact lists
     class Contacts
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ContactCreateParams} for more details.
@@ -115,10 +116,11 @@ module Sentdm
       # @see Sentdm::Models::ContactListParams
       def list(params)
         parsed, options = Sentdm::ContactListParams.dump_request(params)
+        query = Sentdm::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "v3/contacts",
-          query: parsed.transform_keys(page_size: "pageSize"),
+          query: query.transform_keys(page_size: "pageSize"),
           model: Sentdm::Models::ContactListResponse,
           options: options
         )

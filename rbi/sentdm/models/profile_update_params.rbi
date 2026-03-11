@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::ProfileUpdateParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :path_profile_id
+
       # Whether contacts are shared across profiles (optional)
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :allow_contact_sharing
@@ -98,6 +101,7 @@ module Sentdm
 
       sig do
         params(
+          path_profile_id: String,
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_number_change_during_onboarding: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
@@ -121,6 +125,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        path_profile_id:,
         # Whether contacts are shared across profiles (optional)
         allow_contact_sharing: nil,
         # Whether number changes are allowed during onboarding (optional)
@@ -166,6 +171,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            path_profile_id: String,
             allow_contact_sharing: T.nilable(T::Boolean),
             allow_number_change_during_onboarding: T.nilable(T::Boolean),
             allow_template_sharing: T.nilable(T::Boolean),

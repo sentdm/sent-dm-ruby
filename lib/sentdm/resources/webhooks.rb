@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Configure webhook endpoints for real-time event delivery
     class Webhooks
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookCreateParams} for more details.
@@ -117,10 +118,11 @@ module Sentdm
       # @see Sentdm::Models::WebhookListParams
       def list(params)
         parsed, options = Sentdm::WebhookListParams.dump_request(params)
+        query = Sentdm::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "v3/webhooks",
-          query: parsed.transform_keys(page_size: "pageSize", is_active: "isActive"),
+          query: query.transform_keys(page_size: "pageSize", is_active: "isActive"),
           model: Sentdm::Models::WebhookListResponse,
           options: options
         )
@@ -178,10 +180,11 @@ module Sentdm
       # @see Sentdm::Models::WebhookListEventsParams
       def list_events(id, params)
         parsed, options = Sentdm::WebhookListEventsParams.dump_request(params)
+        query = Sentdm::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["v3/webhooks/%1$s/events", id],
-          query: parsed.transform_keys(page_size: "pageSize"),
+          query: query.transform_keys(page_size: "pageSize"),
           model: Sentdm::Models::WebhookListEventsResponse,
           options: options
         )

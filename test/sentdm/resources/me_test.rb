@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Sentdm::Test::Resources::MeTest < Sentdm::Test::ResourceTest
   def test_retrieve
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.me.retrieve
 

@@ -3,6 +3,7 @@
 module Sentdm
   module Resources
     class Brands
+      # Register and manage 10DLC brands for SMS compliance
       class Campaigns
         # Creates a new campaign scoped under a specific brand. The campaign is linked to
         # the specified brand. Each campaign must include at least one use case with

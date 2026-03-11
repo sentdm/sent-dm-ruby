@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
   def test_create
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.templates.create
 
@@ -23,7 +23,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
   end
 
   def test_retrieve
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.templates.retrieve("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 
@@ -42,7 +42,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
   end
 
   def test_update
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.templates.update("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 
@@ -61,7 +61,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
   end
 
   def test_list_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.templates.list(page: 0, page_size: 0)
 
@@ -80,7 +80,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @sent_dm.templates.delete("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 

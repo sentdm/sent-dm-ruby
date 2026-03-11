@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type webhook_update_params =
       {
+        id: String,
         display_name: String,
         endpoint_url: String,
         event_types: ::Array[String],
@@ -15,6 +16,8 @@ module Sentdm
     class WebhookUpdateParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader display_name: String?
 
@@ -45,6 +48,7 @@ module Sentdm
       def idempotency_key=: (String) -> String
 
       def initialize: (
+        id: String,
         ?display_name: String,
         ?endpoint_url: String,
         ?event_types: ::Array[String],
@@ -56,6 +60,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        id: String,
         display_name: String,
         endpoint_url: String,
         event_types: ::Array[String],

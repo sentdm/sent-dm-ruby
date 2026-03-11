@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Manage message templates with variable substitution
     class Templates
       # Creates a new message template with header, body, footer, and buttons. The
       # template can be submitted for review immediately or saved as draft for later

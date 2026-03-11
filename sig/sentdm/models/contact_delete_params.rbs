@@ -1,21 +1,25 @@
 module Sentdm
   module Models
     type contact_delete_params =
-      { body: Sentdm::ContactDeleteParams::Body }
+      { id: String, body: Sentdm::ContactDeleteParams::Body }
       & Sentdm::Internal::Type::request_parameters
 
     class ContactDeleteParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      attr_accessor id: String
+
       attr_accessor body: Sentdm::ContactDeleteParams::Body
 
       def initialize: (
+        id: String,
         body: Sentdm::ContactDeleteParams::Body,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         body: Sentdm::ContactDeleteParams::Body,
         request_options: Sentdm::RequestOptions
       }

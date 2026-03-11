@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute default_channel
       #   Default messaging channel: "sms" or "whatsapp"
       #
@@ -31,9 +36,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(default_channel: nil, opt_out: nil, test_mode: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(id:, default_channel: nil, opt_out: nil, test_mode: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ContactUpdateParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param default_channel [String, nil] Default messaging channel: "sms" or "whatsapp"
       #

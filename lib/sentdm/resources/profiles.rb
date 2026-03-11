@@ -2,6 +2,7 @@
 
 module Sentdm
   module Resources
+    # Manage organization profiles
     class Profiles
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ProfileCreateParams} for more details.

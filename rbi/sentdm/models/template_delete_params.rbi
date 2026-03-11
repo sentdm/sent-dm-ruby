@@ -11,6 +11,9 @@ module Sentdm
           T.any(Sentdm::TemplateDeleteParams, Sentdm::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Whether to also delete the template from WhatsApp/Meta (optional, defaults to
       # false)
       sig { returns(T.nilable(T::Boolean)) }
@@ -26,12 +29,14 @@ module Sentdm
 
       sig do
         params(
+          id: String,
           delete_from_meta: T.nilable(T::Boolean),
           test_mode: T::Boolean,
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Whether to also delete the template from WhatsApp/Meta (optional, defaults to
         # false)
         delete_from_meta: nil,
@@ -45,6 +50,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            id: String,
             delete_from_meta: T.nilable(T::Boolean),
             test_mode: T::Boolean,
             request_options: Sentdm::RequestOptions

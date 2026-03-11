@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type contact_update_params =
       {
+        id: String,
         default_channel: String?,
         opt_out: bool?,
         test_mode: bool,
@@ -12,6 +13,8 @@ module Sentdm
     class ContactUpdateParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor default_channel: String?
 
@@ -26,6 +29,7 @@ module Sentdm
       def idempotency_key=: (String) -> String
 
       def initialize: (
+        id: String,
         ?default_channel: String?,
         ?opt_out: bool?,
         ?test_mode: bool,
@@ -34,6 +38,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        id: String,
         default_channel: String?,
         opt_out: bool?,
         test_mode: bool,

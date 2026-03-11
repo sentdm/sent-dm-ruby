@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute path_user_id
+      #
+      #   @return [String]
+      required :path_user_id, String
+
       # @!attribute test_mode
       #   Test mode flag - when true, the operation is simulated without side effects
       #   Useful for testing integrations without actual execution
@@ -20,9 +25,11 @@ module Sentdm
       #   @return [String, nil]
       optional :body_user_id, String, api_name: :user_id
 
-      # @!method initialize(test_mode: nil, body_user_id: nil, request_options: {})
+      # @!method initialize(path_user_id:, test_mode: nil, body_user_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::UserRemoveParams} for more details.
+      #
+      #   @param path_user_id [String]
       #
       #   @param test_mode [Boolean] Test mode flag - when true, the operation is simulated without side effects
       #

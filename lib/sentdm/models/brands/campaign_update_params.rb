@@ -13,6 +13,11 @@ module Sentdm
         #   @return [String]
         required :brand_id, String
 
+        # @!attribute campaign_id
+        #
+        #   @return [String]
+        required :campaign_id, String
+
         # @!attribute campaign
         #   Campaign data
         #
@@ -31,11 +36,13 @@ module Sentdm
         #   @return [String, nil]
         optional :idempotency_key, String
 
-        # @!method initialize(brand_id:, campaign:, test_mode: nil, idempotency_key: nil, request_options: {})
+        # @!method initialize(brand_id:, campaign_id:, campaign:, test_mode: nil, idempotency_key: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Brands::CampaignUpdateParams} for more details.
         #
         #   @param brand_id [String]
+        #
+        #   @param campaign_id [String]
         #
         #   @param campaign [Sentdm::Models::Brands::CampaignData] Campaign data
         #

@@ -1,15 +1,20 @@
 module Sentdm
   module Models
     type webhook_delete_params =
-      {  } & Sentdm::Internal::Type::request_parameters
+      { id: String } & Sentdm::Internal::Type::request_parameters
 
     class WebhookDeleteParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Sentdm::request_opts) -> void
+      attr_accessor id: String
 
-      def to_hash: -> { request_options: Sentdm::RequestOptions }
+      def initialize: (
+        id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> { id: String, request_options: Sentdm::RequestOptions }
     end
   end
 end

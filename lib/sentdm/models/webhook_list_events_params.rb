@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute page
       #
       #   @return [Integer]
@@ -22,7 +27,8 @@ module Sentdm
       #   @return [String, nil]
       optional :search, String, nil?: true
 
-      # @!method initialize(page:, page_size:, search: nil, request_options: {})
+      # @!method initialize(id:, page:, page_size:, search: nil, request_options: {})
+      #   @param id [String]
       #   @param page [Integer]
       #   @param page_size [Integer]
       #   @param search [String, nil]

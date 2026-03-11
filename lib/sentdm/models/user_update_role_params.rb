@@ -7,6 +7,11 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute path_user_id
+      #
+      #   @return [String]
+      required :path_user_id, String
+
       # @!attribute role
       #   User role: admin, billing, or developer (required)
       #
@@ -31,9 +36,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(role: nil, test_mode: nil, body_user_id: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(path_user_id:, role: nil, test_mode: nil, body_user_id: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::UserUpdateRoleParams} for more details.
+      #
+      #   @param path_user_id [String]
       #
       #   @param role [String] User role: admin, billing, or developer (required)
       #
