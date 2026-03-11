@@ -34,7 +34,7 @@ module Sentdm
       #   @param x_profile_id [String]
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
 
-      class Body < Sentdm::Models::MutationRequest
+      class Body < Sentdm::Models::MutationRequestBase
         # @!method initialize
       end
     end

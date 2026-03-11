@@ -1,9 +1,0 @@
-module Sentdm
-  module Resources
-    class Brands
-      attr_reader campaigns: Sentdm::Resources::Brands::Campaigns
-
-      def initialize: (client: Sentdm::Client) -> void
-    end
-  end
-end

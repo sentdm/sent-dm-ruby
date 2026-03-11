@@ -1,12 +1,14 @@
 module Sentdm
   module Resources
     class Profiles
+      attr_reader campaigns: Sentdm::Resources::Profiles::Campaigns
+
       def create: (
         ?allow_contact_sharing: bool,
         ?allow_template_sharing: bool,
-        ?billing_contact: Sentdm::ProfileCreateParams::BillingContact?,
+        ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
-        ?brand: Sentdm::BrandData?,
+        ?brand: Sentdm::BrandsBrandData?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -14,7 +16,7 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String,
-        ?payment_details: Sentdm::ProfileCreateParams::PaymentDetails?,
+        ?payment_details: Sentdm::PaymentDetails?,
         ?sandbox: bool,
         ?short_name: String?,
         ?whatsapp_business_account: Sentdm::ProfileCreateParams::WhatsappBusinessAccount?,
@@ -34,9 +36,9 @@ module Sentdm
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
-        ?billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
-        ?brand: Sentdm::BrandData?,
+        ?brand: Sentdm::BrandsBrandData?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -44,7 +46,7 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String?,
-        ?payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        ?payment_details: Sentdm::PaymentDetails?,
         ?sandbox: bool,
         ?sending_phone_number: String?,
         ?sending_phone_number_profile_id: String?,
@@ -68,7 +70,7 @@ module Sentdm
         ?request_options: Sentdm::request_opts
       ) -> nil
 
-      def complete: (
+      def complete_setup: (
         String profile_id,
         web_hook_url: String,
         ?sandbox: bool,

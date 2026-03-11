@@ -44,8 +44,8 @@ module Sentdm
         # @!attribute contacts
         #   List of contacts
         #
-        #   @return [Array<Sentdm::Models::Contact>, nil]
-        optional :contacts, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Contact] }
+        #   @return [Array<Sentdm::Models::ContactResponse>, nil]
+        optional :contacts, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::ContactResponse] }
 
         # @!attribute pagination
         #   Pagination metadata
@@ -56,7 +56,7 @@ module Sentdm
         # @!method initialize(contacts: nil, pagination: nil)
         #   The response data (null if error)
         #
-        #   @param contacts [Array<Sentdm::Models::Contact>] List of contacts
+        #   @param contacts [Array<Sentdm::Models::ContactResponse>] List of contacts
         #
         #   @param pagination [Sentdm::Models::PaginationMeta] Pagination metadata
       end

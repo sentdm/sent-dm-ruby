@@ -6,9 +6,9 @@ module Sentdm
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
-        billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        billing_contact: Sentdm::BillingContactInfo?,
         billing_model: String?,
-        brand: Sentdm::BrandData?,
+        brand: Sentdm::BrandsBrandData?,
         description: String?,
         icon: String?,
         inherit_contacts: bool?,
@@ -16,7 +16,7 @@ module Sentdm
         inherit_tcr_campaign: bool?,
         inherit_templates: bool?,
         name: String?,
-        payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        payment_details: Sentdm::PaymentDetails?,
         sandbox: bool,
         sending_phone_number: String?,
         sending_phone_number_profile_id: String?,
@@ -40,11 +40,11 @@ module Sentdm
 
       attr_accessor allow_template_sharing: bool?
 
-      attr_accessor billing_contact: Sentdm::ProfileUpdateParams::BillingContact?
+      attr_accessor billing_contact: Sentdm::BillingContactInfo?
 
       attr_accessor billing_model: String?
 
-      attr_accessor brand: Sentdm::BrandData?
+      attr_accessor brand: Sentdm::BrandsBrandData?
 
       attr_accessor description: String?
 
@@ -60,7 +60,7 @@ module Sentdm
 
       attr_accessor name: String?
 
-      attr_accessor payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?
+      attr_accessor payment_details: Sentdm::PaymentDetails?
 
       attr_reader sandbox: bool?
 
@@ -89,9 +89,9 @@ module Sentdm
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
-        ?billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
-        ?brand: Sentdm::BrandData?,
+        ?brand: Sentdm::BrandsBrandData?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -99,7 +99,7 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String?,
-        ?payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        ?payment_details: Sentdm::PaymentDetails?,
         ?sandbox: bool,
         ?sending_phone_number: String?,
         ?sending_phone_number_profile_id: String?,
@@ -116,9 +116,9 @@ module Sentdm
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
-        billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        billing_contact: Sentdm::BillingContactInfo?,
         billing_model: String?,
-        brand: Sentdm::BrandData?,
+        brand: Sentdm::BrandsBrandData?,
         description: String?,
         icon: String?,
         inherit_contacts: bool?,
@@ -126,7 +126,7 @@ module Sentdm
         inherit_tcr_campaign: bool?,
         inherit_templates: bool?,
         name: String?,
-        payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        payment_details: Sentdm::PaymentDetails?,
         sandbox: bool,
         sending_phone_number: String?,
         sending_phone_number_profile_id: String?,
@@ -137,60 +137,6 @@ module Sentdm
         x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
-
-      type billing_contact =
-        { email: String, name: String, address: String?, phone: String? }
-
-      class BillingContact < Sentdm::Internal::Type::BaseModel
-        attr_accessor email: String
-
-        attr_accessor name: String
-
-        attr_accessor address: String?
-
-        attr_accessor phone: String?
-
-        def initialize: (
-          email: String,
-          name: String,
-          ?address: String?,
-          ?phone: String?
-        ) -> void
-
-        def to_hash: -> {
-          email: String,
-          name: String,
-          address: String?,
-          phone: String?
-        }
-      end
-
-      type payment_details =
-        { card_number: String, cvc: String, expiry: String, zip_code: String }
-
-      class PaymentDetails < Sentdm::Internal::Type::BaseModel
-        attr_accessor card_number: String
-
-        attr_accessor cvc: String
-
-        attr_accessor expiry: String
-
-        attr_accessor zip_code: String
-
-        def initialize: (
-          card_number: String,
-          cvc: String,
-          expiry: String,
-          zip_code: String
-        ) -> void
-
-        def to_hash: -> {
-          card_number: String,
-          cvc: String,
-          expiry: String,
-          zip_code: String
-        }
-      end
     end
   end
 end

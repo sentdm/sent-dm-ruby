@@ -4,6 +4,10 @@ module Sentdm
   module Resources
     # Manage organization profiles
     class Profiles
+      # Manage organization profiles
+      # @return [Sentdm::Resources::Profiles::Campaigns]
+      attr_reader :campaigns
+
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ProfileCreateParams} for more details.
       #
@@ -50,11 +54,11 @@ module Sentdm
       #
       # @param allow_template_sharing [Boolean] Body param: Whether templates are shared across profiles (default: false)
       #
-      # @param billing_contact [Sentdm::Models::ProfileCreateParams::BillingContact, nil] Body param: Billing contact for this profile. Required when billing_model is "pr
+      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact for this profile. Required when billing_model is "pr
       #
       # @param billing_model [String, nil] Body param: Billing model: profile, organization, or profile_and_organization (d
       #
-      # @param brand [Sentdm::Models::BrandData, nil] Body param: Brand and KYC information for this profile (optional).
+      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC information for this profile (optional).
       #
       # @param description [String, nil] Body param: Profile description (optional)
       #
@@ -70,7 +74,7 @@ module Sentdm
       #
       # @param name [String] Body param: Profile name (required)
       #
-      # @param payment_details [Sentdm::Models::ProfileCreateParams::PaymentDetails, nil] Body param: Payment card details for this profile (optional).
+      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for this profile (optional).
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -161,11 +165,11 @@ module Sentdm
       #
       # @param allow_template_sharing [Boolean, nil] Body param: Whether templates are shared across profiles (optional)
       #
-      # @param billing_contact [Sentdm::Models::ProfileUpdateParams::BillingContact, nil] Body param: Billing contact for this profile. Required when billing_model is "pr
+      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact for this profile. Required when billing_model is "pr
       #
       # @param billing_model [String, nil] Body param: Billing model: profile, organization, or profile_and_organization (o
       #
-      # @param brand [Sentdm::Models::BrandData, nil] Body param: Brand and KYC information for this profile (optional).
+      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC information for this profile (optional).
       #
       # @param description [String, nil] Body param: Profile description (optional)
       #
@@ -181,7 +185,7 @@ module Sentdm
       #
       # @param name [String, nil] Body param: Profile name (optional)
       #
-      # @param payment_details [Sentdm::Models::ProfileUpdateParams::PaymentDetails, nil] Body param: Payment card details for this profile (optional).
+      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for this profile (optional).
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -277,7 +281,7 @@ module Sentdm
       end
 
       # Some parameter documentations has been truncated, see
-      # {Sentdm::Models::ProfileCompleteParams} for more details.
+      # {Sentdm::Models::ProfileCompleteSetupParams} for more details.
       #
       # Final step in profile compliance workflow. Validates all prerequisites (general
       # data, brand, campaigns), connects profile to Telnyx/WhatsApp, and sets status
@@ -298,7 +302,7 @@ module Sentdm
       #                 - If non-TCR with destination country (IsMain=true) → SUBMITTED
       #                 - Otherwise → COMPLETED
       #
-      # @overload complete(profile_id, web_hook_url:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload complete_setup(profile_id, web_hook_url:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param profile_id [String] Path param: Profile ID from route
       #
@@ -314,9 +318,9 @@ module Sentdm
       #
       # @return [Object]
       #
-      # @see Sentdm::Models::ProfileCompleteParams
-      def complete(profile_id, params)
-        parsed, options = Sentdm::ProfileCompleteParams.dump_request(params)
+      # @see Sentdm::Models::ProfileCompleteSetupParams
+      def complete_setup(profile_id, params)
+        parsed, options = Sentdm::ProfileCompleteSetupParams.dump_request(params)
         header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
         @client.request(
           method: :post,
@@ -333,6 +337,7 @@ module Sentdm
       # @param client [Sentdm::Client]
       def initialize(client:)
         @client = client
+        @campaigns = Sentdm::Resources::Profiles::Campaigns.new(client: client)
       end
     end
   end

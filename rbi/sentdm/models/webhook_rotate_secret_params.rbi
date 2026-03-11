@@ -64,7 +64,7 @@ module Sentdm
       def to_hash
       end
 
-      class Body < Sentdm::Models::MutationRequest
+      class Body < Sentdm::Models::MutationRequestBase
         OrHash =
           T.type_alias do
             T.any(

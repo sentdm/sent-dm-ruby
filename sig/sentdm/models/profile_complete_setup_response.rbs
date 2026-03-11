@@ -1,0 +1,5 @@
+module Sentdm
+  module Models
+    ProfileCompleteSetupResponse: Sentdm::Internal::Type::Converter
+  end
+end
