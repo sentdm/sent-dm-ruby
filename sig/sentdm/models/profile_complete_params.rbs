@@ -1,6 +1,6 @@
 module Sentdm
   module Models
-    type profile_complete_setup_params =
+    type profile_complete_params =
       {
         profile_id: String,
         web_hook_url: String,
@@ -10,7 +10,7 @@ module Sentdm
       }
       & Sentdm::Internal::Type::request_parameters
 
-    class ProfileCompleteSetupParams < Sentdm::Internal::Type::BaseModel
+    class ProfileCompleteParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 

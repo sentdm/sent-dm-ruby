@@ -2,13 +2,13 @@
 
 module Sentdm
   module Models
-    class ProfileCompleteSetupParams < Sentdm::Internal::Type::BaseModel
+    class ProfileCompleteParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
       OrHash =
         T.type_alias do
-          T.any(Sentdm::ProfileCompleteSetupParams, Sentdm::Internal::AnyHash)
+          T.any(Sentdm::ProfileCompleteParams, Sentdm::Internal::AnyHash)
         end
 
       sig { returns(String) }

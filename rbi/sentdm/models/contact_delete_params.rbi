@@ -57,7 +57,7 @@ module Sentdm
       def to_hash
       end
 
-      class Body < Sentdm::Models::MutationRequestBase
+      class Body < Sentdm::Models::MutationRequest
         OrHash =
           T.type_alias do
             T.any(Sentdm::ContactDeleteParams::Body, Sentdm::Internal::AnyHash)

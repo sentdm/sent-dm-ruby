@@ -2,10 +2,10 @@
 
 module Sentdm
   module Models
-    class MutationRequestBase < Sentdm::Internal::Type::BaseModel
+    class MutationRequest < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(Sentdm::MutationRequestBase, Sentdm::Internal::AnyHash)
+          T.any(Sentdm::MutationRequest, Sentdm::Internal::AnyHash)
         end
 
       # Sandbox flag - when true, the operation is simulated without side effects Useful

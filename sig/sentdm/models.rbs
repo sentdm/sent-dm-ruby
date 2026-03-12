@@ -13,8 +13,6 @@ module Sentdm
 
   class APIResponseWebhook = Sentdm::Models::APIResponseWebhook
 
-  class BaseDto = Sentdm::Models::BaseDto
-
   class BillingContactInfo = Sentdm::Models::BillingContactInfo
 
   class BrandsBrandData = Sentdm::Models::BrandsBrandData
@@ -41,7 +39,7 @@ module Sentdm
 
   class MessageSendParams = Sentdm::Models::MessageSendParams
 
-  class MutationRequestBase = Sentdm::Models::MutationRequestBase
+  class MutationRequest = Sentdm::Models::MutationRequest
 
   class NumberLookupParams = Sentdm::Models::NumberLookupParams
 
@@ -49,7 +47,7 @@ module Sentdm
 
   class PaymentDetails = Sentdm::Models::PaymentDetails
 
-  class ProfileCompleteSetupParams = Sentdm::Models::ProfileCompleteSetupParams
+  class ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
 
   class ProfileCreateParams = Sentdm::Models::ProfileCreateParams
 
@@ -66,24 +64,6 @@ module Sentdm
   class ProfileSettings = Sentdm::Models::ProfileSettings
 
   class ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
-
-  class SentDmServicesCommonContractsPocOsAuthenticationConfig = Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
-
-  class SentDmServicesCommonContractsPocOsTemplateBody = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
-
-  class SentDmServicesCommonContractsPocOsTemplateButton = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
-
-  class SentDmServicesCommonContractsPocOsTemplateButtonProps = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
-
-  class SentDmServicesCommonContractsPocOsTemplateFooter = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
-
-  class SentDmServicesCommonContractsPocOsTemplateHeader = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
-
-  class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo = Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo
-
-  class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo = Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
-
-  class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo = Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
 
   module TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 

@@ -1,8 +1,8 @@
 module Sentdm
   module Models
-    type mutation_request_base = { sandbox: bool }
+    type mutation_request = { sandbox: bool }
 
-    class MutationRequestBase < Sentdm::Internal::Type::BaseModel
+    class MutationRequest < Sentdm::Internal::Type::BaseModel
       attr_reader sandbox: bool?
 
       def sandbox=: (bool) -> bool

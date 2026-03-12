@@ -3,7 +3,7 @@
 module Sentdm
   module Models
     module Profiles
-      class TcrCampaignWithUseCases < Sentdm::Models::BaseDto
+      class TcrCampaignWithUseCases < Sentdm::Models::Profiles::BaseDto
         OrHash =
           T.type_alias do
             T.any(
@@ -331,7 +331,7 @@ module Sentdm
           end
         end
 
-        class UseCase < Sentdm::Models::BaseDto
+        class UseCase < Sentdm::Models::Profiles::BaseDto
           OrHash =
             T.type_alias do
               T.any(
