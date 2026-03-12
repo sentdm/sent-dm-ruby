@@ -22,13 +22,7 @@ module Sentdm
         attr_accessor :type
 
         # List of use cases with sample messages
-        sig do
-          returns(
-            T::Array[
-              Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData
-            ]
-          )
-        end
+        sig { returns(T::Array[Sentdm::Profiles::CampaignData::UseCase]) }
         attr_accessor :use_cases
 
         # Comma-separated keywords that trigger help message (e.g., "HELP, INFO, SUPPORT")
@@ -74,9 +68,7 @@ module Sentdm
             name: String,
             type: String,
             use_cases:
-              T::Array[
-                Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData::OrHash
-              ],
+              T::Array[Sentdm::Profiles::CampaignData::UseCase::OrHash],
             help_keywords: T.nilable(String),
             help_message: T.nilable(String),
             message_flow: T.nilable(String),
@@ -124,10 +116,7 @@ module Sentdm
               description: String,
               name: String,
               type: String,
-              use_cases:
-                T::Array[
-                  Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData
-                ],
+              use_cases: T::Array[Sentdm::Profiles::CampaignData::UseCase],
               help_keywords: T.nilable(String),
               help_message: T.nilable(String),
               message_flow: T.nilable(String),
@@ -141,6 +130,50 @@ module Sentdm
           )
         end
         def to_hash
+        end
+
+        class UseCase < Sentdm::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Sentdm::Profiles::CampaignData::UseCase,
+                Sentdm::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Sentdm::Profiles::MessagingUseCaseUs::OrSymbol) }
+          attr_accessor :messaging_use_case_us
+
+          # Sample messages for this use case (1-5 messages, max 1024 characters each)
+          sig { returns(T::Array[String]) }
+          attr_accessor :sample_messages
+
+          # Campaign use case with sample messages
+          sig do
+            params(
+              messaging_use_case_us:
+                Sentdm::Profiles::MessagingUseCaseUs::OrSymbol,
+              sample_messages: T::Array[String]
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            messaging_use_case_us:,
+            # Sample messages for this use case (1-5 messages, max 1024 characters each)
+            sample_messages:
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                messaging_use_case_us:
+                  Sentdm::Profiles::MessagingUseCaseUs::OrSymbol,
+                sample_messages: T::Array[String]
+              }
+            )
+          end
+          def to_hash
+          end
         end
       end
     end

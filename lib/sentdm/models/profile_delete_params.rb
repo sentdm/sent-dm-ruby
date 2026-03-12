@@ -32,7 +32,7 @@ module Sentdm
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
 
-      class Body < Sentdm::Models::MutationRequestBase
+      class Body < Sentdm::Models::MutationRequest
         # @!method initialize
         #   Request to delete a profile
       end

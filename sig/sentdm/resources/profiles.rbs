@@ -70,7 +70,7 @@ module Sentdm
         ?request_options: Sentdm::request_opts
       ) -> nil
 
-      def complete_setup: (
+      def complete: (
         String profile_id,
         web_hook_url: String,
         ?sandbox: bool,

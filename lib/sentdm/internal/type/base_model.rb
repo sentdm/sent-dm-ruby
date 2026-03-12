@@ -438,11 +438,11 @@ module Sentdm
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `base_dto` is a `Sentdm::BaseDto`
-        #   base_dto => {
-        #     id: id,
-        #     created_at: created_at,
-        #     updated_at: updated_at
+        #   # `api_error` is a `Sentdm::APIError`
+        #   api_error => {
+        #     code: code,
+        #     details: details,
+        #     doc_url: doc_url
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

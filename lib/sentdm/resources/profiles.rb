@@ -281,7 +281,7 @@ module Sentdm
       end
 
       # Some parameter documentations has been truncated, see
-      # {Sentdm::Models::ProfileCompleteSetupParams} for more details.
+      # {Sentdm::Models::ProfileCompleteParams} for more details.
       #
       # Final step in profile compliance workflow. Validates all prerequisites (general
       # data, brand, campaigns), connects profile to Telnyx/WhatsApp, and sets status
@@ -302,7 +302,7 @@ module Sentdm
       #                 - If non-TCR with destination country (IsMain=true) → SUBMITTED
       #                 - Otherwise → COMPLETED
       #
-      # @overload complete_setup(profile_id, web_hook_url:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload complete(profile_id, web_hook_url:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param profile_id [String] Path param: Profile ID from route
       #
@@ -318,9 +318,9 @@ module Sentdm
       #
       # @return [Object]
       #
-      # @see Sentdm::Models::ProfileCompleteSetupParams
-      def complete_setup(profile_id, params)
-        parsed, options = Sentdm::ProfileCompleteSetupParams.dump_request(params)
+      # @see Sentdm::Models::ProfileCompleteParams
+      def complete(profile_id, params)
+        parsed, options = Sentdm::ProfileCompleteParams.dump_request(params)
         header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
         @client.request(
           method: :post,
