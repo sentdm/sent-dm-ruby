@@ -12,13 +12,13 @@ module Sentdm
         optional :data, -> { Sentdm::Profiles::TcrCampaignWithUseCases }, nil?: true
 
         # @!attribute error
-        #   Error details (null if successful)
+        #   Error information
         #
         #   @return [Sentdm::Models::APIError, nil]
         optional :error, -> { Sentdm::APIError }, nil?: true
 
         # @!attribute meta
-        #   Metadata about the request and response
+        #   Request and response metadata
         #
         #   @return [Sentdm::Models::APIMeta, nil]
         optional :meta, -> { Sentdm::APIMeta }
@@ -34,9 +34,9 @@ module Sentdm
         #
         #   @param data [Sentdm::Models::Profiles::TcrCampaignWithUseCases, nil] The response data (null if error)
         #
-        #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+        #   @param error [Sentdm::Models::APIError, nil] Error information
         #
-        #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+        #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
         #
         #   @param success [Boolean] Indicates whether the request was successful
       end

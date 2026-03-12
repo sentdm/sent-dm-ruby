@@ -26,7 +26,8 @@ module Sentdm
         category: nil,
         # Body param: Source of template creation (default: from-api)
         creation_source: nil,
-        # Body param: Template definition including header, body, footer, and buttons
+        # Body param: Complete definition of a message template including header, body,
+        # footer, and buttons
         definition: nil,
         # Body param: Template language code (e.g., en_US) (optional, auto-detected if not
         # provided)
@@ -89,7 +90,8 @@ module Sentdm
         id,
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Body param: Template definition including header, body, footer, and buttons
+        # Body param: Complete definition of a message template including header, body,
+        # footer, and buttons
         definition: nil,
         # Body param: Template language code (e.g., en_US)
         language: nil,

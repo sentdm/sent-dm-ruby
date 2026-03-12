@@ -11,7 +11,7 @@ module Sentdm
           )
         end
 
-      # The response data (null if error)
+      # Message response for v3 API — same shape as v2 with snake_case JSON conventions
       sig do
         returns(T.nilable(Sentdm::Models::MessageRetrieveStatusResponse::Data))
       end
@@ -27,14 +27,14 @@ module Sentdm
       end
       attr_writer :data
 
-      # Error details (null if successful)
+      # Error information
       sig { returns(T.nilable(Sentdm::APIError)) }
       attr_reader :error
 
       sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
       attr_writer :error
 
-      # Metadata about the request and response
+      # Request and response metadata
       sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
@@ -61,11 +61,11 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # The response data (null if error)
+        # Message response for v3 API — same shape as v2 with snake_case JSON conventions
         data: nil,
-        # Error details (null if successful)
+        # Error information
         error: nil,
-        # Metadata about the request and response
+        # Request and response metadata
         meta: nil,
         # Indicates whether the request was successful
         success: nil
@@ -202,7 +202,7 @@ module Sentdm
         sig { params(template_name: String).void }
         attr_writer :template_name
 
-        # The response data (null if error)
+        # Message response for v3 API — same shape as v2 with snake_case JSON conventions
         sig do
           params(
             id: String,

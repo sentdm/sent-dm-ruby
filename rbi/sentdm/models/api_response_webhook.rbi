@@ -15,14 +15,14 @@ module Sentdm
       sig { params(data: T.nilable(Sentdm::WebhookResponse::OrHash)).void }
       attr_writer :data
 
-      # Error details (null if successful)
+      # Error information
       sig { returns(T.nilable(Sentdm::APIError)) }
       attr_reader :error
 
       sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
       attr_writer :error
 
-      # Metadata about the request and response
+      # Request and response metadata
       sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
@@ -48,9 +48,9 @@ module Sentdm
       def self.new(
         # The response data (null if error)
         data: nil,
-        # Error details (null if successful)
+        # Error information
         error: nil,
-        # Metadata about the request and response
+        # Request and response metadata
         meta: nil,
         # Indicates whether the request was successful
         success: nil

@@ -26,9 +26,8 @@ module Sentdm
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :allow_template_sharing
 
-      # Billing contact for this profile. Required when billing_model is "profile" or
-      # "profile_and_organization" and no billing contact has been configured yet.
-      # Identifies who receives invoices and who is responsible for payment.
+      # Billing contact information for a profile. Required when billing_model is
+      # "profile" or "profile_and_organization".
       sig { returns(T.nilable(Sentdm::BillingContactInfo)) }
       attr_reader :billing_contact
 
@@ -49,10 +48,7 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :billing_model
 
-      # Brand and KYC information for this profile (optional). When provided, creates or
-      # updates the brand associated with this profile. Cannot be set when
-      # inherit_tcr_brand is true. Once a brand has been submitted to TCR it cannot be
-      # modified.
+      # Brand and KYC data grouped into contact, business, and compliance sections
       sig { returns(T.nilable(Sentdm::BrandsBrandData)) }
       attr_reader :brand
 
@@ -87,9 +83,9 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :name
 
-      # Payment card details for this profile (optional). Accepted when billing_model is
-      # "profile" or "profile_and_organization". Not persisted on our servers —
-      # forwarded to the payment processor.
+      # Payment card details for a profile. Accepted when billing_model is "profile" or
+      # "profile_and_organization". These details are not stored on our servers and will
+      # be forwarded to the payment processor.
       sig { returns(T.nilable(Sentdm::PaymentDetails)) }
       attr_reader :payment_details
 
@@ -176,9 +172,8 @@ module Sentdm
         allow_number_change_during_onboarding: nil,
         # Whether templates are shared across profiles (optional)
         allow_template_sharing: nil,
-        # Billing contact for this profile. Required when billing_model is "profile" or
-        # "profile_and_organization" and no billing contact has been configured yet.
-        # Identifies who receives invoices and who is responsible for payment.
+        # Billing contact information for a profile. Required when billing_model is
+        # "profile" or "profile_and_organization".
         billing_contact: nil,
         # Billing model: profile, organization, or profile_and_organization (optional).
         #
@@ -188,10 +183,7 @@ module Sentdm
         # - "profile_and_organization": the profile is billed first with the organization
         #   as fallback; billing_contact is required.
         billing_model: nil,
-        # Brand and KYC information for this profile (optional). When provided, creates or
-        # updates the brand associated with this profile. Cannot be set when
-        # inherit_tcr_brand is true. Once a brand has been submitted to TCR it cannot be
-        # modified.
+        # Brand and KYC data grouped into contact, business, and compliance sections
         brand: nil,
         # Profile description (optional)
         description: nil,
@@ -207,9 +199,9 @@ module Sentdm
         inherit_templates: nil,
         # Profile name (optional)
         name: nil,
-        # Payment card details for this profile (optional). Accepted when billing_model is
-        # "profile" or "profile_and_organization". Not persisted on our servers —
-        # forwarded to the payment processor.
+        # Payment card details for a profile. Accepted when billing_model is "profile" or
+        # "profile_and_organization". These details are not stored on our servers and will
+        # be forwarded to the payment processor.
         payment_details: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution

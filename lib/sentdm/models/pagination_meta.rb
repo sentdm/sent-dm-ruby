@@ -4,7 +4,7 @@ module Sentdm
   module Models
     class PaginationMeta < Sentdm::Internal::Type::BaseModel
       # @!attribute cursors
-      #   Cursor-based pagination (optional)
+      #   Cursor-based pagination pointers
       #
       #   @return [Sentdm::Models::PaginationMeta::Cursors, nil]
       optional :cursors, -> { Sentdm::PaginationMeta::Cursors }, nil?: true
@@ -42,7 +42,7 @@ module Sentdm
       # @!method initialize(cursors: nil, has_more: nil, page: nil, page_size: nil, total_count: nil, total_pages: nil)
       #   Pagination metadata for list responses
       #
-      #   @param cursors [Sentdm::Models::PaginationMeta::Cursors, nil] Cursor-based pagination (optional)
+      #   @param cursors [Sentdm::Models::PaginationMeta::Cursors, nil] Cursor-based pagination pointers
       #
       #   @param has_more [Boolean] Whether there are more pages after this one
       #
@@ -69,7 +69,7 @@ module Sentdm
         optional :before, String, nil?: true
 
         # @!method initialize(after: nil, before: nil)
-        #   Cursor-based pagination (optional)
+        #   Cursor-based pagination pointers
         #
         #   @param after [String, nil] Cursor to fetch the next page
         #

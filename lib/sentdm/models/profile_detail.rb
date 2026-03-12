@@ -28,8 +28,7 @@ module Sentdm
       optional :allow_template_sharing, Sentdm::Internal::Type::Boolean
 
       # @!attribute billing_contact
-      #   Billing contact for this profile. Present when billing_model is "profile" or
-      #   "profile_and_organization".
+      #   Billing contact info returned in profile responses
       #
       #   @return [Sentdm::Models::ProfileDetail::BillingContact, nil]
       optional :billing_contact, -> { Sentdm::ProfileDetail::BillingContact }, nil?: true
@@ -41,8 +40,8 @@ module Sentdm
       optional :billing_model, String
 
       # @!attribute brand
-      #   Brand associated with this profile. Null if no brand has been configured yet.
-      #   Includes KYC information and TCR registration status.
+      #   Brand response with nested contact, business, and compliance sections — mirrors
+      #   the request structure.
       #
       #   @return [Sentdm::Models::ProfileDetail::Brand, nil]
       optional :brand, -> { Sentdm::ProfileDetail::Brand }, nil?: true
@@ -171,11 +170,11 @@ module Sentdm
       #
       #   @param allow_template_sharing [Boolean] Whether templates are shared across profiles in the organization
       #
-      #   @param billing_contact [Sentdm::Models::ProfileDetail::BillingContact, nil] Billing contact for this profile. Present when billing_model is "profile" or "pr
+      #   @param billing_contact [Sentdm::Models::ProfileDetail::BillingContact, nil] Billing contact info returned in profile responses
       #
       #   @param billing_model [String] Billing model: profile, organization, or profile_and_organization
       #
-      #   @param brand [Sentdm::Models::ProfileDetail::Brand, nil] Brand associated with this profile. Null if no brand has been configured yet.
+      #   @param brand [Sentdm::Models::ProfileDetail::Brand, nil] Brand response with nested contact, business, and compliance sections — mirrors
       #
       #   @param created_at [Time] When the profile was created
       #
@@ -236,8 +235,7 @@ module Sentdm
         optional :phone, String, nil?: true
 
         # @!method initialize(address: nil, email: nil, name: nil, phone: nil)
-        #   Billing contact for this profile. Present when billing_model is "profile" or
-        #   "profile_and_organization".
+        #   Billing contact info returned in profile responses
         #
         #   @param address [String, nil]
         #   @param email [String, nil]
@@ -284,7 +282,6 @@ module Sentdm
         optional :csp_id, String, nil?: true
 
         # @!attribute identity_status
-        #   TCR brand identity verification status
         #
         #   @return [Symbol, Sentdm::Models::ProfileDetail::Brand::IdentityStatus, nil]
         optional :identity_status, enum: -> { Sentdm::ProfileDetail::Brand::IdentityStatus }, nil?: true
@@ -296,7 +293,6 @@ module Sentdm
         optional :is_inherited, Sentdm::Internal::Type::Boolean
 
         # @!attribute status
-        #   TCR brand status
         #
         #   @return [Symbol, Sentdm::Models::ProfileDetail::Brand::Status, nil]
         optional :status, enum: -> { Sentdm::ProfileDetail::Brand::Status }, nil?: true
@@ -332,8 +328,8 @@ module Sentdm
         optional :updated_at, Time, nil?: true
 
         # @!method initialize(id: nil, business: nil, compliance: nil, contact: nil, created_at: nil, csp_id: nil, identity_status: nil, is_inherited: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_brand_id: nil, universal_ein: nil, updated_at: nil)
-        #   Brand associated with this profile. Null if no brand has been configured yet.
-        #   Includes KYC information and TCR registration status.
+        #   Brand response with nested contact, business, and compliance sections — mirrors
+        #   the request structure.
         #
         #   @param id [String] Unique identifier for the brand
         #
@@ -347,11 +343,11 @@ module Sentdm
         #
         #   @param csp_id [String, nil] CSP (Campaign Service Provider) ID
         #
-        #   @param identity_status [Symbol, Sentdm::Models::ProfileDetail::Brand::IdentityStatus, nil] TCR brand identity verification status
+        #   @param identity_status [Symbol, Sentdm::Models::ProfileDetail::Brand::IdentityStatus, nil]
         #
         #   @param is_inherited [Boolean] Whether this brand is inherited from the parent organization
         #
-        #   @param status [Symbol, Sentdm::Models::ProfileDetail::Brand::Status, nil] TCR brand status
+        #   @param status [Symbol, Sentdm::Models::ProfileDetail::Brand::Status, nil]
         #
         #   @param submitted_at [Time, nil] When the brand was submitted to TCR
         #
@@ -460,7 +456,6 @@ module Sentdm
         # @see Sentdm::Models::ProfileDetail::Brand#compliance
         class Compliance < Sentdm::Internal::Type::BaseModel
           # @!attribute brand_relationship
-          #   Brand relationship level with TCR
           #
           #   @return [Symbol, Sentdm::Models::TcrBrandRelationship, nil]
           optional :brand_relationship, enum: -> { Sentdm::TcrBrandRelationship }, nil?: true
@@ -502,7 +497,6 @@ module Sentdm
           optional :primary_use_case, String, nil?: true
 
           # @!attribute vertical
-          #   Business vertical/industry category
           #
           #   @return [Symbol, Sentdm::Models::TcrVertical, nil]
           optional :vertical, enum: -> { Sentdm::TcrVertical }, nil?: true
@@ -510,7 +504,7 @@ module Sentdm
           # @!method initialize(brand_relationship: nil, destination_countries: nil, expected_messaging_volume: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil, primary_use_case: nil, vertical: nil)
           #   Compliance and TCR-related information
           #
-          #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship, nil] Brand relationship level with TCR
+          #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship, nil]
           #
           #   @param destination_countries [Array<Sentdm::Models::DestinationCountry>] List of destination countries for messaging
           #
@@ -524,7 +518,7 @@ module Sentdm
           #
           #   @param primary_use_case [String, nil] Primary messaging use case description
           #
-          #   @param vertical [Symbol, Sentdm::Models::TcrVertical, nil] Business vertical/industry category
+          #   @param vertical [Symbol, Sentdm::Models::TcrVertical, nil]
         end
 
         # @see Sentdm::Models::ProfileDetail::Brand#contact
@@ -581,8 +575,6 @@ module Sentdm
           #   @param role [String, nil] Contact's role in the business
         end
 
-        # TCR brand identity verification status
-        #
         # @see Sentdm::Models::ProfileDetail::Brand#identity_status
         module IdentityStatus
           extend Sentdm::Internal::Type::Enum
@@ -596,8 +588,6 @@ module Sentdm
           #   @return [Array<Symbol>]
         end
 
-        # TCR brand status
-        #
         # @see Sentdm::Models::ProfileDetail::Brand#status
         module Status
           extend Sentdm::Internal::Type::Enum

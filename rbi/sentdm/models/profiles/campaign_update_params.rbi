@@ -21,7 +21,7 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :campaign_id
 
-        # Campaign data
+        # Campaign data for create or update operation
         sig { returns(Sentdm::Profiles::CampaignData) }
         attr_reader :campaign
 
@@ -62,7 +62,7 @@ module Sentdm
         def self.new(
           profile_id:,
           campaign_id:,
-          # Campaign data
+          # Campaign data for create or update operation
           campaign:,
           # Sandbox flag - when true, the operation is simulated without side effects Useful
           # for testing integrations without actual execution

@@ -5,19 +5,19 @@ module Sentdm
     # @see Sentdm::Resources::Users#retrieve
     class APIResponseOfUser < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   The response data (null if error)
+      #   User response for v3 API
       #
       #   @return [Sentdm::Models::UserResponse, nil]
       optional :data, -> { Sentdm::UserResponse }, nil?: true
 
       # @!attribute error
-      #   Error details (null if successful)
+      #   Error information
       #
       #   @return [Sentdm::Models::APIError, nil]
       optional :error, -> { Sentdm::APIError }, nil?: true
 
       # @!attribute meta
-      #   Metadata about the request and response
+      #   Request and response metadata
       #
       #   @return [Sentdm::Models::APIMeta, nil]
       optional :meta, -> { Sentdm::APIMeta }
@@ -31,11 +31,11 @@ module Sentdm
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::UserResponse, nil] The response data (null if error)
+      #   @param data [Sentdm::Models::UserResponse, nil] User response for v3 API
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #   @param error [Sentdm::Models::APIError, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
     end

@@ -75,9 +75,8 @@ module Sentdm
         allow_contact_sharing: nil,
         # Body param: Whether templates are shared across profiles (default: false)
         allow_template_sharing: nil,
-        # Body param: Billing contact for this profile. Required when billing_model is
-        # "profile" or "profile_and_organization". Identifies who receives invoices and
-        # who is responsible for payment.
+        # Body param: Billing contact information for a profile. Required when
+        # billing_model is "profile" or "profile_and_organization".
         billing_contact: nil,
         # Body param: Billing model: profile, organization, or profile_and_organization
         # (default: profile).
@@ -88,9 +87,8 @@ module Sentdm
         # - "profile_and_organization": the profile is billed first with the organization
         #   as fallback; billing_contact is required.
         billing_model: nil,
-        # Body param: Brand and KYC information for this profile (optional). When
-        # provided, creates the brand associated with this profile. Cannot be set when
-        # inherit_tcr_brand is true.
+        # Body param: Brand and KYC data grouped into contact, business, and compliance
+        # sections
         brand: nil,
         # Body param: Profile description (optional)
         description: nil,
@@ -110,9 +108,9 @@ module Sentdm
         inherit_templates: nil,
         # Body param: Profile name (required)
         name: nil,
-        # Body param: Payment card details for this profile (optional). Accepted when
-        # billing_model is "profile" or "profile_and_organization". Not persisted on our
-        # servers — forwarded to the payment processor.
+        # Body param: Payment card details for a profile. Accepted when billing_model is
+        # "profile" or "profile_and_organization". These details are not stored on our
+        # servers and will be forwarded to the payment processor.
         payment_details: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
@@ -121,11 +119,11 @@ module Sentdm
         # contain only letters, numbers, and spaces, and include at least one letter.
         # Example: "SALES", "Mkt 2", "Support1".
         short_name: nil,
-        # Body param: Direct WhatsApp Business Account credentials for this profile. When
-        # provided, the profile uses its own WhatsApp Business Account instead of
-        # inheriting from the organization. When omitted, the profile inherits the
-        # organization's WhatsApp Business Account (requires the organization to have
-        # completed WhatsApp Embedded Signup).
+        # Body param: Direct WhatsApp Business Account credentials for a profile. Use this
+        # when the profile should have its own WhatsApp Business Account instead of
+        # inheriting from the organization. Credentials must be obtained from Meta
+        # Business Manager by creating a System User with whatsapp_business_messaging and
+        # whatsapp_business_management scopes.
         whatsapp_business_account: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
@@ -213,10 +211,8 @@ module Sentdm
         allow_number_change_during_onboarding: nil,
         # Body param: Whether templates are shared across profiles (optional)
         allow_template_sharing: nil,
-        # Body param: Billing contact for this profile. Required when billing_model is
-        # "profile" or "profile_and_organization" and no billing contact has been
-        # configured yet. Identifies who receives invoices and who is responsible for
-        # payment.
+        # Body param: Billing contact information for a profile. Required when
+        # billing_model is "profile" or "profile_and_organization".
         billing_contact: nil,
         # Body param: Billing model: profile, organization, or profile_and_organization
         # (optional).
@@ -227,10 +223,8 @@ module Sentdm
         # - "profile_and_organization": the profile is billed first with the organization
         #   as fallback; billing_contact is required.
         billing_model: nil,
-        # Body param: Brand and KYC information for this profile (optional). When
-        # provided, creates or updates the brand associated with this profile. Cannot be
-        # set when inherit_tcr_brand is true. Once a brand has been submitted to TCR it
-        # cannot be modified.
+        # Body param: Brand and KYC data grouped into contact, business, and compliance
+        # sections
         brand: nil,
         # Body param: Profile description (optional)
         description: nil,
@@ -247,9 +241,9 @@ module Sentdm
         inherit_templates: nil,
         # Body param: Profile name (optional)
         name: nil,
-        # Body param: Payment card details for this profile (optional). Accepted when
-        # billing_model is "profile" or "profile_and_organization". Not persisted on our
-        # servers — forwarded to the payment processor.
+        # Body param: Payment card details for a profile. Accepted when billing_model is
+        # "profile" or "profile_and_organization". These details are not stored on our
+        # servers and will be forwarded to the payment processor.
         payment_details: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution

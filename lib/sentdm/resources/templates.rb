@@ -17,7 +17,7 @@ module Sentdm
       #
       # @param creation_source [String, nil] Body param: Source of template creation (default: from-api)
       #
-      # @param definition [Sentdm::Models::TemplateDefinition] Body param: Template definition including header, body, footer, and buttons
+      # @param definition [Sentdm::Models::TemplateDefinition] Body param: Complete definition of a message template including header, body, fo
       #
       # @param language [String, nil] Body param: Template language code (e.g., en_US) (optional, auto-detected if not
       #
@@ -87,7 +87,7 @@ module Sentdm
       #
       # @param category [String, nil] Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
       #
-      # @param definition [Sentdm::Models::TemplateDefinition, nil] Body param: Template definition including header, body, footer, and buttons
+      # @param definition [Sentdm::Models::TemplateDefinition, nil] Body param: Complete definition of a message template including header, body, fo
       #
       # @param language [String, nil] Body param: Template language code (e.g., en_US)
       #

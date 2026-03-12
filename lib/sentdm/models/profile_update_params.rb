@@ -31,9 +31,8 @@ module Sentdm
       optional :allow_template_sharing, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute billing_contact
-      #   Billing contact for this profile. Required when billing_model is "profile" or
-      #   "profile_and_organization" and no billing contact has been configured yet.
-      #   Identifies who receives invoices and who is responsible for payment.
+      #   Billing contact information for a profile. Required when billing_model is
+      #   "profile" or "profile_and_organization".
       #
       #   @return [Sentdm::Models::BillingContactInfo, nil]
       optional :billing_contact, -> { Sentdm::BillingContactInfo }, nil?: true
@@ -51,10 +50,7 @@ module Sentdm
       optional :billing_model, String, nil?: true
 
       # @!attribute brand
-      #   Brand and KYC information for this profile (optional). When provided, creates or
-      #   updates the brand associated with this profile. Cannot be set when
-      #   inherit_tcr_brand is true. Once a brand has been submitted to TCR it cannot be
-      #   modified.
+      #   Brand and KYC data grouped into contact, business, and compliance sections
       #
       #   @return [Sentdm::Models::BrandsBrandData, nil]
       optional :brand, -> { Sentdm::BrandsBrandData }, nil?: true
@@ -102,9 +98,9 @@ module Sentdm
       optional :name, String, nil?: true
 
       # @!attribute payment_details
-      #   Payment card details for this profile (optional). Accepted when billing_model is
-      #   "profile" or "profile_and_organization". Not persisted on our servers —
-      #   forwarded to the payment processor.
+      #   Payment card details for a profile. Accepted when billing_model is "profile" or
+      #   "profile_and_organization". These details are not stored on our servers and will
+      #   be forwarded to the payment processor.
       #
       #   @return [Sentdm::Models::PaymentDetails, nil]
       optional :payment_details, -> { Sentdm::PaymentDetails }, nil?: true
@@ -170,11 +166,11 @@ module Sentdm
       #
       #   @param allow_template_sharing [Boolean, nil] Whether templates are shared across profiles (optional)
       #
-      #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact for this profile. Required when billing_model is "profile" or "p
+      #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact information for a profile.
       #
       #   @param billing_model [String, nil] Billing model: profile, organization, or profile_and_organization (optional).
       #
-      #   @param brand [Sentdm::Models::BrandsBrandData, nil] Brand and KYC information for this profile (optional).
+      #   @param brand [Sentdm::Models::BrandsBrandData, nil] Brand and KYC data grouped into contact, business, and compliance sections
       #
       #   @param description [String, nil] Profile description (optional)
       #
@@ -190,7 +186,7 @@ module Sentdm
       #
       #   @param name [String, nil] Profile name (optional)
       #
-      #   @param payment_details [Sentdm::Models::PaymentDetails, nil] Payment card details for this profile (optional).
+      #   @param payment_details [Sentdm::Models::PaymentDetails, nil] Payment card details for a profile.
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #

@@ -8,21 +8,21 @@ module Sentdm
           T.any(Sentdm::APIResponseOfContact, Sentdm::Internal::AnyHash)
         end
 
-      # The response data (null if error)
+      # Contact response for v3 API Uses snake_case for JSON property names
       sig { returns(T.nilable(Sentdm::ContactResponse)) }
       attr_reader :data
 
       sig { params(data: T.nilable(Sentdm::ContactResponse::OrHash)).void }
       attr_writer :data
 
-      # Error details (null if successful)
+      # Error information
       sig { returns(T.nilable(Sentdm::APIError)) }
       attr_reader :error
 
       sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
       attr_writer :error
 
-      # Metadata about the request and response
+      # Request and response metadata
       sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
@@ -46,11 +46,11 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # The response data (null if error)
+        # Contact response for v3 API Uses snake_case for JSON property names
         data: nil,
-        # Error details (null if successful)
+        # Error information
         error: nil,
-        # Metadata about the request and response
+        # Request and response metadata
         meta: nil,
         # Indicates whether the request was successful
         success: nil

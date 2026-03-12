@@ -4,13 +4,11 @@ module Sentdm
   module Models
     class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo < Sentdm::Internal::Type::BaseModel
       # @!attribute brand_relationship
-      #   Brand relationship level with TCR (required for TCR)
       #
       #   @return [Symbol, Sentdm::Models::TcrBrandRelationship]
       required :brand_relationship, enum: -> { Sentdm::TcrBrandRelationship }, api_name: :brandRelationship
 
       # @!attribute vertical
-      #   Business vertical/industry category (required for TCR)
       #
       #   @return [Symbol, Sentdm::Models::TcrVertical]
       required :vertical, enum: -> { Sentdm::TcrVertical }
@@ -57,9 +55,9 @@ module Sentdm
       # @!method initialize(brand_relationship:, vertical:, destination_countries: nil, expected_messaging_volume: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil, primary_use_case: nil)
       #   Compliance and TCR information for brand registration
       #
-      #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship] Brand relationship level with TCR (required for TCR)
+      #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship]
       #
-      #   @param vertical [Symbol, Sentdm::Models::TcrVertical] Business vertical/industry category (required for TCR)
+      #   @param vertical [Symbol, Sentdm::Models::TcrVertical]
       #
       #   @param destination_countries [Array<Sentdm::Models::DestinationCountry>, nil] List of destination countries for messaging
       #
