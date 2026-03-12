@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    type sent_dm_services_common_contracts_poc_os_template_footer =
+      {
+        template: String,
+        type: String?,
+        variables: ::Array[Sentdm::TemplateVariable]?
+      }
+
+    class SentDmServicesCommonContractsPocOsTemplateFooter < Sentdm::Internal::Type::BaseModel
+      attr_reader template: String?
+
+      def template=: (String) -> String
+
+      attr_accessor type: String?
+
+      attr_accessor variables: ::Array[Sentdm::TemplateVariable]?
+
+      def initialize: (
+        ?template: String,
+        ?type: String?,
+        ?variables: ::Array[Sentdm::TemplateVariable]?
+      ) -> void
+
+      def to_hash: -> {
+        template: String,
+        type: String?,
+        variables: ::Array[Sentdm::TemplateVariable]?
+      }
+    end
+  end
+end
