@@ -4,7 +4,7 @@ module Sentdm
       type campaign_list_response =
         {
           data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?,
-          error: Sentdm::APIError?,
+          error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }
@@ -12,7 +12,7 @@ module Sentdm
       class CampaignListResponse < Sentdm::Internal::Type::BaseModel
         attr_accessor data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?
 
-        attr_accessor error: Sentdm::APIError?
+        attr_accessor error: Sentdm::ErrorDetail?
 
         attr_reader meta: Sentdm::APIMeta?
 
@@ -24,14 +24,14 @@ module Sentdm
 
         def initialize: (
           ?data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?,
-          ?error: Sentdm::APIError?,
+          ?error: Sentdm::ErrorDetail?,
           ?meta: Sentdm::APIMeta,
           ?success: bool
         ) -> void
 
         def to_hash: -> {
           data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?,
-          error: Sentdm::APIError?,
+          error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }

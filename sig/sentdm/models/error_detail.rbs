@@ -1,6 +1,6 @@
 module Sentdm
   module Models
-    type api_error =
+    type error_detail =
       {
         code: String,
         details: ::Hash[Symbol, ::Array[String]]?,
@@ -8,7 +8,7 @@ module Sentdm
         message: String
       }
 
-    class APIError < Sentdm::Internal::Type::BaseModel
+    class ErrorDetail < Sentdm::Internal::Type::BaseModel
       attr_reader code: String?
 
       def code=: (String) -> String

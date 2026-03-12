@@ -2,9 +2,9 @@
 
 module Sentdm
   module Models
-    class APIError < Sentdm::Internal::Type::BaseModel
+    class ErrorDetail < Sentdm::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(Sentdm::APIError, Sentdm::Internal::AnyHash) }
+        T.type_alias { T.any(Sentdm::ErrorDetail, Sentdm::Internal::AnyHash) }
 
       # Machine-readable error code (e.g., "RESOURCE_001")
       sig { returns(T.nilable(String)) }
