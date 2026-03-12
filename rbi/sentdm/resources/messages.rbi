@@ -66,7 +66,8 @@ module Sentdm
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
-        # Body param: Template reference (by id or name, with optional parameters)
+        # Body param: SDK-style template reference: resolve by ID or by name, with
+        # optional parameters.
         template: nil,
         # Body param: List of recipient phone numbers in E.164 format (multi-recipient
         # fan-out)

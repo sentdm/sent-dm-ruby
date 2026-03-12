@@ -20,9 +20,8 @@ module Sentdm
       optional :allow_template_sharing, Sentdm::Internal::Type::Boolean
 
       # @!attribute billing_contact
-      #   Billing contact for this profile. Required when billing_model is "profile" or
-      #   "profile_and_organization". Identifies who receives invoices and who is
-      #   responsible for payment.
+      #   Billing contact information for a profile. Required when billing_model is
+      #   "profile" or "profile_and_organization".
       #
       #   @return [Sentdm::Models::BillingContactInfo, nil]
       optional :billing_contact, -> { Sentdm::BillingContactInfo }, nil?: true
@@ -41,9 +40,7 @@ module Sentdm
       optional :billing_model, String, nil?: true
 
       # @!attribute brand
-      #   Brand and KYC information for this profile (optional). When provided, creates
-      #   the brand associated with this profile. Cannot be set when inherit_tcr_brand is
-      #   true.
+      #   Brand and KYC data grouped into contact, business, and compliance sections
       #
       #   @return [Sentdm::Models::BrandsBrandData, nil]
       optional :brand, -> { Sentdm::BrandsBrandData }, nil?: true
@@ -91,9 +88,9 @@ module Sentdm
       optional :name, String
 
       # @!attribute payment_details
-      #   Payment card details for this profile (optional). Accepted when billing_model is
-      #   "profile" or "profile_and_organization". Not persisted on our servers —
-      #   forwarded to the payment processor.
+      #   Payment card details for a profile. Accepted when billing_model is "profile" or
+      #   "profile_and_organization". These details are not stored on our servers and will
+      #   be forwarded to the payment processor.
       #
       #   @return [Sentdm::Models::PaymentDetails, nil]
       optional :payment_details, -> { Sentdm::PaymentDetails }, nil?: true
@@ -114,11 +111,11 @@ module Sentdm
       optional :short_name, String, nil?: true
 
       # @!attribute whatsapp_business_account
-      #   Direct WhatsApp Business Account credentials for this profile. When provided,
-      #   the profile uses its own WhatsApp Business Account instead of inheriting from
-      #   the organization. When omitted, the profile inherits the organization's WhatsApp
-      #   Business Account (requires the organization to have completed WhatsApp Embedded
-      #   Signup).
+      #   Direct WhatsApp Business Account credentials for a profile. Use this when the
+      #   profile should have its own WhatsApp Business Account instead of inheriting from
+      #   the organization. Credentials must be obtained from Meta Business Manager by
+      #   creating a System User with whatsapp_business_messaging and
+      #   whatsapp_business_management scopes.
       #
       #   @return [Sentdm::Models::ProfileCreateParams::WhatsappBusinessAccount, nil]
       optional :whatsapp_business_account,
@@ -143,11 +140,11 @@ module Sentdm
       #
       #   @param allow_template_sharing [Boolean] Whether templates are shared across profiles (default: false)
       #
-      #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact for this profile. Required when billing_model is "profile" or "p
+      #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact information for a profile.
       #
       #   @param billing_model [String, nil] Billing model: profile, organization, or profile_and_organization (default: prof
       #
-      #   @param brand [Sentdm::Models::BrandsBrandData, nil] Brand and KYC information for this profile (optional).
+      #   @param brand [Sentdm::Models::BrandsBrandData, nil] Brand and KYC data grouped into contact, business, and compliance sections
       #
       #   @param description [String, nil] Profile description (optional)
       #
@@ -163,13 +160,13 @@ module Sentdm
       #
       #   @param name [String] Profile name (required)
       #
-      #   @param payment_details [Sentdm::Models::PaymentDetails, nil] Payment card details for this profile (optional).
+      #   @param payment_details [Sentdm::Models::PaymentDetails, nil] Payment card details for a profile.
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
       #   @param short_name [String, nil] Profile short name/abbreviation (optional). Must be 3–11 characters, contain onl
       #
-      #   @param whatsapp_business_account [Sentdm::Models::ProfileCreateParams::WhatsappBusinessAccount, nil] Direct WhatsApp Business Account credentials for this profile.
+      #   @param whatsapp_business_account [Sentdm::Models::ProfileCreateParams::WhatsappBusinessAccount, nil] Direct WhatsApp Business Account credentials for a profile.
       #
       #   @param idempotency_key [String]
       #
@@ -205,11 +202,11 @@ module Sentdm
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::ProfileCreateParams::WhatsappBusinessAccount} for more details.
         #
-        #   Direct WhatsApp Business Account credentials for this profile. When provided,
-        #   the profile uses its own WhatsApp Business Account instead of inheriting from
-        #   the organization. When omitted, the profile inherits the organization's WhatsApp
-        #   Business Account (requires the organization to have completed WhatsApp Embedded
-        #   Signup).
+        #   Direct WhatsApp Business Account credentials for a profile. Use this when the
+        #   profile should have its own WhatsApp Business Account instead of inheriting from
+        #   the organization. Credentials must be obtained from Meta Business Manager by
+        #   creating a System User with whatsapp_business_messaging and
+        #   whatsapp_business_management scopes.
         #
         #   @param access_token [String] System User access token with whatsapp_business_messaging and
         #

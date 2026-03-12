@@ -5,19 +5,19 @@ module Sentdm
     # @see Sentdm::Resources::Profiles#list
     class ProfileListResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   The response data (null if error)
+      #   List of profiles response
       #
       #   @return [Sentdm::Models::ProfileListResponse::Data, nil]
       optional :data, -> { Sentdm::Models::ProfileListResponse::Data }, nil?: true
 
       # @!attribute error
-      #   Error details (null if successful)
+      #   Error information
       #
       #   @return [Sentdm::Models::APIError, nil]
       optional :error, -> { Sentdm::APIError }, nil?: true
 
       # @!attribute meta
-      #   Metadata about the request and response
+      #   Request and response metadata
       #
       #   @return [Sentdm::Models::APIMeta, nil]
       optional :meta, -> { Sentdm::APIMeta }
@@ -31,11 +31,11 @@ module Sentdm
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::ProfileListResponse::Data, nil] The response data (null if error)
+      #   @param data [Sentdm::Models::ProfileListResponse::Data, nil] List of profiles response
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #   @param error [Sentdm::Models::APIError, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -48,7 +48,7 @@ module Sentdm
         optional :profiles, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::ProfileDetail] }
 
         # @!method initialize(profiles: nil)
-        #   The response data (null if error)
+        #   List of profiles response
         #
         #   @param profiles [Array<Sentdm::Models::ProfileDetail>] List of profiles in the organization
       end

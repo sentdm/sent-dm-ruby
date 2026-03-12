@@ -5,19 +5,19 @@ module Sentdm
     # @see Sentdm::Resources::Messages#retrieve_activities
     class MessageRetrieveActivitiesResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   The response data (null if error)
+      #   Response for GET /messages/{id}/activities
       #
       #   @return [Sentdm::Models::MessageRetrieveActivitiesResponse::Data, nil]
       optional :data, -> { Sentdm::Models::MessageRetrieveActivitiesResponse::Data }, nil?: true
 
       # @!attribute error
-      #   Error details (null if successful)
+      #   Error information
       #
       #   @return [Sentdm::Models::APIError, nil]
       optional :error, -> { Sentdm::APIError }, nil?: true
 
       # @!attribute meta
-      #   Metadata about the request and response
+      #   Request and response metadata
       #
       #   @return [Sentdm::Models::APIMeta, nil]
       optional :meta, -> { Sentdm::APIMeta }
@@ -31,11 +31,11 @@ module Sentdm
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::MessageRetrieveActivitiesResponse::Data, nil] The response data (null if error)
+      #   @param data [Sentdm::Models::MessageRetrieveActivitiesResponse::Data, nil] Response for GET /messages/{id}/activities
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #   @param error [Sentdm::Models::APIError, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -55,7 +55,7 @@ module Sentdm
         optional :message_id, String
 
         # @!method initialize(activities: nil, message_id: nil)
-        #   The response data (null if error)
+        #   Response for GET /messages/{id}/activities
         #
         #   @param activities [Array<Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity>] List of activity events ordered by most recent first
         #

@@ -75,7 +75,7 @@ module Sentdm
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
-      # @param template [Sentdm::Models::MessageSendParams::Template] Body param: Template reference (by id or name, with optional parameters)
+      # @param template [Sentdm::Models::MessageSendParams::Template] Body param: SDK-style template reference: resolve by ID or by name, with optiona
       #
       # @param to [Array<String>] Body param: List of recipient phone numbers in E.164 format (multi-recipient fan
       #

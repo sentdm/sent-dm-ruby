@@ -25,9 +25,8 @@ module Sentdm
       sig { params(allow_template_sharing: T::Boolean).void }
       attr_writer :allow_template_sharing
 
-      # Billing contact for this profile. Required when billing_model is "profile" or
-      # "profile_and_organization". Identifies who receives invoices and who is
-      # responsible for payment.
+      # Billing contact information for a profile. Required when billing_model is
+      # "profile" or "profile_and_organization".
       sig { returns(T.nilable(Sentdm::BillingContactInfo)) }
       attr_reader :billing_contact
 
@@ -49,9 +48,7 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :billing_model
 
-      # Brand and KYC information for this profile (optional). When provided, creates
-      # the brand associated with this profile. Cannot be set when inherit_tcr_brand is
-      # true.
+      # Brand and KYC data grouped into contact, business, and compliance sections
       sig { returns(T.nilable(Sentdm::BrandsBrandData)) }
       attr_reader :brand
 
@@ -89,9 +86,9 @@ module Sentdm
       sig { params(name: String).void }
       attr_writer :name
 
-      # Payment card details for this profile (optional). Accepted when billing_model is
-      # "profile" or "profile_and_organization". Not persisted on our servers —
-      # forwarded to the payment processor.
+      # Payment card details for a profile. Accepted when billing_model is "profile" or
+      # "profile_and_organization". These details are not stored on our servers and will
+      # be forwarded to the payment processor.
       sig { returns(T.nilable(Sentdm::PaymentDetails)) }
       attr_reader :payment_details
 
@@ -114,11 +111,11 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :short_name
 
-      # Direct WhatsApp Business Account credentials for this profile. When provided,
-      # the profile uses its own WhatsApp Business Account instead of inheriting from
-      # the organization. When omitted, the profile inherits the organization's WhatsApp
-      # Business Account (requires the organization to have completed WhatsApp Embedded
-      # Signup).
+      # Direct WhatsApp Business Account credentials for a profile. Use this when the
+      # profile should have its own WhatsApp Business Account instead of inheriting from
+      # the organization. Credentials must be obtained from Meta Business Manager by
+      # creating a System User with whatsapp_business_messaging and
+      # whatsapp_business_management scopes.
       sig do
         returns(T.nilable(Sentdm::ProfileCreateParams::WhatsappBusinessAccount))
       end
@@ -177,9 +174,8 @@ module Sentdm
         allow_contact_sharing: nil,
         # Whether templates are shared across profiles (default: false)
         allow_template_sharing: nil,
-        # Billing contact for this profile. Required when billing_model is "profile" or
-        # "profile_and_organization". Identifies who receives invoices and who is
-        # responsible for payment.
+        # Billing contact information for a profile. Required when billing_model is
+        # "profile" or "profile_and_organization".
         billing_contact: nil,
         # Billing model: profile, organization, or profile_and_organization (default:
         # profile).
@@ -190,9 +186,7 @@ module Sentdm
         # - "profile_and_organization": the profile is billed first with the organization
         #   as fallback; billing_contact is required.
         billing_model: nil,
-        # Brand and KYC information for this profile (optional). When provided, creates
-        # the brand associated with this profile. Cannot be set when inherit_tcr_brand is
-        # true.
+        # Brand and KYC data grouped into contact, business, and compliance sections
         brand: nil,
         # Profile description (optional)
         description: nil,
@@ -208,9 +202,9 @@ module Sentdm
         inherit_templates: nil,
         # Profile name (required)
         name: nil,
-        # Payment card details for this profile (optional). Accepted when billing_model is
-        # "profile" or "profile_and_organization". Not persisted on our servers —
-        # forwarded to the payment processor.
+        # Payment card details for a profile. Accepted when billing_model is "profile" or
+        # "profile_and_organization". These details are not stored on our servers and will
+        # be forwarded to the payment processor.
         payment_details: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
@@ -219,11 +213,11 @@ module Sentdm
         # only letters, numbers, and spaces, and include at least one letter. Example:
         # "SALES", "Mkt 2", "Support1".
         short_name: nil,
-        # Direct WhatsApp Business Account credentials for this profile. When provided,
-        # the profile uses its own WhatsApp Business Account instead of inheriting from
-        # the organization. When omitted, the profile inherits the organization's WhatsApp
-        # Business Account (requires the organization to have completed WhatsApp Embedded
-        # Signup).
+        # Direct WhatsApp Business Account credentials for a profile. Use this when the
+        # profile should have its own WhatsApp Business Account instead of inheriting from
+        # the organization. Credentials must be obtained from Meta Business Manager by
+        # creating a System User with whatsapp_business_messaging and
+        # whatsapp_business_management scopes.
         whatsapp_business_account: nil,
         idempotency_key: nil,
         x_profile_id: nil,
@@ -286,11 +280,11 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :phone_number_id
 
-        # Direct WhatsApp Business Account credentials for this profile. When provided,
-        # the profile uses its own WhatsApp Business Account instead of inheriting from
-        # the organization. When omitted, the profile inherits the organization's WhatsApp
-        # Business Account (requires the organization to have completed WhatsApp Embedded
-        # Signup).
+        # Direct WhatsApp Business Account credentials for a profile. Use this when the
+        # profile should have its own WhatsApp Business Account instead of inheriting from
+        # the organization. Credentials must be obtained from Meta Business Manager by
+        # creating a System User with whatsapp_business_messaging and
+        # whatsapp_business_management scopes.
         sig do
           params(
             access_token: String,

@@ -20,7 +20,8 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :creation_source
 
-      # Template definition including header, body, footer, and buttons
+      # Complete definition of a message template including header, body, footer, and
+      # buttons
       sig { returns(T.nilable(Sentdm::TemplateDefinition)) }
       attr_reader :definition
 
@@ -77,7 +78,8 @@ module Sentdm
         category: nil,
         # Source of template creation (default: from-api)
         creation_source: nil,
-        # Template definition including header, body, footer, and buttons
+        # Complete definition of a message template including header, body, footer, and
+        # buttons
         definition: nil,
         # Template language code (e.g., en_US) (optional, auto-detected if not provided)
         language: nil,

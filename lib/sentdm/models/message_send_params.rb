@@ -23,7 +23,8 @@ module Sentdm
       optional :sandbox, Sentdm::Internal::Type::Boolean
 
       # @!attribute template
-      #   Template reference (by id or name, with optional parameters)
+      #   SDK-style template reference: resolve by ID or by name, with optional
+      #   parameters.
       #
       #   @return [Sentdm::Models::MessageSendParams::Template, nil]
       optional :template, -> { Sentdm::MessageSendParams::Template }
@@ -52,7 +53,7 @@ module Sentdm
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
-      #   @param template [Sentdm::Models::MessageSendParams::Template] Template reference (by id or name, with optional parameters)
+      #   @param template [Sentdm::Models::MessageSendParams::Template] SDK-style template reference: resolve by ID or by name, with optional parameters
       #
       #   @param to [Array<String>] List of recipient phone numbers in E.164 format (multi-recipient fan-out)
       #
@@ -82,7 +83,8 @@ module Sentdm
         optional :parameters, Sentdm::Internal::Type::HashOf[String], nil?: true
 
         # @!method initialize(id: nil, name: nil, parameters: nil)
-        #   Template reference (by id or name, with optional parameters)
+        #   SDK-style template reference: resolve by ID or by name, with optional
+        #   parameters.
         #
         #   @param id [String, nil] Template ID (mutually exclusive with name)
         #

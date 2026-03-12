@@ -18,7 +18,8 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :category
 
-      # Template definition including header, body, footer, and buttons
+      # Complete definition of a message template including header, body, footer, and
+      # buttons
       sig { returns(T.nilable(Sentdm::TemplateDefinition)) }
       attr_reader :definition
 
@@ -80,7 +81,8 @@ module Sentdm
         id:,
         # Template category: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Template definition including header, body, footer, and buttons
+        # Complete definition of a message template including header, body, footer, and
+        # buttons
         definition: nil,
         # Template language code (e.g., en_US)
         language: nil,

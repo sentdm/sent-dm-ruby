@@ -8,7 +8,7 @@ module Sentdm
           T.any(Sentdm::Models::TemplateListResponse, Sentdm::Internal::AnyHash)
         end
 
-      # The response data (null if error)
+      # Paginated list of templates
       sig { returns(T.nilable(Sentdm::Models::TemplateListResponse::Data)) }
       attr_reader :data
 
@@ -19,14 +19,14 @@ module Sentdm
       end
       attr_writer :data
 
-      # Error details (null if successful)
+      # Error information
       sig { returns(T.nilable(Sentdm::APIError)) }
       attr_reader :error
 
       sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
       attr_writer :error
 
-      # Metadata about the request and response
+      # Request and response metadata
       sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
@@ -50,11 +50,11 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # The response data (null if error)
+        # Paginated list of templates
         data: nil,
-        # Error details (null if successful)
+        # Error information
         error: nil,
-        # Metadata about the request and response
+        # Request and response metadata
         meta: nil,
         # Indicates whether the request was successful
         success: nil
@@ -83,7 +83,7 @@ module Sentdm
             )
           end
 
-        # Pagination metadata
+        # Pagination metadata for list responses
         sig { returns(T.nilable(Sentdm::PaginationMeta)) }
         attr_reader :pagination
 
@@ -97,7 +97,7 @@ module Sentdm
         sig { params(templates: T::Array[Sentdm::Template::OrHash]).void }
         attr_writer :templates
 
-        # The response data (null if error)
+        # Paginated list of templates
         sig do
           params(
             pagination: Sentdm::PaginationMeta::OrHash,
@@ -105,7 +105,7 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
-          # Pagination metadata
+          # Pagination metadata for list responses
           pagination: nil,
           # List of templates
           templates: nil

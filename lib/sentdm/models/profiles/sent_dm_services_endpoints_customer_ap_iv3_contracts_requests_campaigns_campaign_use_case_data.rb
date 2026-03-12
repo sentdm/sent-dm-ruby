@@ -5,7 +5,6 @@ module Sentdm
     module Profiles
       class SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData < Sentdm::Internal::Type::BaseModel
         # @!attribute messaging_use_case_us
-        #   US messaging use case category
         #
         #   @return [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs]
         required :messaging_use_case_us,
@@ -21,7 +20,7 @@ module Sentdm
         # @!method initialize(messaging_use_case_us:, sample_messages:)
         #   Campaign use case with sample messages
         #
-        #   @param messaging_use_case_us [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs] US messaging use case category
+        #   @param messaging_use_case_us [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs]
         #
         #   @param sample_messages [Array<String>] Sample messages for this use case (1-5 messages, max 1024 characters each)
       end

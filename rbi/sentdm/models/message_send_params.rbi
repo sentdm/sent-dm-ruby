@@ -25,7 +25,8 @@ module Sentdm
       sig { params(sandbox: T::Boolean).void }
       attr_writer :sandbox
 
-      # Template reference (by id or name, with optional parameters)
+      # SDK-style template reference: resolve by ID or by name, with optional
+      # parameters.
       sig { returns(T.nilable(Sentdm::MessageSendParams::Template)) }
       attr_reader :template
 
@@ -70,7 +71,8 @@ module Sentdm
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
         sandbox: nil,
-        # Template reference (by id or name, with optional parameters)
+        # SDK-style template reference: resolve by ID or by name, with optional
+        # parameters.
         template: nil,
         # List of recipient phone numbers in E.164 format (multi-recipient fan-out)
         to: nil,
@@ -117,7 +119,8 @@ module Sentdm
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_accessor :parameters
 
-        # Template reference (by id or name, with optional parameters)
+        # SDK-style template reference: resolve by ID or by name, with optional
+        # parameters.
         sig do
           params(
             id: T.nilable(String),

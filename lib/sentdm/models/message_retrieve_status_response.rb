@@ -5,19 +5,19 @@ module Sentdm
     # @see Sentdm::Resources::Messages#retrieve_status
     class MessageRetrieveStatusResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   The response data (null if error)
+      #   Message response for v3 API — same shape as v2 with snake_case JSON conventions
       #
       #   @return [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil]
       optional :data, -> { Sentdm::Models::MessageRetrieveStatusResponse::Data }, nil?: true
 
       # @!attribute error
-      #   Error details (null if successful)
+      #   Error information
       #
       #   @return [Sentdm::Models::APIError, nil]
       optional :error, -> { Sentdm::APIError }, nil?: true
 
       # @!attribute meta
-      #   Metadata about the request and response
+      #   Request and response metadata
       #
       #   @return [Sentdm::Models::APIMeta, nil]
       optional :meta, -> { Sentdm::APIMeta }
@@ -31,11 +31,11 @@ module Sentdm
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil] The response data (null if error)
+      #   @param data [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil] Message response for v3 API — same shape as v2 with snake_case JSON conventions
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #   @param error [Sentdm::Models::APIError, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -131,7 +131,7 @@ module Sentdm
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MessageRetrieveStatusResponse::Data} for more details.
         #
-        #   The response data (null if error)
+        #   Message response for v3 API — same shape as v2 with snake_case JSON conventions
         #
         #   @param id [String]
         #
