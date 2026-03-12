@@ -14,7 +14,7 @@ module Sentdm
         required :profile_id, String
 
         # @!attribute campaign
-        #   Campaign data
+        #   Campaign data for create or update operation
         #
         #   @return [Sentdm::Models::Profiles::CampaignData]
         required :campaign, -> { Sentdm::Profiles::CampaignData }
@@ -42,7 +42,7 @@ module Sentdm
         #
         #   @param profile_id [String]
         #
-        #   @param campaign [Sentdm::Models::Profiles::CampaignData] Campaign data
+        #   @param campaign [Sentdm::Models::Profiles::CampaignData] Campaign data for create or update operation
         #
         #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
         #

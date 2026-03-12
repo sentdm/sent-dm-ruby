@@ -20,7 +20,7 @@ module Sentdm
         def create(
           # Path param: Profile ID from route
           profile_id,
-          # Body param: Campaign data
+          # Body param: Campaign data for create or update operation
           campaign:,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
@@ -55,7 +55,7 @@ module Sentdm
           campaign_id,
           # Path param: Profile ID from route
           profile_id:,
-          # Body param: Campaign data
+          # Body param: Campaign data for create or update operation
           campaign:,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution

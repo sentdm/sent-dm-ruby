@@ -5,19 +5,21 @@ module Sentdm
     # @see Sentdm::Resources::Me#retrieve
     class MeRetrieveResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   The response data (null if error)
+      #   Account response for GET /v3/me endpoint. Returns organization (with profiles),
+      #   user (standalone), or profile (child of an organization) data depending on the
+      #   API key type. Always includes messaging channel configuration.
       #
       #   @return [Sentdm::Models::MeRetrieveResponse::Data, nil]
       optional :data, -> { Sentdm::Models::MeRetrieveResponse::Data }, nil?: true
 
       # @!attribute error
-      #   Error details (null if successful)
+      #   Error information
       #
       #   @return [Sentdm::Models::APIError, nil]
       optional :error, -> { Sentdm::APIError }, nil?: true
 
       # @!attribute meta
-      #   Metadata about the request and response
+      #   Request and response metadata
       #
       #   @return [Sentdm::Models::APIMeta, nil]
       optional :meta, -> { Sentdm::APIMeta }
@@ -29,13 +31,16 @@ module Sentdm
       optional :success, Sentdm::Internal::Type::Boolean
 
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::MeRetrieveResponse} for more details.
+      #
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::MeRetrieveResponse::Data, nil] The response data (null if error)
+      #   @param data [Sentdm::Models::MeRetrieveResponse::Data, nil] Account response for GET /v3/me endpoint.
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #   @param error [Sentdm::Models::APIError, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -48,7 +53,8 @@ module Sentdm
         optional :id, String
 
         # @!attribute channels
-        #   Messaging channel configuration
+        #   Messaging channel configuration. All three channels are always present. Each
+        #   channel has a "configured" flag; configured channels expose additional details.
         #
         #   @return [Sentdm::Models::MeRetrieveResponse::Data::Channels, nil]
         optional :channels, -> { Sentdm::Models::MeRetrieveResponse::Data::Channels }
@@ -98,7 +104,7 @@ module Sentdm
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::MeRetrieveResponse::Data::Profile] }
 
         # @!attribute settings
-        #   Profile settings (only for profile type)
+        #   Profile configuration settings
         #
         #   @return [Sentdm::Models::ProfileSettings, nil]
         optional :settings, -> { Sentdm::ProfileSettings }, nil?: true
@@ -127,11 +133,13 @@ module Sentdm
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MeRetrieveResponse::Data} for more details.
         #
-        #   The response data (null if error)
+        #   Account response for GET /v3/me endpoint. Returns organization (with profiles),
+        #   user (standalone), or profile (child of an organization) data depending on the
+        #   API key type. Always includes messaging channel configuration.
         #
         #   @param id [String] Customer ID (organization, account, or profile)
         #
-        #   @param channels [Sentdm::Models::MeRetrieveResponse::Data::Channels] Messaging channel configuration
+        #   @param channels [Sentdm::Models::MeRetrieveResponse::Data::Channels] Messaging channel configuration. All three channels are always present.
         #
         #   @param created_at [Time] When the account was created
         #
@@ -147,7 +155,7 @@ module Sentdm
         #
         #   @param profiles [Array<Sentdm::Models::MeRetrieveResponse::Data::Profile>] List of profiles (populated for organization type, empty for user and profile ty
         #
-        #   @param settings [Sentdm::Models::ProfileSettings, nil] Profile settings (only for profile type)
+        #   @param settings [Sentdm::Models::ProfileSettings, nil] Profile configuration settings
         #
         #   @param short_name [String, nil] Short name / abbreviation (only for profile type)
         #
@@ -158,31 +166,36 @@ module Sentdm
         # @see Sentdm::Models::MeRetrieveResponse::Data#channels
         class Channels < Sentdm::Internal::Type::BaseModel
           # @!attribute rcs
-          #   RCS channel (provider: vibes)
+          #   RCS channel configuration. When configured, includes the RCS phone number.
           #
           #   @return [Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs, nil]
           optional :rcs, -> { Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs }
 
           # @!attribute sms
-          #   SMS channel (providers: telnyx, sinch)
+          #   SMS channel configuration. When configured, includes the sending phone number.
           #
           #   @return [Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS, nil]
           optional :sms, -> { Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS }
 
           # @!attribute whatsapp
-          #   WhatsApp Business channel (provider: meta)
+          #   WhatsApp Business channel configuration. When configured, includes the WhatsApp
+          #   phone number and business name.
           #
           #   @return [Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp, nil]
           optional :whatsapp, -> { Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp }
 
           # @!method initialize(rcs: nil, sms: nil, whatsapp: nil)
-          #   Messaging channel configuration
+          #   Some parameter documentations has been truncated, see
+          #   {Sentdm::Models::MeRetrieveResponse::Data::Channels} for more details.
           #
-          #   @param rcs [Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs] RCS channel (provider: vibes)
+          #   Messaging channel configuration. All three channels are always present. Each
+          #   channel has a "configured" flag; configured channels expose additional details.
           #
-          #   @param sms [Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS] SMS channel (providers: telnyx, sinch)
+          #   @param rcs [Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs] RCS channel configuration. When configured, includes the RCS phone number.
           #
-          #   @param whatsapp [Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp] WhatsApp Business channel (provider: meta)
+          #   @param sms [Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS] SMS channel configuration. When configured, includes the sending phone number.
+          #
+          #   @param whatsapp [Sentdm::Models::MeRetrieveResponse::Data::Channels::Whatsapp] WhatsApp Business channel configuration. When configured, includes the WhatsApp
 
           # @see Sentdm::Models::MeRetrieveResponse::Data::Channels#rcs
           class Rcs < Sentdm::Internal::Type::BaseModel
@@ -199,7 +212,7 @@ module Sentdm
             optional :phone_number, String, nil?: true
 
             # @!method initialize(configured: nil, phone_number: nil)
-            #   RCS channel (provider: vibes)
+            #   RCS channel configuration. When configured, includes the RCS phone number.
             #
             #   @param configured [Boolean] Whether RCS is configured for this account
             #
@@ -221,7 +234,7 @@ module Sentdm
             optional :phone_number, String, nil?: true
 
             # @!method initialize(configured: nil, phone_number: nil)
-            #   SMS channel (providers: telnyx, sinch)
+            #   SMS channel configuration. When configured, includes the sending phone number.
             #
             #   @param configured [Boolean] Whether SMS is configured for this account
             #
@@ -249,7 +262,8 @@ module Sentdm
             optional :phone_number, String, nil?: true
 
             # @!method initialize(business_name: nil, configured: nil, phone_number: nil)
-            #   WhatsApp Business channel (provider: meta)
+            #   WhatsApp Business channel configuration. When configured, includes the WhatsApp
+            #   phone number and business name.
             #
             #   @param business_name [String, nil] WhatsApp Business display name
             #

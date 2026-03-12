@@ -8,7 +8,9 @@ module Sentdm
           T.any(Sentdm::Models::MeRetrieveResponse, Sentdm::Internal::AnyHash)
         end
 
-      # The response data (null if error)
+      # Account response for GET /v3/me endpoint. Returns organization (with profiles),
+      # user (standalone), or profile (child of an organization) data depending on the
+      # API key type. Always includes messaging channel configuration.
       sig { returns(T.nilable(Sentdm::Models::MeRetrieveResponse::Data)) }
       attr_reader :data
 
@@ -19,14 +21,14 @@ module Sentdm
       end
       attr_writer :data
 
-      # Error details (null if successful)
+      # Error information
       sig { returns(T.nilable(Sentdm::APIError)) }
       attr_reader :error
 
       sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
       attr_writer :error
 
-      # Metadata about the request and response
+      # Request and response metadata
       sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
@@ -50,11 +52,13 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # The response data (null if error)
+        # Account response for GET /v3/me endpoint. Returns organization (with profiles),
+        # user (standalone), or profile (child of an organization) data depending on the
+        # API key type. Always includes messaging channel configuration.
         data: nil,
-        # Error details (null if successful)
+        # Error information
         error: nil,
-        # Metadata about the request and response
+        # Request and response metadata
         meta: nil,
         # Indicates whether the request was successful
         success: nil
@@ -90,7 +94,8 @@ module Sentdm
         sig { params(id: String).void }
         attr_writer :id
 
-        # Messaging channel configuration
+        # Messaging channel configuration. All three channels are always present. Each
+        # channel has a "configured" flag; configured channels expose additional details.
         sig do
           returns(T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Channels))
         end
@@ -154,7 +159,7 @@ module Sentdm
         end
         attr_writer :profiles
 
-        # Profile settings (only for profile type)
+        # Profile configuration settings
         sig { returns(T.nilable(Sentdm::ProfileSettings)) }
         attr_reader :settings
 
@@ -180,7 +185,9 @@ module Sentdm
         sig { params(type: String).void }
         attr_writer :type
 
-        # The response data (null if error)
+        # Account response for GET /v3/me endpoint. Returns organization (with profiles),
+        # user (standalone), or profile (child of an organization) data depending on the
+        # API key type. Always includes messaging channel configuration.
         sig do
           params(
             id: String,
@@ -205,7 +212,8 @@ module Sentdm
         def self.new(
           # Customer ID (organization, account, or profile)
           id: nil,
-          # Messaging channel configuration
+          # Messaging channel configuration. All three channels are always present. Each
+          # channel has a "configured" flag; configured channels expose additional details.
           channels: nil,
           # When the account was created
           created_at: nil,
@@ -222,7 +230,7 @@ module Sentdm
           # List of profiles (populated for organization type, empty for user and profile
           # types)
           profiles: nil,
-          # Profile settings (only for profile type)
+          # Profile configuration settings
           settings: nil,
           # Short name / abbreviation (only for profile type)
           short_name: nil,
@@ -267,7 +275,7 @@ module Sentdm
               )
             end
 
-          # RCS channel (provider: vibes)
+          # RCS channel configuration. When configured, includes the RCS phone number.
           sig do
             returns(
               T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Channels::Rcs)
@@ -283,7 +291,7 @@ module Sentdm
           end
           attr_writer :rcs
 
-          # SMS channel (providers: telnyx, sinch)
+          # SMS channel configuration. When configured, includes the sending phone number.
           sig do
             returns(
               T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Channels::SMS)
@@ -299,7 +307,8 @@ module Sentdm
           end
           attr_writer :sms
 
-          # WhatsApp Business channel (provider: meta)
+          # WhatsApp Business channel configuration. When configured, includes the WhatsApp
+          # phone number and business name.
           sig do
             returns(
               T.nilable(
@@ -317,7 +326,8 @@ module Sentdm
           end
           attr_writer :whatsapp
 
-          # Messaging channel configuration
+          # Messaging channel configuration. All three channels are always present. Each
+          # channel has a "configured" flag; configured channels expose additional details.
           sig do
             params(
               rcs:
@@ -329,11 +339,12 @@ module Sentdm
             ).returns(T.attached_class)
           end
           def self.new(
-            # RCS channel (provider: vibes)
+            # RCS channel configuration. When configured, includes the RCS phone number.
             rcs: nil,
-            # SMS channel (providers: telnyx, sinch)
+            # SMS channel configuration. When configured, includes the sending phone number.
             sms: nil,
-            # WhatsApp Business channel (provider: meta)
+            # WhatsApp Business channel configuration. When configured, includes the WhatsApp
+            # phone number and business name.
             whatsapp: nil
           )
           end
@@ -371,7 +382,7 @@ module Sentdm
             sig { returns(T.nilable(String)) }
             attr_accessor :phone_number
 
-            # RCS channel (provider: vibes)
+            # RCS channel configuration. When configured, includes the RCS phone number.
             sig do
               params(
                 configured: T::Boolean,
@@ -415,7 +426,7 @@ module Sentdm
             sig { returns(T.nilable(String)) }
             attr_accessor :phone_number
 
-            # SMS channel (providers: telnyx, sinch)
+            # SMS channel configuration. When configured, includes the sending phone number.
             sig do
               params(
                 configured: T::Boolean,
@@ -463,7 +474,8 @@ module Sentdm
             sig { returns(T.nilable(String)) }
             attr_accessor :phone_number
 
-            # WhatsApp Business channel (provider: meta)
+            # WhatsApp Business channel configuration. When configured, includes the WhatsApp
+            # phone number and business name.
             sig do
               params(
                 business_name: T.nilable(String),

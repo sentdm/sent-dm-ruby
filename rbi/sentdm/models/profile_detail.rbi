@@ -31,8 +31,7 @@ module Sentdm
       sig { params(allow_template_sharing: T::Boolean).void }
       attr_writer :allow_template_sharing
 
-      # Billing contact for this profile. Present when billing_model is "profile" or
-      # "profile_and_organization".
+      # Billing contact info returned in profile responses
       sig { returns(T.nilable(Sentdm::ProfileDetail::BillingContact)) }
       attr_reader :billing_contact
 
@@ -51,8 +50,8 @@ module Sentdm
       sig { params(billing_model: String).void }
       attr_writer :billing_model
 
-      # Brand associated with this profile. Null if no brand has been configured yet.
-      # Includes KYC information and TCR registration status.
+      # Brand response with nested contact, business, and compliance sections — mirrors
+      # the request structure.
       sig { returns(T.nilable(Sentdm::ProfileDetail::Brand)) }
       attr_reader :brand
 
@@ -196,13 +195,12 @@ module Sentdm
         allow_number_change_during_onboarding: nil,
         # Whether templates are shared across profiles in the organization
         allow_template_sharing: nil,
-        # Billing contact for this profile. Present when billing_model is "profile" or
-        # "profile_and_organization".
+        # Billing contact info returned in profile responses
         billing_contact: nil,
         # Billing model: profile, organization, or profile_and_organization
         billing_model: nil,
-        # Brand associated with this profile. Null if no brand has been configured yet.
-        # Includes KYC information and TCR registration status.
+        # Brand response with nested contact, business, and compliance sections — mirrors
+        # the request structure.
         brand: nil,
         # When the profile was created
         created_at: nil,
@@ -300,8 +298,7 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :phone
 
-        # Billing contact for this profile. Present when billing_model is "profile" or
-        # "profile_and_organization".
+        # Billing contact info returned in profile responses
         sig do
           params(
             address: T.nilable(String),
@@ -385,7 +382,6 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :csp_id
 
-        # TCR brand identity verification status
         sig do
           returns(
             T.nilable(
@@ -402,7 +398,6 @@ module Sentdm
         sig { params(is_inherited: T::Boolean).void }
         attr_writer :is_inherited
 
-        # TCR brand status
         sig do
           returns(T.nilable(Sentdm::ProfileDetail::Brand::Status::TaggedSymbol))
         end
@@ -431,8 +426,8 @@ module Sentdm
         sig { returns(T.nilable(Time)) }
         attr_accessor :updated_at
 
-        # Brand associated with this profile. Null if no brand has been configured yet.
-        # Includes KYC information and TCR registration status.
+        # Brand response with nested contact, business, and compliance sections — mirrors
+        # the request structure.
         sig do
           params(
             id: String,
@@ -466,11 +461,9 @@ module Sentdm
           created_at: nil,
           # CSP (Campaign Service Provider) ID
           csp_id: nil,
-          # TCR brand identity verification status
           identity_status: nil,
           # Whether this brand is inherited from the parent organization
           is_inherited: nil,
-          # TCR brand status
           status: nil,
           # When the brand was submitted to TCR
           submitted_at: nil,
@@ -637,7 +630,6 @@ module Sentdm
               )
             end
 
-          # Brand relationship level with TCR
           sig { returns(T.nilable(Sentdm::TcrBrandRelationship::TaggedSymbol)) }
           attr_accessor :brand_relationship
 
@@ -676,7 +668,6 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :primary_use_case
 
-          # Business vertical/industry category
           sig { returns(T.nilable(Sentdm::TcrVertical::TaggedSymbol)) }
           attr_accessor :vertical
 
@@ -696,7 +687,6 @@ module Sentdm
             ).returns(T.attached_class)
           end
           def self.new(
-            # Brand relationship level with TCR
             brand_relationship: nil,
             # List of destination countries for messaging
             destination_countries: nil,
@@ -710,7 +700,6 @@ module Sentdm
             phone_number_prefix: nil,
             # Primary messaging use case description
             primary_use_case: nil,
-            # Business vertical/industry category
             vertical: nil
           )
           end
@@ -813,7 +802,6 @@ module Sentdm
           end
         end
 
-        # TCR brand identity verification status
         module IdentityStatus
           extend Sentdm::Internal::Type::Enum
 
@@ -855,7 +843,6 @@ module Sentdm
           end
         end
 
-        # TCR brand status
         module Status
           extend Sentdm::Internal::Type::Enum
 

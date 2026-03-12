@@ -11,11 +11,9 @@ module Sentdm
           )
         end
 
-      # Brand relationship level with TCR (required for TCR)
       sig { returns(Sentdm::TcrBrandRelationship::OrSymbol) }
       attr_accessor :brand_relationship
 
-      # Business vertical/industry category (required for TCR)
       sig { returns(Sentdm::TcrVertical::OrSymbol) }
       attr_accessor :vertical
 
@@ -58,9 +56,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Brand relationship level with TCR (required for TCR)
         brand_relationship:,
-        # Business vertical/industry category (required for TCR)
         vertical:,
         # List of destination countries for messaging
         destination_countries: nil,

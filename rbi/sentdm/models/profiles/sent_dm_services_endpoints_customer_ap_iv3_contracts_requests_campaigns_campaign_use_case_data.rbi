@@ -12,7 +12,6 @@ module Sentdm
             )
           end
 
-        # US messaging use case category
         sig { returns(Sentdm::Profiles::MessagingUseCaseUs::OrSymbol) }
         attr_accessor :messaging_use_case_us
 
@@ -29,7 +28,6 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
-          # US messaging use case category
           messaging_use_case_us:,
           # Sample messages for this use case (1-5 messages, max 1024 characters each)
           sample_messages:

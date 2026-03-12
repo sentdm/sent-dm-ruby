@@ -8,7 +8,7 @@ module Sentdm
           T.any(Sentdm::Models::ContactListResponse, Sentdm::Internal::AnyHash)
         end
 
-      # The response data (null if error)
+      # Paginated list of contacts response
       sig { returns(T.nilable(Sentdm::Models::ContactListResponse::Data)) }
       attr_reader :data
 
@@ -19,14 +19,14 @@ module Sentdm
       end
       attr_writer :data
 
-      # Error details (null if successful)
+      # Error information
       sig { returns(T.nilable(Sentdm::APIError)) }
       attr_reader :error
 
       sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
       attr_writer :error
 
-      # Metadata about the request and response
+      # Request and response metadata
       sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
@@ -50,11 +50,11 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # The response data (null if error)
+        # Paginated list of contacts response
         data: nil,
-        # Error details (null if successful)
+        # Error information
         error: nil,
-        # Metadata about the request and response
+        # Request and response metadata
         meta: nil,
         # Indicates whether the request was successful
         success: nil
@@ -90,14 +90,14 @@ module Sentdm
         sig { params(contacts: T::Array[Sentdm::ContactResponse::OrHash]).void }
         attr_writer :contacts
 
-        # Pagination metadata
+        # Pagination metadata for list responses
         sig { returns(T.nilable(Sentdm::PaginationMeta)) }
         attr_reader :pagination
 
         sig { params(pagination: Sentdm::PaginationMeta::OrHash).void }
         attr_writer :pagination
 
-        # The response data (null if error)
+        # Paginated list of contacts response
         sig do
           params(
             contacts: T::Array[Sentdm::ContactResponse::OrHash],
@@ -107,7 +107,7 @@ module Sentdm
         def self.new(
           # List of contacts
           contacts: nil,
-          # Pagination metadata
+          # Pagination metadata for list responses
           pagination: nil
         )
         end

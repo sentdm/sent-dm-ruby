@@ -5,19 +5,19 @@ module Sentdm
     # @see Sentdm::Resources::Users#list
     class UserListResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   The response data (null if error)
+      #   List of users response
       #
       #   @return [Sentdm::Models::UserListResponse::Data, nil]
       optional :data, -> { Sentdm::Models::UserListResponse::Data }, nil?: true
 
       # @!attribute error
-      #   Error details (null if successful)
+      #   Error information
       #
       #   @return [Sentdm::Models::APIError, nil]
       optional :error, -> { Sentdm::APIError }, nil?: true
 
       # @!attribute meta
-      #   Metadata about the request and response
+      #   Request and response metadata
       #
       #   @return [Sentdm::Models::APIMeta, nil]
       optional :meta, -> { Sentdm::APIMeta }
@@ -31,11 +31,11 @@ module Sentdm
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::UserListResponse::Data, nil] The response data (null if error)
+      #   @param data [Sentdm::Models::UserListResponse::Data, nil] List of users response
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error details (null if successful)
+      #   @param error [Sentdm::Models::APIError, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Metadata about the request and response
+      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -48,7 +48,7 @@ module Sentdm
         optional :users, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::UserResponse] }
 
         # @!method initialize(users: nil)
-        #   The response data (null if error)
+        #   List of users response
         #
         #   @param users [Array<Sentdm::Models::UserResponse>] List of users in the organization
       end

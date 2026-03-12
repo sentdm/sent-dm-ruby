@@ -22,7 +22,6 @@ module Sentdm
       optional :country_of_registration, String, api_name: :countryOfRegistration, nil?: true
 
       # @!attribute entity_type
-      #   Business entity type
       #
       #   @return [Symbol, Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, nil]
       optional :entity_type,
@@ -83,7 +82,7 @@ module Sentdm
       #
       #   @param country_of_registration [String, nil] Country where the business is registered
       #
-      #   @param entity_type [Symbol, Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, nil] Business entity type
+      #   @param entity_type [Symbol, Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, nil]
       #
       #   @param legal_name [String, nil] Legal business name
       #
@@ -99,8 +98,6 @@ module Sentdm
       #
       #   @param url [String, nil] Business website URL
 
-      # Business entity type
-      #
       # @see Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo#entity_type
       module EntityType
         extend Sentdm::Internal::Type::Enum

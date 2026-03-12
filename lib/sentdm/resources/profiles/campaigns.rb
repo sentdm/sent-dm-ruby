@@ -15,7 +15,7 @@ module Sentdm
         #
         # @param profile_id [String] Path param: Profile ID from route
         #
-        # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data
+        # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data for create or update operation
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -53,7 +53,7 @@ module Sentdm
         #
         # @param profile_id [String] Path param: Profile ID from route
         #
-        # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data
+        # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data for create or update operation
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #

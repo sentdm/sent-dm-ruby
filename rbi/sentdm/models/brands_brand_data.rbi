@@ -8,7 +8,7 @@ module Sentdm
           T.any(Sentdm::BrandsBrandData, Sentdm::Internal::AnyHash)
         end
 
-      # Compliance and TCR-related information
+      # Compliance and TCR information for brand registration
       sig do
         returns(
           Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
@@ -24,7 +24,7 @@ module Sentdm
       end
       attr_writer :compliance
 
-      # Contact information for the brand
+      # Contact information for brand KYC
       sig do
         returns(
           Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
@@ -40,7 +40,7 @@ module Sentdm
       end
       attr_writer :contact
 
-      # Business details and address information
+      # Business details and address for brand KYC
       sig do
         returns(
           T.nilable(
@@ -74,11 +74,11 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Compliance and TCR-related information
+        # Compliance and TCR information for brand registration
         compliance:,
-        # Contact information for the brand
+        # Contact information for brand KYC
         contact:,
-        # Business details and address information
+        # Business details and address for brand KYC
         business: nil
       )
       end

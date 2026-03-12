@@ -54,11 +54,11 @@ module Sentdm
       #
       # @param allow_template_sharing [Boolean] Body param: Whether templates are shared across profiles (default: false)
       #
-      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact for this profile. Required when billing_model is "pr
+      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact information for a profile.
       #
       # @param billing_model [String, nil] Body param: Billing model: profile, organization, or profile_and_organization (d
       #
-      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC information for this profile (optional).
+      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC data grouped into contact, business, and compliance se
       #
       # @param description [String, nil] Body param: Profile description (optional)
       #
@@ -74,13 +74,13 @@ module Sentdm
       #
       # @param name [String] Body param: Profile name (required)
       #
-      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for this profile (optional).
+      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for a profile.
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
       # @param short_name [String, nil] Body param: Profile short name/abbreviation (optional). Must be 3–11 characters,
       #
-      # @param whatsapp_business_account [Sentdm::Models::ProfileCreateParams::WhatsappBusinessAccount, nil] Body param: Direct WhatsApp Business Account credentials for this profile.
+      # @param whatsapp_business_account [Sentdm::Models::ProfileCreateParams::WhatsappBusinessAccount, nil] Body param: Direct WhatsApp Business Account credentials for a profile.
       #
       # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
       #
@@ -165,11 +165,11 @@ module Sentdm
       #
       # @param allow_template_sharing [Boolean, nil] Body param: Whether templates are shared across profiles (optional)
       #
-      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact for this profile. Required when billing_model is "pr
+      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact information for a profile.
       #
       # @param billing_model [String, nil] Body param: Billing model: profile, organization, or profile_and_organization (o
       #
-      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC information for this profile (optional).
+      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC data grouped into contact, business, and compliance se
       #
       # @param description [String, nil] Body param: Profile description (optional)
       #
@@ -185,7 +185,7 @@ module Sentdm
       #
       # @param name [String, nil] Body param: Profile name (optional)
       #
-      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for this profile (optional).
+      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for a profile.
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #

@@ -19,7 +19,8 @@ module Sentdm
       optional :category, String, nil?: true
 
       # @!attribute definition
-      #   Template definition including header, body, footer, and buttons
+      #   Complete definition of a message template including header, body, footer, and
+      #   buttons
       #
       #   @return [Sentdm::Models::TemplateDefinition, nil]
       optional :definition, -> { Sentdm::TemplateDefinition }, nil?: true
@@ -67,7 +68,7 @@ module Sentdm
       #
       #   @param category [String, nil] Template category: MARKETING, UTILITY, AUTHENTICATION
       #
-      #   @param definition [Sentdm::Models::TemplateDefinition, nil] Template definition including header, body, footer, and buttons
+      #   @param definition [Sentdm::Models::TemplateDefinition, nil] Complete definition of a message template including header, body, footer, and bu
       #
       #   @param language [String, nil] Template language code (e.g., en_US)
       #

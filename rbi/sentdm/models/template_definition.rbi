@@ -8,8 +8,7 @@ module Sentdm
           T.any(Sentdm::TemplateDefinition, Sentdm::Internal::AnyHash)
         end
 
-      # Required template body with content for different channels (multi-channel,
-      # SMS-specific, or WhatsApp-specific)
+      # Body section of a message template with channel-specific content
       sig { returns(Sentdm::SentDmServicesCommonContractsPocOsTemplateBody) }
       attr_reader :body
 
@@ -20,7 +19,7 @@ module Sentdm
       end
       attr_writer :body
 
-      # Configuration specific to AUTHENTICATION category templates (optional)
+      # Configuration for AUTHENTICATION category templates
       sig do
         returns(
           T.nilable(
@@ -54,7 +53,7 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :definition_version
 
-      # Optional template footer with optional variables
+      # Footer section of a message template
       sig do
         returns(
           T.nilable(Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter)
@@ -72,7 +71,7 @@ module Sentdm
       end
       attr_writer :footer
 
-      # Optional template header with optional variables
+      # Header section of a message template
       sig do
         returns(
           T.nilable(Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader)
@@ -117,18 +116,17 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Required template body with content for different channels (multi-channel,
-        # SMS-specific, or WhatsApp-specific)
+        # Body section of a message template with channel-specific content
         body:,
-        # Configuration specific to AUTHENTICATION category templates (optional)
+        # Configuration for AUTHENTICATION category templates
         authentication_config: nil,
         # Optional list of interactive buttons (e.g., quick replies, URLs, phone numbers)
         buttons: nil,
         # The version of the template definition format
         definition_version: nil,
-        # Optional template footer with optional variables
+        # Footer section of a message template
         footer: nil,
-        # Optional template header with optional variables
+        # Header section of a message template
         header: nil
       )
       end

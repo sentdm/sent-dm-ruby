@@ -8,7 +8,7 @@ module Sentdm
           T.any(Sentdm::PaginationMeta, Sentdm::Internal::AnyHash)
         end
 
-      # Cursor-based pagination (optional)
+      # Cursor-based pagination pointers
       sig { returns(T.nilable(Sentdm::PaginationMeta::Cursors)) }
       attr_reader :cursors
 
@@ -64,7 +64,7 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor-based pagination (optional)
+        # Cursor-based pagination pointers
         cursors: nil,
         # Whether there are more pages after this one
         has_more: nil,
@@ -108,7 +108,7 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :before
 
-        # Cursor-based pagination (optional)
+        # Cursor-based pagination pointers
         sig do
           params(after: T.nilable(String), before: T.nilable(String)).returns(
             T.attached_class

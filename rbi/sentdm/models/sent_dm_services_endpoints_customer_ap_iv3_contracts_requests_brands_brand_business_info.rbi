@@ -23,7 +23,6 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :country_of_registration
 
-      # Business entity type
       sig do
         returns(
           T.nilable(
@@ -87,7 +86,6 @@ module Sentdm
         country: nil,
         # Country where the business is registered
         country_of_registration: nil,
-        # Business entity type
         entity_type: nil,
         # Legal business name
         legal_name: nil,
@@ -129,7 +127,6 @@ module Sentdm
       def to_hash
       end
 
-      # Business entity type
       module EntityType
         extend Sentdm::Internal::Type::Enum
 

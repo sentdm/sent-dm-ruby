@@ -21,7 +21,8 @@ module Sentdm
       optional :creation_source, String, nil?: true
 
       # @!attribute definition
-      #   Template definition including header, body, footer, and buttons
+      #   Complete definition of a message template including header, body, footer, and
+      #   buttons
       #
       #   @return [Sentdm::Models::TemplateDefinition, nil]
       optional :definition, -> { Sentdm::TemplateDefinition }
@@ -63,7 +64,7 @@ module Sentdm
       #
       #   @param creation_source [String, nil] Source of template creation (default: from-api)
       #
-      #   @param definition [Sentdm::Models::TemplateDefinition] Template definition including header, body, footer, and buttons
+      #   @param definition [Sentdm::Models::TemplateDefinition] Complete definition of a message template including header, body, footer, and bu
       #
       #   @param language [String, nil] Template language code (e.g., en_US) (optional, auto-detected if not provided)
       #
