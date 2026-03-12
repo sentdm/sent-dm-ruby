@@ -3,7 +3,7 @@ module Sentdm
     type message_retrieve_status_response =
       {
         data: Sentdm::Models::MessageRetrieveStatusResponse::Data?,
-        error: Sentdm::APIError?,
+        error: Sentdm::ErrorDetail?,
         meta: Sentdm::APIMeta,
         success: bool
       }
@@ -11,7 +11,7 @@ module Sentdm
     class MessageRetrieveStatusResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::MessageRetrieveStatusResponse::Data?
 
-      attr_accessor error: Sentdm::APIError?
+      attr_accessor error: Sentdm::ErrorDetail?
 
       attr_reader meta: Sentdm::APIMeta?
 
@@ -23,14 +23,14 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::MessageRetrieveStatusResponse::Data?,
-        ?error: Sentdm::APIError?,
+        ?error: Sentdm::ErrorDetail?,
         ?meta: Sentdm::APIMeta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::MessageRetrieveStatusResponse::Data?,
-        error: Sentdm::APIError?,
+        error: Sentdm::ErrorDetail?,
         meta: Sentdm::APIMeta,
         success: bool
       }

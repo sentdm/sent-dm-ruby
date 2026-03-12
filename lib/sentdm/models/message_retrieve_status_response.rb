@@ -13,8 +13,8 @@ module Sentdm
       # @!attribute error
       #   Error information
       #
-      #   @return [Sentdm::Models::APIError, nil]
-      optional :error, -> { Sentdm::APIError }, nil?: true
+      #   @return [Sentdm::Models::ErrorDetail, nil]
+      optional :error, -> { Sentdm::ErrorDetail }, nil?: true
 
       # @!attribute meta
       #   Request and response metadata
@@ -33,7 +33,7 @@ module Sentdm
       #
       #   @param data [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil] Message response for v3 API — same shape as v2 with snake_case JSON conventions
       #
-      #   @param error [Sentdm::Models::APIError, nil] Error information
+      #   @param error [Sentdm::Models::ErrorDetail, nil] Error information
       #
       #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
       #

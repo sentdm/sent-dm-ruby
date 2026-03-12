@@ -15,7 +15,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Template | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
@@ -34,7 +34,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Template | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
@@ -53,7 +53,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Template | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
@@ -72,7 +72,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::TemplateListResponse::Data | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }

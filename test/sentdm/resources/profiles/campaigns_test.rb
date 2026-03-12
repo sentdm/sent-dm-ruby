@@ -32,7 +32,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     assert_pattern do
       response => {
         data: Sentdm::Profiles::TcrCampaignWithUseCases | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
@@ -69,7 +69,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     assert_pattern do
       response => {
         data: Sentdm::Profiles::TcrCampaignWithUseCases | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
@@ -88,7 +88,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     assert_pattern do
       response => {
         data: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::TcrCampaignWithUseCases]) | nil,
-        error: Sentdm::APIError | nil,
+        error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }

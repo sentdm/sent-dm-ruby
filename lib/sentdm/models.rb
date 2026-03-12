@@ -39,8 +39,6 @@ module Sentdm
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
-  APIError = Sentdm::Models::APIError
-
   APIMeta = Sentdm::Models::APIMeta
 
   APIResponseOfContact = Sentdm::Models::APIResponseOfContact
@@ -70,6 +68,8 @@ module Sentdm
   ContactUpdateParams = Sentdm::Models::ContactUpdateParams
 
   DestinationCountry = Sentdm::Models::DestinationCountry
+
+  ErrorDetail = Sentdm::Models::ErrorDetail
 
   MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
