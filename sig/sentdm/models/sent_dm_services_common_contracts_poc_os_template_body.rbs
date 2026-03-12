@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type sent_dm_services_common_contracts_poc_os_template_body =
+      {
+        multi_channel: Sentdm::TemplateBodyContent?,
+        sms: Sentdm::TemplateBodyContent?,
+        whatsapp: Sentdm::TemplateBodyContent?
+      }
+
+    class SentDmServicesCommonContractsPocOsTemplateBody < Sentdm::Internal::Type::BaseModel
+      attr_accessor multi_channel: Sentdm::TemplateBodyContent?
+
+      attr_accessor sms: Sentdm::TemplateBodyContent?
+
+      attr_accessor whatsapp: Sentdm::TemplateBodyContent?
+
+      def initialize: (
+        ?multi_channel: Sentdm::TemplateBodyContent?,
+        ?sms: Sentdm::TemplateBodyContent?,
+        ?whatsapp: Sentdm::TemplateBodyContent?
+      ) -> void
+
+      def to_hash: -> {
+        multi_channel: Sentdm::TemplateBodyContent?,
+        sms: Sentdm::TemplateBodyContent?,
+        whatsapp: Sentdm::TemplateBodyContent?
+      }
+    end
+  end
+end
