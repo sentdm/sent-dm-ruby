@@ -2,29 +2,209 @@ module Sentdm
   module Models
     type brands_brand_data =
       {
-        compliance: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo,
-        contact: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo,
-        business: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo?
+        compliance: Sentdm::BrandsBrandData::Compliance,
+        contact: Sentdm::BrandsBrandData::Contact,
+        business: Sentdm::BrandsBrandData::Business?
       }
 
     class BrandsBrandData < Sentdm::Internal::Type::BaseModel
-      attr_accessor compliance: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
+      attr_accessor compliance: Sentdm::BrandsBrandData::Compliance
 
-      attr_accessor contact: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
+      attr_accessor contact: Sentdm::BrandsBrandData::Contact
 
-      attr_accessor business: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo?
+      attr_accessor business: Sentdm::BrandsBrandData::Business?
 
       def initialize: (
-        compliance: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo,
-        contact: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo,
-        ?business: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo?
+        compliance: Sentdm::BrandsBrandData::Compliance,
+        contact: Sentdm::BrandsBrandData::Contact,
+        ?business: Sentdm::BrandsBrandData::Business?
       ) -> void
 
       def to_hash: -> {
-        compliance: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo,
-        contact: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo,
-        business: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo?
+        compliance: Sentdm::BrandsBrandData::Compliance,
+        contact: Sentdm::BrandsBrandData::Contact,
+        business: Sentdm::BrandsBrandData::Business?
       }
+
+      type compliance =
+        {
+          brand_relationship: Sentdm::Models::tcr_brand_relationship,
+          vertical: Sentdm::Models::tcr_vertical,
+          destination_countries: ::Array[Sentdm::DestinationCountry]?,
+          expected_messaging_volume: String?,
+          is_tcr_application: bool?,
+          notes: String?,
+          phone_number_prefix: String?,
+          primary_use_case: String?
+        }
+
+      class Compliance < Sentdm::Internal::Type::BaseModel
+        attr_accessor brand_relationship: Sentdm::Models::tcr_brand_relationship
+
+        attr_accessor vertical: Sentdm::Models::tcr_vertical
+
+        attr_accessor destination_countries: ::Array[Sentdm::DestinationCountry]?
+
+        attr_accessor expected_messaging_volume: String?
+
+        attr_accessor is_tcr_application: bool?
+
+        attr_accessor notes: String?
+
+        attr_accessor phone_number_prefix: String?
+
+        attr_accessor primary_use_case: String?
+
+        def initialize: (
+          brand_relationship: Sentdm::Models::tcr_brand_relationship,
+          vertical: Sentdm::Models::tcr_vertical,
+          ?destination_countries: ::Array[Sentdm::DestinationCountry]?,
+          ?expected_messaging_volume: String?,
+          ?is_tcr_application: bool?,
+          ?notes: String?,
+          ?phone_number_prefix: String?,
+          ?primary_use_case: String?
+        ) -> void
+
+        def to_hash: -> {
+          brand_relationship: Sentdm::Models::tcr_brand_relationship,
+          vertical: Sentdm::Models::tcr_vertical,
+          destination_countries: ::Array[Sentdm::DestinationCountry]?,
+          expected_messaging_volume: String?,
+          is_tcr_application: bool?,
+          notes: String?,
+          phone_number_prefix: String?,
+          primary_use_case: String?
+        }
+      end
+
+      type contact =
+        {
+          name: String,
+          business_name: String?,
+          email: String?,
+          phone: String?,
+          phone_country_code: String?,
+          role: String?
+        }
+
+      class Contact < Sentdm::Internal::Type::BaseModel
+        attr_accessor name: String
+
+        attr_accessor business_name: String?
+
+        attr_accessor email: String?
+
+        attr_accessor phone: String?
+
+        attr_accessor phone_country_code: String?
+
+        attr_accessor role: String?
+
+        def initialize: (
+          name: String,
+          ?business_name: String?,
+          ?email: String?,
+          ?phone: String?,
+          ?phone_country_code: String?,
+          ?role: String?
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          business_name: String?,
+          email: String?,
+          phone: String?,
+          phone_country_code: String?,
+          role: String?
+        }
+      end
+
+      type business =
+        {
+          city: String?,
+          country: String?,
+          country_of_registration: String?,
+          entity_type: Sentdm::Models::BrandsBrandData::Business::entity_type?,
+          legal_name: String?,
+          postal_code: String?,
+          state: String?,
+          street: String?,
+          tax_id: String?,
+          tax_id_type: String?,
+          url: String?
+        }
+
+      class Business < Sentdm::Internal::Type::BaseModel
+        attr_accessor city: String?
+
+        attr_accessor country: String?
+
+        attr_accessor country_of_registration: String?
+
+        attr_accessor entity_type: Sentdm::Models::BrandsBrandData::Business::entity_type?
+
+        attr_accessor legal_name: String?
+
+        attr_accessor postal_code: String?
+
+        attr_accessor state: String?
+
+        attr_accessor street: String?
+
+        attr_accessor tax_id: String?
+
+        attr_accessor tax_id_type: String?
+
+        attr_accessor url: String?
+
+        def initialize: (
+          ?city: String?,
+          ?country: String?,
+          ?country_of_registration: String?,
+          ?entity_type: Sentdm::Models::BrandsBrandData::Business::entity_type?,
+          ?legal_name: String?,
+          ?postal_code: String?,
+          ?state: String?,
+          ?street: String?,
+          ?tax_id: String?,
+          ?tax_id_type: String?,
+          ?url: String?
+        ) -> void
+
+        def to_hash: -> {
+          city: String?,
+          country: String?,
+          country_of_registration: String?,
+          entity_type: Sentdm::Models::BrandsBrandData::Business::entity_type?,
+          legal_name: String?,
+          postal_code: String?,
+          state: String?,
+          street: String?,
+          tax_id: String?,
+          tax_id_type: String?,
+          url: String?
+        }
+
+        type entity_type =
+          :PRIVATE_PROFIT
+          | :PUBLIC_PROFIT
+          | :NON_PROFIT
+          | :SOLE_PROPRIETOR
+          | :GOVERNMENT
+
+        module EntityType
+          extend Sentdm::Internal::Type::Enum
+
+          PRIVATE_PROFIT: :PRIVATE_PROFIT
+          PUBLIC_PROFIT: :PUBLIC_PROFIT
+          NON_PROFIT: :NON_PROFIT
+          SOLE_PROPRIETOR: :SOLE_PROPRIETOR
+          GOVERNMENT: :GOVERNMENT
+
+          def self?.values: -> ::Array[Sentdm::Models::BrandsBrandData::Business::entity_type]
+        end
+      end
     end
   end
 end

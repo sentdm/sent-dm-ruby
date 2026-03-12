@@ -33,7 +33,7 @@ module Sentdm
           use_cases: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase]
         }
 
-      class TcrCampaignWithUseCases < Sentdm::Models::BaseDto
+      class TcrCampaignWithUseCases < Sentdm::Models::Profiles::BaseDto
         def billed_date: -> Time?
 
         def billed_date=: (Time? _) -> Time?
@@ -246,7 +246,7 @@ module Sentdm
             sample_messages: ::Array[String]
           }
 
-        class UseCase < Sentdm::Models::BaseDto
+        class UseCase < Sentdm::Models::Profiles::BaseDto
           def campaign_id: -> String?
 
           def campaign_id=: (String _) -> String

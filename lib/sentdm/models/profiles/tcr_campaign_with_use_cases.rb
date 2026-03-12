@@ -3,7 +3,7 @@
 module Sentdm
   module Models
     module Profiles
-      class TcrCampaignWithUseCases < Sentdm::Models::BaseDto
+      class TcrCampaignWithUseCases < Sentdm::Models::Profiles::BaseDto
         # @!attribute billed_date
         #
         #   @return [Time, nil]
@@ -201,7 +201,7 @@ module Sentdm
           #   @return [Array<Symbol>]
         end
 
-        class UseCase < Sentdm::Models::BaseDto
+        class UseCase < Sentdm::Models::Profiles::BaseDto
           # @!attribute campaign_id
           #
           #   @return [String, nil]

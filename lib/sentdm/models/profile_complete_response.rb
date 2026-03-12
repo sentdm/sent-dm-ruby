@@ -3,6 +3,6 @@
 module Sentdm
   module Models
     # @type [Sentdm::Internal::Type::Converter]
-    ProfileCompleteSetupResponse = Sentdm::Internal::Type::Unknown
+    ProfileCompleteResponse = Sentdm::Internal::Type::Unknown
   end
 end

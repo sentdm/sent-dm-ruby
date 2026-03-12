@@ -2,8 +2,8 @@
 
 module Sentdm
   module Models
-    # @see Sentdm::Resources::Profiles#complete_setup
-    class ProfileCompleteSetupParams < Sentdm::Internal::Type::BaseModel
+    # @see Sentdm::Resources::Profiles#complete
+    class ProfileCompleteParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
@@ -37,7 +37,7 @@ module Sentdm
 
       # @!method initialize(profile_id:, web_hook_url:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::ProfileCompleteSetupParams} for more details.
+      #   {Sentdm::Models::ProfileCompleteParams} for more details.
       #
       #   @param profile_id [String]
       #

@@ -343,7 +343,7 @@ module Sentdm
           request_options: Sentdm::RequestOptions::OrHash
         ).returns(T.anything)
       end
-      def complete_setup(
+      def complete(
         # Path param: Profile ID from route
         profile_id,
         # Body param: Webhook URL to call when profile completion finishes (success or

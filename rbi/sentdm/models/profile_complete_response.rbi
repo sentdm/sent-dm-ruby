@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    ProfileCompleteSetupResponse =
+    ProfileCompleteResponse =
       T.let(T.anything, Sentdm::Internal::Type::Converter)
   end
 end
