@@ -4,7 +4,7 @@ module Sentdm
       type api_response_of_tcr_campaign_with_use_cases =
         {
           data: Sentdm::Profiles::TcrCampaignWithUseCases?,
-          error: Sentdm::APIError?,
+          error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }
@@ -12,7 +12,7 @@ module Sentdm
       class APIResponseOfTcrCampaignWithUseCases < Sentdm::Internal::Type::BaseModel
         attr_accessor data: Sentdm::Profiles::TcrCampaignWithUseCases?
 
-        attr_accessor error: Sentdm::APIError?
+        attr_accessor error: Sentdm::ErrorDetail?
 
         attr_reader meta: Sentdm::APIMeta?
 
@@ -24,14 +24,14 @@ module Sentdm
 
         def initialize: (
           ?data: Sentdm::Profiles::TcrCampaignWithUseCases?,
-          ?error: Sentdm::APIError?,
+          ?error: Sentdm::ErrorDetail?,
           ?meta: Sentdm::APIMeta,
           ?success: bool
         ) -> void
 
         def to_hash: -> {
           data: Sentdm::Profiles::TcrCampaignWithUseCases?,
-          error: Sentdm::APIError?,
+          error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }

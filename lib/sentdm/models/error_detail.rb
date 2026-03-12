@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class APIError < Sentdm::Internal::Type::BaseModel
+    class ErrorDetail < Sentdm::Internal::Type::BaseModel
       # @!attribute code
       #   Machine-readable error code (e.g., "RESOURCE_001")
       #

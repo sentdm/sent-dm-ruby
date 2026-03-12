@@ -24,10 +24,10 @@ module Sentdm
         attr_writer :data
 
         # Error information
-        sig { returns(T.nilable(Sentdm::APIError)) }
+        sig { returns(T.nilable(Sentdm::ErrorDetail)) }
         attr_reader :error
 
-        sig { params(error: T.nilable(Sentdm::APIError::OrHash)).void }
+        sig { params(error: T.nilable(Sentdm::ErrorDetail::OrHash)).void }
         attr_writer :error
 
         # Request and response metadata
@@ -48,7 +48,7 @@ module Sentdm
         sig do
           params(
             data: T.nilable(Sentdm::Profiles::TcrCampaignWithUseCases::OrHash),
-            error: T.nilable(Sentdm::APIError::OrHash),
+            error: T.nilable(Sentdm::ErrorDetail::OrHash),
             meta: Sentdm::APIMeta::OrHash,
             success: T::Boolean
           ).returns(T.attached_class)
@@ -69,7 +69,7 @@ module Sentdm
           override.returns(
             {
               data: T.nilable(Sentdm::Profiles::TcrCampaignWithUseCases),
-              error: T.nilable(Sentdm::APIError),
+              error: T.nilable(Sentdm::ErrorDetail),
               meta: Sentdm::APIMeta,
               success: T::Boolean
             }

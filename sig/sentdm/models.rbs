@@ -1,6 +1,4 @@
 module Sentdm
-  class APIError = Sentdm::Models::APIError
-
   class APIMeta = Sentdm::Models::APIMeta
 
   class APIResponseOfContact = Sentdm::Models::APIResponseOfContact
@@ -30,6 +28,8 @@ module Sentdm
   class ContactUpdateParams = Sentdm::Models::ContactUpdateParams
 
   class DestinationCountry = Sentdm::Models::DestinationCountry
+
+  class ErrorDetail = Sentdm::Models::ErrorDetail
 
   class MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
