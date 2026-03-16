@@ -41,12 +41,6 @@ module Sentdm
 
       # @see Sentdm::Models::MessageSendResponse#data
       class Data < Sentdm::Internal::Type::BaseModel
-        # @!attribute body
-        #   Resolved template body text
-        #
-        #   @return [String, nil]
-        optional :body, String, nil?: true
-
         # @!attribute recipients
         #   Per-recipient message results
         #
@@ -72,10 +66,8 @@ module Sentdm
         #   @return [String, nil]
         optional :template_name, String
 
-        # @!method initialize(body: nil, recipients: nil, status: nil, template_id: nil, template_name: nil)
+        # @!method initialize(recipients: nil, status: nil, template_id: nil, template_name: nil)
         #   Response for the multi-recipient send message endpoint
-        #
-        #   @param body [String, nil] Resolved template body text
         #
         #   @param recipients [Array<Sentdm::Models::MessageSendResponse::Data::Recipient>] Per-recipient message results
         #
@@ -86,6 +78,13 @@ module Sentdm
         #   @param template_name [String] Template display name
 
         class Recipient < Sentdm::Internal::Type::BaseModel
+          # @!attribute body
+          #   Resolved template body text for this recipient's channel, or null for
+          #   auto-detect
+          #
+          #   @return [String, nil]
+          optional :body, String, nil?: true
+
           # @!attribute channel
           #   Channel this message will be sent on (e.g. "sms", "whatsapp"), or null for
           #   auto-detect
@@ -105,11 +104,13 @@ module Sentdm
           #   @return [String, nil]
           optional :to, String
 
-          # @!method initialize(channel: nil, message_id: nil, to: nil)
+          # @!method initialize(body: nil, channel: nil, message_id: nil, to: nil)
           #   Some parameter documentations has been truncated, see
           #   {Sentdm::Models::MessageSendResponse::Data::Recipient} for more details.
           #
           #   Per-recipient result in the send message response
+          #
+          #   @param body [String, nil] Resolved template body text for this recipient's channel, or null for auto-detec
           #
           #   @param channel [String, nil] Channel this message will be sent on (e.g. "sms", "whatsapp"), or null for auto-
           #

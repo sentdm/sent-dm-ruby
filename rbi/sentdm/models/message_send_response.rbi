@@ -83,10 +83,6 @@ module Sentdm
             )
           end
 
-        # Resolved template body text
-        sig { returns(T.nilable(String)) }
-        attr_accessor :body
-
         # Per-recipient message results
         sig do
           returns(
@@ -131,7 +127,6 @@ module Sentdm
         # Response for the multi-recipient send message endpoint
         sig do
           params(
-            body: T.nilable(String),
             recipients:
               T::Array[
                 Sentdm::Models::MessageSendResponse::Data::Recipient::OrHash
@@ -142,8 +137,6 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
-          # Resolved template body text
-          body: nil,
           # Per-recipient message results
           recipients: nil,
           # Overall request status (e.g. "accepted")
@@ -158,7 +151,6 @@ module Sentdm
         sig do
           override.returns(
             {
-              body: T.nilable(String),
               recipients:
                 T::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
               status: String,
@@ -178,6 +170,11 @@ module Sentdm
                 Sentdm::Internal::AnyHash
               )
             end
+
+          # Resolved template body text for this recipient's channel, or null for
+          # auto-detect
+          sig { returns(T.nilable(String)) }
+          attr_accessor :body
 
           # Channel this message will be sent on (e.g. "sms", "whatsapp"), or null for
           # auto-detect
@@ -201,12 +198,16 @@ module Sentdm
           # Per-recipient result in the send message response
           sig do
             params(
+              body: T.nilable(String),
               channel: T.nilable(String),
               message_id: String,
               to: String
             ).returns(T.attached_class)
           end
           def self.new(
+            # Resolved template body text for this recipient's channel, or null for
+            # auto-detect
+            body: nil,
             # Channel this message will be sent on (e.g. "sms", "whatsapp"), or null for
             # auto-detect
             channel: nil,
@@ -219,7 +220,12 @@ module Sentdm
 
           sig do
             override.returns(
-              { channel: T.nilable(String), message_id: String, to: String }
+              {
+                body: T.nilable(String),
+                channel: T.nilable(String),
+                message_id: String,
+                to: String
+              }
             )
           end
           def to_hash
