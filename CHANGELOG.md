@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.1 (2026-03-17)
+
+Full Changelog: [v0.10.0...v0.10.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.10.0...v0.10.1)
+
+### Chores
+
+* **internal:** tweak CI branches ([1501c04](https://github.com/sentdm/sent-dm-ruby/commit/1501c0468926ce395397078436bc75effdb20aa5))
+
 ## 0.10.0 (2026-03-16)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.9.0...v0.10.0)
