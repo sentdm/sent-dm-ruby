@@ -83,7 +83,7 @@ module Sentdm
           optional :price, String, nil?: true
 
           # @!attribute status
-          #   Activity status (e.g., ACCEPTED, PROCESSED, SENT, DELIVERED, FAILED)
+          #   Activity status (e.g., QUEUED, PROCESSED, SENT, DELIVERED, FAILED)
           #
           #   @return [String, nil]
           optional :status, String
@@ -107,7 +107,7 @@ module Sentdm
           #
           #   @param price [String, nil] Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
           #
-          #   @param status [String] Activity status (e.g., ACCEPTED, PROCESSED, SENT, DELIVERED, FAILED)
+          #   @param status [String] Activity status (e.g., QUEUED, PROCESSED, SENT, DELIVERED, FAILED)
           #
           #   @param timestamp [Time] When this activity occurred
         end
