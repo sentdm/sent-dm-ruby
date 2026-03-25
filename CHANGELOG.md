@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.11.0 (2026-03-25)
+
+Full Changelog: [v0.10.1...v0.11.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.10.1...v0.11.0)
+
+### Features
+
+* **api:** api update ([a135bb7](https://github.com/sentdm/sent-dm-ruby/commit/a135bb7e7d7d58b2a021350e40d31caef272e1d8))
+* **api:** api update ([28c1518](https://github.com/sentdm/sent-dm-ruby/commit/28c1518edc74bc69e75c26927e3cc10694080863))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([deb319b](https://github.com/sentdm/sent-dm-ruby/commit/deb319b2a4165820342151a807d6f76577d64dda))
+* **internal:** update gitignore ([6b93a57](https://github.com/sentdm/sent-dm-ruby/commit/6b93a579755f49944db2dd97f1719b6b0bf4fa7f))
+
 ## 0.10.1 (2026-03-17)
 
 Full Changelog: [v0.10.0...v0.10.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.10.0...v0.10.1)
