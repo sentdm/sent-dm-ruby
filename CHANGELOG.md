@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.1 (2026-03-31)
+
+Full Changelog: [v0.11.0...v0.11.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.11.0...v0.11.1)
+
+### Bug Fixes
+
+* **internal:** correct multipart form field name encoding ([f7565bc](https://github.com/sentdm/sent-dm-ruby/commit/f7565bc81745d8eeb2319554d783b4ff8622aeea))
+
+
+### Chores
+
+* **ci:** support opting out of skipping builds on metadata-only commits ([a7b09ef](https://github.com/sentdm/sent-dm-ruby/commit/a7b09ef0bc8d45db861446221594acd016193d04))
+
 ## 0.11.0 (2026-03-25)
 
 Full Changelog: [v0.10.1...v0.11.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.10.1...v0.11.0)
