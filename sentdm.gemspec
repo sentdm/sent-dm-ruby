@@ -5,8 +5,8 @@ require_relative "lib/sentdm/version"
 Gem::Specification.new do |s|
   s.name = "sentdm"
   s.version = Sentdm::VERSION
-  s.summary = "Ruby library to access the Sent Dm API"
-  s.authors = ["Sent Dm"]
+  s.summary = "Ruby library to access the Sent API"
+  s.authors = ["Sent"]
   s.email = "support@sent.dm"
   s.homepage = "https://gemdocs.org/gems/sentdm"
   s.metadata["homepage_uri"] = s.homepage

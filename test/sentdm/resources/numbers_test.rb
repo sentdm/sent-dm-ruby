@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::NumbersTest < Sentdm::Test::ResourceTest
   def test_lookup
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.numbers.lookup("+12025551234")
+    response = @sent.numbers.lookup("+12025551234")
 
     assert_pattern do
       response => Sentdm::Models::NumberLookupResponse

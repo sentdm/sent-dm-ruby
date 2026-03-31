@@ -74,7 +74,7 @@ class Sentdm::Test::ResourceTest < Minitest::Test
 
   def before_all
     super
-    @sent_dm = Sentdm::Test::SingletonClient.instance
+    @sent = Sentdm::Test::SingletonClient.instance
   end
 
   def around_all = async? ? Sync { super } : super

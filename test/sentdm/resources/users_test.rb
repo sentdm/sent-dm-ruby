@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.users.retrieve("userId")
+    response = @sent.users.retrieve("userId")
 
     assert_pattern do
       response => Sentdm::APIResponseOfUser
@@ -25,7 +25,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.users.list
+    response = @sent.users.list
 
     assert_pattern do
       response => Sentdm::Models::UserListResponse
@@ -44,7 +44,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_invite
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.users.invite
+    response = @sent.users.invite
 
     assert_pattern do
       response => Sentdm::APIResponseOfUser
@@ -63,7 +63,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_remove_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.users.remove("userId", body: {})
+    response = @sent.users.remove("userId", body: {})
 
     assert_pattern do
       response => nil
@@ -73,7 +73,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_update_role
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.users.update_role("userId")
+    response = @sent.users.update_role("userId")
 
     assert_pattern do
       response => Sentdm::APIResponseOfUser
