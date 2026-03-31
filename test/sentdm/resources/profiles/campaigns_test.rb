@@ -7,7 +7,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     skip("Mock server tests are disabled")
 
     response =
-      @sent_dm.profiles.campaigns.create(
+      @sent.profiles.campaigns.create(
         "770e8400-e29b-41d4-a716-446655440002",
         campaign: {
           description: "Appointment reminders and account notifications",
@@ -43,7 +43,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     skip("Mock server tests are disabled")
 
     response =
-      @sent_dm.profiles.campaigns.update(
+      @sent.profiles.campaigns.update(
         "b2c3d4e5-f6a7-8901-bcde-f12345678901",
         profile_id: "770e8400-e29b-41d4-a716-446655440002",
         campaign: {
@@ -79,7 +79,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
   def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.campaigns.list("770e8400-e29b-41d4-a716-446655440002")
+    response = @sent.profiles.campaigns.list("770e8400-e29b-41d4-a716-446655440002")
 
     assert_pattern do
       response => Sentdm::Models::Profiles::CampaignListResponse
@@ -99,7 +99,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     skip("Mock server tests are disabled")
 
     response =
-      @sent_dm.profiles.campaigns.delete(
+      @sent.profiles.campaigns.delete(
         "b2c3d4e5-f6a7-8901-bcde-f12345678901",
         profile_id: "770e8400-e29b-41d4-a716-446655440002",
         body: {}

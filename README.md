@@ -1,12 +1,12 @@
-# Sent Dm Ruby API library
+# Sent Ruby API library
 
-The Sent Dm Ruby library provides convenient access to the Sent Dm REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/sentdm/sent-dm-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Sent Ruby library provides convenient access to the Sent REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/sentdm/sent-dm-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## MCP Server
 
-Use the Sent Dm MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
+Use the Sent MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
 
 [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40sentdm%2Fsentdm-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzZW50ZG0vc2VudGRtLW1jcCJdLCJlbnYiOnsiU0VOVF9ETV9BUElfS0VZIjoiTXkgQVBJIEtleSJ9fQ)
 [![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40sentdm%2Fsentdm-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40sentdm%2Fsentdm-mcp%22%5D%2C%22env%22%3A%7B%22SENT_DM_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)
@@ -37,11 +37,11 @@ gem "sentdm", "~> 0.11.1"
 require "bundler/setup"
 require "sentdm"
 
-sent_dm = Sentdm::Client.new(
+sent = Sentdm::Client.new(
   api_key: ENV["SENT_DM_API_KEY"] # This is the default and can be omitted
 )
 
-response = sent_dm.messages.send_(
+response = sent.messages.send_(
   channel: ["sms", "whatsapp"],
   template: {
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -60,7 +60,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  message = sent_dm.messages.send_(
+  message = sent.messages.send_(
     channel: ["sms"],
     template: {
       id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -106,12 +106,12 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-sent_dm = Sentdm::Client.new(
+sent = Sentdm::Client.new(
   max_retries: 0 # default is 2
 )
 
 # Or, configure per-request:
-sent_dm.messages.send_(
+sent.messages.send_(
   channel: ["sms"],
   template: {
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -129,12 +129,12 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-sent_dm = Sentdm::Client.new(
+sent = Sentdm::Client.new(
   timeout: nil # default is 60
 )
 
 # Or, configure per-request:
-sent_dm.messages.send_(
+sent.messages.send_(
   channel: ["sms"],
   template: {
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -174,7 +174,7 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 
 ```ruby
 response =
-  sent_dm.messages.send_(
+  sent.messages.send_(
     channel: ["sms"],
     template: {
       id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -227,7 +227,7 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-sent_dm.messages.send_(
+sent.messages.send_(
   channel: ["sms", "whatsapp"],
   template: Sentdm::MessageSendParams::Template.new(
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -242,7 +242,7 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-sent_dm.messages.send_(
+sent.messages.send_(
   channel: ["sms", "whatsapp"],
   template: {
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -262,7 +262,7 @@ params = Sentdm::MessageSendParams.new(
   ),
   to: ["+14155551234", "+14155555678"]
 )
-sent_dm.messages.send_(**params)
+sent.messages.send_(**params)
 ```
 
 ### Enums

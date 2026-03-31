@@ -69,8 +69,8 @@ module Sentdm
       # to `ENV["SENT_DM_API_KEY"]`
       api_key: ENV["SENT_DM_API_KEY"],
       # Override the default base URL for the API, e.g.,
-      # `"https://api.example.com/v2/"`. Defaults to `ENV["SENT_DM_BASE_URL"]`
-      base_url: ENV["SENT_DM_BASE_URL"],
+      # `"https://api.example.com/v2/"`. Defaults to `ENV["SENT_BASE_URL"]`
+      base_url: ENV["SENT_BASE_URL"],
       # Max number of retries to attempt after a failed retryable request.
       max_retries: Sentdm::Client::DEFAULT_MAX_RETRIES,
       timeout: Sentdm::Client::DEFAULT_TIMEOUT_IN_SECONDS,
