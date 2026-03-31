@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::MeTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.me.retrieve
+    response = @sent.me.retrieve
 
     assert_pattern do
       response => Sentdm::Models::MeRetrieveResponse

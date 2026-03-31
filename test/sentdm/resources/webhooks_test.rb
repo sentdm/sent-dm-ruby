@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_create
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.create
+    response = @sent.webhooks.create
 
     assert_pattern do
       response => Sentdm::APIResponseWebhook
@@ -25,7 +25,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.retrieve("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+    response = @sent.webhooks.retrieve("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
       response => Sentdm::APIResponseWebhook
@@ -44,7 +44,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_update
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.update("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+    response = @sent.webhooks.update("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
       response => Sentdm::APIResponseWebhook
@@ -63,7 +63,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_list_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.list(page: 0, page_size: 0)
+    response = @sent.webhooks.list(page: 0, page_size: 0)
 
     assert_pattern do
       response => Sentdm::Models::WebhookListResponse
@@ -82,7 +82,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_delete
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.delete("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+    response = @sent.webhooks.delete("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
       response => nil
@@ -92,7 +92,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_list_event_types
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.list_event_types
+    response = @sent.webhooks.list_event_types
 
     assert_pattern do
       response => Sentdm::Models::WebhookListEventTypesResponse
@@ -111,7 +111,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_list_events_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", page: 0, page_size: 0)
+    response = @sent.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", page: 0, page_size: 0)
 
     assert_pattern do
       response => Sentdm::Models::WebhookListEventsResponse
@@ -130,7 +130,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_rotate_secret_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.rotate_secret("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", body: {})
+    response = @sent.webhooks.rotate_secret("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", body: {})
 
     assert_pattern do
       response => Sentdm::Models::WebhookRotateSecretResponse
@@ -149,7 +149,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_test_
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.test_("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+    response = @sent.webhooks.test_("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
       response => Sentdm::Models::WebhookTestResponse
@@ -168,7 +168,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
   def test_toggle_status
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.webhooks.toggle_status("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
+    response = @sent.webhooks.toggle_status("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
       response => Sentdm::APIResponseWebhook

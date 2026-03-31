@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_create
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.create
+    response = @sent.profiles.create
 
     assert_pattern do
       response => Sentdm::APIResponseOfProfileDetail
@@ -25,7 +25,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.retrieve("profileId")
+    response = @sent.profiles.retrieve("profileId")
 
     assert_pattern do
       response => Sentdm::APIResponseOfProfileDetail
@@ -44,7 +44,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_update
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.update("profileId")
+    response = @sent.profiles.update("profileId")
 
     assert_pattern do
       response => Sentdm::APIResponseOfProfileDetail
@@ -63,7 +63,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.list
+    response = @sent.profiles.list
 
     assert_pattern do
       response => Sentdm::Models::ProfileListResponse
@@ -82,7 +82,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
   def test_delete_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.profiles.delete("profileId", body: {})
+    response = @sent.profiles.delete("profileId", body: {})
 
     assert_pattern do
       response => nil
@@ -93,7 +93,7 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     skip("Mock server tests are disabled")
 
     response =
-      @sent_dm.profiles.complete(
+      @sent.profiles.complete(
         "660e8400-e29b-41d4-a716-446655440000",
         web_hook_url: "https://your-app.com/webhook/profile-complete"
       )

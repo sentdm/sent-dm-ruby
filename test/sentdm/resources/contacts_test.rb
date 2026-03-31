@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
   def test_create
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.contacts.create
+    response = @sent.contacts.create
 
     assert_pattern do
       response => Sentdm::APIResponseOfContact
@@ -25,7 +25,7 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.contacts.retrieve("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+    response = @sent.contacts.retrieve("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
       response => Sentdm::APIResponseOfContact
@@ -44,7 +44,7 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
   def test_update
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.contacts.update("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+    response = @sent.contacts.update("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
       response => Sentdm::APIResponseOfContact
@@ -63,7 +63,7 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
   def test_list_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.contacts.list(page: 0, page_size: 0)
+    response = @sent.contacts.list(page: 0, page_size: 0)
 
     assert_pattern do
       response => Sentdm::Models::ContactListResponse
@@ -82,7 +82,7 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
   def test_delete_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent_dm.contacts.delete("6ba7b810-9dad-11d1-80b4-00c04fd430c8", body: {})
+    response = @sent.contacts.delete("6ba7b810-9dad-11d1-80b4-00c04fd430c8", body: {})
 
     assert_pattern do
       response => nil
