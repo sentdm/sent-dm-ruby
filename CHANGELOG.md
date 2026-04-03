@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.1 (2026-04-03)
+
+Full Changelog: [v0.12.0...v0.12.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.12.0...v0.12.1)
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([23356d5](https://github.com/sentdm/sent-dm-ruby/commit/23356d59410d9fb4e51d5a0c2fac41ebf8e7b4ad))
+* variable name typo ([f8be0fa](https://github.com/sentdm/sent-dm-ruby/commit/f8be0faad28f663de88afa1bea075b5c7c139cca))
+
 ## 0.12.0 (2026-03-31)
 
 Full Changelog: [v0.11.1...v0.12.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.11.1...v0.12.0)
