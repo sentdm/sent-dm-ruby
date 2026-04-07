@@ -2,36 +2,30 @@ module Sentdm
   module Models
     type sent_dm_services_common_contracts_poc_os_template_button =
       {
-        id: Integer,
         props: Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
-        type: String
+        type: String,
+        id: Integer
       }
 
     class SentDmServicesCommonContractsPocOsTemplateButton < Sentdm::Internal::Type::BaseModel
+      attr_accessor props: Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps
+
+      attr_accessor type: String
+
       attr_reader id: Integer?
 
       def id=: (Integer) -> Integer
 
-      attr_reader props: Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps?
-
-      def props=: (
-        Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps
-      ) -> Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps
-
-      attr_reader type: String?
-
-      def type=: (String) -> String
-
       def initialize: (
-        ?id: Integer,
-        ?props: Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
-        ?type: String
+        props: Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
+        type: String,
+        ?id: Integer
       ) -> void
 
       def to_hash: -> {
-        id: Integer,
         props: Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
-        type: String
+        type: String,
+        id: Integer
       }
     end
   end

@@ -6,8 +6,8 @@ module Sentdm
       # @!attribute template
       #   The footer template text with optional variable placeholders
       #
-      #   @return [String, nil]
-      optional :template, String
+      #   @return [String]
+      required :template, String
 
       # @!attribute type
       #   The type of footer (typically "text")
@@ -21,7 +21,7 @@ module Sentdm
       #   @return [Array<Sentdm::Models::TemplateVariable>, nil]
       optional :variables, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateVariable] }, nil?: true
 
-      # @!method initialize(template: nil, type: nil, variables: nil)
+      # @!method initialize(template:, type: nil, variables: nil)
       #   Footer section of a message template
       #
       #   @param template [String] The footer template text with optional variable placeholders

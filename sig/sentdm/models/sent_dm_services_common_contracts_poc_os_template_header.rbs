@@ -8,16 +8,14 @@ module Sentdm
       }
 
     class SentDmServicesCommonContractsPocOsTemplateHeader < Sentdm::Internal::Type::BaseModel
-      attr_reader template: String?
-
-      def template=: (String) -> String
+      attr_accessor template: String
 
       attr_accessor type: String?
 
       attr_accessor variables: ::Array[Sentdm::TemplateVariable]?
 
       def initialize: (
-        ?template: String,
+        template: String,
         ?type: String?,
         ?variables: ::Array[Sentdm::TemplateVariable]?
       ) -> void

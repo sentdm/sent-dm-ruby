@@ -7,8 +7,8 @@ module Sentdm
       #   The header template text with optional variable placeholders (e.g., "Welcome to
       #   {{0:variable}}")
       #
-      #   @return [String, nil]
-      optional :template, String
+      #   @return [String]
+      required :template, String
 
       # @!attribute type
       #   The type of header (e.g., "text", "image", "video", "document")
@@ -22,7 +22,7 @@ module Sentdm
       #   @return [Array<Sentdm::Models::TemplateVariable>, nil]
       optional :variables, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateVariable] }, nil?: true
 
-      # @!method initialize(template: nil, type: nil, variables: nil)
+      # @!method initialize(template:, type: nil, variables: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader} for more
       #   details.
