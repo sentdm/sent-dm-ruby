@@ -5,8 +5,8 @@ module Sentdm
     class TemplateBodyContent < Sentdm::Internal::Type::BaseModel
       # @!attribute template
       #
-      #   @return [String, nil]
-      optional :template, String
+      #   @return [String]
+      required :template, String
 
       # @!attribute type
       #
@@ -18,7 +18,7 @@ module Sentdm
       #   @return [Array<Sentdm::Models::TemplateVariable>, nil]
       optional :variables, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateVariable] }, nil?: true
 
-      # @!method initialize(template: nil, type: nil, variables: nil)
+      # @!method initialize(template:, type: nil, variables: nil)
       #   @param template [String]
       #   @param type [String, nil]
       #   @param variables [Array<Sentdm::Models::TemplateVariable>, nil]

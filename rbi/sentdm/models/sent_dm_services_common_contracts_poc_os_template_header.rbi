@@ -13,11 +13,8 @@ module Sentdm
 
       # The header template text with optional variable placeholders (e.g., "Welcome to
       # {{0:variable}}")
-      sig { returns(T.nilable(String)) }
-      attr_reader :template
-
-      sig { params(template: String).void }
-      attr_writer :template
+      sig { returns(String) }
+      attr_accessor :template
 
       # The type of header (e.g., "text", "image", "video", "document")
       sig { returns(T.nilable(String)) }
@@ -38,7 +35,7 @@ module Sentdm
       def self.new(
         # The header template text with optional variable placeholders (e.g., "Welcome to
         # {{0:variable}}")
-        template: nil,
+        template:,
         # The type of header (e.g., "text", "image", "video", "document")
         type: nil,
         # List of variables used in the header template

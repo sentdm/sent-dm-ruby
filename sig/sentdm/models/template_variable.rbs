@@ -2,89 +2,81 @@ module Sentdm
   module Models
     type template_variable =
       {
-        id: Integer,
         name: String,
         props: Sentdm::TemplateVariable::Props,
-        type: String
+        type: String,
+        id: Integer
       }
 
     class TemplateVariable < Sentdm::Internal::Type::BaseModel
+      attr_accessor name: String
+
+      attr_accessor props: Sentdm::TemplateVariable::Props
+
+      attr_accessor type: String
+
       attr_reader id: Integer?
 
       def id=: (Integer) -> Integer
 
-      attr_reader name: String?
-
-      def name=: (String) -> String
-
-      attr_reader props: Sentdm::TemplateVariable::Props?
-
-      def props=: (
-        Sentdm::TemplateVariable::Props
-      ) -> Sentdm::TemplateVariable::Props
-
-      attr_reader type: String?
-
-      def type=: (String) -> String
-
       def initialize: (
-        ?id: Integer,
-        ?name: String,
-        ?props: Sentdm::TemplateVariable::Props,
-        ?type: String
+        name: String,
+        props: Sentdm::TemplateVariable::Props,
+        type: String,
+        ?id: Integer
       ) -> void
 
       def to_hash: -> {
-        id: Integer,
         name: String,
         props: Sentdm::TemplateVariable::Props,
-        type: String
+        type: String,
+        id: Integer
       }
 
       type props =
         {
+          media_type: String,
+          sample: String,
+          url: String,
+          variable_type: String,
           alt: String?,
-          media_type: String?,
           regex: String?,
-          sample: String?,
-          short_url: String?,
-          url: String?,
-          variable_type: String?
+          short_url: String?
         }
 
       class Props < Sentdm::Internal::Type::BaseModel
-        attr_accessor alt: String?
+        attr_accessor media_type: String
 
-        attr_accessor media_type: String?
+        attr_accessor sample: String
+
+        attr_accessor url: String
+
+        attr_accessor variable_type: String
+
+        attr_accessor alt: String?
 
         attr_accessor regex: String?
 
-        attr_accessor sample: String?
-
         attr_accessor short_url: String?
 
-        attr_accessor url: String?
-
-        attr_accessor variable_type: String?
-
         def initialize: (
+          media_type: String,
+          sample: String,
+          url: String,
+          variable_type: String,
           ?alt: String?,
-          ?media_type: String?,
           ?regex: String?,
-          ?sample: String?,
-          ?short_url: String?,
-          ?url: String?,
-          ?variable_type: String?
+          ?short_url: String?
         ) -> void
 
         def to_hash: -> {
+          media_type: String,
+          sample: String,
+          url: String,
+          variable_type: String,
           alt: String?,
-          media_type: String?,
           regex: String?,
-          sample: String?,
-          short_url: String?,
-          url: String?,
-          variable_type: String?
+          short_url: String?
         }
       end
     end

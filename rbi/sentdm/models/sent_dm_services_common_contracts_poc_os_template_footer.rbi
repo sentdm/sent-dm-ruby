@@ -12,11 +12,8 @@ module Sentdm
         end
 
       # The footer template text with optional variable placeholders
-      sig { returns(T.nilable(String)) }
-      attr_reader :template
-
-      sig { params(template: String).void }
-      attr_writer :template
+      sig { returns(String) }
+      attr_accessor :template
 
       # The type of footer (typically "text")
       sig { returns(T.nilable(String)) }
@@ -36,7 +33,7 @@ module Sentdm
       end
       def self.new(
         # The footer template text with optional variable placeholders
-        template: nil,
+        template:,
         # The type of footer (typically "text")
         type: nil,
         # List of variables used in the footer template
