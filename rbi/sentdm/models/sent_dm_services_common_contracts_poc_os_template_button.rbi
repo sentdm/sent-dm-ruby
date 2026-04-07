@@ -11,20 +11,9 @@ module Sentdm
           )
         end
 
-      # The unique identifier of the button (1-based index)
-      sig { returns(T.nilable(Integer)) }
-      attr_reader :id
-
-      sig { params(id: Integer).void }
-      attr_writer :id
-
       # Properties specific to the button type
       sig do
-        returns(
-          T.nilable(
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps
-          )
-        )
+        returns(Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps)
       end
       attr_reader :props
 
@@ -37,38 +26,42 @@ module Sentdm
       attr_writer :props
 
       # The type of button (e.g., QUICK_REPLY, URL, PHONE_NUMBER, VOICE_CALL, COPY_CODE)
-      sig { returns(T.nilable(String)) }
-      attr_reader :type
+      sig { returns(String) }
+      attr_accessor :type
 
-      sig { params(type: String).void }
-      attr_writer :type
+      # The unique identifier of the button (1-based index)
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :id
+
+      sig { params(id: Integer).void }
+      attr_writer :id
 
       # Interactive button in a message template
       sig do
         params(
-          id: Integer,
           props:
             Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps::OrHash,
-          type: String
+          type: String,
+          id: Integer
         ).returns(T.attached_class)
       end
       def self.new(
-        # The unique identifier of the button (1-based index)
-        id: nil,
         # Properties specific to the button type
-        props: nil,
+        props:,
         # The type of button (e.g., QUICK_REPLY, URL, PHONE_NUMBER, VOICE_CALL, COPY_CODE)
-        type: nil
+        type:,
+        # The unique identifier of the button (1-based index)
+        id: nil
       )
       end
 
       sig do
         override.returns(
           {
-            id: Integer,
             props:
               Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
-            type: String
+            type: String,
+            id: Integer
           }
         )
       end

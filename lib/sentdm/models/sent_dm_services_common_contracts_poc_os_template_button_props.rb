@@ -5,23 +5,48 @@ module Sentdm
     class SentDmServicesCommonContractsPocOsTemplateButtonProps < Sentdm::Internal::Type::BaseModel
       # @!attribute active_for
       #
-      #   @return [Integer, nil]
-      optional :active_for, Integer, api_name: :activeFor, nil?: true
+      #   @return [Integer]
+      required :active_for, Integer, api_name: :activeFor
+
+      # @!attribute country_code
+      #
+      #   @return [String]
+      required :country_code, String, api_name: :countryCode
+
+      # @!attribute offer_code
+      #
+      #   @return [String]
+      required :offer_code, String, api_name: :offerCode
+
+      # @!attribute phone_number
+      #
+      #   @return [String]
+      required :phone_number, String, api_name: :phoneNumber
+
+      # @!attribute quick_reply_type
+      #
+      #   @return [String]
+      required :quick_reply_type, String, api_name: :quickReplyType
+
+      # @!attribute text
+      #
+      #   @return [String]
+      required :text, String
+
+      # @!attribute url
+      #
+      #   @return [String]
+      required :url, String
+
+      # @!attribute url_type
+      #
+      #   @return [String]
+      required :url_type, String, api_name: :urlType
 
       # @!attribute autofill_text
       #
       #   @return [String, nil]
       optional :autofill_text, String, api_name: :autofillText, nil?: true
-
-      # @!attribute country_code
-      #
-      #   @return [String, nil]
-      optional :country_code, String, api_name: :countryCode, nil?: true
-
-      # @!attribute offer_code
-      #
-      #   @return [String, nil]
-      optional :offer_code, String, api_name: :offerCode, nil?: true
 
       # @!attribute otp_type
       #
@@ -33,49 +58,24 @@ module Sentdm
       #   @return [String, nil]
       optional :package_name, String, api_name: :packageName, nil?: true
 
-      # @!attribute phone_number
-      #
-      #   @return [String, nil]
-      optional :phone_number, String, api_name: :phoneNumber, nil?: true
-
-      # @!attribute quick_reply_type
-      #
-      #   @return [String, nil]
-      optional :quick_reply_type, String, api_name: :quickReplyType, nil?: true
-
       # @!attribute signature_hash
       #
       #   @return [String, nil]
       optional :signature_hash, String, api_name: :signatureHash, nil?: true
 
-      # @!attribute text
-      #
-      #   @return [String, nil]
-      optional :text, String, nil?: true
-
-      # @!attribute url
-      #
-      #   @return [String, nil]
-      optional :url, String, nil?: true
-
-      # @!attribute url_type
-      #
-      #   @return [String, nil]
-      optional :url_type, String, api_name: :urlType, nil?: true
-
-      # @!method initialize(active_for: nil, autofill_text: nil, country_code: nil, offer_code: nil, otp_type: nil, package_name: nil, phone_number: nil, quick_reply_type: nil, signature_hash: nil, text: nil, url: nil, url_type: nil)
-      #   @param active_for [Integer, nil]
+      # @!method initialize(active_for:, country_code:, offer_code:, phone_number:, quick_reply_type:, text:, url:, url_type:, autofill_text: nil, otp_type: nil, package_name: nil, signature_hash: nil)
+      #   @param active_for [Integer]
+      #   @param country_code [String]
+      #   @param offer_code [String]
+      #   @param phone_number [String]
+      #   @param quick_reply_type [String]
+      #   @param text [String]
+      #   @param url [String]
+      #   @param url_type [String]
       #   @param autofill_text [String, nil]
-      #   @param country_code [String, nil]
-      #   @param offer_code [String, nil]
       #   @param otp_type [String, nil]
       #   @param package_name [String, nil]
-      #   @param phone_number [String, nil]
-      #   @param quick_reply_type [String, nil]
       #   @param signature_hash [String, nil]
-      #   @param text [String, nil]
-      #   @param url [String, nil]
-      #   @param url_type [String, nil]
     end
   end
 end

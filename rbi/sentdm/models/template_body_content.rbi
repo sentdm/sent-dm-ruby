@@ -8,11 +8,8 @@ module Sentdm
           T.any(Sentdm::TemplateBodyContent, Sentdm::Internal::AnyHash)
         end
 
-      sig { returns(T.nilable(String)) }
-      attr_reader :template
-
-      sig { params(template: String).void }
-      attr_writer :template
+      sig { returns(String) }
+      attr_accessor :template
 
       sig { returns(T.nilable(String)) }
       attr_accessor :type
@@ -27,7 +24,7 @@ module Sentdm
           variables: T.nilable(T::Array[Sentdm::TemplateVariable::OrHash])
         ).returns(T.attached_class)
       end
-      def self.new(template: nil, type: nil, variables: nil)
+      def self.new(template:, type: nil, variables: nil)
       end
 
       sig do
