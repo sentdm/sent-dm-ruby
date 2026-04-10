@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.1 (2026-04-10)
+
+Full Changelog: [v0.13.0...v0.13.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.13.0...v0.13.1)
+
+### Bug Fixes
+
+* multipart encoding for file arrays ([3bf860f](https://github.com/sentdm/sent-dm-ruby/commit/3bf860f577ef213e769f932545dfe961183ccee9))
+
 ## 0.13.0 (2026-04-07)
 
 Full Changelog: [v0.12.1...v0.13.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.12.1...v0.13.0)
