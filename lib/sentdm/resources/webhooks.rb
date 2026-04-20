@@ -9,11 +9,13 @@ module Sentdm
       #
       # Creates a new webhook endpoint for the authenticated customer.
       #
-      # @overload create(display_name: nil, endpoint_url: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param display_name [String] Body param
       #
       # @param endpoint_url [String] Body param
+      #
+      # @param event_filters [Hash{Symbol=>Array<String>}, nil] Body param
       #
       # @param event_types [Array<String>] Body param
       #
@@ -77,13 +79,15 @@ module Sentdm
       #
       # Updates an existing webhook for the authenticated customer.
       #
-      # @overload update(id, display_name: nil, endpoint_url: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
       #
       # @param display_name [String] Body param
       #
       # @param endpoint_url [String] Body param
+      #
+      # @param event_filters [Hash{Symbol=>Array<String>}, nil] Body param
       #
       # @param event_types [Array<String>] Body param
       #

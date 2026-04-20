@@ -159,6 +159,9 @@ module Sentdm
           sig { params(display_name: String).void }
           attr_writer :display_name
 
+          sig { returns(T.nilable(String)) }
+          attr_accessor :event_type
+
           sig { returns(T.nilable(T::Boolean)) }
           attr_reader :is_active
 
@@ -171,19 +174,26 @@ module Sentdm
           sig { params(name: String).void }
           attr_writer :name
 
+          sig { returns(T.nilable(T::Array[T.anything])) }
+          attr_accessor :sub_types
+
           sig do
             params(
               description: T.nilable(String),
               display_name: String,
+              event_type: T.nilable(String),
               is_active: T::Boolean,
-              name: String
+              name: String,
+              sub_types: T.nilable(T::Array[T.anything])
             ).returns(T.attached_class)
           end
           def self.new(
             description: nil,
             display_name: nil,
+            event_type: nil,
             is_active: nil,
-            name: nil
+            name: nil,
+            sub_types: nil
           )
           end
 
@@ -192,8 +202,10 @@ module Sentdm
               {
                 description: T.nilable(String),
                 display_name: String,
+                event_type: T.nilable(String),
                 is_active: T::Boolean,
-                name: String
+                name: String,
+                sub_types: T.nilable(T::Array[T.anything])
               }
             )
           end

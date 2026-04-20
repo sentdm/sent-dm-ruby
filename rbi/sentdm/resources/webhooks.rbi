@@ -9,6 +9,7 @@ module Sentdm
         params(
           display_name: String,
           endpoint_url: String,
+          event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
           event_types: T::Array[String],
           retry_count: Integer,
           sandbox: T::Boolean,
@@ -23,6 +24,8 @@ module Sentdm
         display_name: nil,
         # Body param
         endpoint_url: nil,
+        # Body param
+        event_filters: nil,
         # Body param
         event_types: nil,
         # Body param
@@ -67,6 +70,7 @@ module Sentdm
           id: String,
           display_name: String,
           endpoint_url: String,
+          event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
           event_types: T::Array[String],
           retry_count: Integer,
           sandbox: T::Boolean,
@@ -83,6 +87,8 @@ module Sentdm
         display_name: nil,
         # Body param
         endpoint_url: nil,
+        # Body param
+        event_filters: nil,
         # Body param
         event_types: nil,
         # Body param

@@ -181,6 +181,12 @@ module Sentdm
           sig { params(description: String).void }
           attr_writer :description
 
+          # Sender phone number for this activity (the customer's sending number for
+          # outbound, the external sender for inbound). Null when not reported by the
+          # provider.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :from
+
           # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
           # 4 decimal places.
           sig { returns(T.nilable(String)) }
@@ -205,6 +211,7 @@ module Sentdm
             params(
               active_contact_price: T.nilable(String),
               description: String,
+              from: T.nilable(String),
               price: T.nilable(String),
               status: String,
               timestamp: Time
@@ -216,6 +223,10 @@ module Sentdm
             active_contact_price: nil,
             # Human-readable description of the activity
             description: nil,
+            # Sender phone number for this activity (the customer's sending number for
+            # outbound, the external sender for inbound). Null when not reported by the
+            # provider.
+            from: nil,
             # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
             # 4 decimal places.
             price: nil,
@@ -231,6 +242,7 @@ module Sentdm
               {
                 active_contact_price: T.nilable(String),
                 description: String,
+                from: T.nilable(String),
                 price: T.nilable(String),
                 status: String,
                 timestamp: Time

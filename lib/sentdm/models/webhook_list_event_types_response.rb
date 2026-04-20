@@ -63,6 +63,11 @@ module Sentdm
           #   @return [String, nil]
           optional :display_name, String
 
+          # @!attribute event_type
+          #
+          #   @return [String, nil]
+          optional :event_type, String, nil?: true
+
           # @!attribute is_active
           #
           #   @return [Boolean, nil]
@@ -73,11 +78,18 @@ module Sentdm
           #   @return [String, nil]
           optional :name, String
 
-          # @!method initialize(description: nil, display_name: nil, is_active: nil, name: nil)
+          # @!attribute sub_types
+          #
+          #   @return [Array<Object>, nil]
+          optional :sub_types, Sentdm::Internal::Type::ArrayOf[Sentdm::Internal::Type::Unknown], nil?: true
+
+          # @!method initialize(description: nil, display_name: nil, event_type: nil, is_active: nil, name: nil, sub_types: nil)
           #   @param description [String, nil]
           #   @param display_name [String]
+          #   @param event_type [String, nil]
           #   @param is_active [Boolean]
           #   @param name [String]
+          #   @param sub_types [Array<Object>, nil]
         end
       end
     end
