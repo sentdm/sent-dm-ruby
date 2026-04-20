@@ -4,6 +4,7 @@ module Sentdm
       def create: (
         ?display_name: String,
         ?endpoint_url: String,
+        ?event_filters: ::Hash[Symbol, ::Array[String]]?,
         ?event_types: ::Array[String],
         ?retry_count: Integer,
         ?sandbox: bool,
@@ -23,6 +24,7 @@ module Sentdm
         String id,
         ?display_name: String,
         ?endpoint_url: String,
+        ?event_filters: ::Hash[Symbol, ::Array[String]]?,
         ?event_types: ::Array[String],
         ?retry_count: Integer,
         ?sandbox: bool,

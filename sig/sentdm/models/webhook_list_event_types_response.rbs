@@ -59,8 +59,10 @@ module Sentdm
           {
             description: String?,
             display_name: String,
+            event_type: String?,
             is_active: bool,
-            name: String
+            name: String,
+            sub_types: ::Array[top]?
           }
 
         class EventType < Sentdm::Internal::Type::BaseModel
@@ -70,6 +72,8 @@ module Sentdm
 
           def display_name=: (String) -> String
 
+          attr_accessor event_type: String?
+
           attr_reader is_active: bool?
 
           def is_active=: (bool) -> bool
@@ -78,18 +82,24 @@ module Sentdm
 
           def name=: (String) -> String
 
+          attr_accessor sub_types: ::Array[top]?
+
           def initialize: (
             ?description: String?,
             ?display_name: String,
+            ?event_type: String?,
             ?is_active: bool,
-            ?name: String
+            ?name: String,
+            ?sub_types: ::Array[top]?
           ) -> void
 
           def to_hash: -> {
             description: String?,
             display_name: String,
+            event_type: String?,
             is_active: bool,
-            name: String
+            name: String,
+            sub_types: ::Array[top]?
           }
         end
       end

@@ -75,6 +75,14 @@ module Sentdm
           #   @return [String, nil]
           optional :description, String
 
+          # @!attribute from
+          #   Sender phone number for this activity (the customer's sending number for
+          #   outbound, the external sender for inbound). Null when not reported by the
+          #   provider.
+          #
+          #   @return [String, nil]
+          optional :from, String, nil?: true
+
           # @!attribute price
           #   Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
           #   4 decimal places.
@@ -94,7 +102,7 @@ module Sentdm
           #   @return [Time, nil]
           optional :timestamp, Time
 
-          # @!method initialize(active_contact_price: nil, description: nil, price: nil, status: nil, timestamp: nil)
+          # @!method initialize(active_contact_price: nil, description: nil, from: nil, price: nil, status: nil, timestamp: nil)
           #   Some parameter documentations has been truncated, see
           #   {Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity} for more
           #   details.
@@ -104,6 +112,8 @@ module Sentdm
           #   @param active_contact_price [String, nil] Active contact markup applied on top of the channel cost, formatted to 4 decimal
           #
           #   @param description [String] Human-readable description of the activity
+          #
+          #   @param from [String, nil] Sender phone number for this activity (the customer's sending number for outboun
           #
           #   @param price [String, nil] Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
           #

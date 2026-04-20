@@ -38,6 +38,9 @@ module Sentdm
       sig { params(endpoint_url: String).void }
       attr_writer :endpoint_url
 
+      sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
+      attr_accessor :event_filters
+
       sig { returns(T.nilable(T::Array[String])) }
       attr_reader :event_types
 
@@ -81,6 +84,7 @@ module Sentdm
           created_at: Time,
           display_name: String,
           endpoint_url: String,
+          event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
           event_types: T::Array[String],
           is_active: T::Boolean,
           last_delivery_attempt_at: T.nilable(Time),
@@ -97,6 +101,7 @@ module Sentdm
         created_at: nil,
         display_name: nil,
         endpoint_url: nil,
+        event_filters: nil,
         event_types: nil,
         is_active: nil,
         last_delivery_attempt_at: nil,
@@ -116,6 +121,7 @@ module Sentdm
             created_at: Time,
             display_name: String,
             endpoint_url: String,
+            event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
             event_types: T::Array[String],
             is_active: T::Boolean,
             last_delivery_attempt_at: T.nilable(Time),
