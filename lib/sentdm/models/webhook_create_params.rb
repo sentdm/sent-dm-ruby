@@ -17,6 +17,13 @@ module Sentdm
       #   @return [String, nil]
       optional :endpoint_url, String
 
+      # @!attribute event_filters
+      #
+      #   @return [Hash{Symbol=>Array<String>}, nil]
+      optional :event_filters,
+               Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]],
+               nil?: true
+
       # @!attribute event_types
       #
       #   @return [Array<String>, nil]
@@ -49,13 +56,15 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(display_name: nil, endpoint_url: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookCreateParams} for more details.
       #
       #   @param display_name [String]
       #
       #   @param endpoint_url [String]
+      #
+      #   @param event_filters [Hash{Symbol=>Array<String>}, nil]
       #
       #   @param event_types [Array<String>]
       #

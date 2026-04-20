@@ -28,6 +28,13 @@ module Sentdm
       #   @return [String, nil]
       optional :endpoint_url, String
 
+      # @!attribute event_filters
+      #
+      #   @return [Hash{Symbol=>Array<String>}, nil]
+      optional :event_filters,
+               Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]],
+               nil?: true
+
       # @!attribute event_types
       #
       #   @return [Array<String>, nil]
@@ -68,12 +75,13 @@ module Sentdm
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(id: nil, consecutive_failures: nil, created_at: nil, display_name: nil, endpoint_url: nil, event_types: nil, is_active: nil, last_delivery_attempt_at: nil, last_successful_delivery_at: nil, retry_count: nil, signing_secret: nil, timeout_seconds: nil, updated_at: nil)
+      # @!method initialize(id: nil, consecutive_failures: nil, created_at: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_active: nil, last_delivery_attempt_at: nil, last_successful_delivery_at: nil, retry_count: nil, signing_secret: nil, timeout_seconds: nil, updated_at: nil)
       #   @param id [String]
       #   @param consecutive_failures [Integer]
       #   @param created_at [Time]
       #   @param display_name [String]
       #   @param endpoint_url [String]
+      #   @param event_filters [Hash{Symbol=>Array<String>}, nil]
       #   @param event_types [Array<String>]
       #   @param is_active [Boolean]
       #   @param last_delivery_attempt_at [Time, nil]

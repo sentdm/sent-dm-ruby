@@ -23,6 +23,9 @@ module Sentdm
       sig { params(endpoint_url: String).void }
       attr_writer :endpoint_url
 
+      sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
+      attr_accessor :event_filters
+
       sig { returns(T.nilable(T::Array[String])) }
       attr_reader :event_types
 
@@ -65,6 +68,7 @@ module Sentdm
         params(
           display_name: String,
           endpoint_url: String,
+          event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
           event_types: T::Array[String],
           retry_count: Integer,
           sandbox: T::Boolean,
@@ -77,6 +81,7 @@ module Sentdm
       def self.new(
         display_name: nil,
         endpoint_url: nil,
+        event_filters: nil,
         event_types: nil,
         retry_count: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -94,6 +99,7 @@ module Sentdm
           {
             display_name: String,
             endpoint_url: String,
+            event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
             event_types: T::Array[String],
             retry_count: Integer,
             sandbox: T::Boolean,
