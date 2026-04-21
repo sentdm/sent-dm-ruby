@@ -22,6 +22,13 @@ module Sentdm
       sig { params(available_channels: String).void }
       attr_writer :available_channels
 
+      # Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in",
+      # "opted_out". All channels will have the same status because consent is global
+      # across channels. A STOP on any channel opts out of all channels; a START opts in
+      # to all.
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_accessor :channel_consent
+
       # Country calling code (e.g., 1 for US/Canada)
       sig { returns(T.nilable(String)) }
       attr_reader :country_code
@@ -108,6 +115,7 @@ module Sentdm
         params(
           id: String,
           available_channels: String,
+          channel_consent: T.nilable(T::Hash[Symbol, String]),
           country_code: String,
           created_at: Time,
           default_channel: String,
@@ -127,6 +135,11 @@ module Sentdm
         id: nil,
         # Comma-separated list of available messaging channels (e.g., "sms,whatsapp")
         available_channels: nil,
+        # Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in",
+        # "opted_out". All channels will have the same status because consent is global
+        # across channels. A STOP on any channel opts out of all channels; a START opts in
+        # to all.
+        channel_consent: nil,
         # Country calling code (e.g., 1 for US/Canada)
         country_code: nil,
         # When the contact was created
@@ -159,6 +172,7 @@ module Sentdm
           {
             id: String,
             available_channels: String,
+            channel_consent: T.nilable(T::Hash[Symbol, String]),
             country_code: String,
             created_at: Time,
             default_channel: String,

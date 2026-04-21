@@ -3,6 +3,7 @@ module Sentdm
     type contact_update_params =
       {
         id: String,
+        channel_consent: ::Hash[Symbol, String]?,
         default_channel: String?,
         opt_out: bool?,
         sandbox: bool,
@@ -16,6 +17,8 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor id: String
+
+      attr_accessor channel_consent: ::Hash[Symbol, String]?
 
       attr_accessor default_channel: String?
 
@@ -35,6 +38,7 @@ module Sentdm
 
       def initialize: (
         id: String,
+        ?channel_consent: ::Hash[Symbol, String]?,
         ?default_channel: String?,
         ?opt_out: bool?,
         ?sandbox: bool,
@@ -45,6 +49,7 @@ module Sentdm
 
       def to_hash: -> {
         id: String,
+        channel_consent: ::Hash[Symbol, String]?,
         default_channel: String?,
         opt_out: bool?,
         sandbox: bool,

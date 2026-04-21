@@ -43,6 +43,7 @@ module Sentdm
           contact_id: String,
           created_at: Time,
           customer_id: String,
+          direction: String,
           events: ::Array[Sentdm::Models::MessageRetrieveStatusResponse::Data::Event]?,
           message_body: Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody?,
           phone: String,
@@ -50,9 +51,9 @@ module Sentdm
           price: Float?,
           region_code: String,
           status: String,
-          template_category: String,
+          template_category: String?,
           template_id: String?,
-          template_name: String
+          template_name: String?
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
@@ -78,6 +79,10 @@ module Sentdm
 
         def customer_id=: (String) -> String
 
+        attr_reader direction: String?
+
+        def direction=: (String) -> String
+
         attr_accessor events: ::Array[Sentdm::Models::MessageRetrieveStatusResponse::Data::Event]?
 
         attr_accessor message_body: Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody?
@@ -100,15 +105,11 @@ module Sentdm
 
         def status=: (String) -> String
 
-        attr_reader template_category: String?
-
-        def template_category=: (String) -> String
+        attr_accessor template_category: String?
 
         attr_accessor template_id: String?
 
-        attr_reader template_name: String?
-
-        def template_name=: (String) -> String
+        attr_accessor template_name: String?
 
         def initialize: (
           ?id: String,
@@ -117,6 +118,7 @@ module Sentdm
           ?contact_id: String,
           ?created_at: Time,
           ?customer_id: String,
+          ?direction: String,
           ?events: ::Array[Sentdm::Models::MessageRetrieveStatusResponse::Data::Event]?,
           ?message_body: Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody?,
           ?phone: String,
@@ -124,9 +126,9 @@ module Sentdm
           ?price: Float?,
           ?region_code: String,
           ?status: String,
-          ?template_category: String,
+          ?template_category: String?,
           ?template_id: String?,
-          ?template_name: String
+          ?template_name: String?
         ) -> void
 
         def to_hash: -> {
@@ -136,6 +138,7 @@ module Sentdm
           contact_id: String,
           created_at: Time,
           customer_id: String,
+          direction: String,
           events: ::Array[Sentdm::Models::MessageRetrieveStatusResponse::Data::Event]?,
           message_body: Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody?,
           phone: String,
@@ -143,9 +146,9 @@ module Sentdm
           price: Float?,
           region_code: String,
           status: String,
-          template_category: String,
+          template_category: String?,
           template_id: String?,
-          template_name: String
+          template_name: String?
         }
 
         type event = { description: String?, status: String, timestamp: Time }

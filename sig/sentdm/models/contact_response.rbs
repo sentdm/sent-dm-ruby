@@ -4,6 +4,7 @@ module Sentdm
       {
         id: String,
         available_channels: String,
+        channel_consent: ::Hash[Symbol, String]?,
         country_code: String,
         created_at: Time,
         default_channel: String,
@@ -26,6 +27,8 @@ module Sentdm
       attr_reader available_channels: String?
 
       def available_channels=: (String) -> String
+
+      attr_accessor channel_consent: ::Hash[Symbol, String]?
 
       attr_reader country_code: String?
 
@@ -76,6 +79,7 @@ module Sentdm
       def initialize: (
         ?id: String,
         ?available_channels: String,
+        ?channel_consent: ::Hash[Symbol, String]?,
         ?country_code: String,
         ?created_at: Time,
         ?default_channel: String,
@@ -93,6 +97,7 @@ module Sentdm
       def to_hash: -> {
         id: String,
         available_channels: String,
+        channel_consent: ::Hash[Symbol, String]?,
         country_code: String,
         created_at: Time,
         default_channel: String,
