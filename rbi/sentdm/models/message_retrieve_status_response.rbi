@@ -128,6 +128,12 @@ module Sentdm
         sig { params(customer_id: String).void }
         attr_writer :customer_id
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :direction
+
+        sig { params(direction: String).void }
+        attr_writer :direction
+
         sig do
           returns(
             T.nilable(
@@ -188,19 +194,13 @@ module Sentdm
         attr_writer :status
 
         sig { returns(T.nilable(String)) }
-        attr_reader :template_category
-
-        sig { params(template_category: String).void }
-        attr_writer :template_category
+        attr_accessor :template_category
 
         sig { returns(T.nilable(String)) }
         attr_accessor :template_id
 
         sig { returns(T.nilable(String)) }
-        attr_reader :template_name
-
-        sig { params(template_name: String).void }
-        attr_writer :template_name
+        attr_accessor :template_name
 
         # Message response for v3 API — same shape as v2 with snake_case JSON conventions
         sig do
@@ -211,6 +211,7 @@ module Sentdm
             contact_id: String,
             created_at: Time,
             customer_id: String,
+            direction: String,
             events:
               T.nilable(
                 T::Array[
@@ -226,9 +227,9 @@ module Sentdm
             price: T.nilable(Float),
             region_code: String,
             status: String,
-            template_category: String,
+            template_category: T.nilable(String),
             template_id: T.nilable(String),
-            template_name: String
+            template_name: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -238,6 +239,7 @@ module Sentdm
           contact_id: nil,
           created_at: nil,
           customer_id: nil,
+          direction: nil,
           events: nil,
           # Structured message body format for database storage. Preserves channel-specific
           # components (header, body, footer, buttons).
@@ -262,6 +264,7 @@ module Sentdm
               contact_id: String,
               created_at: Time,
               customer_id: String,
+              direction: String,
               events:
                 T.nilable(
                   T::Array[
@@ -277,9 +280,9 @@ module Sentdm
               price: T.nilable(Float),
               region_code: String,
               status: String,
-              template_category: String,
+              template_category: T.nilable(String),
               template_id: T.nilable(String),
-              template_name: String
+              template_name: T.nilable(String)
             }
           )
         end

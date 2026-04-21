@@ -73,9 +73,11 @@ module Sentdm
       # Updates a contact's default channel and/or opt-out status. Inherited contacts
       # cannot be updated.
       #
-      # @overload update(id, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, channel_consent: nil, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Contact ID from route parameter
+      #
+      # @param channel_consent [Hash{Symbol=>String}, nil] Body param: Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_i
       #
       # @param default_channel [String, nil] Body param: Default messaging channel: "sms" or "whatsapp"
       #

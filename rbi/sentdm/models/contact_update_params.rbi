@@ -14,6 +14,15 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :id
 
+      # Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in",
+      # "opted_out". All entries must have the same status — mixed values (e.g., sms:
+      # opted_out + whatsapp: opted_in) are rejected with 400. The provided status is
+      # applied to ALL channels regardless of which keys are specified, because consent
+      # is global across channels. When provided, takes precedence over the opt_out
+      # field.
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_accessor :channel_consent
+
       # Default messaging channel: "sms" or "whatsapp"
       sig { returns(T.nilable(String)) }
       attr_accessor :default_channel
@@ -45,6 +54,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          channel_consent: T.nilable(T::Hash[Symbol, String]),
           default_channel: T.nilable(String),
           opt_out: T.nilable(T::Boolean),
           sandbox: T::Boolean,
@@ -55,6 +65,13 @@ module Sentdm
       end
       def self.new(
         id:,
+        # Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in",
+        # "opted_out". All entries must have the same status — mixed values (e.g., sms:
+        # opted_out + whatsapp: opted_in) are rejected with 400. The provided status is
+        # applied to ALL channels regardless of which keys are specified, because consent
+        # is global across channels. When provided, takes precedence over the opt_out
+        # field.
+        channel_consent: nil,
         # Default messaging channel: "sms" or "whatsapp"
         default_channel: nil,
         # Whether the contact has opted out of messaging
@@ -72,6 +89,7 @@ module Sentdm
         override.returns(
           {
             id: String,
+            channel_consent: T.nilable(T::Hash[Symbol, String]),
             default_channel: T.nilable(String),
             opt_out: T.nilable(T::Boolean),
             sandbox: T::Boolean,

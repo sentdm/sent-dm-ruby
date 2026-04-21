@@ -17,6 +17,7 @@ module Sentdm
 
       def update: (
         String id,
+        ?channel_consent: ::Hash[Symbol, String]?,
         ?default_channel: String?,
         ?opt_out: bool?,
         ?sandbox: bool,
