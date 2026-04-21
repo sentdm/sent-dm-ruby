@@ -12,6 +12,17 @@ module Sentdm
       #   @return [String]
       required :id, String
 
+      # @!attribute channel_consent
+      #   Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in",
+      #   "opted_out". All entries must have the same status — mixed values (e.g., sms:
+      #   opted_out + whatsapp: opted_in) are rejected with 400. The provided status is
+      #   applied to ALL channels regardless of which keys are specified, because consent
+      #   is global across channels. When provided, takes precedence over the opt_out
+      #   field.
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :channel_consent, Sentdm::Internal::Type::HashOf[String], nil?: true
+
       # @!attribute default_channel
       #   Default messaging channel: "sms" or "whatsapp"
       #
@@ -41,11 +52,13 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(id:, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(id:, channel_consent: nil, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ContactUpdateParams} for more details.
       #
       #   @param id [String]
+      #
+      #   @param channel_consent [Hash{Symbol=>String}, nil] Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in", "opted_o
       #
       #   @param default_channel [String, nil] Default messaging channel: "sms" or "whatsapp"
       #

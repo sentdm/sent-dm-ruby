@@ -15,6 +15,15 @@ module Sentdm
       #   @return [String, nil]
       optional :available_channels, String
 
+      # @!attribute channel_consent
+      #   Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in",
+      #   "opted_out". All channels will have the same status because consent is global
+      #   across channels. A STOP on any channel opts out of all channels; a START opts in
+      #   to all.
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :channel_consent, Sentdm::Internal::Type::HashOf[String], nil?: true
+
       # @!attribute country_code
       #   Country calling code (e.g., 1 for US/Canada)
       #
@@ -87,12 +96,17 @@ module Sentdm
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(id: nil, available_channels: nil, country_code: nil, created_at: nil, default_channel: nil, format_e164: nil, format_international: nil, format_national: nil, format_rfc: nil, is_inherited: nil, opt_out: nil, phone_number: nil, region_code: nil, updated_at: nil)
+      # @!method initialize(id: nil, available_channels: nil, channel_consent: nil, country_code: nil, created_at: nil, default_channel: nil, format_e164: nil, format_international: nil, format_national: nil, format_rfc: nil, is_inherited: nil, opt_out: nil, phone_number: nil, region_code: nil, updated_at: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::ContactResponse} for more details.
+      #
       #   Contact response for v3 API Uses snake_case for JSON property names
       #
       #   @param id [String] Unique identifier for the contact
       #
       #   @param available_channels [String] Comma-separated list of available messaging channels (e.g., "sms,whatsapp")
+      #
+      #   @param channel_consent [Hash{Symbol=>String}, nil] Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_in", "opted_o
       #
       #   @param country_code [String] Country calling code (e.g., 1 for US/Canada)
       #

@@ -71,6 +71,11 @@ module Sentdm
         #   @return [String, nil]
         optional :customer_id, String
 
+        # @!attribute direction
+        #
+        #   @return [String, nil]
+        optional :direction, String
+
         # @!attribute events
         #
         #   @return [Array<Sentdm::Models::MessageRetrieveStatusResponse::Data::Event>, nil]
@@ -115,7 +120,7 @@ module Sentdm
         # @!attribute template_category
         #
         #   @return [String, nil]
-        optional :template_category, String
+        optional :template_category, String, nil?: true
 
         # @!attribute template_id
         #
@@ -125,9 +130,9 @@ module Sentdm
         # @!attribute template_name
         #
         #   @return [String, nil]
-        optional :template_name, String
+        optional :template_name, String, nil?: true
 
-        # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
+        # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, direction: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MessageRetrieveStatusResponse::Data} for more details.
         #
@@ -145,6 +150,8 @@ module Sentdm
         #
         #   @param customer_id [String]
         #
+        #   @param direction [String]
+        #
         #   @param events [Array<Sentdm::Models::MessageRetrieveStatusResponse::Data::Event>, nil]
         #
         #   @param message_body [Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody, nil] Structured message body format for database storage.
@@ -159,11 +166,11 @@ module Sentdm
         #
         #   @param status [String]
         #
-        #   @param template_category [String]
+        #   @param template_category [String, nil]
         #
         #   @param template_id [String, nil]
         #
-        #   @param template_name [String]
+        #   @param template_name [String, nil]
 
         class Event < Sentdm::Internal::Type::BaseModel
           # @!attribute description
