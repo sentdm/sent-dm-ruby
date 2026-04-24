@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.15.1 (2026-04-24)
+
+Full Changelog: [v0.15.0...v0.15.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.15.0...v0.15.1)
+
+### Chores
+
+* **internal:** more robust bootstrap script ([295a55c](https://github.com/sentdm/sent-dm-ruby/commit/295a55c2246fead59e17035e49bbff82c001f860))
+
 ## 0.15.0 (2026-04-21)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.14.0...v0.15.0)
