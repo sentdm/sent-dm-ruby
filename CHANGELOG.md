@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.0 (2026-04-28)
+
+Full Changelog: [v0.15.1...v0.16.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.15.1...v0.16.0)
+
+### Features
+
+* support setting headers via env ([b5821b8](https://github.com/sentdm/sent-dm-ruby/commit/b5821b85bbb068d7625094c579dc26976700c4fb))
+
 ## 0.15.1 (2026-04-24)
 
 Full Changelog: [v0.15.0...v0.15.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.15.0...v0.15.1)
