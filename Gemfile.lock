@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    sentdm (0.15.1)
+    sentdm (0.16.0)
       cgi
       connection_pool
 
