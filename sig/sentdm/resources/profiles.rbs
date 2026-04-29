@@ -65,7 +65,7 @@ module Sentdm
 
       def delete: (
         String profile_id,
-        body: Sentdm::ProfileDeleteParams::Body,
+        ?sandbox: bool,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil
@@ -77,7 +77,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> top
+      ) -> Sentdm::Models::ProfileCompleteResponse
 
       def initialize: (client: Sentdm::Client) -> void
     end

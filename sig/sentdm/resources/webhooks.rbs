@@ -65,7 +65,7 @@ module Sentdm
 
       def rotate_secret: (
         String id,
-        body: Sentdm::WebhookRotateSecretParams::Body,
+        ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts

@@ -97,7 +97,7 @@ module Sentdm
           params(
             campaign_id: String,
             profile_id: String,
-            body: Sentdm::Profiles::CampaignDeleteParams::Body::OrHash,
+            sandbox: T::Boolean,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
           ).void
@@ -107,8 +107,9 @@ module Sentdm
           campaign_id,
           # Path param: Profile ID from route parameter
           profile_id:,
-          # Body param: Request to delete a campaign from a brand
-          body:,
+          # Body param: Sandbox flag - when true, the operation is simulated without side
+          # effects Useful for testing integrations without actual execution
+          sandbox: nil,
           # Header param: Profile UUID to scope the request to a child profile. Only
           # organization API keys can use this header. The profile must belong to the
           # calling organization.

@@ -249,11 +249,11 @@ module Sentdm
       # Generates a new signing secret for the specified webhook. The old secret is
       # immediately invalidated.
       #
-      # @overload rotate_secret(id, body:, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload rotate_secret(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
       #
-      # @param body [Sentdm::Models::WebhookRotateSecretParams::Body] Body param
+      # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
       # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
       #
@@ -264,16 +264,14 @@ module Sentdm
       # @return [Sentdm::Models::WebhookRotateSecretResponse]
       #
       # @see Sentdm::Models::WebhookRotateSecretParams
-      def rotate_secret(id, params)
+      def rotate_secret(id, params = {})
         parsed, options = Sentdm::WebhookRotateSecretParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
         @client.request(
           method: :post,
           path: ["v3/webhooks/%1$s/rotate-secret", id],
-          headers: parsed.except(:body).transform_keys(
-            idempotency_key: "idempotency-key",
-            x_profile_id: "x-profile-id"
-          ),
-          body: parsed[:body],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           model: Sentdm::Models::WebhookRotateSecretResponse,
           options: options
         )

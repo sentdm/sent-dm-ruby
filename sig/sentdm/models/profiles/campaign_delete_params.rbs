@@ -2,32 +2,28 @@ module Sentdm
   module Models
     module Profiles
       type campaign_delete_params =
-        {
-          profile_id: String,
-          campaign_id: String,
-          body: Sentdm::Profiles::CampaignDeleteParams::Body,
-          x_profile_id: String
-        }
+        { profile_id: String, campaign_id: String, x_profile_id: String }
         & Sentdm::Internal::Type::request_parameters
 
-      class CampaignDeleteParams < Sentdm::Internal::Type::BaseModel
+      class CampaignDeleteParams < Sentdm::Models::MutationRequest
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
-        attr_accessor profile_id: String
+        def profile_id: -> String
 
-        attr_accessor campaign_id: String
+        def profile_id=: (String _) -> String
 
-        attr_accessor body: Sentdm::Profiles::CampaignDeleteParams::Body
+        def campaign_id: -> String
 
-        attr_reader x_profile_id: String?
+        def campaign_id=: (String _) -> String
 
-        def x_profile_id=: (String) -> String
+        def x_profile_id: -> String?
+
+        def x_profile_id=: (String _) -> String
 
         def initialize: (
           profile_id: String,
           campaign_id: String,
-          body: Sentdm::Profiles::CampaignDeleteParams::Body,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts
         ) -> void
@@ -35,18 +31,9 @@ module Sentdm
         def to_hash: -> {
           profile_id: String,
           campaign_id: String,
-          body: Sentdm::Profiles::CampaignDeleteParams::Body,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions
         }
-
-        type body = {  }
-
-        class Body < Sentdm::Models::MutationRequest
-          def initialize: -> void
-
-          def to_hash: -> {  }
-        end
       end
     end
   end

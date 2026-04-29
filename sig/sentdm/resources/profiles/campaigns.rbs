@@ -30,7 +30,7 @@ module Sentdm
         def delete: (
           String campaign_id,
           profile_id: String,
-          body: Sentdm::Profiles::CampaignDeleteParams::Body,
+          ?sandbox: bool,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts
         ) -> nil

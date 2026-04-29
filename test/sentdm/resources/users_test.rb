@@ -60,10 +60,10 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_remove_required_params
+  def test_remove
     skip("Mock server tests are disabled")
 
-    response = @sent.users.remove("userId", body: {})
+    response = @sent.users.remove("userId")
 
     assert_pattern do
       response => nil

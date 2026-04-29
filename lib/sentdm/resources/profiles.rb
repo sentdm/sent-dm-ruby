@@ -255,11 +255,11 @@ module Sentdm
       # Soft deletes a sender profile. The profile will be marked as deleted but data is
       # retained. Requires admin role in the organization.
       #
-      # @overload delete(profile_id, body:, x_profile_id: nil, request_options: {})
+      # @overload delete(profile_id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param profile_id [String] Path param
       #
-      # @param body [Sentdm::Models::ProfileDeleteParams::Body] Body param: Request to delete a profile
+      # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
       # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
       #
@@ -268,13 +268,14 @@ module Sentdm
       # @return [nil]
       #
       # @see Sentdm::Models::ProfileDeleteParams
-      def delete(profile_id, params)
+      def delete(profile_id, params = {})
         parsed, options = Sentdm::ProfileDeleteParams.dump_request(params)
+        header_params = {x_profile_id: "x-profile-id"}
         @client.request(
           method: :delete,
           path: ["v3/profiles/%1$s", profile_id],
-          headers: parsed.except(:body).transform_keys(x_profile_id: "x-profile-id"),
-          body: parsed[:body],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           model: NilClass,
           options: options
         )
@@ -316,7 +317,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Sentdm::Models::ProfileCompleteResponse]
       #
       # @see Sentdm::Models::ProfileCompleteParams
       def complete(profile_id, params)
@@ -327,7 +328,7 @@ module Sentdm
           path: ["v3/profiles/%1$s/complete", profile_id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Internal::Type::Unknown,
+          model: Sentdm::Models::ProfileCompleteResponse,
           options: options
         )
       end

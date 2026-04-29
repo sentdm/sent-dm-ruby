@@ -117,13 +117,13 @@ module Sentdm
         # Deletes a campaign by ID from the brand of the specified profile. The profile
         # must belong to the authenticated organization.
         #
-        # @overload delete(campaign_id, profile_id:, body:, x_profile_id: nil, request_options: {})
+        # @overload delete(campaign_id, profile_id:, sandbox: nil, x_profile_id: nil, request_options: {})
         #
         # @param campaign_id [String] Path param: Campaign ID from route parameter
         #
         # @param profile_id [String] Path param: Profile ID from route parameter
         #
-        # @param body [Sentdm::Models::Profiles::CampaignDeleteParams::Body] Body param: Request to delete a campaign from a brand
+        # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
         # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
         #
@@ -138,11 +138,12 @@ module Sentdm
             parsed.delete(:profile_id) do
               raise ArgumentError.new("missing required path argument #{_1}")
             end
+          header_params = {x_profile_id: "x-profile-id"}
           @client.request(
             method: :delete,
             path: ["v3/profiles/%1$s/campaigns/%2$s", profile_id, campaign_id],
-            headers: parsed.except(:body).transform_keys(x_profile_id: "x-profile-id"),
-            body: parsed[:body],
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: NilClass,
             options: options
           )
