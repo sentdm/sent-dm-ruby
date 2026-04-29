@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.0 (2026-04-29)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **api:** manual updates ([e91662c](https://github.com/sentdm/sent-dm-ruby/commit/e91662c693727bff3e0179be1b513532aeb168d3))
+
 ## 0.16.0 (2026-04-28)
 
 Full Changelog: [v0.15.1...v0.16.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.15.1...v0.16.0)
