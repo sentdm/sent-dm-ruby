@@ -121,6 +121,8 @@ module Sentdm
 
   class WebhookDeleteParams = Sentdm::Models::WebhookDeleteParams
 
+  class WebhookEventType = Sentdm::Models::WebhookEventType
+
   class WebhookListEventsParams = Sentdm::Models::WebhookListEventsParams
 
   class WebhookListEventTypesParams = Sentdm::Models::WebhookListEventTypesParams
