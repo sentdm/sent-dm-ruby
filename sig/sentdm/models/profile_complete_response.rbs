@@ -1,5 +1,55 @@
 module Sentdm
   module Models
-    ProfileCompleteResponse: Sentdm::Internal::Type::Converter
+    type profile_complete_response =
+      {
+        data: Sentdm::Models::ProfileCompleteResponse::Data?,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class ProfileCompleteResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::ProfileCompleteResponse::Data?
+
+      attr_accessor error: Sentdm::ErrorDetail?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::ProfileCompleteResponse::Data?,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::ProfileCompleteResponse::Data?,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data = { message: String, status: String }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        def initialize: (?message: String, ?status: String) -> void
+
+        def to_hash: -> { message: String, status: String }
+      end
+    end
   end
 end

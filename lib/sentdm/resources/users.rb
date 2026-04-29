@@ -104,11 +104,11 @@ module Sentdm
       # Removes a user's access to an organization or profile. Requires admin role. You
       # cannot remove yourself or remove the last admin.
       #
-      # @overload remove(user_id, body:, x_profile_id: nil, request_options: {})
+      # @overload remove(user_id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param user_id [String] Path param
       #
-      # @param body [Sentdm::Models::UserRemoveParams::Body] Body param: Request to remove a user from an organization
+      # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
       # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
       #
@@ -117,13 +117,14 @@ module Sentdm
       # @return [nil]
       #
       # @see Sentdm::Models::UserRemoveParams
-      def remove(user_id, params)
+      def remove(user_id, params = {})
         parsed, options = Sentdm::UserRemoveParams.dump_request(params)
+        header_params = {x_profile_id: "x-profile-id"}
         @client.request(
           method: :delete,
           path: ["v3/users/%1$s", user_id],
-          headers: parsed.except(:body).transform_keys(x_profile_id: "x-profile-id"),
-          body: parsed[:body],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           model: NilClass,
           options: options
         )

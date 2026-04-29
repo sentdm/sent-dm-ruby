@@ -152,11 +152,11 @@ module Sentdm
       # Dissociates a contact from the authenticated customer. Inherited contacts cannot
       # be deleted.
       #
-      # @overload delete(id, body:, x_profile_id: nil, request_options: {})
+      # @overload delete(id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Contact ID from route parameter
       #
-      # @param body [Sentdm::Models::ContactDeleteParams::Body] Body param: Request to delete/dissociate a contact
+      # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
       # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
       #
@@ -165,13 +165,14 @@ module Sentdm
       # @return [nil]
       #
       # @see Sentdm::Models::ContactDeleteParams
-      def delete(id, params)
+      def delete(id, params = {})
         parsed, options = Sentdm::ContactDeleteParams.dump_request(params)
+        header_params = {x_profile_id: "x-profile-id"}
         @client.request(
           method: :delete,
           path: ["v3/contacts/%1$s", id],
-          headers: parsed.except(:body).transform_keys(x_profile_id: "x-profile-id"),
-          body: parsed[:body],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           model: NilClass,
           options: options
         )

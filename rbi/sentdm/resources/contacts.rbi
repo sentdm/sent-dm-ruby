@@ -133,7 +133,7 @@ module Sentdm
       sig do
         params(
           id: String,
-          body: Sentdm::ContactDeleteParams::Body::OrHash,
+          sandbox: T::Boolean,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).void
@@ -141,8 +141,9 @@ module Sentdm
       def delete(
         # Path param: Contact ID from route parameter
         id,
-        # Body param: Request to delete/dissociate a contact
-        body:,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
         # organization API keys can use this header. The profile must belong to the
         # calling organization.

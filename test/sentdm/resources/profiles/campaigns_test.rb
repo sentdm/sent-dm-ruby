@@ -101,8 +101,7 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     response =
       @sent.profiles.campaigns.delete(
         "b2c3d4e5-f6a7-8901-bcde-f12345678901",
-        profile_id: "770e8400-e29b-41d4-a716-446655440002",
-        body: {}
+        profile_id: "770e8400-e29b-41d4-a716-446655440002"
       )
 
     assert_pattern do
