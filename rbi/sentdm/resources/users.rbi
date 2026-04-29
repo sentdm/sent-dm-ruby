@@ -80,7 +80,7 @@ module Sentdm
       sig do
         params(
           user_id: String,
-          body: Sentdm::UserRemoveParams::Body::OrHash,
+          sandbox: T::Boolean,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).void
@@ -88,8 +88,9 @@ module Sentdm
       def remove(
         # Path param
         user_id,
-        # Body param: Request to remove a user from an organization
-        body:,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
         # organization API keys can use this header. The profile must belong to the
         # calling organization.

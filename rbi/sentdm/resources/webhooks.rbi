@@ -203,7 +203,7 @@ module Sentdm
       sig do
         params(
           id: String,
-          body: Sentdm::WebhookRotateSecretParams::Body::OrHash,
+          sandbox: T::Boolean,
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
@@ -212,8 +212,9 @@ module Sentdm
       def rotate_secret(
         # Path param
         id,
-        # Body param
-        body:,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
         # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
         # hours per key per customer.

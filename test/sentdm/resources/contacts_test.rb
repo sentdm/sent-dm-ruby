@@ -79,10 +79,10 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_delete_required_params
+  def test_delete
     skip("Mock server tests are disabled")
 
-    response = @sent.contacts.delete("6ba7b810-9dad-11d1-80b4-00c04fd430c8", body: {})
+    response = @sent.contacts.delete("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
       response => nil

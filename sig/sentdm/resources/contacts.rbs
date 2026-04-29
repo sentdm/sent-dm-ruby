@@ -38,7 +38,7 @@ module Sentdm
 
       def delete: (
         String id,
-        body: Sentdm::ContactDeleteParams::Body,
+        ?sandbox: bool,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil

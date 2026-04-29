@@ -24,7 +24,7 @@ module Sentdm
 
       def remove: (
         String user_id,
-        body: Sentdm::UserRemoveParams::Body,
+        ?sandbox: bool,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil
