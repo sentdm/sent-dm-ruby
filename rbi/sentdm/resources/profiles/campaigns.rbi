@@ -10,12 +10,12 @@ module Sentdm
         sig do
           params(
             profile_id: String,
-            campaign: Sentdm::Profiles::CampaignData::OrHash,
+            campaign: Sentdm::Profiles::CampaignCreateParams::Campaign::OrHash,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases)
+          ).returns(Sentdm::Models::Profiles::CampaignCreateResponse)
         end
         def create(
           # Path param: Profile ID from route
@@ -43,12 +43,12 @@ module Sentdm
           params(
             campaign_id: String,
             profile_id: String,
-            campaign: Sentdm::Profiles::CampaignData::OrHash,
+            campaign: Sentdm::Profiles::CampaignUpdateParams::Campaign::OrHash,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases)
+          ).returns(Sentdm::Models::Profiles::CampaignUpdateResponse)
         end
         def update(
           # Path param: Campaign ID from route

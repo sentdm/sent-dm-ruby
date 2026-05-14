@@ -9,14 +9,14 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
     response = @sent.users.retrieve("userId")
 
     assert_pattern do
-      response => Sentdm::APIResponseOfUser
+      response => Sentdm::Models::UserRetrieveResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::UserResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::UserRetrieveResponse::Data | nil,
+        error: Sentdm::Models::UserRetrieveResponse::Error | nil,
+        meta: Sentdm::Models::UserRetrieveResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -34,8 +34,8 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::UserListResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::UserListResponse::Error | nil,
+        meta: Sentdm::Models::UserListResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -47,14 +47,14 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
     response = @sent.users.invite
 
     assert_pattern do
-      response => Sentdm::APIResponseOfUser
+      response => Sentdm::Models::UserInviteResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::UserResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::UserInviteResponse::Data | nil,
+        error: Sentdm::Models::UserInviteResponse::Error | nil,
+        meta: Sentdm::Models::UserInviteResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -76,14 +76,14 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
     response = @sent.users.update_role("userId")
 
     assert_pattern do
-      response => Sentdm::APIResponseOfUser
+      response => Sentdm::Models::UserUpdateRoleResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::UserResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::UserUpdateRoleResponse::Data | nil,
+        error: Sentdm::Models::UserUpdateRoleResponse::Error | nil,
+        meta: Sentdm::Models::UserUpdateRoleResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

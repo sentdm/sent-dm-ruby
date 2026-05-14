@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.19.0 (2026-05-14)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* **api:** api update ([77b9ef0](https://github.com/sentdm/sent-dm-ruby/commit/77b9ef0062e98c2d3d0531614a31ee61db897df9))
+
+
+### Bug Fixes
+
+* **client:** elide content type header on requests without body ([b0f835e](https://github.com/sentdm/sent-dm-ruby/commit/b0f835eb138baa4aabbb2d68b4799d9815e257c3))
+
 ## 0.18.0 (2026-04-29)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.17.0...v0.18.0)

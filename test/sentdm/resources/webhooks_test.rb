@@ -9,14 +9,14 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.create
 
     assert_pattern do
-      response => Sentdm::APIResponseWebhook
+      response => Sentdm::Models::WebhookCreateResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::WebhookResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::WebhookCreateResponse::Data | nil,
+        error: Sentdm::Models::WebhookCreateResponse::Error | nil,
+        meta: Sentdm::Models::WebhookCreateResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -28,14 +28,14 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.retrieve("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
-      response => Sentdm::APIResponseWebhook
+      response => Sentdm::Models::WebhookRetrieveResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::WebhookResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::WebhookRetrieveResponse::Data | nil,
+        error: Sentdm::Models::WebhookRetrieveResponse::Error | nil,
+        meta: Sentdm::Models::WebhookRetrieveResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -47,14 +47,14 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.update("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
-      response => Sentdm::APIResponseWebhook
+      response => Sentdm::Models::WebhookUpdateResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::WebhookResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::WebhookUpdateResponse::Data | nil,
+        error: Sentdm::Models::WebhookUpdateResponse::Error | nil,
+        meta: Sentdm::Models::WebhookUpdateResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -72,8 +72,8 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::WebhookListResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::WebhookListResponse::Error | nil,
+        meta: Sentdm::Models::WebhookListResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -101,8 +101,8 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::WebhookListEventTypesResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::WebhookListEventTypesResponse::Error | nil,
+        meta: Sentdm::Models::WebhookListEventTypesResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -120,8 +120,8 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::WebhookListEventsResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::WebhookListEventsResponse::Error | nil,
+        meta: Sentdm::Models::WebhookListEventsResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -139,8 +139,8 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::WebhookRotateSecretResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::WebhookRotateSecretResponse::Error | nil,
+        meta: Sentdm::Models::WebhookRotateSecretResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -158,8 +158,8 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::WebhookTestResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::WebhookTestResponse::Error | nil,
+        meta: Sentdm::Models::WebhookTestResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -171,14 +171,14 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.toggle_status("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
-      response => Sentdm::APIResponseWebhook
+      response => Sentdm::Models::WebhookToggleStatusResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::WebhookResponse | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::WebhookToggleStatusResponse::Data | nil,
+        error: Sentdm::Models::WebhookToggleStatusResponse::Error | nil,
+        meta: Sentdm::Models::WebhookToggleStatusResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

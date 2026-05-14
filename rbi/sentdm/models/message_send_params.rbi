@@ -12,8 +12,8 @@ module Sentdm
         end
 
       # Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel produces a
-      # separate message per recipient. "sent" = auto-detect, "rcs" = reserved
-      # (skipped). Defaults to ["sent"] (auto-detect) if omitted.
+      # separate message per recipient. "sent" = auto-detect. Defaults to ["sent"]
+      # (auto-detect) if omitted.
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :channel
 
@@ -65,8 +65,8 @@ module Sentdm
       end
       def self.new(
         # Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel produces a
-        # separate message per recipient. "sent" = auto-detect, "rcs" = reserved
-        # (skipped). Defaults to ["sent"] (auto-detect) if omitted.
+        # separate message per recipient. "sent" = auto-detect. Defaults to ["sent"]
+        # (auto-detect) if omitted.
         channel: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
