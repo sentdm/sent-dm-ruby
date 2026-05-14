@@ -3,19 +3,21 @@ module Sentdm
     type template_list_response =
       {
         data: Sentdm::Models::TemplateListResponse::Data?,
-        error: Sentdm::ErrorDetail?,
-        meta: Sentdm::APIMeta,
+        error: Sentdm::Models::TemplateListResponse::Error?,
+        meta: Sentdm::Models::TemplateListResponse::Meta,
         success: bool
       }
 
     class TemplateListResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::TemplateListResponse::Data?
 
-      attr_accessor error: Sentdm::ErrorDetail?
+      attr_accessor error: Sentdm::Models::TemplateListResponse::Error?
 
-      attr_reader meta: Sentdm::APIMeta?
+      attr_reader meta: Sentdm::Models::TemplateListResponse::Meta?
 
-      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+      def meta=: (
+        Sentdm::Models::TemplateListResponse::Meta
+      ) -> Sentdm::Models::TemplateListResponse::Meta
 
       attr_reader success: bool?
 
@@ -23,42 +25,246 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::TemplateListResponse::Data?,
-        ?error: Sentdm::ErrorDetail?,
-        ?meta: Sentdm::APIMeta,
+        ?error: Sentdm::Models::TemplateListResponse::Error?,
+        ?meta: Sentdm::Models::TemplateListResponse::Meta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::TemplateListResponse::Data?,
-        error: Sentdm::ErrorDetail?,
-        meta: Sentdm::APIMeta,
+        error: Sentdm::Models::TemplateListResponse::Error?,
+        meta: Sentdm::Models::TemplateListResponse::Meta,
         success: bool
       }
 
       type data =
         {
-          pagination: Sentdm::PaginationMeta,
-          templates: ::Array[Sentdm::Template]
+          pagination: Sentdm::Models::TemplateListResponse::Data::Pagination,
+          templates: ::Array[Sentdm::Models::TemplateListResponse::Data::Template]
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
-        attr_reader pagination: Sentdm::PaginationMeta?
+        attr_reader pagination: Sentdm::Models::TemplateListResponse::Data::Pagination?
 
-        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+        def pagination=: (
+          Sentdm::Models::TemplateListResponse::Data::Pagination
+        ) -> Sentdm::Models::TemplateListResponse::Data::Pagination
 
-        attr_reader templates: ::Array[Sentdm::Template]?
+        attr_reader templates: ::Array[Sentdm::Models::TemplateListResponse::Data::Template]?
 
-        def templates=: (::Array[Sentdm::Template]) -> ::Array[Sentdm::Template]
+        def templates=: (
+          ::Array[Sentdm::Models::TemplateListResponse::Data::Template]
+        ) -> ::Array[Sentdm::Models::TemplateListResponse::Data::Template]
 
         def initialize: (
-          ?pagination: Sentdm::PaginationMeta,
-          ?templates: ::Array[Sentdm::Template]
+          ?pagination: Sentdm::Models::TemplateListResponse::Data::Pagination,
+          ?templates: ::Array[Sentdm::Models::TemplateListResponse::Data::Template]
         ) -> void
 
         def to_hash: -> {
-          pagination: Sentdm::PaginationMeta,
-          templates: ::Array[Sentdm::Template]
+          pagination: Sentdm::Models::TemplateListResponse::Data::Pagination,
+          templates: ::Array[Sentdm::Models::TemplateListResponse::Data::Template]
         }
+
+        type pagination =
+          {
+            cursors: Sentdm::Models::TemplateListResponse::Data::Pagination::Cursors?,
+            has_more: bool,
+            page: Integer,
+            page_size: Integer,
+            total_count: Integer,
+            total_pages: Integer
+          }
+
+        class Pagination < Sentdm::Internal::Type::BaseModel
+          attr_accessor cursors: Sentdm::Models::TemplateListResponse::Data::Pagination::Cursors?
+
+          attr_reader has_more: bool?
+
+          def has_more=: (bool) -> bool
+
+          attr_reader page: Integer?
+
+          def page=: (Integer) -> Integer
+
+          attr_reader page_size: Integer?
+
+          def page_size=: (Integer) -> Integer
+
+          attr_reader total_count: Integer?
+
+          def total_count=: (Integer) -> Integer
+
+          attr_reader total_pages: Integer?
+
+          def total_pages=: (Integer) -> Integer
+
+          def initialize: (
+            ?cursors: Sentdm::Models::TemplateListResponse::Data::Pagination::Cursors?,
+            ?has_more: bool,
+            ?page: Integer,
+            ?page_size: Integer,
+            ?total_count: Integer,
+            ?total_pages: Integer
+          ) -> void
+
+          def to_hash: -> {
+            cursors: Sentdm::Models::TemplateListResponse::Data::Pagination::Cursors?,
+            has_more: bool,
+            page: Integer,
+            page_size: Integer,
+            total_count: Integer,
+            total_pages: Integer
+          }
+
+          type cursors = { after: String?, before: String? }
+
+          class Cursors < Sentdm::Internal::Type::BaseModel
+            attr_accessor after: String?
+
+            attr_accessor before: String?
+
+            def initialize: (?after: String?, ?before: String?) -> void
+
+            def to_hash: -> { after: String?, before: String? }
+          end
+        end
+
+        type template =
+          {
+            id: String,
+            category: String,
+            channels: ::Array[String]?,
+            created_at: Time,
+            is_published: bool,
+            language: String,
+            name: String,
+            status: String,
+            updated_at: Time?,
+            variables: ::Array[String]?
+          }
+
+        class Template < Sentdm::Internal::Type::BaseModel
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader category: String?
+
+          def category=: (String) -> String
+
+          attr_accessor channels: ::Array[String]?
+
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_reader is_published: bool?
+
+          def is_published=: (bool) -> bool
+
+          attr_reader language: String?
+
+          def language=: (String) -> String
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader status: String?
+
+          def status=: (String) -> String
+
+          attr_accessor updated_at: Time?
+
+          attr_accessor variables: ::Array[String]?
+
+          def initialize: (
+            ?id: String,
+            ?category: String,
+            ?channels: ::Array[String]?,
+            ?created_at: Time,
+            ?is_published: bool,
+            ?language: String,
+            ?name: String,
+            ?status: String,
+            ?updated_at: Time?,
+            ?variables: ::Array[String]?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            category: String,
+            channels: ::Array[String]?,
+            created_at: Time,
+            is_published: bool,
+            language: String,
+            name: String,
+            status: String,
+            updated_at: Time?,
+            variables: ::Array[String]?
+          }
+        end
+      end
+
+      type error =
+        {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+
+      class Error < Sentdm::Internal::Type::BaseModel
+        attr_reader code: String?
+
+        def code=: (String) -> String
+
+        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
+
+        attr_accessor doc_url: String?
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (
+          ?code: String,
+          ?details: ::Hash[Symbol, ::Array[String]]?,
+          ?doc_url: String?,
+          ?message: String
+        ) -> void
+
+        def to_hash: -> {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+      end
+
+      type meta = { request_id: String, timestamp: Time, version: String }
+
+      class Meta < Sentdm::Internal::Type::BaseModel
+        attr_reader request_id: String?
+
+        def request_id=: (String) -> String
+
+        attr_reader timestamp: Time?
+
+        def timestamp=: (Time) -> Time
+
+        attr_reader version: String?
+
+        def version=: (String) -> String
+
+        def initialize: (
+          ?request_id: String,
+          ?timestamp: Time,
+          ?version: String
+        ) -> void
+
+        def to_hash: -> { request_id: String, timestamp: Time, version: String }
       end
     end
   end

@@ -26,17 +26,32 @@ module Sentdm
       attr_writer :data
 
       # Error information
-      sig { returns(T.nilable(Sentdm::ErrorDetail)) }
+      sig do
+        returns(T.nilable(Sentdm::Models::WebhookRotateSecretResponse::Error))
+      end
       attr_reader :error
 
-      sig { params(error: T.nilable(Sentdm::ErrorDetail::OrHash)).void }
+      sig do
+        params(
+          error:
+            T.nilable(
+              Sentdm::Models::WebhookRotateSecretResponse::Error::OrHash
+            )
+        ).void
+      end
       attr_writer :error
 
       # Request and response metadata
-      sig { returns(T.nilable(Sentdm::APIMeta)) }
+      sig do
+        returns(T.nilable(Sentdm::Models::WebhookRotateSecretResponse::Meta))
+      end
       attr_reader :meta
 
-      sig { params(meta: Sentdm::APIMeta::OrHash).void }
+      sig do
+        params(
+          meta: Sentdm::Models::WebhookRotateSecretResponse::Meta::OrHash
+        ).void
+      end
       attr_writer :meta
 
       # Indicates whether the request was successful
@@ -53,8 +68,11 @@ module Sentdm
             T.nilable(
               Sentdm::Models::WebhookRotateSecretResponse::Data::OrHash
             ),
-          error: T.nilable(Sentdm::ErrorDetail::OrHash),
-          meta: Sentdm::APIMeta::OrHash,
+          error:
+            T.nilable(
+              Sentdm::Models::WebhookRotateSecretResponse::Error::OrHash
+            ),
+          meta: Sentdm::Models::WebhookRotateSecretResponse::Meta::OrHash,
           success: T::Boolean
         ).returns(T.attached_class)
       end
@@ -74,8 +92,9 @@ module Sentdm
         override.returns(
           {
             data: T.nilable(Sentdm::Models::WebhookRotateSecretResponse::Data),
-            error: T.nilable(Sentdm::ErrorDetail),
-            meta: Sentdm::APIMeta,
+            error:
+              T.nilable(Sentdm::Models::WebhookRotateSecretResponse::Error),
+            meta: Sentdm::Models::WebhookRotateSecretResponse::Meta,
             success: T::Boolean
           }
         )
@@ -104,6 +123,127 @@ module Sentdm
         end
 
         sig { override.returns({ signing_secret: String }) }
+        def to_hash
+        end
+      end
+
+      class Error < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::Models::WebhookRotateSecretResponse::Error,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        # Machine-readable error code (e.g., "RESOURCE_001")
+        sig { returns(T.nilable(String)) }
+        attr_reader :code
+
+        sig { params(code: String).void }
+        attr_writer :code
+
+        # Additional validation error details (field-level errors)
+        sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
+        attr_accessor :details
+
+        # URL to documentation about this error
+        sig { returns(T.nilable(String)) }
+        attr_accessor :doc_url
+
+        # Human-readable error message
+        sig { returns(T.nilable(String)) }
+        attr_reader :message
+
+        sig { params(message: String).void }
+        attr_writer :message
+
+        # Error information
+        sig do
+          params(
+            code: String,
+            details: T.nilable(T::Hash[Symbol, T::Array[String]]),
+            doc_url: T.nilable(String),
+            message: String
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Machine-readable error code (e.g., "RESOURCE_001")
+          code: nil,
+          # Additional validation error details (field-level errors)
+          details: nil,
+          # URL to documentation about this error
+          doc_url: nil,
+          # Human-readable error message
+          message: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              code: String,
+              details: T.nilable(T::Hash[Symbol, T::Array[String]]),
+              doc_url: T.nilable(String),
+              message: String
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+
+      class Meta < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::Models::WebhookRotateSecretResponse::Meta,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        # Unique identifier for this request (for tracing and support)
+        sig { returns(T.nilable(String)) }
+        attr_reader :request_id
+
+        sig { params(request_id: String).void }
+        attr_writer :request_id
+
+        # Server timestamp when the response was generated
+        sig { returns(T.nilable(Time)) }
+        attr_reader :timestamp
+
+        sig { params(timestamp: Time).void }
+        attr_writer :timestamp
+
+        # API version used for this request
+        sig { returns(T.nilable(String)) }
+        attr_reader :version
+
+        sig { params(version: String).void }
+        attr_writer :version
+
+        # Request and response metadata
+        sig do
+          params(request_id: String, timestamp: Time, version: String).returns(
+            T.attached_class
+          )
+        end
+        def self.new(
+          # Unique identifier for this request (for tracing and support)
+          request_id: nil,
+          # Server timestamp when the response was generated
+          timestamp: nil,
+          # API version used for this request
+          version: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            { request_id: String, timestamp: Time, version: String }
+          )
+        end
         def to_hash
         end
       end

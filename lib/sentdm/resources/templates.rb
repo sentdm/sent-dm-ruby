@@ -17,7 +17,7 @@ module Sentdm
       #
       # @param creation_source [String, nil] Body param: Source of template creation (default: from-api)
       #
-      # @param definition [Sentdm::Models::TemplateDefinition] Body param: Complete definition of a message template including header, body, fo
+      # @param definition [Sentdm::Models::TemplateCreateParams::Definition] Body param: Complete definition of a message template including header, body, fo
       #
       # @param language [String, nil] Body param: Template language code (e.g., en_US) (optional, auto-detected if not
       #
@@ -31,7 +31,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseTemplate]
+      # @return [Sentdm::Models::TemplateCreateResponse]
       #
       # @see Sentdm::Models::TemplateCreateParams
       def create(params = {})
@@ -42,7 +42,7 @@ module Sentdm
           path: "v3/templates",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseTemplate,
+          model: Sentdm::Models::TemplateCreateResponse,
           options: options
         )
       end
@@ -61,7 +61,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseTemplate]
+      # @return [Sentdm::Models::TemplateRetrieveResponse]
       #
       # @see Sentdm::Models::TemplateRetrieveParams
       def retrieve(id, params = {})
@@ -70,7 +70,7 @@ module Sentdm
           method: :get,
           path: ["v3/templates/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseTemplate,
+          model: Sentdm::Models::TemplateRetrieveResponse,
           options: options
         )
       end
@@ -87,7 +87,7 @@ module Sentdm
       #
       # @param category [String, nil] Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
       #
-      # @param definition [Sentdm::Models::TemplateDefinition, nil] Body param: Complete definition of a message template including header, body, fo
+      # @param definition [Sentdm::Models::TemplateUpdateParams::Definition, nil] Body param: Complete definition of a message template including header, body, fo
       #
       # @param language [String, nil] Body param: Template language code (e.g., en_US)
       #
@@ -103,7 +103,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseTemplate]
+      # @return [Sentdm::Models::TemplateUpdateResponse]
       #
       # @see Sentdm::Models::TemplateUpdateParams
       def update(id, params = {})
@@ -114,7 +114,7 @@ module Sentdm
           path: ["v3/templates/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseTemplate,
+          model: Sentdm::Models::TemplateUpdateResponse,
           options: options
         )
       end

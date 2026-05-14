@@ -11,7 +11,7 @@ module Sentdm
           user_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfUser)
+        ).returns(Sentdm::Models::UserRetrieveResponse)
       end
       def retrieve(
         user_id,
@@ -51,7 +51,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfUser)
+        ).returns(Sentdm::Models::UserInviteResponse)
       end
       def invite(
         # Body param: User email address (required)
@@ -109,7 +109,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfUser)
+        ).returns(Sentdm::Models::UserUpdateRoleResponse)
       end
       def update_role(
         # Path param

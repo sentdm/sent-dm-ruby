@@ -4,7 +4,7 @@ module Sentdm
       type campaign_create_params =
         {
           profile_id: String,
-          campaign: Sentdm::Profiles::CampaignData,
+          campaign: Sentdm::Profiles::CampaignCreateParams::Campaign,
           sandbox: bool,
           idempotency_key: String,
           x_profile_id: String
@@ -17,7 +17,7 @@ module Sentdm
 
         attr_accessor profile_id: String
 
-        attr_accessor campaign: Sentdm::Profiles::CampaignData
+        attr_accessor campaign: Sentdm::Profiles::CampaignCreateParams::Campaign
 
         attr_reader sandbox: bool?
 
@@ -33,7 +33,7 @@ module Sentdm
 
         def initialize: (
           profile_id: String,
-          campaign: Sentdm::Profiles::CampaignData,
+          campaign: Sentdm::Profiles::CampaignCreateParams::Campaign,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
@@ -42,12 +42,146 @@ module Sentdm
 
         def to_hash: -> {
           profile_id: String,
-          campaign: Sentdm::Profiles::CampaignData,
+          campaign: Sentdm::Profiles::CampaignCreateParams::Campaign,
           sandbox: bool,
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions
         }
+
+        type campaign =
+          {
+            description: String,
+            name: String,
+            type: String,
+            use_cases: ::Array[Sentdm::Profiles::CampaignCreateParams::Campaign::UseCase],
+            help_keywords: String?,
+            help_message: String?,
+            message_flow: String?,
+            optin_keywords: String?,
+            optin_message: String?,
+            optout_keywords: String?,
+            optout_message: String?,
+            privacy_policy_link: String?,
+            terms_and_conditions_link: String?
+          }
+
+        class Campaign < Sentdm::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor name: String
+
+          attr_accessor type: String
+
+          attr_accessor use_cases: ::Array[Sentdm::Profiles::CampaignCreateParams::Campaign::UseCase]
+
+          attr_accessor help_keywords: String?
+
+          attr_accessor help_message: String?
+
+          attr_accessor message_flow: String?
+
+          attr_accessor optin_keywords: String?
+
+          attr_accessor optin_message: String?
+
+          attr_accessor optout_keywords: String?
+
+          attr_accessor optout_message: String?
+
+          attr_accessor privacy_policy_link: String?
+
+          attr_accessor terms_and_conditions_link: String?
+
+          def initialize: (
+            description: String,
+            name: String,
+            type: String,
+            use_cases: ::Array[Sentdm::Profiles::CampaignCreateParams::Campaign::UseCase],
+            ?help_keywords: String?,
+            ?help_message: String?,
+            ?message_flow: String?,
+            ?optin_keywords: String?,
+            ?optin_message: String?,
+            ?optout_keywords: String?,
+            ?optout_message: String?,
+            ?privacy_policy_link: String?,
+            ?terms_and_conditions_link: String?
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            name: String,
+            type: String,
+            use_cases: ::Array[Sentdm::Profiles::CampaignCreateParams::Campaign::UseCase],
+            help_keywords: String?,
+            help_message: String?,
+            message_flow: String?,
+            optin_keywords: String?,
+            optin_message: String?,
+            optout_keywords: String?,
+            optout_message: String?,
+            privacy_policy_link: String?,
+            terms_and_conditions_link: String?
+          }
+
+          type use_case =
+            {
+              messaging_use_case_us: Sentdm::Models::Profiles::CampaignCreateParams::Campaign::UseCase::messaging_use_case_us,
+              sample_messages: ::Array[String]
+            }
+
+          class UseCase < Sentdm::Internal::Type::BaseModel
+            attr_accessor messaging_use_case_us: Sentdm::Models::Profiles::CampaignCreateParams::Campaign::UseCase::messaging_use_case_us
+
+            attr_accessor sample_messages: ::Array[String]
+
+            def initialize: (
+              messaging_use_case_us: Sentdm::Models::Profiles::CampaignCreateParams::Campaign::UseCase::messaging_use_case_us,
+              sample_messages: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              messaging_use_case_us: Sentdm::Models::Profiles::CampaignCreateParams::Campaign::UseCase::messaging_use_case_us,
+              sample_messages: ::Array[String]
+            }
+
+            type messaging_use_case_us =
+              :MARKETING
+              | :ACCOUNT_NOTIFICATION
+              | :CUSTOMER_CARE
+              | :FRAUD_ALERT
+              | :TWO_FA
+              | :DELIVERY_NOTIFICATION
+              | :SECURITY_ALERT
+              | :M2M
+              | :MIXED
+              | :HIGHER_EDUCATION
+              | :POLLING_VOTING
+              | :PUBLIC_SERVICE_ANNOUNCEMENT
+              | :LOW_VOLUME
+
+            module MessagingUseCaseUs
+              extend Sentdm::Internal::Type::Enum
+
+              MARKETING: :MARKETING
+              ACCOUNT_NOTIFICATION: :ACCOUNT_NOTIFICATION
+              CUSTOMER_CARE: :CUSTOMER_CARE
+              FRAUD_ALERT: :FRAUD_ALERT
+              TWO_FA: :TWO_FA
+              DELIVERY_NOTIFICATION: :DELIVERY_NOTIFICATION
+              SECURITY_ALERT: :SECURITY_ALERT
+              M2_M: :M2M
+              MIXED: :MIXED
+              HIGHER_EDUCATION: :HIGHER_EDUCATION
+              POLLING_VOTING: :POLLING_VOTING
+              PUBLIC_SERVICE_ANNOUNCEMENT: :PUBLIC_SERVICE_ANNOUNCEMENT
+              LOW_VOLUME: :LOW_VOLUME
+
+              def self?.values: -> ::Array[Sentdm::Models::Profiles::CampaignCreateParams::Campaign::UseCase::messaging_use_case_us]
+            end
+          end
+        end
       end
     end
   end

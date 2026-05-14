@@ -13,7 +13,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContact)
+        ).returns(Sentdm::Models::ContactCreateResponse)
       end
       def create(
         # Body param: Phone number of the contact to create
@@ -41,7 +41,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContact)
+        ).returns(Sentdm::Models::ContactRetrieveResponse)
       end
       def retrieve(
         # Contact ID from route parameter
@@ -58,28 +58,21 @@ module Sentdm
       sig do
         params(
           id: String,
-          channel_consent: T.nilable(T::Hash[Symbol, String]),
           default_channel: T.nilable(String),
           opt_out: T.nilable(T::Boolean),
           sandbox: T::Boolean,
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContact)
+        ).returns(Sentdm::Models::ContactUpdateResponse)
       end
       def update(
         # Path param: Contact ID from route parameter
         id,
-        # Body param: Consent status by channel. Keys: "sms", "whatsapp". Values:
-        # "opted_in", "opted_out". All entries must have the same status — mixed values
-        # (e.g., sms: opted_out + whatsapp: opted_in) are rejected with 400. The provided
-        # status is applied to ALL channels regardless of which keys are specified,
-        # because consent is global across channels. When provided, takes precedence over
-        # the opt_out field.
-        channel_consent: nil,
         # Body param: Default messaging channel: "sms" or "whatsapp"
         default_channel: nil,
-        # Body param: Whether the contact has opted out of messaging
+        # Body param: Whether the contact has opted out of messaging. Single source of
+        # truth — opt-out is per-contact, not per-channel.
         opt_out: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution

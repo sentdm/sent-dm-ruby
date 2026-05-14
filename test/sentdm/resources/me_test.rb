@@ -15,8 +15,8 @@ class Sentdm::Test::Resources::MeTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::MeRetrieveResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::MeRetrieveResponse::Error | nil,
+        meta: Sentdm::Models::MeRetrieveResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
