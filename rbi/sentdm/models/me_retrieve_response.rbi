@@ -22,23 +22,17 @@ module Sentdm
       attr_writer :data
 
       # Error information
-      sig { returns(T.nilable(Sentdm::Models::MeRetrieveResponse::Error)) }
+      sig { returns(T.nilable(Sentdm::ErrorDetail)) }
       attr_reader :error
 
-      sig do
-        params(
-          error: T.nilable(Sentdm::Models::MeRetrieveResponse::Error::OrHash)
-        ).void
-      end
+      sig { params(error: T.nilable(Sentdm::ErrorDetail::OrHash)).void }
       attr_writer :error
 
       # Request and response metadata
-      sig { returns(T.nilable(Sentdm::Models::MeRetrieveResponse::Meta)) }
+      sig { returns(T.nilable(Sentdm::APIMeta)) }
       attr_reader :meta
 
-      sig do
-        params(meta: Sentdm::Models::MeRetrieveResponse::Meta::OrHash).void
-      end
+      sig { params(meta: Sentdm::APIMeta::OrHash).void }
       attr_writer :meta
 
       # Indicates whether the request was successful
@@ -52,8 +46,8 @@ module Sentdm
       sig do
         params(
           data: T.nilable(Sentdm::Models::MeRetrieveResponse::Data::OrHash),
-          error: T.nilable(Sentdm::Models::MeRetrieveResponse::Error::OrHash),
-          meta: Sentdm::Models::MeRetrieveResponse::Meta::OrHash,
+          error: T.nilable(Sentdm::ErrorDetail::OrHash),
+          meta: Sentdm::APIMeta::OrHash,
           success: T::Boolean
         ).returns(T.attached_class)
       end
@@ -75,8 +69,8 @@ module Sentdm
         override.returns(
           {
             data: T.nilable(Sentdm::Models::MeRetrieveResponse::Data),
-            error: T.nilable(Sentdm::Models::MeRetrieveResponse::Error),
-            meta: Sentdm::Models::MeRetrieveResponse::Meta,
+            error: T.nilable(Sentdm::ErrorDetail),
+            meta: Sentdm::APIMeta,
             success: T::Boolean
           }
         )
@@ -166,18 +160,11 @@ module Sentdm
         attr_writer :profiles
 
         # Profile configuration settings
-        sig do
-          returns(T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Settings))
-        end
+        sig { returns(T.nilable(Sentdm::ProfileSettings)) }
         attr_reader :settings
 
         sig do
-          params(
-            settings:
-              T.nilable(
-                Sentdm::Models::MeRetrieveResponse::Data::Settings::OrHash
-              )
-          ).void
+          params(settings: T.nilable(Sentdm::ProfileSettings::OrHash)).void
         end
         attr_writer :settings
 
@@ -216,10 +203,7 @@ module Sentdm
               T::Array[
                 Sentdm::Models::MeRetrieveResponse::Data::Profile::OrHash
               ],
-            settings:
-              T.nilable(
-                Sentdm::Models::MeRetrieveResponse::Data::Settings::OrHash
-              ),
+            settings: T.nilable(Sentdm::ProfileSettings::OrHash),
             short_name: T.nilable(String),
             status: T.nilable(String),
             type: String
@@ -272,8 +256,7 @@ module Sentdm
               organization_id: T.nilable(String),
               profiles:
                 T::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
-              settings:
-                T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Settings),
+              settings: T.nilable(Sentdm::ProfileSettings),
               short_name: T.nilable(String),
               status: T.nilable(String),
               type: String
@@ -568,21 +551,10 @@ module Sentdm
           attr_accessor :role
 
           # Profile configuration settings
-          sig do
-            returns(
-              T.nilable(
-                Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings
-              )
-            )
-          end
+          sig { returns(T.nilable(Sentdm::ProfileSettings)) }
           attr_reader :settings
 
-          sig do
-            params(
-              settings:
-                Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings::OrHash
-            ).void
-          end
+          sig { params(settings: Sentdm::ProfileSettings::OrHash).void }
           attr_writer :settings
 
           # Profile short name (abbreviation)
@@ -602,8 +574,7 @@ module Sentdm
               icon: T.nilable(String),
               name: String,
               role: T.nilable(String),
-              settings:
-                Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings::OrHash,
+              settings: Sentdm::ProfileSettings::OrHash,
               short_name: T.nilable(String),
               status: T.nilable(String)
             ).returns(T.attached_class)
@@ -640,8 +611,7 @@ module Sentdm
                 icon: T.nilable(String),
                 name: String,
                 role: T.nilable(String),
-                settings:
-                  Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings,
+                settings: Sentdm::ProfileSettings,
                 short_name: T.nilable(String),
                 status: T.nilable(String)
               }
@@ -649,295 +619,6 @@ module Sentdm
           end
           def to_hash
           end
-
-          class Settings < Sentdm::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings,
-                  Sentdm::Internal::AnyHash
-                )
-              end
-
-            # Whether contacts are shared across profiles in the organization
-            sig { returns(T.nilable(T::Boolean)) }
-            attr_accessor :allow_contact_sharing
-
-            # Whether templates are shared across profiles in the organization
-            sig { returns(T.nilable(T::Boolean)) }
-            attr_accessor :allow_template_sharing
-
-            # Billing model: profile, organization, or profile_and_organization
-            sig { returns(T.nilable(String)) }
-            attr_accessor :billing_model
-
-            # Whether this profile inherits contacts from the organization
-            sig { returns(T.nilable(T::Boolean)) }
-            attr_accessor :inherit_contacts
-
-            # Whether this profile inherits TCR brand from the organization
-            sig { returns(T.nilable(T::Boolean)) }
-            attr_accessor :inherit_tcr_brand
-
-            # Whether this profile inherits TCR campaign from the organization
-            sig { returns(T.nilable(T::Boolean)) }
-            attr_accessor :inherit_tcr_campaign
-
-            # Whether this profile inherits templates from the organization
-            sig { returns(T.nilable(T::Boolean)) }
-            attr_accessor :inherit_templates
-
-            # Profile configuration settings
-            sig do
-              params(
-                allow_contact_sharing: T.nilable(T::Boolean),
-                allow_template_sharing: T.nilable(T::Boolean),
-                billing_model: T.nilable(String),
-                inherit_contacts: T.nilable(T::Boolean),
-                inherit_tcr_brand: T.nilable(T::Boolean),
-                inherit_tcr_campaign: T.nilable(T::Boolean),
-                inherit_templates: T.nilable(T::Boolean)
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              # Whether contacts are shared across profiles in the organization
-              allow_contact_sharing: nil,
-              # Whether templates are shared across profiles in the organization
-              allow_template_sharing: nil,
-              # Billing model: profile, organization, or profile_and_organization
-              billing_model: nil,
-              # Whether this profile inherits contacts from the organization
-              inherit_contacts: nil,
-              # Whether this profile inherits TCR brand from the organization
-              inherit_tcr_brand: nil,
-              # Whether this profile inherits TCR campaign from the organization
-              inherit_tcr_campaign: nil,
-              # Whether this profile inherits templates from the organization
-              inherit_templates: nil
-            )
-            end
-
-            sig do
-              override.returns(
-                {
-                  allow_contact_sharing: T.nilable(T::Boolean),
-                  allow_template_sharing: T.nilable(T::Boolean),
-                  billing_model: T.nilable(String),
-                  inherit_contacts: T.nilable(T::Boolean),
-                  inherit_tcr_brand: T.nilable(T::Boolean),
-                  inherit_tcr_campaign: T.nilable(T::Boolean),
-                  inherit_templates: T.nilable(T::Boolean)
-                }
-              )
-            end
-            def to_hash
-            end
-          end
-        end
-
-        class Settings < Sentdm::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Sentdm::Models::MeRetrieveResponse::Data::Settings,
-                Sentdm::Internal::AnyHash
-              )
-            end
-
-          # Whether contacts are shared across profiles in the organization
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_accessor :allow_contact_sharing
-
-          # Whether templates are shared across profiles in the organization
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_accessor :allow_template_sharing
-
-          # Billing model: profile, organization, or profile_and_organization
-          sig { returns(T.nilable(String)) }
-          attr_accessor :billing_model
-
-          # Whether this profile inherits contacts from the organization
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_accessor :inherit_contacts
-
-          # Whether this profile inherits TCR brand from the organization
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_accessor :inherit_tcr_brand
-
-          # Whether this profile inherits TCR campaign from the organization
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_accessor :inherit_tcr_campaign
-
-          # Whether this profile inherits templates from the organization
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_accessor :inherit_templates
-
-          # Profile configuration settings
-          sig do
-            params(
-              allow_contact_sharing: T.nilable(T::Boolean),
-              allow_template_sharing: T.nilable(T::Boolean),
-              billing_model: T.nilable(String),
-              inherit_contacts: T.nilable(T::Boolean),
-              inherit_tcr_brand: T.nilable(T::Boolean),
-              inherit_tcr_campaign: T.nilable(T::Boolean),
-              inherit_templates: T.nilable(T::Boolean)
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            # Whether contacts are shared across profiles in the organization
-            allow_contact_sharing: nil,
-            # Whether templates are shared across profiles in the organization
-            allow_template_sharing: nil,
-            # Billing model: profile, organization, or profile_and_organization
-            billing_model: nil,
-            # Whether this profile inherits contacts from the organization
-            inherit_contacts: nil,
-            # Whether this profile inherits TCR brand from the organization
-            inherit_tcr_brand: nil,
-            # Whether this profile inherits TCR campaign from the organization
-            inherit_tcr_campaign: nil,
-            # Whether this profile inherits templates from the organization
-            inherit_templates: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                allow_contact_sharing: T.nilable(T::Boolean),
-                allow_template_sharing: T.nilable(T::Boolean),
-                billing_model: T.nilable(String),
-                inherit_contacts: T.nilable(T::Boolean),
-                inherit_tcr_brand: T.nilable(T::Boolean),
-                inherit_tcr_campaign: T.nilable(T::Boolean),
-                inherit_templates: T.nilable(T::Boolean)
-              }
-            )
-          end
-          def to_hash
-          end
-        end
-      end
-
-      class Error < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Sentdm::Models::MeRetrieveResponse::Error,
-              Sentdm::Internal::AnyHash
-            )
-          end
-
-        # Machine-readable error code (e.g., "RESOURCE_001")
-        sig { returns(T.nilable(String)) }
-        attr_reader :code
-
-        sig { params(code: String).void }
-        attr_writer :code
-
-        # Additional validation error details (field-level errors)
-        sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
-        attr_accessor :details
-
-        # URL to documentation about this error
-        sig { returns(T.nilable(String)) }
-        attr_accessor :doc_url
-
-        # Human-readable error message
-        sig { returns(T.nilable(String)) }
-        attr_reader :message
-
-        sig { params(message: String).void }
-        attr_writer :message
-
-        # Error information
-        sig do
-          params(
-            code: String,
-            details: T.nilable(T::Hash[Symbol, T::Array[String]]),
-            doc_url: T.nilable(String),
-            message: String
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # Machine-readable error code (e.g., "RESOURCE_001")
-          code: nil,
-          # Additional validation error details (field-level errors)
-          details: nil,
-          # URL to documentation about this error
-          doc_url: nil,
-          # Human-readable error message
-          message: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              code: String,
-              details: T.nilable(T::Hash[Symbol, T::Array[String]]),
-              doc_url: T.nilable(String),
-              message: String
-            }
-          )
-        end
-        def to_hash
-        end
-      end
-
-      class Meta < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Sentdm::Models::MeRetrieveResponse::Meta,
-              Sentdm::Internal::AnyHash
-            )
-          end
-
-        # Unique identifier for this request (for tracing and support)
-        sig { returns(T.nilable(String)) }
-        attr_reader :request_id
-
-        sig { params(request_id: String).void }
-        attr_writer :request_id
-
-        # Server timestamp when the response was generated
-        sig { returns(T.nilable(Time)) }
-        attr_reader :timestamp
-
-        sig { params(timestamp: Time).void }
-        attr_writer :timestamp
-
-        # API version used for this request
-        sig { returns(T.nilable(String)) }
-        attr_reader :version
-
-        sig { params(version: String).void }
-        attr_writer :version
-
-        # Request and response metadata
-        sig do
-          params(request_id: String, timestamp: Time, version: String).returns(
-            T.attached_class
-          )
-        end
-        def self.new(
-          # Unique identifier for this request (for tracing and support)
-          request_id: nil,
-          # Server timestamp when the response was generated
-          timestamp: nil,
-          # API version used for this request
-          version: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            { request_id: String, timestamp: Time, version: String }
-          )
-        end
-        def to_hash
         end
       end
     end

@@ -17,7 +17,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookCreateResponse)
+        ).returns(Sentdm::APIResponseWebhook)
       end
       def create(
         # Body param
@@ -53,7 +53,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookRetrieveResponse)
+        ).returns(Sentdm::APIResponseWebhook)
       end
       def retrieve(
         id,
@@ -78,7 +78,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookUpdateResponse)
+        ).returns(Sentdm::APIResponseWebhook)
       end
       def update(
         # Path param
@@ -267,7 +267,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookToggleStatusResponse)
+        ).returns(Sentdm::APIResponseWebhook)
       end
       def toggle_status(
         # Path param

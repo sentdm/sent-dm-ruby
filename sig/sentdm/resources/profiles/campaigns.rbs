@@ -4,22 +4,22 @@ module Sentdm
       class Campaigns
         def create: (
           String profile_id,
-          campaign: Sentdm::Profiles::CampaignCreateParams::Campaign,
+          campaign: Sentdm::Profiles::CampaignData,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Models::Profiles::CampaignCreateResponse
+        ) -> Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases
 
         def update: (
           String campaign_id,
           profile_id: String,
-          campaign: Sentdm::Profiles::CampaignUpdateParams::Campaign,
+          campaign: Sentdm::Profiles::CampaignData,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Models::Profiles::CampaignUpdateResponse
+        ) -> Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases
 
         def list: (
           String profile_id,

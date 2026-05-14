@@ -9,14 +9,14 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     response = @sent.contacts.create
 
     assert_pattern do
-      response => Sentdm::Models::ContactCreateResponse
+      response => Sentdm::APIResponseOfContact
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ContactCreateResponse::Data | nil,
-        error: Sentdm::Models::ContactCreateResponse::Error | nil,
-        meta: Sentdm::Models::ContactCreateResponse::Meta | nil,
+        data: Sentdm::ContactResponse | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -28,14 +28,14 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     response = @sent.contacts.retrieve("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::Models::ContactRetrieveResponse
+      response => Sentdm::APIResponseOfContact
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ContactRetrieveResponse::Data | nil,
-        error: Sentdm::Models::ContactRetrieveResponse::Error | nil,
-        meta: Sentdm::Models::ContactRetrieveResponse::Meta | nil,
+        data: Sentdm::ContactResponse | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -47,14 +47,14 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     response = @sent.contacts.update("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::Models::ContactUpdateResponse
+      response => Sentdm::APIResponseOfContact
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ContactUpdateResponse::Data | nil,
-        error: Sentdm::Models::ContactUpdateResponse::Error | nil,
-        meta: Sentdm::Models::ContactUpdateResponse::Meta | nil,
+        data: Sentdm::ContactResponse | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -72,8 +72,8 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::ContactListResponse::Data | nil,
-        error: Sentdm::Models::ContactListResponse::Error | nil,
-        meta: Sentdm::Models::ContactListResponse::Meta | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

@@ -3,21 +3,19 @@ module Sentdm
     type webhook_list_events_response =
       {
         data: Sentdm::Models::WebhookListEventsResponse::Data?,
-        error: Sentdm::Models::WebhookListEventsResponse::Error?,
-        meta: Sentdm::Models::WebhookListEventsResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
     class WebhookListEventsResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::WebhookListEventsResponse::Data?
 
-      attr_accessor error: Sentdm::Models::WebhookListEventsResponse::Error?
+      attr_accessor error: Sentdm::ErrorDetail?
 
-      attr_reader meta: Sentdm::Models::WebhookListEventsResponse::Meta?
+      attr_reader meta: Sentdm::APIMeta?
 
-      def meta=: (
-        Sentdm::Models::WebhookListEventsResponse::Meta
-      ) -> Sentdm::Models::WebhookListEventsResponse::Meta
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
 
       attr_reader success: bool?
 
@@ -25,22 +23,22 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::WebhookListEventsResponse::Data?,
-        ?error: Sentdm::Models::WebhookListEventsResponse::Error?,
-        ?meta: Sentdm::Models::WebhookListEventsResponse::Meta,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::WebhookListEventsResponse::Data?,
-        error: Sentdm::Models::WebhookListEventsResponse::Error?,
-        meta: Sentdm::Models::WebhookListEventsResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
       type data =
         {
           events: ::Array[Sentdm::Models::WebhookListEventsResponse::Data::Event],
-          pagination: Sentdm::Models::WebhookListEventsResponse::Data::Pagination
+          pagination: Sentdm::PaginationMeta
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
@@ -50,20 +48,18 @@ module Sentdm
           ::Array[Sentdm::Models::WebhookListEventsResponse::Data::Event]
         ) -> ::Array[Sentdm::Models::WebhookListEventsResponse::Data::Event]
 
-        attr_reader pagination: Sentdm::Models::WebhookListEventsResponse::Data::Pagination?
+        attr_reader pagination: Sentdm::PaginationMeta?
 
-        def pagination=: (
-          Sentdm::Models::WebhookListEventsResponse::Data::Pagination
-        ) -> Sentdm::Models::WebhookListEventsResponse::Data::Pagination
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
 
         def initialize: (
           ?events: ::Array[Sentdm::Models::WebhookListEventsResponse::Data::Event],
-          ?pagination: Sentdm::Models::WebhookListEventsResponse::Data::Pagination
+          ?pagination: Sentdm::PaginationMeta
         ) -> void
 
         def to_hash: -> {
           events: ::Array[Sentdm::Models::WebhookListEventsResponse::Data::Event],
-          pagination: Sentdm::Models::WebhookListEventsResponse::Data::Pagination
+          pagination: Sentdm::PaginationMeta
         }
 
         type event =
@@ -144,130 +140,6 @@ module Sentdm
             response_body: String?
           }
         end
-
-        type pagination =
-          {
-            cursors: Sentdm::Models::WebhookListEventsResponse::Data::Pagination::Cursors?,
-            has_more: bool,
-            page: Integer,
-            page_size: Integer,
-            total_count: Integer,
-            total_pages: Integer
-          }
-
-        class Pagination < Sentdm::Internal::Type::BaseModel
-          attr_accessor cursors: Sentdm::Models::WebhookListEventsResponse::Data::Pagination::Cursors?
-
-          attr_reader has_more: bool?
-
-          def has_more=: (bool) -> bool
-
-          attr_reader page: Integer?
-
-          def page=: (Integer) -> Integer
-
-          attr_reader page_size: Integer?
-
-          def page_size=: (Integer) -> Integer
-
-          attr_reader total_count: Integer?
-
-          def total_count=: (Integer) -> Integer
-
-          attr_reader total_pages: Integer?
-
-          def total_pages=: (Integer) -> Integer
-
-          def initialize: (
-            ?cursors: Sentdm::Models::WebhookListEventsResponse::Data::Pagination::Cursors?,
-            ?has_more: bool,
-            ?page: Integer,
-            ?page_size: Integer,
-            ?total_count: Integer,
-            ?total_pages: Integer
-          ) -> void
-
-          def to_hash: -> {
-            cursors: Sentdm::Models::WebhookListEventsResponse::Data::Pagination::Cursors?,
-            has_more: bool,
-            page: Integer,
-            page_size: Integer,
-            total_count: Integer,
-            total_pages: Integer
-          }
-
-          type cursors = { after: String?, before: String? }
-
-          class Cursors < Sentdm::Internal::Type::BaseModel
-            attr_accessor after: String?
-
-            attr_accessor before: String?
-
-            def initialize: (?after: String?, ?before: String?) -> void
-
-            def to_hash: -> { after: String?, before: String? }
-          end
-        end
-      end
-
-      type error =
-        {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-
-      class Error < Sentdm::Internal::Type::BaseModel
-        attr_reader code: String?
-
-        def code=: (String) -> String
-
-        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
-
-        attr_accessor doc_url: String?
-
-        attr_reader message: String?
-
-        def message=: (String) -> String
-
-        def initialize: (
-          ?code: String,
-          ?details: ::Hash[Symbol, ::Array[String]]?,
-          ?doc_url: String?,
-          ?message: String
-        ) -> void
-
-        def to_hash: -> {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-      end
-
-      type meta = { request_id: String, timestamp: Time, version: String }
-
-      class Meta < Sentdm::Internal::Type::BaseModel
-        attr_reader request_id: String?
-
-        def request_id=: (String) -> String
-
-        attr_reader timestamp: Time?
-
-        def timestamp=: (Time) -> Time
-
-        attr_reader version: String?
-
-        def version=: (String) -> String
-
-        def initialize: (
-          ?request_id: String,
-          ?timestamp: Time,
-          ?version: String
-        ) -> void
-
-        def to_hash: -> { request_id: String, timestamp: Time, version: String }
       end
     end
   end

@@ -1,0 +1,58 @@
+module Sentdm
+  module Models
+    type tcr_vertical =
+      :PROFESSIONAL
+      | :REAL_ESTATE
+      | :HEALTHCARE
+      | :HUMAN_RESOURCES
+      | :ENERGY
+      | :ENTERTAINMENT
+      | :RETAIL
+      | :TRANSPORTATION
+      | :AGRICULTURE
+      | :INSURANCE
+      | :POSTAL
+      | :EDUCATION
+      | :HOSPITALITY
+      | :FINANCIAL
+      | :POLITICAL
+      | :GAMBLING
+      | :LEGAL
+      | :CONSTRUCTION
+      | :NGO
+      | :MANUFACTURING
+      | :GOVERNMENT
+      | :TECHNOLOGY
+      | :COMMUNICATION
+
+    module TcrVertical
+      extend Sentdm::Internal::Type::Enum
+
+      PROFESSIONAL: :PROFESSIONAL
+      REAL_ESTATE: :REAL_ESTATE
+      HEALTHCARE: :HEALTHCARE
+      HUMAN_RESOURCES: :HUMAN_RESOURCES
+      ENERGY: :ENERGY
+      ENTERTAINMENT: :ENTERTAINMENT
+      RETAIL: :RETAIL
+      TRANSPORTATION: :TRANSPORTATION
+      AGRICULTURE: :AGRICULTURE
+      INSURANCE: :INSURANCE
+      POSTAL: :POSTAL
+      EDUCATION: :EDUCATION
+      HOSPITALITY: :HOSPITALITY
+      FINANCIAL: :FINANCIAL
+      POLITICAL: :POLITICAL
+      GAMBLING: :GAMBLING
+      LEGAL: :LEGAL
+      CONSTRUCTION: :CONSTRUCTION
+      NGO: :NGO
+      MANUFACTURING: :MANUFACTURING
+      GOVERNMENT: :GOVERNMENT
+      TECHNOLOGY: :TECHNOLOGY
+      COMMUNICATION: :COMMUNICATION
+
+      def self?.values: -> ::Array[Sentdm::Models::tcr_vertical]
+    end
+  end
+end

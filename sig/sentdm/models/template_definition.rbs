@@ -1,0 +1,45 @@
+module Sentdm
+  module Models
+    type template_definition =
+      {
+        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
+        authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
+        buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
+        definition_version: String?,
+        footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
+        header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+      }
+
+    class TemplateDefinition < Sentdm::Internal::Type::BaseModel
+      attr_accessor body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody
+
+      attr_accessor authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?
+
+      attr_accessor buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?
+
+      attr_accessor definition_version: String?
+
+      attr_accessor footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?
+
+      attr_accessor header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+
+      def initialize: (
+        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
+        ?authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
+        ?buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
+        ?definition_version: String?,
+        ?footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
+        ?header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+      ) -> void
+
+      def to_hash: -> {
+        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
+        authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
+        buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
+        definition_version: String?,
+        footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
+        header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+      }
+    end
+  end
+end

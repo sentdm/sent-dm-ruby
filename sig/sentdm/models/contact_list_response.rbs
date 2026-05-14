@@ -3,21 +3,19 @@ module Sentdm
     type contact_list_response =
       {
         data: Sentdm::Models::ContactListResponse::Data?,
-        error: Sentdm::Models::ContactListResponse::Error?,
-        meta: Sentdm::Models::ContactListResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
     class ContactListResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::ContactListResponse::Data?
 
-      attr_accessor error: Sentdm::Models::ContactListResponse::Error?
+      attr_accessor error: Sentdm::ErrorDetail?
 
-      attr_reader meta: Sentdm::Models::ContactListResponse::Meta?
+      attr_reader meta: Sentdm::APIMeta?
 
-      def meta=: (
-        Sentdm::Models::ContactListResponse::Meta
-      ) -> Sentdm::Models::ContactListResponse::Meta
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
 
       attr_reader success: bool?
 
@@ -25,278 +23,44 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::ContactListResponse::Data?,
-        ?error: Sentdm::Models::ContactListResponse::Error?,
-        ?meta: Sentdm::Models::ContactListResponse::Meta,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::ContactListResponse::Data?,
-        error: Sentdm::Models::ContactListResponse::Error?,
-        meta: Sentdm::Models::ContactListResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
       type data =
         {
-          contacts: ::Array[Sentdm::Models::ContactListResponse::Data::Contact],
-          pagination: Sentdm::Models::ContactListResponse::Data::Pagination
+          contacts: ::Array[Sentdm::ContactResponse],
+          pagination: Sentdm::PaginationMeta
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
-        attr_reader contacts: ::Array[Sentdm::Models::ContactListResponse::Data::Contact]?
+        attr_reader contacts: ::Array[Sentdm::ContactResponse]?
 
         def contacts=: (
-          ::Array[Sentdm::Models::ContactListResponse::Data::Contact]
-        ) -> ::Array[Sentdm::Models::ContactListResponse::Data::Contact]
+          ::Array[Sentdm::ContactResponse]
+        ) -> ::Array[Sentdm::ContactResponse]
 
-        attr_reader pagination: Sentdm::Models::ContactListResponse::Data::Pagination?
+        attr_reader pagination: Sentdm::PaginationMeta?
 
-        def pagination=: (
-          Sentdm::Models::ContactListResponse::Data::Pagination
-        ) -> Sentdm::Models::ContactListResponse::Data::Pagination
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
 
         def initialize: (
-          ?contacts: ::Array[Sentdm::Models::ContactListResponse::Data::Contact],
-          ?pagination: Sentdm::Models::ContactListResponse::Data::Pagination
+          ?contacts: ::Array[Sentdm::ContactResponse],
+          ?pagination: Sentdm::PaginationMeta
         ) -> void
 
         def to_hash: -> {
-          contacts: ::Array[Sentdm::Models::ContactListResponse::Data::Contact],
-          pagination: Sentdm::Models::ContactListResponse::Data::Pagination
+          contacts: ::Array[Sentdm::ContactResponse],
+          pagination: Sentdm::PaginationMeta
         }
-
-        type contact =
-          {
-            id: String,
-            available_channels: String,
-            country_code: String,
-            created_at: Time,
-            default_channel: String,
-            :format_e164 => String,
-            format_international: String,
-            format_national: String,
-            format_rfc: String,
-            is_inherited: bool,
-            opt_out: bool,
-            phone_number: String,
-            region_code: String,
-            updated_at: Time?
-          }
-
-        class Contact < Sentdm::Internal::Type::BaseModel
-          attr_reader id: String?
-
-          def id=: (String) -> String
-
-          attr_reader available_channels: String?
-
-          def available_channels=: (String) -> String
-
-          attr_reader country_code: String?
-
-          def country_code=: (String) -> String
-
-          attr_reader created_at: Time?
-
-          def created_at=: (Time) -> Time
-
-          attr_reader default_channel: String?
-
-          def default_channel=: (String) -> String
-
-          attr_reader format_e164: String?
-
-          def format_e164=: (String) -> String
-
-          attr_reader format_international: String?
-
-          def format_international=: (String) -> String
-
-          attr_reader format_national: String?
-
-          def format_national=: (String) -> String
-
-          attr_reader format_rfc: String?
-
-          def format_rfc=: (String) -> String
-
-          attr_reader is_inherited: bool?
-
-          def is_inherited=: (bool) -> bool
-
-          attr_reader opt_out: bool?
-
-          def opt_out=: (bool) -> bool
-
-          attr_reader phone_number: String?
-
-          def phone_number=: (String) -> String
-
-          attr_reader region_code: String?
-
-          def region_code=: (String) -> String
-
-          attr_accessor updated_at: Time?
-
-          def initialize: (
-            ?id: String,
-            ?available_channels: String,
-            ?country_code: String,
-            ?created_at: Time,
-            ?default_channel: String,
-            ?format_e164: String,
-            ?format_international: String,
-            ?format_national: String,
-            ?format_rfc: String,
-            ?is_inherited: bool,
-            ?opt_out: bool,
-            ?phone_number: String,
-            ?region_code: String,
-            ?updated_at: Time?
-          ) -> void
-
-          def to_hash: -> {
-            id: String,
-            available_channels: String,
-            country_code: String,
-            created_at: Time,
-            default_channel: String,
-            :format_e164 => String,
-            format_international: String,
-            format_national: String,
-            format_rfc: String,
-            is_inherited: bool,
-            opt_out: bool,
-            phone_number: String,
-            region_code: String,
-            updated_at: Time?
-          }
-        end
-
-        type pagination =
-          {
-            cursors: Sentdm::Models::ContactListResponse::Data::Pagination::Cursors?,
-            has_more: bool,
-            page: Integer,
-            page_size: Integer,
-            total_count: Integer,
-            total_pages: Integer
-          }
-
-        class Pagination < Sentdm::Internal::Type::BaseModel
-          attr_accessor cursors: Sentdm::Models::ContactListResponse::Data::Pagination::Cursors?
-
-          attr_reader has_more: bool?
-
-          def has_more=: (bool) -> bool
-
-          attr_reader page: Integer?
-
-          def page=: (Integer) -> Integer
-
-          attr_reader page_size: Integer?
-
-          def page_size=: (Integer) -> Integer
-
-          attr_reader total_count: Integer?
-
-          def total_count=: (Integer) -> Integer
-
-          attr_reader total_pages: Integer?
-
-          def total_pages=: (Integer) -> Integer
-
-          def initialize: (
-            ?cursors: Sentdm::Models::ContactListResponse::Data::Pagination::Cursors?,
-            ?has_more: bool,
-            ?page: Integer,
-            ?page_size: Integer,
-            ?total_count: Integer,
-            ?total_pages: Integer
-          ) -> void
-
-          def to_hash: -> {
-            cursors: Sentdm::Models::ContactListResponse::Data::Pagination::Cursors?,
-            has_more: bool,
-            page: Integer,
-            page_size: Integer,
-            total_count: Integer,
-            total_pages: Integer
-          }
-
-          type cursors = { after: String?, before: String? }
-
-          class Cursors < Sentdm::Internal::Type::BaseModel
-            attr_accessor after: String?
-
-            attr_accessor before: String?
-
-            def initialize: (?after: String?, ?before: String?) -> void
-
-            def to_hash: -> { after: String?, before: String? }
-          end
-        end
-      end
-
-      type error =
-        {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-
-      class Error < Sentdm::Internal::Type::BaseModel
-        attr_reader code: String?
-
-        def code=: (String) -> String
-
-        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
-
-        attr_accessor doc_url: String?
-
-        attr_reader message: String?
-
-        def message=: (String) -> String
-
-        def initialize: (
-          ?code: String,
-          ?details: ::Hash[Symbol, ::Array[String]]?,
-          ?doc_url: String?,
-          ?message: String
-        ) -> void
-
-        def to_hash: -> {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-      end
-
-      type meta = { request_id: String, timestamp: Time, version: String }
-
-      class Meta < Sentdm::Internal::Type::BaseModel
-        attr_reader request_id: String?
-
-        def request_id=: (String) -> String
-
-        attr_reader timestamp: Time?
-
-        def timestamp=: (Time) -> Time
-
-        attr_reader version: String?
-
-        def version=: (String) -> String
-
-        def initialize: (
-          ?request_id: String,
-          ?timestamp: Time,
-          ?version: String
-        ) -> void
-
-        def to_hash: -> { request_id: String, timestamp: Time, version: String }
       end
     end
   end

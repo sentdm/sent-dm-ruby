@@ -39,15 +39,37 @@ module Sentdm
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
+  APIMeta = Sentdm::Models::APIMeta
+
+  APIResponseOfContact = Sentdm::Models::APIResponseOfContact
+
+  APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
+
+  APIResponseOfUser = Sentdm::Models::APIResponseOfUser
+
+  APIResponseTemplate = Sentdm::Models::APIResponseTemplate
+
+  APIResponseWebhook = Sentdm::Models::APIResponseWebhook
+
+  BillingContactInfo = Sentdm::Models::BillingContactInfo
+
+  BrandsBrandData = Sentdm::Models::BrandsBrandData
+
   ContactCreateParams = Sentdm::Models::ContactCreateParams
 
   ContactDeleteParams = Sentdm::Models::ContactDeleteParams
 
   ContactListParams = Sentdm::Models::ContactListParams
 
+  ContactResponse = Sentdm::Models::ContactResponse
+
   ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
   ContactUpdateParams = Sentdm::Models::ContactUpdateParams
+
+  DestinationCountry = Sentdm::Models::DestinationCountry
+
+  ErrorDetail = Sentdm::Models::ErrorDetail
 
   MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
@@ -57,7 +79,13 @@ module Sentdm
 
   MessageSendParams = Sentdm::Models::MessageSendParams
 
+  MutationRequest = Sentdm::Models::MutationRequest
+
   NumberLookupParams = Sentdm::Models::NumberLookupParams
+
+  PaginationMeta = Sentdm::Models::PaginationMeta
+
+  PaymentDetails = Sentdm::Models::PaymentDetails
 
   ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
 
@@ -65,15 +93,56 @@ module Sentdm
 
   ProfileDeleteParams = Sentdm::Models::ProfileDeleteParams
 
+  ProfileDetail = Sentdm::Models::ProfileDetail
+
   ProfileListParams = Sentdm::Models::ProfileListParams
 
   ProfileRetrieveParams = Sentdm::Models::ProfileRetrieveParams
 
   Profiles = Sentdm::Models::Profiles
 
+  ProfileSettings = Sentdm::Models::ProfileSettings
+
   ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
 
+  SentDmServicesCommonContractsPocOsAuthenticationConfig =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
+
+  SentDmServicesCommonContractsPocOsTemplateBody =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
+
+  SentDmServicesCommonContractsPocOsTemplateButton =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
+
+  SentDmServicesCommonContractsPocOsTemplateButtonProps =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
+
+  SentDmServicesCommonContractsPocOsTemplateFooter =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
+
+  SentDmServicesCommonContractsPocOsTemplateHeader =
+    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
+
+  SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo =
+    Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo
+
+  SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo =
+    Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
+
+  SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo =
+    Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
+
+  TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
+
+  TcrVertical = Sentdm::Models::TcrVertical
+
+  Template = Sentdm::Models::Template
+
+  TemplateBodyContent = Sentdm::Models::TemplateBodyContent
+
   TemplateCreateParams = Sentdm::Models::TemplateCreateParams
+
+  TemplateDefinition = Sentdm::Models::TemplateDefinition
 
   TemplateDeleteParams = Sentdm::Models::TemplateDeleteParams
 
@@ -83,11 +152,15 @@ module Sentdm
 
   TemplateUpdateParams = Sentdm::Models::TemplateUpdateParams
 
+  TemplateVariable = Sentdm::Models::TemplateVariable
+
   UserInviteParams = Sentdm::Models::UserInviteParams
 
   UserListParams = Sentdm::Models::UserListParams
 
   UserRemoveParams = Sentdm::Models::UserRemoveParams
+
+  UserResponse = Sentdm::Models::UserResponse
 
   UserRetrieveParams = Sentdm::Models::UserRetrieveParams
 
@@ -97,11 +170,15 @@ module Sentdm
 
   WebhookDeleteParams = Sentdm::Models::WebhookDeleteParams
 
+  WebhookEventType = Sentdm::Models::WebhookEventType
+
   WebhookListEventsParams = Sentdm::Models::WebhookListEventsParams
 
   WebhookListEventTypesParams = Sentdm::Models::WebhookListEventTypesParams
 
   WebhookListParams = Sentdm::Models::WebhookListParams
+
+  WebhookResponse = Sentdm::Models::WebhookResponse
 
   WebhookRetrieveParams = Sentdm::Models::WebhookRetrieveParams
 

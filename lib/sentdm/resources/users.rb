@@ -18,7 +18,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::UserRetrieveResponse]
+      # @return [Sentdm::Models::APIResponseOfUser]
       #
       # @see Sentdm::Models::UserRetrieveParams
       def retrieve(user_id, params = {})
@@ -27,7 +27,7 @@ module Sentdm
           method: :get,
           path: ["v3/users/%1$s", user_id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::UserRetrieveResponse,
+          model: Sentdm::APIResponseOfUser,
           options: options
         )
       end
@@ -82,7 +82,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::UserInviteResponse]
+      # @return [Sentdm::Models::APIResponseOfUser]
       #
       # @see Sentdm::Models::UserInviteParams
       def invite(params = {})
@@ -93,7 +93,7 @@ module Sentdm
           path: "v3/users",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::UserInviteResponse,
+          model: Sentdm::APIResponseOfUser,
           options: options
         )
       end
@@ -150,7 +150,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::UserUpdateRoleResponse]
+      # @return [Sentdm::Models::APIResponseOfUser]
       #
       # @see Sentdm::Models::UserUpdateRoleParams
       def update_role(user_id, params = {})
@@ -161,7 +161,7 @@ module Sentdm
           path: ["v3/users/%1$s", user_id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::UserUpdateRoleResponse,
+          model: Sentdm::APIResponseOfUser,
           options: options
         )
       end
