@@ -9,8 +9,8 @@ module Sentdm
 
       # @!attribute channel
       #   Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel produces a
-      #   separate message per recipient. "sent" = auto-detect, "rcs" = reserved
-      #   (skipped). Defaults to ["sent"] (auto-detect) if omitted.
+      #   separate message per recipient. "sent" = auto-detect. Defaults to ["sent"]
+      #   (auto-detect) if omitted.
       #
       #   @return [Array<String>, nil]
       optional :channel, Sentdm::Internal::Type::ArrayOf[String], nil?: true

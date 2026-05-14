@@ -15,14 +15,14 @@ module Sentdm
       # @!attribute error
       #   Error information
       #
-      #   @return [Sentdm::Models::ErrorDetail, nil]
-      optional :error, -> { Sentdm::ErrorDetail }, nil?: true
+      #   @return [Sentdm::Models::MeRetrieveResponse::Error, nil]
+      optional :error, -> { Sentdm::Models::MeRetrieveResponse::Error }, nil?: true
 
       # @!attribute meta
       #   Request and response metadata
       #
-      #   @return [Sentdm::Models::APIMeta, nil]
-      optional :meta, -> { Sentdm::APIMeta }
+      #   @return [Sentdm::Models::MeRetrieveResponse::Meta, nil]
+      optional :meta, -> { Sentdm::Models::MeRetrieveResponse::Meta }
 
       # @!attribute success
       #   Indicates whether the request was successful
@@ -38,9 +38,9 @@ module Sentdm
       #
       #   @param data [Sentdm::Models::MeRetrieveResponse::Data, nil] Account response for GET /v3/me endpoint.
       #
-      #   @param error [Sentdm::Models::ErrorDetail, nil] Error information
+      #   @param error [Sentdm::Models::MeRetrieveResponse::Error, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
+      #   @param meta [Sentdm::Models::MeRetrieveResponse::Meta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -106,8 +106,8 @@ module Sentdm
         # @!attribute settings
         #   Profile configuration settings
         #
-        #   @return [Sentdm::Models::ProfileSettings, nil]
-        optional :settings, -> { Sentdm::ProfileSettings }, nil?: true
+        #   @return [Sentdm::Models::MeRetrieveResponse::Data::Settings, nil]
+        optional :settings, -> { Sentdm::Models::MeRetrieveResponse::Data::Settings }, nil?: true
 
         # @!attribute short_name
         #   Short name / abbreviation (only for profile type)
@@ -155,7 +155,7 @@ module Sentdm
         #
         #   @param profiles [Array<Sentdm::Models::MeRetrieveResponse::Data::Profile>] List of profiles (populated for organization type, empty for user and profile ty
         #
-        #   @param settings [Sentdm::Models::ProfileSettings, nil] Profile configuration settings
+        #   @param settings [Sentdm::Models::MeRetrieveResponse::Data::Settings, nil] Profile configuration settings
         #
         #   @param short_name [String, nil] Short name / abbreviation (only for profile type)
         #
@@ -314,8 +314,8 @@ module Sentdm
           # @!attribute settings
           #   Profile configuration settings
           #
-          #   @return [Sentdm::Models::ProfileSettings, nil]
-          optional :settings, -> { Sentdm::ProfileSettings }
+          #   @return [Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings, nil]
+          optional :settings, -> { Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings }
 
           # @!attribute short_name
           #   Profile short name (abbreviation)
@@ -347,12 +347,204 @@ module Sentdm
           #
           #   @param role [String, nil] User's role in this profile: admin, billing, developer (inherited from organizat
           #
-          #   @param settings [Sentdm::Models::ProfileSettings] Profile configuration settings
+          #   @param settings [Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings] Profile configuration settings
           #
           #   @param short_name [String, nil] Profile short name (abbreviation)
           #
           #   @param status [String, nil] Profile setup status: incomplete, pending_review, approved, rejected
+
+          # @see Sentdm::Models::MeRetrieveResponse::Data::Profile#settings
+          class Settings < Sentdm::Internal::Type::BaseModel
+            # @!attribute allow_contact_sharing
+            #   Whether contacts are shared across profiles in the organization
+            #
+            #   @return [Boolean, nil]
+            optional :allow_contact_sharing, Sentdm::Internal::Type::Boolean, nil?: true
+
+            # @!attribute allow_template_sharing
+            #   Whether templates are shared across profiles in the organization
+            #
+            #   @return [Boolean, nil]
+            optional :allow_template_sharing, Sentdm::Internal::Type::Boolean, nil?: true
+
+            # @!attribute billing_model
+            #   Billing model: profile, organization, or profile_and_organization
+            #
+            #   @return [String, nil]
+            optional :billing_model, String, nil?: true
+
+            # @!attribute inherit_contacts
+            #   Whether this profile inherits contacts from the organization
+            #
+            #   @return [Boolean, nil]
+            optional :inherit_contacts, Sentdm::Internal::Type::Boolean, nil?: true
+
+            # @!attribute inherit_tcr_brand
+            #   Whether this profile inherits TCR brand from the organization
+            #
+            #   @return [Boolean, nil]
+            optional :inherit_tcr_brand, Sentdm::Internal::Type::Boolean, nil?: true
+
+            # @!attribute inherit_tcr_campaign
+            #   Whether this profile inherits TCR campaign from the organization
+            #
+            #   @return [Boolean, nil]
+            optional :inherit_tcr_campaign, Sentdm::Internal::Type::Boolean, nil?: true
+
+            # @!attribute inherit_templates
+            #   Whether this profile inherits templates from the organization
+            #
+            #   @return [Boolean, nil]
+            optional :inherit_templates, Sentdm::Internal::Type::Boolean, nil?: true
+
+            # @!method initialize(allow_contact_sharing: nil, allow_template_sharing: nil, billing_model: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil)
+            #   Profile configuration settings
+            #
+            #   @param allow_contact_sharing [Boolean, nil] Whether contacts are shared across profiles in the organization
+            #
+            #   @param allow_template_sharing [Boolean, nil] Whether templates are shared across profiles in the organization
+            #
+            #   @param billing_model [String, nil] Billing model: profile, organization, or profile_and_organization
+            #
+            #   @param inherit_contacts [Boolean, nil] Whether this profile inherits contacts from the organization
+            #
+            #   @param inherit_tcr_brand [Boolean, nil] Whether this profile inherits TCR brand from the organization
+            #
+            #   @param inherit_tcr_campaign [Boolean, nil] Whether this profile inherits TCR campaign from the organization
+            #
+            #   @param inherit_templates [Boolean, nil] Whether this profile inherits templates from the organization
+          end
         end
+
+        # @see Sentdm::Models::MeRetrieveResponse::Data#settings
+        class Settings < Sentdm::Internal::Type::BaseModel
+          # @!attribute allow_contact_sharing
+          #   Whether contacts are shared across profiles in the organization
+          #
+          #   @return [Boolean, nil]
+          optional :allow_contact_sharing, Sentdm::Internal::Type::Boolean, nil?: true
+
+          # @!attribute allow_template_sharing
+          #   Whether templates are shared across profiles in the organization
+          #
+          #   @return [Boolean, nil]
+          optional :allow_template_sharing, Sentdm::Internal::Type::Boolean, nil?: true
+
+          # @!attribute billing_model
+          #   Billing model: profile, organization, or profile_and_organization
+          #
+          #   @return [String, nil]
+          optional :billing_model, String, nil?: true
+
+          # @!attribute inherit_contacts
+          #   Whether this profile inherits contacts from the organization
+          #
+          #   @return [Boolean, nil]
+          optional :inherit_contacts, Sentdm::Internal::Type::Boolean, nil?: true
+
+          # @!attribute inherit_tcr_brand
+          #   Whether this profile inherits TCR brand from the organization
+          #
+          #   @return [Boolean, nil]
+          optional :inherit_tcr_brand, Sentdm::Internal::Type::Boolean, nil?: true
+
+          # @!attribute inherit_tcr_campaign
+          #   Whether this profile inherits TCR campaign from the organization
+          #
+          #   @return [Boolean, nil]
+          optional :inherit_tcr_campaign, Sentdm::Internal::Type::Boolean, nil?: true
+
+          # @!attribute inherit_templates
+          #   Whether this profile inherits templates from the organization
+          #
+          #   @return [Boolean, nil]
+          optional :inherit_templates, Sentdm::Internal::Type::Boolean, nil?: true
+
+          # @!method initialize(allow_contact_sharing: nil, allow_template_sharing: nil, billing_model: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil)
+          #   Profile configuration settings
+          #
+          #   @param allow_contact_sharing [Boolean, nil] Whether contacts are shared across profiles in the organization
+          #
+          #   @param allow_template_sharing [Boolean, nil] Whether templates are shared across profiles in the organization
+          #
+          #   @param billing_model [String, nil] Billing model: profile, organization, or profile_and_organization
+          #
+          #   @param inherit_contacts [Boolean, nil] Whether this profile inherits contacts from the organization
+          #
+          #   @param inherit_tcr_brand [Boolean, nil] Whether this profile inherits TCR brand from the organization
+          #
+          #   @param inherit_tcr_campaign [Boolean, nil] Whether this profile inherits TCR campaign from the organization
+          #
+          #   @param inherit_templates [Boolean, nil] Whether this profile inherits templates from the organization
+        end
+      end
+
+      # @see Sentdm::Models::MeRetrieveResponse#error
+      class Error < Sentdm::Internal::Type::BaseModel
+        # @!attribute code
+        #   Machine-readable error code (e.g., "RESOURCE_001")
+        #
+        #   @return [String, nil]
+        optional :code, String
+
+        # @!attribute details
+        #   Additional validation error details (field-level errors)
+        #
+        #   @return [Hash{Symbol=>Array<String>}, nil]
+        optional :details, Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]], nil?: true
+
+        # @!attribute doc_url
+        #   URL to documentation about this error
+        #
+        #   @return [String, nil]
+        optional :doc_url, String, nil?: true
+
+        # @!attribute message
+        #   Human-readable error message
+        #
+        #   @return [String, nil]
+        optional :message, String
+
+        # @!method initialize(code: nil, details: nil, doc_url: nil, message: nil)
+        #   Error information
+        #
+        #   @param code [String] Machine-readable error code (e.g., "RESOURCE_001")
+        #
+        #   @param details [Hash{Symbol=>Array<String>}, nil] Additional validation error details (field-level errors)
+        #
+        #   @param doc_url [String, nil] URL to documentation about this error
+        #
+        #   @param message [String] Human-readable error message
+      end
+
+      # @see Sentdm::Models::MeRetrieveResponse#meta
+      class Meta < Sentdm::Internal::Type::BaseModel
+        # @!attribute request_id
+        #   Unique identifier for this request (for tracing and support)
+        #
+        #   @return [String, nil]
+        optional :request_id, String
+
+        # @!attribute timestamp
+        #   Server timestamp when the response was generated
+        #
+        #   @return [Time, nil]
+        optional :timestamp, Time
+
+        # @!attribute version
+        #   API version used for this request
+        #
+        #   @return [String, nil]
+        optional :version, String
+
+        # @!method initialize(request_id: nil, timestamp: nil, version: nil)
+        #   Request and response metadata
+        #
+        #   @param request_id [String] Unique identifier for this request (for tracing and support)
+        #
+        #   @param timestamp [Time] Server timestamp when the response was generated
+        #
+        #   @param version [String] API version used for this request
       end
     end
   end

@@ -22,7 +22,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContact]
+      # @return [Sentdm::Models::ContactCreateResponse]
       #
       # @see Sentdm::Models::ContactCreateParams
       def create(params = {})
@@ -33,7 +33,7 @@ module Sentdm
           path: "v3/contacts",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseOfContact,
+          model: Sentdm::Models::ContactCreateResponse,
           options: options
         )
       end
@@ -53,7 +53,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContact]
+      # @return [Sentdm::Models::ContactRetrieveResponse]
       #
       # @see Sentdm::Models::ContactRetrieveParams
       def retrieve(id, params = {})
@@ -62,7 +62,7 @@ module Sentdm
           method: :get,
           path: ["v3/contacts/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfContact,
+          model: Sentdm::Models::ContactRetrieveResponse,
           options: options
         )
       end
@@ -73,15 +73,13 @@ module Sentdm
       # Updates a contact's default channel and/or opt-out status. Inherited contacts
       # cannot be updated.
       #
-      # @overload update(id, channel_consent: nil, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Contact ID from route parameter
       #
-      # @param channel_consent [Hash{Symbol=>String}, nil] Body param: Consent status by channel. Keys: "sms", "whatsapp". Values: "opted_i
-      #
       # @param default_channel [String, nil] Body param: Default messaging channel: "sms" or "whatsapp"
       #
-      # @param opt_out [Boolean, nil] Body param: Whether the contact has opted out of messaging
+      # @param opt_out [Boolean, nil] Body param: Whether the contact has opted out of messaging. Single source of tru
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -91,7 +89,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContact]
+      # @return [Sentdm::Models::ContactUpdateResponse]
       #
       # @see Sentdm::Models::ContactUpdateParams
       def update(id, params = {})
@@ -102,7 +100,7 @@ module Sentdm
           path: ["v3/contacts/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseOfContact,
+          model: Sentdm::Models::ContactUpdateResponse,
           options: options
         )
       end

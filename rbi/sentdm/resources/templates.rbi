@@ -11,14 +11,14 @@ module Sentdm
         params(
           category: T.nilable(String),
           creation_source: T.nilable(String),
-          definition: Sentdm::TemplateDefinition::OrHash,
+          definition: Sentdm::TemplateCreateParams::Definition::OrHash,
           language: T.nilable(String),
           sandbox: T::Boolean,
           submit_for_review: T::Boolean,
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseTemplate)
+        ).returns(Sentdm::Models::TemplateCreateResponse)
       end
       def create(
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional,
@@ -57,7 +57,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseTemplate)
+        ).returns(Sentdm::Models::TemplateRetrieveResponse)
       end
       def retrieve(
         # Template ID from route parameter
@@ -75,7 +75,8 @@ module Sentdm
         params(
           id: String,
           category: T.nilable(String),
-          definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
+          definition:
+            T.nilable(Sentdm::TemplateUpdateParams::Definition::OrHash),
           language: T.nilable(String),
           name: T.nilable(String),
           sandbox: T::Boolean,
@@ -83,7 +84,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseTemplate)
+        ).returns(Sentdm::Models::TemplateUpdateResponse)
       end
       def update(
         # Path param: Template ID from route parameter

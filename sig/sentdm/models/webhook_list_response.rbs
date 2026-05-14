@@ -3,19 +3,21 @@ module Sentdm
     type webhook_list_response =
       {
         data: Sentdm::Models::WebhookListResponse::Data?,
-        error: Sentdm::ErrorDetail?,
-        meta: Sentdm::APIMeta,
+        error: Sentdm::Models::WebhookListResponse::Error?,
+        meta: Sentdm::Models::WebhookListResponse::Meta,
         success: bool
       }
 
     class WebhookListResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::WebhookListResponse::Data?
 
-      attr_accessor error: Sentdm::ErrorDetail?
+      attr_accessor error: Sentdm::Models::WebhookListResponse::Error?
 
-      attr_reader meta: Sentdm::APIMeta?
+      attr_reader meta: Sentdm::Models::WebhookListResponse::Meta?
 
-      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+      def meta=: (
+        Sentdm::Models::WebhookListResponse::Meta
+      ) -> Sentdm::Models::WebhookListResponse::Meta
 
       attr_reader success: bool?
 
@@ -23,44 +25,270 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::WebhookListResponse::Data?,
-        ?error: Sentdm::ErrorDetail?,
-        ?meta: Sentdm::APIMeta,
+        ?error: Sentdm::Models::WebhookListResponse::Error?,
+        ?meta: Sentdm::Models::WebhookListResponse::Meta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::WebhookListResponse::Data?,
-        error: Sentdm::ErrorDetail?,
-        meta: Sentdm::APIMeta,
+        error: Sentdm::Models::WebhookListResponse::Error?,
+        meta: Sentdm::Models::WebhookListResponse::Meta,
         success: bool
       }
 
       type data =
         {
-          pagination: Sentdm::PaginationMeta,
-          webhooks: ::Array[Sentdm::WebhookResponse]
+          pagination: Sentdm::Models::WebhookListResponse::Data::Pagination,
+          webhooks: ::Array[Sentdm::Models::WebhookListResponse::Data::Webhook]
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
-        attr_reader pagination: Sentdm::PaginationMeta?
+        attr_reader pagination: Sentdm::Models::WebhookListResponse::Data::Pagination?
 
-        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+        def pagination=: (
+          Sentdm::Models::WebhookListResponse::Data::Pagination
+        ) -> Sentdm::Models::WebhookListResponse::Data::Pagination
 
-        attr_reader webhooks: ::Array[Sentdm::WebhookResponse]?
+        attr_reader webhooks: ::Array[Sentdm::Models::WebhookListResponse::Data::Webhook]?
 
         def webhooks=: (
-          ::Array[Sentdm::WebhookResponse]
-        ) -> ::Array[Sentdm::WebhookResponse]
+          ::Array[Sentdm::Models::WebhookListResponse::Data::Webhook]
+        ) -> ::Array[Sentdm::Models::WebhookListResponse::Data::Webhook]
 
         def initialize: (
-          ?pagination: Sentdm::PaginationMeta,
-          ?webhooks: ::Array[Sentdm::WebhookResponse]
+          ?pagination: Sentdm::Models::WebhookListResponse::Data::Pagination,
+          ?webhooks: ::Array[Sentdm::Models::WebhookListResponse::Data::Webhook]
         ) -> void
 
         def to_hash: -> {
-          pagination: Sentdm::PaginationMeta,
-          webhooks: ::Array[Sentdm::WebhookResponse]
+          pagination: Sentdm::Models::WebhookListResponse::Data::Pagination,
+          webhooks: ::Array[Sentdm::Models::WebhookListResponse::Data::Webhook]
         }
+
+        type pagination =
+          {
+            cursors: Sentdm::Models::WebhookListResponse::Data::Pagination::Cursors?,
+            has_more: bool,
+            page: Integer,
+            page_size: Integer,
+            total_count: Integer,
+            total_pages: Integer
+          }
+
+        class Pagination < Sentdm::Internal::Type::BaseModel
+          attr_accessor cursors: Sentdm::Models::WebhookListResponse::Data::Pagination::Cursors?
+
+          attr_reader has_more: bool?
+
+          def has_more=: (bool) -> bool
+
+          attr_reader page: Integer?
+
+          def page=: (Integer) -> Integer
+
+          attr_reader page_size: Integer?
+
+          def page_size=: (Integer) -> Integer
+
+          attr_reader total_count: Integer?
+
+          def total_count=: (Integer) -> Integer
+
+          attr_reader total_pages: Integer?
+
+          def total_pages=: (Integer) -> Integer
+
+          def initialize: (
+            ?cursors: Sentdm::Models::WebhookListResponse::Data::Pagination::Cursors?,
+            ?has_more: bool,
+            ?page: Integer,
+            ?page_size: Integer,
+            ?total_count: Integer,
+            ?total_pages: Integer
+          ) -> void
+
+          def to_hash: -> {
+            cursors: Sentdm::Models::WebhookListResponse::Data::Pagination::Cursors?,
+            has_more: bool,
+            page: Integer,
+            page_size: Integer,
+            total_count: Integer,
+            total_pages: Integer
+          }
+
+          type cursors = { after: String?, before: String? }
+
+          class Cursors < Sentdm::Internal::Type::BaseModel
+            attr_accessor after: String?
+
+            attr_accessor before: String?
+
+            def initialize: (?after: String?, ?before: String?) -> void
+
+            def to_hash: -> { after: String?, before: String? }
+          end
+        end
+
+        type webhook =
+          {
+            id: String,
+            consecutive_failures: Integer,
+            created_at: Time,
+            display_name: String,
+            endpoint_url: String,
+            event_filters: ::Hash[Symbol, ::Array[String]]?,
+            event_types: ::Array[String],
+            is_active: bool,
+            last_delivery_attempt_at: Time?,
+            last_successful_delivery_at: Time?,
+            retry_count: Integer,
+            signing_secret: String?,
+            timeout_seconds: Integer,
+            updated_at: Time?
+          }
+
+        class Webhook < Sentdm::Internal::Type::BaseModel
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader consecutive_failures: Integer?
+
+          def consecutive_failures=: (Integer) -> Integer
+
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_reader display_name: String?
+
+          def display_name=: (String) -> String
+
+          attr_reader endpoint_url: String?
+
+          def endpoint_url=: (String) -> String
+
+          attr_accessor event_filters: ::Hash[Symbol, ::Array[String]]?
+
+          attr_reader event_types: ::Array[String]?
+
+          def event_types=: (::Array[String]) -> ::Array[String]
+
+          attr_reader is_active: bool?
+
+          def is_active=: (bool) -> bool
+
+          attr_accessor last_delivery_attempt_at: Time?
+
+          attr_accessor last_successful_delivery_at: Time?
+
+          attr_reader retry_count: Integer?
+
+          def retry_count=: (Integer) -> Integer
+
+          attr_accessor signing_secret: String?
+
+          attr_reader timeout_seconds: Integer?
+
+          def timeout_seconds=: (Integer) -> Integer
+
+          attr_accessor updated_at: Time?
+
+          def initialize: (
+            ?id: String,
+            ?consecutive_failures: Integer,
+            ?created_at: Time,
+            ?display_name: String,
+            ?endpoint_url: String,
+            ?event_filters: ::Hash[Symbol, ::Array[String]]?,
+            ?event_types: ::Array[String],
+            ?is_active: bool,
+            ?last_delivery_attempt_at: Time?,
+            ?last_successful_delivery_at: Time?,
+            ?retry_count: Integer,
+            ?signing_secret: String?,
+            ?timeout_seconds: Integer,
+            ?updated_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            consecutive_failures: Integer,
+            created_at: Time,
+            display_name: String,
+            endpoint_url: String,
+            event_filters: ::Hash[Symbol, ::Array[String]]?,
+            event_types: ::Array[String],
+            is_active: bool,
+            last_delivery_attempt_at: Time?,
+            last_successful_delivery_at: Time?,
+            retry_count: Integer,
+            signing_secret: String?,
+            timeout_seconds: Integer,
+            updated_at: Time?
+          }
+        end
+      end
+
+      type error =
+        {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+
+      class Error < Sentdm::Internal::Type::BaseModel
+        attr_reader code: String?
+
+        def code=: (String) -> String
+
+        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
+
+        attr_accessor doc_url: String?
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (
+          ?code: String,
+          ?details: ::Hash[Symbol, ::Array[String]]?,
+          ?doc_url: String?,
+          ?message: String
+        ) -> void
+
+        def to_hash: -> {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+      end
+
+      type meta = { request_id: String, timestamp: Time, version: String }
+
+      class Meta < Sentdm::Internal::Type::BaseModel
+        attr_reader request_id: String?
+
+        def request_id=: (String) -> String
+
+        attr_reader timestamp: Time?
+
+        def timestamp=: (Time) -> Time
+
+        attr_reader version: String?
+
+        def version=: (String) -> String
+
+        def initialize: (
+          ?request_id: String,
+          ?timestamp: Time,
+          ?version: String
+        ) -> void
+
+        def to_hash: -> { request_id: String, timestamp: Time, version: String }
       end
     end
   end

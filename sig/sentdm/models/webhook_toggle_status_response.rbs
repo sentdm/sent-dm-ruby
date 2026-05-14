@@ -1,0 +1,201 @@
+module Sentdm
+  module Models
+    type webhook_toggle_status_response =
+      {
+        data: Sentdm::Models::WebhookToggleStatusResponse::Data?,
+        error: Sentdm::Models::WebhookToggleStatusResponse::Error?,
+        meta: Sentdm::Models::WebhookToggleStatusResponse::Meta,
+        success: bool
+      }
+
+    class WebhookToggleStatusResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::WebhookToggleStatusResponse::Data?
+
+      attr_accessor error: Sentdm::Models::WebhookToggleStatusResponse::Error?
+
+      attr_reader meta: Sentdm::Models::WebhookToggleStatusResponse::Meta?
+
+      def meta=: (
+        Sentdm::Models::WebhookToggleStatusResponse::Meta
+      ) -> Sentdm::Models::WebhookToggleStatusResponse::Meta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::WebhookToggleStatusResponse::Data?,
+        ?error: Sentdm::Models::WebhookToggleStatusResponse::Error?,
+        ?meta: Sentdm::Models::WebhookToggleStatusResponse::Meta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::WebhookToggleStatusResponse::Data?,
+        error: Sentdm::Models::WebhookToggleStatusResponse::Error?,
+        meta: Sentdm::Models::WebhookToggleStatusResponse::Meta,
+        success: bool
+      }
+
+      type data =
+        {
+          id: String,
+          consecutive_failures: Integer,
+          created_at: Time,
+          display_name: String,
+          endpoint_url: String,
+          event_filters: ::Hash[Symbol, ::Array[String]]?,
+          event_types: ::Array[String],
+          is_active: bool,
+          last_delivery_attempt_at: Time?,
+          last_successful_delivery_at: Time?,
+          retry_count: Integer,
+          signing_secret: String?,
+          timeout_seconds: Integer,
+          updated_at: Time?
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader consecutive_failures: Integer?
+
+        def consecutive_failures=: (Integer) -> Integer
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader display_name: String?
+
+        def display_name=: (String) -> String
+
+        attr_reader endpoint_url: String?
+
+        def endpoint_url=: (String) -> String
+
+        attr_accessor event_filters: ::Hash[Symbol, ::Array[String]]?
+
+        attr_reader event_types: ::Array[String]?
+
+        def event_types=: (::Array[String]) -> ::Array[String]
+
+        attr_reader is_active: bool?
+
+        def is_active=: (bool) -> bool
+
+        attr_accessor last_delivery_attempt_at: Time?
+
+        attr_accessor last_successful_delivery_at: Time?
+
+        attr_reader retry_count: Integer?
+
+        def retry_count=: (Integer) -> Integer
+
+        attr_accessor signing_secret: String?
+
+        attr_reader timeout_seconds: Integer?
+
+        def timeout_seconds=: (Integer) -> Integer
+
+        attr_accessor updated_at: Time?
+
+        def initialize: (
+          ?id: String,
+          ?consecutive_failures: Integer,
+          ?created_at: Time,
+          ?display_name: String,
+          ?endpoint_url: String,
+          ?event_filters: ::Hash[Symbol, ::Array[String]]?,
+          ?event_types: ::Array[String],
+          ?is_active: bool,
+          ?last_delivery_attempt_at: Time?,
+          ?last_successful_delivery_at: Time?,
+          ?retry_count: Integer,
+          ?signing_secret: String?,
+          ?timeout_seconds: Integer,
+          ?updated_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          consecutive_failures: Integer,
+          created_at: Time,
+          display_name: String,
+          endpoint_url: String,
+          event_filters: ::Hash[Symbol, ::Array[String]]?,
+          event_types: ::Array[String],
+          is_active: bool,
+          last_delivery_attempt_at: Time?,
+          last_successful_delivery_at: Time?,
+          retry_count: Integer,
+          signing_secret: String?,
+          timeout_seconds: Integer,
+          updated_at: Time?
+        }
+      end
+
+      type error =
+        {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+
+      class Error < Sentdm::Internal::Type::BaseModel
+        attr_reader code: String?
+
+        def code=: (String) -> String
+
+        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
+
+        attr_accessor doc_url: String?
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (
+          ?code: String,
+          ?details: ::Hash[Symbol, ::Array[String]]?,
+          ?doc_url: String?,
+          ?message: String
+        ) -> void
+
+        def to_hash: -> {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+      end
+
+      type meta = { request_id: String, timestamp: Time, version: String }
+
+      class Meta < Sentdm::Internal::Type::BaseModel
+        attr_reader request_id: String?
+
+        def request_id=: (String) -> String
+
+        attr_reader timestamp: Time?
+
+        def timestamp=: (Time) -> Time
+
+        attr_reader version: String?
+
+        def version=: (String) -> String
+
+        def initialize: (
+          ?request_id: String,
+          ?timestamp: Time,
+          ?version: String
+        ) -> void
+
+        def to_hash: -> { request_id: String, timestamp: Time, version: String }
+      end
+    end
+  end
+end

@@ -54,11 +54,11 @@ module Sentdm
       #
       # @param allow_template_sharing [Boolean] Body param: Whether templates are shared across profiles (default: false)
       #
-      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact information for a profile.
+      # @param billing_contact [Sentdm::Models::ProfileCreateParams::BillingContact, nil] Body param: Billing contact information for a profile.
       #
       # @param billing_model [String, nil] Body param: Billing model: profile, organization, or profile_and_organization (d
       #
-      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC data grouped into contact, business, and compliance se
+      # @param brand [Sentdm::Models::ProfileCreateParams::Brand, nil] Body param: Brand and KYC data grouped into contact, business, and compliance se
       #
       # @param description [String, nil] Body param: Profile description (optional)
       #
@@ -74,7 +74,7 @@ module Sentdm
       #
       # @param name [String] Body param: Profile name (required)
       #
-      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for a profile.
+      # @param payment_details [Sentdm::Models::ProfileCreateParams::PaymentDetails, nil] Body param: Payment card details for a profile.
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -88,7 +88,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfProfileDetail]
+      # @return [Sentdm::Models::ProfileCreateResponse]
       #
       # @see Sentdm::Models::ProfileCreateParams
       def create(params = {})
@@ -99,7 +99,7 @@ module Sentdm
           path: "v3/profiles",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseOfProfileDetail,
+          model: Sentdm::Models::ProfileCreateResponse,
           options: options
         )
       end
@@ -119,7 +119,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfProfileDetail]
+      # @return [Sentdm::Models::ProfileRetrieveResponse]
       #
       # @see Sentdm::Models::ProfileRetrieveParams
       def retrieve(profile_id, params = {})
@@ -128,7 +128,7 @@ module Sentdm
           method: :get,
           path: ["v3/profiles/%1$s", profile_id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfProfileDetail,
+          model: Sentdm::Models::ProfileRetrieveResponse,
           options: options
         )
       end
@@ -165,11 +165,11 @@ module Sentdm
       #
       # @param allow_template_sharing [Boolean, nil] Body param: Whether templates are shared across profiles (optional)
       #
-      # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact information for a profile.
+      # @param billing_contact [Sentdm::Models::ProfileUpdateParams::BillingContact, nil] Body param: Billing contact information for a profile.
       #
       # @param billing_model [String, nil] Body param: Billing model: profile, organization, or profile_and_organization (o
       #
-      # @param brand [Sentdm::Models::BrandsBrandData, nil] Body param: Brand and KYC data grouped into contact, business, and compliance se
+      # @param brand [Sentdm::Models::ProfileUpdateParams::Brand, nil] Body param: Brand and KYC data grouped into contact, business, and compliance se
       #
       # @param description [String, nil] Body param: Profile description (optional)
       #
@@ -185,7 +185,7 @@ module Sentdm
       #
       # @param name [String, nil] Body param: Profile name (optional)
       #
-      # @param payment_details [Sentdm::Models::PaymentDetails, nil] Body param: Payment card details for a profile.
+      # @param payment_details [Sentdm::Models::ProfileUpdateParams::PaymentDetails, nil] Body param: Payment card details for a profile.
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -205,7 +205,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfProfileDetail]
+      # @return [Sentdm::Models::ProfileUpdateResponse]
       #
       # @see Sentdm::Models::ProfileUpdateParams
       def update(profile_id, params = {})
@@ -216,7 +216,7 @@ module Sentdm
           path: ["v3/profiles/%1$s", profile_id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseOfProfileDetail,
+          model: Sentdm::Models::ProfileUpdateResponse,
           options: options
         )
       end

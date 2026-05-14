@@ -3,38 +3,421 @@ module Sentdm
     module Profiles
       type campaign_list_response =
         {
-          data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?,
-          error: Sentdm::ErrorDetail?,
-          meta: Sentdm::APIMeta,
+          data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?,
+          error: Sentdm::Models::Profiles::CampaignListResponse::Error?,
+          meta: Sentdm::Models::Profiles::CampaignListResponse::Meta,
           success: bool
         }
 
       class CampaignListResponse < Sentdm::Internal::Type::BaseModel
-        attr_accessor data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?
+        attr_accessor data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?
 
-        attr_accessor error: Sentdm::ErrorDetail?
+        attr_accessor error: Sentdm::Models::Profiles::CampaignListResponse::Error?
 
-        attr_reader meta: Sentdm::APIMeta?
+        attr_reader meta: Sentdm::Models::Profiles::CampaignListResponse::Meta?
 
-        def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+        def meta=: (
+          Sentdm::Models::Profiles::CampaignListResponse::Meta
+        ) -> Sentdm::Models::Profiles::CampaignListResponse::Meta
 
         attr_reader success: bool?
 
         def success=: (bool) -> bool
 
         def initialize: (
-          ?data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?,
-          ?error: Sentdm::ErrorDetail?,
-          ?meta: Sentdm::APIMeta,
+          ?data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?,
+          ?error: Sentdm::Models::Profiles::CampaignListResponse::Error?,
+          ?meta: Sentdm::Models::Profiles::CampaignListResponse::Meta,
           ?success: bool
         ) -> void
 
         def to_hash: -> {
-          data: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases]?,
-          error: Sentdm::ErrorDetail?,
-          meta: Sentdm::APIMeta,
+          data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?,
+          error: Sentdm::Models::Profiles::CampaignListResponse::Error?,
+          meta: Sentdm::Models::Profiles::CampaignListResponse::Meta,
           success: bool
         }
+
+        type data =
+          {
+            id: String,
+            billed_date: Time?,
+            brand_id: String?,
+            cost: Float?,
+            created_at: Time,
+            csp_id: String?,
+            customer_id: String,
+            dca_elections_complete: bool,
+            dca_elections_completed_at: Time?,
+            description: String,
+            help_keywords: String?,
+            help_message: String?,
+            kyc_submission_form_id: String?,
+            message_flow: String?,
+            name: String,
+            optin_keywords: String?,
+            optin_message: String?,
+            optout_keywords: String?,
+            optout_message: String?,
+            privacy_policy_link: String?,
+            reseller_id: String?,
+            sharing_status: Sentdm::Models::Profiles::CampaignListResponse::Data::sharing_status?,
+            status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?,
+            submitted_at: Time?,
+            submitted_to_tcr: bool,
+            tcr_campaign_id: String?,
+            tcr_sync_error: String?,
+            telnyx_campaign_id: String?,
+            terms_and_conditions_link: String?,
+            type: String,
+            updated_at: Time?,
+            upstream_cnp_id: String?,
+            use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
+          }
+
+        class Data < Sentdm::Internal::Type::BaseModel
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_accessor billed_date: Time?
+
+          attr_accessor brand_id: String?
+
+          attr_accessor cost: Float?
+
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_accessor csp_id: String?
+
+          attr_reader customer_id: String?
+
+          def customer_id=: (String) -> String
+
+          attr_reader dca_elections_complete: bool?
+
+          def dca_elections_complete=: (bool) -> bool
+
+          attr_accessor dca_elections_completed_at: Time?
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_accessor help_keywords: String?
+
+          attr_accessor help_message: String?
+
+          attr_accessor kyc_submission_form_id: String?
+
+          attr_accessor message_flow: String?
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_accessor optin_keywords: String?
+
+          attr_accessor optin_message: String?
+
+          attr_accessor optout_keywords: String?
+
+          attr_accessor optout_message: String?
+
+          attr_accessor privacy_policy_link: String?
+
+          attr_accessor reseller_id: String?
+
+          attr_accessor sharing_status: Sentdm::Models::Profiles::CampaignListResponse::Data::sharing_status?
+
+          attr_accessor status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?
+
+          attr_accessor submitted_at: Time?
+
+          attr_reader submitted_to_tcr: bool?
+
+          def submitted_to_tcr=: (bool) -> bool
+
+          attr_accessor tcr_campaign_id: String?
+
+          attr_accessor tcr_sync_error: String?
+
+          attr_accessor telnyx_campaign_id: String?
+
+          attr_accessor terms_and_conditions_link: String?
+
+          attr_reader type: String?
+
+          def type=: (String) -> String
+
+          attr_accessor updated_at: Time?
+
+          attr_accessor upstream_cnp_id: String?
+
+          attr_reader use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]?
+
+          def use_cases=: (
+            ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
+          ) -> ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
+
+          def initialize: (
+            ?id: String,
+            ?billed_date: Time?,
+            ?brand_id: String?,
+            ?cost: Float?,
+            ?created_at: Time,
+            ?csp_id: String?,
+            ?customer_id: String,
+            ?dca_elections_complete: bool,
+            ?dca_elections_completed_at: Time?,
+            ?description: String,
+            ?help_keywords: String?,
+            ?help_message: String?,
+            ?kyc_submission_form_id: String?,
+            ?message_flow: String?,
+            ?name: String,
+            ?optin_keywords: String?,
+            ?optin_message: String?,
+            ?optout_keywords: String?,
+            ?optout_message: String?,
+            ?privacy_policy_link: String?,
+            ?reseller_id: String?,
+            ?sharing_status: Sentdm::Models::Profiles::CampaignListResponse::Data::sharing_status?,
+            ?status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?,
+            ?submitted_at: Time?,
+            ?submitted_to_tcr: bool,
+            ?tcr_campaign_id: String?,
+            ?tcr_sync_error: String?,
+            ?telnyx_campaign_id: String?,
+            ?terms_and_conditions_link: String?,
+            ?type: String,
+            ?updated_at: Time?,
+            ?upstream_cnp_id: String?,
+            ?use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            billed_date: Time?,
+            brand_id: String?,
+            cost: Float?,
+            created_at: Time,
+            csp_id: String?,
+            customer_id: String,
+            dca_elections_complete: bool,
+            dca_elections_completed_at: Time?,
+            description: String,
+            help_keywords: String?,
+            help_message: String?,
+            kyc_submission_form_id: String?,
+            message_flow: String?,
+            name: String,
+            optin_keywords: String?,
+            optin_message: String?,
+            optout_keywords: String?,
+            optout_message: String?,
+            privacy_policy_link: String?,
+            reseller_id: String?,
+            sharing_status: Sentdm::Models::Profiles::CampaignListResponse::Data::sharing_status?,
+            status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?,
+            submitted_at: Time?,
+            submitted_to_tcr: bool,
+            tcr_campaign_id: String?,
+            tcr_sync_error: String?,
+            telnyx_campaign_id: String?,
+            terms_and_conditions_link: String?,
+            type: String,
+            updated_at: Time?,
+            upstream_cnp_id: String?,
+            use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
+          }
+
+          type sharing_status = :PENDING | :ACCEPTED | :DECLINED
+
+          module SharingStatus
+            extend Sentdm::Internal::Type::Enum
+
+            PENDING: :PENDING
+            ACCEPTED: :ACCEPTED
+            DECLINED: :DECLINED
+
+            def self?.values: -> ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::sharing_status]
+          end
+
+          type status = :SENT_CREATED | :ACTIVE | :EXPIRED
+
+          module Status
+            extend Sentdm::Internal::Type::Enum
+
+            SENT_CREATED: :SENT_CREATED
+            ACTIVE: :ACTIVE
+            EXPIRED: :EXPIRED
+
+            def self?.values: -> ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::status]
+          end
+
+          type use_case =
+            {
+              id: String,
+              campaign_id: String,
+              created_at: Time,
+              customer_id: String,
+              messaging_use_case_us: Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us,
+              sample_messages: ::Array[String],
+              updated_at: Time?
+            }
+
+          class UseCase < Sentdm::Internal::Type::BaseModel
+            attr_reader id: String?
+
+            def id=: (String) -> String
+
+            attr_reader campaign_id: String?
+
+            def campaign_id=: (String) -> String
+
+            attr_reader created_at: Time?
+
+            def created_at=: (Time) -> Time
+
+            attr_reader customer_id: String?
+
+            def customer_id=: (String) -> String
+
+            attr_reader messaging_use_case_us: Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us?
+
+            def messaging_use_case_us=: (
+              Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us
+            ) -> Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us
+
+            attr_reader sample_messages: ::Array[String]?
+
+            def sample_messages=: (::Array[String]) -> ::Array[String]
+
+            attr_accessor updated_at: Time?
+
+            def initialize: (
+              ?id: String,
+              ?campaign_id: String,
+              ?created_at: Time,
+              ?customer_id: String,
+              ?messaging_use_case_us: Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us,
+              ?sample_messages: ::Array[String],
+              ?updated_at: Time?
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              campaign_id: String,
+              created_at: Time,
+              customer_id: String,
+              messaging_use_case_us: Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us,
+              sample_messages: ::Array[String],
+              updated_at: Time?
+            }
+
+            type messaging_use_case_us =
+              :MARKETING
+              | :ACCOUNT_NOTIFICATION
+              | :CUSTOMER_CARE
+              | :FRAUD_ALERT
+              | :TWO_FA
+              | :DELIVERY_NOTIFICATION
+              | :SECURITY_ALERT
+              | :M2M
+              | :MIXED
+              | :HIGHER_EDUCATION
+              | :POLLING_VOTING
+              | :PUBLIC_SERVICE_ANNOUNCEMENT
+              | :LOW_VOLUME
+
+            module MessagingUseCaseUs
+              extend Sentdm::Internal::Type::Enum
+
+              MARKETING: :MARKETING
+              ACCOUNT_NOTIFICATION: :ACCOUNT_NOTIFICATION
+              CUSTOMER_CARE: :CUSTOMER_CARE
+              FRAUD_ALERT: :FRAUD_ALERT
+              TWO_FA: :TWO_FA
+              DELIVERY_NOTIFICATION: :DELIVERY_NOTIFICATION
+              SECURITY_ALERT: :SECURITY_ALERT
+              M2_M: :M2M
+              MIXED: :MIXED
+              HIGHER_EDUCATION: :HIGHER_EDUCATION
+              POLLING_VOTING: :POLLING_VOTING
+              PUBLIC_SERVICE_ANNOUNCEMENT: :PUBLIC_SERVICE_ANNOUNCEMENT
+              LOW_VOLUME: :LOW_VOLUME
+
+              def self?.values: -> ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::messaging_use_case_us]
+            end
+          end
+        end
+
+        type error =
+          {
+            code: String,
+            details: ::Hash[Symbol, ::Array[String]]?,
+            doc_url: String?,
+            message: String
+          }
+
+        class Error < Sentdm::Internal::Type::BaseModel
+          attr_reader code: String?
+
+          def code=: (String) -> String
+
+          attr_accessor details: ::Hash[Symbol, ::Array[String]]?
+
+          attr_accessor doc_url: String?
+
+          attr_reader message: String?
+
+          def message=: (String) -> String
+
+          def initialize: (
+            ?code: String,
+            ?details: ::Hash[Symbol, ::Array[String]]?,
+            ?doc_url: String?,
+            ?message: String
+          ) -> void
+
+          def to_hash: -> {
+            code: String,
+            details: ::Hash[Symbol, ::Array[String]]?,
+            doc_url: String?,
+            message: String
+          }
+        end
+
+        type meta = { request_id: String, timestamp: Time, version: String }
+
+        class Meta < Sentdm::Internal::Type::BaseModel
+          attr_reader request_id: String?
+
+          def request_id=: (String) -> String
+
+          attr_reader timestamp: Time?
+
+          def timestamp=: (Time) -> Time
+
+          attr_reader version: String?
+
+          def version=: (String) -> String
+
+          def initialize: (
+            ?request_id: String,
+            ?timestamp: Time,
+            ?version: String
+          ) -> void
+
+          def to_hash: -> {
+            request_id: String,
+            timestamp: Time,
+            version: String
+          }
+        end
       end
     end
   end

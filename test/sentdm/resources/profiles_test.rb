@@ -9,14 +9,14 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     response = @sent.profiles.create
 
     assert_pattern do
-      response => Sentdm::APIResponseOfProfileDetail
+      response => Sentdm::Models::ProfileCreateResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::ProfileDetail | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::ProfileCreateResponse::Data | nil,
+        error: Sentdm::Models::ProfileCreateResponse::Error | nil,
+        meta: Sentdm::Models::ProfileCreateResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -28,14 +28,14 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     response = @sent.profiles.retrieve("profileId")
 
     assert_pattern do
-      response => Sentdm::APIResponseOfProfileDetail
+      response => Sentdm::Models::ProfileRetrieveResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::ProfileDetail | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::ProfileRetrieveResponse::Data | nil,
+        error: Sentdm::Models::ProfileRetrieveResponse::Error | nil,
+        meta: Sentdm::Models::ProfileRetrieveResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -47,14 +47,14 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     response = @sent.profiles.update("profileId")
 
     assert_pattern do
-      response => Sentdm::APIResponseOfProfileDetail
+      response => Sentdm::Models::ProfileUpdateResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::ProfileDetail | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::ProfileUpdateResponse::Data | nil,
+        error: Sentdm::Models::ProfileUpdateResponse::Error | nil,
+        meta: Sentdm::Models::ProfileUpdateResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -72,8 +72,8 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::ProfileListResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::ProfileListResponse::Error | nil,
+        meta: Sentdm::Models::ProfileListResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -105,8 +105,8 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::ProfileCompleteResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::ProfileCompleteResponse::Error | nil,
+        meta: Sentdm::Models::ProfileCompleteResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

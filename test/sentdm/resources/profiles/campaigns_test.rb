@@ -26,14 +26,14 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
       )
 
     assert_pattern do
-      response => Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases
+      response => Sentdm::Models::Profiles::CampaignCreateResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Profiles::TcrCampaignWithUseCases | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::Profiles::CampaignCreateResponse::Data | nil,
+        error: Sentdm::Models::Profiles::CampaignCreateResponse::Error | nil,
+        meta: Sentdm::Models::Profiles::CampaignCreateResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -63,14 +63,14 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
       )
 
     assert_pattern do
-      response => Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases
+      response => Sentdm::Models::Profiles::CampaignUpdateResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Profiles::TcrCampaignWithUseCases | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: Sentdm::Models::Profiles::CampaignUpdateResponse::Data | nil,
+        error: Sentdm::Models::Profiles::CampaignUpdateResponse::Error | nil,
+        meta: Sentdm::Models::Profiles::CampaignUpdateResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -87,9 +87,9 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
 
     assert_pattern do
       response => {
-        data: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::TcrCampaignWithUseCases]) | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        data: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Models::Profiles::CampaignListResponse::Data]) | nil,
+        error: Sentdm::Models::Profiles::CampaignListResponse::Error | nil,
+        meta: Sentdm::Models::Profiles::CampaignListResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
