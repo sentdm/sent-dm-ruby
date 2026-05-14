@@ -3,21 +3,19 @@ module Sentdm
     type user_list_response =
       {
         data: Sentdm::Models::UserListResponse::Data?,
-        error: Sentdm::Models::UserListResponse::Error?,
-        meta: Sentdm::Models::UserListResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
     class UserListResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::UserListResponse::Data?
 
-      attr_accessor error: Sentdm::Models::UserListResponse::Error?
+      attr_accessor error: Sentdm::ErrorDetail?
 
-      attr_reader meta: Sentdm::Models::UserListResponse::Meta?
+      attr_reader meta: Sentdm::APIMeta?
 
-      def meta=: (
-        Sentdm::Models::UserListResponse::Meta
-      ) -> Sentdm::Models::UserListResponse::Meta
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
 
       attr_reader success: bool?
 
@@ -25,164 +23,30 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::UserListResponse::Data?,
-        ?error: Sentdm::Models::UserListResponse::Error?,
-        ?meta: Sentdm::Models::UserListResponse::Meta,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::UserListResponse::Data?,
-        error: Sentdm::Models::UserListResponse::Error?,
-        meta: Sentdm::Models::UserListResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
-      type data =
-        { users: ::Array[Sentdm::Models::UserListResponse::Data::User] }
+      type data = { users: ::Array[Sentdm::UserResponse] }
 
       class Data < Sentdm::Internal::Type::BaseModel
-        attr_reader users: ::Array[Sentdm::Models::UserListResponse::Data::User]?
+        attr_reader users: ::Array[Sentdm::UserResponse]?
 
         def users=: (
-          ::Array[Sentdm::Models::UserListResponse::Data::User]
-        ) -> ::Array[Sentdm::Models::UserListResponse::Data::User]
+          ::Array[Sentdm::UserResponse]
+        ) -> ::Array[Sentdm::UserResponse]
 
-        def initialize: (
-          ?users: ::Array[Sentdm::Models::UserListResponse::Data::User]
-        ) -> void
+        def initialize: (?users: ::Array[Sentdm::UserResponse]) -> void
 
-        def to_hash: -> {
-          users: ::Array[Sentdm::Models::UserListResponse::Data::User]
-        }
-
-        type user =
-          {
-            id: String,
-            created_at: Time,
-            email: String,
-            invited_at: Time?,
-            last_login_at: Time?,
-            name: String,
-            role: String,
-            status: String,
-            updated_at: Time?
-          }
-
-        class User < Sentdm::Internal::Type::BaseModel
-          attr_reader id: String?
-
-          def id=: (String) -> String
-
-          attr_reader created_at: Time?
-
-          def created_at=: (Time) -> Time
-
-          attr_reader email: String?
-
-          def email=: (String) -> String
-
-          attr_accessor invited_at: Time?
-
-          attr_accessor last_login_at: Time?
-
-          attr_reader name: String?
-
-          def name=: (String) -> String
-
-          attr_reader role: String?
-
-          def role=: (String) -> String
-
-          attr_reader status: String?
-
-          def status=: (String) -> String
-
-          attr_accessor updated_at: Time?
-
-          def initialize: (
-            ?id: String,
-            ?created_at: Time,
-            ?email: String,
-            ?invited_at: Time?,
-            ?last_login_at: Time?,
-            ?name: String,
-            ?role: String,
-            ?status: String,
-            ?updated_at: Time?
-          ) -> void
-
-          def to_hash: -> {
-            id: String,
-            created_at: Time,
-            email: String,
-            invited_at: Time?,
-            last_login_at: Time?,
-            name: String,
-            role: String,
-            status: String,
-            updated_at: Time?
-          }
-        end
-      end
-
-      type error =
-        {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-
-      class Error < Sentdm::Internal::Type::BaseModel
-        attr_reader code: String?
-
-        def code=: (String) -> String
-
-        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
-
-        attr_accessor doc_url: String?
-
-        attr_reader message: String?
-
-        def message=: (String) -> String
-
-        def initialize: (
-          ?code: String,
-          ?details: ::Hash[Symbol, ::Array[String]]?,
-          ?doc_url: String?,
-          ?message: String
-        ) -> void
-
-        def to_hash: -> {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-      end
-
-      type meta = { request_id: String, timestamp: Time, version: String }
-
-      class Meta < Sentdm::Internal::Type::BaseModel
-        attr_reader request_id: String?
-
-        def request_id=: (String) -> String
-
-        attr_reader timestamp: Time?
-
-        def timestamp=: (Time) -> Time
-
-        attr_reader version: String?
-
-        def version=: (String) -> String
-
-        def initialize: (
-          ?request_id: String,
-          ?timestamp: Time,
-          ?version: String
-        ) -> void
-
-        def to_hash: -> { request_id: String, timestamp: Time, version: String }
+        def to_hash: -> { users: ::Array[Sentdm::UserResponse] }
       end
     end
   end
