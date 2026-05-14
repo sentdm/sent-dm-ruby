@@ -15,8 +15,8 @@ class Sentdm::Test::Resources::NumbersTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::NumberLookupResponse::Data | nil,
-        error: Sentdm::Models::NumberLookupResponse::Error | nil,
-        meta: Sentdm::Models::NumberLookupResponse::Meta | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

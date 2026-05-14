@@ -1,0 +1,22 @@
+module Sentdm
+  module Models
+    type tcr_brand_relationship =
+      :BASIC_ACCOUNT
+      | :MEDIUM_ACCOUNT
+      | :LARGE_ACCOUNT
+      | :SMALL_ACCOUNT
+      | :KEY_ACCOUNT
+
+    module TcrBrandRelationship
+      extend Sentdm::Internal::Type::Enum
+
+      BASIC_ACCOUNT: :BASIC_ACCOUNT
+      MEDIUM_ACCOUNT: :MEDIUM_ACCOUNT
+      LARGE_ACCOUNT: :LARGE_ACCOUNT
+      SMALL_ACCOUNT: :SMALL_ACCOUNT
+      KEY_ACCOUNT: :KEY_ACCOUNT
+
+      def self?.values: -> ::Array[Sentdm::Models::tcr_brand_relationship]
+    end
+  end
+end

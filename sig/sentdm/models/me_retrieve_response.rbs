@@ -3,21 +3,19 @@ module Sentdm
     type me_retrieve_response =
       {
         data: Sentdm::Models::MeRetrieveResponse::Data?,
-        error: Sentdm::Models::MeRetrieveResponse::Error?,
-        meta: Sentdm::Models::MeRetrieveResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
     class MeRetrieveResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::MeRetrieveResponse::Data?
 
-      attr_accessor error: Sentdm::Models::MeRetrieveResponse::Error?
+      attr_accessor error: Sentdm::ErrorDetail?
 
-      attr_reader meta: Sentdm::Models::MeRetrieveResponse::Meta?
+      attr_reader meta: Sentdm::APIMeta?
 
-      def meta=: (
-        Sentdm::Models::MeRetrieveResponse::Meta
-      ) -> Sentdm::Models::MeRetrieveResponse::Meta
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
 
       attr_reader success: bool?
 
@@ -25,15 +23,15 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::MeRetrieveResponse::Data?,
-        ?error: Sentdm::Models::MeRetrieveResponse::Error?,
-        ?meta: Sentdm::Models::MeRetrieveResponse::Meta,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::MeRetrieveResponse::Data?,
-        error: Sentdm::Models::MeRetrieveResponse::Error?,
-        meta: Sentdm::Models::MeRetrieveResponse::Meta,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
         success: bool
       }
 
@@ -48,7 +46,7 @@ module Sentdm
           name: String,
           organization_id: String?,
           profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
-          settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?,
+          settings: Sentdm::ProfileSettings?,
           short_name: String?,
           status: String?,
           type: String
@@ -87,7 +85,7 @@ module Sentdm
           ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]
         ) -> ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]
 
-        attr_accessor settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?
+        attr_accessor settings: Sentdm::ProfileSettings?
 
         attr_accessor short_name: String?
 
@@ -107,7 +105,7 @@ module Sentdm
           ?name: String,
           ?organization_id: String?,
           ?profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
-          ?settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?,
+          ?settings: Sentdm::ProfileSettings?,
           ?short_name: String?,
           ?status: String?,
           ?type: String
@@ -123,7 +121,7 @@ module Sentdm
           name: String,
           organization_id: String?,
           profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
-          settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?,
+          settings: Sentdm::ProfileSettings?,
           short_name: String?,
           status: String?,
           type: String
@@ -229,7 +227,7 @@ module Sentdm
             icon: String?,
             name: String,
             role: String?,
-            settings: Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings,
+            settings: Sentdm::ProfileSettings,
             short_name: String?,
             status: String?
           }
@@ -253,11 +251,9 @@ module Sentdm
 
           attr_accessor role: String?
 
-          attr_reader settings: Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings?
+          attr_reader settings: Sentdm::ProfileSettings?
 
-          def settings=: (
-            Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings
-          ) -> Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings
+          def settings=: (Sentdm::ProfileSettings) -> Sentdm::ProfileSettings
 
           attr_accessor short_name: String?
 
@@ -270,7 +266,7 @@ module Sentdm
             ?icon: String?,
             ?name: String,
             ?role: String?,
-            ?settings: Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings,
+            ?settings: Sentdm::ProfileSettings,
             ?short_name: String?,
             ?status: String?
           ) -> void
@@ -282,165 +278,11 @@ module Sentdm
             icon: String?,
             name: String,
             role: String?,
-            settings: Sentdm::Models::MeRetrieveResponse::Data::Profile::Settings,
+            settings: Sentdm::ProfileSettings,
             short_name: String?,
             status: String?
           }
-
-          type settings =
-            {
-              allow_contact_sharing: bool?,
-              allow_template_sharing: bool?,
-              billing_model: String?,
-              inherit_contacts: bool?,
-              inherit_tcr_brand: bool?,
-              inherit_tcr_campaign: bool?,
-              inherit_templates: bool?
-            }
-
-          class Settings < Sentdm::Internal::Type::BaseModel
-            attr_accessor allow_contact_sharing: bool?
-
-            attr_accessor allow_template_sharing: bool?
-
-            attr_accessor billing_model: String?
-
-            attr_accessor inherit_contacts: bool?
-
-            attr_accessor inherit_tcr_brand: bool?
-
-            attr_accessor inherit_tcr_campaign: bool?
-
-            attr_accessor inherit_templates: bool?
-
-            def initialize: (
-              ?allow_contact_sharing: bool?,
-              ?allow_template_sharing: bool?,
-              ?billing_model: String?,
-              ?inherit_contacts: bool?,
-              ?inherit_tcr_brand: bool?,
-              ?inherit_tcr_campaign: bool?,
-              ?inherit_templates: bool?
-            ) -> void
-
-            def to_hash: -> {
-              allow_contact_sharing: bool?,
-              allow_template_sharing: bool?,
-              billing_model: String?,
-              inherit_contacts: bool?,
-              inherit_tcr_brand: bool?,
-              inherit_tcr_campaign: bool?,
-              inherit_templates: bool?
-            }
-          end
         end
-
-        type settings =
-          {
-            allow_contact_sharing: bool?,
-            allow_template_sharing: bool?,
-            billing_model: String?,
-            inherit_contacts: bool?,
-            inherit_tcr_brand: bool?,
-            inherit_tcr_campaign: bool?,
-            inherit_templates: bool?
-          }
-
-        class Settings < Sentdm::Internal::Type::BaseModel
-          attr_accessor allow_contact_sharing: bool?
-
-          attr_accessor allow_template_sharing: bool?
-
-          attr_accessor billing_model: String?
-
-          attr_accessor inherit_contacts: bool?
-
-          attr_accessor inherit_tcr_brand: bool?
-
-          attr_accessor inherit_tcr_campaign: bool?
-
-          attr_accessor inherit_templates: bool?
-
-          def initialize: (
-            ?allow_contact_sharing: bool?,
-            ?allow_template_sharing: bool?,
-            ?billing_model: String?,
-            ?inherit_contacts: bool?,
-            ?inherit_tcr_brand: bool?,
-            ?inherit_tcr_campaign: bool?,
-            ?inherit_templates: bool?
-          ) -> void
-
-          def to_hash: -> {
-            allow_contact_sharing: bool?,
-            allow_template_sharing: bool?,
-            billing_model: String?,
-            inherit_contacts: bool?,
-            inherit_tcr_brand: bool?,
-            inherit_tcr_campaign: bool?,
-            inherit_templates: bool?
-          }
-        end
-      end
-
-      type error =
-        {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-
-      class Error < Sentdm::Internal::Type::BaseModel
-        attr_reader code: String?
-
-        def code=: (String) -> String
-
-        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
-
-        attr_accessor doc_url: String?
-
-        attr_reader message: String?
-
-        def message=: (String) -> String
-
-        def initialize: (
-          ?code: String,
-          ?details: ::Hash[Symbol, ::Array[String]]?,
-          ?doc_url: String?,
-          ?message: String
-        ) -> void
-
-        def to_hash: -> {
-          code: String,
-          details: ::Hash[Symbol, ::Array[String]]?,
-          doc_url: String?,
-          message: String
-        }
-      end
-
-      type meta = { request_id: String, timestamp: Time, version: String }
-
-      class Meta < Sentdm::Internal::Type::BaseModel
-        attr_reader request_id: String?
-
-        def request_id=: (String) -> String
-
-        attr_reader timestamp: Time?
-
-        def timestamp=: (Time) -> Time
-
-        attr_reader version: String?
-
-        def version=: (String) -> String
-
-        def initialize: (
-          ?request_id: String,
-          ?timestamp: Time,
-          ?version: String
-        ) -> void
-
-        def to_hash: -> { request_id: String, timestamp: Time, version: String }
       end
     end
   end

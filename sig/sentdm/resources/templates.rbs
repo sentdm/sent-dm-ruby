@@ -4,25 +4,25 @@ module Sentdm
       def create: (
         ?category: String?,
         ?creation_source: String?,
-        ?definition: Sentdm::TemplateCreateParams::Definition,
+        ?definition: Sentdm::TemplateDefinition,
         ?language: String?,
         ?sandbox: bool,
         ?submit_for_review: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::TemplateCreateResponse
+      ) -> Sentdm::APIResponseTemplate
 
       def retrieve: (
         String id,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::TemplateRetrieveResponse
+      ) -> Sentdm::APIResponseTemplate
 
       def update: (
         String id,
         ?category: String?,
-        ?definition: Sentdm::TemplateUpdateParams::Definition?,
+        ?definition: Sentdm::TemplateDefinition?,
         ?language: String?,
         ?name: String?,
         ?sandbox: bool,
@@ -30,7 +30,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::TemplateUpdateResponse
+      ) -> Sentdm::APIResponseTemplate
 
       def list: (
         page: Integer,

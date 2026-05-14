@@ -6,9 +6,9 @@ module Sentdm
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
-        billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        billing_contact: Sentdm::BillingContactInfo?,
         billing_model: String?,
-        brand: Sentdm::ProfileUpdateParams::Brand?,
+        brand: Sentdm::BrandsBrandData?,
         description: String?,
         icon: String?,
         inherit_contacts: bool?,
@@ -16,7 +16,7 @@ module Sentdm
         inherit_tcr_campaign: bool?,
         inherit_templates: bool?,
         name: String?,
-        payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        payment_details: Sentdm::PaymentDetails?,
         sandbox: bool,
         sending_phone_number: String?,
         sending_phone_number_profile_id: String?,
@@ -40,11 +40,11 @@ module Sentdm
 
       attr_accessor allow_template_sharing: bool?
 
-      attr_accessor billing_contact: Sentdm::ProfileUpdateParams::BillingContact?
+      attr_accessor billing_contact: Sentdm::BillingContactInfo?
 
       attr_accessor billing_model: String?
 
-      attr_accessor brand: Sentdm::ProfileUpdateParams::Brand?
+      attr_accessor brand: Sentdm::BrandsBrandData?
 
       attr_accessor description: String?
 
@@ -60,7 +60,7 @@ module Sentdm
 
       attr_accessor name: String?
 
-      attr_accessor payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?
+      attr_accessor payment_details: Sentdm::PaymentDetails?
 
       attr_reader sandbox: bool?
 
@@ -89,9 +89,9 @@ module Sentdm
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
-        ?billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
-        ?brand: Sentdm::ProfileUpdateParams::Brand?,
+        ?brand: Sentdm::BrandsBrandData?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -99,7 +99,7 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String?,
-        ?payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        ?payment_details: Sentdm::PaymentDetails?,
         ?sandbox: bool,
         ?sending_phone_number: String?,
         ?sending_phone_number_profile_id: String?,
@@ -116,9 +116,9 @@ module Sentdm
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
-        billing_contact: Sentdm::ProfileUpdateParams::BillingContact?,
+        billing_contact: Sentdm::BillingContactInfo?,
         billing_model: String?,
-        brand: Sentdm::ProfileUpdateParams::Brand?,
+        brand: Sentdm::BrandsBrandData?,
         description: String?,
         icon: String?,
         inherit_contacts: bool?,
@@ -126,7 +126,7 @@ module Sentdm
         inherit_tcr_campaign: bool?,
         inherit_templates: bool?,
         name: String?,
-        payment_details: Sentdm::ProfileUpdateParams::PaymentDetails?,
+        payment_details: Sentdm::PaymentDetails?,
         sandbox: bool,
         sending_phone_number: String?,
         sending_phone_number_profile_id: String?,
@@ -137,357 +137,6 @@ module Sentdm
         x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
-
-      type billing_contact =
-        { email: String, name: String, address: String?, phone: String? }
-
-      class BillingContact < Sentdm::Internal::Type::BaseModel
-        attr_accessor email: String
-
-        attr_accessor name: String
-
-        attr_accessor address: String?
-
-        attr_accessor phone: String?
-
-        def initialize: (
-          email: String,
-          name: String,
-          ?address: String?,
-          ?phone: String?
-        ) -> void
-
-        def to_hash: -> {
-          email: String,
-          name: String,
-          address: String?,
-          phone: String?
-        }
-      end
-
-      type brand =
-        {
-          compliance: Sentdm::ProfileUpdateParams::Brand::Compliance,
-          contact: Sentdm::ProfileUpdateParams::Brand::Contact,
-          business: Sentdm::ProfileUpdateParams::Brand::Business?
-        }
-
-      class Brand < Sentdm::Internal::Type::BaseModel
-        attr_accessor compliance: Sentdm::ProfileUpdateParams::Brand::Compliance
-
-        attr_accessor contact: Sentdm::ProfileUpdateParams::Brand::Contact
-
-        attr_accessor business: Sentdm::ProfileUpdateParams::Brand::Business?
-
-        def initialize: (
-          compliance: Sentdm::ProfileUpdateParams::Brand::Compliance,
-          contact: Sentdm::ProfileUpdateParams::Brand::Contact,
-          ?business: Sentdm::ProfileUpdateParams::Brand::Business?
-        ) -> void
-
-        def to_hash: -> {
-          compliance: Sentdm::ProfileUpdateParams::Brand::Compliance,
-          contact: Sentdm::ProfileUpdateParams::Brand::Contact,
-          business: Sentdm::ProfileUpdateParams::Brand::Business?
-        }
-
-        type compliance =
-          {
-            brand_relationship: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::brand_relationship,
-            vertical: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::vertical,
-            destination_countries: ::Array[Sentdm::ProfileUpdateParams::Brand::Compliance::DestinationCountry]?,
-            expected_messaging_volume: String?,
-            is_tcr_application: bool?,
-            notes: String?,
-            phone_number_prefix: String?,
-            primary_use_case: String?
-          }
-
-        class Compliance < Sentdm::Internal::Type::BaseModel
-          attr_accessor brand_relationship: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::brand_relationship
-
-          attr_accessor vertical: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::vertical
-
-          attr_accessor destination_countries: ::Array[Sentdm::ProfileUpdateParams::Brand::Compliance::DestinationCountry]?
-
-          attr_accessor expected_messaging_volume: String?
-
-          attr_accessor is_tcr_application: bool?
-
-          attr_accessor notes: String?
-
-          attr_accessor phone_number_prefix: String?
-
-          attr_accessor primary_use_case: String?
-
-          def initialize: (
-            brand_relationship: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::brand_relationship,
-            vertical: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::vertical,
-            ?destination_countries: ::Array[Sentdm::ProfileUpdateParams::Brand::Compliance::DestinationCountry]?,
-            ?expected_messaging_volume: String?,
-            ?is_tcr_application: bool?,
-            ?notes: String?,
-            ?phone_number_prefix: String?,
-            ?primary_use_case: String?
-          ) -> void
-
-          def to_hash: -> {
-            brand_relationship: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::brand_relationship,
-            vertical: Sentdm::Models::ProfileUpdateParams::Brand::Compliance::vertical,
-            destination_countries: ::Array[Sentdm::ProfileUpdateParams::Brand::Compliance::DestinationCountry]?,
-            expected_messaging_volume: String?,
-            is_tcr_application: bool?,
-            notes: String?,
-            phone_number_prefix: String?,
-            primary_use_case: String?
-          }
-
-          type brand_relationship =
-            :BASIC_ACCOUNT
-            | :MEDIUM_ACCOUNT
-            | :LARGE_ACCOUNT
-            | :SMALL_ACCOUNT
-            | :KEY_ACCOUNT
-
-          module BrandRelationship
-            extend Sentdm::Internal::Type::Enum
-
-            BASIC_ACCOUNT: :BASIC_ACCOUNT
-            MEDIUM_ACCOUNT: :MEDIUM_ACCOUNT
-            LARGE_ACCOUNT: :LARGE_ACCOUNT
-            SMALL_ACCOUNT: :SMALL_ACCOUNT
-            KEY_ACCOUNT: :KEY_ACCOUNT
-
-            def self?.values: -> ::Array[Sentdm::Models::ProfileUpdateParams::Brand::Compliance::brand_relationship]
-          end
-
-          type vertical =
-            :PROFESSIONAL
-            | :REAL_ESTATE
-            | :HEALTHCARE
-            | :HUMAN_RESOURCES
-            | :ENERGY
-            | :ENTERTAINMENT
-            | :RETAIL
-            | :TRANSPORTATION
-            | :AGRICULTURE
-            | :INSURANCE
-            | :POSTAL
-            | :EDUCATION
-            | :HOSPITALITY
-            | :FINANCIAL
-            | :POLITICAL
-            | :GAMBLING
-            | :LEGAL
-            | :CONSTRUCTION
-            | :NGO
-            | :MANUFACTURING
-            | :GOVERNMENT
-            | :TECHNOLOGY
-            | :COMMUNICATION
-
-          module Vertical
-            extend Sentdm::Internal::Type::Enum
-
-            PROFESSIONAL: :PROFESSIONAL
-            REAL_ESTATE: :REAL_ESTATE
-            HEALTHCARE: :HEALTHCARE
-            HUMAN_RESOURCES: :HUMAN_RESOURCES
-            ENERGY: :ENERGY
-            ENTERTAINMENT: :ENTERTAINMENT
-            RETAIL: :RETAIL
-            TRANSPORTATION: :TRANSPORTATION
-            AGRICULTURE: :AGRICULTURE
-            INSURANCE: :INSURANCE
-            POSTAL: :POSTAL
-            EDUCATION: :EDUCATION
-            HOSPITALITY: :HOSPITALITY
-            FINANCIAL: :FINANCIAL
-            POLITICAL: :POLITICAL
-            GAMBLING: :GAMBLING
-            LEGAL: :LEGAL
-            CONSTRUCTION: :CONSTRUCTION
-            NGO: :NGO
-            MANUFACTURING: :MANUFACTURING
-            GOVERNMENT: :GOVERNMENT
-            TECHNOLOGY: :TECHNOLOGY
-            COMMUNICATION: :COMMUNICATION
-
-            def self?.values: -> ::Array[Sentdm::Models::ProfileUpdateParams::Brand::Compliance::vertical]
-          end
-
-          type destination_country = { id: String, is_main: bool }
-
-          class DestinationCountry < Sentdm::Internal::Type::BaseModel
-            attr_reader id: String?
-
-            def id=: (String) -> String
-
-            attr_reader is_main: bool?
-
-            def is_main=: (bool) -> bool
-
-            def initialize: (?id: String, ?is_main: bool) -> void
-
-            def to_hash: -> { id: String, is_main: bool }
-          end
-        end
-
-        type contact =
-          {
-            name: String,
-            business_name: String?,
-            email: String?,
-            phone: String?,
-            phone_country_code: String?,
-            role: String?
-          }
-
-        class Contact < Sentdm::Internal::Type::BaseModel
-          attr_accessor name: String
-
-          attr_accessor business_name: String?
-
-          attr_accessor email: String?
-
-          attr_accessor phone: String?
-
-          attr_accessor phone_country_code: String?
-
-          attr_accessor role: String?
-
-          def initialize: (
-            name: String,
-            ?business_name: String?,
-            ?email: String?,
-            ?phone: String?,
-            ?phone_country_code: String?,
-            ?role: String?
-          ) -> void
-
-          def to_hash: -> {
-            name: String,
-            business_name: String?,
-            email: String?,
-            phone: String?,
-            phone_country_code: String?,
-            role: String?
-          }
-        end
-
-        type business =
-          {
-            city: String?,
-            country: String?,
-            country_of_registration: String?,
-            entity_type: Sentdm::Models::ProfileUpdateParams::Brand::Business::entity_type?,
-            legal_name: String?,
-            postal_code: String?,
-            state: String?,
-            street: String?,
-            tax_id: String?,
-            tax_id_type: String?,
-            url: String?
-          }
-
-        class Business < Sentdm::Internal::Type::BaseModel
-          attr_accessor city: String?
-
-          attr_accessor country: String?
-
-          attr_accessor country_of_registration: String?
-
-          attr_accessor entity_type: Sentdm::Models::ProfileUpdateParams::Brand::Business::entity_type?
-
-          attr_accessor legal_name: String?
-
-          attr_accessor postal_code: String?
-
-          attr_accessor state: String?
-
-          attr_accessor street: String?
-
-          attr_accessor tax_id: String?
-
-          attr_accessor tax_id_type: String?
-
-          attr_accessor url: String?
-
-          def initialize: (
-            ?city: String?,
-            ?country: String?,
-            ?country_of_registration: String?,
-            ?entity_type: Sentdm::Models::ProfileUpdateParams::Brand::Business::entity_type?,
-            ?legal_name: String?,
-            ?postal_code: String?,
-            ?state: String?,
-            ?street: String?,
-            ?tax_id: String?,
-            ?tax_id_type: String?,
-            ?url: String?
-          ) -> void
-
-          def to_hash: -> {
-            city: String?,
-            country: String?,
-            country_of_registration: String?,
-            entity_type: Sentdm::Models::ProfileUpdateParams::Brand::Business::entity_type?,
-            legal_name: String?,
-            postal_code: String?,
-            state: String?,
-            street: String?,
-            tax_id: String?,
-            tax_id_type: String?,
-            url: String?
-          }
-
-          type entity_type =
-            :PRIVATE_PROFIT
-            | :PUBLIC_PROFIT
-            | :NON_PROFIT
-            | :SOLE_PROPRIETOR
-            | :GOVERNMENT
-
-          module EntityType
-            extend Sentdm::Internal::Type::Enum
-
-            PRIVATE_PROFIT: :PRIVATE_PROFIT
-            PUBLIC_PROFIT: :PUBLIC_PROFIT
-            NON_PROFIT: :NON_PROFIT
-            SOLE_PROPRIETOR: :SOLE_PROPRIETOR
-            GOVERNMENT: :GOVERNMENT
-
-            def self?.values: -> ::Array[Sentdm::Models::ProfileUpdateParams::Brand::Business::entity_type]
-          end
-        end
-      end
-
-      type payment_details =
-        { card_number: String, cvc: String, expiry: String, zip_code: String }
-
-      class PaymentDetails < Sentdm::Internal::Type::BaseModel
-        attr_accessor card_number: String
-
-        attr_accessor cvc: String
-
-        attr_accessor expiry: String
-
-        attr_accessor zip_code: String
-
-        def initialize: (
-          card_number: String,
-          cvc: String,
-          expiry: String,
-          zip_code: String
-        ) -> void
-
-        def to_hash: -> {
-          card_number: String,
-          cvc: String,
-          expiry: String,
-          zip_code: String
-        }
-      end
     end
   end
 end
