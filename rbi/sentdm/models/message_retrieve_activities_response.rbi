@@ -192,7 +192,8 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :price
 
-          # Activity status (e.g., QUEUED, PROCESSED, ROUTED, SENT, DELIVERED, FAILED)
+          # Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SENT, DELIVERED, READ,
+          # FAILED. Inbound (from contact): RECEIVED (terminal).
           sig { returns(T.nilable(String)) }
           attr_reader :status
 
@@ -230,7 +231,8 @@ module Sentdm
             # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
             # 4 decimal places.
             price: nil,
-            # Activity status (e.g., QUEUED, PROCESSED, ROUTED, SENT, DELIVERED, FAILED)
+            # Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SENT, DELIVERED, READ,
+            # FAILED. Inbound (from contact): RECEIVED (terminal).
             status: nil,
             # When this activity occurred
             timestamp: nil

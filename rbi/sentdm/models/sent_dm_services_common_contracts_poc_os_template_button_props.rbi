@@ -35,6 +35,12 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :url_type
 
+      # Variables embedded in a dynamic URL button (only when UrlType = dynamic). Count
+      # is capped by TemplateContentLimits.MaxUrlButtonVariables; the placeholder must
+      # appear at the end of Url (validated in TemplateDefinitionValidator).
+      sig { returns(T::Array[Sentdm::TemplateVariable]) }
+      attr_accessor :variables
+
       sig { returns(T.nilable(String)) }
       attr_accessor :autofill_text
 
@@ -57,6 +63,7 @@ module Sentdm
           text: String,
           url: String,
           url_type: String,
+          variables: T::Array[Sentdm::TemplateVariable::OrHash],
           autofill_text: T.nilable(String),
           otp_type: T.nilable(String),
           package_name: T.nilable(String),
@@ -72,6 +79,10 @@ module Sentdm
         text:,
         url:,
         url_type:,
+        # Variables embedded in a dynamic URL button (only when UrlType = dynamic). Count
+        # is capped by TemplateContentLimits.MaxUrlButtonVariables; the placeholder must
+        # appear at the end of Url (validated in TemplateDefinitionValidator).
+        variables:,
         autofill_text: nil,
         otp_type: nil,
         package_name: nil,
@@ -90,6 +101,7 @@ module Sentdm
             text: String,
             url: String,
             url_type: String,
+            variables: T::Array[Sentdm::TemplateVariable],
             autofill_text: T.nilable(String),
             otp_type: T.nilable(String),
             package_name: T.nilable(String),
