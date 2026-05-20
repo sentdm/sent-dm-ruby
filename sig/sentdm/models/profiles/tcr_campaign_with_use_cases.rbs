@@ -8,7 +8,7 @@ module Sentdm
           cost: Float?,
           csp_id: String?,
           customer_id: String,
-          dca_elections_complete: bool,
+          dca_elections_complete: bool?,
           dca_elections_completed_at: Time?,
           description: String,
           help_keywords: String?,
@@ -58,7 +58,7 @@ module Sentdm
 
         def dca_elections_complete: -> bool?
 
-        def dca_elections_complete=: (bool _) -> bool
+        def dca_elections_complete=: (bool? _) -> bool?
 
         def dca_elections_completed_at: -> Time?
 
@@ -168,7 +168,7 @@ module Sentdm
           ?cost: Float?,
           ?csp_id: String?,
           ?customer_id: String,
-          ?dca_elections_complete: bool,
+          ?dca_elections_complete: bool?,
           ?dca_elections_completed_at: Time?,
           ?description: String,
           ?help_keywords: String?,
@@ -201,7 +201,7 @@ module Sentdm
           cost: Float?,
           csp_id: String?,
           customer_id: String,
-          dca_elections_complete: bool,
+          dca_elections_complete: bool?,
           dca_elections_completed_at: Time?,
           description: String,
           help_keywords: String?,
