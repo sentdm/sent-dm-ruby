@@ -32,7 +32,10 @@ module Sentdm
         # @!attribute dca_elections_complete
         #
         #   @return [Boolean, nil]
-        optional :dca_elections_complete, Sentdm::Internal::Type::Boolean, api_name: :dcaElectionsComplete
+        optional :dca_elections_complete,
+                 Sentdm::Internal::Type::Boolean,
+                 api_name: :dcaElectionsComplete,
+                 nil?: true
 
         # @!attribute dca_elections_completed_at
         #
@@ -165,7 +168,7 @@ module Sentdm
         #   @param cost [Float, nil]
         #   @param csp_id [String, nil]
         #   @param customer_id [String]
-        #   @param dca_elections_complete [Boolean]
+        #   @param dca_elections_complete [Boolean, nil]
         #   @param dca_elections_completed_at [Time, nil]
         #   @param description [String]
         #   @param help_keywords [String, nil]

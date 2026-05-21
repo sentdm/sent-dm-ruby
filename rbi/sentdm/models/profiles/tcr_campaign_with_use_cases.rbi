@@ -31,10 +31,7 @@ module Sentdm
         attr_writer :customer_id
 
         sig { returns(T.nilable(T::Boolean)) }
-        attr_reader :dca_elections_complete
-
-        sig { params(dca_elections_complete: T::Boolean).void }
-        attr_writer :dca_elections_complete
+        attr_accessor :dca_elections_complete
 
         sig { returns(T.nilable(Time)) }
         attr_accessor :dca_elections_completed_at
@@ -155,7 +152,7 @@ module Sentdm
             cost: T.nilable(Float),
             csp_id: T.nilable(String),
             customer_id: String,
-            dca_elections_complete: T::Boolean,
+            dca_elections_complete: T.nilable(T::Boolean),
             dca_elections_completed_at: T.nilable(Time),
             description: String,
             help_keywords: T.nilable(String),
@@ -233,7 +230,7 @@ module Sentdm
               cost: T.nilable(Float),
               csp_id: T.nilable(String),
               customer_id: String,
-              dca_elections_complete: T::Boolean,
+              dca_elections_complete: T.nilable(T::Boolean),
               dca_elections_completed_at: T.nilable(Time),
               description: String,
               help_keywords: T.nilable(String),

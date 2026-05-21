@@ -43,6 +43,14 @@ module Sentdm
       #   @return [String]
       required :url_type, String, api_name: :urlType
 
+      # @!attribute variables
+      #   Variables embedded in a dynamic URL button (only when UrlType = dynamic). Count
+      #   is capped by TemplateContentLimits.MaxUrlButtonVariables; the placeholder must
+      #   appear at the end of Url (validated in TemplateDefinitionValidator).
+      #
+      #   @return [Array<Sentdm::Models::TemplateVariable>]
+      required :variables, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::TemplateVariable] }
+
       # @!attribute autofill_text
       #
       #   @return [String, nil]
@@ -63,18 +71,35 @@ module Sentdm
       #   @return [String, nil]
       optional :signature_hash, String, api_name: :signatureHash, nil?: true
 
-      # @!method initialize(active_for:, country_code:, offer_code:, phone_number:, quick_reply_type:, text:, url:, url_type:, autofill_text: nil, otp_type: nil, package_name: nil, signature_hash: nil)
+      # @!method initialize(active_for:, country_code:, offer_code:, phone_number:, quick_reply_type:, text:, url:, url_type:, variables:, autofill_text: nil, otp_type: nil, package_name: nil, signature_hash: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps} for more
+      #   details.
+      #
       #   @param active_for [Integer]
+      #
       #   @param country_code [String]
+      #
       #   @param offer_code [String]
+      #
       #   @param phone_number [String]
+      #
       #   @param quick_reply_type [String]
+      #
       #   @param text [String]
+      #
       #   @param url [String]
+      #
       #   @param url_type [String]
+      #
+      #   @param variables [Array<Sentdm::Models::TemplateVariable>] Variables embedded in a dynamic URL button (only when UrlType = dynamic).
+      #
       #   @param autofill_text [String, nil]
+      #
       #   @param otp_type [String, nil]
+      #
       #   @param package_name [String, nil]
+      #
       #   @param signature_hash [String, nil]
     end
   end
