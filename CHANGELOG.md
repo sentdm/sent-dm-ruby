@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.1 (2026-06-18)
+
+Full Changelog: [v0.22.0...v0.22.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.22.0...v0.22.1)
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([cc8d5d4](https://github.com/sentdm/sent-dm-ruby/commit/cc8d5d4eaae4eb4077d2be62c7ed4ca676f49789))
+
 ## 0.22.0 (2026-05-21)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.21.0...v0.22.0)
