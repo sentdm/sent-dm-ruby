@@ -42,6 +42,15 @@ module Sentdm
         sig { params(description: String).void }
         attr_writer :description
 
+        # True when this campaign already has a billing transaction of reference type
+        # TCR_CAMPAIGN_SUBMISSION (the one-time submission fee was charged). Populated
+        # only by the campaigns-list path; defaults false on other responses.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :has_submission_transaction
+
+        sig { params(has_submission_transaction: T::Boolean).void }
+        attr_writer :has_submission_transaction
+
         sig { returns(T.nilable(String)) }
         attr_accessor :help_keywords
 
@@ -155,6 +164,7 @@ module Sentdm
             dca_elections_complete: T.nilable(T::Boolean),
             dca_elections_completed_at: T.nilable(Time),
             description: String,
+            has_submission_transaction: T::Boolean,
             help_keywords: T.nilable(String),
             help_message: T.nilable(String),
             kyc_submission_form_id: T.nilable(String),
@@ -197,6 +207,10 @@ module Sentdm
           dca_elections_complete: nil,
           dca_elections_completed_at: nil,
           description: nil,
+          # True when this campaign already has a billing transaction of reference type
+          # TCR_CAMPAIGN_SUBMISSION (the one-time submission fee was charged). Populated
+          # only by the campaigns-list path; defaults false on other responses.
+          has_submission_transaction: nil,
           help_keywords: nil,
           help_message: nil,
           kyc_submission_form_id: nil,
@@ -233,6 +247,7 @@ module Sentdm
               dca_elections_complete: T.nilable(T::Boolean),
               dca_elections_completed_at: T.nilable(Time),
               description: String,
+              has_submission_transaction: T::Boolean,
               help_keywords: T.nilable(String),
               help_message: T.nilable(String),
               kyc_submission_form_id: T.nilable(String),

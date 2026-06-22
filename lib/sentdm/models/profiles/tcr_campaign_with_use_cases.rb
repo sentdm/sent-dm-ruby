@@ -47,6 +47,16 @@ module Sentdm
         #   @return [String, nil]
         optional :description, String
 
+        # @!attribute has_submission_transaction
+        #   True when this campaign already has a billing transaction of reference type
+        #   TCR_CAMPAIGN_SUBMISSION (the one-time submission fee was charged). Populated
+        #   only by the campaigns-list path; defaults false on other responses.
+        #
+        #   @return [Boolean, nil]
+        optional :has_submission_transaction,
+                 Sentdm::Internal::Type::Boolean,
+                 api_name: :hasSubmissionTransaction
+
         # @!attribute help_keywords
         #
         #   @return [String, nil]
@@ -162,36 +172,70 @@ module Sentdm
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase] },
                  api_name: :useCases
 
-        # @!method initialize(billed_date: nil, brand_id: nil, cost: nil, csp_id: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, help_keywords: nil, help_message: nil, kyc_submission_form_id: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, reseller_id: nil, sharing_status: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, telnyx_campaign_id: nil, terms_and_conditions_link: nil, type: nil, upstream_cnp_id: nil, use_cases: nil)
+        # @!method initialize(billed_date: nil, brand_id: nil, cost: nil, csp_id: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, kyc_submission_form_id: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, reseller_id: nil, sharing_status: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, telnyx_campaign_id: nil, terms_and_conditions_link: nil, type: nil, upstream_cnp_id: nil, use_cases: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Sentdm::Models::Profiles::TcrCampaignWithUseCases} for more details.
+        #
         #   @param billed_date [Time, nil]
+        #
         #   @param brand_id [String, nil]
+        #
         #   @param cost [Float, nil]
+        #
         #   @param csp_id [String, nil]
+        #
         #   @param customer_id [String]
+        #
         #   @param dca_elections_complete [Boolean, nil]
+        #
         #   @param dca_elections_completed_at [Time, nil]
+        #
         #   @param description [String]
+        #
+        #   @param has_submission_transaction [Boolean] True when this campaign already has a billing transaction of reference type
+        #
         #   @param help_keywords [String, nil]
+        #
         #   @param help_message [String, nil]
+        #
         #   @param kyc_submission_form_id [String, nil]
+        #
         #   @param message_flow [String, nil]
+        #
         #   @param name [String]
+        #
         #   @param optin_keywords [String, nil]
+        #
         #   @param optin_message [String, nil]
+        #
         #   @param optout_keywords [String, nil]
+        #
         #   @param optout_message [String, nil]
+        #
         #   @param privacy_policy_link [String, nil]
+        #
         #   @param reseller_id [String, nil]
+        #
         #   @param sharing_status [Symbol, Sentdm::Models::Profiles::TcrCampaignWithUseCases::SharingStatus, nil]
+        #
         #   @param status [Symbol, Sentdm::Models::Profiles::TcrCampaignWithUseCases::Status, nil]
+        #
         #   @param submitted_at [Time, nil]
+        #
         #   @param submitted_to_tcr [Boolean]
+        #
         #   @param tcr_campaign_id [String, nil]
+        #
         #   @param tcr_sync_error [String, nil]
+        #
         #   @param telnyx_campaign_id [String, nil]
+        #
         #   @param terms_and_conditions_link [String, nil]
+        #
         #   @param type [String]
+        #
         #   @param upstream_cnp_id [String, nil]
+        #
         #   @param use_cases [Array<Sentdm::Models::Profiles::TcrCampaignWithUseCases::UseCase>]
 
         module SharingStatus
