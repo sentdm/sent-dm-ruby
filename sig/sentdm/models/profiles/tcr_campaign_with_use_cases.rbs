@@ -11,6 +11,7 @@ module Sentdm
           dca_elections_complete: bool?,
           dca_elections_completed_at: Time?,
           description: String,
+          has_submission_transaction: bool,
           help_keywords: String?,
           help_message: String?,
           kyc_submission_form_id: String?,
@@ -67,6 +68,10 @@ module Sentdm
         def description: -> String?
 
         def description=: (String _) -> String
+
+        def has_submission_transaction: -> bool?
+
+        def has_submission_transaction=: (bool _) -> bool
 
         def help_keywords: -> String?
 
@@ -171,6 +176,7 @@ module Sentdm
           ?dca_elections_complete: bool?,
           ?dca_elections_completed_at: Time?,
           ?description: String,
+          ?has_submission_transaction: bool,
           ?help_keywords: String?,
           ?help_message: String?,
           ?kyc_submission_form_id: String?,
@@ -204,6 +210,7 @@ module Sentdm
           dca_elections_complete: bool?,
           dca_elections_completed_at: Time?,
           description: String,
+          has_submission_transaction: bool,
           help_keywords: String?,
           help_message: String?,
           kyc_submission_form_id: String?,
