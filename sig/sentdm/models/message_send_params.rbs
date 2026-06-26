@@ -4,7 +4,8 @@ module Sentdm
       {
         channel: ::Array[String]?,
         sandbox: bool,
-        template: Sentdm::MessageSendParams::Template,
+        template: Sentdm::MessageSendParams::Template?,
+        text: String?,
         to: ::Array[String],
         idempotency_key: String,
         x_profile_id: String
@@ -21,11 +22,9 @@ module Sentdm
 
       def sandbox=: (bool) -> bool
 
-      attr_reader template: Sentdm::MessageSendParams::Template?
+      attr_accessor template: Sentdm::MessageSendParams::Template?
 
-      def template=: (
-        Sentdm::MessageSendParams::Template
-      ) -> Sentdm::MessageSendParams::Template
+      attr_accessor text: String?
 
       attr_reader to: ::Array[String]?
 
@@ -42,7 +41,8 @@ module Sentdm
       def initialize: (
         ?channel: ::Array[String]?,
         ?sandbox: bool,
-        ?template: Sentdm::MessageSendParams::Template,
+        ?template: Sentdm::MessageSendParams::Template?,
+        ?text: String?,
         ?to: ::Array[String],
         ?idempotency_key: String,
         ?x_profile_id: String,
@@ -52,7 +52,8 @@ module Sentdm
       def to_hash: -> {
         channel: ::Array[String]?,
         sandbox: bool,
-        template: Sentdm::MessageSendParams::Template,
+        template: Sentdm::MessageSendParams::Template?,
+        text: String?,
         to: ::Array[String],
         idempotency_key: String,
         x_profile_id: String,

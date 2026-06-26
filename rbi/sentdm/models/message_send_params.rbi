@@ -30,8 +30,16 @@ module Sentdm
       sig { returns(T.nilable(Sentdm::MessageSendParams::Template)) }
       attr_reader :template
 
-      sig { params(template: Sentdm::MessageSendParams::Template::OrHash).void }
+      sig do
+        params(
+          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash)
+        ).void
+      end
       attr_writer :template
+
+      # Plain-text (free-form) message body. Provide either Template or this.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :text
 
       # List of recipient phone numbers in E.164 format (multi-recipient fan-out)
       sig { returns(T.nilable(T::Array[String])) }
@@ -56,7 +64,8 @@ module Sentdm
         params(
           channel: T.nilable(T::Array[String]),
           sandbox: T::Boolean,
-          template: Sentdm::MessageSendParams::Template::OrHash,
+          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash),
+          text: T.nilable(String),
           to: T::Array[String],
           idempotency_key: String,
           x_profile_id: String,
@@ -74,6 +83,8 @@ module Sentdm
         # SDK-style template reference: resolve by ID or by name, with optional
         # parameters.
         template: nil,
+        # Plain-text (free-form) message body. Provide either Template or this.
+        text: nil,
         # List of recipient phone numbers in E.164 format (multi-recipient fan-out)
         to: nil,
         idempotency_key: nil,
@@ -87,7 +98,8 @@ module Sentdm
           {
             channel: T.nilable(T::Array[String]),
             sandbox: T::Boolean,
-            template: Sentdm::MessageSendParams::Template,
+            template: T.nilable(Sentdm::MessageSendParams::Template),
+            text: T.nilable(String),
             to: T::Array[String],
             idempotency_key: String,
             x_profile_id: String,
