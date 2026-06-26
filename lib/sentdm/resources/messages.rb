@@ -69,13 +69,15 @@ module Sentdm
       # Returns immediately with per-recipient message IDs for async tracking via
       # webhooks or the GET /messages/{id} endpoint.
       #
-      # @overload send_(channel: nil, sandbox: nil, template: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload send_(channel: nil, sandbox: nil, template: nil, text: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param channel [Array<String>, nil] Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"].
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
-      # @param template [Sentdm::Models::MessageSendParams::Template] Body param: SDK-style template reference: resolve by ID or by name, with optiona
+      # @param template [Sentdm::Models::MessageSendParams::Template, nil] Body param: SDK-style template reference: resolve by ID or by name, with optiona
+      #
+      # @param text [String, nil] Body param: Plain-text (free-form) message body. Provide either Template or this
       #
       # @param to [Array<String>] Body param: List of recipient phone numbers in E.164 format (multi-recipient fan
       #

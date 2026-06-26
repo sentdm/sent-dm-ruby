@@ -51,7 +51,8 @@ module Sentdm
         params(
           channel: T.nilable(T::Array[String]),
           sandbox: T::Boolean,
-          template: Sentdm::MessageSendParams::Template::OrHash,
+          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash),
+          text: T.nilable(String),
           to: T::Array[String],
           idempotency_key: String,
           x_profile_id: String,
@@ -69,6 +70,9 @@ module Sentdm
         # Body param: SDK-style template reference: resolve by ID or by name, with
         # optional parameters.
         template: nil,
+        # Body param: Plain-text (free-form) message body. Provide either Template or
+        # this.
+        text: nil,
         # Body param: List of recipient phone numbers in E.164 format (multi-recipient
         # fan-out)
         to: nil,
