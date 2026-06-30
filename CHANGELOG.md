@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.23.0 (2026-06-30)
+
+Full Changelog: [v0.22.1...v0.23.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.22.1...v0.23.0)
+
+### Features
+
+* **api:** api update ([441c4bd](https://github.com/sentdm/sent-dm-ruby/commit/441c4bdaabc474360f4ad3efd5a1805948e95686))
+* **api:** api update ([702b196](https://github.com/sentdm/sent-dm-ruby/commit/702b196e3037740b8980f60bc4c67719d582d261))
+
+
+### Chores
+
+* **internal:** bound formatter parallelism to CPU count ([65b5f68](https://github.com/sentdm/sent-dm-ruby/commit/65b5f68b53b42df10db46a2ed2b5f1a26cc0949b))
+
 ## 0.22.1 (2026-06-18)
 
 Full Changelog: [v0.22.0...v0.22.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.22.0...v0.22.1)

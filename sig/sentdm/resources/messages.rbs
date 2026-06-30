@@ -16,7 +16,8 @@ module Sentdm
       def send_: (
         ?channel: ::Array[String]?,
         ?sandbox: bool,
-        ?template: Sentdm::MessageSendParams::Template,
+        ?template: Sentdm::MessageSendParams::Template?,
+        ?text: String?,
         ?to: ::Array[String],
         ?idempotency_key: String,
         ?x_profile_id: String,
