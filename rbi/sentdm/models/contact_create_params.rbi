@@ -12,11 +12,8 @@ module Sentdm
         end
 
       # Phone number of the contact to create
-      sig { returns(T.nilable(String)) }
-      attr_reader :phone_number
-
-      sig { params(phone_number: String).void }
-      attr_writer :phone_number
+      sig { returns(String) }
+      attr_accessor :phone_number
 
       # Sandbox flag - when true, the operation is simulated without side effects Useful
       # for testing integrations without actual execution
@@ -49,7 +46,7 @@ module Sentdm
       end
       def self.new(
         # Phone number of the contact to create
-        phone_number: nil,
+        phone_number:,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
         sandbox: nil,

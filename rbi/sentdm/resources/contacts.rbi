@@ -17,7 +17,7 @@ module Sentdm
       end
       def create(
         # Body param: Phone number of the contact to create
-        phone_number: nil,
+        phone_number:,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,

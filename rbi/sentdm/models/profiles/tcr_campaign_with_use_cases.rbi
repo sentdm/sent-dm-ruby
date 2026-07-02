@@ -12,6 +12,15 @@ module Sentdm
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :description
+
+        sig { returns(String) }
+        attr_accessor :name
+
+        sig { returns(String) }
+        attr_accessor :type
+
         sig { returns(T.nilable(Time)) }
         attr_accessor :billed_date
 
@@ -36,12 +45,6 @@ module Sentdm
         sig { returns(T.nilable(Time)) }
         attr_accessor :dca_elections_completed_at
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :description
-
-        sig { params(description: String).void }
-        attr_writer :description
-
         # True when this campaign already has a billing transaction of reference type
         # TCR_CAMPAIGN_SUBMISSION (the one-time submission fee was charged). Populated
         # only by the campaigns-list path; defaults false on other responses.
@@ -62,12 +65,6 @@ module Sentdm
 
         sig { returns(T.nilable(String)) }
         attr_accessor :message_flow
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :name
-
-        sig { params(name: String).void }
-        attr_writer :name
 
         sig { returns(T.nilable(String)) }
         attr_accessor :optin_keywords
@@ -127,12 +124,6 @@ module Sentdm
         attr_accessor :terms_and_conditions_link
 
         sig { returns(T.nilable(String)) }
-        attr_reader :type
-
-        sig { params(type: String).void }
-        attr_writer :type
-
-        sig { returns(T.nilable(String)) }
         attr_accessor :upstream_cnp_id
 
         sig do
@@ -156,6 +147,9 @@ module Sentdm
 
         sig do
           params(
+            description: String,
+            name: String,
+            type: String,
             billed_date: T.nilable(Time),
             brand_id: T.nilable(String),
             cost: T.nilable(Float),
@@ -163,13 +157,11 @@ module Sentdm
             customer_id: String,
             dca_elections_complete: T.nilable(T::Boolean),
             dca_elections_completed_at: T.nilable(Time),
-            description: String,
             has_submission_transaction: T::Boolean,
             help_keywords: T.nilable(String),
             help_message: T.nilable(String),
             kyc_submission_form_id: T.nilable(String),
             message_flow: T.nilable(String),
-            name: String,
             optin_keywords: T.nilable(String),
             optin_message: T.nilable(String),
             optout_keywords: T.nilable(String),
@@ -190,7 +182,6 @@ module Sentdm
             tcr_sync_error: T.nilable(String),
             telnyx_campaign_id: T.nilable(String),
             terms_and_conditions_link: T.nilable(String),
-            type: String,
             upstream_cnp_id: T.nilable(String),
             use_cases:
               T::Array[
@@ -199,6 +190,9 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
+          description:,
+          name:,
+          type:,
           billed_date: nil,
           brand_id: nil,
           cost: nil,
@@ -206,7 +200,6 @@ module Sentdm
           customer_id: nil,
           dca_elections_complete: nil,
           dca_elections_completed_at: nil,
-          description: nil,
           # True when this campaign already has a billing transaction of reference type
           # TCR_CAMPAIGN_SUBMISSION (the one-time submission fee was charged). Populated
           # only by the campaigns-list path; defaults false on other responses.
@@ -215,7 +208,6 @@ module Sentdm
           help_message: nil,
           kyc_submission_form_id: nil,
           message_flow: nil,
-          name: nil,
           optin_keywords: nil,
           optin_message: nil,
           optout_keywords: nil,
@@ -230,7 +222,6 @@ module Sentdm
           tcr_sync_error: nil,
           telnyx_campaign_id: nil,
           terms_and_conditions_link: nil,
-          type: nil,
           upstream_cnp_id: nil,
           use_cases: nil
         )
@@ -239,6 +230,9 @@ module Sentdm
         sig do
           override.returns(
             {
+              description: String,
+              name: String,
+              type: String,
               billed_date: T.nilable(Time),
               brand_id: T.nilable(String),
               cost: T.nilable(Float),
@@ -246,13 +240,11 @@ module Sentdm
               customer_id: String,
               dca_elections_complete: T.nilable(T::Boolean),
               dca_elections_completed_at: T.nilable(Time),
-              description: String,
               has_submission_transaction: T::Boolean,
               help_keywords: T.nilable(String),
               help_message: T.nilable(String),
               kyc_submission_form_id: T.nilable(String),
               message_flow: T.nilable(String),
-              name: String,
               optin_keywords: T.nilable(String),
               optin_message: T.nilable(String),
               optout_keywords: T.nilable(String),
@@ -273,7 +265,6 @@ module Sentdm
               tcr_sync_error: T.nilable(String),
               telnyx_campaign_id: T.nilable(String),
               terms_and_conditions_link: T.nilable(String),
-              type: String,
               upstream_cnp_id: T.nilable(String),
               use_cases:
                 T::Array[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase]
@@ -367,6 +358,9 @@ module Sentdm
               )
             end
 
+          sig { returns(T::Array[String]) }
+          attr_accessor :sample_messages
+
           sig { returns(T.nilable(String)) }
           attr_reader :campaign_id
 
@@ -394,37 +388,31 @@ module Sentdm
           end
           attr_writer :messaging_use_case_us
 
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :sample_messages
-
-          sig { params(sample_messages: T::Array[String]).void }
-          attr_writer :sample_messages
-
           sig do
             params(
+              sample_messages: T::Array[String],
               campaign_id: String,
               customer_id: String,
               messaging_use_case_us:
-                Sentdm::Profiles::MessagingUseCaseUs::OrSymbol,
-              sample_messages: T::Array[String]
+                Sentdm::Profiles::MessagingUseCaseUs::OrSymbol
             ).returns(T.attached_class)
           end
           def self.new(
+            sample_messages:,
             campaign_id: nil,
             customer_id: nil,
-            messaging_use_case_us: nil,
-            sample_messages: nil
+            messaging_use_case_us: nil
           )
           end
 
           sig do
             override.returns(
               {
+                sample_messages: T::Array[String],
                 campaign_id: String,
                 customer_id: String,
                 messaging_use_case_us:
-                  Sentdm::Profiles::MessagingUseCaseUs::TaggedSymbol,
-                sample_messages: T::Array[String]
+                  Sentdm::Profiles::MessagingUseCaseUs::TaggedSymbol
               }
             )
           end

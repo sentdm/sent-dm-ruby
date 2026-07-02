@@ -151,29 +151,25 @@ module Sentdm
           template_name: String?
         }
 
-        type event = { description: String?, status: String, timestamp: Time }
+        type event = { status: String, timestamp: Time, description: String? }
 
         class Event < Sentdm::Internal::Type::BaseModel
+          attr_accessor status: String
+
+          attr_accessor timestamp: Time
+
           attr_accessor description: String?
 
-          attr_reader status: String?
-
-          def status=: (String) -> String
-
-          attr_reader timestamp: Time?
-
-          def timestamp=: (Time) -> Time
-
           def initialize: (
-            ?description: String?,
-            ?status: String,
-            ?timestamp: Time
+            status: String,
+            timestamp: Time,
+            ?description: String?
           ) -> void
 
           def to_hash: -> {
-            description: String?,
             status: String,
-            timestamp: Time
+            timestamp: Time,
+            description: String?
           }
         end
 
