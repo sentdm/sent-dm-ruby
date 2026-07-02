@@ -173,27 +173,27 @@ module Sentdm
         #   @param template_name [String, nil]
 
         class Event < Sentdm::Internal::Type::BaseModel
+          # @!attribute status
+          #
+          #   @return [String]
+          required :status, String
+
+          # @!attribute timestamp
+          #
+          #   @return [Time]
+          required :timestamp, Time
+
           # @!attribute description
           #
           #   @return [String, nil]
           optional :description, String, nil?: true
 
-          # @!attribute status
-          #
-          #   @return [String, nil]
-          optional :status, String
-
-          # @!attribute timestamp
-          #
-          #   @return [Time, nil]
-          optional :timestamp, Time
-
-          # @!method initialize(description: nil, status: nil, timestamp: nil)
+          # @!method initialize(status:, timestamp:, description: nil)
           #   Represents a status change event in a message's lifecycle (v3)
           #
-          #   @param description [String, nil]
           #   @param status [String]
           #   @param timestamp [Time]
+          #   @param description [String, nil]
         end
 
         # @see Sentdm::Models::MessageRetrieveStatusResponse::Data#message_body

@@ -298,38 +298,32 @@ module Sentdm
               )
             end
 
+          sig { returns(String) }
+          attr_accessor :status
+
+          sig { returns(Time) }
+          attr_accessor :timestamp
+
           sig { returns(T.nilable(String)) }
           attr_accessor :description
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :status
-
-          sig { params(status: String).void }
-          attr_writer :status
-
-          sig { returns(T.nilable(Time)) }
-          attr_reader :timestamp
-
-          sig { params(timestamp: Time).void }
-          attr_writer :timestamp
 
           # Represents a status change event in a message's lifecycle (v3)
           sig do
             params(
-              description: T.nilable(String),
               status: String,
-              timestamp: Time
+              timestamp: Time,
+              description: T.nilable(String)
             ).returns(T.attached_class)
           end
-          def self.new(description: nil, status: nil, timestamp: nil)
+          def self.new(status:, timestamp:, description: nil)
           end
 
           sig do
             override.returns(
               {
-                description: T.nilable(String),
                 status: String,
-                timestamp: Time
+                timestamp: Time,
+                description: T.nilable(String)
               }
             )
           end

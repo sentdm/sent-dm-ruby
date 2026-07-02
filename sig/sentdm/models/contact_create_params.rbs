@@ -13,9 +13,7 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      attr_reader phone_number: String?
-
-      def phone_number=: (String) -> String
+      attr_accessor phone_number: String
 
       attr_reader sandbox: bool?
 
@@ -30,7 +28,7 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
-        ?phone_number: String,
+        phone_number: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,

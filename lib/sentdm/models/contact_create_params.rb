@@ -10,8 +10,8 @@ module Sentdm
       # @!attribute phone_number
       #   Phone number of the contact to create
       #
-      #   @return [String, nil]
-      optional :phone_number, String
+      #   @return [String]
+      required :phone_number, String
 
       # @!attribute sandbox
       #   Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -30,7 +30,7 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(phone_number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(phone_number:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ContactCreateParams} for more details.
       #
