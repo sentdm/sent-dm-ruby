@@ -3,6 +3,9 @@ module Sentdm
     module Profiles
       type tcr_campaign_with_use_cases =
         {
+          description: String,
+          name: String,
+          type: String,
           billed_date: Time?,
           brand_id: String?,
           cost: Float?,
@@ -10,13 +13,11 @@ module Sentdm
           customer_id: String,
           dca_elections_complete: bool?,
           dca_elections_completed_at: Time?,
-          description: String,
           has_submission_transaction: bool,
           help_keywords: String?,
           help_message: String?,
           kyc_submission_form_id: String?,
           message_flow: String?,
-          name: String,
           optin_keywords: String?,
           optin_message: String?,
           optout_keywords: String?,
@@ -31,12 +32,23 @@ module Sentdm
           tcr_sync_error: String?,
           telnyx_campaign_id: String?,
           terms_and_conditions_link: String?,
-          type: String,
           upstream_cnp_id: String?,
           use_cases: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase]
         }
 
       class TcrCampaignWithUseCases < Sentdm::Models::Profiles::BaseDto
+        def description: -> String
+
+        def description=: (String _) -> String
+
+        def name: -> String
+
+        def name=: (String _) -> String
+
+        def `type`: -> String
+
+        def type=: (String _) -> String
+
         def billed_date: -> Time?
 
         def billed_date=: (Time? _) -> Time?
@@ -65,10 +77,6 @@ module Sentdm
 
         def dca_elections_completed_at=: (Time? _) -> Time?
 
-        def description: -> String?
-
-        def description=: (String _) -> String
-
         def has_submission_transaction: -> bool?
 
         def has_submission_transaction=: (bool _) -> bool
@@ -88,10 +96,6 @@ module Sentdm
         def message_flow: -> String?
 
         def message_flow=: (String? _) -> String?
-
-        def name: -> String?
-
-        def name=: (String _) -> String
 
         def optin_keywords: -> String?
 
@@ -153,10 +157,6 @@ module Sentdm
 
         def terms_and_conditions_link=: (String? _) -> String?
 
-        def `type`: -> String?
-
-        def type=: (String _) -> String
-
         def upstream_cnp_id: -> String?
 
         def upstream_cnp_id=: (String? _) -> String?
@@ -168,6 +168,9 @@ module Sentdm
         ) -> ::Array[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase]
 
         def initialize: (
+          description: String,
+          name: String,
+          type: String,
           ?billed_date: Time?,
           ?brand_id: String?,
           ?cost: Float?,
@@ -175,13 +178,11 @@ module Sentdm
           ?customer_id: String,
           ?dca_elections_complete: bool?,
           ?dca_elections_completed_at: Time?,
-          ?description: String,
           ?has_submission_transaction: bool,
           ?help_keywords: String?,
           ?help_message: String?,
           ?kyc_submission_form_id: String?,
           ?message_flow: String?,
-          ?name: String,
           ?optin_keywords: String?,
           ?optin_message: String?,
           ?optout_keywords: String?,
@@ -196,12 +197,14 @@ module Sentdm
           ?tcr_sync_error: String?,
           ?telnyx_campaign_id: String?,
           ?terms_and_conditions_link: String?,
-          ?type: String,
           ?upstream_cnp_id: String?,
           ?use_cases: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase]
         ) -> void
 
         def to_hash: -> {
+          description: String,
+          name: String,
+          type: String,
           billed_date: Time?,
           brand_id: String?,
           cost: Float?,
@@ -209,13 +212,11 @@ module Sentdm
           customer_id: String,
           dca_elections_complete: bool?,
           dca_elections_completed_at: Time?,
-          description: String,
           has_submission_transaction: bool,
           help_keywords: String?,
           help_message: String?,
           kyc_submission_form_id: String?,
           message_flow: String?,
-          name: String,
           optin_keywords: String?,
           optin_message: String?,
           optout_keywords: String?,
@@ -230,7 +231,6 @@ module Sentdm
           tcr_sync_error: String?,
           telnyx_campaign_id: String?,
           terms_and_conditions_link: String?,
-          type: String,
           upstream_cnp_id: String?,
           use_cases: ::Array[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase]
         }
@@ -261,13 +261,17 @@ module Sentdm
 
         type use_case =
           {
+            sample_messages: ::Array[String],
             campaign_id: String,
             customer_id: String,
-            messaging_use_case_us: Sentdm::Models::Profiles::messaging_use_case_us,
-            sample_messages: ::Array[String]
+            messaging_use_case_us: Sentdm::Models::Profiles::messaging_use_case_us
           }
 
         class UseCase < Sentdm::Models::Profiles::BaseDto
+          def sample_messages: -> ::Array[String]
+
+          def sample_messages=: (::Array[String] _) -> ::Array[String]
+
           def campaign_id: -> String?
 
           def campaign_id=: (String _) -> String
@@ -282,22 +286,18 @@ module Sentdm
             Sentdm::Models::Profiles::messaging_use_case_us _
           ) -> Sentdm::Models::Profiles::messaging_use_case_us
 
-          def sample_messages: -> ::Array[String]?
-
-          def sample_messages=: (::Array[String] _) -> ::Array[String]
-
           def initialize: (
+            sample_messages: ::Array[String],
             ?campaign_id: String,
             ?customer_id: String,
-            ?messaging_use_case_us: Sentdm::Models::Profiles::messaging_use_case_us,
-            ?sample_messages: ::Array[String]
+            ?messaging_use_case_us: Sentdm::Models::Profiles::messaging_use_case_us
           ) -> void
 
           def to_hash: -> {
+            sample_messages: ::Array[String],
             campaign_id: String,
             customer_id: String,
-            messaging_use_case_us: Sentdm::Models::Profiles::messaging_use_case_us,
-            sample_messages: ::Array[String]
+            messaging_use_case_us: Sentdm::Models::Profiles::messaging_use_case_us
           }
         end
       end

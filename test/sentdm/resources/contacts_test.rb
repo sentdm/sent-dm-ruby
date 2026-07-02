@@ -3,10 +3,10 @@
 require_relative "../test_helper"
 
 class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
-  def test_create
+  def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent.contacts.create
+    response = @sent.contacts.create(phone_number: "+1234567890")
 
     assert_pattern do
       response => Sentdm::APIResponseOfContact

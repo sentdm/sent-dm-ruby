@@ -2,7 +2,7 @@ module Sentdm
   module Resources
     class Contacts
       def create: (
-        ?phone_number: String,
+        phone_number: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,

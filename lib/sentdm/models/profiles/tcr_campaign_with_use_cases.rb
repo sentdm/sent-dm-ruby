@@ -4,6 +4,21 @@ module Sentdm
   module Models
     module Profiles
       class TcrCampaignWithUseCases < Sentdm::Models::Profiles::BaseDto
+        # @!attribute description
+        #
+        #   @return [String]
+        required :description, String
+
+        # @!attribute name
+        #
+        #   @return [String]
+        required :name, String
+
+        # @!attribute type
+        #
+        #   @return [String]
+        required :type, String
+
         # @!attribute billed_date
         #
         #   @return [Time, nil]
@@ -42,11 +57,6 @@ module Sentdm
         #   @return [Time, nil]
         optional :dca_elections_completed_at, Time, api_name: :dcaElectionsCompletedAt, nil?: true
 
-        # @!attribute description
-        #
-        #   @return [String, nil]
-        optional :description, String
-
         # @!attribute has_submission_transaction
         #   True when this campaign already has a billing transaction of reference type
         #   TCR_CAMPAIGN_SUBMISSION (the one-time submission fee was charged). Populated
@@ -76,11 +86,6 @@ module Sentdm
         #
         #   @return [String, nil]
         optional :message_flow, String, api_name: :messageFlow, nil?: true
-
-        # @!attribute name
-        #
-        #   @return [String, nil]
-        optional :name, String
 
         # @!attribute optin_keywords
         #
@@ -155,11 +160,6 @@ module Sentdm
         #   @return [String, nil]
         optional :terms_and_conditions_link, String, api_name: :termsAndConditionsLink, nil?: true
 
-        # @!attribute type
-        #
-        #   @return [String, nil]
-        optional :type, String
-
         # @!attribute upstream_cnp_id
         #
         #   @return [String, nil]
@@ -172,9 +172,15 @@ module Sentdm
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::TcrCampaignWithUseCases::UseCase] },
                  api_name: :useCases
 
-        # @!method initialize(billed_date: nil, brand_id: nil, cost: nil, csp_id: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, kyc_submission_form_id: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, reseller_id: nil, sharing_status: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, telnyx_campaign_id: nil, terms_and_conditions_link: nil, type: nil, upstream_cnp_id: nil, use_cases: nil)
+        # @!method initialize(description:, name:, type:, billed_date: nil, brand_id: nil, cost: nil, csp_id: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, kyc_submission_form_id: nil, message_flow: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, reseller_id: nil, sharing_status: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, telnyx_campaign_id: nil, terms_and_conditions_link: nil, upstream_cnp_id: nil, use_cases: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Profiles::TcrCampaignWithUseCases} for more details.
+        #
+        #   @param description [String]
+        #
+        #   @param name [String]
+        #
+        #   @param type [String]
         #
         #   @param billed_date [Time, nil]
         #
@@ -190,8 +196,6 @@ module Sentdm
         #
         #   @param dca_elections_completed_at [Time, nil]
         #
-        #   @param description [String]
-        #
         #   @param has_submission_transaction [Boolean] True when this campaign already has a billing transaction of reference type
         #
         #   @param help_keywords [String, nil]
@@ -201,8 +205,6 @@ module Sentdm
         #   @param kyc_submission_form_id [String, nil]
         #
         #   @param message_flow [String, nil]
-        #
-        #   @param name [String]
         #
         #   @param optin_keywords [String, nil]
         #
@@ -232,8 +234,6 @@ module Sentdm
         #
         #   @param terms_and_conditions_link [String, nil]
         #
-        #   @param type [String]
-        #
         #   @param upstream_cnp_id [String, nil]
         #
         #   @param use_cases [Array<Sentdm::Models::Profiles::TcrCampaignWithUseCases::UseCase>]
@@ -261,6 +261,11 @@ module Sentdm
         end
 
         class UseCase < Sentdm::Models::Profiles::BaseDto
+          # @!attribute sample_messages
+          #
+          #   @return [Array<String>]
+          required :sample_messages, Sentdm::Internal::Type::ArrayOf[String], api_name: :sampleMessages
+
           # @!attribute campaign_id
           #
           #   @return [String, nil]
@@ -278,16 +283,11 @@ module Sentdm
                    enum: -> { Sentdm::Profiles::MessagingUseCaseUs },
                    api_name: :messagingUseCaseUs
 
-          # @!attribute sample_messages
-          #
-          #   @return [Array<String>, nil]
-          optional :sample_messages, Sentdm::Internal::Type::ArrayOf[String], api_name: :sampleMessages
-
-          # @!method initialize(campaign_id: nil, customer_id: nil, messaging_use_case_us: nil, sample_messages: nil)
+          # @!method initialize(sample_messages:, campaign_id: nil, customer_id: nil, messaging_use_case_us: nil)
+          #   @param sample_messages [Array<String>]
           #   @param campaign_id [String]
           #   @param customer_id [String]
           #   @param messaging_use_case_us [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs]
-          #   @param sample_messages [Array<String>]
         end
       end
     end

@@ -10,7 +10,7 @@ module Sentdm
       # Creates a new contact by phone number and associates it with the authenticated
       # customer.
       #
-      # @overload create(phone_number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(phone_number:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param phone_number [String] Body param: Phone number of the contact to create
       #
@@ -25,7 +25,7 @@ module Sentdm
       # @return [Sentdm::Models::APIResponseOfContact]
       #
       # @see Sentdm::Models::ContactCreateParams
-      def create(params = {})
+      def create(params)
         parsed, options = Sentdm::ContactCreateParams.dump_request(params)
         header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
         @client.request(
