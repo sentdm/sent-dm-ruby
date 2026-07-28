@@ -25,7 +25,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::APIResponseOfTcrCampaignWithUseCases]
+        # @return [Sentdm::Models::Profiles::CampaignCreateResponse]
         #
         # @see Sentdm::Models::Profiles::CampaignCreateParams
         def create(profile_id, params)
@@ -36,7 +36,7 @@ module Sentdm
             path: ["v3/profiles/%1$s/campaigns", profile_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
-            model: Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases,
+            model: Sentdm::Models::Profiles::CampaignCreateResponse,
             options: options
           )
         end
@@ -63,7 +63,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::APIResponseOfTcrCampaignWithUseCases]
+        # @return [Sentdm::Models::Profiles::CampaignUpdateResponse]
         #
         # @see Sentdm::Models::Profiles::CampaignUpdateParams
         def update(campaign_id, params)
@@ -78,7 +78,7 @@ module Sentdm
             path: ["v3/profiles/%1$s/campaigns/%2$s", profile_id, campaign_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
-            model: Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases,
+            model: Sentdm::Models::Profiles::CampaignUpdateResponse,
             options: options
           )
         end

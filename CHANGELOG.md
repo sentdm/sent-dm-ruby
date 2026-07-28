@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.25.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.24.0...v0.25.0) (2026-07-07)
+
+
+### Features
+
+* enable release-please releases and back-sync trigger ([fa11d84](https://github.com/sentdm/sent-dm-ruby/commit/fa11d84c774c4f15e7314d15fa6c32f9e03a679a))
+* initial stlc build ([e0debc2](https://github.com/sentdm/sent-dm-ruby/commit/e0debc2ec4eeac66206d8b16c5a1269272f7072c))
+* stlc SDK generation pipeline (workspace, workflows, setup action) ([d7bec91](https://github.com/sentdm/sent-dm-ruby/commit/d7bec91bda777c44961d42a464cb507fa2e3fb3c))
+
+
+### Chores
+
+* add promote, back-sync, and trunk-lock workflows ([7629b2d](https://github.com/sentdm/sent-dm-ruby/commit/7629b2d33a0fac8d11aa01e4204e3ac90037333d))
+* add release back-sync trigger workflow ([f3fed43](https://github.com/sentdm/sent-dm-ruby/commit/f3fed436972793fc49aba34c86ba25408757ca49))
+* drop fork-only ruby-readme extra-file (unsupported by stock release-please) ([ffbcf4b](https://github.com/sentdm/sent-dm-ruby/commit/ffbcf4b3be85003f44de972e96442324330046cd))
+
 ## 0.24.0 (2026-07-02)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.23.0...v0.24.0)
