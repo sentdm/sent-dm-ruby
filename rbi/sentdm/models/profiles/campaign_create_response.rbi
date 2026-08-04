@@ -12,15 +12,7 @@ module Sentdm
             )
           end
 
-        # Customer-facing campaign representation for the public v3 API. Deliberately does
-        # not inherit TcrCampaign. The service-layer type TcrCampaignWithUseCasesResponse
-        # extends the database entity, so returning it directly from a public endpoint
-        # serialized every column, including supplier-specific and internal provisioning
-        # identifiers. This DTO is an explicit allowlist: a new column on the entity is
-        # invisible to customers until it is added here on purpose. Intentionally omitted:
-        # telnyxCampaignId (supplier-specific), plus cspId, resellerId, upstreamCnpId,
-        # kycSubmissionFormId and sharingStatus (internal provisioning and CSP-to-DCA
-        # plumbing). All six remain available on the admin API.
+        # A 10DLC campaign registered for a brand.
         sig do
           returns(
             T.nilable(Sentdm::Models::Profiles::CampaignCreateResponse::Data)
@@ -72,15 +64,7 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
-          # Customer-facing campaign representation for the public v3 API. Deliberately does
-          # not inherit TcrCampaign. The service-layer type TcrCampaignWithUseCasesResponse
-          # extends the database entity, so returning it directly from a public endpoint
-          # serialized every column, including supplier-specific and internal provisioning
-          # identifiers. This DTO is an explicit allowlist: a new column on the entity is
-          # invisible to customers until it is added here on purpose. Intentionally omitted:
-          # telnyxCampaignId (supplier-specific), plus cspId, resellerId, upstreamCnpId,
-          # kycSubmissionFormId and sharingStatus (internal provisioning and CSP-to-DCA
-          # plumbing). All six remain available on the admin API.
+          # A 10DLC campaign registered for a brand.
           data: nil,
           # Error information
           error: nil,
@@ -254,15 +238,14 @@ module Sentdm
           end
           attr_writer :use_cases
 
-          # Customer-facing campaign representation for the public v3 API. Deliberately does
-          # not inherit TcrCampaign. The service-layer type TcrCampaignWithUseCasesResponse
-          # extends the database entity, so returning it directly from a public endpoint
-          # serialized every column, including supplier-specific and internal provisioning
-          # identifiers. This DTO is an explicit allowlist: a new column on the entity is
-          # invisible to customers until it is added here on purpose. Intentionally omitted:
-          # telnyxCampaignId (supplier-specific), plus cspId, resellerId, upstreamCnpId,
-          # kycSubmissionFormId and sharingStatus (internal provisioning and CSP-to-DCA
-          # plumbing). All six remain available on the admin API.
+          # Expected messaging volume for this campaign — customer-supplied on
+          # create/update, and the input to both the TCR usecase classification (LOW_VOLUME
+          # vs MIXED/specific) and the campaign fee tier. Surfaced so customers can read
+          # back the value they set.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :volume
+
+          # A 10DLC campaign registered for a brand.
           sig do
             params(
               id: String,
@@ -298,7 +281,8 @@ module Sentdm
               use_cases:
                 T::Array[
                   Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase::OrHash
-                ]
+                ],
+              volume: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -335,7 +319,12 @@ module Sentdm
             # Campaign type (for example KYC or App).
             type: nil,
             updated_at: nil,
-            use_cases: nil
+            use_cases: nil,
+            # Expected messaging volume for this campaign — customer-supplied on
+            # create/update, and the input to both the TCR usecase classification (LOW_VOLUME
+            # vs MIXED/specific) and the campaign fee tier. Surfaced so customers can read
+            # back the value they set.
+            volume: nil
           )
           end
 
@@ -375,7 +364,8 @@ module Sentdm
                 use_cases:
                   T::Array[
                     Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase
-                  ]
+                  ],
+                volume: T.nilable(String)
               }
             )
           end

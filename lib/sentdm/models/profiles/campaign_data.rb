@@ -86,7 +86,14 @@ module Sentdm
         #   @return [String, nil]
         optional :terms_and_conditions_link, String, api_name: :termsAndConditionsLink, nil?: true
 
-        # @!method initialize(description:, name:, type:, use_cases:, help_keywords: nil, help_message: nil, message_flow: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, terms_and_conditions_link: nil)
+        # @!attribute volume
+        #   Expected messaging volume for this campaign. Numeric string (e.g. "1999",
+        #   "5000"); values below 2000 bill at the low-volume tier.
+        #
+        #   @return [String, nil]
+        optional :volume, String, nil?: true
+
+        # @!method initialize(description:, name:, type:, use_cases:, help_keywords: nil, help_message: nil, message_flow: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, terms_and_conditions_link: nil, volume: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Profiles::CampaignData} for more details.
         #
@@ -117,6 +124,8 @@ module Sentdm
         #   @param privacy_policy_link [String, nil] URL to privacy policy
         #
         #   @param terms_and_conditions_link [String, nil] URL to terms and conditions
+        #
+        #   @param volume [String, nil] Expected messaging volume for this campaign. Numeric string (e.g. "1999", "5000"
       end
     end
   end

@@ -65,7 +65,8 @@ module Sentdm
             terms_and_conditions_link: String?,
             type: String,
             updated_at: Time?,
-            use_cases: ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase]
+            use_cases: ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase],
+            volume: String?
           }
 
         class Data < Sentdm::Internal::Type::BaseModel
@@ -145,6 +146,8 @@ module Sentdm
             ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase]
           ) -> ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase]
 
+          attr_accessor volume: String?
+
           def initialize: (
             ?id: String,
             ?billed_date: Time?,
@@ -173,7 +176,8 @@ module Sentdm
             ?terms_and_conditions_link: String?,
             ?type: String,
             ?updated_at: Time?,
-            ?use_cases: ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase]
+            ?use_cases: ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase],
+            ?volume: String?
           ) -> void
 
           def to_hash: -> {
@@ -204,7 +208,8 @@ module Sentdm
             terms_and_conditions_link: String?,
             type: String,
             updated_at: Time?,
-            use_cases: ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase]
+            use_cases: ::Array[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase],
+            volume: String?
           }
 
           type status = :SENT_CREATED | :ACTIVE | :EXPIRED

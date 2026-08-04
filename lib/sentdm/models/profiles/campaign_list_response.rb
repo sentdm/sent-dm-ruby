@@ -196,19 +196,20 @@ module Sentdm
                    -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase] },
                    api_name: :useCases
 
-          # @!method initialize(id: nil, billed_date: nil, brand_id: nil, cost: nil, created_at: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, terms_and_conditions_link: nil, type: nil, updated_at: nil, use_cases: nil)
+          # @!attribute volume
+          #   Expected messaging volume for this campaign — customer-supplied on
+          #   create/update, and the input to both the TCR usecase classification (LOW_VOLUME
+          #   vs MIXED/specific) and the campaign fee tier. Surfaced so customers can read
+          #   back the value they set.
+          #
+          #   @return [String, nil]
+          optional :volume, String, nil?: true
+
+          # @!method initialize(id: nil, billed_date: nil, brand_id: nil, cost: nil, created_at: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, terms_and_conditions_link: nil, type: nil, updated_at: nil, use_cases: nil, volume: nil)
           #   Some parameter documentations has been truncated, see
           #   {Sentdm::Models::Profiles::CampaignListResponse::Data} for more details.
           #
-          #   Customer-facing campaign representation for the public v3 API. Deliberately does
-          #   not inherit TcrCampaign. The service-layer type TcrCampaignWithUseCasesResponse
-          #   extends the database entity, so returning it directly from a public endpoint
-          #   serialized every column, including supplier-specific and internal provisioning
-          #   identifiers. This DTO is an explicit allowlist: a new column on the entity is
-          #   invisible to customers until it is added here on purpose. Intentionally omitted:
-          #   telnyxCampaignId (supplier-specific), plus cspId, resellerId, upstreamCnpId,
-          #   kycSubmissionFormId and sharingStatus (internal provisioning and CSP-to-DCA
-          #   plumbing). All six remain available on the admin API.
+          #   A 10DLC campaign registered for a brand.
           #
           #   @param id [String]
           #
@@ -265,6 +266,8 @@ module Sentdm
           #   @param updated_at [Time, nil]
           #
           #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase>]
+          #
+          #   @param volume [String, nil] Expected messaging volume for this campaign — customer-supplied on create/update
 
           # @see Sentdm::Models::Profiles::CampaignListResponse::Data#status
           module Status
