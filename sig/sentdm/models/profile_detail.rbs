@@ -345,7 +345,6 @@ module Sentdm
           {
             brand_relationship: Sentdm::Models::tcr_brand_relationship?,
             destination_countries: ::Array[Sentdm::DestinationCountry],
-            expected_messaging_volume: String?,
             is_tcr_application: bool,
             notes: String?,
             phone_number_prefix: String?,
@@ -362,8 +361,6 @@ module Sentdm
             ::Array[Sentdm::DestinationCountry]
           ) -> ::Array[Sentdm::DestinationCountry]
 
-          attr_accessor expected_messaging_volume: String?
-
           attr_reader is_tcr_application: bool?
 
           def is_tcr_application=: (bool) -> bool
@@ -379,7 +376,6 @@ module Sentdm
           def initialize: (
             ?brand_relationship: Sentdm::Models::tcr_brand_relationship?,
             ?destination_countries: ::Array[Sentdm::DestinationCountry],
-            ?expected_messaging_volume: String?,
             ?is_tcr_application: bool,
             ?notes: String?,
             ?phone_number_prefix: String?,
@@ -390,7 +386,6 @@ module Sentdm
           def to_hash: -> {
             brand_relationship: Sentdm::Models::tcr_brand_relationship?,
             destination_countries: ::Array[Sentdm::DestinationCountry],
-            expected_messaging_volume: String?,
             is_tcr_application: bool,
             notes: String?,
             phone_number_prefix: String?,

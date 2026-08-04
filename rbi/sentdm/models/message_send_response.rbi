@@ -103,8 +103,7 @@ module Sentdm
         end
         attr_writer :recipients
 
-        # Overall request status: "QUEUED" when the batch has been accepted and published
-        # to Kafka.
+        # Overall request status: "QUEUED" when the batch has been accepted for delivery.
         sig { returns(T.nilable(String)) }
         attr_reader :status
 
@@ -140,8 +139,7 @@ module Sentdm
         def self.new(
           # Per-recipient message results
           recipients: nil,
-          # Overall request status: "QUEUED" when the batch has been accepted and published
-          # to Kafka.
+          # Overall request status: "QUEUED" when the batch has been accepted for delivery.
           status: nil,
           # Template ID that was used
           template_id: nil,
