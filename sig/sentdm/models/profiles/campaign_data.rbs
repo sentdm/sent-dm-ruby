@@ -15,7 +15,8 @@ module Sentdm
           optout_keywords: String?,
           optout_message: String?,
           privacy_policy_link: String?,
-          terms_and_conditions_link: String?
+          terms_and_conditions_link: String?,
+          volume: String?
         }
 
       class CampaignData < Sentdm::Internal::Type::BaseModel
@@ -45,6 +46,8 @@ module Sentdm
 
         attr_accessor terms_and_conditions_link: String?
 
+        attr_accessor volume: String?
+
         def initialize: (
           description: String,
           name: String,
@@ -58,7 +61,8 @@ module Sentdm
           ?optout_keywords: String?,
           ?optout_message: String?,
           ?privacy_policy_link: String?,
-          ?terms_and_conditions_link: String?
+          ?terms_and_conditions_link: String?,
+          ?volume: String?
         ) -> void
 
         def to_hash: -> {
@@ -74,7 +78,8 @@ module Sentdm
           optout_keywords: String?,
           optout_message: String?,
           privacy_policy_link: String?,
-          terms_and_conditions_link: String?
+          terms_and_conditions_link: String?,
+          volume: String?
         }
       end
     end
