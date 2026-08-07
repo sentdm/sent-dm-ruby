@@ -22,12 +22,6 @@ module Sentdm
                api_name: :destinationCountries,
                nil?: true
 
-      # @!attribute expected_messaging_volume
-      #   Expected daily messaging volume
-      #
-      #   @return [String, nil]
-      optional :expected_messaging_volume, String, api_name: :expectedMessagingVolume, nil?: true
-
       # @!attribute is_tcr_application
       #   Whether this is a TCR (Campaign Registry) application
       #
@@ -52,7 +46,7 @@ module Sentdm
       #   @return [String, nil]
       optional :primary_use_case, String, api_name: :primaryUseCase, nil?: true
 
-      # @!method initialize(brand_relationship:, vertical:, destination_countries: nil, expected_messaging_volume: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil, primary_use_case: nil)
+      # @!method initialize(brand_relationship:, vertical:, destination_countries: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil, primary_use_case: nil)
       #   Compliance and TCR information for brand registration
       #
       #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship]
@@ -60,8 +54,6 @@ module Sentdm
       #   @param vertical [Symbol, Sentdm::Models::TcrVertical]
       #
       #   @param destination_countries [Array<Sentdm::Models::DestinationCountry>, nil] List of destination countries for messaging
-      #
-      #   @param expected_messaging_volume [String, nil] Expected daily messaging volume
       #
       #   @param is_tcr_application [Boolean, nil] Whether this is a TCR (Campaign Registry) application
       #

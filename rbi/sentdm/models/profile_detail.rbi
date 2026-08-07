@@ -122,7 +122,7 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :sending_phone_number
 
-      # Reference to another profile for SMS/Telnyx configuration
+      # Reference to another profile whose SMS configuration this profile uses
       sig { returns(T.nilable(String)) }
       attr_accessor :sending_phone_number_profile_id
 
@@ -224,7 +224,7 @@ module Sentdm
         organization_id: nil,
         # Direct SMS phone number
         sending_phone_number: nil,
-        # Reference to another profile for SMS/Telnyx configuration
+        # Reference to another profile whose SMS configuration this profile uses
         sending_phone_number_profile_id: nil,
         # Reference to another profile for WhatsApp configuration
         sending_whatsapp_number_profile_id: nil,
@@ -645,10 +645,6 @@ module Sentdm
           end
           attr_writer :destination_countries
 
-          # Expected daily messaging volume
-          sig { returns(T.nilable(String)) }
-          attr_accessor :expected_messaging_volume
-
           # Whether this is a TCR (Campaign Registry) application
           sig { returns(T.nilable(T::Boolean)) }
           attr_reader :is_tcr_application
@@ -678,7 +674,6 @@ module Sentdm
                 T.nilable(Sentdm::TcrBrandRelationship::OrSymbol),
               destination_countries:
                 T::Array[Sentdm::DestinationCountry::OrHash],
-              expected_messaging_volume: T.nilable(String),
               is_tcr_application: T::Boolean,
               notes: T.nilable(String),
               phone_number_prefix: T.nilable(String),
@@ -690,8 +685,6 @@ module Sentdm
             brand_relationship: nil,
             # List of destination countries for messaging
             destination_countries: nil,
-            # Expected daily messaging volume
-            expected_messaging_volume: nil,
             # Whether this is a TCR (Campaign Registry) application
             is_tcr_application: nil,
             # Additional notes about the business or use case
@@ -710,7 +703,6 @@ module Sentdm
                 brand_relationship:
                   T.nilable(Sentdm::TcrBrandRelationship::TaggedSymbol),
                 destination_countries: T::Array[Sentdm::DestinationCountry],
-                expected_messaging_volume: T.nilable(String),
                 is_tcr_application: T::Boolean,
                 notes: T.nilable(String),
                 phone_number_prefix: T.nilable(String),

@@ -3,15 +3,13 @@
 module Sentdm
   module Models
     module Profiles
-      # @see Sentdm::Resources::Profiles::Campaigns#list
-      class CampaignListResponse < Sentdm::Internal::Type::BaseModel
+      # @see Sentdm::Resources::Profiles::Campaigns#update
+      class CampaignUpdateResponse < Sentdm::Internal::Type::BaseModel
         # @!attribute data
-        #   The response data (null if error)
+        #   A 10DLC campaign registered for a brand.
         #
-        #   @return [Array<Sentdm::Models::Profiles::CampaignListResponse::Data>, nil]
-        optional :data,
-                 -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::Profiles::CampaignListResponse::Data] },
-                 nil?: true
+        #   @return [Sentdm::Models::Profiles::CampaignUpdateResponse::Data, nil]
+        optional :data, -> { Sentdm::Models::Profiles::CampaignUpdateResponse::Data }, nil?: true
 
         # @!attribute error
         #   Error information
@@ -34,7 +32,7 @@ module Sentdm
         # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
         #   Standard API response envelope for all v3 endpoints
         #
-        #   @param data [Array<Sentdm::Models::Profiles::CampaignListResponse::Data>, nil] The response data (null if error)
+        #   @param data [Sentdm::Models::Profiles::CampaignUpdateResponse::Data, nil] A 10DLC campaign registered for a brand.
         #
         #   @param error [Sentdm::Models::ErrorDetail, nil] Error information
         #
@@ -42,6 +40,7 @@ module Sentdm
         #
         #   @param success [Boolean] Indicates whether the request was successful
 
+        # @see Sentdm::Models::Profiles::CampaignUpdateResponse#data
         class Data < Sentdm::Internal::Type::BaseModel
           # @!attribute id
           #
@@ -148,8 +147,8 @@ module Sentdm
 
           # @!attribute status
           #
-          #   @return [Symbol, Sentdm::Models::Profiles::CampaignListResponse::Data::Status, nil]
-          optional :status, enum: -> { Sentdm::Models::Profiles::CampaignListResponse::Data::Status }, nil?: true
+          #   @return [Symbol, Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status, nil]
+          optional :status, enum: -> { Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status }, nil?: true
 
           # @!attribute submitted_at
           #
@@ -191,9 +190,9 @@ module Sentdm
 
           # @!attribute use_cases
           #
-          #   @return [Array<Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase>, nil]
+          #   @return [Array<Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase>, nil]
           optional :use_cases,
-                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase] },
+                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase] },
                    api_name: :useCases
 
           # @!attribute volume
@@ -207,7 +206,7 @@ module Sentdm
 
           # @!method initialize(id: nil, billed_date: nil, brand_id: nil, cost: nil, created_at: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, terms_and_conditions_link: nil, type: nil, updated_at: nil, use_cases: nil, volume: nil)
           #   Some parameter documentations has been truncated, see
-          #   {Sentdm::Models::Profiles::CampaignListResponse::Data} for more details.
+          #   {Sentdm::Models::Profiles::CampaignUpdateResponse::Data} for more details.
           #
           #   A 10DLC campaign registered for a brand.
           #
@@ -249,7 +248,7 @@ module Sentdm
           #
           #   @param privacy_policy_link [String, nil]
           #
-          #   @param status [Symbol, Sentdm::Models::Profiles::CampaignListResponse::Data::Status, nil]
+          #   @param status [Symbol, Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status, nil]
           #
           #   @param submitted_at [Time, nil]
           #
@@ -265,11 +264,11 @@ module Sentdm
           #
           #   @param updated_at [Time, nil]
           #
-          #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase>]
+          #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase>]
           #
           #   @param volume [String, nil] Expected messaging volume for this campaign — customer-supplied on create/update
 
-          # @see Sentdm::Models::Profiles::CampaignListResponse::Data#status
+          # @see Sentdm::Models::Profiles::CampaignUpdateResponse::Data#status
           module Status
             extend Sentdm::Internal::Type::Enum
 

@@ -106,7 +106,7 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :sending_phone_number
 
-      # Reference to another profile to use for SMS/Telnyx configuration (optional)
+      # Reference to another profile to use for SMS configuration (optional)
       sig { returns(T.nilable(String)) }
       attr_accessor :sending_phone_number_profile_id
 
@@ -208,7 +208,7 @@ module Sentdm
         sandbox: nil,
         # Direct phone number for SMS sending (optional)
         sending_phone_number: nil,
-        # Reference to another profile to use for SMS/Telnyx configuration (optional)
+        # Reference to another profile to use for SMS configuration (optional)
         sending_phone_number_profile_id: nil,
         # Reference to another profile to use for WhatsApp configuration (optional)
         sending_whatsapp_number_profile_id: nil,

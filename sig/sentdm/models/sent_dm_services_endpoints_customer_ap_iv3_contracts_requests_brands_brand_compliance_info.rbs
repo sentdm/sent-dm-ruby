@@ -5,7 +5,6 @@ module Sentdm
         brand_relationship: Sentdm::Models::tcr_brand_relationship,
         vertical: Sentdm::Models::tcr_vertical,
         destination_countries: ::Array[Sentdm::DestinationCountry]?,
-        expected_messaging_volume: String?,
         is_tcr_application: bool?,
         notes: String?,
         phone_number_prefix: String?,
@@ -19,8 +18,6 @@ module Sentdm
 
       attr_accessor destination_countries: ::Array[Sentdm::DestinationCountry]?
 
-      attr_accessor expected_messaging_volume: String?
-
       attr_accessor is_tcr_application: bool?
 
       attr_accessor notes: String?
@@ -33,7 +30,6 @@ module Sentdm
         brand_relationship: Sentdm::Models::tcr_brand_relationship,
         vertical: Sentdm::Models::tcr_vertical,
         ?destination_countries: ::Array[Sentdm::DestinationCountry]?,
-        ?expected_messaging_volume: String?,
         ?is_tcr_application: bool?,
         ?notes: String?,
         ?phone_number_prefix: String?,
@@ -44,7 +40,6 @@ module Sentdm
         brand_relationship: Sentdm::Models::tcr_brand_relationship,
         vertical: Sentdm::Models::tcr_vertical,
         destination_countries: ::Array[Sentdm::DestinationCountry]?,
-        expected_messaging_volume: String?,
         is_tcr_application: bool?,
         notes: String?,
         phone_number_prefix: String?,

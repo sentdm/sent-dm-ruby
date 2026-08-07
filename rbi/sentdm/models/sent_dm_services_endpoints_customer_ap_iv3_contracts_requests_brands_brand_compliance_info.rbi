@@ -21,10 +21,6 @@ module Sentdm
       sig { returns(T.nilable(T::Array[Sentdm::DestinationCountry])) }
       attr_accessor :destination_countries
 
-      # Expected daily messaging volume
-      sig { returns(T.nilable(String)) }
-      attr_accessor :expected_messaging_volume
-
       # Whether this is a TCR (Campaign Registry) application
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :is_tcr_application
@@ -48,7 +44,6 @@ module Sentdm
           vertical: Sentdm::TcrVertical::OrSymbol,
           destination_countries:
             T.nilable(T::Array[Sentdm::DestinationCountry::OrHash]),
-          expected_messaging_volume: T.nilable(String),
           is_tcr_application: T.nilable(T::Boolean),
           notes: T.nilable(String),
           phone_number_prefix: T.nilable(String),
@@ -60,8 +55,6 @@ module Sentdm
         vertical:,
         # List of destination countries for messaging
         destination_countries: nil,
-        # Expected daily messaging volume
-        expected_messaging_volume: nil,
         # Whether this is a TCR (Campaign Registry) application
         is_tcr_application: nil,
         # Additional notes about the business or use case
@@ -80,7 +73,6 @@ module Sentdm
             vertical: Sentdm::TcrVertical::OrSymbol,
             destination_countries:
               T.nilable(T::Array[Sentdm::DestinationCountry]),
-            expected_messaging_volume: T.nilable(String),
             is_tcr_application: T.nilable(T::Boolean),
             notes: T.nilable(String),
             phone_number_prefix: T.nilable(String),

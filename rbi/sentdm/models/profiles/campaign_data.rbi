@@ -67,6 +67,11 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :terms_and_conditions_link
 
+        # Expected messaging volume for this campaign. Numeric string (e.g. "1999",
+        # "5000"); values below 2000 bill at the low-volume tier.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :volume
+
         # Campaign data for create or update operation
         sig do
           params(
@@ -85,7 +90,8 @@ module Sentdm
             optout_keywords: T.nilable(String),
             optout_message: T.nilable(String),
             privacy_policy_link: T.nilable(String),
-            terms_and_conditions_link: T.nilable(String)
+            terms_and_conditions_link: T.nilable(String),
+            volume: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -114,7 +120,10 @@ module Sentdm
           # URL to privacy policy
           privacy_policy_link: nil,
           # URL to terms and conditions
-          terms_and_conditions_link: nil
+          terms_and_conditions_link: nil,
+          # Expected messaging volume for this campaign. Numeric string (e.g. "1999",
+          # "5000"); values below 2000 bill at the low-volume tier.
+          volume: nil
         )
         end
 
@@ -136,7 +145,8 @@ module Sentdm
               optout_keywords: T.nilable(String),
               optout_message: T.nilable(String),
               privacy_policy_link: T.nilable(String),
-              terms_and_conditions_link: T.nilable(String)
+              terms_and_conditions_link: T.nilable(String),
+              volume: T.nilable(String)
             }
           )
         end

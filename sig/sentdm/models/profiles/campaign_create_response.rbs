@@ -1,16 +1,16 @@
 module Sentdm
   module Models
     module Profiles
-      type campaign_list_response =
+      type campaign_create_response =
         {
-          data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?,
+          data: Sentdm::Models::Profiles::CampaignCreateResponse::Data?,
           error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }
 
-      class CampaignListResponse < Sentdm::Internal::Type::BaseModel
-        attr_accessor data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?
+      class CampaignCreateResponse < Sentdm::Internal::Type::BaseModel
+        attr_accessor data: Sentdm::Models::Profiles::CampaignCreateResponse::Data?
 
         attr_accessor error: Sentdm::ErrorDetail?
 
@@ -23,14 +23,14 @@ module Sentdm
         def success=: (bool) -> bool
 
         def initialize: (
-          ?data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?,
+          ?data: Sentdm::Models::Profiles::CampaignCreateResponse::Data?,
           ?error: Sentdm::ErrorDetail?,
           ?meta: Sentdm::APIMeta,
           ?success: bool
         ) -> void
 
         def to_hash: -> {
-          data: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]?,
+          data: Sentdm::Models::Profiles::CampaignCreateResponse::Data?,
           error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
@@ -57,7 +57,7 @@ module Sentdm
             optout_keywords: String?,
             optout_message: String?,
             privacy_policy_link: String?,
-            status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?,
+            status: Sentdm::Models::Profiles::CampaignCreateResponse::Data::status?,
             submitted_at: Time?,
             submitted_to_tcr: bool,
             tcr_campaign_id: String?,
@@ -65,7 +65,7 @@ module Sentdm
             terms_and_conditions_link: String?,
             type: String,
             updated_at: Time?,
-            use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase],
+            use_cases: ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase],
             volume: String?
           }
 
@@ -120,7 +120,7 @@ module Sentdm
 
           attr_accessor privacy_policy_link: String?
 
-          attr_accessor status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?
+          attr_accessor status: Sentdm::Models::Profiles::CampaignCreateResponse::Data::status?
 
           attr_accessor submitted_at: Time?
 
@@ -140,11 +140,11 @@ module Sentdm
 
           attr_accessor updated_at: Time?
 
-          attr_reader use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]?
+          attr_reader use_cases: ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase]?
 
           def use_cases=: (
-            ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
-          ) -> ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase]
+            ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase]
+          ) -> ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase]
 
           attr_accessor volume: String?
 
@@ -168,7 +168,7 @@ module Sentdm
             ?optout_keywords: String?,
             ?optout_message: String?,
             ?privacy_policy_link: String?,
-            ?status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?,
+            ?status: Sentdm::Models::Profiles::CampaignCreateResponse::Data::status?,
             ?submitted_at: Time?,
             ?submitted_to_tcr: bool,
             ?tcr_campaign_id: String?,
@@ -176,7 +176,7 @@ module Sentdm
             ?terms_and_conditions_link: String?,
             ?type: String,
             ?updated_at: Time?,
-            ?use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase],
+            ?use_cases: ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase],
             ?volume: String?
           ) -> void
 
@@ -200,7 +200,7 @@ module Sentdm
             optout_keywords: String?,
             optout_message: String?,
             privacy_policy_link: String?,
-            status: Sentdm::Models::Profiles::CampaignListResponse::Data::status?,
+            status: Sentdm::Models::Profiles::CampaignCreateResponse::Data::status?,
             submitted_at: Time?,
             submitted_to_tcr: bool,
             tcr_campaign_id: String?,
@@ -208,7 +208,7 @@ module Sentdm
             terms_and_conditions_link: String?,
             type: String,
             updated_at: Time?,
-            use_cases: ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase],
+            use_cases: ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::UseCase],
             volume: String?
           }
 
@@ -221,7 +221,7 @@ module Sentdm
             ACTIVE: :ACTIVE
             EXPIRED: :EXPIRED
 
-            def self?.values: -> ::Array[Sentdm::Models::Profiles::CampaignListResponse::Data::status]
+            def self?.values: -> ::Array[Sentdm::Models::Profiles::CampaignCreateResponse::Data::status]
           end
 
           type use_case =

@@ -15,7 +15,7 @@ module Sentdm
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases)
+          ).returns(Sentdm::Models::Profiles::CampaignCreateResponse)
         end
         def create(
           # Path param: Profile ID from route
@@ -48,7 +48,7 @@ module Sentdm
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfTcrCampaignWithUseCases)
+          ).returns(Sentdm::Models::Profiles::CampaignUpdateResponse)
         end
         def update(
           # Path param: Campaign ID from route

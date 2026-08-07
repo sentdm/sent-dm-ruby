@@ -3,24 +3,32 @@
 module Sentdm
   module Models
     module Profiles
-      class CampaignListResponse < Sentdm::Internal::Type::BaseModel
+      class CampaignUpdateResponse < Sentdm::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Sentdm::Models::Profiles::CampaignListResponse,
+              Sentdm::Models::Profiles::CampaignUpdateResponse,
               Sentdm::Internal::AnyHash
             )
           end
 
-        # The response data (null if error)
+        # A 10DLC campaign registered for a brand.
         sig do
           returns(
-            T.nilable(
-              T::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]
-            )
+            T.nilable(Sentdm::Models::Profiles::CampaignUpdateResponse::Data)
           )
         end
-        attr_accessor :data
+        attr_reader :data
+
+        sig do
+          params(
+            data:
+              T.nilable(
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data::OrHash
+              )
+          ).void
+        end
+        attr_writer :data
 
         # Error information
         sig { returns(T.nilable(Sentdm::ErrorDetail)) }
@@ -48,9 +56,7 @@ module Sentdm
           params(
             data:
               T.nilable(
-                T::Array[
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::OrHash
-                ]
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data::OrHash
               ),
             error: T.nilable(Sentdm::ErrorDetail::OrHash),
             meta: Sentdm::APIMeta::OrHash,
@@ -58,7 +64,7 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
-          # The response data (null if error)
+          # A 10DLC campaign registered for a brand.
           data: nil,
           # Error information
           error: nil,
@@ -74,7 +80,7 @@ module Sentdm
             {
               data:
                 T.nilable(
-                  T::Array[Sentdm::Models::Profiles::CampaignListResponse::Data]
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data
                 ),
               error: T.nilable(Sentdm::ErrorDetail),
               meta: Sentdm::APIMeta,
@@ -89,7 +95,7 @@ module Sentdm
           OrHash =
             T.type_alias do
               T.any(
-                Sentdm::Models::Profiles::CampaignListResponse::Data,
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data,
                 Sentdm::Internal::AnyHash
               )
             end
@@ -175,7 +181,7 @@ module Sentdm
           sig do
             returns(
               T.nilable(
-                Sentdm::Models::Profiles::CampaignListResponse::Data::Status::TaggedSymbol
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::TaggedSymbol
               )
             )
           end
@@ -215,7 +221,7 @@ module Sentdm
             returns(
               T.nilable(
                 T::Array[
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase
                 ]
               )
             )
@@ -226,7 +232,7 @@ module Sentdm
             params(
               use_cases:
                 T::Array[
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::OrHash
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase::OrHash
                 ]
             ).void
           end
@@ -263,7 +269,7 @@ module Sentdm
               privacy_policy_link: T.nilable(String),
               status:
                 T.nilable(
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::Status::OrSymbol
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::OrSymbol
                 ),
               submitted_at: T.nilable(Time),
               submitted_to_tcr: T::Boolean,
@@ -274,7 +280,7 @@ module Sentdm
               updated_at: T.nilable(Time),
               use_cases:
                 T::Array[
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase::OrHash
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase::OrHash
                 ],
               volume: T.nilable(String)
             ).returns(T.attached_class)
@@ -346,7 +352,7 @@ module Sentdm
                 privacy_policy_link: T.nilable(String),
                 status:
                   T.nilable(
-                    Sentdm::Models::Profiles::CampaignListResponse::Data::Status::TaggedSymbol
+                    Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::TaggedSymbol
                   ),
                 submitted_at: T.nilable(Time),
                 submitted_to_tcr: T::Boolean,
@@ -357,7 +363,7 @@ module Sentdm
                 updated_at: T.nilable(Time),
                 use_cases:
                   T::Array[
-                    Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase
+                    Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase
                   ],
                 volume: T.nilable(String)
               }
@@ -373,7 +379,7 @@ module Sentdm
               T.type_alias do
                 T.all(
                   Symbol,
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::Status
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status
                 )
               end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -381,23 +387,23 @@ module Sentdm
             SENT_CREATED =
               T.let(
                 :SENT_CREATED,
-                Sentdm::Models::Profiles::CampaignListResponse::Data::Status::TaggedSymbol
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::TaggedSymbol
               )
             ACTIVE =
               T.let(
                 :ACTIVE,
-                Sentdm::Models::Profiles::CampaignListResponse::Data::Status::TaggedSymbol
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::TaggedSymbol
               )
             EXPIRED =
               T.let(
                 :EXPIRED,
-                Sentdm::Models::Profiles::CampaignListResponse::Data::Status::TaggedSymbol
+                Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::TaggedSymbol
               )
 
             sig do
               override.returns(
                 T::Array[
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::Status::TaggedSymbol
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::Status::TaggedSymbol
                 ]
               )
             end
@@ -409,7 +415,7 @@ module Sentdm
             OrHash =
               T.type_alias do
                 T.any(
-                  Sentdm::Models::Profiles::CampaignListResponse::Data::UseCase,
+                  Sentdm::Models::Profiles::CampaignUpdateResponse::Data::UseCase,
                   Sentdm::Internal::AnyHash
                 )
               end

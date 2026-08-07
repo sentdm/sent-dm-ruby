@@ -49,8 +49,7 @@ module Sentdm
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::MessageSendResponse::Data::Recipient] }
 
         # @!attribute status
-        #   Overall request status: "QUEUED" when the batch has been accepted and published
-        #   to Kafka.
+        #   Overall request status: "QUEUED" when the batch has been accepted for delivery.
         #
         #   @return [String, nil]
         optional :status, String
@@ -68,14 +67,11 @@ module Sentdm
         optional :template_name, String
 
         # @!method initialize(recipients: nil, status: nil, template_id: nil, template_name: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Sentdm::Models::MessageSendResponse::Data} for more details.
-        #
         #   Response for the multi-recipient send message endpoint
         #
         #   @param recipients [Array<Sentdm::Models::MessageSendResponse::Data::Recipient>] Per-recipient message results
         #
-        #   @param status [String] Overall request status: "QUEUED" when the batch has been accepted and published
+        #   @param status [String] Overall request status: "QUEUED" when the batch has been accepted for delivery.
         #
         #   @param template_id [String] Template ID that was used
         #

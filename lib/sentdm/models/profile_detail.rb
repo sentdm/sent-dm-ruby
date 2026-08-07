@@ -113,7 +113,7 @@ module Sentdm
       optional :sending_phone_number, String, nil?: true
 
       # @!attribute sending_phone_number_profile_id
-      #   Reference to another profile for SMS/Telnyx configuration
+      #   Reference to another profile whose SMS configuration this profile uses
       #
       #   @return [String, nil]
       optional :sending_phone_number_profile_id, String, nil?: true
@@ -198,7 +198,7 @@ module Sentdm
       #
       #   @param sending_phone_number [String, nil] Direct SMS phone number
       #
-      #   @param sending_phone_number_profile_id [String, nil] Reference to another profile for SMS/Telnyx configuration
+      #   @param sending_phone_number_profile_id [String, nil] Reference to another profile whose SMS configuration this profile uses
       #
       #   @param sending_whatsapp_number_profile_id [String, nil] Reference to another profile for WhatsApp configuration
       #
@@ -466,12 +466,6 @@ module Sentdm
           #   @return [Array<Sentdm::Models::DestinationCountry>, nil]
           optional :destination_countries, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::DestinationCountry] }
 
-          # @!attribute expected_messaging_volume
-          #   Expected daily messaging volume
-          #
-          #   @return [String, nil]
-          optional :expected_messaging_volume, String, nil?: true
-
           # @!attribute is_tcr_application
           #   Whether this is a TCR (Campaign Registry) application
           #
@@ -501,14 +495,12 @@ module Sentdm
           #   @return [Symbol, Sentdm::Models::TcrVertical, nil]
           optional :vertical, enum: -> { Sentdm::TcrVertical }, nil?: true
 
-          # @!method initialize(brand_relationship: nil, destination_countries: nil, expected_messaging_volume: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil, primary_use_case: nil, vertical: nil)
+          # @!method initialize(brand_relationship: nil, destination_countries: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil, primary_use_case: nil, vertical: nil)
           #   Compliance and TCR-related information
           #
           #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship, nil]
           #
           #   @param destination_countries [Array<Sentdm::Models::DestinationCountry>] List of destination countries for messaging
-          #
-          #   @param expected_messaging_volume [String, nil] Expected daily messaging volume
           #
           #   @param is_tcr_application [Boolean] Whether this is a TCR (Campaign Registry) application
           #
