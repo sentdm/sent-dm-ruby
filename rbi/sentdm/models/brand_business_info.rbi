@@ -2,13 +2,10 @@
 
 module Sentdm
   module Models
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo < Sentdm::Internal::Type::BaseModel
+    class BrandBusinessInfo < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::BrandBusinessInfo, Sentdm::Internal::AnyHash)
         end
 
       # City
@@ -24,11 +21,7 @@ module Sentdm
       attr_accessor :country_of_registration
 
       sig do
-        returns(
-          T.nilable(
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::OrSymbol
-          )
-        )
+        returns(T.nilable(Sentdm::BrandBusinessInfo::EntityType::OrSymbol))
       end
       attr_accessor :entity_type
 
@@ -67,9 +60,7 @@ module Sentdm
           country: T.nilable(String),
           country_of_registration: T.nilable(String),
           entity_type:
-            T.nilable(
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::OrSymbol
-            ),
+            T.nilable(Sentdm::BrandBusinessInfo::EntityType::OrSymbol),
           legal_name: T.nilable(String),
           postal_code: T.nilable(String),
           state: T.nilable(String),
@@ -111,9 +102,7 @@ module Sentdm
             country: T.nilable(String),
             country_of_registration: T.nilable(String),
             entity_type:
-              T.nilable(
-                Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::OrSymbol
-              ),
+              T.nilable(Sentdm::BrandBusinessInfo::EntityType::OrSymbol),
             legal_name: T.nilable(String),
             postal_code: T.nilable(String),
             state: T.nilable(String),
@@ -131,45 +120,38 @@ module Sentdm
         extend Sentdm::Internal::Type::Enum
 
         TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType
-            )
-          end
+          T.type_alias { T.all(Symbol, Sentdm::BrandBusinessInfo::EntityType) }
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         PRIVATE_PROFIT =
           T.let(
             :PRIVATE_PROFIT,
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::TaggedSymbol
+            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
           )
         PUBLIC_PROFIT =
           T.let(
             :PUBLIC_PROFIT,
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::TaggedSymbol
+            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
           )
         NON_PROFIT =
           T.let(
             :NON_PROFIT,
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::TaggedSymbol
+            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
           )
         SOLE_PROPRIETOR =
           T.let(
             :SOLE_PROPRIETOR,
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::TaggedSymbol
+            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
           )
         GOVERNMENT =
           T.let(
             :GOVERNMENT,
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::TaggedSymbol
+            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
           )
 
         sig do
           override.returns(
-            T::Array[
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::TaggedSymbol
-            ]
+            T::Array[Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol]
           )
         end
         def self.values

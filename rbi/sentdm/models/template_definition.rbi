@@ -9,44 +9,25 @@ module Sentdm
         end
 
       # Body section of a message template with channel-specific content
-      sig { returns(Sentdm::SentDmServicesCommonContractsPocOsTemplateBody) }
+      sig { returns(Sentdm::TemplateBody) }
       attr_reader :body
 
-      sig do
-        params(
-          body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody::OrHash
-        ).void
-      end
+      sig { params(body: Sentdm::TemplateBody::OrHash).void }
       attr_writer :body
 
       # Configuration for AUTHENTICATION category templates
-      sig do
-        returns(
-          T.nilable(
-            Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig
-          )
-        )
-      end
+      sig { returns(T.nilable(Sentdm::AuthenticationConfig)) }
       attr_reader :authentication_config
 
       sig do
         params(
-          authentication_config:
-            T.nilable(
-              Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig::OrHash
-            )
+          authentication_config: T.nilable(Sentdm::AuthenticationConfig::OrHash)
         ).void
       end
       attr_writer :authentication_config
 
       # Optional list of interactive buttons (e.g., quick replies, URLs, phone numbers)
-      sig do
-        returns(
-          T.nilable(
-            T::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]
-          )
-        )
-      end
+      sig { returns(T.nilable(T::Array[Sentdm::TemplateButton])) }
       attr_accessor :buttons
 
       # The version of the template definition format
@@ -54,65 +35,30 @@ module Sentdm
       attr_accessor :definition_version
 
       # Footer section of a message template
-      sig do
-        returns(
-          T.nilable(Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter)
-        )
-      end
+      sig { returns(T.nilable(Sentdm::TemplateFooter)) }
       attr_reader :footer
 
-      sig do
-        params(
-          footer:
-            T.nilable(
-              Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter::OrHash
-            )
-        ).void
-      end
+      sig { params(footer: T.nilable(Sentdm::TemplateFooter::OrHash)).void }
       attr_writer :footer
 
       # Header section of a message template
-      sig do
-        returns(
-          T.nilable(Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader)
-        )
-      end
+      sig { returns(T.nilable(Sentdm::TemplateHeader)) }
       attr_reader :header
 
-      sig do
-        params(
-          header:
-            T.nilable(
-              Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader::OrHash
-            )
-        ).void
-      end
+      sig { params(header: T.nilable(Sentdm::TemplateHeader::OrHash)).void }
       attr_writer :header
 
       # Complete definition of a message template including header, body, footer, and
       # buttons
       sig do
         params(
-          body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody::OrHash,
+          body: Sentdm::TemplateBody::OrHash,
           authentication_config:
-            T.nilable(
-              Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig::OrHash
-            ),
-          buttons:
-            T.nilable(
-              T::Array[
-                Sentdm::SentDmServicesCommonContractsPocOsTemplateButton::OrHash
-              ]
-            ),
+            T.nilable(Sentdm::AuthenticationConfig::OrHash),
+          buttons: T.nilable(T::Array[Sentdm::TemplateButton::OrHash]),
           definition_version: T.nilable(String),
-          footer:
-            T.nilable(
-              Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter::OrHash
-            ),
-          header:
-            T.nilable(
-              Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader::OrHash
-            )
+          footer: T.nilable(Sentdm::TemplateFooter::OrHash),
+          header: T.nilable(Sentdm::TemplateHeader::OrHash)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -134,26 +80,12 @@ module Sentdm
       sig do
         override.returns(
           {
-            body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
-            authentication_config:
-              T.nilable(
-                Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig
-              ),
-            buttons:
-              T.nilable(
-                T::Array[
-                  Sentdm::SentDmServicesCommonContractsPocOsTemplateButton
-                ]
-              ),
+            body: Sentdm::TemplateBody,
+            authentication_config: T.nilable(Sentdm::AuthenticationConfig),
+            buttons: T.nilable(T::Array[Sentdm::TemplateButton]),
             definition_version: T.nilable(String),
-            footer:
-              T.nilable(
-                Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter
-              ),
-            header:
-              T.nilable(
-                Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader
-              )
+            footer: T.nilable(Sentdm::TemplateFooter),
+            header: T.nilable(Sentdm::TemplateHeader)
           }
         )
       end

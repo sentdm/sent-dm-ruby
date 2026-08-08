@@ -1,6 +1,6 @@
 module Sentdm
   module Models
-    type sent_dm_services_endpoints_customer_ap_iv3_contracts_requests_brands_brand_contact_info =
+    type brand_contact_info =
       {
         name: String,
         business_name: String?,
@@ -10,7 +10,7 @@ module Sentdm
         role: String?
       }
 
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo < Sentdm::Internal::Type::BaseModel
+    class BrandContactInfo < Sentdm::Internal::Type::BaseModel
       attr_accessor name: String
 
       attr_accessor business_name: String?

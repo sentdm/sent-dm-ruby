@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateFooter < Sentdm::Internal::Type::BaseModel
+    class TemplateFooter < Sentdm::Internal::Type::BaseModel
       # @!attribute template
       #   The footer template text with optional variable placeholders
       #

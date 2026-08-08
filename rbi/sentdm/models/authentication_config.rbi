@@ -2,13 +2,10 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsAuthenticationConfig < Sentdm::Internal::Type::BaseModel
+    class AuthenticationConfig < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::AuthenticationConfig, Sentdm::Internal::AnyHash)
         end
 
       # Whether to add the security recommendation text: "For your security, do not

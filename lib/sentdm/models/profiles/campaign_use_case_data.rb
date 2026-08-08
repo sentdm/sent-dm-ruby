@@ -3,7 +3,7 @@
 module Sentdm
   module Models
     module Profiles
-      class SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData < Sentdm::Internal::Type::BaseModel
+      class CampaignUseCaseData < Sentdm::Internal::Type::BaseModel
         # @!attribute messaging_use_case_us
         #
         #   @return [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs]

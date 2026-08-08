@@ -2,14 +2,9 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateBody < Sentdm::Internal::Type::BaseModel
+    class TemplateBody < Sentdm::Internal::Type::BaseModel
       OrHash =
-        T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
-            Sentdm::Internal::AnyHash
-          )
-        end
+        T.type_alias { T.any(Sentdm::TemplateBody, Sentdm::Internal::AnyHash) }
 
       # Content that will be used for all channels (SMS and WhatsApp) unless
       # channel-specific content is provided

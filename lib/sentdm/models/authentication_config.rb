@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsAuthenticationConfig < Sentdm::Internal::Type::BaseModel
+    class AuthenticationConfig < Sentdm::Internal::Type::BaseModel
       # @!attribute add_security_recommendation
       #   Whether to add the security recommendation text: "For your security, do not
       #   share this code."
@@ -21,8 +21,7 @@ module Sentdm
 
       # @!method initialize(add_security_recommendation: nil, code_expiration_minutes: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig} for
-      #   more details.
+      #   {Sentdm::Models::AuthenticationConfig} for more details.
       #
       #   Configuration for AUTHENTICATION category templates
       #

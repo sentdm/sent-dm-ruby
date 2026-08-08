@@ -1,13 +1,13 @@
 module Sentdm
   module Models
-    type sent_dm_services_common_contracts_poc_os_template_footer =
+    type template_header =
       {
         template: String,
         type: String?,
         variables: ::Array[Sentdm::TemplateVariable]?
       }
 
-    class SentDmServicesCommonContractsPocOsTemplateFooter < Sentdm::Internal::Type::BaseModel
+    class TemplateHeader < Sentdm::Internal::Type::BaseModel
       attr_accessor template: String
 
       attr_accessor type: String?

@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo < Sentdm::Internal::Type::BaseModel
+    class BrandBusinessInfo < Sentdm::Internal::Type::BaseModel
       # @!attribute city
       #   City
       #
@@ -23,11 +23,9 @@ module Sentdm
 
       # @!attribute entity_type
       #
-      #   @return [Symbol, Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, nil]
+      #   @return [Symbol, Sentdm::Models::BrandBusinessInfo::EntityType, nil]
       optional :entity_type,
-               enum: -> {
-                 Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType
-               },
+               enum: -> { Sentdm::BrandBusinessInfo::EntityType },
                api_name: :entityType,
                nil?: true
 
@@ -82,7 +80,7 @@ module Sentdm
       #
       #   @param country_of_registration [String, nil] Country where the business is registered
       #
-      #   @param entity_type [Symbol, Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, nil]
+      #   @param entity_type [Symbol, Sentdm::Models::BrandBusinessInfo::EntityType, nil]
       #
       #   @param legal_name [String, nil] Legal business name
       #
@@ -98,7 +96,7 @@ module Sentdm
       #
       #   @param url [String, nil] Business website URL
 
-      # @see Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo#entity_type
+      # @see Sentdm::Models::BrandBusinessInfo#entity_type
       module EntityType
         extend Sentdm::Internal::Type::Enum
 

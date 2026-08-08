@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo < Sentdm::Internal::Type::BaseModel
+    class BrandComplianceInfo < Sentdm::Internal::Type::BaseModel
       # @!attribute brand_relationship
       #
       #   @return [Symbol, Sentdm::Models::TcrBrandRelationship]

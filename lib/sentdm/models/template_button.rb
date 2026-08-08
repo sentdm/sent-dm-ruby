@@ -2,12 +2,12 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateButton < Sentdm::Internal::Type::BaseModel
+    class TemplateButton < Sentdm::Internal::Type::BaseModel
       # @!attribute props
       #   Properties specific to the button type
       #
-      #   @return [Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps]
-      required :props, -> { Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps }
+      #   @return [Sentdm::Models::TemplateButtonProps]
+      required :props, -> { Sentdm::TemplateButtonProps }
 
       # @!attribute type
       #   The type of button (e.g., QUICK_REPLY, URL, PHONE_NUMBER, VOICE_CALL, COPY_CODE)
@@ -23,12 +23,11 @@ module Sentdm
 
       # @!method initialize(props:, type:, id: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton} for more
-      #   details.
+      #   {Sentdm::Models::TemplateButton} for more details.
       #
       #   Interactive button in a message template
       #
-      #   @param props [Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps] Properties specific to the button type
+      #   @param props [Sentdm::Models::TemplateButtonProps] Properties specific to the button type
       #
       #   @param type [String] The type of button (e.g., QUICK_REPLY, URL, PHONE_NUMBER, VOICE_CALL, COPY_CODE)
       #

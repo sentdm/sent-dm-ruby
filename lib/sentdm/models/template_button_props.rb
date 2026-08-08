@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateButtonProps < Sentdm::Internal::Type::BaseModel
+    class TemplateButtonProps < Sentdm::Internal::Type::BaseModel
       # @!attribute active_for
       #
       #   @return [Integer]
@@ -73,8 +73,7 @@ module Sentdm
 
       # @!method initialize(active_for:, country_code:, offer_code:, phone_number:, quick_reply_type:, text:, url:, url_type:, variables:, autofill_text: nil, otp_type: nil, package_name: nil, signature_hash: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps} for more
-      #   details.
+      #   {Sentdm::Models::TemplateButtonProps} for more details.
       #
       #   @param active_for [Integer]
       #

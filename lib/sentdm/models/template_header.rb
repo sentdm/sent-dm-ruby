@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateHeader < Sentdm::Internal::Type::BaseModel
+    class TemplateHeader < Sentdm::Internal::Type::BaseModel
       # @!attribute template
       #   The header template text with optional variable placeholders (e.g., "Welcome to
       #   {{0:variable}}")
@@ -24,8 +24,7 @@ module Sentdm
 
       # @!method initialize(template:, type: nil, variables: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader} for more
-      #   details.
+      #   {Sentdm::Models::TemplateHeader} for more details.
       #
       #   Header section of a message template
       #

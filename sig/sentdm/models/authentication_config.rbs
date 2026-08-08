@@ -1,9 +1,9 @@
 module Sentdm
   module Models
-    type sent_dm_services_common_contracts_poc_os_authentication_config =
+    type authentication_config =
       { add_security_recommendation: bool, code_expiration_minutes: Integer? }
 
-    class SentDmServicesCommonContractsPocOsAuthenticationConfig < Sentdm::Internal::Type::BaseModel
+    class AuthenticationConfig < Sentdm::Internal::Type::BaseModel
       attr_reader add_security_recommendation: bool?
 
       def add_security_recommendation=: (bool) -> bool

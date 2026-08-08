@@ -6,7 +6,7 @@ module Sentdm
           description: String,
           name: String,
           type: String,
-          use_cases: ::Array[Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
+          use_cases: ::Array[Sentdm::Profiles::CampaignUseCaseData],
           help_keywords: String?,
           help_message: String?,
           message_flow: String?,
@@ -26,7 +26,7 @@ module Sentdm
 
         attr_accessor type: String
 
-        attr_accessor use_cases: ::Array[Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData]
+        attr_accessor use_cases: ::Array[Sentdm::Profiles::CampaignUseCaseData]
 
         attr_accessor help_keywords: String?
 
@@ -52,7 +52,7 @@ module Sentdm
           description: String,
           name: String,
           type: String,
-          use_cases: ::Array[Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
+          use_cases: ::Array[Sentdm::Profiles::CampaignUseCaseData],
           ?help_keywords: String?,
           ?help_message: String?,
           ?message_flow: String?,
@@ -69,7 +69,7 @@ module Sentdm
           description: String,
           name: String,
           type: String,
-          use_cases: ::Array[Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData],
+          use_cases: ::Array[Sentdm::Profiles::CampaignUseCaseData],
           help_keywords: String?,
           help_message: String?,
           message_flow: String?,

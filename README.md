@@ -262,25 +262,21 @@ Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::E
 
 ```ruby
 # :PRIVATE_PROFIT
-puts(
-  Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::PRIVATE_PROFIT
-)
+puts(Sentdm::BrandBusinessInfo::EntityType::PRIVATE_PROFIT)
 
-# Revealed type: `T.all(Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType, Symbol)`
-T.reveal_type(
-  Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::PRIVATE_PROFIT
-)
+# Revealed type: `T.all(Sentdm::BrandBusinessInfo::EntityType, Symbol)`
+T.reveal_type(Sentdm::BrandBusinessInfo::EntityType::PRIVATE_PROFIT)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
-Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo.new(
-  entity_type: Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::EntityType::PRIVATE_PROFIT,
+Sentdm::BrandBusinessInfo.new(
+  entity_type: Sentdm::BrandBusinessInfo::EntityType::PRIVATE_PROFIT,
   # …
 )
 
-Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo.new(
+Sentdm::BrandBusinessInfo.new(
   entity_type: :PRIVATE_PROFIT,
   # …
 )

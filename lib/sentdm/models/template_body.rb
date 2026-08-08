@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateBody < Sentdm::Internal::Type::BaseModel
+    class TemplateBody < Sentdm::Internal::Type::BaseModel
       # @!attribute multi_channel
       #   Content that will be used for all channels (SMS and WhatsApp) unless
       #   channel-specific content is provided
@@ -31,8 +31,7 @@ module Sentdm
 
       # @!method initialize(multi_channel: nil, rcs: nil, sms: nil, whatsapp: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody} for more
-      #   details.
+      #   {Sentdm::Models::TemplateBody} for more details.
       #
       #   Body section of a message template with channel-specific content
       #
