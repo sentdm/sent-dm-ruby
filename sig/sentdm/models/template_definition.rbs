@@ -2,43 +2,43 @@ module Sentdm
   module Models
     type template_definition =
       {
-        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
-        authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
-        buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
+        body: Sentdm::TemplateBody,
+        authentication_config: Sentdm::AuthenticationConfig?,
+        buttons: ::Array[Sentdm::TemplateButton]?,
         definition_version: String?,
-        footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
-        header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+        footer: Sentdm::TemplateFooter?,
+        header: Sentdm::TemplateHeader?
       }
 
     class TemplateDefinition < Sentdm::Internal::Type::BaseModel
-      attr_accessor body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody
+      attr_accessor body: Sentdm::TemplateBody
 
-      attr_accessor authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?
+      attr_accessor authentication_config: Sentdm::AuthenticationConfig?
 
-      attr_accessor buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?
+      attr_accessor buttons: ::Array[Sentdm::TemplateButton]?
 
       attr_accessor definition_version: String?
 
-      attr_accessor footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?
+      attr_accessor footer: Sentdm::TemplateFooter?
 
-      attr_accessor header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+      attr_accessor header: Sentdm::TemplateHeader?
 
       def initialize: (
-        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
-        ?authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
-        ?buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
+        body: Sentdm::TemplateBody,
+        ?authentication_config: Sentdm::AuthenticationConfig?,
+        ?buttons: ::Array[Sentdm::TemplateButton]?,
         ?definition_version: String?,
-        ?footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
-        ?header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+        ?footer: Sentdm::TemplateFooter?,
+        ?header: Sentdm::TemplateHeader?
       ) -> void
 
       def to_hash: -> {
-        body: Sentdm::SentDmServicesCommonContractsPocOsTemplateBody,
-        authentication_config: Sentdm::SentDmServicesCommonContractsPocOsAuthenticationConfig?,
-        buttons: ::Array[Sentdm::SentDmServicesCommonContractsPocOsTemplateButton]?,
+        body: Sentdm::TemplateBody,
+        authentication_config: Sentdm::AuthenticationConfig?,
+        buttons: ::Array[Sentdm::TemplateButton]?,
         definition_version: String?,
-        footer: Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter?,
-        header: Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader?
+        footer: Sentdm::TemplateFooter?,
+        header: Sentdm::TemplateHeader?
       }
     end
   end
