@@ -26,12 +26,12 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
       )
 
     assert_pattern do
-      response => Sentdm::Models::Profiles::CampaignCreateResponse
+      response => Sentdm::Profiles::APIResponseOfBrandCampaign
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::Profiles::CampaignCreateResponse::Data | nil,
+        data: Sentdm::Profiles::BrandCampaign | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -63,12 +63,12 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
       )
 
     assert_pattern do
-      response => Sentdm::Models::Profiles::CampaignUpdateResponse
+      response => Sentdm::Profiles::APIResponseOfBrandCampaign
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::Profiles::CampaignUpdateResponse::Data | nil,
+        data: Sentdm::Profiles::BrandCampaign | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -82,12 +82,12 @@ class Sentdm::Test::Resources::Profiles::CampaignsTest < Sentdm::Test::ResourceT
     response = @sent.profiles.campaigns.list("770e8400-e29b-41d4-a716-446655440002")
 
     assert_pattern do
-      response => Sentdm::Models::Profiles::CampaignListResponse
+      response => Sentdm::Profiles::APIResponseOfListOfBrandCampaign
     end
 
     assert_pattern do
       response => {
-        data: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Models::Profiles::CampaignListResponse::Data]) | nil,
+        data: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::BrandCampaign]) | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

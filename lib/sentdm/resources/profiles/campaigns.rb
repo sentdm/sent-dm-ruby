@@ -25,7 +25,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::CampaignCreateResponse]
+        # @return [Sentdm::Models::Profiles::APIResponseOfBrandCampaign]
         #
         # @see Sentdm::Models::Profiles::CampaignCreateParams
         def create(profile_id, params)
@@ -36,7 +36,7 @@ module Sentdm
             path: ["v3/profiles/%1$s/campaigns", profile_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
-            model: Sentdm::Models::Profiles::CampaignCreateResponse,
+            model: Sentdm::Profiles::APIResponseOfBrandCampaign,
             options: options
           )
         end
@@ -63,7 +63,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::CampaignUpdateResponse]
+        # @return [Sentdm::Models::Profiles::APIResponseOfBrandCampaign]
         #
         # @see Sentdm::Models::Profiles::CampaignUpdateParams
         def update(campaign_id, params)
@@ -78,7 +78,7 @@ module Sentdm
             path: ["v3/profiles/%1$s/campaigns/%2$s", profile_id, campaign_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
-            model: Sentdm::Models::Profiles::CampaignUpdateResponse,
+            model: Sentdm::Profiles::APIResponseOfBrandCampaign,
             options: options
           )
         end
@@ -97,7 +97,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::CampaignListResponse]
+        # @return [Sentdm::Models::Profiles::APIResponseOfListOfBrandCampaign]
         #
         # @see Sentdm::Models::Profiles::CampaignListParams
         def list(profile_id, params = {})
@@ -106,7 +106,7 @@ module Sentdm
             method: :get,
             path: ["v3/profiles/%1$s/campaigns", profile_id],
             headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-            model: Sentdm::Models::Profiles::CampaignListResponse,
+            model: Sentdm::Profiles::APIResponseOfListOfBrandCampaign,
             options: options
           )
         end
