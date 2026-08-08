@@ -1,6 +1,6 @@
 module Sentdm
   module Models
-    type sent_dm_services_endpoints_customer_ap_iv3_contracts_requests_brands_brand_compliance_info =
+    type brand_compliance_info =
       {
         brand_relationship: Sentdm::Models::tcr_brand_relationship,
         vertical: Sentdm::Models::tcr_vertical,
@@ -11,7 +11,7 @@ module Sentdm
         primary_use_case: String?
       }
 
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo < Sentdm::Internal::Type::BaseModel
+    class BrandComplianceInfo < Sentdm::Internal::Type::BaseModel
       attr_accessor brand_relationship: Sentdm::Models::tcr_brand_relationship
 
       attr_accessor vertical: Sentdm::Models::tcr_vertical

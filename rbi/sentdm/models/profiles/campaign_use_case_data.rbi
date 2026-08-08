@@ -3,11 +3,11 @@
 module Sentdm
   module Models
     module Profiles
-      class SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData < Sentdm::Internal::Type::BaseModel
+      class CampaignUseCaseData < Sentdm::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData,
+              Sentdm::Profiles::CampaignUseCaseData,
               Sentdm::Internal::AnyHash
             )
           end

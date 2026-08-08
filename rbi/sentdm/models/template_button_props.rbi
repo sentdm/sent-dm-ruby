@@ -2,13 +2,10 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateButtonProps < Sentdm::Internal::Type::BaseModel
+    class TemplateButtonProps < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::TemplateButtonProps, Sentdm::Internal::AnyHash)
         end
 
       sig { returns(Integer) }

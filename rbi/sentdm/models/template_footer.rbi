@@ -2,13 +2,10 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateFooter < Sentdm::Internal::Type::BaseModel
+    class TemplateFooter < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateFooter,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::TemplateFooter, Sentdm::Internal::AnyHash)
         end
 
       # The footer template text with optional variable placeholders

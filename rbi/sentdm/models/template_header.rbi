@@ -2,13 +2,10 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateHeader < Sentdm::Internal::Type::BaseModel
+    class TemplateHeader < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateHeader,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::TemplateHeader, Sentdm::Internal::AnyHash)
         end
 
       # The header template text with optional variable placeholders (e.g., "Welcome to

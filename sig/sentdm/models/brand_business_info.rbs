@@ -1,11 +1,11 @@
 module Sentdm
   module Models
-    type sent_dm_services_endpoints_customer_ap_iv3_contracts_requests_brands_brand_business_info =
+    type brand_business_info =
       {
         city: String?,
         country: String?,
         country_of_registration: String?,
-        entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?,
+        entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?,
         legal_name: String?,
         postal_code: String?,
         state: String?,
@@ -15,14 +15,14 @@ module Sentdm
         url: String?
       }
 
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo < Sentdm::Internal::Type::BaseModel
+    class BrandBusinessInfo < Sentdm::Internal::Type::BaseModel
       attr_accessor city: String?
 
       attr_accessor country: String?
 
       attr_accessor country_of_registration: String?
 
-      attr_accessor entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?
+      attr_accessor entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?
 
       attr_accessor legal_name: String?
 
@@ -42,7 +42,7 @@ module Sentdm
         ?city: String?,
         ?country: String?,
         ?country_of_registration: String?,
-        ?entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?,
+        ?entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?,
         ?legal_name: String?,
         ?postal_code: String?,
         ?state: String?,
@@ -56,7 +56,7 @@ module Sentdm
         city: String?,
         country: String?,
         country_of_registration: String?,
-        entity_type: Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type?,
+        entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?,
         legal_name: String?,
         postal_code: String?,
         state: String?,
@@ -82,7 +82,7 @@ module Sentdm
         SOLE_PROPRIETOR: :SOLE_PROPRIETOR
         GOVERNMENT: :GOVERNMENT
 
-        def self?.values: -> ::Array[Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::entity_type]
+        def self?.values: -> ::Array[Sentdm::Models::BrandBusinessInfo::entity_type]
       end
     end
   end

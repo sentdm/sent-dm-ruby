@@ -2,27 +2,17 @@
 
 module Sentdm
   module Models
-    class SentDmServicesCommonContractsPocOsTemplateButton < Sentdm::Internal::Type::BaseModel
+    class TemplateButton < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateButton,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::TemplateButton, Sentdm::Internal::AnyHash)
         end
 
       # Properties specific to the button type
-      sig do
-        returns(Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps)
-      end
+      sig { returns(Sentdm::TemplateButtonProps) }
       attr_reader :props
 
-      sig do
-        params(
-          props:
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps::OrHash
-        ).void
-      end
+      sig { params(props: Sentdm::TemplateButtonProps::OrHash).void }
       attr_writer :props
 
       # The type of button (e.g., QUICK_REPLY, URL, PHONE_NUMBER, VOICE_CALL, COPY_CODE)
@@ -39,8 +29,7 @@ module Sentdm
       # Interactive button in a message template
       sig do
         params(
-          props:
-            Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps::OrHash,
+          props: Sentdm::TemplateButtonProps::OrHash,
           type: String,
           id: Integer
         ).returns(T.attached_class)
@@ -57,12 +46,7 @@ module Sentdm
 
       sig do
         override.returns(
-          {
-            props:
-              Sentdm::SentDmServicesCommonContractsPocOsTemplateButtonProps,
-            type: String,
-            id: Integer
-          }
+          { props: Sentdm::TemplateButtonProps, type: String, id: Integer }
         )
       end
       def to_hash

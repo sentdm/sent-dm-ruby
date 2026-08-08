@@ -2,13 +2,10 @@
 
 module Sentdm
   module Models
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo < Sentdm::Internal::Type::BaseModel
+    class BrandContactInfo < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo,
-            Sentdm::Internal::AnyHash
-          )
+          T.any(Sentdm::BrandContactInfo, Sentdm::Internal::AnyHash)
         end
 
       # Primary contact name (required)

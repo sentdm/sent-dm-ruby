@@ -25,11 +25,9 @@ module Sentdm
         # @!attribute use_cases
         #   List of use cases with sample messages
         #
-        #   @return [Array<Sentdm::Models::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData>]
+        #   @return [Array<Sentdm::Models::Profiles::CampaignUseCaseData>]
         required :use_cases,
-                 -> {
-                   Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData]
-                 },
+                 -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::CampaignUseCaseData] },
                  api_name: :useCases
 
         # @!attribute help_keywords
@@ -105,7 +103,7 @@ module Sentdm
         #
         #   @param type [String] Campaign type (e.g., "KYC", "App")
         #
-        #   @param use_cases [Array<Sentdm::Models::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData>] List of use cases with sample messages
+        #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignUseCaseData>] List of use cases with sample messages
         #
         #   @param help_keywords [String, nil] Comma-separated keywords that trigger help message (e.g., "HELP, INFO, SUPPORT")
         #

@@ -22,13 +22,7 @@ module Sentdm
         attr_accessor :type
 
         # List of use cases with sample messages
-        sig do
-          returns(
-            T::Array[
-              Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData
-            ]
-          )
-        end
+        sig { returns(T::Array[Sentdm::Profiles::CampaignUseCaseData]) }
         attr_accessor :use_cases
 
         # Comma-separated keywords that trigger help message (e.g., "HELP, INFO, SUPPORT")
@@ -78,10 +72,7 @@ module Sentdm
             description: String,
             name: String,
             type: String,
-            use_cases:
-              T::Array[
-                Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData::OrHash
-              ],
+            use_cases: T::Array[Sentdm::Profiles::CampaignUseCaseData::OrHash],
             help_keywords: T.nilable(String),
             help_message: T.nilable(String),
             message_flow: T.nilable(String),
@@ -133,10 +124,7 @@ module Sentdm
               description: String,
               name: String,
               type: String,
-              use_cases:
-                T::Array[
-                  Sentdm::Profiles::SentDmServicesEndpointsCustomerApIv3ContractsRequestsCampaignsCampaignUseCaseData
-                ],
+              use_cases: T::Array[Sentdm::Profiles::CampaignUseCaseData],
               help_keywords: T.nilable(String),
               help_message: T.nilable(String),
               message_flow: T.nilable(String),

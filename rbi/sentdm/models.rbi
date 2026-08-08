@@ -13,7 +13,15 @@ module Sentdm
 
   APIResponseWebhook = Sentdm::Models::APIResponseWebhook
 
+  AuthenticationConfig = Sentdm::Models::AuthenticationConfig
+
   BillingContactInfo = Sentdm::Models::BillingContactInfo
+
+  BrandBusinessInfo = Sentdm::Models::BrandBusinessInfo
+
+  BrandComplianceInfo = Sentdm::Models::BrandComplianceInfo
+
+  BrandContactInfo = Sentdm::Models::BrandContactInfo
 
   BrandsBrandData = Sentdm::Models::BrandsBrandData
 
@@ -68,46 +76,29 @@ module Sentdm
 
   ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
 
-  SentDmServicesCommonContractsPocOsAuthenticationConfig =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
-
-  SentDmServicesCommonContractsPocOsTemplateBody =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
-
-  SentDmServicesCommonContractsPocOsTemplateButton =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
-
-  SentDmServicesCommonContractsPocOsTemplateButtonProps =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
-
-  SentDmServicesCommonContractsPocOsTemplateFooter =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
-
-  SentDmServicesCommonContractsPocOsTemplateHeader =
-    Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
-
-  SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo =
-    Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo
-
-  SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo =
-    Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
-
-  SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo =
-    Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
-
   TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 
   TcrVertical = Sentdm::Models::TcrVertical
 
   Template = Sentdm::Models::Template
 
+  TemplateBody = Sentdm::Models::TemplateBody
+
   TemplateBodyContent = Sentdm::Models::TemplateBodyContent
+
+  TemplateButton = Sentdm::Models::TemplateButton
+
+  TemplateButtonProps = Sentdm::Models::TemplateButtonProps
 
   TemplateCreateParams = Sentdm::Models::TemplateCreateParams
 
   TemplateDefinition = Sentdm::Models::TemplateDefinition
 
   TemplateDeleteParams = Sentdm::Models::TemplateDeleteParams
+
+  TemplateFooter = Sentdm::Models::TemplateFooter
+
+  TemplateHeader = Sentdm::Models::TemplateHeader
 
   TemplateListParams = Sentdm::Models::TemplateListParams
 

@@ -1,6 +1,6 @@
 module Sentdm
   module Models
-    type sent_dm_services_common_contracts_poc_os_template_button_props =
+    type template_button_props =
       {
         active_for: Integer,
         country_code: String,
@@ -17,7 +17,7 @@ module Sentdm
         signature_hash: String?
       }
 
-    class SentDmServicesCommonContractsPocOsTemplateButtonProps < Sentdm::Internal::Type::BaseModel
+    class TemplateButtonProps < Sentdm::Internal::Type::BaseModel
       attr_accessor active_for: Integer
 
       attr_accessor country_code: String

@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo < Sentdm::Internal::Type::BaseModel
+    class BrandContactInfo < Sentdm::Internal::Type::BaseModel
       # @!attribute name
       #   Primary contact name (required)
       #
