@@ -48,6 +48,9 @@ module Sentdm
     # @return [Sentdm::Resources::Contacts]
     attr_reader :contacts
 
+    # @return [Sentdm::Resources::Conversations]
+    attr_reader :conversations
+
     # Retrieve account details
     # @return [Sentdm::Resources::Me]
     attr_reader :me
@@ -120,6 +123,7 @@ module Sentdm
       @numbers = Sentdm::Resources::Numbers.new(client: self)
       @messages = Sentdm::Resources::Messages.new(client: self)
       @contacts = Sentdm::Resources::Contacts.new(client: self)
+      @conversations = Sentdm::Resources::Conversations.new(client: self)
       @me = Sentdm::Resources::Me.new(client: self)
     end
   end

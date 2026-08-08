@@ -176,6 +176,36 @@ module Sentdm
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Sentdm::Models::ContactRetrieveMessageSummaryParams} for more details.
+      #
+      # Returns aggregate message counts, time bounds, channels used, and per-channel
+      # success/fail scores (each as a percentage 0-100 of messages on that channel) for
+      # one of your contacts. Successful terminal states: SENT/DELIVERED/READ for
+      # outbound, RECEIVED for inbound. Fail: FAILED.
+      #
+      # @overload retrieve_message_summary(contact_id, x_profile_id: nil, request_options: {})
+      #
+      # @param contact_id [String]
+      #
+      # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
+      #
+      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Sentdm::Models::APIResponseOfContactMessageSummary]
+      #
+      # @see Sentdm::Models::ContactRetrieveMessageSummaryParams
+      def retrieve_message_summary(contact_id, params = {})
+        parsed, options = Sentdm::ContactRetrieveMessageSummaryParams.dump_request(params)
+        @client.request(
+          method: :get,
+          path: ["v3/contacts/%1$s/message-summary", contact_id],
+          headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
+          model: Sentdm::APIResponseOfContactMessageSummary,
+          options: options
+        )
+      end
+
       # @api private
       #
       # @param client [Sentdm::Client]

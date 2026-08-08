@@ -43,6 +43,9 @@ module Sentdm
     sig { returns(Sentdm::Resources::Contacts) }
     attr_reader :contacts
 
+    sig { returns(Sentdm::Resources::Conversations) }
+    attr_reader :conversations
+
     # Retrieve account details
     sig { returns(Sentdm::Resources::Me) }
     attr_reader :me

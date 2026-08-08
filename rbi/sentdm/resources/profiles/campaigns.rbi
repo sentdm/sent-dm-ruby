@@ -15,7 +15,7 @@ module Sentdm
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Models::Profiles::CampaignCreateResponse)
+          ).returns(Sentdm::Profiles::APIResponseOfBrandCampaign)
         end
         def create(
           # Path param: Profile ID from route
@@ -48,7 +48,7 @@ module Sentdm
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Models::Profiles::CampaignUpdateResponse)
+          ).returns(Sentdm::Profiles::APIResponseOfBrandCampaign)
         end
         def update(
           # Path param: Campaign ID from route
@@ -79,7 +79,7 @@ module Sentdm
             profile_id: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Models::Profiles::CampaignListResponse)
+          ).returns(Sentdm::Profiles::APIResponseOfListOfBrandCampaign)
         end
         def list(
           # Profile ID from route

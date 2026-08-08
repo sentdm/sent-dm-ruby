@@ -42,6 +42,12 @@ module Sentdm
         ?request_options: Sentdm::request_opts
       ) -> nil
 
+      def retrieve_message_summary: (
+        String contact_id,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfContactMessageSummary
+
       def initialize: (client: Sentdm::Client) -> void
     end
   end

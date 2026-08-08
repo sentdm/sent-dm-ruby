@@ -1,0 +1,22 @@
+module Sentdm
+  module Resources
+    class Conversations
+      def list: (
+        page: Integer,
+        page_size: Integer,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfConversationMessagesList
+
+      def list_messages: (
+        String id,
+        page: Integer,
+        page_size: Integer,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfConversationMessagesList
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

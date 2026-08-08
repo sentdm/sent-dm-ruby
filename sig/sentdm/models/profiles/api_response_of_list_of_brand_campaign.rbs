@@ -1,0 +1,41 @@
+module Sentdm
+  module Models
+    module Profiles
+      type api_response_of_list_of_brand_campaign =
+        {
+          data: ::Array[Sentdm::Profiles::BrandCampaign]?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+
+      class APIResponseOfListOfBrandCampaign < Sentdm::Internal::Type::BaseModel
+        attr_accessor data: ::Array[Sentdm::Profiles::BrandCampaign]?
+
+        attr_accessor error: Sentdm::ErrorDetail?
+
+        attr_reader meta: Sentdm::APIMeta?
+
+        def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (
+          ?data: ::Array[Sentdm::Profiles::BrandCampaign]?,
+          ?error: Sentdm::ErrorDetail?,
+          ?meta: Sentdm::APIMeta,
+          ?success: bool
+        ) -> void
+
+        def to_hash: -> {
+          data: ::Array[Sentdm::Profiles::BrandCampaign]?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+      end
+    end
+  end
+end

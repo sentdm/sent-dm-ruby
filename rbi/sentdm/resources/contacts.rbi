@@ -145,6 +145,26 @@ module Sentdm
       )
       end
 
+      # Returns aggregate message counts, time bounds, channels used, and per-channel
+      # success/fail scores (each as a percentage 0-100 of messages on that channel) for
+      # one of your contacts. Successful terminal states: SENT/DELIVERED/READ for
+      # outbound, RECEIVED for inbound. Fail: FAILED.
+      sig do
+        params(
+          contact_id: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(Sentdm::APIResponseOfContactMessageSummary)
+      end
+      def retrieve_message_summary(
+        contact_id,
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
+      end
+
       # @api private
       sig { params(client: Sentdm::Client).returns(T.attached_class) }
       def self.new(client:)

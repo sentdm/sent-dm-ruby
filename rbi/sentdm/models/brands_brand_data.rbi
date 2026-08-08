@@ -9,68 +9,34 @@ module Sentdm
         end
 
       # Compliance and TCR information for brand registration
-      sig do
-        returns(
-          Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
-        )
-      end
+      sig { returns(Sentdm::BrandComplianceInfo) }
       attr_reader :compliance
 
-      sig do
-        params(
-          compliance:
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo::OrHash
-        ).void
-      end
+      sig { params(compliance: Sentdm::BrandComplianceInfo::OrHash).void }
       attr_writer :compliance
 
       # Contact information for brand KYC
-      sig do
-        returns(
-          Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
-        )
-      end
+      sig { returns(Sentdm::BrandContactInfo) }
       attr_reader :contact
 
-      sig do
-        params(
-          contact:
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo::OrHash
-        ).void
-      end
+      sig { params(contact: Sentdm::BrandContactInfo::OrHash).void }
       attr_writer :contact
 
       # Business details and address for brand KYC
-      sig do
-        returns(
-          T.nilable(
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo
-          )
-        )
-      end
+      sig { returns(T.nilable(Sentdm::BrandBusinessInfo)) }
       attr_reader :business
 
       sig do
-        params(
-          business:
-            T.nilable(
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::OrHash
-            )
-        ).void
+        params(business: T.nilable(Sentdm::BrandBusinessInfo::OrHash)).void
       end
       attr_writer :business
 
       # Brand and KYC data grouped into contact, business, and compliance sections
       sig do
         params(
-          compliance:
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo::OrHash,
-          contact:
-            Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo::OrHash,
-          business:
-            T.nilable(
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo::OrHash
-            )
+          compliance: Sentdm::BrandComplianceInfo::OrHash,
+          contact: Sentdm::BrandContactInfo::OrHash,
+          business: T.nilable(Sentdm::BrandBusinessInfo::OrHash)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -86,14 +52,9 @@ module Sentdm
       sig do
         override.returns(
           {
-            compliance:
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo,
-            contact:
-              Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo,
-            business:
-              T.nilable(
-                Sentdm::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo
-              )
+            compliance: Sentdm::BrandComplianceInfo,
+            contact: Sentdm::BrandContactInfo,
+            business: T.nilable(Sentdm::BrandBusinessInfo)
           }
         )
       end

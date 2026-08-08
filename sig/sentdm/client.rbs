@@ -24,6 +24,8 @@ module Sentdm
 
     attr_reader contacts: Sentdm::Resources::Contacts
 
+    attr_reader conversations: Sentdm::Resources::Conversations
+
     attr_reader me: Sentdm::Resources::Me
 
     private def auth_headers: -> ::Hash[String, String]

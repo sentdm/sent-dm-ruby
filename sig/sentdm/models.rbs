@@ -3,6 +3,10 @@ module Sentdm
 
   class APIResponseOfContact = Sentdm::Models::APIResponseOfContact
 
+  class APIResponseOfContactMessageSummary = Sentdm::Models::APIResponseOfContactMessageSummary
+
+  class APIResponseOfConversationMessagesList = Sentdm::Models::APIResponseOfConversationMessagesList
+
   class APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
 
   class APIResponseOfUser = Sentdm::Models::APIResponseOfUser
@@ -11,7 +15,15 @@ module Sentdm
 
   class APIResponseWebhook = Sentdm::Models::APIResponseWebhook
 
+  class AuthenticationConfig = Sentdm::Models::AuthenticationConfig
+
   class BillingContactInfo = Sentdm::Models::BillingContactInfo
+
+  class BrandBusinessInfo = Sentdm::Models::BrandBusinessInfo
+
+  class BrandComplianceInfo = Sentdm::Models::BrandComplianceInfo
+
+  class BrandContactInfo = Sentdm::Models::BrandContactInfo
 
   class BrandsBrandData = Sentdm::Models::BrandsBrandData
 
@@ -21,11 +33,21 @@ module Sentdm
 
   class ContactListParams = Sentdm::Models::ContactListParams
 
+  class ContactMessageSummary = Sentdm::Models::ContactMessageSummary
+
   class ContactResponse = Sentdm::Models::ContactResponse
+
+  class ContactRetrieveMessageSummaryParams = Sentdm::Models::ContactRetrieveMessageSummaryParams
 
   class ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
   class ContactUpdateParams = Sentdm::Models::ContactUpdateParams
+
+  class ConversationListMessagesParams = Sentdm::Models::ConversationListMessagesParams
+
+  class ConversationListParams = Sentdm::Models::ConversationListParams
+
+  class ConversationMessagesList = Sentdm::Models::ConversationMessagesList
 
   class DestinationCountry = Sentdm::Models::DestinationCountry
 
@@ -65,37 +87,29 @@ module Sentdm
 
   class ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
 
-  class SentDmServicesCommonContractsPocOsAuthenticationConfig = Sentdm::Models::SentDmServicesCommonContractsPocOsAuthenticationConfig
-
-  class SentDmServicesCommonContractsPocOsTemplateBody = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateBody
-
-  class SentDmServicesCommonContractsPocOsTemplateButton = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButton
-
-  class SentDmServicesCommonContractsPocOsTemplateButtonProps = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateButtonProps
-
-  class SentDmServicesCommonContractsPocOsTemplateFooter = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateFooter
-
-  class SentDmServicesCommonContractsPocOsTemplateHeader = Sentdm::Models::SentDmServicesCommonContractsPocOsTemplateHeader
-
-  class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo = Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandBusinessInfo
-
-  class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo = Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandComplianceInfo
-
-  class SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo = Sentdm::Models::SentDmServicesEndpointsCustomerApIv3ContractsRequestsBrandsBrandContactInfo
-
   module TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 
   module TcrVertical = Sentdm::Models::TcrVertical
 
   class Template = Sentdm::Models::Template
 
+  class TemplateBody = Sentdm::Models::TemplateBody
+
   class TemplateBodyContent = Sentdm::Models::TemplateBodyContent
+
+  class TemplateButton = Sentdm::Models::TemplateButton
+
+  class TemplateButtonProps = Sentdm::Models::TemplateButtonProps
 
   class TemplateCreateParams = Sentdm::Models::TemplateCreateParams
 
   class TemplateDefinition = Sentdm::Models::TemplateDefinition
 
   class TemplateDeleteParams = Sentdm::Models::TemplateDeleteParams
+
+  class TemplateFooter = Sentdm::Models::TemplateFooter
+
+  class TemplateHeader = Sentdm::Models::TemplateHeader
 
   class TemplateListParams = Sentdm::Models::TemplateListParams
 
