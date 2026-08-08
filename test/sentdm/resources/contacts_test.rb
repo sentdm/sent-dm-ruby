@@ -88,4 +88,23 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
       response => nil
     end
   end
+
+  def test_retrieve_message_summary
+    skip("Mock server tests are disabled")
+
+    response = @sent.contacts.retrieve_message_summary("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+
+    assert_pattern do
+      response => Sentdm::APIResponseOfContactMessageSummary
+    end
+
+    assert_pattern do
+      response => {
+        data: Sentdm::ContactMessageSummary | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
+        success: Sentdm::Internal::Type::Boolean | nil
+      }
+    end
+  end
 end

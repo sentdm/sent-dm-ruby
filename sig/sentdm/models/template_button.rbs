@@ -1,0 +1,28 @@
+module Sentdm
+  module Models
+    type template_button =
+      { props: Sentdm::TemplateButtonProps, type: String, id: Integer }
+
+    class TemplateButton < Sentdm::Internal::Type::BaseModel
+      attr_accessor props: Sentdm::TemplateButtonProps
+
+      attr_accessor type: String
+
+      attr_reader id: Integer?
+
+      def id=: (Integer) -> Integer
+
+      def initialize: (
+        props: Sentdm::TemplateButtonProps,
+        type: String,
+        ?id: Integer
+      ) -> void
+
+      def to_hash: -> {
+        props: Sentdm::TemplateButtonProps,
+        type: String,
+        id: Integer
+      }
+    end
+  end
+end
