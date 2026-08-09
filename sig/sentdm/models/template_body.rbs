@@ -1,0 +1,35 @@
+module Sentdm
+  module Models
+    type template_body =
+      {
+        multi_channel: Sentdm::TemplateBodyContent?,
+        rcs: Sentdm::TemplateBodyContent?,
+        sms: Sentdm::TemplateBodyContent?,
+        whatsapp: Sentdm::TemplateBodyContent?
+      }
+
+    class TemplateBody < Sentdm::Internal::Type::BaseModel
+      attr_accessor multi_channel: Sentdm::TemplateBodyContent?
+
+      attr_accessor rcs: Sentdm::TemplateBodyContent?
+
+      attr_accessor sms: Sentdm::TemplateBodyContent?
+
+      attr_accessor whatsapp: Sentdm::TemplateBodyContent?
+
+      def initialize: (
+        ?multi_channel: Sentdm::TemplateBodyContent?,
+        ?rcs: Sentdm::TemplateBodyContent?,
+        ?sms: Sentdm::TemplateBodyContent?,
+        ?whatsapp: Sentdm::TemplateBodyContent?
+      ) -> void
+
+      def to_hash: -> {
+        multi_channel: Sentdm::TemplateBodyContent?,
+        rcs: Sentdm::TemplateBodyContent?,
+        sms: Sentdm::TemplateBodyContent?,
+        whatsapp: Sentdm::TemplateBodyContent?
+      }
+    end
+  end
+end
