@@ -148,6 +148,7 @@ module Sentdm
         ).returns(Sentdm::APIResponseOfProfileDetail)
       end
       def retrieve(
+        # Profile ID from route parameter
         profile_id,
         # Profile UUID to scope the request to a child profile. Only organization API keys
         # can use this header. The profile must belong to the calling organization.
@@ -203,7 +204,7 @@ module Sentdm
         ).returns(Sentdm::APIResponseOfProfileDetail)
       end
       def update(
-        # Path param
+        # Path param: Profile ID from route parameter
         profile_id,
         # Body param: Whether contacts are shared across profiles (optional)
         allow_contact_sharing: nil,
@@ -302,7 +303,7 @@ module Sentdm
         ).void
       end
       def delete(
-        # Path param
+        # Path param: Profile ID from route parameter
         profile_id,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution

@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @sent.users.retrieve("userId")
+    response = @sent.users.retrieve("880e8400-e29b-41d4-a716-446655440003")
 
     assert_pattern do
       response => Sentdm::APIResponseOfUser
@@ -63,7 +63,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_remove
     skip("Mock server tests are disabled")
 
-    response = @sent.users.remove("userId")
+    response = @sent.users.remove("aa0e8400-e29b-41d4-a716-446655440005")
 
     assert_pattern do
       response => nil
@@ -73,7 +73,7 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
   def test_update_role
     skip("Mock server tests are disabled")
 
-    response = @sent.users.update_role("userId")
+    response = @sent.users.update_role("aa0e8400-e29b-41d4-a716-446655440005")
 
     assert_pattern do
       response => Sentdm::APIResponseOfUser
