@@ -14,6 +14,7 @@ module Sentdm
         ).returns(Sentdm::APIResponseOfUser)
       end
       def retrieve(
+        # User ID from route parameter
         user_id,
         # Profile UUID to scope the request to a child profile. Only organization API keys
         # can use this header. The profile must belong to the calling organization.
@@ -86,7 +87,7 @@ module Sentdm
         ).void
       end
       def remove(
-        # Path param
+        # Path param: User ID from route parameter
         user_id,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
@@ -112,7 +113,7 @@ module Sentdm
         ).returns(Sentdm::APIResponseOfUser)
       end
       def update_role(
-        # Path param
+        # Path param: User ID from route parameter
         user_id,
         # Body param: User role: admin, billing, or developer (required)
         role: nil,

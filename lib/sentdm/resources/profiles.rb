@@ -113,7 +113,7 @@ module Sentdm
       #
       # @overload retrieve(profile_id, x_profile_id: nil, request_options: {})
       #
-      # @param profile_id [String]
+      # @param profile_id [String] Profile ID from route parameter
       #
       # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
       #
@@ -157,7 +157,7 @@ module Sentdm
       #
       # @overload update(profile_id, allow_contact_sharing: nil, allow_number_change_during_onboarding: nil, allow_template_sharing: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, sending_whatsapp_number_profile_id: nil, short_name: nil, whatsapp_phone_number: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
-      # @param profile_id [String] Path param
+      # @param profile_id [String] Path param: Profile ID from route parameter
       #
       # @param allow_contact_sharing [Boolean, nil] Body param: Whether contacts are shared across profiles (optional)
       #
@@ -257,7 +257,7 @@ module Sentdm
       #
       # @overload delete(profile_id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
-      # @param profile_id [String] Path param
+      # @param profile_id [String] Path param: Profile ID from route parameter
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
