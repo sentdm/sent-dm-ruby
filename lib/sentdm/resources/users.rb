@@ -12,7 +12,7 @@ module Sentdm
       #
       # @overload retrieve(user_id, x_profile_id: nil, request_options: {})
       #
-      # @param user_id [String]
+      # @param user_id [String] User ID from route parameter
       #
       # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
       #
@@ -106,7 +106,7 @@ module Sentdm
       #
       # @overload remove(user_id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
-      # @param user_id [String] Path param
+      # @param user_id [String] Path param: User ID from route parameter
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -138,7 +138,7 @@ module Sentdm
       #
       # @overload update_role(user_id, role: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
-      # @param user_id [String] Path param
+      # @param user_id [String] Path param: User ID from route parameter
       #
       # @param role [String] Body param: User role: admin, billing, or developer (required)
       #
