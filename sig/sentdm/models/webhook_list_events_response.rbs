@@ -69,7 +69,7 @@ module Sentdm
             delivery_attempts: Integer,
             delivery_status: String,
             error_message: String?,
-            event_data: top,
+            event_data: Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data,
             event_type: String,
             http_status_code: Integer?,
             processing_completed_at: Time?,
@@ -96,9 +96,11 @@ module Sentdm
 
           attr_accessor error_message: String?
 
-          attr_reader event_data: top?
+          attr_reader event_data: Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data?
 
-          def event_data=: (top) -> top
+          def event_data=: (
+            Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data
+          ) -> Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data
 
           attr_reader event_type: String?
 
@@ -118,7 +120,7 @@ module Sentdm
             ?delivery_attempts: Integer,
             ?delivery_status: String,
             ?error_message: String?,
-            ?event_data: top,
+            ?event_data: Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data,
             ?event_type: String,
             ?http_status_code: Integer?,
             ?processing_completed_at: Time?,
@@ -132,13 +134,24 @@ module Sentdm
             delivery_attempts: Integer,
             delivery_status: String,
             error_message: String?,
-            event_data: top,
+            event_data: Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data,
             event_type: String,
             http_status_code: Integer?,
             processing_completed_at: Time?,
             processing_started_at: Time?,
             response_body: String?
           }
+
+          type event_data =
+            Sentdm::MessageEvent
+            | Sentdm::InboundMessageEvent
+            | Sentdm::TemplateEvent
+
+          module EventData
+            extend Sentdm::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Sentdm::Models::WebhookListEventsResponse::Data::Event::event_data]
+          end
         end
       end
     end

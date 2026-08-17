@@ -183,10 +183,29 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :error_message
 
-          sig { returns(T.nilable(T.anything)) }
+          # The exact event body that was delivered, or attempted, for this record. One of
+          # the three webhook envelopes: a message status change, an inbound message, or a
+          # template status change. Read field and event to tell which, the same way your
+          # endpoint does.
+          sig do
+            returns(
+              T.nilable(
+                Sentdm::Models::WebhookListEventsResponse::Data::Event::EventData::Variants
+              )
+            )
+          end
           attr_reader :event_data
 
-          sig { params(event_data: T.anything).void }
+          sig do
+            params(
+              event_data:
+                T.any(
+                  Sentdm::MessageEvent::OrHash,
+                  Sentdm::InboundMessageEvent::OrHash,
+                  Sentdm::TemplateEvent::OrHash
+                )
+            ).void
+          end
           attr_writer :event_data
 
           sig { returns(T.nilable(String)) }
@@ -214,7 +233,12 @@ module Sentdm
               delivery_attempts: Integer,
               delivery_status: String,
               error_message: T.nilable(String),
-              event_data: T.anything,
+              event_data:
+                T.any(
+                  Sentdm::MessageEvent::OrHash,
+                  Sentdm::InboundMessageEvent::OrHash,
+                  Sentdm::TemplateEvent::OrHash
+                ),
               event_type: String,
               http_status_code: T.nilable(Integer),
               processing_completed_at: T.nilable(Time),
@@ -228,6 +252,10 @@ module Sentdm
             delivery_attempts: nil,
             delivery_status: nil,
             error_message: nil,
+            # The exact event body that was delivered, or attempted, for this record. One of
+            # the three webhook envelopes: a message status change, an inbound message, or a
+            # template status change. Read field and event to tell which, the same way your
+            # endpoint does.
             event_data: nil,
             event_type: nil,
             http_status_code: nil,
@@ -245,7 +273,8 @@ module Sentdm
                 delivery_attempts: Integer,
                 delivery_status: String,
                 error_message: T.nilable(String),
-                event_data: T.anything,
+                event_data:
+                  Sentdm::Models::WebhookListEventsResponse::Data::Event::EventData::Variants,
                 event_type: String,
                 http_status_code: T.nilable(Integer),
                 processing_completed_at: T.nilable(Time),
@@ -255,6 +284,33 @@ module Sentdm
             )
           end
           def to_hash
+          end
+
+          # The exact event body that was delivered, or attempted, for this record. One of
+          # the three webhook envelopes: a message status change, an inbound message, or a
+          # template status change. Read field and event to tell which, the same way your
+          # endpoint does.
+          module EventData
+            extend Sentdm::Internal::Type::Union
+
+            Variants =
+              T.type_alias do
+                T.any(
+                  Sentdm::MessageEvent,
+                  Sentdm::InboundMessageEvent,
+                  Sentdm::TemplateEvent
+                )
+              end
+
+            sig do
+              override.returns(
+                T::Array[
+                  Sentdm::Models::WebhookListEventsResponse::Data::Event::EventData::Variants
+                ]
+              )
+            end
+            def self.variants
+            end
           end
         end
       end
