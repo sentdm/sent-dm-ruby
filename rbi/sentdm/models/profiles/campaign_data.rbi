@@ -62,7 +62,7 @@ module Sentdm
         attr_accessor :terms_and_conditions_link
 
         # Expected messaging volume for this campaign. Numeric string (e.g. "1999",
-        # "5000"); values below 2000 bill at the low-volume tier.
+        # "5000"). Values below 2000 bill at the low-volume tier.
         sig { returns(T.nilable(String)) }
         attr_accessor :volume
 
@@ -113,7 +113,7 @@ module Sentdm
           # URL to terms and conditions
           terms_and_conditions_link: nil,
           # Expected messaging volume for this campaign. Numeric string (e.g. "1999",
-          # "5000"); values below 2000 bill at the low-volume tier.
+          # "5000"). Values below 2000 bill at the low-volume tier.
           volume: nil
         )
         end
