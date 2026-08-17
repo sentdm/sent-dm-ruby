@@ -276,7 +276,12 @@ module Sentdm
         optional :created_at, Time
 
         # @!attribute csp_id
-        #   CSP (Campaign Service Provider) ID
+        #   @deprecated
+        #
+        #   Deprecated and scheduled for removal. Identifies the Campaign Service Provider
+        #   that registered the brand, which is Sent, so the value is the same for every
+        #   brand and every account. Nothing on your side can act on it and there is no
+        #   replacement. Stop reading it.
         #
         #   @return [String, nil]
         optional :csp_id, String, nil?: true
@@ -328,6 +333,9 @@ module Sentdm
         optional :updated_at, Time, nil?: true
 
         # @!method initialize(id: nil, business: nil, compliance: nil, contact: nil, created_at: nil, csp_id: nil, identity_status: nil, is_inherited: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_brand_id: nil, universal_ein: nil, updated_at: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Sentdm::Models::ProfileDetail::Brand} for more details.
+        #
         #   Brand response with nested contact, business, and compliance sections — mirrors
         #   the request structure.
         #
@@ -341,7 +349,7 @@ module Sentdm
         #
         #   @param created_at [Time] When the brand was created
         #
-        #   @param csp_id [String, nil] CSP (Campaign Service Provider) ID
+        #   @param csp_id [String, nil] Deprecated and scheduled for removal. Identifies the Campaign Service Provider t
         #
         #   @param identity_status [Symbol, Sentdm::Models::ProfileDetail::Brand::IdentityStatus, nil]
         #

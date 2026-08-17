@@ -378,7 +378,10 @@ module Sentdm
         sig { params(created_at: Time).void }
         attr_writer :created_at
 
-        # CSP (Campaign Service Provider) ID
+        # Deprecated and scheduled for removal. Identifies the Campaign Service Provider
+        # that registered the brand, which is Sent, so the value is the same for every
+        # brand and every account. Nothing on your side can act on it and there is no
+        # replacement. Stop reading it.
         sig { returns(T.nilable(String)) }
         attr_accessor :csp_id
 
@@ -459,7 +462,10 @@ module Sentdm
           contact: nil,
           # When the brand was created
           created_at: nil,
-          # CSP (Campaign Service Provider) ID
+          # Deprecated and scheduled for removal. Identifies the Campaign Service Provider
+          # that registered the brand, which is Sent, so the value is the same for every
+          # brand and every account. Nothing on your side can act on it and there is no
+          # replacement. Stop reading it.
           csp_id: nil,
           identity_status: nil,
           # Whether this brand is inherited from the parent organization
