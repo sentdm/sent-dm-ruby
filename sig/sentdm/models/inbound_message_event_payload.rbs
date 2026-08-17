@@ -1,0 +1,69 @@
+module Sentdm
+  module Models
+    type inbound_message_event_payload =
+      {
+        account_id: String,
+        channel: String,
+        inbound_number: String,
+        message_id: String,
+        outbound_number: String,
+        received_at: String,
+        text: String?,
+        updated_at: String
+      }
+
+    class InboundMessageEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_reader account_id: String?
+
+      def account_id=: (String) -> String
+
+      attr_reader channel: String?
+
+      def channel=: (String) -> String
+
+      attr_reader inbound_number: String?
+
+      def inbound_number=: (String) -> String
+
+      attr_reader message_id: String?
+
+      def message_id=: (String) -> String
+
+      attr_reader outbound_number: String?
+
+      def outbound_number=: (String) -> String
+
+      attr_reader received_at: String?
+
+      def received_at=: (String) -> String
+
+      attr_accessor text: String?
+
+      attr_reader updated_at: String?
+
+      def updated_at=: (String) -> String
+
+      def initialize: (
+        ?account_id: String,
+        ?channel: String,
+        ?inbound_number: String,
+        ?message_id: String,
+        ?outbound_number: String,
+        ?received_at: String,
+        ?text: String?,
+        ?updated_at: String
+      ) -> void
+
+      def to_hash: -> {
+        account_id: String,
+        channel: String,
+        inbound_number: String,
+        message_id: String,
+        outbound_number: String,
+        received_at: String,
+        text: String?,
+        updated_at: String
+      }
+    end
+  end
+end

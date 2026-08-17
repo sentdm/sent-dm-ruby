@@ -59,7 +59,15 @@ module Sentdm
 
   ErrorDetail = Sentdm::Models::ErrorDetail
 
+  InboundMessageEvent = Sentdm::Models::InboundMessageEvent
+
+  InboundMessageEventPayload = Sentdm::Models::InboundMessageEventPayload
+
   MeRetrieveParams = Sentdm::Models::MeRetrieveParams
+
+  MessageEvent = Sentdm::Models::MessageEvent
+
+  MessageEventPayload = Sentdm::Models::MessageEventPayload
 
   MessageRetrieveActivitiesParams =
     Sentdm::Models::MessageRetrieveActivitiesParams
@@ -113,6 +121,10 @@ module Sentdm
   TemplateDefinition = Sentdm::Models::TemplateDefinition
 
   TemplateDeleteParams = Sentdm::Models::TemplateDeleteParams
+
+  TemplateEvent = Sentdm::Models::TemplateEvent
+
+  TemplateEventPayload = Sentdm::Models::TemplateEventPayload
 
   TemplateFooter = Sentdm::Models::TemplateFooter
 

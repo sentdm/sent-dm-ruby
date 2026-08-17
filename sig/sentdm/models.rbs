@@ -53,7 +53,15 @@ module Sentdm
 
   class ErrorDetail = Sentdm::Models::ErrorDetail
 
+  class InboundMessageEvent = Sentdm::Models::InboundMessageEvent
+
+  class InboundMessageEventPayload = Sentdm::Models::InboundMessageEventPayload
+
   class MeRetrieveParams = Sentdm::Models::MeRetrieveParams
+
+  class MessageEvent = Sentdm::Models::MessageEvent
+
+  class MessageEventPayload = Sentdm::Models::MessageEventPayload
 
   class MessageRetrieveActivitiesParams = Sentdm::Models::MessageRetrieveActivitiesParams
 
@@ -106,6 +114,10 @@ module Sentdm
   class TemplateDefinition = Sentdm::Models::TemplateDefinition
 
   class TemplateDeleteParams = Sentdm::Models::TemplateDeleteParams
+
+  class TemplateEvent = Sentdm::Models::TemplateEvent
+
+  class TemplateEventPayload = Sentdm::Models::TemplateEventPayload
 
   class TemplateFooter = Sentdm::Models::TemplateFooter
 
