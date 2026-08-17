@@ -1,0 +1,39 @@
+module Sentdm
+  module Models
+    type inbound_message_event =
+      {
+        event: String?,
+        field: String,
+        payload: Sentdm::InboundMessageEventPayload?,
+        timestamp: String
+      }
+
+    class InboundMessageEvent < Sentdm::Internal::Type::BaseModel
+      attr_accessor event: String?
+
+      attr_reader field: String?
+
+      def field=: (String) -> String
+
+      attr_accessor payload: Sentdm::InboundMessageEventPayload?
+
+      attr_reader timestamp: String?
+
+      def timestamp=: (String) -> String
+
+      def initialize: (
+        ?event: String?,
+        ?field: String,
+        ?payload: Sentdm::InboundMessageEventPayload?,
+        ?timestamp: String
+      ) -> void
+
+      def to_hash: -> {
+        event: String?,
+        field: String,
+        payload: Sentdm::InboundMessageEventPayload?,
+        timestamp: String
+      }
+    end
+  end
+end
