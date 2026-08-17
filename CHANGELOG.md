@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.27.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.26.0...v0.27.0) (2026-08-17)
+
+
+### Features
+
+* **api:** sync OpenAPI spec from production ([3913d60](https://github.com/sentdm/sent-dm-ruby/commit/3913d6099298feaa278b76ac8a44f7809e13e815))
+* **api:** sync OpenAPI spec from production ([cb9fb87](https://github.com/sentdm/sent-dm-ruby/commit/cb9fb87ae298bc8c33adcc9f3960102215502d47))
+* **api:** sync OpenAPI spec from production ([8690f90](https://github.com/sentdm/sent-dm-ruby/commit/8690f905c974d5c45da6f6b1c9b0883b550c871f))
+* **sdk:** expose the delivered webhook payloads as models ([4b43f3f](https://github.com/sentdm/sent-dm-ruby/commit/4b43f3f16729ec3ee3736149308ffc7ada08480a))
+
+
+### Chores
+
+* add eager seal-dispatch workflow ([c005db3](https://github.com/sentdm/sent-dm-ruby/commit/c005db35357a408367f76e964e00912f5fc83116))
+
 ## [0.26.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.25.0...v0.26.0) (2026-08-08)
 
 
