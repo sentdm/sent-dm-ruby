@@ -2,7 +2,17 @@
 
 module Sentdm
   module Resources
-    # Configure webhook endpoints for real-time event delivery
+    # Delivery reports and inbound messages, pushed to you.
+    #
+    # Subscribe an endpoint to the event types you care about —
+    # `GET /v3/webhooks/event-types` lists them — and we POST each one as it happens,
+    # retrying on failure. Polling `GET /v3/messages/{id}` works and does not scale.
+    #
+    # **Verify the signature.** Every delivery is signed with your endpoint's secret;
+    # an unverified endpoint is one anybody can post to. `rotate-secret` replaces it,
+    # `test` sends a specimen event, and `GET /v3/webhooks/{id}/events` shows what we
+    # tried to deliver and what your endpoint answered — which is the first place to
+    # look when something appears to be missing.
     class Webhooks
       # Creates a new webhook endpoint for the authenticated customer.
       sig do
@@ -17,7 +27,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseWebhook)
+        ).returns(Sentdm::Models::WebhookCreateResponse)
       end
       def create(
         # Body param
@@ -53,7 +63,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseWebhook)
+        ).returns(Sentdm::Models::WebhookRetrieveResponse)
       end
       def retrieve(
         id,
@@ -78,7 +88,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseWebhook)
+        ).returns(Sentdm::Models::WebhookUpdateResponse)
       end
       def update(
         # Path param
@@ -267,7 +277,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseWebhook)
+        ).returns(Sentdm::Models::WebhookToggleStatusResponse)
       end
       def toggle_status(
         # Path param

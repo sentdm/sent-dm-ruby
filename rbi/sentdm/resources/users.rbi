@@ -2,7 +2,12 @@
 
 module Sentdm
   module Resources
-    # Invite, update, and manage organization users and roles
+    # The people who can sign in to your organization, and what each may do.
+    #
+    # Users are dashboard access and nothing else — they do not send, and removing one
+    # does not affect traffic. An API key is not a user: it belongs to the
+    # organization or to a sender profile, so revoking a person's access leaves your
+    # integration running.
     class Users
       # Retrieves detailed information about a specific user in an organization or
       # profile. Requires developer role or higher.
@@ -11,7 +16,7 @@ module Sentdm
           user_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfUser)
+        ).returns(Sentdm::Models::UserRetrieveResponse)
       end
       def retrieve(
         # User ID from route parameter
@@ -52,7 +57,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfUser)
+        ).returns(Sentdm::Models::UserInviteResponse)
       end
       def invite(
         # Body param: User email address (required)
@@ -110,7 +115,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfUser)
+        ).returns(Sentdm::Models::UserUpdateRoleResponse)
       end
       def update_role(
         # Path param: User ID from route parameter

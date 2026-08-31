@@ -2,7 +2,15 @@
 
 module Sentdm
   module Resources
-    # Create, update, and manage customer contact lists
+    # The people you message, and their channel identities.
+    #
+    # A contact holds one identity per channel — a phone number, a WhatsApp number —
+    # so routing can choose between them for the same person. Opt-out is recorded
+    # against the contact and honoured on every send, whichever channel it came
+    # through.
+    #
+    # `GET /v3/contacts/{id}/message-summary` is the per-contact view of what you have
+    # sent and what happened to it.
     class Contacts
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ContactCreateParams} for more details.
@@ -22,7 +30,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContact]
+      # @return [Sentdm::Models::ContactCreateResponse]
       #
       # @see Sentdm::Models::ContactCreateParams
       def create(params)
@@ -33,7 +41,7 @@ module Sentdm
           path: "v3/contacts",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseOfContact,
+          model: Sentdm::Models::ContactCreateResponse,
           options: options
         )
       end
@@ -53,7 +61,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContact]
+      # @return [Sentdm::Models::ContactRetrieveResponse]
       #
       # @see Sentdm::Models::ContactRetrieveParams
       def retrieve(id, params = {})
@@ -62,7 +70,7 @@ module Sentdm
           method: :get,
           path: ["v3/contacts/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfContact,
+          model: Sentdm::Models::ContactRetrieveResponse,
           options: options
         )
       end
@@ -70,8 +78,7 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ContactUpdateParams} for more details.
       #
-      # Updates a contact's default channel and/or opt-out status. Inherited contacts
-      # cannot be updated.
+      # Updates a contact's default channel and/or opt-out status.
       #
       # @overload update(id, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
@@ -89,7 +96,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContact]
+      # @return [Sentdm::Models::ContactUpdateResponse]
       #
       # @see Sentdm::Models::ContactUpdateParams
       def update(id, params = {})
@@ -100,7 +107,7 @@ module Sentdm
           path: ["v3/contacts/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseOfContact,
+          model: Sentdm::Models::ContactUpdateResponse,
           options: options
         )
       end
@@ -144,11 +151,21 @@ module Sentdm
         )
       end
 
+      # @deprecated
+      #
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ContactDeleteParams} for more details.
       #
-      # Dissociates a contact from the authenticated customer. Inherited contacts cannot
-      # be deleted.
+      # **Deprecated.** Use `PATCH /v3/contacts/{id}` with `{"opt_out": true}` instead,
+      # and expect this to be removed in a future release. It still behaves exactly as
+      # before, so nothing needs to change today.
+      #
+      # Opting a contact out stops every send to them, which is what deleting one was
+      # mostly used for — and it keeps the record of who they were and that they asked.
+      # A delete discards the consent history along with the contact, which is the part
+      # you need if anyone ever asks why you stopped, or why you started again.
+      #
+      # Dissociates a contact from the authenticated customer.
       #
       # @overload delete(id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
@@ -192,7 +209,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfContactMessageSummary]
+      # @return [Sentdm::Models::ContactRetrieveMessageSummaryResponse]
       #
       # @see Sentdm::Models::ContactRetrieveMessageSummaryParams
       def retrieve_message_summary(contact_id, params = {})
@@ -201,7 +218,7 @@ module Sentdm
           method: :get,
           path: ["v3/contacts/%1$s/message-summary", contact_id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfContactMessageSummary,
+          model: Sentdm::Models::ContactRetrieveMessageSummaryResponse,
           options: options
         )
       end

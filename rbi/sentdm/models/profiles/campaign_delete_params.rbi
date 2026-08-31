@@ -3,7 +3,7 @@
 module Sentdm
   module Models
     module Profiles
-      class CampaignDeleteParams < Sentdm::Models::MutationRequest
+      class CampaignDeleteParams < Sentdm::Internal::Type::BaseModel
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
@@ -21,6 +21,14 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :campaign_id
 
+        # Sandbox flag - when true, the operation is simulated without side effects Useful
+        # for testing integrations without actual execution
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :sandbox
+
+        sig { params(sandbox: T::Boolean).void }
+        attr_writer :sandbox
+
         sig { returns(T.nilable(String)) }
         attr_reader :x_profile_id
 
@@ -31,6 +39,7 @@ module Sentdm
           params(
             profile_id: String,
             campaign_id: String,
+            sandbox: T::Boolean,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -38,6 +47,9 @@ module Sentdm
         def self.new(
           profile_id:,
           campaign_id:,
+          # Sandbox flag - when true, the operation is simulated without side effects Useful
+          # for testing integrations without actual execution
+          sandbox: nil,
           x_profile_id: nil,
           request_options: {}
         )
@@ -48,6 +60,7 @@ module Sentdm
             {
               profile_id: String,
               campaign_id: String,
+              sandbox: T::Boolean,
               x_profile_id: String,
               request_options: Sentdm::RequestOptions
             }

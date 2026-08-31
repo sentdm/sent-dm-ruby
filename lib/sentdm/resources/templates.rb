@@ -2,7 +2,13 @@
 
 module Sentdm
   module Resources
-    # Manage message templates with variable substitution
+    # Reusable message bodies with named variables.
+    #
+    # A template is substituted at send time from the values you pass, so the copy
+    # lives here rather than in your application. WhatsApp templates additionally need
+    # Meta's approval before they can be sent, and a template's channel status reports
+    # where that stands — an approved SMS template and an unapproved WhatsApp one are
+    # the same template in two states.
     class Templates
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::TemplateCreateParams} for more details.
@@ -31,7 +37,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseTemplate]
+      # @return [Sentdm::Models::TemplateCreateResponse]
       #
       # @see Sentdm::Models::TemplateCreateParams
       def create(params = {})
@@ -42,7 +48,7 @@ module Sentdm
           path: "v3/templates",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseTemplate,
+          model: Sentdm::Models::TemplateCreateResponse,
           options: options
         )
       end
@@ -61,7 +67,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseTemplate]
+      # @return [Sentdm::Models::TemplateRetrieveResponse]
       #
       # @see Sentdm::Models::TemplateRetrieveParams
       def retrieve(id, params = {})
@@ -70,7 +76,7 @@ module Sentdm
           method: :get,
           path: ["v3/templates/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseTemplate,
+          model: Sentdm::Models::TemplateRetrieveResponse,
           options: options
         )
       end
@@ -103,7 +109,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseTemplate]
+      # @return [Sentdm::Models::TemplateUpdateResponse]
       #
       # @see Sentdm::Models::TemplateUpdateParams
       def update(id, params = {})
@@ -114,7 +120,7 @@ module Sentdm
           path: ["v3/templates/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseTemplate,
+          model: Sentdm::Models::TemplateUpdateResponse,
           options: options
         )
       end
@@ -133,7 +139,7 @@ module Sentdm
       #
       # @param category [String, nil] Query param: Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
-      # @param is_welcome_playground [Boolean, nil] Query param: Optional filter by welcome playground flag
+      # @param is_welcome_playground [Boolean, nil] Query param: Accepted and ignored. It used to filter on the welcome-playground m
       #
       # @param search [String, nil] Query param: Optional search term for filtering templates
       #

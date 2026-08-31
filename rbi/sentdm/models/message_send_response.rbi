@@ -8,7 +8,16 @@ module Sentdm
           T.any(Sentdm::Models::MessageSendResponse, Sentdm::Internal::AnyHash)
         end
 
-      # Response for the multi-recipient send message endpoint
+      # The result of a multi-recipient send.
+      #
+      # Declared here rather than in the service layer. POST /v3/messages used to
+      # publish MessageSendResult — a type in Common.Services.Messaging.Contracts — so
+      # the public contract was whatever the send service happened to return, and
+      # changing that service for an internal reason changed the API. The service keeps
+      # its result; this is what a caller sees, and the mapping between them is a
+      # decision the endpoint makes.
+      #
+      # The wire is unchanged by the move: same names, same values.
       sig { returns(T.nilable(Sentdm::Models::MessageSendResponse::Data)) }
       attr_reader :data
 
@@ -20,17 +29,23 @@ module Sentdm
       attr_writer :data
 
       # Error information
-      sig { returns(T.nilable(Sentdm::ErrorDetail)) }
+      sig { returns(T.nilable(Sentdm::Models::MessageSendResponse::Error)) }
       attr_reader :error
 
-      sig { params(error: T.nilable(Sentdm::ErrorDetail::OrHash)).void }
+      sig do
+        params(
+          error: T.nilable(Sentdm::Models::MessageSendResponse::Error::OrHash)
+        ).void
+      end
       attr_writer :error
 
       # Request and response metadata
-      sig { returns(T.nilable(Sentdm::APIMeta)) }
+      sig { returns(T.nilable(Sentdm::Models::MessageSendResponse::Meta)) }
       attr_reader :meta
 
-      sig { params(meta: Sentdm::APIMeta::OrHash).void }
+      sig do
+        params(meta: Sentdm::Models::MessageSendResponse::Meta::OrHash).void
+      end
       attr_writer :meta
 
       # Indicates whether the request was successful
@@ -44,13 +59,22 @@ module Sentdm
       sig do
         params(
           data: T.nilable(Sentdm::Models::MessageSendResponse::Data::OrHash),
-          error: T.nilable(Sentdm::ErrorDetail::OrHash),
-          meta: Sentdm::APIMeta::OrHash,
+          error: T.nilable(Sentdm::Models::MessageSendResponse::Error::OrHash),
+          meta: Sentdm::Models::MessageSendResponse::Meta::OrHash,
           success: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
-        # Response for the multi-recipient send message endpoint
+        # The result of a multi-recipient send.
+        #
+        # Declared here rather than in the service layer. POST /v3/messages used to
+        # publish MessageSendResult — a type in Common.Services.Messaging.Contracts — so
+        # the public contract was whatever the send service happened to return, and
+        # changing that service for an internal reason changed the API. The service keeps
+        # its result; this is what a caller sees, and the mapping between them is a
+        # decision the endpoint makes.
+        #
+        # The wire is unchanged by the move: same names, same values.
         data: nil,
         # Error information
         error: nil,
@@ -65,8 +89,8 @@ module Sentdm
         override.returns(
           {
             data: T.nilable(Sentdm::Models::MessageSendResponse::Data),
-            error: T.nilable(Sentdm::ErrorDetail),
-            meta: Sentdm::APIMeta,
+            error: T.nilable(Sentdm::Models::MessageSendResponse::Error),
+            meta: Sentdm::Models::MessageSendResponse::Meta,
             success: T::Boolean
           }
         )
@@ -83,7 +107,6 @@ module Sentdm
             )
           end
 
-        # Per-recipient message results
         sig do
           returns(
             T.nilable(
@@ -103,28 +126,35 @@ module Sentdm
         end
         attr_writer :recipients
 
-        # Overall request status: "QUEUED" when the batch has been accepted for delivery.
+        # Overall status — QUEUED once the batch is accepted for delivery.
         sig { returns(T.nilable(String)) }
         attr_reader :status
 
         sig { params(status: String).void }
         attr_writer :status
 
-        # Template ID that was used
         sig { returns(T.nilable(String)) }
         attr_reader :template_id
 
         sig { params(template_id: String).void }
         attr_writer :template_id
 
-        # Template display name
         sig { returns(T.nilable(String)) }
         attr_reader :template_name
 
         sig { params(template_name: String).void }
         attr_writer :template_name
 
-        # Response for the multi-recipient send message endpoint
+        # The result of a multi-recipient send.
+        #
+        # Declared here rather than in the service layer. POST /v3/messages used to
+        # publish MessageSendResult — a type in Common.Services.Messaging.Contracts — so
+        # the public contract was whatever the send service happened to return, and
+        # changing that service for an internal reason changed the API. The service keeps
+        # its result; this is what a caller sees, and the mapping between them is a
+        # decision the endpoint makes.
+        #
+        # The wire is unchanged by the move: same names, same values.
         sig do
           params(
             recipients:
@@ -137,13 +167,10 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
-          # Per-recipient message results
           recipients: nil,
-          # Overall request status: "QUEUED" when the batch has been accepted for delivery.
+          # Overall status — QUEUED once the batch is accepted for delivery.
           status: nil,
-          # Template ID that was used
           template_id: nil,
-          # Template display name
           template_name: nil
         )
         end
@@ -171,31 +198,30 @@ module Sentdm
               )
             end
 
-          # Resolved template body text for this recipient's channel, or null for
-          # auto-detect
+          # Resolved template body for this recipient's channel, or null when the channel is
+          # auto-detected.
           sig { returns(T.nilable(String)) }
           attr_accessor :body
 
-          # Channel this message will be sent on (e.g. "sms", "whatsapp"), or null for
-          # auto-detect
+          # Channel this message will be sent on — sms, whatsapp — or null to auto-detect.
           sig { returns(T.nilable(String)) }
           attr_accessor :channel
 
-          # Unique message identifier for tracking this recipient's message
+          # Identifier for tracking this recipient's message.
           sig { returns(T.nilable(String)) }
           attr_reader :message_id
 
           sig { params(message_id: String).void }
           attr_writer :message_id
 
-          # Phone number in E.164 format
+          # Phone number in E.164 format.
           sig { returns(T.nilable(String)) }
           attr_reader :to
 
           sig { params(to: String).void }
           attr_writer :to
 
-          # Per-recipient result in the send message response
+          # What one recipient of a send got, as the API reports it.
           sig do
             params(
               body: T.nilable(String),
@@ -205,15 +231,14 @@ module Sentdm
             ).returns(T.attached_class)
           end
           def self.new(
-            # Resolved template body text for this recipient's channel, or null for
-            # auto-detect
+            # Resolved template body for this recipient's channel, or null when the channel is
+            # auto-detected.
             body: nil,
-            # Channel this message will be sent on (e.g. "sms", "whatsapp"), or null for
-            # auto-detect
+            # Channel this message will be sent on — sms, whatsapp — or null to auto-detect.
             channel: nil,
-            # Unique message identifier for tracking this recipient's message
+            # Identifier for tracking this recipient's message.
             message_id: nil,
-            # Phone number in E.164 format
+            # Phone number in E.164 format.
             to: nil
           )
           end
@@ -230,6 +255,127 @@ module Sentdm
           end
           def to_hash
           end
+        end
+      end
+
+      class Error < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::Models::MessageSendResponse::Error,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        # Machine-readable error code (e.g., "RESOURCE_001")
+        sig { returns(T.nilable(String)) }
+        attr_reader :code
+
+        sig { params(code: String).void }
+        attr_writer :code
+
+        # Additional validation error details (field-level errors)
+        sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
+        attr_accessor :details
+
+        # URL to documentation about this error
+        sig { returns(T.nilable(String)) }
+        attr_accessor :doc_url
+
+        # Human-readable error message
+        sig { returns(T.nilable(String)) }
+        attr_reader :message
+
+        sig { params(message: String).void }
+        attr_writer :message
+
+        # Error information
+        sig do
+          params(
+            code: String,
+            details: T.nilable(T::Hash[Symbol, T::Array[String]]),
+            doc_url: T.nilable(String),
+            message: String
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Machine-readable error code (e.g., "RESOURCE_001")
+          code: nil,
+          # Additional validation error details (field-level errors)
+          details: nil,
+          # URL to documentation about this error
+          doc_url: nil,
+          # Human-readable error message
+          message: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              code: String,
+              details: T.nilable(T::Hash[Symbol, T::Array[String]]),
+              doc_url: T.nilable(String),
+              message: String
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+
+      class Meta < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::Models::MessageSendResponse::Meta,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        # Unique identifier for this request (for tracing and support)
+        sig { returns(T.nilable(String)) }
+        attr_reader :request_id
+
+        sig { params(request_id: String).void }
+        attr_writer :request_id
+
+        # Server timestamp when the response was generated
+        sig { returns(T.nilable(Time)) }
+        attr_reader :timestamp
+
+        sig { params(timestamp: Time).void }
+        attr_writer :timestamp
+
+        # API version used for this request
+        sig { returns(T.nilable(String)) }
+        attr_reader :version
+
+        sig { params(version: String).void }
+        attr_writer :version
+
+        # Request and response metadata
+        sig do
+          params(request_id: String, timestamp: Time, version: String).returns(
+            T.attached_class
+          )
+        end
+        def self.new(
+          # Unique identifier for this request (for tracing and support)
+          request_id: nil,
+          # Server timestamp when the response was generated
+          timestamp: nil,
+          # API version used for this request
+          version: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            { request_id: String, timestamp: Time, version: String }
+          )
+        end
+        def to_hash
         end
       end
     end

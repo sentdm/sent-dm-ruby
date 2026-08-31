@@ -6,7 +6,7 @@ module Sentdm
         page_size: Integer,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::APIResponseOfConversationMessagesList
+      ) -> Sentdm::Models::ConversationListResponse
 
       def list_messages: (
         String id,
@@ -14,7 +14,7 @@ module Sentdm
         page_size: Integer,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::APIResponseOfConversationMessagesList
+      ) -> Sentdm::Models::ConversationListMessagesResponse
 
       def initialize: (client: Sentdm::Client) -> void
     end

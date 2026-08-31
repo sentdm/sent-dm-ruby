@@ -2,6 +2,14 @@
 
 module Sentdm
   module Resources
+    # Inbound and outbound messages, grouped by the person they are with.
+    #
+    # A conversation is the thread for one contact across every channel — a reply by
+    # SMS and one by WhatsApp belong to the same conversation, because they are the
+    # same person talking to you.
+    #
+    # Read-only. Sending is **Messages**; a reply arrives here and through your
+    # webhooks.
     class Conversations
       # Retrieves a paginated list of the authenticated customer's messages across all
       # conversations, ordered by created date (most recent first).
@@ -11,7 +19,7 @@ module Sentdm
           page_size: Integer,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfConversationMessagesList)
+        ).returns(Sentdm::Models::ConversationListResponse)
       end
       def list(
         # Query param
@@ -35,7 +43,7 @@ module Sentdm
           page_size: Integer,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfConversationMessagesList)
+        ).returns(Sentdm::Models::ConversationListMessagesResponse)
       end
       def list_messages(
         # Path param: Conversation id from the route.
