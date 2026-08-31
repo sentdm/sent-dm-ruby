@@ -26,7 +26,11 @@ module Sentdm
       optional :category, String, nil?: true
 
       # @!attribute is_welcome_playground
-      #   Optional filter by welcome playground flag
+      #   Accepted and ignored. It used to filter on the welcome-playground marker inside
+      #   a template's LOB details; that filter is gone and nothing reads this value, so
+      #   sending it neither narrows nor widens the result. Retained only so a client
+      #   still passing is_welcome_playground keeps binding instead of the request shape
+      #   changing under it.
       #
       #   @return [Boolean, nil]
       optional :is_welcome_playground, Sentdm::Internal::Type::Boolean, nil?: true
@@ -49,13 +53,16 @@ module Sentdm
       optional :x_profile_id, String
 
       # @!method initialize(page:, page_size:, category: nil, is_welcome_playground: nil, search: nil, status: nil, x_profile_id: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::TemplateListParams} for more details.
+      #
       #   @param page [Integer] Page number (1-indexed)
       #
       #   @param page_size [Integer] Number of items per page
       #
       #   @param category [String, nil] Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
-      #   @param is_welcome_playground [Boolean, nil] Optional filter by welcome playground flag
+      #   @param is_welcome_playground [Boolean, nil] Accepted and ignored. It used to filter on the welcome-playground marker inside
       #
       #   @param search [String, nil] Optional search term for filtering templates
       #

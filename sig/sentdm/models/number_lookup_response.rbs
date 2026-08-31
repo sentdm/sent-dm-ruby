@@ -3,19 +3,21 @@ module Sentdm
     type number_lookup_response =
       {
         data: Sentdm::Models::NumberLookupResponse::Data?,
-        error: Sentdm::ErrorDetail?,
-        meta: Sentdm::APIMeta,
+        error: Sentdm::Models::NumberLookupResponse::Error?,
+        meta: Sentdm::Models::NumberLookupResponse::Meta,
         success: bool
       }
 
     class NumberLookupResponse < Sentdm::Internal::Type::BaseModel
       attr_accessor data: Sentdm::Models::NumberLookupResponse::Data?
 
-      attr_accessor error: Sentdm::ErrorDetail?
+      attr_accessor error: Sentdm::Models::NumberLookupResponse::Error?
 
-      attr_reader meta: Sentdm::APIMeta?
+      attr_reader meta: Sentdm::Models::NumberLookupResponse::Meta?
 
-      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+      def meta=: (
+        Sentdm::Models::NumberLookupResponse::Meta
+      ) -> Sentdm::Models::NumberLookupResponse::Meta
 
       attr_reader success: bool?
 
@@ -23,15 +25,15 @@ module Sentdm
 
       def initialize: (
         ?data: Sentdm::Models::NumberLookupResponse::Data?,
-        ?error: Sentdm::ErrorDetail?,
-        ?meta: Sentdm::APIMeta,
+        ?error: Sentdm::Models::NumberLookupResponse::Error?,
+        ?meta: Sentdm::Models::NumberLookupResponse::Meta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Sentdm::Models::NumberLookupResponse::Data?,
-        error: Sentdm::ErrorDetail?,
-        meta: Sentdm::APIMeta,
+        error: Sentdm::Models::NumberLookupResponse::Error?,
+        meta: Sentdm::Models::NumberLookupResponse::Meta,
         success: bool
       }
 
@@ -94,6 +96,66 @@ module Sentdm
           mobile_network_code: String?,
           phone_number: String
         }
+      end
+
+      type error =
+        {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+
+      class Error < Sentdm::Internal::Type::BaseModel
+        attr_reader code: String?
+
+        def code=: (String) -> String
+
+        attr_accessor details: ::Hash[Symbol, ::Array[String]]?
+
+        attr_accessor doc_url: String?
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (
+          ?code: String,
+          ?details: ::Hash[Symbol, ::Array[String]]?,
+          ?doc_url: String?,
+          ?message: String
+        ) -> void
+
+        def to_hash: -> {
+          code: String,
+          details: ::Hash[Symbol, ::Array[String]]?,
+          doc_url: String?,
+          message: String
+        }
+      end
+
+      type meta = { request_id: String, timestamp: Time, version: String }
+
+      class Meta < Sentdm::Internal::Type::BaseModel
+        attr_reader request_id: String?
+
+        def request_id=: (String) -> String
+
+        attr_reader timestamp: Time?
+
+        def timestamp=: (Time) -> Time
+
+        attr_reader version: String?
+
+        def version=: (String) -> String
+
+        def initialize: (
+          ?request_id: String,
+          ?timestamp: Time,
+          ?version: String
+        ) -> void
+
+        def to_hash: -> { request_id: String, timestamp: Time, version: String }
       end
     end
   end

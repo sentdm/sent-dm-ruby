@@ -3,10 +3,24 @@
 module Sentdm
   module Resources
     class Profiles
-      # Manage organization profiles
+      # **Deprecated — use Sender Profiles.**
+      #
+      # The original profile resource, kept because it has live callers. It still works,
+      # and its replacement is `/v3/sender-profiles`, which takes the identity and the
+      # campaign in one call instead of across three.
+      #
+      # New integrations should not start here.
       class Campaigns
+        # @deprecated
+        #
         # Some parameter documentations has been truncated, see
         # {Sentdm::Models::Profiles::CampaignCreateParams} for more details.
+        #
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
         #
         # Creates a new campaign scoped under the brand of the specified profile. Each
         # campaign must include at least one use case with sample messages.
@@ -15,7 +29,7 @@ module Sentdm
         #
         # @param profile_id [String] Path param: Profile ID from route
         #
-        # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data for create or update operation
+        # @param campaign [Sentdm::Models::Profiles::CampaignCreateParams::Campaign] Body param: Campaign data for create or update operation
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -25,7 +39,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::APIResponseOfBrandCampaign]
+        # @return [Sentdm::Models::Profiles::CampaignCreateResponse]
         #
         # @see Sentdm::Models::Profiles::CampaignCreateParams
         def create(profile_id, params)
@@ -36,13 +50,21 @@ module Sentdm
             path: ["v3/profiles/%1$s/campaigns", profile_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
-            model: Sentdm::Profiles::APIResponseOfBrandCampaign,
+            model: Sentdm::Models::Profiles::CampaignCreateResponse,
             options: options
           )
         end
 
+        # @deprecated
+        #
         # Some parameter documentations has been truncated, see
         # {Sentdm::Models::Profiles::CampaignUpdateParams} for more details.
+        #
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
         #
         # Updates an existing campaign under the brand of the specified profile. Cannot
         # update campaigns that have already been submitted to TCR.
@@ -53,7 +75,7 @@ module Sentdm
         #
         # @param profile_id [String] Path param: Profile ID from route
         #
-        # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data for create or update operation
+        # @param campaign [Sentdm::Models::Profiles::CampaignUpdateParams::Campaign] Body param: Campaign data for create or update operation
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -63,7 +85,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::APIResponseOfBrandCampaign]
+        # @return [Sentdm::Models::Profiles::CampaignUpdateResponse]
         #
         # @see Sentdm::Models::Profiles::CampaignUpdateParams
         def update(campaign_id, params)
@@ -78,13 +100,21 @@ module Sentdm
             path: ["v3/profiles/%1$s/campaigns/%2$s", profile_id, campaign_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
-            model: Sentdm::Profiles::APIResponseOfBrandCampaign,
+            model: Sentdm::Models::Profiles::CampaignUpdateResponse,
             options: options
           )
         end
 
+        # @deprecated
+        #
         # Some parameter documentations has been truncated, see
         # {Sentdm::Models::Profiles::CampaignListParams} for more details.
+        #
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
         #
         # Retrieves all campaigns linked to the profile's brand, including use cases and
         # sample messages. Returns inherited campaigns if inherit_tcr_campaign=true.
@@ -97,7 +127,7 @@ module Sentdm
         #
         # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Sentdm::Models::Profiles::APIResponseOfListOfBrandCampaign]
+        # @return [Sentdm::Models::Profiles::CampaignListResponse]
         #
         # @see Sentdm::Models::Profiles::CampaignListParams
         def list(profile_id, params = {})
@@ -106,13 +136,21 @@ module Sentdm
             method: :get,
             path: ["v3/profiles/%1$s/campaigns", profile_id],
             headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-            model: Sentdm::Profiles::APIResponseOfListOfBrandCampaign,
+            model: Sentdm::Models::Profiles::CampaignListResponse,
             options: options
           )
         end
 
+        # @deprecated
+        #
         # Some parameter documentations has been truncated, see
         # {Sentdm::Models::Profiles::CampaignDeleteParams} for more details.
+        #
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
         #
         # Deletes a campaign by ID from the brand of the specified profile. The profile
         # must belong to the authenticated organization.
