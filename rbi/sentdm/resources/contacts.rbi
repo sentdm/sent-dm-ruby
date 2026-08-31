@@ -2,7 +2,15 @@
 
 module Sentdm
   module Resources
-    # Create, update, and manage customer contact lists
+    # The people you message, and their channel identities.
+    #
+    # A contact holds one identity per channel — a phone number, a WhatsApp number —
+    # so routing can choose between them for the same person. Opt-out is recorded
+    # against the contact and honoured on every send, whichever channel it came
+    # through.
+    #
+    # `GET /v3/contacts/{id}/message-summary` is the per-contact view of what you have
+    # sent and what happened to it.
     class Contacts
       # Creates a new contact by phone number and associates it with the authenticated
       # customer.
@@ -13,7 +21,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContact)
+        ).returns(Sentdm::Models::ContactCreateResponse)
       end
       def create(
         # Body param: Phone number of the contact to create
@@ -41,7 +49,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContact)
+        ).returns(Sentdm::Models::ContactRetrieveResponse)
       end
       def retrieve(
         # Contact ID from route parameter
@@ -53,8 +61,7 @@ module Sentdm
       )
       end
 
-      # Updates a contact's default channel and/or opt-out status. Inherited contacts
-      # cannot be updated.
+      # Updates a contact's default channel and/or opt-out status.
       sig do
         params(
           id: String,
@@ -64,7 +71,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContact)
+        ).returns(Sentdm::Models::ContactUpdateResponse)
       end
       def update(
         # Path param: Contact ID from route parameter
@@ -121,8 +128,16 @@ module Sentdm
       )
       end
 
-      # Dissociates a contact from the authenticated customer. Inherited contacts cannot
-      # be deleted.
+      # **Deprecated.** Use `PATCH /v3/contacts/{id}` with `{"opt_out": true}` instead,
+      # and expect this to be removed in a future release. It still behaves exactly as
+      # before, so nothing needs to change today.
+      #
+      # Opting a contact out stops every send to them, which is what deleting one was
+      # mostly used for — and it keeps the record of who they were and that they asked.
+      # A delete discards the consent history along with the contact, which is the part
+      # you need if anyone ever asks why you stopped, or why you started again.
+      #
+      # Dissociates a contact from the authenticated customer.
       sig do
         params(
           id: String,
@@ -154,7 +169,7 @@ module Sentdm
           contact_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfContactMessageSummary)
+        ).returns(Sentdm::Models::ContactRetrieveMessageSummaryResponse)
       end
       def retrieve_message_summary(
         contact_id,

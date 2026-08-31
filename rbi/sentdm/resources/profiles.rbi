@@ -2,35 +2,45 @@
 
 module Sentdm
   module Resources
-    # Manage organization profiles
+    # **Deprecated — use Sender Profiles.**
+    #
+    # The original profile resource, kept because it has live callers. It still works,
+    # and its replacement is `/v3/sender-profiles`, which takes the identity and the
+    # campaign in one call instead of across three.
+    #
+    # New integrations should not start here.
     class Profiles
-      # Manage organization profiles
+      # **Deprecated — use Sender Profiles.**
+      #
+      # The original profile resource, kept because it has live callers. It still works,
+      # and its replacement is `/v3/sender-profiles`, which takes the identity and the
+      # campaign in one call instead of across three.
+      #
+      # New integrations should not start here.
       sig { returns(Sentdm::Resources::Profiles::Campaigns) }
       attr_reader :campaigns
 
+      # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+      # removed in a future release. It still behaves exactly as before, so nothing
+      # needs to change today — but new integrations should use `/v3/sender-profiles`,
+      # which models a profile's markets, compliance, brand, campaigns and billing
+      # explicitly.
+      #
       # Creates a new sender profile within an organization. Profiles represent
       # different brands, departments, or use cases, each with their own messaging
       # configuration and settings. Requires admin role in the organization.
       #
       # ## WhatsApp Business Account
       #
-      # Every profile must be linked to a WhatsApp Business Account. There are two ways
-      # to do this:
+      # Every profile owns its own WhatsApp Business Account — accounts are never shared
+      # between profiles or inherited from the organization. Provide a
+      # `whatsapp_business_account` object with `waba_id`, `phone_number_id`, and
+      # `access_token`. Obtain these from Meta Business Manager by creating a System
+      # User with `whatsapp_business_messaging` and `whatsapp_business_management`
+      # permissions.
       #
-      # **1. Inherit from organization (default)** — Omit the
-      # `whatsapp_business_account` field. The profile will share the organization's
-      # WhatsApp Business Account, which must have been set up via WhatsApp Embedded
-      # Signup. This is the recommended path for most use cases.
-      #
-      # **2. Direct credentials** — Provide a `whatsapp_business_account` object with
-      # `waba_id`, `phone_number_id`, and `access_token`. Use this when the profile
-      # needs its own independent WhatsApp Business Account. Obtain these from Meta
-      # Business Manager by creating a System User with `whatsapp_business_messaging`
-      # and `whatsapp_business_management` permissions.
-      #
-      # If the `whatsapp_business_account` field is omitted and the organization has no
-      # WhatsApp Business Account configured, the request will be rejected with
-      # HTTP 422.
+      # Omit the field and the profile is created without WhatsApp, staying incomplete
+      # until it has an account of its own.
       #
       # ## Brand
       #
@@ -46,11 +56,12 @@ module Sentdm
       # when `billing_model` is `"organization"` is not allowed.
       sig do
         params(
-          allow_contact_sharing: T::Boolean,
-          allow_template_sharing: T::Boolean,
-          billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
+          allow_contact_sharing: T.nilable(T::Boolean),
+          allow_template_sharing: T.nilable(T::Boolean),
+          billing_contact:
+            T.nilable(Sentdm::ProfileCreateParams::BillingContact::OrHash),
           billing_model: T.nilable(String),
-          brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
+          brand: T.nilable(Sentdm::ProfileCreateParams::Brand::OrHash),
           description: T.nilable(String),
           icon: T.nilable(String),
           inherit_contacts: T.nilable(T::Boolean),
@@ -58,7 +69,8 @@ module Sentdm
           inherit_tcr_campaign: T.nilable(T::Boolean),
           inherit_templates: T.nilable(T::Boolean),
           name: String,
-          payment_details: T.nilable(Sentdm::PaymentDetails::OrHash),
+          payment_details:
+            T.nilable(Sentdm::ProfileCreateParams::PaymentDetails::OrHash),
           sandbox: T::Boolean,
           short_name: T.nilable(String),
           whatsapp_business_account:
@@ -68,12 +80,27 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfProfileDetail)
+        ).returns(Sentdm::Models::ProfileCreateResponse)
       end
       def create(
-        # Body param: Whether contacts are shared across profiles (default: false)
+        # Body param: Deprecated. Accepted and ignored. Contact and template sharing
+        # between sender profiles is gone — a profile sees only what it owns, and the
+        # organization still sees all of its profiles' contacts and templates through
+        # read-time widening. The four columns behind these flags were dropped by
+        # M260720120000.
+        #
+        # Bound rather than dropped so the properties survive on the wire and in a
+        # generated client: an SDK that assigns them keeps compiling, which is the
+        # compatibility this exists for. Deliberately not refused either — a 400 would
+        # break an integration that is otherwise working, and the capability they ask for
+        # is gone either way. Same rule as SendingPhoneNumberProfileId.
+        #
+        # The read is what makes this survivable: every profile reports all four as false,
+        # so a caller that checks its own write can see it did not take. Requests carrying
+        # one are logged, so we can tell when nobody sends them any more and the fields
+        # can go for real.
         allow_contact_sharing: nil,
-        # Body param: Whether templates are shared across profiles (default: false)
+        # Body param
         allow_template_sharing: nil,
         # Body param: Billing contact information for a profile. Required when
         # billing_model is "profile" or "profile_and_organization".
@@ -94,23 +121,21 @@ module Sentdm
         description: nil,
         # Body param: Profile icon URL (optional)
         icon: nil,
-        # Body param: Whether this profile inherits contacts from organization (default:
-        # true)
+        # Body param
         inherit_contacts: nil,
         # Body param: Whether this profile inherits TCR brand from organization (default:
-        # true)
+        # false)
         inherit_tcr_brand: nil,
         # Body param: Whether this profile inherits TCR campaign from organization
-        # (default: true)
+        # (default: false)
         inherit_tcr_campaign: nil,
-        # Body param: Whether this profile inherits templates from organization (default:
-        # true)
+        # Body param
         inherit_templates: nil,
         # Body param: Profile name (required)
         name: nil,
-        # Body param: Payment card details for a profile. Accepted when billing_model is
-        # "profile" or "profile_and_organization". These details are not stored on our
-        # servers and will be forwarded to the payment processor.
+        # Body param: Payment card details for this profile (optional). Accepted when
+        # billing_model is "profile" or "profile_and_organization". Not persisted on our
+        # servers — forwarded to the payment processor.
         payment_details: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
@@ -137,6 +162,12 @@ module Sentdm
       )
       end
 
+      # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+      # removed in a future release. It still behaves exactly as before, so nothing
+      # needs to change today — but new integrations should use `/v3/sender-profiles`,
+      # which models a profile's markets, compliance, brand, campaigns and billing
+      # explicitly.
+      #
       # Retrieves detailed information about a specific sender profile within an
       # organization, including brand and KYC information if a brand has been
       # configured.
@@ -145,7 +176,7 @@ module Sentdm
           profile_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfProfileDetail)
+        ).returns(Sentdm::Models::ProfileRetrieveResponse)
       end
       def retrieve(
         # Profile ID from route parameter
@@ -157,6 +188,12 @@ module Sentdm
       )
       end
 
+      # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+      # removed in a future release. It still behaves exactly as before, so nothing
+      # needs to change today — but new integrations should use `/v3/sender-profiles`,
+      # which models a profile's markets, compliance, brand, campaigns and billing
+      # explicitly.
+      #
       # Updates a profile's configuration and settings. Requires admin role in the
       # organization. Only provided fields will be updated (partial update).
       #
@@ -175,15 +212,30 @@ module Sentdm
       # CVC, and billing ZIP code. Payment details are **never stored** on our servers
       # and are forwarded directly to the payment processor. Providing `payment_details`
       # when `billing_model` is `"organization"` is not allowed.
+      #
+      # ## Deprecated fields
+      #
+      # `sending_phone_number_profile_id` and `sending_whatsapp_number_profile_id` are
+      # **accepted and ignored**. Sender borrowing is gone: a profile cannot send from
+      # another profile's number, because two profiles behind one sender makes an
+      # inbound reply and a delivery receipt ambiguous about whose they are.
+      #
+      # Sending either **changes nothing and still returns `200`** — they are kept on
+      # the contract so an existing integration keeps working. Reads carry both keys too
+      # and always answer `null`, which is how you can confirm the value did not take.
+      #
+      # Give the profile a sender of its own instead — `POST /v3/channels/sms` or
+      # `POST /v3/channels/whatsapp`, sent with the `x-profile-id` header naming it.
       sig do
         params(
           profile_id: String,
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_number_change_during_onboarding: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
-          billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
+          billing_contact:
+            T.nilable(Sentdm::ProfileUpdateParams::BillingContact::OrHash),
           billing_model: T.nilable(String),
-          brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
+          brand: T.nilable(Sentdm::ProfileUpdateParams::Brand::OrHash),
           description: T.nilable(String),
           icon: T.nilable(String),
           inherit_contacts: T.nilable(T::Boolean),
@@ -191,7 +243,8 @@ module Sentdm
           inherit_tcr_campaign: T.nilable(T::Boolean),
           inherit_templates: T.nilable(T::Boolean),
           name: T.nilable(String),
-          payment_details: T.nilable(Sentdm::PaymentDetails::OrHash),
+          payment_details:
+            T.nilable(Sentdm::ProfileUpdateParams::PaymentDetails::OrHash),
           sandbox: T::Boolean,
           sending_phone_number: T.nilable(String),
           sending_phone_number_profile_id: T.nilable(String),
@@ -201,16 +254,26 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfProfileDetail)
+        ).returns(Sentdm::Models::ProfileUpdateResponse)
       end
       def update(
         # Path param: Profile ID from route parameter
         profile_id,
-        # Body param: Whether contacts are shared across profiles (optional)
+        # Body param: Deprecated. Accepted and ignored. Contact and template sharing
+        # between sender profiles is gone — a profile sees only what it owns, and the
+        # organization still sees all of its profiles' contacts and templates through
+        # read-time widening. The four columns behind these flags were dropped by
+        # M260720120000.
+        #
+        # Retired the same way as SendingPhoneNumberProfileId, and for the same reason:
+        # the properties stay bound so an SDK that assigns them keeps compiling, and a 400
+        # would break a working integration over a capability that is gone regardless.
+        # Every profile reports all four as false, so a caller that checks its own write
+        # can see it did not take.
         allow_contact_sharing: nil,
         # Body param: Whether number changes are allowed during onboarding (optional)
         allow_number_change_during_onboarding: nil,
-        # Body param: Whether templates are shared across profiles (optional)
+        # Body param
         allow_template_sharing: nil,
         # Body param: Billing contact information for a profile. Required when
         # billing_model is "profile" or "profile_and_organization".
@@ -231,30 +294,47 @@ module Sentdm
         description: nil,
         # Body param: Profile icon URL (optional)
         icon: nil,
-        # Body param: Whether this profile inherits contacts from organization (optional)
+        # Body param
         inherit_contacts: nil,
         # Body param: Whether this profile inherits TCR brand from organization (optional)
         inherit_tcr_brand: nil,
         # Body param: Whether this profile inherits TCR campaign from organization
         # (optional)
         inherit_tcr_campaign: nil,
-        # Body param: Whether this profile inherits templates from organization (optional)
+        # Body param
         inherit_templates: nil,
         # Body param: Profile name (optional)
         name: nil,
-        # Body param: Payment card details for a profile. Accepted when billing_model is
-        # "profile" or "profile_and_organization". These details are not stored on our
-        # servers and will be forwarded to the payment processor.
+        # Body param: Payment card details for this profile (optional). Accepted when
+        # billing_model is "profile" or "profile_and_organization". Not persisted on our
+        # servers — forwarded to the payment processor.
         payment_details: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
         # Body param: Direct phone number for SMS sending (optional)
         sending_phone_number: nil,
-        # Body param: Reference to another profile to use for SMS configuration (optional)
+        # Body param: Deprecated. Accepted and ignored. Sender borrowing is gone: a
+        # profile cannot send from another profile's SMS number. Supplying this changes
+        # nothing and the request still succeeds.
+        #
+        # Bound rather than dropped so the property survives on the wire and in a
+        # generated client — an SDK that assigns it keeps compiling, which is the
+        # compatibility this exists for. It is deliberately not refused: a 400 here would
+        # break an integration that is otherwise working, and the capability it asks for
+        # is gone either way.
+        #
+        # The trade-off, stated plainly. A caller asking for borrowing is told it
+        # succeeded when nothing happened. What makes that survivable is the read:
+        # sending_phone_number_profile_id comes back null on every profile, so a caller
+        # that checks its own write can see it did not take. Every request that carries
+        # one is logged, so we can tell when nobody is sending it any more and the field
+        # can go for real.
+        #
+        # Give the profile a sender of its own instead: POST /v3/channels/sms with the
+        # x-profile-id header naming it.
         sending_phone_number_profile_id: nil,
-        # Body param: Reference to another profile to use for WhatsApp configuration
-        # (optional)
+        # Body param
         sending_whatsapp_number_profile_id: nil,
         # Body param: Profile short name/abbreviation (optional). Must be 3–11 characters,
         # contain only letters, numbers, and spaces, and include at least one letter.
@@ -274,6 +354,12 @@ module Sentdm
       )
       end
 
+      # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+      # removed in a future release. It still behaves exactly as before, so nothing
+      # needs to change today — but new integrations should use `/v3/sender-profiles`,
+      # which models a profile's markets, compliance, brand, campaigns and billing
+      # explicitly.
+      #
       # Retrieves all sender profiles within an organization, including brand
       # information for each profile. Profiles represent different brands, departments,
       # or use cases within an organization, each with their own messaging
@@ -292,8 +378,17 @@ module Sentdm
       )
       end
 
+      # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+      # removed in a future release. It still behaves exactly as before, so nothing
+      # needs to change today — but new integrations should use `/v3/sender-profiles`,
+      # which models a profile's markets, compliance, brand, campaigns and billing
+      # explicitly.
+      #
       # Soft deletes a sender profile. The profile will be marked as deleted but data is
-      # retained. Requires admin role in the organization.
+      # retained. Anything it still held is released first: phone numbers return to our
+      # inventory and can go to whoever asks next, its own WhatsApp account is
+      # deregistered, and its routing rules stop being used. Requires admin role in the
+      # organization.
       sig do
         params(
           profile_id: String,
@@ -316,15 +411,27 @@ module Sentdm
       )
       end
 
+      # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+      # removed in a future release. It still behaves exactly as before, so nothing
+      # needs to change today — but new integrations should use `/v3/sender-profiles`,
+      # which models a profile's markets, compliance, brand, campaigns and billing
+      # explicitly.
+      #
       # Final step in the profile compliance workflow. Validates all prerequisites (KYC,
       # brand, campaigns, required documents), connects the profile to the SMS and
-      # WhatsApp channels, and sets its status based on configuration. Prerequisites are
-      # always validated first: if any fail the call returns 400. If they pass and the
-      # profile is already completed, the call returns 200 and does nothing. Otherwise
-      # it returns 202 and calls the provided webhook URL when background processing
-      # finishes.
+      # WhatsApp channels, and marks it onboarded. Prerequisites are always validated
+      # first: if any fail the call returns 400 naming every unmet one, and nothing is
+      # started. If they pass and the profile is already onboarded, the call returns 200
+      # and does nothing. Otherwise it returns 202 and calls the provided webhook URL
+      # when background processing finishes.
       #
-      # Prerequisites:
+      # Callable with the organization's API key or the profile's own key. The key's
+      # user must be an admin or owner of the profile, or of the organization it belongs
+      # to.
+      #
+      # Prerequisites (all but the last are checked before the already-onboarded
+      # short-circuit, matching the previous contract; the last is checked after it, so
+      # a profile that is already onboarded is never rejected by it):
       #
       # - Profile must have a name, short name, and description (short name max 50
       #   characters, description max 5000)
@@ -335,17 +442,18 @@ module Sentdm
       # - TCR applications must have at least one campaign, own or inherited
       # - Destination countries marked as main must have their required compliance
       #   documents uploaded
+      # - TCR applications must state whether they inherit the organization's TCR brand
+      #   and campaign
       #
-      # Resulting status:
+      # Outcome:
       #
-      # - If either the SMS or WhatsApp channel is unconfigured, the profile is
-      #   SUBMITTED
-      # - For a TCR application that inherits both its brand and its campaigns, the
-      #   profile is COMPLETED
-      # - For a TCR application that owns either its brand or its campaigns, the profile
-      #   is COMPLETED once both have been submitted to TCR, and SUBMITTED until then
-      # - For a non-TCR application, the profile is SUBMITTED when a main destination
-      #   country is set, and COMPLETED otherwise
+      # - Once the prerequisites pass and background processing succeeds, the profile's
+      #   conversionFlowStatus becomes ONBOARDED and its public status reads `approved`
+      # - A profile with no WhatsApp channel, or one still awaiting TCR registration or
+      #   country documents, is onboarded like any other. Those are answered by the
+      #   brand and campaign records, not by a status on the profile
+      # - If background processing fails, the profile keeps the status it already had
+      #   and the webhook reports the reason
       sig do
         params(
           profile_id: String,

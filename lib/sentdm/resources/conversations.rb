@@ -2,6 +2,14 @@
 
 module Sentdm
   module Resources
+    # Inbound and outbound messages, grouped by the person they are with.
+    #
+    # A conversation is the thread for one contact across every channel — a reply by
+    # SMS and one by WhatsApp belong to the same conversation, because they are the
+    # same person talking to you.
+    #
+    # Read-only. Sending is **Messages**; a reply arrives here and through your
+    # webhooks.
     class Conversations
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ConversationListParams} for more details.
@@ -19,7 +27,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfConversationMessagesList]
+      # @return [Sentdm::Models::ConversationListResponse]
       #
       # @see Sentdm::Models::ConversationListParams
       def list(params)
@@ -31,7 +39,7 @@ module Sentdm
           path: "v3/conversations",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfConversationMessagesList,
+          model: Sentdm::Models::ConversationListResponse,
           options: options
         )
       end
@@ -54,7 +62,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfConversationMessagesList]
+      # @return [Sentdm::Models::ConversationListMessagesResponse]
       #
       # @see Sentdm::Models::ConversationListMessagesParams
       def list_messages(id, params)
@@ -66,7 +74,7 @@ module Sentdm
           path: ["v3/conversations/%1$s", id],
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfConversationMessagesList,
+          model: Sentdm::Models::ConversationListMessagesResponse,
           options: options
         )
       end
