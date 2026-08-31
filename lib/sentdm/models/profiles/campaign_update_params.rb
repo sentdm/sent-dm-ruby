@@ -21,8 +21,8 @@ module Sentdm
         # @!attribute campaign
         #   Campaign data for create or update operation
         #
-        #   @return [Sentdm::Models::Profiles::CampaignData]
-        required :campaign, -> { Sentdm::Profiles::CampaignData }
+        #   @return [Sentdm::Models::Profiles::CampaignUpdateParams::Campaign]
+        required :campaign, -> { Sentdm::Profiles::CampaignUpdateParams::Campaign }
 
         # @!attribute sandbox
         #   Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -49,7 +49,7 @@ module Sentdm
         #
         #   @param campaign_id [String]
         #
-        #   @param campaign [Sentdm::Models::Profiles::CampaignData] Campaign data for create or update operation
+        #   @param campaign [Sentdm::Models::Profiles::CampaignUpdateParams::Campaign] Campaign data for create or update operation
         #
         #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
         #
@@ -58,6 +58,159 @@ module Sentdm
         #   @param x_profile_id [String]
         #
         #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
+
+        class Campaign < Sentdm::Internal::Type::BaseModel
+          # @!attribute description
+          #   Campaign description
+          #
+          #   @return [String]
+          required :description, String
+
+          # @!attribute name
+          #   Campaign name
+          #
+          #   @return [String]
+          required :name, String
+
+          # @!attribute type
+          #   Campaign type (e.g., "KYC", "App").
+          #
+          #   Still required of a caller, and consulted by nothing. It named the signup path
+          #   that produced the campaign, was written to a column no query filters on, no TCR
+          #   payload carries and no fee or status decision reads, and is now defaulted at the
+          #   entity instead. It stays required so that a request which was valid before is
+          #   still valid — dropping it would be the client-visible change, not keeping it.
+          #
+          #   @return [String]
+          required :type, String
+
+          # @!attribute use_cases
+          #   List of use cases with sample messages
+          #
+          #   @return [Array<Sentdm::Models::Profiles::CampaignUpdateParams::Campaign::UseCase>]
+          required :use_cases,
+                   -> {
+                     Sentdm::Internal::Type::ArrayOf[Sentdm::Profiles::CampaignUpdateParams::Campaign::UseCase]
+                   },
+                   api_name: :useCases
+
+          # @!attribute help_keywords
+          #   Comma-separated keywords that trigger help message (e.g., "HELP, INFO, SUPPORT")
+          #
+          #   @return [String, nil]
+          optional :help_keywords, String, api_name: :helpKeywords, nil?: true
+
+          # @!attribute help_message
+          #   Message sent when user requests help
+          #
+          #   @return [String, nil]
+          optional :help_message, String, api_name: :helpMessage, nil?: true
+
+          # @!attribute message_flow
+          #   Description of how messages flow in the campaign
+          #
+          #   @return [String, nil]
+          optional :message_flow, String, api_name: :messageFlow, nil?: true
+
+          # @!attribute optin_keywords
+          #   Comma-separated keywords that trigger opt-in (e.g., "YES, START, SUBSCRIBE")
+          #
+          #   @return [String, nil]
+          optional :optin_keywords, String, api_name: :optinKeywords, nil?: true
+
+          # @!attribute optin_message
+          #   Message sent when user opts in
+          #
+          #   @return [String, nil]
+          optional :optin_message, String, api_name: :optinMessage, nil?: true
+
+          # @!attribute optout_keywords
+          #   Comma-separated keywords that trigger opt-out (e.g., "STOP, UNSUBSCRIBE, END")
+          #
+          #   @return [String, nil]
+          optional :optout_keywords, String, api_name: :optoutKeywords, nil?: true
+
+          # @!attribute optout_message
+          #   Message sent when user opts out
+          #
+          #   @return [String, nil]
+          optional :optout_message, String, api_name: :optoutMessage, nil?: true
+
+          # @!attribute privacy_policy_link
+          #   URL to privacy policy
+          #
+          #   @return [String, nil]
+          optional :privacy_policy_link, String, api_name: :privacyPolicyLink, nil?: true
+
+          # @!attribute terms_and_conditions_link
+          #   URL to terms and conditions
+          #
+          #   @return [String, nil]
+          optional :terms_and_conditions_link, String, api_name: :termsAndConditionsLink, nil?: true
+
+          # @!attribute volume
+          #   Expected messaging volume for this campaign. Numeric string (e.g. "1999",
+          #   "5000"). Values below 2000 bill at the low-volume tier.
+          #
+          #   @return [String, nil]
+          optional :volume, String, nil?: true
+
+          # @!method initialize(description:, name:, type:, use_cases:, help_keywords: nil, help_message: nil, message_flow: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, terms_and_conditions_link: nil, volume: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Sentdm::Models::Profiles::CampaignUpdateParams::Campaign} for more details.
+          #
+          #   Campaign data for create or update operation
+          #
+          #   @param description [String] Campaign description
+          #
+          #   @param name [String] Campaign name
+          #
+          #   @param type [String] Campaign type (e.g., "KYC", "App").
+          #
+          #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignUpdateParams::Campaign::UseCase>] List of use cases with sample messages
+          #
+          #   @param help_keywords [String, nil] Comma-separated keywords that trigger help message (e.g., "HELP, INFO, SUPPORT")
+          #
+          #   @param help_message [String, nil] Message sent when user requests help
+          #
+          #   @param message_flow [String, nil] Description of how messages flow in the campaign
+          #
+          #   @param optin_keywords [String, nil] Comma-separated keywords that trigger opt-in (e.g., "YES, START, SUBSCRIBE")
+          #
+          #   @param optin_message [String, nil] Message sent when user opts in
+          #
+          #   @param optout_keywords [String, nil] Comma-separated keywords that trigger opt-out (e.g., "STOP, UNSUBSCRIBE, END")
+          #
+          #   @param optout_message [String, nil] Message sent when user opts out
+          #
+          #   @param privacy_policy_link [String, nil] URL to privacy policy
+          #
+          #   @param terms_and_conditions_link [String, nil] URL to terms and conditions
+          #
+          #   @param volume [String, nil] Expected messaging volume for this campaign. Numeric string (e.g. "1999", "5000"
+
+          class UseCase < Sentdm::Internal::Type::BaseModel
+            # @!attribute messaging_use_case_us
+            #
+            #   @return [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs]
+            required :messaging_use_case_us,
+                     enum: -> { Sentdm::Profiles::MessagingUseCaseUs },
+                     api_name: :messagingUseCaseUs
+
+            # @!attribute sample_messages
+            #   Sample messages for this use case (1-5 messages, max 1024 characters each)
+            #
+            #   @return [Array<String>]
+            required :sample_messages, Sentdm::Internal::Type::ArrayOf[String], api_name: :sampleMessages
+
+            # @!method initialize(messaging_use_case_us:, sample_messages:)
+            #   Campaign use case with sample messages
+            #
+            #   @param messaging_use_case_us [Symbol, Sentdm::Models::Profiles::MessagingUseCaseUs]
+            #
+            #   @param sample_messages [Array<String>] Sample messages for this use case (1-5 messages, max 1024 characters each)
+          end
+        end
       end
     end
   end

@@ -13,14 +13,14 @@ module Sentdm
       # @!attribute error
       #   Error information
       #
-      #   @return [Sentdm::Models::ErrorDetail, nil]
-      optional :error, -> { Sentdm::ErrorDetail }, nil?: true
+      #   @return [Sentdm::Models::MessageRetrieveActivitiesResponse::Error, nil]
+      optional :error, -> { Sentdm::Models::MessageRetrieveActivitiesResponse::Error }, nil?: true
 
       # @!attribute meta
       #   Request and response metadata
       #
-      #   @return [Sentdm::Models::APIMeta, nil]
-      optional :meta, -> { Sentdm::APIMeta }
+      #   @return [Sentdm::Models::MessageRetrieveActivitiesResponse::Meta, nil]
+      optional :meta, -> { Sentdm::Models::MessageRetrieveActivitiesResponse::Meta }
 
       # @!attribute success
       #   Indicates whether the request was successful
@@ -33,9 +33,9 @@ module Sentdm
       #
       #   @param data [Sentdm::Models::MessageRetrieveActivitiesResponse::Data, nil] Response for GET /messages/{id}/activities
       #
-      #   @param error [Sentdm::Models::ErrorDetail, nil] Error information
+      #   @param error [Sentdm::Models::MessageRetrieveActivitiesResponse::Error, nil] Error information
       #
-      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
+      #   @param meta [Sentdm::Models::MessageRetrieveActivitiesResponse::Meta] Request and response metadata
       #
       #   @param success [Boolean] Indicates whether the request was successful
 
@@ -54,12 +54,20 @@ module Sentdm
         #   @return [String, nil]
         optional :message_id, String
 
-        # @!method initialize(activities: nil, message_id: nil)
+        # @!attribute pagination
+        #   Pagination metadata for list responses
+        #
+        #   @return [Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination, nil]
+        optional :pagination, -> { Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination }
+
+        # @!method initialize(activities: nil, message_id: nil, pagination: nil)
         #   Response for GET /messages/{id}/activities
         #
         #   @param activities [Array<Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity>] List of activity events ordered by most recent first
         #
         #   @param message_id [String] The message ID these activities belong to
+        #
+        #   @param pagination [Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination] Pagination metadata for list responses
 
         class Activity < Sentdm::Internal::Type::BaseModel
           # @!attribute active_contact_price
@@ -122,6 +130,156 @@ module Sentdm
           #
           #   @param timestamp [Time] When this activity occurred
         end
+
+        # @see Sentdm::Models::MessageRetrieveActivitiesResponse::Data#pagination
+        class Pagination < Sentdm::Internal::Type::BaseModel
+          # @!attribute cursors
+          #   @deprecated
+          #
+          #   Cursor-based pagination. Never populated — see Cursors.
+          #
+          #   @return [Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination::Cursors, nil]
+          optional :cursors,
+                   -> { Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination::Cursors },
+                   nil?: true
+
+          # @!attribute has_more
+          #   Whether there are more pages after this one
+          #
+          #   @return [Boolean, nil]
+          optional :has_more, Sentdm::Internal::Type::Boolean
+
+          # @!attribute page
+          #   Current page number (1-indexed)
+          #
+          #   @return [Integer, nil]
+          optional :page, Integer
+
+          # @!attribute page_size
+          #   Number of items per page
+          #
+          #   @return [Integer, nil]
+          optional :page_size, Integer
+
+          # @!attribute total_count
+          #   Total number of items across all pages
+          #
+          #   @return [Integer, nil]
+          optional :total_count, Integer
+
+          # @!attribute total_pages
+          #   Total number of pages
+          #
+          #   @return [Integer, nil]
+          optional :total_pages, Integer
+
+          # @!method initialize(cursors: nil, has_more: nil, page: nil, page_size: nil, total_count: nil, total_pages: nil)
+          #   Pagination metadata for list responses
+          #
+          #   @param cursors [Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination::Cursors, nil] Cursor-based pagination. Never populated — see Cursors.
+          #
+          #   @param has_more [Boolean] Whether there are more pages after this one
+          #
+          #   @param page [Integer] Current page number (1-indexed)
+          #
+          #   @param page_size [Integer] Number of items per page
+          #
+          #   @param total_count [Integer] Total number of items across all pages
+          #
+          #   @param total_pages [Integer] Total number of pages
+
+          # @deprecated
+          #
+          # @see Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Pagination#cursors
+          class Cursors < Sentdm::Internal::Type::BaseModel
+            # @!attribute after
+            #   Cursor to fetch the next page.
+            #
+            #   @return [String, nil]
+            optional :after, String, nil?: true
+
+            # @!attribute before
+            #   Cursor to fetch the previous page.
+            #
+            #   @return [String, nil]
+            optional :before, String, nil?: true
+
+            # @!method initialize(after: nil, before: nil)
+            #   Cursor-based pagination. Never populated — see Cursors.
+            #
+            #   @param after [String, nil] Cursor to fetch the next page.
+            #
+            #   @param before [String, nil] Cursor to fetch the previous page.
+          end
+        end
+      end
+
+      # @see Sentdm::Models::MessageRetrieveActivitiesResponse#error
+      class Error < Sentdm::Internal::Type::BaseModel
+        # @!attribute code
+        #   Machine-readable error code (e.g., "RESOURCE_001")
+        #
+        #   @return [String, nil]
+        optional :code, String
+
+        # @!attribute details
+        #   Additional validation error details (field-level errors)
+        #
+        #   @return [Hash{Symbol=>Array<String>}, nil]
+        optional :details, Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]], nil?: true
+
+        # @!attribute doc_url
+        #   URL to documentation about this error
+        #
+        #   @return [String, nil]
+        optional :doc_url, String, nil?: true
+
+        # @!attribute message
+        #   Human-readable error message
+        #
+        #   @return [String, nil]
+        optional :message, String
+
+        # @!method initialize(code: nil, details: nil, doc_url: nil, message: nil)
+        #   Error information
+        #
+        #   @param code [String] Machine-readable error code (e.g., "RESOURCE_001")
+        #
+        #   @param details [Hash{Symbol=>Array<String>}, nil] Additional validation error details (field-level errors)
+        #
+        #   @param doc_url [String, nil] URL to documentation about this error
+        #
+        #   @param message [String] Human-readable error message
+      end
+
+      # @see Sentdm::Models::MessageRetrieveActivitiesResponse#meta
+      class Meta < Sentdm::Internal::Type::BaseModel
+        # @!attribute request_id
+        #   Unique identifier for this request (for tracing and support)
+        #
+        #   @return [String, nil]
+        optional :request_id, String
+
+        # @!attribute timestamp
+        #   Server timestamp when the response was generated
+        #
+        #   @return [Time, nil]
+        optional :timestamp, Time
+
+        # @!attribute version
+        #   API version used for this request
+        #
+        #   @return [String, nil]
+        optional :version, String
+
+        # @!method initialize(request_id: nil, timestamp: nil, version: nil)
+        #   Request and response metadata
+        #
+        #   @param request_id [String] Unique identifier for this request (for tracing and support)
+        #
+        #   @param timestamp [Time] Server timestamp when the response was generated
+        #
+        #   @param version [String] API version used for this request
       end
     end
   end

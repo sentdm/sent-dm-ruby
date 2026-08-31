@@ -2,7 +2,13 @@
 
 module Sentdm
   module Resources
-    # Manage message templates with variable substitution
+    # Reusable message bodies with named variables.
+    #
+    # A template is substituted at send time from the values you pass, so the copy
+    # lives here rather than in your application. WhatsApp templates additionally need
+    # Meta's approval before they can be sent, and a template's channel status reports
+    # where that stands — an approved SMS template and an unapproved WhatsApp one are
+    # the same template in two states.
     class Templates
       # Creates a new message template with header, body, footer, and buttons. The
       # template can be submitted for review immediately or saved as draft for later
@@ -18,7 +24,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseTemplate)
+        ).returns(Sentdm::Models::TemplateCreateResponse)
       end
       def create(
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional,
@@ -57,7 +63,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseTemplate)
+        ).returns(Sentdm::Models::TemplateRetrieveResponse)
       end
       def retrieve(
         # Template ID from route parameter
@@ -83,7 +89,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseTemplate)
+        ).returns(Sentdm::Models::TemplateUpdateResponse)
       end
       def update(
         # Path param: Template ID from route parameter
@@ -136,7 +142,11 @@ module Sentdm
         page_size:,
         # Query param: Optional category filter: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Query param: Optional filter by welcome playground flag
+        # Query param: Accepted and ignored. It used to filter on the welcome-playground
+        # marker inside a template's LOB details; that filter is gone and nothing reads
+        # this value, so sending it neither narrows nor widens the result. Retained only
+        # so a client still passing is_welcome_playground keeps binding instead of the
+        # request shape changing under it.
         is_welcome_playground: nil,
         # Query param: Optional search term for filtering templates
         search: nil,

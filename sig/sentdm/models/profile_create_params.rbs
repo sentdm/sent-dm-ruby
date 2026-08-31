@@ -2,11 +2,11 @@ module Sentdm
   module Models
     type profile_create_params =
       {
-        allow_contact_sharing: bool,
-        allow_template_sharing: bool,
-        billing_contact: Sentdm::BillingContactInfo?,
+        allow_contact_sharing: bool?,
+        allow_template_sharing: bool?,
+        billing_contact: Sentdm::ProfileCreateParams::BillingContact?,
         billing_model: String?,
-        brand: Sentdm::BrandsBrandData?,
+        brand: Sentdm::ProfileCreateParams::Brand?,
         description: String?,
         icon: String?,
         inherit_contacts: bool?,
@@ -14,7 +14,7 @@ module Sentdm
         inherit_tcr_campaign: bool?,
         inherit_templates: bool?,
         name: String,
-        payment_details: Sentdm::PaymentDetails?,
+        payment_details: Sentdm::ProfileCreateParams::PaymentDetails?,
         sandbox: bool,
         short_name: String?,
         whatsapp_business_account: Sentdm::ProfileCreateParams::WhatsappBusinessAccount?,
@@ -27,19 +27,15 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      attr_reader allow_contact_sharing: bool?
+      attr_accessor allow_contact_sharing: bool?
 
-      def allow_contact_sharing=: (bool) -> bool
+      attr_accessor allow_template_sharing: bool?
 
-      attr_reader allow_template_sharing: bool?
-
-      def allow_template_sharing=: (bool) -> bool
-
-      attr_accessor billing_contact: Sentdm::BillingContactInfo?
+      attr_accessor billing_contact: Sentdm::ProfileCreateParams::BillingContact?
 
       attr_accessor billing_model: String?
 
-      attr_accessor brand: Sentdm::BrandsBrandData?
+      attr_accessor brand: Sentdm::ProfileCreateParams::Brand?
 
       attr_accessor description: String?
 
@@ -57,7 +53,7 @@ module Sentdm
 
       def name=: (String) -> String
 
-      attr_accessor payment_details: Sentdm::PaymentDetails?
+      attr_accessor payment_details: Sentdm::ProfileCreateParams::PaymentDetails?
 
       attr_reader sandbox: bool?
 
@@ -76,11 +72,11 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
-        ?allow_contact_sharing: bool,
-        ?allow_template_sharing: bool,
-        ?billing_contact: Sentdm::BillingContactInfo?,
+        ?allow_contact_sharing: bool?,
+        ?allow_template_sharing: bool?,
+        ?billing_contact: Sentdm::ProfileCreateParams::BillingContact?,
         ?billing_model: String?,
-        ?brand: Sentdm::BrandsBrandData?,
+        ?brand: Sentdm::ProfileCreateParams::Brand?,
         ?description: String?,
         ?icon: String?,
         ?inherit_contacts: bool?,
@@ -88,7 +84,7 @@ module Sentdm
         ?inherit_tcr_campaign: bool?,
         ?inherit_templates: bool?,
         ?name: String,
-        ?payment_details: Sentdm::PaymentDetails?,
+        ?payment_details: Sentdm::ProfileCreateParams::PaymentDetails?,
         ?sandbox: bool,
         ?short_name: String?,
         ?whatsapp_business_account: Sentdm::ProfileCreateParams::WhatsappBusinessAccount?,
@@ -98,11 +94,11 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
-        allow_contact_sharing: bool,
-        allow_template_sharing: bool,
-        billing_contact: Sentdm::BillingContactInfo?,
+        allow_contact_sharing: bool?,
+        allow_template_sharing: bool?,
+        billing_contact: Sentdm::ProfileCreateParams::BillingContact?,
         billing_model: String?,
-        brand: Sentdm::BrandsBrandData?,
+        brand: Sentdm::ProfileCreateParams::Brand?,
         description: String?,
         icon: String?,
         inherit_contacts: bool?,
@@ -110,7 +106,7 @@ module Sentdm
         inherit_tcr_campaign: bool?,
         inherit_templates: bool?,
         name: String,
-        payment_details: Sentdm::PaymentDetails?,
+        payment_details: Sentdm::ProfileCreateParams::PaymentDetails?,
         sandbox: bool,
         short_name: String?,
         whatsapp_business_account: Sentdm::ProfileCreateParams::WhatsappBusinessAccount?,
@@ -118,6 +114,257 @@ module Sentdm
         x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
+
+      type billing_contact =
+        { email: String, name: String, address: String?, phone: String? }
+
+      class BillingContact < Sentdm::Internal::Type::BaseModel
+        attr_accessor email: String
+
+        attr_accessor name: String
+
+        attr_accessor address: String?
+
+        attr_accessor phone: String?
+
+        def initialize: (
+          email: String,
+          name: String,
+          ?address: String?,
+          ?phone: String?
+        ) -> void
+
+        def to_hash: -> {
+          email: String,
+          name: String,
+          address: String?,
+          phone: String?
+        }
+      end
+
+      type brand =
+        {
+          compliance: Sentdm::ProfileCreateParams::Brand::Compliance,
+          contact: Sentdm::ProfileCreateParams::Brand::Contact,
+          business: Sentdm::ProfileCreateParams::Brand::Business?
+        }
+
+      class Brand < Sentdm::Internal::Type::BaseModel
+        attr_accessor compliance: Sentdm::ProfileCreateParams::Brand::Compliance
+
+        attr_accessor contact: Sentdm::ProfileCreateParams::Brand::Contact
+
+        attr_accessor business: Sentdm::ProfileCreateParams::Brand::Business?
+
+        def initialize: (
+          compliance: Sentdm::ProfileCreateParams::Brand::Compliance,
+          contact: Sentdm::ProfileCreateParams::Brand::Contact,
+          ?business: Sentdm::ProfileCreateParams::Brand::Business?
+        ) -> void
+
+        def to_hash: -> {
+          compliance: Sentdm::ProfileCreateParams::Brand::Compliance,
+          contact: Sentdm::ProfileCreateParams::Brand::Contact,
+          business: Sentdm::ProfileCreateParams::Brand::Business?
+        }
+
+        type compliance =
+          {
+            brand_relationship: Sentdm::Models::tcr_brand_relationship,
+            vertical: Sentdm::Models::tcr_vertical,
+            destination_countries: ::Array[Sentdm::DestinationCountry]?,
+            is_tcr_application: bool?,
+            notes: String?,
+            phone_number_prefix: String?
+          }
+
+        class Compliance < Sentdm::Internal::Type::BaseModel
+          attr_accessor brand_relationship: Sentdm::Models::tcr_brand_relationship
+
+          attr_accessor vertical: Sentdm::Models::tcr_vertical
+
+          attr_accessor destination_countries: ::Array[Sentdm::DestinationCountry]?
+
+          attr_accessor is_tcr_application: bool?
+
+          attr_accessor notes: String?
+
+          attr_accessor phone_number_prefix: String?
+
+          def initialize: (
+            brand_relationship: Sentdm::Models::tcr_brand_relationship,
+            vertical: Sentdm::Models::tcr_vertical,
+            ?destination_countries: ::Array[Sentdm::DestinationCountry]?,
+            ?is_tcr_application: bool?,
+            ?notes: String?,
+            ?phone_number_prefix: String?
+          ) -> void
+
+          def to_hash: -> {
+            brand_relationship: Sentdm::Models::tcr_brand_relationship,
+            vertical: Sentdm::Models::tcr_vertical,
+            destination_countries: ::Array[Sentdm::DestinationCountry]?,
+            is_tcr_application: bool?,
+            notes: String?,
+            phone_number_prefix: String?
+          }
+        end
+
+        type contact =
+          {
+            name: String,
+            business_name: String?,
+            email: String?,
+            phone: String?,
+            phone_country_code: String?,
+            role: String?
+          }
+
+        class Contact < Sentdm::Internal::Type::BaseModel
+          attr_accessor name: String
+
+          attr_accessor business_name: String?
+
+          attr_accessor email: String?
+
+          attr_accessor phone: String?
+
+          attr_accessor phone_country_code: String?
+
+          attr_accessor role: String?
+
+          def initialize: (
+            name: String,
+            ?business_name: String?,
+            ?email: String?,
+            ?phone: String?,
+            ?phone_country_code: String?,
+            ?role: String?
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            business_name: String?,
+            email: String?,
+            phone: String?,
+            phone_country_code: String?,
+            role: String?
+          }
+        end
+
+        type business =
+          {
+            city: String?,
+            country: String?,
+            country_of_registration: String?,
+            entity_type: Sentdm::Models::ProfileCreateParams::Brand::Business::entity_type?,
+            legal_name: String?,
+            postal_code: String?,
+            state: String?,
+            street: String?,
+            tax_id: String?,
+            tax_id_type: String?,
+            url: String?
+          }
+
+        class Business < Sentdm::Internal::Type::BaseModel
+          attr_accessor city: String?
+
+          attr_accessor country: String?
+
+          attr_accessor country_of_registration: String?
+
+          attr_accessor entity_type: Sentdm::Models::ProfileCreateParams::Brand::Business::entity_type?
+
+          attr_accessor legal_name: String?
+
+          attr_accessor postal_code: String?
+
+          attr_accessor state: String?
+
+          attr_accessor street: String?
+
+          attr_accessor tax_id: String?
+
+          attr_accessor tax_id_type: String?
+
+          attr_accessor url: String?
+
+          def initialize: (
+            ?city: String?,
+            ?country: String?,
+            ?country_of_registration: String?,
+            ?entity_type: Sentdm::Models::ProfileCreateParams::Brand::Business::entity_type?,
+            ?legal_name: String?,
+            ?postal_code: String?,
+            ?state: String?,
+            ?street: String?,
+            ?tax_id: String?,
+            ?tax_id_type: String?,
+            ?url: String?
+          ) -> void
+
+          def to_hash: -> {
+            city: String?,
+            country: String?,
+            country_of_registration: String?,
+            entity_type: Sentdm::Models::ProfileCreateParams::Brand::Business::entity_type?,
+            legal_name: String?,
+            postal_code: String?,
+            state: String?,
+            street: String?,
+            tax_id: String?,
+            tax_id_type: String?,
+            url: String?
+          }
+
+          type entity_type =
+            :PRIVATE_PROFIT
+            | :PUBLIC_PROFIT
+            | :NON_PROFIT
+            | :SOLE_PROPRIETOR
+            | :GOVERNMENT
+
+          module EntityType
+            extend Sentdm::Internal::Type::Enum
+
+            PRIVATE_PROFIT: :PRIVATE_PROFIT
+            PUBLIC_PROFIT: :PUBLIC_PROFIT
+            NON_PROFIT: :NON_PROFIT
+            SOLE_PROPRIETOR: :SOLE_PROPRIETOR
+            GOVERNMENT: :GOVERNMENT
+
+            def self?.values: -> ::Array[Sentdm::Models::ProfileCreateParams::Brand::Business::entity_type]
+          end
+        end
+      end
+
+      type payment_details =
+        { card_number: String, cvc: String, expiry: String, zip_code: String }
+
+      class PaymentDetails < Sentdm::Internal::Type::BaseModel
+        attr_accessor card_number: String
+
+        attr_accessor cvc: String
+
+        attr_accessor expiry: String
+
+        attr_accessor zip_code: String
+
+        def initialize: (
+          card_number: String,
+          cvc: String,
+          expiry: String,
+          zip_code: String
+        ) -> void
+
+        def to_hash: -> {
+          card_number: String,
+          cvc: String,
+          expiry: String,
+          zip_code: String
+        }
+      end
 
       type whatsapp_business_account =
         { access_token: String, waba_id: String, phone_number_id: String? }

@@ -3,19 +3,31 @@
 module Sentdm
   module Resources
     class Profiles
-      # Manage organization profiles
+      # **Deprecated — use Sender Profiles.**
+      #
+      # The original profile resource, kept because it has live callers. It still works,
+      # and its replacement is `/v3/sender-profiles`, which takes the identity and the
+      # campaign in one call instead of across three.
+      #
+      # New integrations should not start here.
       class Campaigns
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
+        #
         # Creates a new campaign scoped under the brand of the specified profile. Each
         # campaign must include at least one use case with sample messages.
         sig do
           params(
             profile_id: String,
-            campaign: Sentdm::Profiles::CampaignData::OrHash,
+            campaign: Sentdm::Profiles::CampaignCreateParams::Campaign::OrHash,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfBrandCampaign)
+          ).returns(Sentdm::Models::Profiles::CampaignCreateResponse)
         end
         def create(
           # Path param: Profile ID from route
@@ -37,18 +49,24 @@ module Sentdm
         )
         end
 
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
+        #
         # Updates an existing campaign under the brand of the specified profile. Cannot
         # update campaigns that have already been submitted to TCR.
         sig do
           params(
             campaign_id: String,
             profile_id: String,
-            campaign: Sentdm::Profiles::CampaignData::OrHash,
+            campaign: Sentdm::Profiles::CampaignUpdateParams::Campaign::OrHash,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfBrandCampaign)
+          ).returns(Sentdm::Models::Profiles::CampaignUpdateResponse)
         end
         def update(
           # Path param: Campaign ID from route
@@ -72,6 +90,12 @@ module Sentdm
         )
         end
 
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
+        #
         # Retrieves all campaigns linked to the profile's brand, including use cases and
         # sample messages. Returns inherited campaigns if inherit_tcr_campaign=true.
         sig do
@@ -79,7 +103,7 @@ module Sentdm
             profile_id: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Profiles::APIResponseOfListOfBrandCampaign)
+          ).returns(Sentdm::Models::Profiles::CampaignListResponse)
         end
         def list(
           # Profile ID from route
@@ -91,6 +115,12 @@ module Sentdm
         )
         end
 
+        # **Deprecated.** This endpoint is replaced by `/v3/sender-profiles` and will be
+        # removed in a future release. It still behaves exactly as before, so nothing
+        # needs to change today — but new integrations should use `/v3/sender-profiles`,
+        # which models a profile's markets, compliance, brand, campaigns and billing
+        # explicitly.
+        #
         # Deletes a campaign by ID from the brand of the specified profile. The profile
         # must belong to the authenticated organization.
         sig do

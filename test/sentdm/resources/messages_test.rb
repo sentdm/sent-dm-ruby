@@ -15,8 +15,8 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::MessageRetrieveActivitiesResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::MessageRetrieveActivitiesResponse::Error | nil,
+        meta: Sentdm::Models::MessageRetrieveActivitiesResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -34,8 +34,8 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::MessageRetrieveStatusResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::MessageRetrieveStatusResponse::Error | nil,
+        meta: Sentdm::Models::MessageRetrieveStatusResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -53,8 +53,8 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::MessageSendResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
+        error: Sentdm::Models::MessageSendResponse::Error | nil,
+        meta: Sentdm::Models::MessageSendResponse::Meta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

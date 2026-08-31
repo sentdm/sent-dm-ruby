@@ -2,7 +2,17 @@
 
 module Sentdm
   module Resources
-    # Configure webhook endpoints for real-time event delivery
+    # Delivery reports and inbound messages, pushed to you.
+    #
+    # Subscribe an endpoint to the event types you care about —
+    # `GET /v3/webhooks/event-types` lists them — and we POST each one as it happens,
+    # retrying on failure. Polling `GET /v3/messages/{id}` works and does not scale.
+    #
+    # **Verify the signature.** Every delivery is signed with your endpoint's secret;
+    # an unverified endpoint is one anybody can post to. `rotate-secret` replaces it,
+    # `test` sends a specimen event, and `GET /v3/webhooks/{id}/events` shows what we
+    # tried to deliver and what your endpoint answered — which is the first place to
+    # look when something appears to be missing.
     class Webhooks
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookCreateParams} for more details.
@@ -31,7 +41,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseWebhook]
+      # @return [Sentdm::Models::WebhookCreateResponse]
       #
       # @see Sentdm::Models::WebhookCreateParams
       def create(params = {})
@@ -42,7 +52,7 @@ module Sentdm
           path: "v3/webhooks",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseWebhook,
+          model: Sentdm::Models::WebhookCreateResponse,
           options: options
         )
       end
@@ -60,7 +70,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseWebhook]
+      # @return [Sentdm::Models::WebhookRetrieveResponse]
       #
       # @see Sentdm::Models::WebhookRetrieveParams
       def retrieve(id, params = {})
@@ -69,7 +79,7 @@ module Sentdm
           method: :get,
           path: ["v3/webhooks/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseWebhook,
+          model: Sentdm::Models::WebhookRetrieveResponse,
           options: options
         )
       end
@@ -103,7 +113,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseWebhook]
+      # @return [Sentdm::Models::WebhookUpdateResponse]
       #
       # @see Sentdm::Models::WebhookUpdateParams
       def update(id, params = {})
@@ -114,7 +124,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseWebhook,
+          model: Sentdm::Models::WebhookUpdateResponse,
           options: options
         )
       end
@@ -331,7 +341,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseWebhook]
+      # @return [Sentdm::Models::WebhookToggleStatusResponse]
       #
       # @see Sentdm::Models::WebhookToggleStatusParams
       def toggle_status(id, params = {})
@@ -342,7 +352,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s/toggle-status", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::APIResponseWebhook,
+          model: Sentdm::Models::WebhookToggleStatusResponse,
           options: options
         )
       end

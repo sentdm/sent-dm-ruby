@@ -8,23 +8,39 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       # @!attribute allow_contact_sharing
-      #   Whether contacts are shared across profiles (default: false)
+      #   @deprecated
+      #
+      #   Deprecated. Accepted and ignored. Contact and template sharing between sender
+      #   profiles is gone — a profile sees only what it owns, and the organization still
+      #   sees all of its profiles' contacts and templates through read-time widening. The
+      #   four columns behind these flags were dropped by M260720120000.
+      #
+      #   Bound rather than dropped so the properties survive on the wire and in a
+      #   generated client: an SDK that assigns them keeps compiling, which is the
+      #   compatibility this exists for. Deliberately not refused either — a 400 would
+      #   break an integration that is otherwise working, and the capability they ask for
+      #   is gone either way. Same rule as SendingPhoneNumberProfileId.
+      #
+      #   The read is what makes this survivable: every profile reports all four as false,
+      #   so a caller that checks its own write can see it did not take. Requests carrying
+      #   one are logged, so we can tell when nobody sends them any more and the fields
+      #   can go for real.
       #
       #   @return [Boolean, nil]
-      optional :allow_contact_sharing, Sentdm::Internal::Type::Boolean
+      optional :allow_contact_sharing, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute allow_template_sharing
-      #   Whether templates are shared across profiles (default: false)
+      #   @deprecated
       #
       #   @return [Boolean, nil]
-      optional :allow_template_sharing, Sentdm::Internal::Type::Boolean
+      optional :allow_template_sharing, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute billing_contact
       #   Billing contact information for a profile. Required when billing_model is
       #   "profile" or "profile_and_organization".
       #
-      #   @return [Sentdm::Models::BillingContactInfo, nil]
-      optional :billing_contact, -> { Sentdm::BillingContactInfo }, nil?: true
+      #   @return [Sentdm::Models::ProfileCreateParams::BillingContact, nil]
+      optional :billing_contact, -> { Sentdm::ProfileCreateParams::BillingContact }, nil?: true
 
       # @!attribute billing_model
       #   Billing model: profile, organization, or profile_and_organization (default:
@@ -42,8 +58,8 @@ module Sentdm
       # @!attribute brand
       #   Brand and KYC data grouped into contact, business, and compliance sections
       #
-      #   @return [Sentdm::Models::BrandsBrandData, nil]
-      optional :brand, -> { Sentdm::BrandsBrandData }, nil?: true
+      #   @return [Sentdm::Models::ProfileCreateParams::Brand, nil]
+      optional :brand, -> { Sentdm::ProfileCreateParams::Brand }, nil?: true
 
       # @!attribute description
       #   Profile description (optional)
@@ -58,25 +74,25 @@ module Sentdm
       optional :icon, String, nil?: true
 
       # @!attribute inherit_contacts
-      #   Whether this profile inherits contacts from organization (default: true)
+      #   @deprecated
       #
       #   @return [Boolean, nil]
       optional :inherit_contacts, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute inherit_tcr_brand
-      #   Whether this profile inherits TCR brand from organization (default: true)
+      #   Whether this profile inherits TCR brand from organization (default: false)
       #
       #   @return [Boolean, nil]
       optional :inherit_tcr_brand, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute inherit_tcr_campaign
-      #   Whether this profile inherits TCR campaign from organization (default: true)
+      #   Whether this profile inherits TCR campaign from organization (default: false)
       #
       #   @return [Boolean, nil]
       optional :inherit_tcr_campaign, Sentdm::Internal::Type::Boolean, nil?: true
 
       # @!attribute inherit_templates
-      #   Whether this profile inherits templates from organization (default: true)
+      #   @deprecated
       #
       #   @return [Boolean, nil]
       optional :inherit_templates, Sentdm::Internal::Type::Boolean, nil?: true
@@ -88,12 +104,12 @@ module Sentdm
       optional :name, String
 
       # @!attribute payment_details
-      #   Payment card details for a profile. Accepted when billing_model is "profile" or
-      #   "profile_and_organization". These details are not stored on our servers and will
-      #   be forwarded to the payment processor.
+      #   Payment card details for this profile (optional). Accepted when billing_model is
+      #   "profile" or "profile_and_organization". Not persisted on our servers —
+      #   forwarded to the payment processor.
       #
-      #   @return [Sentdm::Models::PaymentDetails, nil]
-      optional :payment_details, -> { Sentdm::PaymentDetails }, nil?: true
+      #   @return [Sentdm::Models::ProfileCreateParams::PaymentDetails, nil]
+      optional :payment_details, -> { Sentdm::ProfileCreateParams::PaymentDetails }, nil?: true
 
       # @!attribute sandbox
       #   Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -136,31 +152,31 @@ module Sentdm
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ProfileCreateParams} for more details.
       #
-      #   @param allow_contact_sharing [Boolean] Whether contacts are shared across profiles (default: false)
+      #   @param allow_contact_sharing [Boolean, nil] Deprecated. Accepted and ignored. Contact and template sharing between sender pr
       #
-      #   @param allow_template_sharing [Boolean] Whether templates are shared across profiles (default: false)
+      #   @param allow_template_sharing [Boolean, nil]
       #
-      #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact information for a profile.
+      #   @param billing_contact [Sentdm::Models::ProfileCreateParams::BillingContact, nil] Billing contact information for a profile.
       #
       #   @param billing_model [String, nil] Billing model: profile, organization, or profile_and_organization (default: prof
       #
-      #   @param brand [Sentdm::Models::BrandsBrandData, nil] Brand and KYC data grouped into contact, business, and compliance sections
+      #   @param brand [Sentdm::Models::ProfileCreateParams::Brand, nil] Brand and KYC data grouped into contact, business, and compliance sections
       #
       #   @param description [String, nil] Profile description (optional)
       #
       #   @param icon [String, nil] Profile icon URL (optional)
       #
-      #   @param inherit_contacts [Boolean, nil] Whether this profile inherits contacts from organization (default: true)
+      #   @param inherit_contacts [Boolean, nil]
       #
-      #   @param inherit_tcr_brand [Boolean, nil] Whether this profile inherits TCR brand from organization (default: true)
+      #   @param inherit_tcr_brand [Boolean, nil] Whether this profile inherits TCR brand from organization (default: false)
       #
-      #   @param inherit_tcr_campaign [Boolean, nil] Whether this profile inherits TCR campaign from organization (default: true)
+      #   @param inherit_tcr_campaign [Boolean, nil] Whether this profile inherits TCR campaign from organization (default: false)
       #
-      #   @param inherit_templates [Boolean, nil] Whether this profile inherits templates from organization (default: true)
+      #   @param inherit_templates [Boolean, nil]
       #
       #   @param name [String] Profile name (required)
       #
-      #   @param payment_details [Sentdm::Models::PaymentDetails, nil] Payment card details for a profile.
+      #   @param payment_details [Sentdm::Models::ProfileCreateParams::PaymentDetails, nil] Payment card details for this profile (optional).
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
@@ -173,6 +189,342 @@ module Sentdm
       #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
+
+      class BillingContact < Sentdm::Internal::Type::BaseModel
+        # @!attribute email
+        #   Email address where invoices will be sent (required)
+        #
+        #   @return [String]
+        required :email, String
+
+        # @!attribute name
+        #   Full name of the billing contact or company (required)
+        #
+        #   @return [String]
+        required :name, String
+
+        # @!attribute address
+        #   Billing address (optional). Free-form text including street, city, state, postal
+        #   code, and country.
+        #
+        #   @return [String, nil]
+        optional :address, String, nil?: true
+
+        # @!attribute phone
+        #   Phone number for the billing contact (optional)
+        #
+        #   @return [String, nil]
+        optional :phone, String, nil?: true
+
+        # @!method initialize(email:, name:, address: nil, phone: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Sentdm::Models::ProfileCreateParams::BillingContact} for more details.
+        #
+        #   Billing contact information for a profile. Required when billing_model is
+        #   "profile" or "profile_and_organization".
+        #
+        #   @param email [String] Email address where invoices will be sent (required)
+        #
+        #   @param name [String] Full name of the billing contact or company (required)
+        #
+        #   @param address [String, nil] Billing address (optional). Free-form text including street, city, state, postal
+        #
+        #   @param phone [String, nil] Phone number for the billing contact (optional)
+      end
+
+      class Brand < Sentdm::Internal::Type::BaseModel
+        # @!attribute compliance
+        #   Compliance and TCR information for brand registration
+        #
+        #   @return [Sentdm::Models::ProfileCreateParams::Brand::Compliance]
+        required :compliance, -> { Sentdm::ProfileCreateParams::Brand::Compliance }
+
+        # @!attribute contact
+        #   Contact information for brand KYC
+        #
+        #   @return [Sentdm::Models::ProfileCreateParams::Brand::Contact]
+        required :contact, -> { Sentdm::ProfileCreateParams::Brand::Contact }
+
+        # @!attribute business
+        #   Business details and address for brand KYC
+        #
+        #   @return [Sentdm::Models::ProfileCreateParams::Brand::Business, nil]
+        optional :business, -> { Sentdm::ProfileCreateParams::Brand::Business }, nil?: true
+
+        # @!method initialize(compliance:, contact:, business: nil)
+        #   Brand and KYC data grouped into contact, business, and compliance sections
+        #
+        #   @param compliance [Sentdm::Models::ProfileCreateParams::Brand::Compliance] Compliance and TCR information for brand registration
+        #
+        #   @param contact [Sentdm::Models::ProfileCreateParams::Brand::Contact] Contact information for brand KYC
+        #
+        #   @param business [Sentdm::Models::ProfileCreateParams::Brand::Business, nil] Business details and address for brand KYC
+
+        # @see Sentdm::Models::ProfileCreateParams::Brand#compliance
+        class Compliance < Sentdm::Internal::Type::BaseModel
+          # @!attribute brand_relationship
+          #
+          #   @return [Symbol, Sentdm::Models::TcrBrandRelationship]
+          required :brand_relationship,
+                   enum: -> {
+                     Sentdm::TcrBrandRelationship
+                   },
+                   api_name: :brandRelationship
+
+          # @!attribute vertical
+          #
+          #   @return [Symbol, Sentdm::Models::TcrVertical]
+          required :vertical, enum: -> { Sentdm::TcrVertical }
+
+          # @!attribute destination_countries
+          #   List of destination countries for messaging
+          #
+          #   @return [Array<Sentdm::Models::DestinationCountry>, nil]
+          optional :destination_countries,
+                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::DestinationCountry] },
+                   api_name: :destinationCountries,
+                   nil?: true
+
+          # @!attribute is_tcr_application
+          #   Whether this is a TCR (Campaign Registry) application
+          #
+          #   @return [Boolean, nil]
+          optional :is_tcr_application,
+                   Sentdm::Internal::Type::Boolean,
+                   api_name: :isTcrApplication,
+                   nil?: true
+
+          # @!attribute notes
+          #   Additional notes about the business or use case
+          #
+          #   @return [String, nil]
+          optional :notes, String, nil?: true
+
+          # @!attribute phone_number_prefix
+          #   Phone number prefix for messaging (e.g., "+1")
+          #
+          #   @return [String, nil]
+          optional :phone_number_prefix, String, api_name: :phoneNumberPrefix, nil?: true
+
+          # @!method initialize(brand_relationship:, vertical:, destination_countries: nil, is_tcr_application: nil, notes: nil, phone_number_prefix: nil)
+          #   Compliance and TCR information for brand registration
+          #
+          #   @param brand_relationship [Symbol, Sentdm::Models::TcrBrandRelationship]
+          #
+          #   @param vertical [Symbol, Sentdm::Models::TcrVertical]
+          #
+          #   @param destination_countries [Array<Sentdm::Models::DestinationCountry>, nil] List of destination countries for messaging
+          #
+          #   @param is_tcr_application [Boolean, nil] Whether this is a TCR (Campaign Registry) application
+          #
+          #   @param notes [String, nil] Additional notes about the business or use case
+          #
+          #   @param phone_number_prefix [String, nil] Phone number prefix for messaging (e.g., "+1")
+        end
+
+        # @see Sentdm::Models::ProfileCreateParams::Brand#contact
+        class Contact < Sentdm::Internal::Type::BaseModel
+          # @!attribute name
+          #   Primary contact name (required)
+          #
+          #   @return [String]
+          required :name, String
+
+          # @!attribute business_name
+          #   Business/brand name
+          #
+          #   @return [String, nil]
+          optional :business_name, String, api_name: :businessName, nil?: true
+
+          # @!attribute email
+          #   Contact email address
+          #
+          #   @return [String, nil]
+          optional :email, String, nil?: true
+
+          # @!attribute phone
+          #   Contact phone number in E.164 format
+          #
+          #   @return [String, nil]
+          optional :phone, String, nil?: true
+
+          # @!attribute phone_country_code
+          #   Contact phone country code (e.g., "1" for US)
+          #
+          #   @return [String, nil]
+          optional :phone_country_code, String, api_name: :phoneCountryCode, nil?: true
+
+          # @!attribute role
+          #   Contact's role in the business
+          #
+          #   @return [String, nil]
+          optional :role, String, nil?: true
+
+          # @!method initialize(name:, business_name: nil, email: nil, phone: nil, phone_country_code: nil, role: nil)
+          #   Contact information for brand KYC
+          #
+          #   @param name [String] Primary contact name (required)
+          #
+          #   @param business_name [String, nil] Business/brand name
+          #
+          #   @param email [String, nil] Contact email address
+          #
+          #   @param phone [String, nil] Contact phone number in E.164 format
+          #
+          #   @param phone_country_code [String, nil] Contact phone country code (e.g., "1" for US)
+          #
+          #   @param role [String, nil] Contact's role in the business
+        end
+
+        # @see Sentdm::Models::ProfileCreateParams::Brand#business
+        class Business < Sentdm::Internal::Type::BaseModel
+          # @!attribute city
+          #   City
+          #
+          #   @return [String, nil]
+          optional :city, String, nil?: true
+
+          # @!attribute country
+          #   Country code (e.g., US, CA)
+          #
+          #   @return [String, nil]
+          optional :country, String, nil?: true
+
+          # @!attribute country_of_registration
+          #   Country where the business is registered
+          #
+          #   @return [String, nil]
+          optional :country_of_registration, String, api_name: :countryOfRegistration, nil?: true
+
+          # @!attribute entity_type
+          #
+          #   @return [Symbol, Sentdm::Models::ProfileCreateParams::Brand::Business::EntityType, nil]
+          optional :entity_type,
+                   enum: -> { Sentdm::ProfileCreateParams::Brand::Business::EntityType },
+                   api_name: :entityType,
+                   nil?: true
+
+          # @!attribute legal_name
+          #   Legal business name
+          #
+          #   @return [String, nil]
+          optional :legal_name, String, api_name: :legalName, nil?: true
+
+          # @!attribute postal_code
+          #   Postal/ZIP code
+          #
+          #   @return [String, nil]
+          optional :postal_code, String, api_name: :postalCode, nil?: true
+
+          # @!attribute state
+          #   State/province code
+          #
+          #   @return [String, nil]
+          optional :state, String, nil?: true
+
+          # @!attribute street
+          #   Street address
+          #
+          #   @return [String, nil]
+          optional :street, String, nil?: true
+
+          # @!attribute tax_id
+          #   Tax ID/EIN number
+          #
+          #   @return [String, nil]
+          optional :tax_id, String, api_name: :taxId, nil?: true
+
+          # @!attribute tax_id_type
+          #   Type of tax ID (e.g., us_ein, ca_bn)
+          #
+          #   @return [String, nil]
+          optional :tax_id_type, String, api_name: :taxIdType, nil?: true
+
+          # @!attribute url
+          #   Business website URL
+          #
+          #   @return [String, nil]
+          optional :url, String, nil?: true
+
+          # @!method initialize(city: nil, country: nil, country_of_registration: nil, entity_type: nil, legal_name: nil, postal_code: nil, state: nil, street: nil, tax_id: nil, tax_id_type: nil, url: nil)
+          #   Business details and address for brand KYC
+          #
+          #   @param city [String, nil] City
+          #
+          #   @param country [String, nil] Country code (e.g., US, CA)
+          #
+          #   @param country_of_registration [String, nil] Country where the business is registered
+          #
+          #   @param entity_type [Symbol, Sentdm::Models::ProfileCreateParams::Brand::Business::EntityType, nil]
+          #
+          #   @param legal_name [String, nil] Legal business name
+          #
+          #   @param postal_code [String, nil] Postal/ZIP code
+          #
+          #   @param state [String, nil] State/province code
+          #
+          #   @param street [String, nil] Street address
+          #
+          #   @param tax_id [String, nil] Tax ID/EIN number
+          #
+          #   @param tax_id_type [String, nil] Type of tax ID (e.g., us_ein, ca_bn)
+          #
+          #   @param url [String, nil] Business website URL
+
+          # @see Sentdm::Models::ProfileCreateParams::Brand::Business#entity_type
+          module EntityType
+            extend Sentdm::Internal::Type::Enum
+
+            PRIVATE_PROFIT = :PRIVATE_PROFIT
+            PUBLIC_PROFIT = :PUBLIC_PROFIT
+            NON_PROFIT = :NON_PROFIT
+            SOLE_PROPRIETOR = :SOLE_PROPRIETOR
+            GOVERNMENT = :GOVERNMENT
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+      end
+
+      class PaymentDetails < Sentdm::Internal::Type::BaseModel
+        # @!attribute card_number
+        #   Card number (digits only, 13–19 characters)
+        #
+        #   @return [String]
+        required :card_number, String
+
+        # @!attribute cvc
+        #   Card security code (3–4 digits)
+        #
+        #   @return [String]
+        required :cvc, String
+
+        # @!attribute expiry
+        #   Card expiry date in MM/YY format (e.g. "09/27")
+        #
+        #   @return [String]
+        required :expiry, String
+
+        # @!attribute zip_code
+        #   Billing ZIP / postal code associated with the card
+        #
+        #   @return [String]
+        required :zip_code, String
+
+        # @!method initialize(card_number:, cvc:, expiry:, zip_code:)
+        #   Payment card details for this profile (optional). Accepted when billing_model is
+        #   "profile" or "profile_and_organization". Not persisted on our servers —
+        #   forwarded to the payment processor.
+        #
+        #   @param card_number [String] Card number (digits only, 13–19 characters)
+        #
+        #   @param cvc [String] Card security code (3–4 digits)
+        #
+        #   @param expiry [String] Card expiry date in MM/YY format (e.g. "09/27")
+        #
+        #   @param zip_code [String] Billing ZIP / postal code associated with the card
+      end
 
       class WhatsappBusinessAccount < Sentdm::Internal::Type::BaseModel
         # @!attribute access_token
