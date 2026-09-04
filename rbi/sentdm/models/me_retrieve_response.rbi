@@ -165,6 +165,28 @@ module Sentdm
         end
         attr_writer :profiles
 
+        # The SMS sender this account sends from in the United States, in E.164 form. Null
+        # when the account has no US SMS sender.
+        #
+        # The same value as channels.sms.phone_number, published under both names on
+        # purpose: sending_phone_number is what this value is already called on GET
+        # /v3/profiles, so the same key answers the same question whichever of the two
+        # endpoints you ask. Neither name is preferred over the other and neither is
+        # deprecated.
+        #
+        # The same value, not the same presence: this key is always written, including as
+        # null, whereas channels.sms.phone_number is left out entirely when there is no
+        # sender.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :sending_phone_number
+
+        # The account that holds sending_phone_number in number inventory: normally this
+        # account itself, and a different account when the number is held elsewhere. Null
+        # when there is no US sender, or when the sender is not a number drawn from
+        # inventory — an alphanumeric sender ID or a short code.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :sending_phone_number_profile_id
+
         # Profile configuration settings
         sig do
           returns(T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Settings))
@@ -216,6 +238,8 @@ module Sentdm
               T::Array[
                 Sentdm::Models::MeRetrieveResponse::Data::Profile::OrHash
               ],
+            sending_phone_number: T.nilable(String),
+            sending_phone_number_profile_id: T.nilable(String),
             settings:
               T.nilable(
                 Sentdm::Models::MeRetrieveResponse::Data::Settings::OrHash
@@ -246,6 +270,24 @@ module Sentdm
           # List of profiles (populated for organization type, empty for user and profile
           # types)
           profiles: nil,
+          # The SMS sender this account sends from in the United States, in E.164 form. Null
+          # when the account has no US SMS sender.
+          #
+          # The same value as channels.sms.phone_number, published under both names on
+          # purpose: sending_phone_number is what this value is already called on GET
+          # /v3/profiles, so the same key answers the same question whichever of the two
+          # endpoints you ask. Neither name is preferred over the other and neither is
+          # deprecated.
+          #
+          # The same value, not the same presence: this key is always written, including as
+          # null, whereas channels.sms.phone_number is left out entirely when there is no
+          # sender.
+          sending_phone_number: nil,
+          # The account that holds sending_phone_number in number inventory: normally this
+          # account itself, and a different account when the number is held elsewhere. Null
+          # when there is no US sender, or when the sender is not a number drawn from
+          # inventory — an alphanumeric sender ID or a short code.
+          sending_phone_number_profile_id: nil,
           # Profile configuration settings
           settings: nil,
           # Short name / abbreviation (only for profile type)
@@ -272,6 +314,8 @@ module Sentdm
               organization_id: T.nilable(String),
               profiles:
                 T::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
+              sending_phone_number: T.nilable(String),
+              sending_phone_number_profile_id: T.nilable(String),
               settings:
                 T.nilable(Sentdm::Models::MeRetrieveResponse::Data::Settings),
               short_name: T.nilable(String),

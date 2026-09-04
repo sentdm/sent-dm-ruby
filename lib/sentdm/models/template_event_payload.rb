@@ -3,6 +3,19 @@
 module Sentdm
   module Models
     class TemplateEventPayload < Sentdm::Internal::Type::BaseModel
+      # @!attribute status
+      #   The review status the template just reached, for example APPROVED or REJECTED.
+      #
+      #   @return [String]
+      required :status, String
+
+      # @!attribute whatsapp_template_id
+      #   The template's identifier with Meta, assigned when the template is submitted for
+      #   review.
+      #
+      #   @return [String]
+      required :whatsapp_template_id, String
+
       # @!attribute account_id
       #   The account the template belongs to.
       #
@@ -34,12 +47,6 @@ module Sentdm
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!attribute status
-      #   The review status the template just reached, for example APPROVED or REJECTED.
-      #
-      #   @return [String, nil]
-      optional :status, String
-
       # @!attribute template_id
       #   The template in Sent.
       #
@@ -52,19 +59,16 @@ module Sentdm
       #   @return [String, nil]
       optional :template_name, String
 
-      # @!attribute whatsapp_template_id
-      #   The template's identifier with Meta, assigned when the template is submitted for
-      #   review.
-      #
-      #   @return [String, nil]
-      optional :whatsapp_template_id, String
-
-      # @!method initialize(account_id: nil, category: nil, channel: nil, language: nil, reason: nil, status: nil, template_id: nil, template_name: nil, whatsapp_template_id: nil)
+      # @!method initialize(status:, whatsapp_template_id:, account_id: nil, category: nil, channel: nil, language: nil, reason: nil, template_id: nil, template_name: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateEventPayload} for more details.
       #
       #   Body of a template status event. Delivered when a template's review outcome
       #   changes, so you can react without polling.
+      #
+      #   @param status [String] The review status the template just reached, for example APPROVED or
+      #
+      #   @param whatsapp_template_id [String] The template's identifier with Meta, assigned when the template is submitted for
       #
       #   @param account_id [String] The account the template belongs to.
       #
@@ -76,13 +80,9 @@ module Sentdm
       #
       #   @param reason [String, nil] Why the template reached Status, when a reason was given. Populated on a
       #
-      #   @param status [String] The review status the template just reached, for example APPROVED or
-      #
       #   @param template_id [String] The template in Sent.
       #
       #   @param template_name [String] The template's display name.
-      #
-      #   @param whatsapp_template_id [String] The template's identifier with Meta, assigned when the template is submitted for
     end
   end
 end

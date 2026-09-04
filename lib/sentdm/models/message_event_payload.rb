@@ -3,6 +3,14 @@
 module Sentdm
   module Models
     class MessageEventPayload < Sentdm::Internal::Type::BaseModel
+      # @!attribute message_status
+      #   The status the message just reached, for example SENT, DELIVERED, or FAILED.
+      #   Sent means dispatched and delivered means confirmed, so treat them as distinct
+      #   outcomes.
+      #
+      #   @return [String]
+      required :message_status, String
+
       # @!attribute account_id
       #   The account the message belongs to.
       #
@@ -29,14 +37,6 @@ module Sentdm
       #   @return [String, nil]
       optional :message_id, String
 
-      # @!attribute message_status
-      #   The status the message just reached, for example SENT, DELIVERED, or FAILED.
-      #   Sent means dispatched and delivered means confirmed, so treat them as distinct
-      #   outcomes.
-      #
-      #   @return [String, nil]
-      optional :message_status, String
-
       # @!attribute outbound_number
       #   The recipient's number in E.164 format.
       #
@@ -62,13 +62,15 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(account_id: nil, agent_id: nil, channel: nil, message_id: nil, message_status: nil, outbound_number: nil, template_id: nil, template_name: nil, updated_at: nil)
+      # @!method initialize(message_status:, account_id: nil, agent_id: nil, channel: nil, message_id: nil, outbound_number: nil, template_id: nil, template_name: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::MessageEventPayload} for more details.
       #
       #   Body of an outbound message lifecycle event. Delivered once per status change,
       #   so a single message produces several of these as it moves toward a terminal
       #   status.
+      #
+      #   @param message_status [String] The status the message just reached, for example SENT, DELIVERED, or
       #
       #   @param account_id [String] The account the message belongs to.
       #
@@ -77,8 +79,6 @@ module Sentdm
       #   @param channel [String] The channel the message went out on, for example sms or whatsapp. A message
       #
       #   @param message_id [String] The message this event describes. Stable across every event in the message's lif
-      #
-      #   @param message_status [String] The status the message just reached, for example SENT, DELIVERED, or
       #
       #   @param outbound_number [String] The recipient's number in E.164 format.
       #

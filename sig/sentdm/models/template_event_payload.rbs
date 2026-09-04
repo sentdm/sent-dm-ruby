@@ -2,18 +2,22 @@ module Sentdm
   module Models
     type template_event_payload =
       {
+        status: String,
+        whatsapp_template_id: String,
         account_id: String,
         category: String,
         channel: String,
         language: String,
         reason: String?,
-        status: String,
         template_id: String,
-        template_name: String,
-        whatsapp_template_id: String
+        template_name: String
       }
 
     class TemplateEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor status: String
+
+      attr_accessor whatsapp_template_id: String
+
       attr_reader account_id: String?
 
       def account_id=: (String) -> String
@@ -32,10 +36,6 @@ module Sentdm
 
       attr_accessor reason: String?
 
-      attr_reader status: String?
-
-      def status=: (String) -> String
-
       attr_reader template_id: String?
 
       def template_id=: (String) -> String
@@ -44,32 +44,28 @@ module Sentdm
 
       def template_name=: (String) -> String
 
-      attr_reader whatsapp_template_id: String?
-
-      def whatsapp_template_id=: (String) -> String
-
       def initialize: (
+        status: String,
+        whatsapp_template_id: String,
         ?account_id: String,
         ?category: String,
         ?channel: String,
         ?language: String,
         ?reason: String?,
-        ?status: String,
         ?template_id: String,
-        ?template_name: String,
-        ?whatsapp_template_id: String
+        ?template_name: String
       ) -> void
 
       def to_hash: -> {
+        status: String,
+        whatsapp_template_id: String,
         account_id: String,
         category: String,
         channel: String,
         language: String,
         reason: String?,
-        status: String,
         template_id: String,
-        template_name: String,
-        whatsapp_template_id: String
+        template_name: String
       }
     end
   end
