@@ -2,17 +2,21 @@ module Sentdm
   module Models
     type inbound_message_event_payload =
       {
+        inbound_number: String,
+        received_at: String,
         account_id: String,
         channel: String,
-        inbound_number: String,
         message_id: String,
         outbound_number: String,
-        received_at: String,
         text: String?,
         updated_at: String
       }
 
     class InboundMessageEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor inbound_number: String
+
+      attr_accessor received_at: String
+
       attr_reader account_id: String?
 
       def account_id=: (String) -> String
@@ -20,10 +24,6 @@ module Sentdm
       attr_reader channel: String?
 
       def channel=: (String) -> String
-
-      attr_reader inbound_number: String?
-
-      def inbound_number=: (String) -> String
 
       attr_reader message_id: String?
 
@@ -33,10 +33,6 @@ module Sentdm
 
       def outbound_number=: (String) -> String
 
-      attr_reader received_at: String?
-
-      def received_at=: (String) -> String
-
       attr_accessor text: String?
 
       attr_reader updated_at: String?
@@ -44,23 +40,23 @@ module Sentdm
       def updated_at=: (String) -> String
 
       def initialize: (
+        inbound_number: String,
+        received_at: String,
         ?account_id: String,
         ?channel: String,
-        ?inbound_number: String,
         ?message_id: String,
         ?outbound_number: String,
-        ?received_at: String,
         ?text: String?,
         ?updated_at: String
       ) -> void
 
       def to_hash: -> {
+        inbound_number: String,
+        received_at: String,
         account_id: String,
         channel: String,
-        inbound_number: String,
         message_id: String,
         outbound_number: String,
-        received_at: String,
         text: String?,
         updated_at: String
       }

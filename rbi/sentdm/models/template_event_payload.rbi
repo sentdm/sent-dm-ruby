@@ -8,6 +8,15 @@ module Sentdm
           T.any(Sentdm::TemplateEventPayload, Sentdm::Internal::AnyHash)
         end
 
+      # The review status the template just reached, for example APPROVED or REJECTED.
+      sig { returns(String) }
+      attr_accessor :status
+
+      # The template's identifier with Meta, assigned when the template is submitted for
+      # review.
+      sig { returns(String) }
+      attr_accessor :whatsapp_template_id
+
       # The account the template belongs to.
       sig { returns(T.nilable(String)) }
       attr_reader :account_id
@@ -41,13 +50,6 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :reason
 
-      # The review status the template just reached, for example APPROVED or REJECTED.
-      sig { returns(T.nilable(String)) }
-      attr_reader :status
-
-      sig { params(status: String).void }
-      attr_writer :status
-
       # The template in Sent.
       sig { returns(T.nilable(String)) }
       attr_reader :template_id
@@ -62,30 +64,27 @@ module Sentdm
       sig { params(template_name: String).void }
       attr_writer :template_name
 
-      # The template's identifier with Meta, assigned when the template is submitted for
-      # review.
-      sig { returns(T.nilable(String)) }
-      attr_reader :whatsapp_template_id
-
-      sig { params(whatsapp_template_id: String).void }
-      attr_writer :whatsapp_template_id
-
       # Body of a template status event. Delivered when a template's review outcome
       # changes, so you can react without polling.
       sig do
         params(
+          status: String,
+          whatsapp_template_id: String,
           account_id: String,
           category: String,
           channel: String,
           language: String,
           reason: T.nilable(String),
-          status: String,
           template_id: String,
-          template_name: String,
-          whatsapp_template_id: String
+          template_name: String
         ).returns(T.attached_class)
       end
       def self.new(
+        # The review status the template just reached, for example APPROVED or REJECTED.
+        status:,
+        # The template's identifier with Meta, assigned when the template is submitted for
+        # review.
+        whatsapp_template_id:,
         # The account the template belongs to.
         account_id: nil,
         # The template's category, for example UTILITY, MARKETING, or AUTHENTICATION.
@@ -97,30 +96,25 @@ module Sentdm
         # Why the template reached Status, when a reason was given. Populated on a
         # rejection.
         reason: nil,
-        # The review status the template just reached, for example APPROVED or REJECTED.
-        status: nil,
         # The template in Sent.
         template_id: nil,
         # The template's display name.
-        template_name: nil,
-        # The template's identifier with Meta, assigned when the template is submitted for
-        # review.
-        whatsapp_template_id: nil
+        template_name: nil
       )
       end
 
       sig do
         override.returns(
           {
+            status: String,
+            whatsapp_template_id: String,
             account_id: String,
             category: String,
             channel: String,
             language: String,
             reason: T.nilable(String),
-            status: String,
             template_id: String,
-            template_name: String,
-            whatsapp_template_id: String
+            template_name: String
           }
         )
       end

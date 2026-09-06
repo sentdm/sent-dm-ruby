@@ -8,6 +8,12 @@ module Sentdm
           T.any(Sentdm::MessageEventPayload, Sentdm::Internal::AnyHash)
         end
 
+      # The status the message just reached, for example SENT, DELIVERED, or FAILED.
+      # Sent means dispatched and delivered means confirmed, so treat them as distinct
+      # outcomes.
+      sig { returns(String) }
+      attr_accessor :message_status
+
       # The account the message belongs to.
       sig { returns(T.nilable(String)) }
       attr_reader :account_id
@@ -34,15 +40,6 @@ module Sentdm
 
       sig { params(message_id: String).void }
       attr_writer :message_id
-
-      # The status the message just reached, for example SENT, DELIVERED, or FAILED.
-      # Sent means dispatched and delivered means confirmed, so treat them as distinct
-      # outcomes.
-      sig { returns(T.nilable(String)) }
-      attr_reader :message_status
-
-      sig { params(message_status: String).void }
-      attr_writer :message_status
 
       # The recipient's number in E.164 format.
       sig { returns(T.nilable(String)) }
@@ -72,11 +69,11 @@ module Sentdm
       # status.
       sig do
         params(
+          message_status: String,
           account_id: String,
           agent_id: T.nilable(String),
           channel: String,
           message_id: String,
-          message_status: String,
           outbound_number: String,
           template_id: T.nilable(String),
           template_name: T.nilable(String),
@@ -84,6 +81,10 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        # The status the message just reached, for example SENT, DELIVERED, or FAILED.
+        # Sent means dispatched and delivered means confirmed, so treat them as distinct
+        # outcomes.
+        message_status:,
         # The account the message belongs to.
         account_id: nil,
         # The agent attributed to the send, when the send was attributed to one.
@@ -94,10 +95,6 @@ module Sentdm
         # The message this event describes. Stable across every event in the message's
         # lifecycle, so use it to correlate them.
         message_id: nil,
-        # The status the message just reached, for example SENT, DELIVERED, or FAILED.
-        # Sent means dispatched and delivered means confirmed, so treat them as distinct
-        # outcomes.
-        message_status: nil,
         # The recipient's number in E.164 format.
         outbound_number: nil,
         # The template the message was sent from, when it was sent from one.
@@ -113,11 +110,11 @@ module Sentdm
       sig do
         override.returns(
           {
+            message_status: String,
             account_id: String,
             agent_id: T.nilable(String),
             channel: String,
             message_id: String,
-            message_status: String,
             outbound_number: String,
             template_id: T.nilable(String),
             template_name: T.nilable(String),

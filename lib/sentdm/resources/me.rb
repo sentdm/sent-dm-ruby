@@ -28,6 +28,17 @@ module Sentdm
       # `rcs`. Each channel has a `configured` boolean. Configured channels expose
       # additional details such as `phone_number`.
       #
+      # **Sending number:** `sending_phone_number` is the account's US SMS sender. It is
+      # intentionally the same value as `channels.sms.phone_number` — the two are kept
+      # in step, and it is published under both names because `sending_phone_number` is
+      # what this value is called on `GET /v3/profiles`. Read either. One difference:
+      # `sending_phone_number` is always present, including as `null`, while
+      # `channels.sms.phone_number` is omitted when there is no sender.
+      #
+      # `sending_phone_number_profile_id` names the account that holds that number in
+      # inventory — normally this account, and a different one where a number is shared.
+      # Both are `null` when the account has no US SMS sender.
+      #
       # @overload retrieve(x_profile_id: nil, request_options: {})
       #
       # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys

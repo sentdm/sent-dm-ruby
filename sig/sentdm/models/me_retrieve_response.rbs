@@ -48,6 +48,8 @@ module Sentdm
           name: String,
           organization_id: String?,
           profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
+          sending_phone_number: String?,
+          sending_phone_number_profile_id: String?,
           settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?,
           short_name: String?,
           status: String?,
@@ -87,6 +89,10 @@ module Sentdm
           ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]
         ) -> ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile]
 
+        attr_accessor sending_phone_number: String?
+
+        attr_accessor sending_phone_number_profile_id: String?
+
         attr_accessor settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?
 
         attr_accessor short_name: String?
@@ -107,6 +113,8 @@ module Sentdm
           ?name: String,
           ?organization_id: String?,
           ?profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
+          ?sending_phone_number: String?,
+          ?sending_phone_number_profile_id: String?,
           ?settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?,
           ?short_name: String?,
           ?status: String?,
@@ -123,6 +131,8 @@ module Sentdm
           name: String,
           organization_id: String?,
           profiles: ::Array[Sentdm::Models::MeRetrieveResponse::Data::Profile],
+          sending_phone_number: String?,
+          sending_phone_number_profile_id: String?,
           settings: Sentdm::Models::MeRetrieveResponse::Data::Settings?,
           short_name: String?,
           status: String?,

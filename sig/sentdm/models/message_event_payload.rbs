@@ -2,11 +2,11 @@ module Sentdm
   module Models
     type message_event_payload =
       {
+        message_status: String,
         account_id: String,
         agent_id: String?,
         channel: String,
         message_id: String,
-        message_status: String,
         outbound_number: String,
         template_id: String?,
         template_name: String?,
@@ -14,6 +14,8 @@ module Sentdm
       }
 
     class MessageEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor message_status: String
+
       attr_reader account_id: String?
 
       def account_id=: (String) -> String
@@ -28,10 +30,6 @@ module Sentdm
 
       def message_id=: (String) -> String
 
-      attr_reader message_status: String?
-
-      def message_status=: (String) -> String
-
       attr_reader outbound_number: String?
 
       def outbound_number=: (String) -> String
@@ -45,11 +43,11 @@ module Sentdm
       def updated_at=: (String) -> String
 
       def initialize: (
+        message_status: String,
         ?account_id: String,
         ?agent_id: String?,
         ?channel: String,
         ?message_id: String,
-        ?message_status: String,
         ?outbound_number: String,
         ?template_id: String?,
         ?template_name: String?,
@@ -57,11 +55,11 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        message_status: String,
         account_id: String,
         agent_id: String?,
         channel: String,
         message_id: String,
-        message_status: String,
         outbound_number: String,
         template_id: String?,
         template_name: String?,

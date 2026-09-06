@@ -103,6 +103,32 @@ module Sentdm
         optional :profiles,
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::MeRetrieveResponse::Data::Profile] }
 
+        # @!attribute sending_phone_number
+        #   The SMS sender this account sends from in the United States, in E.164 form. Null
+        #   when the account has no US SMS sender.
+        #
+        #   The same value as channels.sms.phone_number, published under both names on
+        #   purpose: sending_phone_number is what this value is already called on GET
+        #   /v3/profiles, so the same key answers the same question whichever of the two
+        #   endpoints you ask. Neither name is preferred over the other and neither is
+        #   deprecated.
+        #
+        #   The same value, not the same presence: this key is always written, including as
+        #   null, whereas channels.sms.phone_number is left out entirely when there is no
+        #   sender.
+        #
+        #   @return [String, nil]
+        optional :sending_phone_number, String, nil?: true
+
+        # @!attribute sending_phone_number_profile_id
+        #   The account that holds sending_phone_number in number inventory: normally this
+        #   account itself, and a different account when the number is held elsewhere. Null
+        #   when there is no US sender, or when the sender is not a number drawn from
+        #   inventory — an alphanumeric sender ID or a short code.
+        #
+        #   @return [String, nil]
+        optional :sending_phone_number_profile_id, String, nil?: true
+
         # @!attribute settings
         #   Profile configuration settings
         #
@@ -129,7 +155,7 @@ module Sentdm
         #   @return [String, nil]
         optional :type, String
 
-        # @!method initialize(id: nil, channels: nil, created_at: nil, description: nil, email: nil, icon: nil, name: nil, organization_id: nil, profiles: nil, settings: nil, short_name: nil, status: nil, type: nil)
+        # @!method initialize(id: nil, channels: nil, created_at: nil, description: nil, email: nil, icon: nil, name: nil, organization_id: nil, profiles: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, settings: nil, short_name: nil, status: nil, type: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MeRetrieveResponse::Data} for more details.
         #
@@ -154,6 +180,10 @@ module Sentdm
         #   @param organization_id [String, nil] Organization ID (only for profile type — the parent organization)
         #
         #   @param profiles [Array<Sentdm::Models::MeRetrieveResponse::Data::Profile>] List of profiles (populated for organization type, empty for user and profile ty
+        #
+        #   @param sending_phone_number [String, nil] The SMS sender this account sends from in the United States, in E.164 form. Null
+        #
+        #   @param sending_phone_number_profile_id [String, nil] The account that holds sending_phone_number in number inventory: normally this a
         #
         #   @param settings [Sentdm::Models::MeRetrieveResponse::Data::Settings, nil] Profile configuration settings
         #
