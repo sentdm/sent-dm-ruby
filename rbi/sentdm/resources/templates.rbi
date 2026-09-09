@@ -24,7 +24,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateCreateResponse)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def create(
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional,
@@ -63,7 +63,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateRetrieveResponse)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def retrieve(
         # Template ID from route parameter
@@ -89,7 +89,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateUpdateResponse)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def update(
         # Path param: Template ID from route parameter

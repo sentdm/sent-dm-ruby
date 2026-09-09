@@ -1,0 +1,51 @@
+module Sentdm
+  module Models
+    type webhook_event_type =
+      {
+        description: String?,
+        display_name: String,
+        event_type: String?,
+        is_active: bool,
+        name: String,
+        sub_types: ::Array[Sentdm::WebhookEventType]?
+      }
+
+    class WebhookEventType < Sentdm::Internal::Type::BaseModel
+      attr_accessor description: String?
+
+      attr_reader display_name: String?
+
+      def display_name=: (String) -> String
+
+      attr_accessor event_type: String?
+
+      attr_reader is_active: bool?
+
+      def is_active=: (bool) -> bool
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor sub_types: ::Array[Sentdm::WebhookEventType]?
+
+      def initialize: (
+        ?description: String?,
+        ?display_name: String,
+        ?event_type: String?,
+        ?is_active: bool,
+        ?name: String,
+        ?sub_types: ::Array[Sentdm::WebhookEventType]?
+      ) -> void
+
+      def to_hash: -> {
+        description: String?,
+        display_name: String,
+        event_type: String?,
+        is_active: bool,
+        name: String,
+        sub_types: ::Array[Sentdm::WebhookEventType]?
+      }
+    end
+  end
+end

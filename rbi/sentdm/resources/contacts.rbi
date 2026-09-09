@@ -21,7 +21,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactCreateResponse)
+        ).returns(Sentdm::APIResponseOfContact)
       end
       def create(
         # Body param: Phone number of the contact to create
@@ -49,7 +49,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactRetrieveResponse)
+        ).returns(Sentdm::APIResponseOfContact)
       end
       def retrieve(
         # Contact ID from route parameter
@@ -71,7 +71,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactUpdateResponse)
+        ).returns(Sentdm::APIResponseOfContact)
       end
       def update(
         # Path param: Contact ID from route parameter
@@ -169,7 +169,7 @@ module Sentdm
           contact_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactRetrieveMessageSummaryResponse)
+        ).returns(Sentdm::APIResponseOfContactMessageSummary)
       end
       def retrieve_message_summary(
         contact_id,
