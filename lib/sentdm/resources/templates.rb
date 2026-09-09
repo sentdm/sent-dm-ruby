@@ -37,7 +37,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateCreateResponse]
+      # @return [Sentdm::Models::APIResponseTemplate]
       #
       # @see Sentdm::Models::TemplateCreateParams
       def create(params = {})
@@ -48,7 +48,7 @@ module Sentdm
           path: "v3/templates",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::TemplateCreateResponse,
+          model: Sentdm::APIResponseTemplate,
           options: options
         )
       end
@@ -67,7 +67,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateRetrieveResponse]
+      # @return [Sentdm::Models::APIResponseTemplate]
       #
       # @see Sentdm::Models::TemplateRetrieveParams
       def retrieve(id, params = {})
@@ -76,7 +76,7 @@ module Sentdm
           method: :get,
           path: ["v3/templates/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::TemplateRetrieveResponse,
+          model: Sentdm::APIResponseTemplate,
           options: options
         )
       end
@@ -109,7 +109,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateUpdateResponse]
+      # @return [Sentdm::Models::APIResponseTemplate]
       #
       # @see Sentdm::Models::TemplateUpdateParams
       def update(id, params = {})
@@ -120,7 +120,7 @@ module Sentdm
           path: ["v3/templates/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::TemplateUpdateResponse,
+          model: Sentdm::APIResponseTemplate,
           options: options
         )
       end

@@ -1,0 +1,45 @@
+module Sentdm
+  module Models
+    type brand_compliance_info =
+      {
+        brand_relationship: Sentdm::Models::tcr_brand_relationship,
+        vertical: Sentdm::Models::tcr_vertical,
+        destination_countries: ::Array[Sentdm::DestinationCountry]?,
+        is_tcr_application: bool?,
+        notes: String?,
+        phone_number_prefix: String?
+      }
+
+    class BrandComplianceInfo < Sentdm::Internal::Type::BaseModel
+      attr_accessor brand_relationship: Sentdm::Models::tcr_brand_relationship
+
+      attr_accessor vertical: Sentdm::Models::tcr_vertical
+
+      attr_accessor destination_countries: ::Array[Sentdm::DestinationCountry]?
+
+      attr_accessor is_tcr_application: bool?
+
+      attr_accessor notes: String?
+
+      attr_accessor phone_number_prefix: String?
+
+      def initialize: (
+        brand_relationship: Sentdm::Models::tcr_brand_relationship,
+        vertical: Sentdm::Models::tcr_vertical,
+        ?destination_countries: ::Array[Sentdm::DestinationCountry]?,
+        ?is_tcr_application: bool?,
+        ?notes: String?,
+        ?phone_number_prefix: String?
+      ) -> void
+
+      def to_hash: -> {
+        brand_relationship: Sentdm::Models::tcr_brand_relationship,
+        vertical: Sentdm::Models::tcr_vertical,
+        destination_countries: ::Array[Sentdm::DestinationCountry]?,
+        is_tcr_application: bool?,
+        notes: String?,
+        phone_number_prefix: String?
+      }
+    end
+  end
+end

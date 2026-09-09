@@ -58,10 +58,9 @@ module Sentdm
         params(
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
-          billing_contact:
-            T.nilable(Sentdm::ProfileCreateParams::BillingContact::OrHash),
+          billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
-          brand: T.nilable(Sentdm::ProfileCreateParams::Brand::OrHash),
+          brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
           description: T.nilable(String),
           icon: T.nilable(String),
           inherit_contacts: T.nilable(T::Boolean),
@@ -69,8 +68,7 @@ module Sentdm
           inherit_tcr_campaign: T.nilable(T::Boolean),
           inherit_templates: T.nilable(T::Boolean),
           name: String,
-          payment_details:
-            T.nilable(Sentdm::ProfileCreateParams::PaymentDetails::OrHash),
+          payment_details: T.nilable(Sentdm::PaymentDetails::OrHash),
           sandbox: T::Boolean,
           short_name: T.nilable(String),
           whatsapp_business_account:
@@ -80,7 +78,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ProfileCreateResponse)
+        ).returns(Sentdm::APIResponseOfProfileDetail)
       end
       def create(
         # Body param: Deprecated. Accepted and ignored. Contact and template sharing
@@ -176,7 +174,7 @@ module Sentdm
           profile_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ProfileRetrieveResponse)
+        ).returns(Sentdm::APIResponseOfProfileDetail)
       end
       def retrieve(
         # Profile ID from route parameter
@@ -232,10 +230,9 @@ module Sentdm
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_number_change_during_onboarding: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
-          billing_contact:
-            T.nilable(Sentdm::ProfileUpdateParams::BillingContact::OrHash),
+          billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
-          brand: T.nilable(Sentdm::ProfileUpdateParams::Brand::OrHash),
+          brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
           description: T.nilable(String),
           icon: T.nilable(String),
           inherit_contacts: T.nilable(T::Boolean),
@@ -243,8 +240,7 @@ module Sentdm
           inherit_tcr_campaign: T.nilable(T::Boolean),
           inherit_templates: T.nilable(T::Boolean),
           name: T.nilable(String),
-          payment_details:
-            T.nilable(Sentdm::ProfileUpdateParams::PaymentDetails::OrHash),
+          payment_details: T.nilable(Sentdm::PaymentDetails::OrHash),
           sandbox: T::Boolean,
           sending_phone_number: T.nilable(String),
           sending_phone_number_profile_id: T.nilable(String),
@@ -254,7 +250,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ProfileUpdateResponse)
+        ).returns(Sentdm::APIResponseOfProfileDetail)
       end
       def update(
         # Path param: Profile ID from route parameter

@@ -19,7 +19,7 @@ module Sentdm
           page_size: Integer,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ConversationListResponse)
+        ).returns(Sentdm::APIResponseOfConversationMessagesList)
       end
       def list(
         # Query param
@@ -43,7 +43,7 @@ module Sentdm
           page_size: Integer,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ConversationListMessagesResponse)
+        ).returns(Sentdm::APIResponseOfConversationMessagesList)
       end
       def list_messages(
         # Path param: Conversation id from the route.

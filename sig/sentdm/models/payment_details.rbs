@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type payment_details =
+      { card_number: String, cvc: String, expiry: String, zip_code: String }
+
+    class PaymentDetails < Sentdm::Internal::Type::BaseModel
+      attr_accessor card_number: String
+
+      attr_accessor cvc: String
+
+      attr_accessor expiry: String
+
+      attr_accessor zip_code: String
+
+      def initialize: (
+        card_number: String,
+        cvc: String,
+        expiry: String,
+        zip_code: String
+      ) -> void
+
+      def to_hash: -> {
+        card_number: String,
+        cvc: String,
+        expiry: String,
+        zip_code: String
+      }
+    end
+  end
+end

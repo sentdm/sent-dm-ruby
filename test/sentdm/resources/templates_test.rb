@@ -9,14 +9,14 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     response = @sent.templates.create
 
     assert_pattern do
-      response => Sentdm::Models::TemplateCreateResponse
+      response => Sentdm::APIResponseTemplate
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::TemplateCreateResponse::Data | nil,
-        error: Sentdm::Models::TemplateCreateResponse::Error | nil,
-        meta: Sentdm::Models::TemplateCreateResponse::Meta | nil,
+        data: Sentdm::Template | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -28,14 +28,14 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     response = @sent.templates.retrieve("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::Models::TemplateRetrieveResponse
+      response => Sentdm::APIResponseTemplate
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::TemplateRetrieveResponse::Data | nil,
-        error: Sentdm::Models::TemplateRetrieveResponse::Error | nil,
-        meta: Sentdm::Models::TemplateRetrieveResponse::Meta | nil,
+        data: Sentdm::Template | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -47,14 +47,14 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     response = @sent.templates.update("7ba7b820-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::Models::TemplateUpdateResponse
+      response => Sentdm::APIResponseTemplate
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::TemplateUpdateResponse::Data | nil,
-        error: Sentdm::Models::TemplateUpdateResponse::Error | nil,
-        meta: Sentdm::Models::TemplateUpdateResponse::Meta | nil,
+        data: Sentdm::Template | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -72,8 +72,8 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       response => {
         data: Sentdm::Models::TemplateListResponse::Data | nil,
-        error: Sentdm::Models::TemplateListResponse::Error | nil,
-        meta: Sentdm::Models::TemplateListResponse::Meta | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end

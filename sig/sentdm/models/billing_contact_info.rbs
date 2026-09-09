@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type billing_contact_info =
+      { email: String, name: String, address: String?, phone: String? }
+
+    class BillingContactInfo < Sentdm::Internal::Type::BaseModel
+      attr_accessor email: String
+
+      attr_accessor name: String
+
+      attr_accessor address: String?
+
+      attr_accessor phone: String?
+
+      def initialize: (
+        email: String,
+        name: String,
+        ?address: String?,
+        ?phone: String?
+      ) -> void
+
+      def to_hash: -> {
+        email: String,
+        name: String,
+        address: String?,
+        phone: String?
+      }
+    end
+  end
+end
