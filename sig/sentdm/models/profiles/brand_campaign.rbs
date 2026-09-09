@@ -1,0 +1,194 @@
+module Sentdm
+  module Models
+    module Profiles
+      type brand_campaign =
+        {
+          id: String,
+          billed_date: Time?,
+          brand_id: String?,
+          cost: Float?,
+          created_at: Time,
+          customer_id: String,
+          dca_elections_complete: bool?,
+          dca_elections_completed_at: Time?,
+          description: String,
+          has_submission_transaction: bool,
+          help_keywords: String?,
+          help_message: String?,
+          message_flow: String?,
+          name: String,
+          optin_keywords: String?,
+          optin_message: String?,
+          optout_keywords: String?,
+          optout_message: String?,
+          privacy_policy_link: String?,
+          status: Sentdm::Models::Profiles::BrandCampaign::status?,
+          submitted_at: Time?,
+          submitted_to_tcr: bool,
+          tcr_campaign_id: String?,
+          tcr_sync_error: String?,
+          terms_and_conditions_link: String?,
+          type: String,
+          updated_at: Time?,
+          use_cases: ::Array[Sentdm::Profiles::CampaignUseCase],
+          volume: String?
+        }
+
+      class BrandCampaign < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_accessor billed_date: Time?
+
+        attr_accessor brand_id: String?
+
+        attr_accessor cost: Float?
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader customer_id: String?
+
+        def customer_id=: (String) -> String
+
+        attr_accessor dca_elections_complete: bool?
+
+        attr_accessor dca_elections_completed_at: Time?
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader has_submission_transaction: bool?
+
+        def has_submission_transaction=: (bool) -> bool
+
+        attr_accessor help_keywords: String?
+
+        attr_accessor help_message: String?
+
+        attr_accessor message_flow: String?
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_accessor optin_keywords: String?
+
+        attr_accessor optin_message: String?
+
+        attr_accessor optout_keywords: String?
+
+        attr_accessor optout_message: String?
+
+        attr_accessor privacy_policy_link: String?
+
+        attr_accessor status: Sentdm::Models::Profiles::BrandCampaign::status?
+
+        attr_accessor submitted_at: Time?
+
+        attr_reader submitted_to_tcr: bool?
+
+        def submitted_to_tcr=: (bool) -> bool
+
+        attr_accessor tcr_campaign_id: String?
+
+        attr_accessor tcr_sync_error: String?
+
+        attr_accessor terms_and_conditions_link: String?
+
+        attr_reader type: String?
+
+        def type=: (String) -> String
+
+        attr_accessor updated_at: Time?
+
+        attr_reader use_cases: ::Array[Sentdm::Profiles::CampaignUseCase]?
+
+        def use_cases=: (
+          ::Array[Sentdm::Profiles::CampaignUseCase]
+        ) -> ::Array[Sentdm::Profiles::CampaignUseCase]
+
+        attr_accessor volume: String?
+
+        def initialize: (
+          ?id: String,
+          ?billed_date: Time?,
+          ?brand_id: String?,
+          ?cost: Float?,
+          ?created_at: Time,
+          ?customer_id: String,
+          ?dca_elections_complete: bool?,
+          ?dca_elections_completed_at: Time?,
+          ?description: String,
+          ?has_submission_transaction: bool,
+          ?help_keywords: String?,
+          ?help_message: String?,
+          ?message_flow: String?,
+          ?name: String,
+          ?optin_keywords: String?,
+          ?optin_message: String?,
+          ?optout_keywords: String?,
+          ?optout_message: String?,
+          ?privacy_policy_link: String?,
+          ?status: Sentdm::Models::Profiles::BrandCampaign::status?,
+          ?submitted_at: Time?,
+          ?submitted_to_tcr: bool,
+          ?tcr_campaign_id: String?,
+          ?tcr_sync_error: String?,
+          ?terms_and_conditions_link: String?,
+          ?type: String,
+          ?updated_at: Time?,
+          ?use_cases: ::Array[Sentdm::Profiles::CampaignUseCase],
+          ?volume: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          billed_date: Time?,
+          brand_id: String?,
+          cost: Float?,
+          created_at: Time,
+          customer_id: String,
+          dca_elections_complete: bool?,
+          dca_elections_completed_at: Time?,
+          description: String,
+          has_submission_transaction: bool,
+          help_keywords: String?,
+          help_message: String?,
+          message_flow: String?,
+          name: String,
+          optin_keywords: String?,
+          optin_message: String?,
+          optout_keywords: String?,
+          optout_message: String?,
+          privacy_policy_link: String?,
+          status: Sentdm::Models::Profiles::BrandCampaign::status?,
+          submitted_at: Time?,
+          submitted_to_tcr: bool,
+          tcr_campaign_id: String?,
+          tcr_sync_error: String?,
+          terms_and_conditions_link: String?,
+          type: String,
+          updated_at: Time?,
+          use_cases: ::Array[Sentdm::Profiles::CampaignUseCase],
+          volume: String?
+        }
+
+        type status = :SENT_CREATED | :ACTIVE | :EXPIRED
+
+        module Status
+          extend Sentdm::Internal::Type::Enum
+
+          SENT_CREATED: :SENT_CREATED
+          ACTIVE: :ACTIVE
+          EXPIRED: :EXPIRED
+
+          def self?.values: -> ::Array[Sentdm::Models::Profiles::BrandCampaign::status]
+        end
+      end
+    end
+  end
+end
