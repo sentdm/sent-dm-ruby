@@ -438,11 +438,11 @@ module Sentdm
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `inbound_message_event` is a `Sentdm::InboundMessageEvent`
-        #   inbound_message_event => {
-        #     event: event,
-        #     field: field,
-        #     payload: payload
+        #   # `api_meta` is a `Sentdm::APIMeta`
+        #   api_meta => {
+        #     request_id: request_id,
+        #     timestamp: timestamp,
+        #     version: version
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

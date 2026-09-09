@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type brands_brand_data =
+      {
+        compliance: Sentdm::BrandComplianceInfo,
+        contact: Sentdm::BrandContactInfo,
+        business: Sentdm::BrandBusinessInfo?
+      }
+
+    class BrandsBrandData < Sentdm::Internal::Type::BaseModel
+      attr_accessor compliance: Sentdm::BrandComplianceInfo
+
+      attr_accessor contact: Sentdm::BrandContactInfo
+
+      attr_accessor business: Sentdm::BrandBusinessInfo?
+
+      def initialize: (
+        compliance: Sentdm::BrandComplianceInfo,
+        contact: Sentdm::BrandContactInfo,
+        ?business: Sentdm::BrandBusinessInfo?
+      ) -> void
+
+      def to_hash: -> {
+        compliance: Sentdm::BrandComplianceInfo,
+        contact: Sentdm::BrandContactInfo,
+        business: Sentdm::BrandBusinessInfo?
+      }
+    end
+  end
+end

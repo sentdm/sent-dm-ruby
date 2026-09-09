@@ -41,7 +41,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookCreateResponse]
+      # @return [Sentdm::Models::APIResponseWebhook]
       #
       # @see Sentdm::Models::WebhookCreateParams
       def create(params = {})
@@ -52,7 +52,7 @@ module Sentdm
           path: "v3/webhooks",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::WebhookCreateResponse,
+          model: Sentdm::APIResponseWebhook,
           options: options
         )
       end
@@ -70,7 +70,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookRetrieveResponse]
+      # @return [Sentdm::Models::APIResponseWebhook]
       #
       # @see Sentdm::Models::WebhookRetrieveParams
       def retrieve(id, params = {})
@@ -79,7 +79,7 @@ module Sentdm
           method: :get,
           path: ["v3/webhooks/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::WebhookRetrieveResponse,
+          model: Sentdm::APIResponseWebhook,
           options: options
         )
       end
@@ -113,7 +113,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookUpdateResponse]
+      # @return [Sentdm::Models::APIResponseWebhook]
       #
       # @see Sentdm::Models::WebhookUpdateParams
       def update(id, params = {})
@@ -124,7 +124,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::WebhookUpdateResponse,
+          model: Sentdm::APIResponseWebhook,
           options: options
         )
       end
@@ -341,7 +341,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookToggleStatusResponse]
+      # @return [Sentdm::Models::APIResponseWebhook]
       #
       # @see Sentdm::Models::WebhookToggleStatusParams
       def toggle_status(id, params = {})
@@ -352,7 +352,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s/toggle-status", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::WebhookToggleStatusResponse,
+          model: Sentdm::APIResponseWebhook,
           options: options
         )
       end

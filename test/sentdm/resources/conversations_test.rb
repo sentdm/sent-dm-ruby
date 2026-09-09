@@ -9,14 +9,14 @@ class Sentdm::Test::Resources::ConversationsTest < Sentdm::Test::ResourceTest
     response = @sent.conversations.list(page: 0, page_size: 0)
 
     assert_pattern do
-      response => Sentdm::Models::ConversationListResponse
+      response => Sentdm::APIResponseOfConversationMessagesList
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ConversationListResponse::Data | nil,
-        error: Sentdm::Models::ConversationListResponse::Error | nil,
-        meta: Sentdm::Models::ConversationListResponse::Meta | nil,
+        data: Sentdm::ConversationMessagesList | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
@@ -29,14 +29,14 @@ class Sentdm::Test::Resources::ConversationsTest < Sentdm::Test::ResourceTest
       @sent.conversations.list_messages("08fab313-c9e2-502c-975e-08b0356c432e", page: 0, page_size: 0)
 
     assert_pattern do
-      response => Sentdm::Models::ConversationListMessagesResponse
+      response => Sentdm::APIResponseOfConversationMessagesList
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ConversationListMessagesResponse::Data | nil,
-        error: Sentdm::Models::ConversationListMessagesResponse::Error | nil,
-        meta: Sentdm::Models::ConversationListMessagesResponse::Meta | nil,
+        data: Sentdm::ConversationMessagesList | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
       }
     end
