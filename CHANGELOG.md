@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.30.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.29.0...v0.30.0) (2026-09-09)
+
+
+### Features
+
+* **api:** repoint dangling model refs at current v3 schema names ([631adad](https://github.com/sentdm/sent-dm-ruby/commit/631adadfe49cd6eb7ae9df2d3ad3c8261ac54984))
+
 ## [0.29.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.28.0...v0.29.0) (2026-09-06)
 
 
