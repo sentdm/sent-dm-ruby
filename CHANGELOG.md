@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.29.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.28.0...v0.29.0) (2026-09-06)
+
+
+### Features
+
+* **api:** sync OpenAPI spec from production ([d619423](https://github.com/sentdm/sent-dm-ruby/commit/d61942394aee7452e991472c466c1e3d71018cb0))
+* **api:** sync OpenAPI spec from production ([c8fa353](https://github.com/sentdm/sent-dm-ruby/commit/c8fa353d8623967fbc94a962b709f6a18771a3d6))
+
+## [0.28.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.27.0...v0.28.0) (2026-08-31)
+
+
+### Features
+
+* **api:** sync OpenAPI spec from production ([d1e44c2](https://github.com/sentdm/sent-dm-ruby/commit/d1e44c2f20f5397cc0d868af4ac0216f2c78baa8))
+* **api:** sync OpenAPI spec from production ([f6354b3](https://github.com/sentdm/sent-dm-ruby/commit/f6354b3dc2a88c39d886349558b605b37a97db3e))
+
+
+### Bug Fixes
+
+* sync the package version in Gemfile.lock to 0.27.0 ([d6f29cc](https://github.com/sentdm/sent-dm-ruby/commit/d6f29cc70c3d1b1786ed6e31c08dd6c9321552b0))
+
 ## [0.27.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.26.0...v0.27.0) (2026-08-17)
 
 
