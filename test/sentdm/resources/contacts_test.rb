@@ -60,21 +60,39 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_required_params
+  def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent.contacts.list(page: 0, page_size: 0)
+    response = @sent.contacts.list
 
     assert_pattern do
-      response => Sentdm::Models::ContactListResponse
+      response => Sentdm::Internal::ContactsPage
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Sentdm::ContactResponse
     end
 
     assert_pattern do
-      response => {
-        data: Sentdm::Models::ContactListResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
-        success: Sentdm::Internal::Type::Boolean | nil
+      row => {
+        id: String | nil,
+        available_channels: String | nil,
+        country_code: String | nil,
+        created_at: Time | nil,
+        customer_id: String | nil,
+        default_channel: String | nil,
+        format_e164: String | nil,
+        format_international: String | nil,
+        format_national: String | nil,
+        format_rfc: String | nil,
+        is_inherited: Sentdm::Internal::Type::Boolean | nil,
+        opt_out: Sentdm::Internal::Type::Boolean | nil,
+        phone_number: String | nil,
+        region_code: String | nil,
+        updated_at: Time | nil
       }
     end
   end

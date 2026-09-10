@@ -45,6 +45,34 @@ response = sent.messages.send_(
 puts(response.data)
 ```
 
+### Pagination
+
+List methods in the Sent API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```ruby
+page = sent.webhooks.list
+
+# Fetch single item from page.
+webhook = page.data&.webhooks[0]
+puts(webhook.id)
+
+# Automatically fetches more pages as needed.
+page.auto_paging_each do |webhook|
+  puts(webhook.id)
+end
+```
+
+Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
+
+```ruby
+if page.next_page?
+  new_page = page.next_page
+  puts(new_page.data&.webhooks[0].id)
+end
+```
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Sentdm::Errors::APIError` will be thrown:

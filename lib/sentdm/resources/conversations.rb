@@ -17,7 +17,7 @@ module Sentdm
       # Retrieves a paginated list of the authenticated customer's messages across all
       # conversations, ordered by created date (most recent first).
       #
-      # @overload list(page:, page_size:, x_profile_id: nil, request_options: {})
+      # @overload list(page: nil, page_size: nil, x_profile_id: nil, request_options: {})
       #
       # @param page [Integer] Query param
       #
@@ -27,10 +27,10 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfConversationMessagesList]
+      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
       #
       # @see Sentdm::Models::ConversationListParams
-      def list(params)
+      def list(params = {})
         query_params = [:page, :page_size]
         parsed, options = Sentdm::ConversationListParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
@@ -39,7 +39,8 @@ module Sentdm
           path: "v3/conversations",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfConversationMessagesList,
+          page: Sentdm::Internal::ConversationsPage,
+          model: Sentdm::ConversationMessagesList::Message,
           options: options
         )
       end
@@ -50,7 +51,7 @@ module Sentdm
       # Retrieves a paginated list of the messages in a single conversation (scoped to
       # the authenticated customer), ordered by created date (most recent first).
       #
-      # @overload list_messages(id, page:, page_size:, x_profile_id: nil, request_options: {})
+      # @overload list_messages(id, page: nil, page_size: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Conversation id from the route.
       #
@@ -62,10 +63,10 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfConversationMessagesList]
+      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
       #
       # @see Sentdm::Models::ConversationListMessagesParams
-      def list_messages(id, params)
+      def list_messages(id, params = {})
         query_params = [:page, :page_size]
         parsed, options = Sentdm::ConversationListMessagesParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
@@ -74,7 +75,8 @@ module Sentdm
           path: ["v3/conversations/%1$s", id],
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfConversationMessagesList,
+          page: Sentdm::Internal::ConversationsPage,
+          model: Sentdm::ConversationMessagesList::Message,
           options: options
         )
       end

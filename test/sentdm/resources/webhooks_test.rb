@@ -60,21 +60,39 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_required_params
+  def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent.webhooks.list(page: 0, page_size: 0)
+    response = @sent.webhooks.list
 
     assert_pattern do
-      response => Sentdm::Models::WebhookListResponse
+      response => Sentdm::Internal::WebhooksPage
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Sentdm::WebhookResponse
     end
 
     assert_pattern do
-      response => {
-        data: Sentdm::Models::WebhookListResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
-        success: Sentdm::Internal::Type::Boolean | nil
+      row => {
+        id: String | nil,
+        consecutive_failures: Integer | nil,
+        created_at: Time | nil,
+        customer_id: String | nil,
+        display_name: String | nil,
+        endpoint_url: String | nil,
+        event_filters: ^(Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]]) | nil,
+        event_types: ^(Sentdm::Internal::Type::ArrayOf[String]) | nil,
+        is_active: Sentdm::Internal::Type::Boolean | nil,
+        last_delivery_attempt_at: Time | nil,
+        last_successful_delivery_at: Time | nil,
+        retry_count: Integer | nil,
+        signing_secret: String | nil,
+        timeout_seconds: Integer | nil,
+        updated_at: Time | nil
       }
     end
   end
@@ -108,21 +126,35 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_events_required_params
+  def test_list_events
     skip("Mock server tests are disabled")
 
-    response = @sent.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", page: 0, page_size: 0)
+    response = @sent.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
-      response => Sentdm::Models::WebhookListEventsResponse
+      response => Sentdm::Internal::WebhookEventsPage
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Sentdm::Models::WebhookListEventsResponse
     end
 
     assert_pattern do
-      response => {
-        data: Sentdm::Models::WebhookListEventsResponse::Data | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
-        success: Sentdm::Internal::Type::Boolean | nil
+      row => {
+        id: String | nil,
+        created_at: Time | nil,
+        delivery_attempts: Integer | nil,
+        delivery_status: String | nil,
+        error_message: String | nil,
+        event_data: Sentdm::Models::WebhookListEventsResponse::EventData | nil,
+        event_type: String | nil,
+        http_status_code: Integer | nil,
+        processing_completed_at: Time | nil,
+        processing_started_at: Time | nil,
+        response_body: String | nil
       }
     end
   end

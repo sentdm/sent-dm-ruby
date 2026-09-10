@@ -2,10 +2,10 @@ module Sentdm
   module Models
     type template_list_params =
       {
-        page: Integer,
-        page_size: Integer,
         category: String?,
         is_welcome_playground: bool?,
+        page: Integer,
+        page_size: Integer,
         search: String?,
         status: String?,
         x_profile_id: String
@@ -16,13 +16,17 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      attr_accessor page: Integer
-
-      attr_accessor page_size: Integer
-
       attr_accessor category: String?
 
       attr_accessor is_welcome_playground: bool?
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
 
       attr_accessor search: String?
 
@@ -33,10 +37,10 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
-        page: Integer,
-        page_size: Integer,
         ?category: String?,
         ?is_welcome_playground: bool?,
+        ?page: Integer,
+        ?page_size: Integer,
         ?search: String?,
         ?status: String?,
         ?x_profile_id: String,
@@ -44,10 +48,10 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
-        page: Integer,
-        page_size: Integer,
         category: String?,
         is_welcome_playground: bool?,
+        page: Integer,
+        page_size: Integer,
         search: String?,
         status: String?,
         x_profile_id: String,

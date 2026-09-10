@@ -2,6 +2,7 @@
 
 module Sentdm
   module Models
+    # @see Sentdm::Resources::Templates#list
     class Template < Sentdm::Internal::Type::BaseModel
       # @!attribute customer_id
       #   Which customer owns this — the key's own, or the profile named in x-profile-id.

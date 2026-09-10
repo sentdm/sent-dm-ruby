@@ -134,13 +134,13 @@ module Sentdm
       #
       # Retrieves a paginated list of webhooks for the authenticated customer.
       #
-      # @overload list(page:, page_size:, is_active: nil, search: nil, x_profile_id: nil, request_options: {})
+      # @overload list(is_active: nil, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param is_active [Boolean, nil] Query param
       #
       # @param page [Integer] Query param
       #
       # @param page_size [Integer] Query param
-      #
-      # @param is_active [Boolean, nil] Query param
       #
       # @param search [String, nil] Query param
       #
@@ -148,11 +148,11 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookListResponse]
+      # @return [Sentdm::Internal::WebhooksPage<Sentdm::Models::WebhookResponse>]
       #
       # @see Sentdm::Models::WebhookListParams
-      def list(params)
-        query_params = [:page, :page_size, :is_active, :search]
+      def list(params = {})
+        query_params = [:is_active, :page, :page_size, :search]
         parsed, options = Sentdm::WebhookListParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
@@ -160,7 +160,8 @@ module Sentdm
           path: "v3/webhooks",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::WebhookListResponse,
+          page: Sentdm::Internal::WebhooksPage,
+          model: Sentdm::WebhookResponse,
           options: options
         )
       end
@@ -222,7 +223,7 @@ module Sentdm
       #
       # Retrieves a paginated list of delivery events for the specified webhook.
       #
-      # @overload list_events(id, page:, page_size:, search: nil, x_profile_id: nil, request_options: {})
+      # @overload list_events(id, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
       #
@@ -236,10 +237,10 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookListEventsResponse]
+      # @return [Sentdm::Internal::WebhookEventsPage<Sentdm::Models::WebhookListEventsResponse>]
       #
       # @see Sentdm::Models::WebhookListEventsParams
-      def list_events(id, params)
+      def list_events(id, params = {})
         query_params = [:page, :page_size, :search]
         parsed, options = Sentdm::WebhookListEventsParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
@@ -248,6 +249,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s/events", id],
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
+          page: Sentdm::Internal::WebhookEventsPage,
           model: Sentdm::Models::WebhookListEventsResponse,
           options: options
         )

@@ -4,174 +4,114 @@ module Sentdm
   module Models
     # @see Sentdm::Resources::Webhooks#list_events
     class WebhookListEventsResponse < Sentdm::Internal::Type::BaseModel
-      # @!attribute data
-      #   A paginated list of webhook delivery records.
+      # @!attribute id
       #
-      #   @return [Sentdm::Models::WebhookListEventsResponse::Data, nil]
-      optional :data, -> { Sentdm::Models::WebhookListEventsResponse::Data }, nil?: true
+      #   @return [String, nil]
+      optional :id, String
 
-      # @!attribute error
-      #   Error information
+      # @!attribute created_at
       #
-      #   @return [Sentdm::Models::ErrorDetail, nil]
-      optional :error, -> { Sentdm::ErrorDetail }, nil?: true
+      #   @return [Time, nil]
+      optional :created_at, Time
 
-      # @!attribute meta
-      #   Request and response metadata
+      # @!attribute delivery_attempts
       #
-      #   @return [Sentdm::Models::APIMeta, nil]
-      optional :meta, -> { Sentdm::APIMeta }
+      #   @return [Integer, nil]
+      optional :delivery_attempts, Integer
 
-      # @!attribute success
-      #   Indicates whether the request was successful
+      # @!attribute delivery_status
       #
-      #   @return [Boolean, nil]
-      optional :success, Sentdm::Internal::Type::Boolean
+      #   @return [String, nil]
+      optional :delivery_status, String
 
-      # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
-      #   Standard API response envelope for all v3 endpoints
+      # @!attribute error_message
       #
-      #   @param data [Sentdm::Models::WebhookListEventsResponse::Data, nil] A paginated list of webhook delivery records.
+      #   @return [String, nil]
+      optional :error_message, String, nil?: true
+
+      # @!attribute event_data
+      #   The exact event body that was delivered, or attempted, for this record. One of
+      #   the three webhook envelopes: a message status change, an inbound message, or a
+      #   template status change. Read field and event to tell which, the same way your
+      #   endpoint does.
       #
-      #   @param error [Sentdm::Models::ErrorDetail, nil] Error information
+      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, nil]
+      optional :event_data, union: -> { Sentdm::Models::WebhookListEventsResponse::EventData }
+
+      # @!attribute event_type
       #
-      #   @param meta [Sentdm::Models::APIMeta] Request and response metadata
+      #   @return [String, nil]
+      optional :event_type, String
+
+      # @!attribute http_status_code
       #
-      #   @param success [Boolean] Indicates whether the request was successful
+      #   @return [Integer, nil]
+      optional :http_status_code, Integer, nil?: true
 
-      # @see Sentdm::Models::WebhookListEventsResponse#data
-      class Data < Sentdm::Internal::Type::BaseModel
-        # @!attribute events
-        #   The events on this page.
-        #
-        #   @return [Array<Sentdm::Models::WebhookListEventsResponse::Data::Event>, nil]
-        optional :events,
-                 -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::WebhookListEventsResponse::Data::Event] }
+      # @!attribute processing_completed_at
+      #
+      #   @return [Time, nil]
+      optional :processing_completed_at, Time, nil?: true
 
-        # @!attribute pagination
-        #   Pagination metadata for list responses
-        #
-        #   @return [Sentdm::Models::PaginationMeta, nil]
-        optional :pagination, -> { Sentdm::PaginationMeta }
+      # @!attribute processing_started_at
+      #
+      #   @return [Time, nil]
+      optional :processing_started_at, Time, nil?: true
 
-        # @!method initialize(events: nil, pagination: nil)
-        #   A paginated list of webhook delivery records.
-        #
-        #   @param events [Array<Sentdm::Models::WebhookListEventsResponse::Data::Event>] The events on this page.
-        #
-        #   @param pagination [Sentdm::Models::PaginationMeta] Pagination metadata for list responses
+      # @!attribute response_body
+      #
+      #   @return [String, nil]
+      optional :response_body, String, nil?: true
 
-        class Event < Sentdm::Internal::Type::BaseModel
-          # @!attribute id
-          #
-          #   @return [String, nil]
-          optional :id, String
+      # @!method initialize(id: nil, created_at: nil, delivery_attempts: nil, delivery_status: nil, error_message: nil, event_data: nil, event_type: nil, http_status_code: nil, processing_completed_at: nil, processing_started_at: nil, response_body: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::WebhookListEventsResponse} for more details.
+      #
+      #   @param id [String]
+      #
+      #   @param created_at [Time]
+      #
+      #   @param delivery_attempts [Integer]
+      #
+      #   @param delivery_status [String]
+      #
+      #   @param error_message [String, nil]
+      #
+      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent] The exact event body that was delivered, or attempted, for this record. One of t
+      #
+      #   @param event_type [String]
+      #
+      #   @param http_status_code [Integer, nil]
+      #
+      #   @param processing_completed_at [Time, nil]
+      #
+      #   @param processing_started_at [Time, nil]
+      #
+      #   @param response_body [String, nil]
 
-          # @!attribute created_at
-          #
-          #   @return [Time, nil]
-          optional :created_at, Time
+      # The exact event body that was delivered, or attempted, for this record. One of
+      # the three webhook envelopes: a message status change, an inbound message, or a
+      # template status change. Read field and event to tell which, the same way your
+      # endpoint does.
+      #
+      # @see Sentdm::Models::WebhookListEventsResponse#event_data
+      module EventData
+        extend Sentdm::Internal::Type::Union
 
-          # @!attribute delivery_attempts
-          #
-          #   @return [Integer, nil]
-          optional :delivery_attempts, Integer
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::MessageEvent }
 
-          # @!attribute delivery_status
-          #
-          #   @return [String, nil]
-          optional :delivery_status, String
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::InboundMessageEvent }
 
-          # @!attribute error_message
-          #
-          #   @return [String, nil]
-          optional :error_message, String, nil?: true
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::TemplateEvent }
 
-          # @!attribute event_data
-          #   The exact event body that was delivered, or attempted, for this record. One of
-          #   the three webhook envelopes: a message status change, an inbound message, or a
-          #   template status change. Read field and event to tell which, the same way your
-          #   endpoint does.
-          #
-          #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, nil]
-          optional :event_data, union: -> { Sentdm::Models::WebhookListEventsResponse::Data::Event::EventData }
-
-          # @!attribute event_type
-          #
-          #   @return [String, nil]
-          optional :event_type, String
-
-          # @!attribute http_status_code
-          #
-          #   @return [Integer, nil]
-          optional :http_status_code, Integer, nil?: true
-
-          # @!attribute processing_completed_at
-          #
-          #   @return [Time, nil]
-          optional :processing_completed_at, Time, nil?: true
-
-          # @!attribute processing_started_at
-          #
-          #   @return [Time, nil]
-          optional :processing_started_at, Time, nil?: true
-
-          # @!attribute response_body
-          #
-          #   @return [String, nil]
-          optional :response_body, String, nil?: true
-
-          # @!method initialize(id: nil, created_at: nil, delivery_attempts: nil, delivery_status: nil, error_message: nil, event_data: nil, event_type: nil, http_status_code: nil, processing_completed_at: nil, processing_started_at: nil, response_body: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {Sentdm::Models::WebhookListEventsResponse::Data::Event} for more details.
-          #
-          #   @param id [String]
-          #
-          #   @param created_at [Time]
-          #
-          #   @param delivery_attempts [Integer]
-          #
-          #   @param delivery_status [String]
-          #
-          #   @param error_message [String, nil]
-          #
-          #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent] The exact event body that was delivered, or attempted, for this record. One of t
-          #
-          #   @param event_type [String]
-          #
-          #   @param http_status_code [Integer, nil]
-          #
-          #   @param processing_completed_at [Time, nil]
-          #
-          #   @param processing_started_at [Time, nil]
-          #
-          #   @param response_body [String, nil]
-
-          # The exact event body that was delivered, or attempted, for this record. One of
-          # the three webhook envelopes: a message status change, an inbound message, or a
-          # template status change. Read field and event to tell which, the same way your
-          # endpoint does.
-          #
-          # @see Sentdm::Models::WebhookListEventsResponse::Data::Event#event_data
-          module EventData
-            extend Sentdm::Internal::Type::Union
-
-            # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
-            # varies only in Payload.
-            variant -> { Sentdm::MessageEvent }
-
-            # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
-            # varies only in Payload.
-            variant -> { Sentdm::InboundMessageEvent }
-
-            # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
-            # varies only in Payload.
-            variant -> { Sentdm::TemplateEvent }
-
-            # @!method self.variants
-            #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent)]
-          end
-        end
+        # @!method self.variants
+        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent)]
       end
     end
   end

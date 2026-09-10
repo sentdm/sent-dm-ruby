@@ -11,17 +11,23 @@ module Sentdm
           T.any(Sentdm::ContactListParams, Sentdm::Internal::AnyHash)
         end
 
-      # Page number (1-indexed)
-      sig { returns(Integer) }
-      attr_accessor :page
-
-      # Number of items per page
-      sig { returns(Integer) }
-      attr_accessor :page_size
-
       # Optional channel filter (sms, whatsapp)
       sig { returns(T.nilable(String)) }
       attr_accessor :channel
+
+      # Page number (1-indexed)
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page
+
+      sig { params(page: Integer).void }
+      attr_writer :page
+
+      # Number of items per page
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
 
       # Optional phone number filter (alternative to list view)
       sig { returns(T.nilable(String)) }
@@ -39,9 +45,9 @@ module Sentdm
 
       sig do
         params(
+          channel: T.nilable(String),
           page: Integer,
           page_size: Integer,
-          channel: T.nilable(String),
           phone: T.nilable(String),
           search: T.nilable(String),
           x_profile_id: String,
@@ -49,12 +55,12 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Page number (1-indexed)
-        page:,
-        # Number of items per page
-        page_size:,
         # Optional channel filter (sms, whatsapp)
         channel: nil,
+        # Page number (1-indexed)
+        page: nil,
+        # Number of items per page
+        page_size: nil,
         # Optional phone number filter (alternative to list view)
         phone: nil,
         # Optional search term for filtering contacts
@@ -67,9 +73,9 @@ module Sentdm
       sig do
         override.returns(
           {
+            channel: T.nilable(String),
             page: Integer,
             page_size: Integer,
-            channel: T.nilable(String),
             phone: T.nilable(String),
             search: T.nilable(String),
             x_profile_id: String,

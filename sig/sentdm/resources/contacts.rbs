@@ -26,14 +26,14 @@ module Sentdm
       ) -> Sentdm::APIResponseOfContact
 
       def list: (
-        page: Integer,
-        page_size: Integer,
         ?channel: String?,
+        ?page: Integer,
+        ?page_size: Integer,
         ?phone: String?,
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::ContactListResponse
+      ) -> Sentdm::Internal::ContactsPage[Sentdm::ContactResponse]
 
       def delete: (
         String id,

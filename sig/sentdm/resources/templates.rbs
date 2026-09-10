@@ -33,15 +33,15 @@ module Sentdm
       ) -> Sentdm::APIResponseTemplate
 
       def list: (
-        page: Integer,
-        page_size: Integer,
         ?category: String?,
         ?is_welcome_playground: bool?,
+        ?page: Integer,
+        ?page_size: Integer,
         ?search: String?,
         ?status: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::TemplateListResponse
+      ) -> Sentdm::Internal::TemplatesPage[Sentdm::Template]
 
       def delete: (
         String id,

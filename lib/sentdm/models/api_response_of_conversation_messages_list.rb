@@ -2,7 +2,6 @@
 
 module Sentdm
   module Models
-    # @see Sentdm::Resources::Conversations#list
     class APIResponseOfConversationMessagesList < Sentdm::Internal::Type::BaseModel
       # @!attribute data
       #   A paginated list of messages — used by both conversation read endpoints.
