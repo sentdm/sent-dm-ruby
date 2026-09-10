@@ -34,7 +34,7 @@ module Sentdm
 
         req = Sentdm::Internal::Util.deep_merge(
           @req,
-          {query: {page: (data&.pagination&.page || 1).to_i.succ}}
+          {query: {page: @req.fetch(:query).fetch(:page, 1).to_i.succ}}
         )
         @client.request(req)
       end
@@ -106,20 +106,8 @@ module Sentdm
           #   @return [Boolean, nil]
           optional :has_more, Sentdm::Internal::Type::Boolean
 
-          # @!attribute page
-          #
-          #   @return [Integer, nil]
-          optional :page, Integer
-
-          # @!attribute total_pages
-          #
-          #   @return [Integer, nil]
-          optional :total_pages, Integer
-
-          # @!method initialize(has_more: nil, page: nil, total_pages: nil)
+          # @!method initialize(has_more: nil)
           #   @param has_more [Boolean]
-          #   @param page [Integer]
-          #   @param total_pages [Integer]
         end
       end
     end

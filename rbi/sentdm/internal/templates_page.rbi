@@ -57,33 +57,11 @@ module Sentdm
           sig { params(has_more: T::Boolean).void }
           attr_writer :has_more
 
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :page
-
-          sig { params(page: Integer).void }
-          attr_writer :page
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :total_pages
-
-          sig { params(total_pages: Integer).void }
-          attr_writer :total_pages
-
-          sig do
-            params(
-              has_more: T::Boolean,
-              page: Integer,
-              total_pages: Integer
-            ).returns(T.attached_class)
-          end
-          def self.new(has_more: nil, page: nil, total_pages: nil)
+          sig { params(has_more: T::Boolean).returns(T.attached_class) }
+          def self.new(has_more: nil)
           end
 
-          sig do
-            override.returns(
-              { has_more: T::Boolean, page: Integer, total_pages: Integer }
-            )
-          end
+          sig { override.returns({ has_more: T::Boolean }) }
           def to_hash
           end
         end

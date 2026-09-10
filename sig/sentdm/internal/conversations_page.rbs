@@ -24,33 +24,16 @@ module Sentdm
 
         def to_hash: -> { messages: ::Array[top], pagination: Data::Pagination }
 
-        type pagination =
-          { has_more: bool, page: Integer, total_pages: Integer }
+        type pagination = { has_more: bool }
 
         class Pagination < Sentdm::Internal::Type::BaseModel
           attr_reader has_more: bool?
 
           def has_more=: (bool) -> bool
 
-          attr_reader page: Integer?
+          def initialize: (?has_more: bool) -> void
 
-          def page=: (Integer) -> Integer
-
-          attr_reader total_pages: Integer?
-
-          def total_pages=: (Integer) -> Integer
-
-          def initialize: (
-            ?has_more: bool,
-            ?page: Integer,
-            ?total_pages: Integer
-          ) -> void
-
-          def to_hash: -> {
-            has_more: bool,
-            page: Integer,
-            total_pages: Integer
-          }
+          def to_hash: -> { has_more: bool }
         end
       end
     end
