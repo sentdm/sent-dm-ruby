@@ -10,9 +10,13 @@ module Sentdm
 
       attr_accessor id: String
 
-      attr_accessor page: Integer
+      attr_reader page: Integer?
 
-      attr_accessor page_size: Integer
+      def page=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
 
       attr_reader x_profile_id: String?
 
@@ -20,8 +24,8 @@ module Sentdm
 
       def initialize: (
         id: String,
-        page: Integer,
-        page_size: Integer,
+        ?page: Integer,
+        ?page_size: Integer,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
