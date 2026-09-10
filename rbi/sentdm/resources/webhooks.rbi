@@ -129,7 +129,7 @@ module Sentdm
           search: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookListResponse)
+        ).returns(Sentdm::Internal::WebhooksPage[Sentdm::WebhookResponse])
       end
       def list(
         # Query param
@@ -189,7 +189,11 @@ module Sentdm
           search: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookListEventsResponse)
+        ).returns(
+          Sentdm::Internal::WebhookEventsPage[
+            Sentdm::Models::WebhookListEventsResponse
+          ]
+        )
       end
       def list_events(
         # Path param

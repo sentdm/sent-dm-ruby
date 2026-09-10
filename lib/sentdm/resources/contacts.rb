@@ -134,7 +134,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::ContactListResponse]
+      # @return [Sentdm::Internal::ContactsPage<Sentdm::Models::ContactResponse>]
       #
       # @see Sentdm::Models::ContactListParams
       def list(params)
@@ -146,7 +146,8 @@ module Sentdm
           path: "v3/contacts",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::ContactListResponse,
+          page: Sentdm::Internal::ContactsPage,
+          model: Sentdm::ContactResponse,
           options: options
         )
       end

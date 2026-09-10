@@ -148,7 +148,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookListResponse]
+      # @return [Sentdm::Internal::WebhooksPage<Sentdm::Models::WebhookResponse>]
       #
       # @see Sentdm::Models::WebhookListParams
       def list(params)
@@ -160,7 +160,8 @@ module Sentdm
           path: "v3/webhooks",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::WebhookListResponse,
+          page: Sentdm::Internal::WebhooksPage,
+          model: Sentdm::WebhookResponse,
           options: options
         )
       end
@@ -236,7 +237,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookListEventsResponse]
+      # @return [Sentdm::Internal::WebhookEventsPage<Sentdm::Models::WebhookListEventsResponse>]
       #
       # @see Sentdm::Models::WebhookListEventsParams
       def list_events(id, params)
@@ -248,6 +249,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s/events", id],
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
+          page: Sentdm::Internal::WebhookEventsPage,
           model: Sentdm::Models::WebhookListEventsResponse,
           options: options
         )
