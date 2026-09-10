@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.30.0...v0.31.0) (2026-09-10)
+
+
+### Features
+
+* **api:** configure page_number pagination for the v3 list endpoints ([d23828b](https://github.com/sentdm/sent-dm-ruby/commit/d23828b500a4b683f9036f63d40e79c466699b2f))
+
 ## [0.30.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.29.0...v0.30.0) (2026-09-09)
 
 
