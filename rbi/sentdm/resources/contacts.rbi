@@ -100,9 +100,9 @@ module Sentdm
       # filtering by search term, channel, or phone number.
       sig do
         params(
+          channel: T.nilable(String),
           page: Integer,
           page_size: Integer,
-          channel: T.nilable(String),
           phone: T.nilable(String),
           search: T.nilable(String),
           x_profile_id: String,
@@ -110,12 +110,12 @@ module Sentdm
         ).returns(Sentdm::Internal::ContactsPage[Sentdm::ContactResponse])
       end
       def list(
-        # Query param: Page number (1-indexed)
-        page:,
-        # Query param: Number of items per page
-        page_size:,
         # Query param: Optional channel filter (sms, whatsapp)
         channel: nil,
+        # Query param: Page number (1-indexed)
+        page: nil,
+        # Query param: Number of items per page
+        page_size: nil,
         # Query param: Optional phone number filter (alternative to list view)
         phone: nil,
         # Query param: Optional search term for filtering contacts

@@ -26,9 +26,9 @@ module Sentdm
       ) -> Sentdm::APIResponseOfContact
 
       def list: (
-        page: Integer,
-        page_size: Integer,
         ?channel: String?,
+        ?page: Integer,
+        ?page_size: Integer,
         ?phone: String?,
         ?search: String?,
         ?x_profile_id: String,

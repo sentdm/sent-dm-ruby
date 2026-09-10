@@ -14,13 +14,13 @@ module Sentdm
 
       # @!attribute page
       #
-      #   @return [Integer]
-      required :page, Integer
+      #   @return [Integer, nil]
+      optional :page, Integer
 
       # @!attribute page_size
       #
-      #   @return [Integer]
-      required :page_size, Integer
+      #   @return [Integer, nil]
+      optional :page_size, Integer
 
       # @!attribute search
       #
@@ -32,7 +32,7 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(id:, page:, page_size:, search: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(id:, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #   @param id [String]
       #   @param page [Integer]
       #   @param page_size [Integer]

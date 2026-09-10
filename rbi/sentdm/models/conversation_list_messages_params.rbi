@@ -17,11 +17,17 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :id
 
-      sig { returns(Integer) }
-      attr_accessor :page
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page
 
-      sig { returns(Integer) }
-      attr_accessor :page_size
+      sig { params(page: Integer).void }
+      attr_writer :page
+
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
 
       sig { returns(T.nilable(String)) }
       attr_reader :x_profile_id
@@ -40,8 +46,8 @@ module Sentdm
       end
       def self.new(
         id:,
-        page:,
-        page_size:,
+        page: nil,
+        page_size: nil,
         x_profile_id: nil,
         request_options: {}
       )

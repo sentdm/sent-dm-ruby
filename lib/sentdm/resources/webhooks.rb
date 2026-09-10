@@ -134,13 +134,13 @@ module Sentdm
       #
       # Retrieves a paginated list of webhooks for the authenticated customer.
       #
-      # @overload list(page:, page_size:, is_active: nil, search: nil, x_profile_id: nil, request_options: {})
+      # @overload list(is_active: nil, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param is_active [Boolean, nil] Query param
       #
       # @param page [Integer] Query param
       #
       # @param page_size [Integer] Query param
-      #
-      # @param is_active [Boolean, nil] Query param
       #
       # @param search [String, nil] Query param
       #
@@ -151,8 +151,8 @@ module Sentdm
       # @return [Sentdm::Internal::WebhooksPage<Sentdm::Models::WebhookResponse>]
       #
       # @see Sentdm::Models::WebhookListParams
-      def list(params)
-        query_params = [:page, :page_size, :is_active, :search]
+      def list(params = {})
+        query_params = [:is_active, :page, :page_size, :search]
         parsed, options = Sentdm::WebhookListParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
@@ -223,7 +223,7 @@ module Sentdm
       #
       # Retrieves a paginated list of delivery events for the specified webhook.
       #
-      # @overload list_events(id, page:, page_size:, search: nil, x_profile_id: nil, request_options: {})
+      # @overload list_events(id, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
       #
@@ -240,7 +240,7 @@ module Sentdm
       # @return [Sentdm::Internal::WebhookEventsPage<Sentdm::Models::WebhookListEventsResponse>]
       #
       # @see Sentdm::Models::WebhookListEventsParams
-      def list_events(id, params)
+      def list_events(id, params = {})
         query_params = [:page, :page_size, :search]
         parsed, options = Sentdm::WebhookListEventsParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))

@@ -60,10 +60,10 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_required_params
+  def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent.templates.list(page: 0, page_size: 0)
+    response = @sent.templates.list
 
     assert_pattern do
       response => Sentdm::Internal::TemplatesPage

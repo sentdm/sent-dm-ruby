@@ -27,9 +27,9 @@ module Sentdm
       end
       def list(
         # Query param
-        page:,
+        page: nil,
         # Query param
-        page_size:,
+        page_size: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
         # organization API keys can use this header. The profile must belong to the
         # calling organization.
@@ -57,9 +57,9 @@ module Sentdm
         # Path param: Conversation id from the route.
         id,
         # Query param
-        page:,
+        page: nil,
         # Query param
-        page_size:,
+        page_size: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
         # organization API keys can use this header. The profile must belong to the
         # calling organization.

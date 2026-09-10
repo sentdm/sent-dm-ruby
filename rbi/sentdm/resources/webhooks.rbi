@@ -123,9 +123,9 @@ module Sentdm
       # Retrieves a paginated list of webhooks for the authenticated customer.
       sig do
         params(
+          is_active: T.nilable(T::Boolean),
           page: Integer,
           page_size: Integer,
-          is_active: T.nilable(T::Boolean),
           search: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
@@ -133,11 +133,11 @@ module Sentdm
       end
       def list(
         # Query param
-        page:,
-        # Query param
-        page_size:,
-        # Query param
         is_active: nil,
+        # Query param
+        page: nil,
+        # Query param
+        page_size: nil,
         # Query param
         search: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
@@ -199,9 +199,9 @@ module Sentdm
         # Path param
         id,
         # Query param
-        page:,
+        page: nil,
         # Query param
-        page_size:,
+        page_size: nil,
         # Query param
         search: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only

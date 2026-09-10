@@ -60,10 +60,10 @@ class Sentdm::Test::Resources::ContactsTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_required_params
+  def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent.contacts.list(page: 0, page_size: 0)
+    response = @sent.contacts.list
 
     assert_pattern do
       response => Sentdm::Internal::ContactsPage

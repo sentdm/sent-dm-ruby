@@ -17,7 +17,7 @@ module Sentdm
       # Retrieves a paginated list of the authenticated customer's messages across all
       # conversations, ordered by created date (most recent first).
       #
-      # @overload list(page:, page_size:, x_profile_id: nil, request_options: {})
+      # @overload list(page: nil, page_size: nil, x_profile_id: nil, request_options: {})
       #
       # @param page [Integer] Query param
       #
@@ -30,7 +30,7 @@ module Sentdm
       # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
       #
       # @see Sentdm::Models::ConversationListParams
-      def list(params)
+      def list(params = {})
         query_params = [:page, :page_size]
         parsed, options = Sentdm::ConversationListParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
@@ -51,7 +51,7 @@ module Sentdm
       # Retrieves a paginated list of the messages in a single conversation (scoped to
       # the authenticated customer), ordered by created date (most recent first).
       #
-      # @overload list_messages(id, page:, page_size:, x_profile_id: nil, request_options: {})
+      # @overload list_messages(id, page: nil, page_size: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Conversation id from the route.
       #
@@ -66,7 +66,7 @@ module Sentdm
       # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
       #
       # @see Sentdm::Models::ConversationListMessagesParams
-      def list_messages(id, params)
+      def list_messages(id, params = {})
         query_params = [:page, :page_size]
         parsed, options = Sentdm::ConversationListMessagesParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))

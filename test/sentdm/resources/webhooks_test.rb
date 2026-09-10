@@ -60,10 +60,10 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_required_params
+  def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent.webhooks.list(page: 0, page_size: 0)
+    response = @sent.webhooks.list
 
     assert_pattern do
       response => Sentdm::Internal::WebhooksPage
@@ -126,10 +126,10 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_list_events_required_params
+  def test_list_events
     skip("Mock server tests are disabled")
 
-    response = @sent.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8", page: 0, page_size: 0)
+    response = @sent.webhooks.list_events("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
       response => Sentdm::Internal::WebhookEventsPage

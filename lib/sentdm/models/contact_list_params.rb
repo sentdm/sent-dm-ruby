@@ -7,23 +7,23 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      # @!attribute page
-      #   Page number (1-indexed)
-      #
-      #   @return [Integer]
-      required :page, Integer
-
-      # @!attribute page_size
-      #   Number of items per page
-      #
-      #   @return [Integer]
-      required :page_size, Integer
-
       # @!attribute channel
       #   Optional channel filter (sms, whatsapp)
       #
       #   @return [String, nil]
       optional :channel, String, nil?: true
+
+      # @!attribute page
+      #   Page number (1-indexed)
+      #
+      #   @return [Integer, nil]
+      optional :page, Integer
+
+      # @!attribute page_size
+      #   Number of items per page
+      #
+      #   @return [Integer, nil]
+      optional :page_size, Integer
 
       # @!attribute phone
       #   Optional phone number filter (alternative to list view)
@@ -42,12 +42,12 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(page:, page_size:, channel: nil, phone: nil, search: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(channel: nil, page: nil, page_size: nil, phone: nil, search: nil, x_profile_id: nil, request_options: {})
+      #   @param channel [String, nil] Optional channel filter (sms, whatsapp)
+      #
       #   @param page [Integer] Page number (1-indexed)
       #
       #   @param page_size [Integer] Number of items per page
-      #
-      #   @param channel [String, nil] Optional channel filter (sms, whatsapp)
       #
       #   @param phone [String, nil] Optional phone number filter (alternative to list view)
       #

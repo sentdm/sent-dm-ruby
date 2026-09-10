@@ -33,10 +33,10 @@ module Sentdm
       ) -> Sentdm::APIResponseTemplate
 
       def list: (
-        page: Integer,
-        page_size: Integer,
         ?category: String?,
         ?is_welcome_playground: bool?,
+        ?page: Integer,
+        ?page_size: Integer,
         ?search: String?,
         ?status: String?,
         ?x_profile_id: String,

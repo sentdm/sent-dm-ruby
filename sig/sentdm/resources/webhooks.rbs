@@ -35,9 +35,9 @@ module Sentdm
       ) -> Sentdm::APIResponseWebhook
 
       def list: (
-        page: Integer,
-        page_size: Integer,
         ?is_active: bool?,
+        ?page: Integer,
+        ?page_size: Integer,
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
@@ -56,8 +56,8 @@ module Sentdm
 
       def list_events: (
         String id,
-        page: Integer,
-        page_size: Integer,
+        ?page: Integer,
+        ?page_size: Integer,
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
