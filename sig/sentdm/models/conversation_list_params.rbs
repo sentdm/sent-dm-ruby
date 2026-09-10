@@ -8,17 +8,21 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      attr_accessor page: Integer
+      attr_reader page: Integer?
 
-      attr_accessor page_size: Integer
+      def page=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
 
       attr_reader x_profile_id: String?
 
       def x_profile_id=: (String) -> String
 
       def initialize: (
-        page: Integer,
-        page_size: Integer,
+        ?page: Integer,
+        ?page_size: Integer,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void

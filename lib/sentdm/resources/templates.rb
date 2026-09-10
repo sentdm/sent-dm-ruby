@@ -131,15 +131,15 @@ module Sentdm
       # Retrieves a paginated list of message templates for the authenticated customer.
       # Supports filtering by status, category, and search term.
       #
-      # @overload list(page:, page_size:, category: nil, is_welcome_playground: nil, search: nil, status: nil, x_profile_id: nil, request_options: {})
-      #
-      # @param page [Integer] Query param: Page number (1-indexed)
-      #
-      # @param page_size [Integer] Query param: Number of items per page
+      # @overload list(category: nil, is_welcome_playground: nil, page: nil, page_size: nil, search: nil, status: nil, x_profile_id: nil, request_options: {})
       #
       # @param category [String, nil] Query param: Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
       # @param is_welcome_playground [Boolean, nil] Query param: Accepted and ignored. It used to filter on the welcome-playground m
+      #
+      # @param page [Integer] Query param: Page number (1-indexed)
+      #
+      # @param page_size [Integer] Query param: Number of items per page
       #
       # @param search [String, nil] Query param: Optional search term for filtering templates
       #
@@ -149,11 +149,11 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateListResponse]
+      # @return [Sentdm::Internal::TemplatesPage<Sentdm::Models::Template>]
       #
       # @see Sentdm::Models::TemplateListParams
-      def list(params)
-        query_params = [:page, :page_size, :category, :is_welcome_playground, :search, :status]
+      def list(params = {})
+        query_params = [:category, :is_welcome_playground, :page, :page_size, :search, :status]
         parsed, options = Sentdm::TemplateListParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
@@ -161,7 +161,8 @@ module Sentdm
           path: "v3/templates",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::TemplateListResponse,
+          page: Sentdm::Internal::TemplatesPage,
+          model: Sentdm::Template,
           options: options
         )
       end

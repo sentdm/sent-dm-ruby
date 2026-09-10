@@ -2,6 +2,7 @@
 
 module Sentdm
   module Models
+    # @see Sentdm::Resources::Webhooks#list
     class WebhookResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute id
       #

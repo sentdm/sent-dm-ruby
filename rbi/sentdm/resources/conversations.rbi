@@ -19,13 +19,17 @@ module Sentdm
           page_size: Integer,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfConversationMessagesList)
+        ).returns(
+          Sentdm::Internal::ConversationsPage[
+            Sentdm::ConversationMessagesList::Message
+          ]
+        )
       end
       def list(
         # Query param
-        page:,
+        page: nil,
         # Query param
-        page_size:,
+        page_size: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
         # organization API keys can use this header. The profile must belong to the
         # calling organization.
@@ -43,15 +47,19 @@ module Sentdm
           page_size: Integer,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::APIResponseOfConversationMessagesList)
+        ).returns(
+          Sentdm::Internal::ConversationsPage[
+            Sentdm::ConversationMessagesList::Message
+          ]
+        )
       end
       def list_messages(
         # Path param: Conversation id from the route.
         id,
         # Query param
-        page:,
+        page: nil,
         # Query param
-        page_size:,
+        page_size: nil,
         # Header param: Profile UUID to scope the request to a child profile. Only
         # organization API keys can use this header. The profile must belong to the
         # calling organization.
