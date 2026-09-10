@@ -27,7 +27,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfConversationMessagesList]
+      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
       #
       # @see Sentdm::Models::ConversationListParams
       def list(params)
@@ -39,7 +39,8 @@ module Sentdm
           path: "v3/conversations",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfConversationMessagesList,
+          page: Sentdm::Internal::ConversationsPage,
+          model: Sentdm::ConversationMessagesList::Message,
           options: options
         )
       end
@@ -62,7 +63,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::APIResponseOfConversationMessagesList]
+      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
       #
       # @see Sentdm::Models::ConversationListMessagesParams
       def list_messages(id, params)
@@ -74,7 +75,8 @@ module Sentdm
           path: ["v3/conversations/%1$s", id],
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::APIResponseOfConversationMessagesList,
+          page: Sentdm::Internal::ConversationsPage,
+          model: Sentdm::ConversationMessagesList::Message,
           options: options
         )
       end

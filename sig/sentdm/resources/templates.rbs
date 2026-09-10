@@ -41,7 +41,7 @@ module Sentdm
         ?status: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::TemplateListResponse
+      ) -> Sentdm::Internal::TemplatesPage[Sentdm::Template]
 
       def delete: (
         String id,
