@@ -1,0 +1,58 @@
+module Sentdm
+  module Internal
+    class ConversationsPage[Elem]
+      include Sentdm::Internal::Type::BasePage[Elem]
+
+      attr_accessor data: Data
+
+      def inspect: -> String
+
+      type data = { messages: ::Array[top], pagination: Data::Pagination }
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader messages: ::Array[top]?
+
+        def messages=: (::Array[top]) -> ::Array[top]
+
+        attr_reader pagination: Data::Pagination?
+
+        def pagination=: (Data::Pagination) -> Data::Pagination
+
+        def initialize: (
+          ?messages: ::Array[top],
+          ?pagination: Data::Pagination
+        ) -> void
+
+        def to_hash: -> { messages: ::Array[top], pagination: Data::Pagination }
+
+        type pagination =
+          { has_more: bool, page: Integer, total_pages: Integer }
+
+        class Pagination < Sentdm::Internal::Type::BaseModel
+          attr_reader has_more: bool?
+
+          def has_more=: (bool) -> bool
+
+          attr_reader page: Integer?
+
+          def page=: (Integer) -> Integer
+
+          attr_reader total_pages: Integer?
+
+          def total_pages=: (Integer) -> Integer
+
+          def initialize: (
+            ?has_more: bool,
+            ?page: Integer,
+            ?total_pages: Integer
+          ) -> void
+
+          def to_hash: -> {
+            has_more: bool,
+            page: Integer,
+            total_pages: Integer
+          }
+        end
+      end
+    end
+  end
+end

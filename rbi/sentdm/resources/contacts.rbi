@@ -107,7 +107,7 @@ module Sentdm
           search: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactListResponse)
+        ).returns(Sentdm::Internal::ContactsPage[Sentdm::ContactResponse])
       end
       def list(
         # Query param: Page number (1-indexed)

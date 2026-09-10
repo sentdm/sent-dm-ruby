@@ -33,7 +33,7 @@ module Sentdm
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::ContactListResponse
+      ) -> Sentdm::Internal::ContactsPage[Sentdm::ContactResponse]
 
       def delete: (
         String id,

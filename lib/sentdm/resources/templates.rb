@@ -149,7 +149,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::TemplateListResponse]
+      # @return [Sentdm::Internal::TemplatesPage<Sentdm::Models::Template>]
       #
       # @see Sentdm::Models::TemplateListParams
       def list(params)
@@ -161,7 +161,8 @@ module Sentdm
           path: "v3/templates",
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::TemplateListResponse,
+          page: Sentdm::Internal::TemplatesPage,
+          model: Sentdm::Template,
           options: options
         )
       end

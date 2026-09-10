@@ -133,7 +133,7 @@ module Sentdm
           status: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateListResponse)
+        ).returns(Sentdm::Internal::TemplatesPage[Sentdm::Template])
       end
       def list(
         # Query param: Page number (1-indexed)

@@ -41,7 +41,7 @@ module Sentdm
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::WebhookListResponse
+      ) -> Sentdm::Internal::WebhooksPage[Sentdm::WebhookResponse]
 
       def delete: (
         String id,
@@ -61,7 +61,7 @@ module Sentdm
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::WebhookListEventsResponse
+      ) -> Sentdm::Internal::WebhookEventsPage[Sentdm::Models::WebhookListEventsResponse]
 
       def rotate_secret: (
         String id,

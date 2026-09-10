@@ -1,0 +1,61 @@
+module Sentdm
+  module Internal
+    class TemplatesPage[Elem]
+      include Sentdm::Internal::Type::BasePage[Elem]
+
+      attr_accessor data: Data
+
+      def inspect: -> String
+
+      type data = { pagination: Data::Pagination, templates: ::Array[top] }
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader pagination: Data::Pagination?
+
+        def pagination=: (Data::Pagination) -> Data::Pagination
+
+        attr_reader templates: ::Array[top]?
+
+        def templates=: (::Array[top]) -> ::Array[top]
+
+        def initialize: (
+          ?pagination: Data::Pagination,
+          ?templates: ::Array[top]
+        ) -> void
+
+        def to_hash: -> {
+          pagination: Data::Pagination,
+          templates: ::Array[top]
+        }
+
+        type pagination =
+          { has_more: bool, page: Integer, total_pages: Integer }
+
+        class Pagination < Sentdm::Internal::Type::BaseModel
+          attr_reader has_more: bool?
+
+          def has_more=: (bool) -> bool
+
+          attr_reader page: Integer?
+
+          def page=: (Integer) -> Integer
+
+          attr_reader total_pages: Integer?
+
+          def total_pages=: (Integer) -> Integer
+
+          def initialize: (
+            ?has_more: bool,
+            ?page: Integer,
+            ?total_pages: Integer
+          ) -> void
+
+          def to_hash: -> {
+            has_more: bool,
+            page: Integer,
+            total_pages: Integer
+          }
+        end
+      end
+    end
+  end
+end
