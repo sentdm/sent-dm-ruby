@@ -7,20 +7,20 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      # @!attribute page
-      #
-      #   @return [Integer]
-      required :page, Integer
-
-      # @!attribute page_size
-      #
-      #   @return [Integer]
-      required :page_size, Integer
-
       # @!attribute is_active
       #
       #   @return [Boolean, nil]
       optional :is_active, Sentdm::Internal::Type::Boolean, nil?: true
+
+      # @!attribute page
+      #
+      #   @return [Integer, nil]
+      optional :page, Integer
+
+      # @!attribute page_size
+      #
+      #   @return [Integer, nil]
+      optional :page_size, Integer
 
       # @!attribute search
       #
@@ -32,10 +32,10 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(page:, page_size:, is_active: nil, search: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(is_active: nil, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
+      #   @param is_active [Boolean, nil]
       #   @param page [Integer]
       #   @param page_size [Integer]
-      #   @param is_active [Boolean, nil]
       #   @param search [String, nil]
       #   @param x_profile_id [String]
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]

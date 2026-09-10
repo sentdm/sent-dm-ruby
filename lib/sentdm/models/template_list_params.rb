@@ -7,18 +7,6 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
-      # @!attribute page
-      #   Page number (1-indexed)
-      #
-      #   @return [Integer]
-      required :page, Integer
-
-      # @!attribute page_size
-      #   Number of items per page
-      #
-      #   @return [Integer]
-      required :page_size, Integer
-
       # @!attribute category
       #   Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
@@ -34,6 +22,18 @@ module Sentdm
       #
       #   @return [Boolean, nil]
       optional :is_welcome_playground, Sentdm::Internal::Type::Boolean, nil?: true
+
+      # @!attribute page
+      #   Page number (1-indexed)
+      #
+      #   @return [Integer, nil]
+      optional :page, Integer
+
+      # @!attribute page_size
+      #   Number of items per page
+      #
+      #   @return [Integer, nil]
+      optional :page_size, Integer
 
       # @!attribute search
       #   Optional search term for filtering templates
@@ -52,17 +52,17 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(page:, page_size:, category: nil, is_welcome_playground: nil, search: nil, status: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(category: nil, is_welcome_playground: nil, page: nil, page_size: nil, search: nil, status: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateListParams} for more details.
-      #
-      #   @param page [Integer] Page number (1-indexed)
-      #
-      #   @param page_size [Integer] Number of items per page
       #
       #   @param category [String, nil] Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       #
       #   @param is_welcome_playground [Boolean, nil] Accepted and ignored. It used to filter on the welcome-playground marker inside
+      #
+      #   @param page [Integer] Page number (1-indexed)
+      #
+      #   @param page_size [Integer] Number of items per page
       #
       #   @param search [String, nil] Optional search term for filtering templates
       #

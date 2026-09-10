@@ -2,6 +2,7 @@
 
 module Sentdm
   module Models
+    # @see Sentdm::Resources::Contacts#list
     class ContactResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute id
       #   Unique identifier for the contact

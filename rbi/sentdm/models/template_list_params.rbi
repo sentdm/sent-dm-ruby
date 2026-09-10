@@ -11,14 +11,6 @@ module Sentdm
           T.any(Sentdm::TemplateListParams, Sentdm::Internal::AnyHash)
         end
 
-      # Page number (1-indexed)
-      sig { returns(Integer) }
-      attr_accessor :page
-
-      # Number of items per page
-      sig { returns(Integer) }
-      attr_accessor :page_size
-
       # Optional category filter: MARKETING, UTILITY, AUTHENTICATION
       sig { returns(T.nilable(String)) }
       attr_accessor :category
@@ -30,6 +22,20 @@ module Sentdm
       # changing under it.
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :is_welcome_playground
+
+      # Page number (1-indexed)
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page
+
+      sig { params(page: Integer).void }
+      attr_writer :page
+
+      # Number of items per page
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
 
       # Optional search term for filtering templates
       sig { returns(T.nilable(String)) }
@@ -47,10 +53,10 @@ module Sentdm
 
       sig do
         params(
-          page: Integer,
-          page_size: Integer,
           category: T.nilable(String),
           is_welcome_playground: T.nilable(T::Boolean),
+          page: Integer,
+          page_size: Integer,
           search: T.nilable(String),
           status: T.nilable(String),
           x_profile_id: String,
@@ -58,10 +64,6 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Page number (1-indexed)
-        page:,
-        # Number of items per page
-        page_size:,
         # Optional category filter: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
         # Accepted and ignored. It used to filter on the welcome-playground marker inside
@@ -70,6 +72,10 @@ module Sentdm
         # still passing is_welcome_playground keeps binding instead of the request shape
         # changing under it.
         is_welcome_playground: nil,
+        # Page number (1-indexed)
+        page: nil,
+        # Number of items per page
+        page_size: nil,
         # Optional search term for filtering templates
         search: nil,
         # Optional status filter: APPROVED, PENDING, REJECTED
@@ -82,10 +88,10 @@ module Sentdm
       sig do
         override.returns(
           {
-            page: Integer,
-            page_size: Integer,
             category: T.nilable(String),
             is_welcome_playground: T.nilable(T::Boolean),
+            page: Integer,
+            page_size: Integer,
             search: T.nilable(String),
             status: T.nilable(String),
             x_profile_id: String,
