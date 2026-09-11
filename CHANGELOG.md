@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.31.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.30.0...v0.31.0) (2026-09-10)
+
+
+### Highlights
+
+The contacts, templates, webhooks, webhook events, conversations, and conversation messages list methods now return a page you can iterate instead of a single response body. Iterate the result and the SDK fetches each page as it goes. This changes those methods' return type, so code that read the response body directly needs to iterate the page, or read its items, instead.
+
+`page` and `page_size` are now optional on those calls. You don't have to pass them to list anything.
+
+### Features
+
+* **api:** configure page_number pagination for the v3 list endpoints ([d23828b](https://github.com/sentdm/sent-dm-ruby/commit/d23828b500a4b683f9036f63d40e79c466699b2f))
+
+## [0.30.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.29.0...v0.30.0) (2026-09-09)
+
+
+### Highlights
+
+This release is breaking for the webhook endpoints. Webhook responses now use one shared model instead of a separate type per operation: the create, retrieve, update and toggle-status response types are gone, and all four now return the shared webhook API response model (`ApiResponseWebhook`, in this language's casing). If your code references one of the removed types, or its nested data, error or meta members, point it at the shared model. The list, list-event-types, list-events, rotate-secret and test responses are unchanged, because each returns a different envelope.
+
+### Features
+
+* **api:** repoint dangling model refs at current v3 schema names ([631adad](https://github.com/sentdm/sent-dm-ruby/commit/631adadfe49cd6eb7ae9df2d3ad3c8261ac54984))
+
 ## [0.29.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.28.0...v0.29.0) (2026-09-06)
 
 

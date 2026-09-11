@@ -24,7 +24,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateCreateResponse)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def create(
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional,
@@ -63,7 +63,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateRetrieveResponse)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def retrieve(
         # Template ID from route parameter
@@ -89,7 +89,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateUpdateResponse)
+        ).returns(Sentdm::APIResponseTemplate)
       end
       def update(
         # Path param: Template ID from route parameter
@@ -125,21 +125,17 @@ module Sentdm
       # Supports filtering by status, category, and search term.
       sig do
         params(
-          page: Integer,
-          page_size: Integer,
           category: T.nilable(String),
           is_welcome_playground: T.nilable(T::Boolean),
+          page: Integer,
+          page_size: Integer,
           search: T.nilable(String),
           status: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::TemplateListResponse)
+        ).returns(Sentdm::Internal::TemplatesPage[Sentdm::Template])
       end
       def list(
-        # Query param: Page number (1-indexed)
-        page:,
-        # Query param: Number of items per page
-        page_size:,
         # Query param: Optional category filter: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
         # Query param: Accepted and ignored. It used to filter on the welcome-playground
@@ -148,6 +144,10 @@ module Sentdm
         # so a client still passing is_welcome_playground keeps binding instead of the
         # request shape changing under it.
         is_welcome_playground: nil,
+        # Query param: Page number (1-indexed)
+        page: nil,
+        # Query param: Number of items per page
+        page_size: nil,
         # Query param: Optional search term for filtering templates
         search: nil,
         # Query param: Optional status filter: APPROVED, PENDING, REJECTED

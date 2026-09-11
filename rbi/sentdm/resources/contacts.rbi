@@ -21,7 +21,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactCreateResponse)
+        ).returns(Sentdm::APIResponseOfContact)
       end
       def create(
         # Body param: Phone number of the contact to create
@@ -49,7 +49,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactRetrieveResponse)
+        ).returns(Sentdm::APIResponseOfContact)
       end
       def retrieve(
         # Contact ID from route parameter
@@ -71,7 +71,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactUpdateResponse)
+        ).returns(Sentdm::APIResponseOfContact)
       end
       def update(
         # Path param: Contact ID from route parameter
@@ -100,22 +100,22 @@ module Sentdm
       # filtering by search term, channel, or phone number.
       sig do
         params(
+          channel: T.nilable(String),
           page: Integer,
           page_size: Integer,
-          channel: T.nilable(String),
           phone: T.nilable(String),
           search: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactListResponse)
+        ).returns(Sentdm::Internal::ContactsPage[Sentdm::ContactResponse])
       end
       def list(
-        # Query param: Page number (1-indexed)
-        page:,
-        # Query param: Number of items per page
-        page_size:,
         # Query param: Optional channel filter (sms, whatsapp)
         channel: nil,
+        # Query param: Page number (1-indexed)
+        page: nil,
+        # Query param: Number of items per page
+        page_size: nil,
         # Query param: Optional phone number filter (alternative to list view)
         phone: nil,
         # Query param: Optional search term for filtering contacts
@@ -169,7 +169,7 @@ module Sentdm
           contact_id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ContactRetrieveMessageSummaryResponse)
+        ).returns(Sentdm::APIResponseOfContactMessageSummary)
       end
       def retrieve_message_summary(
         contact_id,

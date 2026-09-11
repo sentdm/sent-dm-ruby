@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "sentdm", "~> 0.29.0"
+gem "sentdm", "~> 0.31.0"
 ```
 
 <!-- x-release-please-end -->
@@ -43,6 +43,34 @@ response = sent.messages.send_(
 )
 
 puts(response.data)
+```
+
+### Pagination
+
+List methods in the Sent API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```ruby
+page = sent.webhooks.list
+
+# Fetch single item from page.
+webhook = page.data&.webhooks[0]
+puts(webhook.id)
+
+# Automatically fetches more pages as needed.
+page.auto_paging_each do |webhook|
+  puts(webhook.id)
+end
+```
+
+Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
+
+```ruby
+if page.next_page?
+  new_page = page.next_page
+  puts(new_page.data&.webhooks[0].id)
+end
 ```
 
 ### Handling errors
@@ -254,6 +282,32 @@ params = Sentdm::MessageSendParams.new(
   to: ["+14155551234", "+14155555678"]
 )
 sent.messages.send_(**params)
+```
+
+### Enums
+
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+
+```ruby
+# :PRIVATE_PROFIT
+puts(Sentdm::BrandBusinessInfo::EntityType::PRIVATE_PROFIT)
+
+# Revealed type: `T.all(Sentdm::BrandBusinessInfo::EntityType, Symbol)`
+T.reveal_type(Sentdm::BrandBusinessInfo::EntityType::PRIVATE_PROFIT)
+```
+
+Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+
+```ruby
+Sentdm::BrandBusinessInfo.new(
+  entity_type: Sentdm::BrandBusinessInfo::EntityType::PRIVATE_PROFIT,
+  # …
+)
+
+Sentdm::BrandBusinessInfo.new(
+  entity_type: :PRIVATE_PROFIT,
+  # …
+)
 ```
 
 ## Versioning
