@@ -15,7 +15,9 @@ module Sentdm
       #
       # Creates a new message template with header, body, footer, and buttons. The
       # template can be submitted for review immediately or saved as draft for later
-      # submission.
+      # submission. There is no `name` field on create — the display name is derived
+      # from the template's content and can be changed afterwards with
+      # `PUT /v3/templates/{id}`.
       #
       # @overload create(category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
@@ -85,7 +87,10 @@ module Sentdm
       # {Sentdm::Models::TemplateUpdateParams} for more details.
       #
       # Updates an existing template's name, category, language, definition, or submits
-      # it for review.
+      # it for review. While the template is in review (status PENDING, or any channel
+      # awaiting a verdict) its definition, category and language are frozen and a
+      # resubmission is refused — those requests answer 409 CONFLICT_006. The display
+      # name stays editable throughout.
       #
       # @overload update(id, category: nil, definition: nil, language: nil, name: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #

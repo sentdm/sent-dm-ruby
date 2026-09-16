@@ -29,10 +29,16 @@ module Sentdm
       optional :category, String
 
       # @!attribute channel
-      #   The channel the template applies to.
+      #   The channel leg this decision is about, for example whatsapp, sms, or rcs. A
+      #   template is reviewed per channel and the legs come back independently, so each
+      #   one reports separately.
+      #
+      #   Omitted when the decision applies to the template as a whole rather than to one
+      #   leg. That event is the broader news: a template-wide rejection blocks every
+      #   channel, whatever the individual legs say.
       #
       #   @return [String, nil]
-      optional :channel, String
+      optional :channel, String, nil?: true
 
       # @!attribute language
       #   The template's language code, for example en_US.
@@ -74,7 +80,7 @@ module Sentdm
       #
       #   @param category [String] The template's category, for example UTILITY, MARKETING, or
       #
-      #   @param channel [String] The channel the template applies to.
+      #   @param channel [String, nil] The channel leg this decision is about, for example whatsapp, sms, or rcs.
       #
       #   @param language [String] The template's language code, for example en_US.
       #
