@@ -31,12 +31,15 @@ module Sentdm
       sig { params(category: String).void }
       attr_writer :category
 
-      # The channel the template applies to.
+      # The channel leg this decision is about, for example whatsapp, sms, or rcs. A
+      # template is reviewed per channel and the legs come back independently, so each
+      # one reports separately.
+      #
+      # Omitted when the decision applies to the template as a whole rather than to one
+      # leg. That event is the broader news: a template-wide rejection blocks every
+      # channel, whatever the individual legs say.
       sig { returns(T.nilable(String)) }
-      attr_reader :channel
-
-      sig { params(channel: String).void }
-      attr_writer :channel
+      attr_accessor :channel
 
       # The template's language code, for example en_US.
       sig { returns(T.nilable(String)) }
@@ -72,7 +75,7 @@ module Sentdm
           whatsapp_template_id: String,
           account_id: String,
           category: String,
-          channel: String,
+          channel: T.nilable(String),
           language: String,
           reason: T.nilable(String),
           template_id: String,
@@ -89,7 +92,13 @@ module Sentdm
         account_id: nil,
         # The template's category, for example UTILITY, MARKETING, or AUTHENTICATION.
         category: nil,
-        # The channel the template applies to.
+        # The channel leg this decision is about, for example whatsapp, sms, or rcs. A
+        # template is reviewed per channel and the legs come back independently, so each
+        # one reports separately.
+        #
+        # Omitted when the decision applies to the template as a whole rather than to one
+        # leg. That event is the broader news: a template-wide rejection blocks every
+        # channel, whatever the individual legs say.
         channel: nil,
         # The template's language code, for example en_US.
         language: nil,
@@ -110,7 +119,7 @@ module Sentdm
             whatsapp_template_id: String,
             account_id: String,
             category: String,
-            channel: String,
+            channel: T.nilable(String),
             language: String,
             reason: T.nilable(String),
             template_id: String,

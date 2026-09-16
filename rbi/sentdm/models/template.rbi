@@ -57,7 +57,8 @@ module Sentdm
       sig { params(name: String).void }
       attr_writer :name
 
-      # Template status: APPROVED, PENDING, REJECTED
+      # Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
+      # submit_for_review: false starts as DRAFT and stays there until it is submitted.
       sig { returns(T.nilable(String)) }
       attr_reader :status
 
@@ -106,7 +107,8 @@ module Sentdm
         language: nil,
         # Template display name
         name: nil,
-        # Template status: APPROVED, PENDING, REJECTED
+        # Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
+        # submit_for_review: false starts as DRAFT and stays there until it is submitted.
         status: nil,
         # When the template was last updated
         updated_at: nil,

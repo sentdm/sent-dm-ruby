@@ -6,7 +6,7 @@ module Sentdm
         whatsapp_template_id: String,
         account_id: String,
         category: String,
-        channel: String,
+        channel: String?,
         language: String,
         reason: String?,
         template_id: String,
@@ -26,9 +26,7 @@ module Sentdm
 
       def category=: (String) -> String
 
-      attr_reader channel: String?
-
-      def channel=: (String) -> String
+      attr_accessor channel: String?
 
       attr_reader language: String?
 
@@ -49,7 +47,7 @@ module Sentdm
         whatsapp_template_id: String,
         ?account_id: String,
         ?category: String,
-        ?channel: String,
+        ?channel: String?,
         ?language: String,
         ?reason: String?,
         ?template_id: String,
@@ -61,7 +59,7 @@ module Sentdm
         whatsapp_template_id: String,
         account_id: String,
         category: String,
-        channel: String,
+        channel: String?,
         language: String,
         reason: String?,
         template_id: String,

@@ -54,7 +54,8 @@ module Sentdm
       optional :name, String
 
       # @!attribute status
-      #   Template status: APPROVED, PENDING, REJECTED
+      #   Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
+      #   submit_for_review: false starts as DRAFT and stays there until it is submitted.
       #
       #   @return [String, nil]
       optional :status, String
@@ -93,7 +94,7 @@ module Sentdm
       #
       #   @param name [String] Template display name
       #
-      #   @param status [String] Template status: APPROVED, PENDING, REJECTED
+      #   @param status [String] Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
       #
       #   @param updated_at [Time, nil] When the template was last updated
       #
