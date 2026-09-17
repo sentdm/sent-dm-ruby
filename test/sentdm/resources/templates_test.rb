@@ -80,6 +80,7 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
       row => {
         customer_id: String,
         id: String | nil,
+        auto_reply_action: String | nil,
         category: String | nil,
         channels: ^(Sentdm::Internal::Type::ArrayOf[String]) | nil,
         created_at: Time | nil,

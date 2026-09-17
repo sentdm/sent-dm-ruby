@@ -18,6 +18,21 @@ module Sentdm
       sig { params(id: String).void }
       attr_writer :id
 
+      # Which consent keyword this template answers, when it is one of Sent's
+      # auto-replies: OPT_IN, OPT_OUT, HELP, or OTHER for a customer-defined keyword.
+      # Null for an ordinary template, and omitted from the response, so its presence is
+      # the answer to "is this an auto-reply".
+      #
+      # Deliberately not required, unlike CustomerId, even though the same "no single
+      # mapper" argument applies: NJsonSchema publishes a C# required member in the
+      # schema's required array, so the contract would have advertised a field this
+      # response omits for every ordinary template, and a generated client could refuse
+      # the common case. A compile-time guard is not worth a wrong published contract.
+      # Every mapping site sets it explicitly, and TemplateResponseSchemaTests pins the
+      # field as optional so it cannot be reintroduced.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :auto_reply_action
+
       # Template category: MARKETING, UTILITY, AUTHENTICATION
       sig { returns(T.nilable(String)) }
       attr_reader :category
@@ -25,7 +40,18 @@ module Sentdm
       sig { params(category: String).void }
       attr_writer :category
 
-      # Supported channels: sms, whatsapp
+      # The channels this template's definition can render on, in canonical order: sms,
+      # whatsapp, rcs.
+      #
+      # Derived from the definition's body, mirroring each channel's send-time fallback
+      # chain, so a channel is listed only when a real body would be produced for it:
+      # SMS reads sms ?? multiChannel, WhatsApp reads whatsapp ?? multiChannel, and RCS
+      # reads rcs ?? multiChannel ?? sms. A multiChannel body therefore reports all
+      # three, and the extra SMS fallback on RCS is why an sms/whatsapp pair reports RCS
+      # too.
+      #
+      # This says what the content can render on, not what may be sent: sending also
+      # needs the template approved for that channel.
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :channels
 
@@ -57,7 +83,8 @@ module Sentdm
       sig { params(name: String).void }
       attr_writer :name
 
-      # Template status: APPROVED, PENDING, REJECTED
+      # Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
+      # submit_for_review: false starts as DRAFT and stays there until it is submitted.
       sig { returns(T.nilable(String)) }
       attr_reader :status
 
@@ -77,6 +104,7 @@ module Sentdm
         params(
           customer_id: String,
           id: String,
+          auto_reply_action: T.nilable(String),
           category: String,
           channels: T.nilable(T::Array[String]),
           created_at: Time,
@@ -94,9 +122,33 @@ module Sentdm
         customer_id:,
         # Unique template identifier
         id: nil,
+        # Which consent keyword this template answers, when it is one of Sent's
+        # auto-replies: OPT_IN, OPT_OUT, HELP, or OTHER for a customer-defined keyword.
+        # Null for an ordinary template, and omitted from the response, so its presence is
+        # the answer to "is this an auto-reply".
+        #
+        # Deliberately not required, unlike CustomerId, even though the same "no single
+        # mapper" argument applies: NJsonSchema publishes a C# required member in the
+        # schema's required array, so the contract would have advertised a field this
+        # response omits for every ordinary template, and a generated client could refuse
+        # the common case. A compile-time guard is not worth a wrong published contract.
+        # Every mapping site sets it explicitly, and TemplateResponseSchemaTests pins the
+        # field as optional so it cannot be reintroduced.
+        auto_reply_action: nil,
         # Template category: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
-        # Supported channels: sms, whatsapp
+        # The channels this template's definition can render on, in canonical order: sms,
+        # whatsapp, rcs.
+        #
+        # Derived from the definition's body, mirroring each channel's send-time fallback
+        # chain, so a channel is listed only when a real body would be produced for it:
+        # SMS reads sms ?? multiChannel, WhatsApp reads whatsapp ?? multiChannel, and RCS
+        # reads rcs ?? multiChannel ?? sms. A multiChannel body therefore reports all
+        # three, and the extra SMS fallback on RCS is why an sms/whatsapp pair reports RCS
+        # too.
+        #
+        # This says what the content can render on, not what may be sent: sending also
+        # needs the template approved for that channel.
         channels: nil,
         # When the template was created
         created_at: nil,
@@ -106,7 +158,8 @@ module Sentdm
         language: nil,
         # Template display name
         name: nil,
-        # Template status: APPROVED, PENDING, REJECTED
+        # Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
+        # submit_for_review: false starts as DRAFT and stays there until it is submitted.
         status: nil,
         # When the template was last updated
         updated_at: nil,
@@ -120,6 +173,7 @@ module Sentdm
           {
             customer_id: String,
             id: String,
+            auto_reply_action: T.nilable(String),
             category: String,
             channels: T.nilable(T::Array[String]),
             created_at: Time,
