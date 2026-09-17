@@ -4,6 +4,7 @@ module Sentdm
       {
         customer_id: String,
         id: String,
+        auto_reply_action: String?,
         category: String,
         channels: ::Array[String]?,
         created_at: Time,
@@ -21,6 +22,8 @@ module Sentdm
       attr_reader id: String?
 
       def id=: (String) -> String
+
+      attr_accessor auto_reply_action: String?
 
       attr_reader category: String?
 
@@ -55,6 +58,7 @@ module Sentdm
       def initialize: (
         customer_id: String,
         ?id: String,
+        ?auto_reply_action: String?,
         ?category: String,
         ?channels: ::Array[String]?,
         ?created_at: Time,
@@ -69,6 +73,7 @@ module Sentdm
       def to_hash: -> {
         customer_id: String,
         id: String,
+        auto_reply_action: String?,
         category: String,
         channels: ::Array[String]?,
         created_at: Time,

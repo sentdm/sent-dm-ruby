@@ -24,6 +24,23 @@ module Sentdm
       sig { params(account_id: String).void }
       attr_writer :account_id
 
+      # Which consent keyword this template answers, when it is one of Sent's
+      # auto-replies: OPT_IN, OPT_OUT, HELP, or OTHER for a customer-defined keyword.
+      #
+      # Omitted for an ordinary template, so its presence is the answer to "is this an
+      # auto-reply". Sent creates the three compliance auto-replies at signup and they
+      # go through review like any other template, so their events arrive mixed in with
+      # the customer's own with nothing else to tell them apart.
+      #
+      # Named for the reader rather than after Template.OptAction, which it is mapped
+      # from. The MCP tool result deliberately keeps OptAction, OptKeywords and IsOpt:
+      # it mirrors the internal shape on purpose and publishes the keywords too, so
+      # renaming one of the three there would leave a surface half in each vocabulary.
+      # Two names for one concept, each consistent within its own surface, chosen over a
+      # rename that breaks MCP clients silently.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :auto_reply_action
+
       # The template's category, for example UTILITY, MARKETING, or AUTHENTICATION.
       sig { returns(T.nilable(String)) }
       attr_reader :category
@@ -74,6 +91,7 @@ module Sentdm
           status: String,
           whatsapp_template_id: String,
           account_id: String,
+          auto_reply_action: T.nilable(String),
           category: String,
           channel: T.nilable(String),
           language: String,
@@ -90,6 +108,21 @@ module Sentdm
         whatsapp_template_id:,
         # The account the template belongs to.
         account_id: nil,
+        # Which consent keyword this template answers, when it is one of Sent's
+        # auto-replies: OPT_IN, OPT_OUT, HELP, or OTHER for a customer-defined keyword.
+        #
+        # Omitted for an ordinary template, so its presence is the answer to "is this an
+        # auto-reply". Sent creates the three compliance auto-replies at signup and they
+        # go through review like any other template, so their events arrive mixed in with
+        # the customer's own with nothing else to tell them apart.
+        #
+        # Named for the reader rather than after Template.OptAction, which it is mapped
+        # from. The MCP tool result deliberately keeps OptAction, OptKeywords and IsOpt:
+        # it mirrors the internal shape on purpose and publishes the keywords too, so
+        # renaming one of the three there would leave a surface half in each vocabulary.
+        # Two names for one concept, each consistent within its own surface, chosen over a
+        # rename that breaks MCP clients silently.
+        auto_reply_action: nil,
         # The template's category, for example UTILITY, MARKETING, or AUTHENTICATION.
         category: nil,
         # The channel leg this decision is about, for example whatsapp, sms, or rcs. A
@@ -118,6 +151,7 @@ module Sentdm
             status: String,
             whatsapp_template_id: String,
             account_id: String,
+            auto_reply_action: T.nilable(String),
             category: String,
             channel: T.nilable(String),
             language: String,
