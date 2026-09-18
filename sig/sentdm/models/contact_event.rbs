@@ -1,0 +1,44 @@
+module Sentdm
+  module Models
+    type contact_event =
+      {
+        event: String?,
+        field: String,
+        payload: Sentdm::ContactEventPayload?,
+        request_id: String?,
+        timestamp: String
+      }
+
+    class ContactEvent < Sentdm::Internal::Type::BaseModel
+      attr_accessor event: String?
+
+      attr_reader field: String?
+
+      def field=: (String) -> String
+
+      attr_accessor payload: Sentdm::ContactEventPayload?
+
+      attr_accessor request_id: String?
+
+      attr_reader timestamp: String?
+
+      def timestamp=: (String) -> String
+
+      def initialize: (
+        ?event: String?,
+        ?field: String,
+        ?payload: Sentdm::ContactEventPayload?,
+        ?request_id: String?,
+        ?timestamp: String
+      ) -> void
+
+      def to_hash: -> {
+        event: String?,
+        field: String,
+        payload: Sentdm::ContactEventPayload?,
+        request_id: String?,
+        timestamp: String
+      }
+    end
+  end
+end
