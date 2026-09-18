@@ -363,6 +363,26 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :header
 
+          # The media asset that rode a message's header, recorded as sent.
+          sig do
+            returns(
+              T.nilable(
+                Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia
+              )
+            )
+          end
+          attr_reader :header_media
+
+          sig do
+            params(
+              header_media:
+                T.nilable(
+                  Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia::OrHash
+                )
+            ).void
+          end
+          attr_writer :header_media
+
           # Structured message body format for database storage. Preserves channel-specific
           # components (header, body, footer, buttons).
           sig do
@@ -375,10 +395,21 @@ module Sentdm
                 ),
               content: String,
               footer: T.nilable(String),
-              header: T.nilable(String)
+              header: T.nilable(String),
+              header_media:
+                T.nilable(
+                  Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia::OrHash
+                )
             ).returns(T.attached_class)
           end
-          def self.new(buttons: nil, content: nil, footer: nil, header: nil)
+          def self.new(
+            buttons: nil,
+            content: nil,
+            footer: nil,
+            header: nil,
+            # The media asset that rode a message's header, recorded as sent.
+            header_media: nil
+          )
           end
 
           sig do
@@ -392,7 +423,11 @@ module Sentdm
                   ),
                 content: String,
                 footer: T.nilable(String),
-                header: T.nilable(String)
+                header: T.nilable(String),
+                header_media:
+                  T.nilable(
+                    Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia
+                  )
               }
             )
           end
@@ -447,6 +482,48 @@ module Sentdm
                 }
               )
             end
+            def to_hash
+            end
+          end
+
+          class HeaderMedia < Sentdm::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia,
+                  Sentdm::Internal::AnyHash
+                )
+              end
+
+            # "image", "video" or "document" — taken from the header's media variable.
+            sig { returns(T.nilable(String)) }
+            attr_reader :type
+
+            sig { params(type: String).void }
+            attr_writer :type
+
+            # The https URL the caller supplied for this send. Never the template's stored
+            # props.sample, which is Meta's expiring header_handle rather than what was
+            # delivered.
+            sig { returns(T.nilable(String)) }
+            attr_reader :url
+
+            sig { params(url: String).void }
+            attr_writer :url
+
+            # The media asset that rode a message's header, recorded as sent.
+            sig { params(type: String, url: String).returns(T.attached_class) }
+            def self.new(
+              # "image", "video" or "document" — taken from the header's media variable.
+              type: nil,
+              # The https URL the caller supplied for this send. Never the template's stored
+              # props.sample, which is Meta's expiring header_handle rather than what was
+              # delivered.
+              url: nil
+            )
+            end
+
+            sig { override.returns({ type: String, url: String }) }
             def to_hash
             end
           end
