@@ -23,6 +23,14 @@ module Sentdm
       #   @return [String, nil]
       optional :agent_id, String, nil?: true
 
+      # @!attribute body
+      #   The rendered message body, as plain text. Sent as null when we aren't asserting
+      #   a body for this event. The field is always present, so read it and check for
+      #   null rather than checking whether the key exists. Truncated to 3072 characters.
+      #
+      #   @return [String, nil]
+      optional :body, String, nil?: true
+
       # @!attribute channel
       #   The channel the message went out on, for example sms or whatsapp. A message that
       #   falls back to another channel reports the channel actually used.
@@ -62,7 +70,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(message_status:, account_id: nil, agent_id: nil, channel: nil, message_id: nil, outbound_number: nil, template_id: nil, template_name: nil, updated_at: nil)
+      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, template_id: nil, template_name: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::MessageEventPayload} for more details.
       #
@@ -75,6 +83,8 @@ module Sentdm
       #   @param account_id [String] The account the message belongs to.
       #
       #   @param agent_id [String, nil] The agent attributed to the send, when the send was attributed to one.
+      #
+      #   @param body [String, nil] The rendered message body, as plain text. Sent as null when we aren't asserting
       #
       #   @param channel [String] The channel the message went out on, for example sms or whatsapp. A message
       #

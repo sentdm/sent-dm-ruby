@@ -25,6 +25,12 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :agent_id
 
+      # The rendered message body, as plain text. Sent as null when we aren't asserting
+      # a body for this event. The field is always present, so read it and check for
+      # null rather than checking whether the key exists. Truncated to 3072 characters.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :body
+
       # The channel the message went out on, for example sms or whatsapp. A message that
       # falls back to another channel reports the channel actually used.
       sig { returns(T.nilable(String)) }
@@ -72,6 +78,7 @@ module Sentdm
           message_status: String,
           account_id: String,
           agent_id: T.nilable(String),
+          body: T.nilable(String),
           channel: String,
           message_id: String,
           outbound_number: String,
@@ -89,6 +96,10 @@ module Sentdm
         account_id: nil,
         # The agent attributed to the send, when the send was attributed to one.
         agent_id: nil,
+        # The rendered message body, as plain text. Sent as null when we aren't asserting
+        # a body for this event. The field is always present, so read it and check for
+        # null rather than checking whether the key exists. Truncated to 3072 characters.
+        body: nil,
         # The channel the message went out on, for example sms or whatsapp. A message that
         # falls back to another channel reports the channel actually used.
         channel: nil,
@@ -113,6 +124,7 @@ module Sentdm
             message_status: String,
             account_id: String,
             agent_id: T.nilable(String),
+            body: T.nilable(String),
             channel: String,
             message_id: String,
             outbound_number: String,

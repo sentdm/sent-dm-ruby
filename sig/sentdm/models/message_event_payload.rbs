@@ -5,6 +5,7 @@ module Sentdm
         message_status: String,
         account_id: String,
         agent_id: String?,
+        body: String?,
         channel: String,
         message_id: String,
         outbound_number: String,
@@ -21,6 +22,8 @@ module Sentdm
       def account_id=: (String) -> String
 
       attr_accessor agent_id: String?
+
+      attr_accessor body: String?
 
       attr_reader channel: String?
 
@@ -46,6 +49,7 @@ module Sentdm
         message_status: String,
         ?account_id: String,
         ?agent_id: String?,
+        ?body: String?,
         ?channel: String,
         ?message_id: String,
         ?outbound_number: String,
@@ -58,6 +62,7 @@ module Sentdm
         message_status: String,
         account_id: String,
         agent_id: String?,
+        body: String?,
         channel: String,
         message_id: String,
         outbound_number: String,

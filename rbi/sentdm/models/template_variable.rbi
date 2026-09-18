@@ -8,6 +8,9 @@ module Sentdm
           T.any(Sentdm::TemplateVariable, Sentdm::Internal::AnyHash)
         end
 
+      # The variable's name, and the key callers use for it in a send request's
+      # parameters object. Must start with a letter and hold only letters, digits and
+      # underscores.
       sig { returns(String) }
       attr_accessor :name
 
@@ -17,9 +20,17 @@ module Sentdm
       sig { params(props: Sentdm::TemplateVariable::Props::OrHash).void }
       attr_writer :props
 
+      # One of variable, link or media. Decides which Props fields are required.
       sig { returns(String) }
       attr_accessor :type
 
+      # The variable's index, and the number its {{index:variable}} placeholder refers
+      # to.
+      #
+      # Omitting it is only safe for a section holding a single variable. The field is a
+      # non-nullable int, so every variable that leaves it out defaults to 0, and a
+      # section with two such variables is refused by the unique-id rule ("variables
+      # must have unique IDs"). Number them from 0 in the order they appear.
       sig { returns(T.nilable(Integer)) }
       attr_reader :id
 
@@ -34,7 +45,23 @@ module Sentdm
           id: Integer
         ).returns(T.attached_class)
       end
-      def self.new(name:, props:, type:, id: nil)
+      def self.new(
+        # The variable's name, and the key callers use for it in a send request's
+        # parameters object. Must start with a letter and hold only letters, digits and
+        # underscores.
+        name:,
+        props:,
+        # One of variable, link or media. Decides which Props fields are required.
+        type:,
+        # The variable's index, and the number its {{index:variable}} placeholder refers
+        # to.
+        #
+        # Omitting it is only safe for a section holding a single variable. The field is a
+        # non-nullable int, so every variable that leaves it out defaults to 0, and a
+        # section with two such variables is refused by the unique-id rule ("variables
+        # must have unique IDs"). Number them from 0 in the order they appear.
+        id: nil
+      )
       end
 
       sig do

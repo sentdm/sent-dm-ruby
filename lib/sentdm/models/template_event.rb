@@ -4,16 +4,16 @@ module Sentdm
   module Models
     class TemplateEvent < Sentdm::Internal::Type::BaseModel
       # @!attribute event
-      #   The specific event within the family, for example message.delivered or
-      #   message.received. Absent on events that have no subtype, so treat it as
-      #   optional.
+      #   The specific event within the family, for example message.delivered,
+      #   message.received or contact.opt_out. Absent on events that have no subtype, so
+      #   treat it as optional.
       #
       #   @return [String, nil]
       optional :event, String, nil?: true
 
       # @!attribute field
-      #   The event family, for example message or templates. Route on this first, then on
-      #   event for the specific change.
+      #   The event family, for example message, templates or contact. Route on this
+      #   first, then on event for the specific change.
       #
       #   @return [String, nil]
       optional :field, String
@@ -25,6 +25,12 @@ module Sentdm
       #   @return [Sentdm::Models::TemplateEventPayload, nil]
       optional :payload, -> { Sentdm::TemplateEventPayload }, nil?: true
 
+      # @!attribute request_id
+      #   The event-specific body.
+      #
+      #   @return [String, nil]
+      optional :request_id, String, nil?: true
+
       # @!attribute timestamp
       #   When Sent emitted the event, in UTC (yyyy-MM-ddTHH:mm:ssZ). This is the emission
       #   time, not the time the underlying change happened. Use the timestamp inside the
@@ -33,18 +39,20 @@ module Sentdm
       #   @return [String, nil]
       optional :timestamp, String
 
-      # @!method initialize(event: nil, field: nil, payload: nil, timestamp: nil)
+      # @!method initialize(event: nil, field: nil, payload: nil, request_id: nil, timestamp: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateEvent} for more details.
       #
       #   The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares
       #   this shape and varies only in Payload.
       #
-      #   @param event [String, nil] The specific event within the family, for example message.delivered or
+      #   @param event [String, nil] The specific event within the family, for example message.delivered,
       #
-      #   @param field [String] The event family, for example message or templates. Route on this first, then
+      #   @param field [String] The event family, for example message, templates or contact. Route on
       #
       #   @param payload [Sentdm::Models::TemplateEventPayload, nil] Body of a template status event. Delivered when a template's review outcome chan
+      #
+      #   @param request_id [String, nil] The event-specific body.
       #
       #   @param timestamp [String] When Sent emitted the event, in UTC (yyyy-MM-ddTHH:mm:ssZ). This is the emission
     end

@@ -6,14 +6,14 @@ module Sentdm
       OrHash =
         T.type_alias { T.any(Sentdm::MessageEvent, Sentdm::Internal::AnyHash) }
 
-      # The specific event within the family, for example message.delivered or
-      # message.received. Absent on events that have no subtype, so treat it as
-      # optional.
+      # The specific event within the family, for example message.delivered,
+      # message.received or contact.opt_out. Absent on events that have no subtype, so
+      # treat it as optional.
       sig { returns(T.nilable(String)) }
       attr_accessor :event
 
-      # The event family, for example message or templates. Route on this first, then on
-      # event for the specific change.
+      # The event family, for example message, templates or contact. Route on this
+      # first, then on event for the specific change.
       sig { returns(T.nilable(String)) }
       attr_reader :field
 
@@ -31,6 +31,10 @@ module Sentdm
       end
       attr_writer :payload
 
+      # The event-specific body.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :request_id
+
       # When Sent emitted the event, in UTC (yyyy-MM-ddTHH:mm:ssZ). This is the emission
       # time, not the time the underlying change happened. Use the timestamp inside the
       # payload for the latter.
@@ -47,21 +51,24 @@ module Sentdm
           event: T.nilable(String),
           field: String,
           payload: T.nilable(Sentdm::MessageEventPayload::OrHash),
+          request_id: T.nilable(String),
           timestamp: String
         ).returns(T.attached_class)
       end
       def self.new(
-        # The specific event within the family, for example message.delivered or
-        # message.received. Absent on events that have no subtype, so treat it as
-        # optional.
+        # The specific event within the family, for example message.delivered,
+        # message.received or contact.opt_out. Absent on events that have no subtype, so
+        # treat it as optional.
         event: nil,
-        # The event family, for example message or templates. Route on this first, then on
-        # event for the specific change.
+        # The event family, for example message, templates or contact. Route on this
+        # first, then on event for the specific change.
         field: nil,
         # Body of an outbound message lifecycle event. Delivered once per status change,
         # so a single message produces several of these as it moves toward a terminal
         # status.
         payload: nil,
+        # The event-specific body.
+        request_id: nil,
         # When Sent emitted the event, in UTC (yyyy-MM-ddTHH:mm:ssZ). This is the emission
         # time, not the time the underlying change happened. Use the timestamp inside the
         # payload for the latter.
@@ -75,6 +82,7 @@ module Sentdm
             event: T.nilable(String),
             field: String,
             payload: T.nilable(Sentdm::MessageEventPayload),
+            request_id: T.nilable(String),
             timestamp: String
           }
         )
