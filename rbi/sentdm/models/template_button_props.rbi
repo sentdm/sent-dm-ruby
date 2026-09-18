@@ -23,6 +23,17 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :quick_reply_type
 
+      # The button's label. Required for every button type, and capped at
+      # TemplateContentLimits.MaxButtonTextLength (25) characters.
+      #
+      # Meta accepts only static text here, so a label is refused when it contains a
+      # {{...}} variable placeholder, a newline, an emoji, or WhatsApp formatting markup
+      # (\*, \_, ~) — enforced by ApplyButtonLabelContentRules in
+      # TemplateButtonValidator. Meta reports all four as one error: "Buttons can't have
+      # any variables, newlines, emojis, or formatting characters."
+      #
+      # AUTHENTICATION OTP buttons are the exception: Meta auto-localizes their label
+      # from the template language, and the converter drops whatever text was sent.
       sig { returns(String) }
       attr_accessor :text
 
@@ -73,6 +84,17 @@ module Sentdm
         offer_code:,
         phone_number:,
         quick_reply_type:,
+        # The button's label. Required for every button type, and capped at
+        # TemplateContentLimits.MaxButtonTextLength (25) characters.
+        #
+        # Meta accepts only static text here, so a label is refused when it contains a
+        # {{...}} variable placeholder, a newline, an emoji, or WhatsApp formatting markup
+        # (\*, \_, ~) — enforced by ApplyButtonLabelContentRules in
+        # TemplateButtonValidator. Meta reports all four as one error: "Buttons can't have
+        # any variables, newlines, emojis, or formatting characters."
+        #
+        # AUTHENTICATION OTP buttons are the exception: Meta auto-localizes their label
+        # from the template language, and the converter drops whatever text was sent.
         text:,
         url:,
         url_type:,

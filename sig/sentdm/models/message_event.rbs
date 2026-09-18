@@ -5,6 +5,7 @@ module Sentdm
         event: String?,
         field: String,
         payload: Sentdm::MessageEventPayload?,
+        request_id: String?,
         timestamp: String
       }
 
@@ -17,6 +18,8 @@ module Sentdm
 
       attr_accessor payload: Sentdm::MessageEventPayload?
 
+      attr_accessor request_id: String?
+
       attr_reader timestamp: String?
 
       def timestamp=: (String) -> String
@@ -25,6 +28,7 @@ module Sentdm
         ?event: String?,
         ?field: String,
         ?payload: Sentdm::MessageEventPayload?,
+        ?request_id: String?,
         ?timestamp: String
       ) -> void
 
@@ -32,6 +36,7 @@ module Sentdm
         event: String?,
         field: String,
         payload: Sentdm::MessageEventPayload?,
+        request_id: String?,
         timestamp: String
       }
     end
