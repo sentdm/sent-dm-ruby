@@ -84,6 +84,8 @@ module Sentdm
         Sentdm::MessageEvent
         | Sentdm::InboundMessageEvent
         | Sentdm::TemplateEvent
+        | Sentdm::ChannelEvent
+        | Sentdm::ContactEvent
 
       module EventData
         extend Sentdm::Internal::Type::Union

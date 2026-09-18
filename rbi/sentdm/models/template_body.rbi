@@ -6,8 +6,7 @@ module Sentdm
       OrHash =
         T.type_alias { T.any(Sentdm::TemplateBody, Sentdm::Internal::AnyHash) }
 
-      # Content that will be used for all channels (SMS and WhatsApp) unless
-      # channel-specific content is provided
+      # The shared body, used for every channel. One half of the choice described above.
       sig { returns(T.nilable(Sentdm::TemplateBodyContent)) }
       attr_reader :multi_channel
 
@@ -18,22 +17,23 @@ module Sentdm
       end
       attr_writer :multi_channel
 
-      # RCS-specific content that overrides multi-channel content for RCS messages
+      # RCS-specific copy that overrides the chosen strategy for RCS only. The one true
+      # override: optional on top of either strategy, but it cannot be the only body
+      # present. Its length cap is the higher one described on Template.
       sig { returns(T.nilable(Sentdm::TemplateBodyContent)) }
       attr_reader :rcs
 
       sig { params(rcs: T.nilable(Sentdm::TemplateBodyContent::OrHash)).void }
       attr_writer :rcs
 
-      # SMS-specific content that overrides multi-channel content for SMS messages
+      # The SMS body. It does not override multiChannel, it replaces it.
       sig { returns(T.nilable(Sentdm::TemplateBodyContent)) }
       attr_reader :sms
 
       sig { params(sms: T.nilable(Sentdm::TemplateBodyContent::OrHash)).void }
       attr_writer :sms
 
-      # WhatsApp-specific content that overrides multi-channel content for WhatsApp
-      # messages
+      # The WhatsApp body. It does not override multiChannel, it replaces it.
       sig { returns(T.nilable(Sentdm::TemplateBodyContent)) }
       attr_reader :whatsapp
 
@@ -42,7 +42,16 @@ module Sentdm
       end
       attr_writer :whatsapp
 
-      # Body section of a message template with channel-specific content
+      # Body section of a message template.
+      #
+      # A body picks one of two authoring strategies, and mixing them is refused
+      # (TemplateDefinitionValidator.HaveValidChannelConfiguration): a shared
+      # multiChannel body on its own, or an explicit sms + whatsapp pair, both present.
+      #
+      # multiChannel together with sms or whatsapp is rejected, and so is sms or
+      # whatsapp on its own — every template is expected to be deliverable on every
+      # channel. rcs is the one true override: it may accompany either strategy to vary
+      # the copy, but cannot stand alone.
       sig do
         params(
           multi_channel: T.nilable(Sentdm::TemplateBodyContent::OrHash),
@@ -52,15 +61,15 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # Content that will be used for all channels (SMS and WhatsApp) unless
-        # channel-specific content is provided
+        # The shared body, used for every channel. One half of the choice described above.
         multi_channel: nil,
-        # RCS-specific content that overrides multi-channel content for RCS messages
+        # RCS-specific copy that overrides the chosen strategy for RCS only. The one true
+        # override: optional on top of either strategy, but it cannot be the only body
+        # present. Its length cap is the higher one described on Template.
         rcs: nil,
-        # SMS-specific content that overrides multi-channel content for SMS messages
+        # The SMS body. It does not override multiChannel, it replaces it.
         sms: nil,
-        # WhatsApp-specific content that overrides multi-channel content for WhatsApp
-        # messages
+        # The WhatsApp body. It does not override multiChannel, it replaces it.
         whatsapp: nil
       )
       end

@@ -31,11 +31,11 @@ module Sentdm
 
       # @!attribute event_data
       #   The exact event body that was delivered, or attempted, for this record. One of
-      #   the three webhook envelopes: a message status change, an inbound message, or a
-      #   template status change. Read field and event to tell which, the same way your
-      #   endpoint does.
+      #   the four webhook envelopes: a message status change, an inbound message, a
+      #   template status change, or a contact consent signal. Read field and event to
+      #   tell which, the same way your endpoint does.
       #
-      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, nil]
+      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, nil]
       optional :event_data, union: -> { Sentdm::Models::WebhookListEventsResponse::EventData }
 
       # @!attribute event_type
@@ -77,7 +77,7 @@ module Sentdm
       #
       #   @param error_message [String, nil]
       #
-      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent] The exact event body that was delivered, or attempted, for this record. One of t
+      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent] The exact event body that was delivered, or attempted, for this record. One of t
       #
       #   @param event_type [String]
       #
@@ -90,9 +90,9 @@ module Sentdm
       #   @param response_body [String, nil]
 
       # The exact event body that was delivered, or attempted, for this record. One of
-      # the three webhook envelopes: a message status change, an inbound message, or a
-      # template status change. Read field and event to tell which, the same way your
-      # endpoint does.
+      # the four webhook envelopes: a message status change, an inbound message, a
+      # template status change, or a contact consent signal. Read field and event to
+      # tell which, the same way your endpoint does.
       #
       # @see Sentdm::Models::WebhookListEventsResponse#event_data
       module EventData
@@ -110,8 +110,16 @@ module Sentdm
         # varies only in Payload.
         variant -> { Sentdm::TemplateEvent }
 
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::ChannelEvent }
+
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::ContactEvent }
+
         # @!method self.variants
-        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent)]
+        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent)]
       end
     end
   end
