@@ -39,9 +39,9 @@ module Sentdm
       attr_accessor :error_message
 
       # The exact event body that was delivered, or attempted, for this record. One of
-      # the three webhook envelopes: a message status change, an inbound message, or a
-      # template status change. Read field and event to tell which, the same way your
-      # endpoint does.
+      # the four webhook envelopes: a message status change, an inbound message, a
+      # template status change, or a contact consent signal. Read field and event to
+      # tell which, the same way your endpoint does.
       sig do
         returns(
           T.nilable(
@@ -57,7 +57,9 @@ module Sentdm
             T.any(
               Sentdm::MessageEvent::OrHash,
               Sentdm::InboundMessageEvent::OrHash,
-              Sentdm::TemplateEvent::OrHash
+              Sentdm::TemplateEvent::OrHash,
+              Sentdm::ChannelEvent::OrHash,
+              Sentdm::ContactEvent::OrHash
             )
         ).void
       end
@@ -92,7 +94,9 @@ module Sentdm
             T.any(
               Sentdm::MessageEvent::OrHash,
               Sentdm::InboundMessageEvent::OrHash,
-              Sentdm::TemplateEvent::OrHash
+              Sentdm::TemplateEvent::OrHash,
+              Sentdm::ChannelEvent::OrHash,
+              Sentdm::ContactEvent::OrHash
             ),
           event_type: String,
           http_status_code: T.nilable(Integer),
@@ -108,9 +112,9 @@ module Sentdm
         delivery_status: nil,
         error_message: nil,
         # The exact event body that was delivered, or attempted, for this record. One of
-        # the three webhook envelopes: a message status change, an inbound message, or a
-        # template status change. Read field and event to tell which, the same way your
-        # endpoint does.
+        # the four webhook envelopes: a message status change, an inbound message, a
+        # template status change, or a contact consent signal. Read field and event to
+        # tell which, the same way your endpoint does.
         event_data: nil,
         event_type: nil,
         http_status_code: nil,
@@ -142,9 +146,9 @@ module Sentdm
       end
 
       # The exact event body that was delivered, or attempted, for this record. One of
-      # the three webhook envelopes: a message status change, an inbound message, or a
-      # template status change. Read field and event to tell which, the same way your
-      # endpoint does.
+      # the four webhook envelopes: a message status change, an inbound message, a
+      # template status change, or a contact consent signal. Read field and event to
+      # tell which, the same way your endpoint does.
       module EventData
         extend Sentdm::Internal::Type::Union
 
@@ -153,7 +157,9 @@ module Sentdm
             T.any(
               Sentdm::MessageEvent,
               Sentdm::InboundMessageEvent,
-              Sentdm::TemplateEvent
+              Sentdm::TemplateEvent,
+              Sentdm::ChannelEvent,
+              Sentdm::ContactEvent
             )
           end
 

@@ -27,9 +27,17 @@ module Sentdm
 
   class BrandsBrandData = Sentdm::Models::BrandsBrandData
 
+  class ChannelEvent = Sentdm::Models::ChannelEvent
+
+  class ChannelEventPayload = Sentdm::Models::ChannelEventPayload
+
   class ContactCreateParams = Sentdm::Models::ContactCreateParams
 
   class ContactDeleteParams = Sentdm::Models::ContactDeleteParams
+
+  class ContactEvent = Sentdm::Models::ContactEvent
+
+  class ContactEventPayload = Sentdm::Models::ContactEventPayload
 
   class ContactListParams = Sentdm::Models::ContactListParams
 

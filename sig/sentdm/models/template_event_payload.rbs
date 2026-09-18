@@ -5,8 +5,9 @@ module Sentdm
         status: String,
         whatsapp_template_id: String,
         account_id: String,
+        auto_reply_action: String?,
         category: String,
-        channel: String,
+        channel: String?,
         language: String,
         reason: String?,
         template_id: String,
@@ -22,13 +23,13 @@ module Sentdm
 
       def account_id=: (String) -> String
 
+      attr_accessor auto_reply_action: String?
+
       attr_reader category: String?
 
       def category=: (String) -> String
 
-      attr_reader channel: String?
-
-      def channel=: (String) -> String
+      attr_accessor channel: String?
 
       attr_reader language: String?
 
@@ -48,8 +49,9 @@ module Sentdm
         status: String,
         whatsapp_template_id: String,
         ?account_id: String,
+        ?auto_reply_action: String?,
         ?category: String,
-        ?channel: String,
+        ?channel: String?,
         ?language: String,
         ?reason: String?,
         ?template_id: String,
@@ -60,8 +62,9 @@ module Sentdm
         status: String,
         whatsapp_template_id: String,
         account_id: String,
+        auto_reply_action: String?,
         category: String,
-        channel: String,
+        channel: String?,
         language: String,
         reason: String?,
         template_id: String,
