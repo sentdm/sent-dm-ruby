@@ -1,0 +1,63 @@
+module Sentdm
+  module Models
+    type contact_event_payload =
+      {
+        opt_out: bool,
+        source: String,
+        account_id: String,
+        channel: String,
+        contact_id: String,
+        message_id: String?,
+        phone_number: String,
+        text: String?
+      }
+
+    class ContactEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor opt_out: bool
+
+      attr_accessor source: String
+
+      attr_reader account_id: String?
+
+      def account_id=: (String) -> String
+
+      attr_reader channel: String?
+
+      def channel=: (String) -> String
+
+      attr_reader contact_id: String?
+
+      def contact_id=: (String) -> String
+
+      attr_accessor message_id: String?
+
+      attr_reader phone_number: String?
+
+      def phone_number=: (String) -> String
+
+      attr_accessor text: String?
+
+      def initialize: (
+        opt_out: bool,
+        source: String,
+        ?account_id: String,
+        ?channel: String,
+        ?contact_id: String,
+        ?message_id: String?,
+        ?phone_number: String,
+        ?text: String?
+      ) -> void
+
+      def to_hash: -> {
+        opt_out: bool,
+        source: String,
+        account_id: String,
+        channel: String,
+        contact_id: String,
+        message_id: String?,
+        phone_number: String,
+        text: String?
+      }
+    end
+  end
+end
