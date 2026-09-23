@@ -54,6 +54,17 @@ module Sentdm
       sig { params(outbound_number: String).void }
       attr_writer :outbound_number
 
+      # message.scheduled only: why the message is held, either because you scheduled it
+      # or because the recipient is inside a protected quiet-hours window. Omitted on
+      # every other event.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :schedule_reason
+
+      # message.scheduled only: when the held message will be released for delivery, in
+      # UTC (yyyy-MM-ddTHH:mm:ssZ). Omitted on every other event.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :scheduled_at
+
       # The template the message was sent from, when it was sent from one.
       sig { returns(T.nilable(String)) }
       attr_accessor :template_id
@@ -82,6 +93,8 @@ module Sentdm
           channel: String,
           message_id: String,
           outbound_number: String,
+          schedule_reason: T.nilable(String),
+          scheduled_at: T.nilable(String),
           template_id: T.nilable(String),
           template_name: T.nilable(String),
           updated_at: String
@@ -108,6 +121,13 @@ module Sentdm
         message_id: nil,
         # The recipient's number in E.164 format.
         outbound_number: nil,
+        # message.scheduled only: why the message is held, either because you scheduled it
+        # or because the recipient is inside a protected quiet-hours window. Omitted on
+        # every other event.
+        schedule_reason: nil,
+        # message.scheduled only: when the held message will be released for delivery, in
+        # UTC (yyyy-MM-ddTHH:mm:ssZ). Omitted on every other event.
+        scheduled_at: nil,
         # The template the message was sent from, when it was sent from one.
         template_id: nil,
         # Name of the template the message was sent from. Omitted when the message wasn't
@@ -128,6 +148,8 @@ module Sentdm
             channel: String,
             message_id: String,
             outbound_number: String,
+            schedule_reason: T.nilable(String),
+            scheduled_at: T.nilable(String),
             template_id: T.nilable(String),
             template_name: T.nilable(String),
             updated_at: String

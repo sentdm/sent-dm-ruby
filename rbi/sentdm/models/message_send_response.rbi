@@ -17,7 +17,9 @@ module Sentdm
       # its result; this is what a caller sees, and the mapping between them is a
       # decision the endpoint makes.
       #
-      # The wire is unchanged by the move: same names, same values.
+      # The shape of an immediate send: it never has a scheduled_at key. A send that
+      # carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
+      # which of the two to answer with. From always returns this type.
       sig { returns(T.nilable(Sentdm::Models::MessageSendResponse::Data)) }
       attr_reader :data
 
@@ -68,7 +70,9 @@ module Sentdm
         # its result; this is what a caller sees, and the mapping between them is a
         # decision the endpoint makes.
         #
-        # The wire is unchanged by the move: same names, same values.
+        # The shape of an immediate send: it never has a scheduled_at key. A send that
+        # carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
+        # which of the two to answer with. From always returns this type.
         data: nil,
         # Error information
         error: nil,
@@ -120,7 +124,9 @@ module Sentdm
         end
         attr_writer :recipients
 
-        # Overall status — QUEUED once the batch is accepted for delivery.
+        # QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED
+        # here too; each message moves to SCHEDULED once it is held, as GET
+        # /v3/messages/{id} and the message.scheduled webhook report.
         sig { returns(T.nilable(String)) }
         attr_reader :status
 
@@ -148,7 +154,9 @@ module Sentdm
         # its result; this is what a caller sees, and the mapping between them is a
         # decision the endpoint makes.
         #
-        # The wire is unchanged by the move: same names, same values.
+        # The shape of an immediate send: it never has a scheduled_at key. A send that
+        # carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
+        # which of the two to answer with. From always returns this type.
         sig do
           params(
             recipients:
@@ -162,7 +170,9 @@ module Sentdm
         end
         def self.new(
           recipients: nil,
-          # Overall status — QUEUED once the batch is accepted for delivery.
+          # QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED
+          # here too; each message moves to SCHEDULED once it is held, as GET
+          # /v3/messages/{id} and the message.scheduled webhook report.
           status: nil,
           template_id: nil,
           template_name: nil

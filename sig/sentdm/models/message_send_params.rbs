@@ -3,7 +3,10 @@ module Sentdm
     type message_send_params =
       {
         channel: ::Array[String]?,
+        media_urls: ::Array[String]?,
         sandbox: bool,
+        scheduled_at: Time?,
+        subject: String?,
         template: Sentdm::MessageSendParams::Template?,
         text: String?,
         to: ::Array[String],
@@ -18,9 +21,15 @@ module Sentdm
 
       attr_accessor channel: ::Array[String]?
 
+      attr_accessor media_urls: ::Array[String]?
+
       attr_reader sandbox: bool?
 
       def sandbox=: (bool) -> bool
+
+      attr_accessor scheduled_at: Time?
+
+      attr_accessor subject: String?
 
       attr_accessor template: Sentdm::MessageSendParams::Template?
 
@@ -40,7 +49,10 @@ module Sentdm
 
       def initialize: (
         ?channel: ::Array[String]?,
+        ?media_urls: ::Array[String]?,
         ?sandbox: bool,
+        ?scheduled_at: Time?,
+        ?subject: String?,
         ?template: Sentdm::MessageSendParams::Template?,
         ?text: String?,
         ?to: ::Array[String],
@@ -51,7 +63,10 @@ module Sentdm
 
       def to_hash: -> {
         channel: ::Array[String]?,
+        media_urls: ::Array[String]?,
         sandbox: bool,
+        scheduled_at: Time?,
+        subject: String?,
         template: Sentdm::MessageSendParams::Template?,
         text: String?,
         to: ::Array[String],

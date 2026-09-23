@@ -9,8 +9,9 @@ module Sentdm
         end
 
       # Whether the contact is opted out after this signal — the state to write to your
-      # own record. Same meaning as opt_out on the contact resource. On contact.help
-      # this reports the contact's existing state, which help does not change.
+      # own record. Same meaning as opt_out on the contact resource. On contact.help and
+      # contact.custom_keyword this reports the contact's existing state, which neither
+      # changes.
       #
       # Two signals from the same contact can arrive out of order, because each one is
       # queued on its own rather than against the contact. Compare the envelope's
@@ -35,6 +36,16 @@ module Sentdm
       sig { params(account_id: String).void }
       attr_writer :account_id
 
+      # The RCS agent the signal reached, when it reached one.
+      #
+      # Omitted entirely on channels that have no agent, rather than sent as null — an
+      # SMS or WhatsApp payload does not carry this key at all. On RCS it is the
+      # counterpart to To: a contact reaches an agent rather than a number, so exactly
+      # one of the two is populated and never both. If you run more than one agent, this
+      # is what tells you which of them the contact acted on.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_id
+
       # The channel the signal arrived on, for example sms or whatsapp.
       sig { returns(T.nilable(String)) }
       attr_reader :channel
@@ -43,13 +54,22 @@ module Sentdm
       attr_writer :channel
 
       # The contact who raised the signal. Always populated, including for contact.help
-      # from a number you have not messaged before — the contact is created if it does
-      # not exist yet, so this identifier is always resolvable against the contacts API.
+      # or contact.custom_keyword from a number you have not messaged before — the
+      # contact is created if it does not exist yet, so this identifier is always
+      # resolvable against the contacts API.
       sig { returns(T.nilable(String)) }
       attr_reader :contact_id
 
       sig { params(contact_id: String).void }
       attr_writer :contact_id
+
+      # The contact's number, in E.164 format with the leading + — who raised the
+      # signal. The same party message.received publishes as inbound_number.
+      sig { returns(T.nilable(String)) }
+      attr_reader :from
+
+      sig { params(from: String).void }
+      attr_writer :from
 
       # The inbound message that carried the signal, matching message_id on the
       # corresponding message.received event so the two can be joined.
@@ -62,13 +82,19 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :message_id
 
-      # The contact's number in E.164 format. Same value as phone_number on the contact
-      # resource.
+      # The auto-reply template whose keyword the contact matched, joinable against the
+      # templates API.
+      #
+      # This is what identifies which signal arrived on contact.custom_keyword: every
+      # custom template reports the same event name, so the event alone cannot tell your
+      # booking keyword from your opening-hours one. One template holds as many keywords
+      # as you configured, so this is steadier to switch on than text.
+      #
+      # Populated on the compliance sub-types too, where it names the template that
+      # replied. Sent as null when no template was involved — a network-reported opt-out
+      # matches no keyword. The field is always present, so read it and check for null.
       sig { returns(T.nilable(String)) }
-      attr_reader :phone_number
-
-      sig { params(phone_number: String).void }
-      attr_writer :phone_number
+      attr_accessor :template_id
 
       # The text the contact sent, for example STOP or UNSUBSCRIBE. Sent as null when
       # the signal did not arrive as text. The field is always present, so read it and
@@ -76,33 +102,60 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :text
 
-      # Body of a contact.opt_in, contact.opt_out or contact.help event. Delivered when
-      # a contact signals a consent change or asks for help.
+      # The number of yours that received the signal, in E.164 format with the leading
+      # +. Tells a multi-number account which of its senders the contact acted on, which
+      # nothing else on this payload answers.
+      #
+      # This is your number, not the contact's. That is the opposite of what to means on
+      # POST /v3/messages, where it is the list of recipients you are sending to. Reply
+      # to From, not to this field, or the message goes back to yourself.
+      #
+      # Sent as null when the signal did not arrive at a number of yours — an RCS signal
+      # terminates at an agent rather than a number, and a provider-reported opt-out may
+      # name no receiving number at all. The field is always present, so read it and
+      # check for null rather than checking whether the key exists.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :to
+
+      # Body of a contact.opt_in, contact.opt_out, contact.help or
+      # contact.custom_keyword event. Delivered when a contact signals a consent change,
+      # asks for help, or sends one of your own auto-reply keywords.
       #
       # These events state the signal outright, so you do not have to recognise keywords
       # in the text of a message.received event. They also cover cases that produce no
       # inbound message at all, such as a network handling an opt-out on your behalf.
       #
-      # Fields are ordered identity → resulting state → provenance → join key. Nothing
-      # here restates the envelope: which of the three signals occurred is the
-      # envelope's event, and when it was emitted is its timestamp. Retries carry the
-      # same X-Webhook-Event-ID header, which is what to deduplicate on.
+      # Two of the four change consent and two do not: contact.help and
+      # contact.custom_keyword report the state the contact already had. Read opt_out
+      # for the state and the envelope's event for what happened, rather than inferring
+      # one from the other.
+      #
+      # Fields are ordered identity → resulting state → provenance → join keys. The two
+      # parties are from and to. Note that the message family has not moved to those
+      # names yet — message.received still calls the same two parties inbound_number and
+      # outbound_number. Nothing here restates the envelope: which signal occurred is
+      # the envelope's event, and when it was emitted is its timestamp. Retries carry
+      # the same X-Webhook-Event-ID header, which is what to deduplicate on.
       sig do
         params(
           opt_out: T::Boolean,
           source: String,
           account_id: String,
+          agent_id: T.nilable(String),
           channel: String,
           contact_id: String,
+          from: String,
           message_id: T.nilable(String),
-          phone_number: String,
-          text: T.nilable(String)
+          template_id: T.nilable(String),
+          text: T.nilable(String),
+          to: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
         # Whether the contact is opted out after this signal — the state to write to your
-        # own record. Same meaning as opt_out on the contact resource. On contact.help
-        # this reports the contact's existing state, which help does not change.
+        # own record. Same meaning as opt_out on the contact resource. On contact.help and
+        # contact.custom_keyword this reports the contact's existing state, which neither
+        # changes.
         #
         # Two signals from the same contact can arrive out of order, because each one is
         # queued on its own rather than against the contact. Compare the envelope's
@@ -118,12 +171,24 @@ module Sentdm
         # The account the contact belongs to. Present so one endpoint can serve several
         # accounts.
         account_id: nil,
+        # The RCS agent the signal reached, when it reached one.
+        #
+        # Omitted entirely on channels that have no agent, rather than sent as null — an
+        # SMS or WhatsApp payload does not carry this key at all. On RCS it is the
+        # counterpart to To: a contact reaches an agent rather than a number, so exactly
+        # one of the two is populated and never both. If you run more than one agent, this
+        # is what tells you which of them the contact acted on.
+        agent_id: nil,
         # The channel the signal arrived on, for example sms or whatsapp.
         channel: nil,
         # The contact who raised the signal. Always populated, including for contact.help
-        # from a number you have not messaged before — the contact is created if it does
-        # not exist yet, so this identifier is always resolvable against the contacts API.
+        # or contact.custom_keyword from a number you have not messaged before — the
+        # contact is created if it does not exist yet, so this identifier is always
+        # resolvable against the contacts API.
         contact_id: nil,
+        # The contact's number, in E.164 format with the leading + — who raised the
+        # signal. The same party message.received publishes as inbound_number.
+        from: nil,
         # The inbound message that carried the signal, matching message_id on the
         # corresponding message.received event so the two can be joined.
         #
@@ -133,13 +198,35 @@ module Sentdm
         # number. The field is always present, so read it and check for null rather than
         # checking whether the key exists.
         message_id: nil,
-        # The contact's number in E.164 format. Same value as phone_number on the contact
-        # resource.
-        phone_number: nil,
+        # The auto-reply template whose keyword the contact matched, joinable against the
+        # templates API.
+        #
+        # This is what identifies which signal arrived on contact.custom_keyword: every
+        # custom template reports the same event name, so the event alone cannot tell your
+        # booking keyword from your opening-hours one. One template holds as many keywords
+        # as you configured, so this is steadier to switch on than text.
+        #
+        # Populated on the compliance sub-types too, where it names the template that
+        # replied. Sent as null when no template was involved — a network-reported opt-out
+        # matches no keyword. The field is always present, so read it and check for null.
+        template_id: nil,
         # The text the contact sent, for example STOP or UNSUBSCRIBE. Sent as null when
         # the signal did not arrive as text. The field is always present, so read it and
         # check for null rather than checking whether the key exists.
-        text: nil
+        text: nil,
+        # The number of yours that received the signal, in E.164 format with the leading
+        # +. Tells a multi-number account which of its senders the contact acted on, which
+        # nothing else on this payload answers.
+        #
+        # This is your number, not the contact's. That is the opposite of what to means on
+        # POST /v3/messages, where it is the list of recipients you are sending to. Reply
+        # to From, not to this field, or the message goes back to yourself.
+        #
+        # Sent as null when the signal did not arrive at a number of yours — an RCS signal
+        # terminates at an agent rather than a number, and a provider-reported opt-out may
+        # name no receiving number at all. The field is always present, so read it and
+        # check for null rather than checking whether the key exists.
+        to: nil
       )
       end
 
@@ -149,11 +236,14 @@ module Sentdm
             opt_out: T::Boolean,
             source: String,
             account_id: String,
+            agent_id: T.nilable(String),
             channel: String,
             contact_id: String,
+            from: String,
             message_id: T.nilable(String),
-            phone_number: String,
-            text: T.nilable(String)
+            template_id: T.nilable(String),
+            text: T.nilable(String),
+            to: T.nilable(String)
           }
         )
       end

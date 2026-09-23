@@ -14,7 +14,9 @@ module Sentdm
       #   its result; this is what a caller sees, and the mapping between them is a
       #   decision the endpoint makes.
       #
-      #   The wire is unchanged by the move: same names, same values.
+      #   The shape of an immediate send: it never has a scheduled_at key. A send that
+      #   carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
+      #   which of the two to answer with. From always returns this type.
       #
       #   @return [Sentdm::Models::MessageSendResponse::Data, nil]
       optional :data, -> { Sentdm::Models::MessageSendResponse::Data }, nil?: true
@@ -60,7 +62,9 @@ module Sentdm
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::MessageSendResponse::Data::Recipient] }
 
         # @!attribute status
-        #   Overall status — QUEUED once the batch is accepted for delivery.
+        #   QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED
+        #   here too; each message moves to SCHEDULED once it is held, as GET
+        #   /v3/messages/{id} and the message.scheduled webhook report.
         #
         #   @return [String, nil]
         optional :status, String
@@ -76,6 +80,9 @@ module Sentdm
         optional :template_name, String
 
         # @!method initialize(recipients: nil, status: nil, template_id: nil, template_name: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Sentdm::Models::MessageSendResponse::Data} for more details.
+        #
         #   The result of a multi-recipient send.
         #
         #   Declared here rather than in the service layer. POST /v3/messages used to
@@ -85,11 +92,13 @@ module Sentdm
         #   its result; this is what a caller sees, and the mapping between them is a
         #   decision the endpoint makes.
         #
-        #   The wire is unchanged by the move: same names, same values.
+        #   The shape of an immediate send: it never has a scheduled_at key. A send that
+        #   carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
+        #   which of the two to answer with. From always returns this type.
         #
         #   @param recipients [Array<Sentdm::Models::MessageSendResponse::Data::Recipient>]
         #
-        #   @param status [String] Overall status — QUEUED once the batch is accepted for delivery.
+        #   @param status [String] QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED
         #
         #   @param template_id [String]
         #

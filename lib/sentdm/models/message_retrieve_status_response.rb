@@ -5,7 +5,12 @@ module Sentdm
     # @see Sentdm::Resources::Messages#retrieve_status
     class MessageRetrieveStatusResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
-      #   Message response for v3 API — same shape as v2 with snake_case JSON conventions
+      #   Message response for v3 API — same shape as v2 with snake_case JSON conventions.
+      #
+      #   The shape of a message that was sent immediately: it never has a scheduled_at
+      #   key. A message that is or was held for a later instant is a
+      #   ScheduledMessageResponse, and the endpoint decides which of the two to answer
+      #   with. From always returns this type.
       #
       #   @return [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil]
       optional :data, -> { Sentdm::Models::MessageRetrieveStatusResponse::Data }, nil?: true
@@ -29,9 +34,12 @@ module Sentdm
       optional :success, Sentdm::Internal::Type::Boolean
 
       # @!method initialize(data: nil, error: nil, meta: nil, success: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::MessageRetrieveStatusResponse} for more details.
+      #
       #   Standard API response envelope for all v3 endpoints
       #
-      #   @param data [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil] Message response for v3 API — same shape as v2 with snake_case JSON conventions
+      #   @param data [Sentdm::Models::MessageRetrieveStatusResponse::Data, nil] Message response for v3 API — same shape as v2 with snake_case JSON conventions.
       #
       #   @param error [Sentdm::Models::ErrorDetail, nil] Error information
       #
@@ -85,7 +93,14 @@ module Sentdm
 
         # @!attribute message_body
         #   Structured message body format for database storage. Preserves channel-specific
-        #   components (header, body, footer, buttons).
+        #   components (header, header media, body, footer, buttons, MMS subject and media).
+        #
+        #   Persisted as the messageBody jsonb column on Messages. Every write path goes
+        #   through MessageUtils.MessageBodyJsonOptions, which writes nulls, so the envelope
+        #   shape is stable regardless of channel or status. Anything that rebuilds this
+        #   object field by field — the four IMessageBodyStrategy implementations and
+        #   MessageUtils.BuildSegmentBody — has to carry every member, or that member is
+        #   silently dropped on whichever path forgot it.
         #
         #   @return [Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody, nil]
         optional :message_body,
@@ -136,7 +151,12 @@ module Sentdm
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MessageRetrieveStatusResponse::Data} for more details.
         #
-        #   Message response for v3 API — same shape as v2 with snake_case JSON conventions
+        #   Message response for v3 API — same shape as v2 with snake_case JSON conventions.
+        #
+        #   The shape of a message that was sent immediately: it never has a scheduled_at
+        #   key. A message that is or was held for a later instant is a
+        #   ScheduledMessageResponse, and the endpoint decides which of the two to answer
+        #   with. From always returns this type.
         #
         #   @param id [String]
         #
@@ -220,14 +240,63 @@ module Sentdm
           #   @return [String, nil]
           optional :header, String, nil?: true
 
-          # @!method initialize(buttons: nil, content: nil, footer: nil, header: nil)
+          # @!attribute header_media
+          #   The media asset that rode a message's header, recorded as sent.
+          #
+          #   @return [Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia, nil]
+          optional :header_media,
+                   -> { Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia },
+                   api_name: :headerMedia,
+                   nil?: true
+
+          # @!attribute media
+          #   MMS attachments, as the publicly fetchable URLs handed to the carrier. Null on
+          #   every other channel.
+          #
+          #   Persisted rather than derived because a resend and a curfew release rebuild the
+          #   send from the stored row — MessageReplayCommandBuilder reads templateId and
+          #   templateVariables and nothing else — so media that lives only on the original
+          #   request would silently turn a replayed MMS into a text message.
+          #
+          #   @return [Array<Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Media>, nil]
+          optional :media,
+                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Media] },
+                   nil?: true
+
+          # @!attribute subject
+          #   MMS subject line. Null on every other channel.
+          #
+          #   @return [String, nil]
+          optional :subject, String, nil?: true
+
+          # @!method initialize(buttons: nil, content: nil, footer: nil, header: nil, header_media: nil, media: nil, subject: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody} for more
+          #   details.
+          #
           #   Structured message body format for database storage. Preserves channel-specific
-          #   components (header, body, footer, buttons).
+          #   components (header, header media, body, footer, buttons, MMS subject and media).
+          #
+          #   Persisted as the messageBody jsonb column on Messages. Every write path goes
+          #   through MessageUtils.MessageBodyJsonOptions, which writes nulls, so the envelope
+          #   shape is stable regardless of channel or status. Anything that rebuilds this
+          #   object field by field — the four IMessageBodyStrategy implementations and
+          #   MessageUtils.BuildSegmentBody — has to carry every member, or that member is
+          #   silently dropped on whichever path forgot it.
           #
           #   @param buttons [Array<Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Button>, nil]
+          #
           #   @param content [String]
+          #
           #   @param footer [String, nil]
+          #
           #   @param header [String, nil]
+          #
+          #   @param header_media [Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia, nil] The media asset that rode a message's header, recorded as sent.
+          #
+          #   @param media [Array<Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Media>, nil] MMS attachments, as the publicly fetchable URLs handed to the carrier. Null on e
+          #
+          #   @param subject [String, nil] MMS subject line. Null on every other channel.
 
           class Button < Sentdm::Internal::Type::BaseModel
             # @!attribute postback_data
@@ -255,6 +324,64 @@ module Sentdm
             #   @param text [String, nil]
             #   @param type [String]
             #   @param value [String]
+          end
+
+          # @see Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody#header_media
+          class HeaderMedia < Sentdm::Internal::Type::BaseModel
+            # @!attribute type
+            #   "image", "video" or "document" — taken from the header's media variable.
+            #
+            #   @return [String, nil]
+            optional :type, String
+
+            # @!attribute url
+            #   The https URL the caller supplied for this send. Never the template's stored
+            #   props.sample, which is Meta's expiring header_handle rather than what was
+            #   delivered.
+            #
+            #   @return [String, nil]
+            optional :url, String
+
+            # @!method initialize(type: nil, url: nil)
+            #   Some parameter documentations has been truncated, see
+            #   {Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::HeaderMedia}
+            #   for more details.
+            #
+            #   The media asset that rode a message's header, recorded as sent.
+            #
+            #   @param type [String] "image", "video" or "document" — taken from the header's media variable.
+            #
+            #   @param url [String] The https URL the caller supplied for this send. Never the template's stored
+          end
+
+          class Media < Sentdm::Internal::Type::BaseModel
+            # @!attribute media_type
+            #   One of Constants.MmsMediaTypes when known. Advisory — the carrier reads the
+            #   fetched object's Content-Type, not this.
+            #
+            #   @return [String, nil]
+            optional :media_type, String, api_name: :mediaType, nil?: true
+
+            # @!attribute url
+            #
+            #   @return [String, nil]
+            optional :url, String
+
+            # @!method initialize(media_type: nil, url: nil)
+            #   Some parameter documentations has been truncated, see
+            #   {Sentdm::Models::MessageRetrieveStatusResponse::Data::MessageBody::Media} for
+            #   more details.
+            #
+            #   One attachment on a message: a customer-supplied public URL handed to the
+            #   carrier as-is.
+            #
+            #                A URL and nothing else. sent.dm never takes custody of MMS media — the customer hosts it and we
+            #                pass the link through at send time — so there is no storage key, size or expiry to record. If we ever
+            #                do host attachments, that belongs with the change that introduces the hosting, not here.
+            #
+            #   @param media_type [String, nil] One of Constants.MmsMediaTypes when known. Advisory — the carrier reads the
+            #
+            #   @param url [String]
           end
         end
       end

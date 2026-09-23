@@ -15,7 +15,10 @@ module Sentdm
 
       def send_: (
         ?channel: ::Array[String]?,
+        ?media_urls: ::Array[String]?,
         ?sandbox: bool,
+        ?scheduled_at: Time?,
+        ?subject: String?,
         ?template: Sentdm::MessageSendParams::Template?,
         ?text: String?,
         ?to: ::Array[String],

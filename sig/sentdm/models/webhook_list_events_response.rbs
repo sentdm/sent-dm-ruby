@@ -86,9 +86,154 @@ module Sentdm
         | Sentdm::TemplateEvent
         | Sentdm::ChannelEvent
         | Sentdm::ContactEvent
+        | Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload
 
       module EventData
         extend Sentdm::Internal::Type::Union
+
+        type sent_dm_services_common_services_webhooks_contracts_webhook_event_of_link_webhook_payload =
+          {
+            event: String?,
+            field: String,
+            payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload::Payload?,
+            request_id: String?,
+            timestamp: String
+          }
+
+        class SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload < Sentdm::Internal::Type::BaseModel
+          attr_accessor event: String?
+
+          attr_reader field: String?
+
+          def field=: (String) -> String
+
+          attr_accessor payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload::Payload?
+
+          attr_accessor request_id: String?
+
+          attr_reader timestamp: String?
+
+          def timestamp=: (String) -> String
+
+          def initialize: (
+            ?event: String?,
+            ?field: String,
+            ?payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload::Payload?,
+            ?request_id: String?,
+            ?timestamp: String
+          ) -> void
+
+          def to_hash: -> {
+            event: String?,
+            field: String,
+            payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload::Payload?,
+            request_id: String?,
+            timestamp: String
+          }
+
+          type payload =
+            {
+              record_id: String,
+              access_country: String?,
+              access_outcome: String?,
+              browser: String?,
+              bytes_served: Integer?,
+              channel: String?,
+              customer_id: String,
+              device: String?,
+              link_kind: String,
+              message_id: String?,
+              occurred_at: String,
+              reference_key: String?,
+              referrer_host: String?,
+              request_method: String?,
+              sender_profile_id: String?,
+              status_code: Integer?,
+              traffic_class: String?
+            }
+
+          class Payload < Sentdm::Internal::Type::BaseModel
+            attr_accessor record_id: String
+
+            attr_accessor access_country: String?
+
+            attr_accessor access_outcome: String?
+
+            attr_accessor browser: String?
+
+            attr_accessor bytes_served: Integer?
+
+            attr_accessor channel: String?
+
+            attr_reader customer_id: String?
+
+            def customer_id=: (String) -> String
+
+            attr_accessor device: String?
+
+            attr_reader link_kind: String?
+
+            def link_kind=: (String) -> String
+
+            attr_accessor message_id: String?
+
+            attr_reader occurred_at: String?
+
+            def occurred_at=: (String) -> String
+
+            attr_accessor reference_key: String?
+
+            attr_accessor referrer_host: String?
+
+            attr_accessor request_method: String?
+
+            attr_accessor sender_profile_id: String?
+
+            attr_accessor status_code: Integer?
+
+            attr_accessor traffic_class: String?
+
+            def initialize: (
+              record_id: String,
+              ?access_country: String?,
+              ?access_outcome: String?,
+              ?browser: String?,
+              ?bytes_served: Integer?,
+              ?channel: String?,
+              ?customer_id: String,
+              ?device: String?,
+              ?link_kind: String,
+              ?message_id: String?,
+              ?occurred_at: String,
+              ?reference_key: String?,
+              ?referrer_host: String?,
+              ?request_method: String?,
+              ?sender_profile_id: String?,
+              ?status_code: Integer?,
+              ?traffic_class: String?
+            ) -> void
+
+            def to_hash: -> {
+              record_id: String,
+              access_country: String?,
+              access_outcome: String?,
+              browser: String?,
+              bytes_served: Integer?,
+              channel: String?,
+              customer_id: String,
+              device: String?,
+              link_kind: String,
+              message_id: String?,
+              occurred_at: String,
+              reference_key: String?,
+              referrer_host: String?,
+              request_method: String?,
+              sender_profile_id: String?,
+              status_code: Integer?,
+              traffic_class: String?
+            }
+          end
+        end
 
         def self?.variants: -> ::Array[Sentdm::Models::WebhookListEventsResponse::event_data]
       end

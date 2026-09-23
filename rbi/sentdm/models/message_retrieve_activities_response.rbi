@@ -203,8 +203,15 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :price
 
-          # Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SENT, DELIVERED, READ,
-          # FAILED. Inbound (from contact): RECEIVED (terminal).
+          # SCHEDULED activities only: when the held message will be released for delivery,
+          # in UTC. Same wire name as on the send response, the message and the webhook.
+          # Omitted on every other activity. A message that quiet hours moved at release has
+          # two SCHEDULED entries, each carrying the instant as it stood at that moment.
+          sig { returns(T.nilable(Time)) }
+          attr_accessor :scheduled_at
+
+          # Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SCHEDULED, SENT,
+          # DELIVERED, READ, FAILED. Inbound (from contact): RECEIVED (terminal).
           sig { returns(T.nilable(String)) }
           attr_reader :status
 
@@ -218,13 +225,18 @@ module Sentdm
           sig { params(timestamp: Time).void }
           attr_writer :timestamp
 
-          # A single message activity event for v3 API
+          # A single message activity event for v3 API.
+          #
+          # The activity list mixes statuses, so unlike a message it is one shape rather
+          # than two: a SCHEDULED entry carries scheduled_at, and every other entry has no
+          # such key.
           sig do
             params(
               active_contact_price: T.nilable(String),
               description: String,
               from: T.nilable(String),
               price: T.nilable(String),
+              scheduled_at: T.nilable(Time),
               status: String,
               timestamp: Time
             ).returns(T.attached_class)
@@ -242,8 +254,13 @@ module Sentdm
             # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
             # 4 decimal places.
             price: nil,
-            # Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SENT, DELIVERED, READ,
-            # FAILED. Inbound (from contact): RECEIVED (terminal).
+            # SCHEDULED activities only: when the held message will be released for delivery,
+            # in UTC. Same wire name as on the send response, the message and the webhook.
+            # Omitted on every other activity. A message that quiet hours moved at release has
+            # two SCHEDULED entries, each carrying the instant as it stood at that moment.
+            scheduled_at: nil,
+            # Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SCHEDULED, SENT,
+            # DELIVERED, READ, FAILED. Inbound (from contact): RECEIVED (terminal).
             status: nil,
             # When this activity occurred
             timestamp: nil
@@ -257,6 +274,7 @@ module Sentdm
                 description: String,
                 from: T.nilable(String),
                 price: T.nilable(String),
+                scheduled_at: T.nilable(Time),
                 status: String,
                 timestamp: Time
               }
