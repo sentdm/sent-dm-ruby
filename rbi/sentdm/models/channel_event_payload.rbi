@@ -18,7 +18,9 @@ module Sentdm
       # The account whose market this is, named as on every other family. When an
       # organization receives an event for one of its sender profiles this is the
       # profile, so a reseller compares it with its own id and anything different is one
-      # of its profiles.
+      # of its profiles. Matches customer_id on GET /v3/channels and the sender
+      # profile's id. Together with channel, country, and number_type, it identifies the
+      # market.
       sig { returns(T.nilable(String)) }
       attr_reader :account_id
 
@@ -33,6 +35,33 @@ module Sentdm
 
       sig { params(channel: String).void }
       attr_writer :channel
+
+      # What a market has been given: the identity it registers under, its programme,
+      # and any documents attached.
+      #
+      # What it does not carry is what the market asks for. That is the subject of GET
+      # /v3/compliance/requirements, and it is the same answer for every caller — a
+      # description of what a compliance regime wants, not a record of one customer's
+      # progress through it. It was reported here as well for a while, which put the
+      # same array in six response shapes and left a caller deciding which of two
+      # sources to believe.
+      #
+      # Present on a list read for markets that register (carrying brand and campaign),
+      # but with documents absent — documents are not fetched for a list, because a
+      # catalog lookup and a document read per market would multiply across a page.
+      # Absent documents is distinct from an empty list: absent says they were not
+      # fetched; empty says the market has been given none. The parent object is null
+      # only when the market registers with nobody and compliance was not computed —
+      # nothing to show at all.
+      sig { returns(T.nilable(Sentdm::ChannelEventPayload::Compliance)) }
+      attr_reader :compliance
+
+      sig do
+        params(
+          compliance: T.nilable(Sentdm::ChannelEventPayload::Compliance::OrHash)
+        ).void
+      end
+      attr_writer :compliance
 
       # The kind of sender the market uses, for example TEN_DLC, LOCAL, or ALPHANUMERIC.
       # Omitted when the subject has no sender type of its own.
@@ -109,6 +138,8 @@ module Sentdm
           country: String,
           account_id: String,
           channel: String,
+          compliance:
+            T.nilable(Sentdm::ChannelEventPayload::Compliance::OrHash),
           number_type: T.nilable(String),
           reason: T.nilable(String),
           sender_value: T.nilable(String),
@@ -125,12 +156,32 @@ module Sentdm
         # The account whose market this is, named as on every other family. When an
         # organization receives an event for one of its sender profiles this is the
         # profile, so a reseller compares it with its own id and anything different is one
-        # of its profiles.
+        # of its profiles. Matches customer_id on GET /v3/channels and the sender
+        # profile's id. Together with channel, country, and number_type, it identifies the
+        # market.
         account_id: nil,
         # The channel this market belongs to: sms, whatsapp, or rcs. Never sent — that
         # value belongs to message events, where it names the smart-routing brand rather
         # than a channel that can be provisioned.
         channel: nil,
+        # What a market has been given: the identity it registers under, its programme,
+        # and any documents attached.
+        #
+        # What it does not carry is what the market asks for. That is the subject of GET
+        # /v3/compliance/requirements, and it is the same answer for every caller — a
+        # description of what a compliance regime wants, not a record of one customer's
+        # progress through it. It was reported here as well for a while, which put the
+        # same array in six response shapes and left a caller deciding which of two
+        # sources to believe.
+        #
+        # Present on a list read for markets that register (carrying brand and campaign),
+        # but with documents absent — documents are not fetched for a list, because a
+        # catalog lookup and a document read per market would multiply across a page.
+        # Absent documents is distinct from an empty list: absent says they were not
+        # fetched; empty says the market has been given none. The parent object is null
+        # only when the market registers with nobody and compliance was not computed —
+        # nothing to show at all.
+        compliance: nil,
         # The kind of sender the market uses, for example TEN_DLC, LOCAL, or ALPHANUMERIC.
         # Omitted when the subject has no sender type of its own.
         number_type: nil,
@@ -174,6 +225,7 @@ module Sentdm
             country: String,
             account_id: String,
             channel: String,
+            compliance: T.nilable(Sentdm::ChannelEventPayload::Compliance),
             number_type: T.nilable(String),
             reason: T.nilable(String),
             sender_value: T.nilable(String),
@@ -183,6 +235,205 @@ module Sentdm
         )
       end
       def to_hash
+      end
+
+      class Compliance < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::ChannelEventPayload::Compliance,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        # The identity this market registers under, with inherit saying whose it is.
+        #
+        # Reported here rather than on the profile because it belongs to the registration
+        # this market files, and only one market files one. It was a top-level block for a
+        # while, which put a per-registration value beside a list of markets and left a
+        # caller to work out which market it belonged to.
+        #
+        # Absent for a market that registers with nobody — such a market asks for no
+        # identity, so there is none to report. Absent and null mean different things:
+        # absent says this market does not ask, null would say it asks and nothing was
+        # supplied.
+        #
+        # Untyped, like the request side, because its members are declared by the market's
+        # own schema rather than by a C# class. A typed pair here would be a second
+        # definition of what a market wants, free to drift from the one that validates.
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        attr_accessor :brand
+
+        # The programme this market registers, with inherit saying whose it is.
+        #
+        # One, not a list. TcrCampaigns permits several and an account built on the admin
+        # side may hold them, but this surface offers one — which is what lets the
+        # market's PATCH be an upsert rather than a collection with an addressable create
+        # behind it. An account holding several is reported as its first and refused on
+        # write, rather than half-edited.
+        #
+        # Carries no id. Nothing addresses a campaign, and an undeclared key would be
+        # refused if the caller sent this object back — which it is meant to be able to
+        # do.
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        attr_accessor :campaign
+
+        # What has been supplied for this market.
+        #
+        # Files, not values — the declared halves above carry the values. A document
+        # cannot be a JSON value, so it is sent as multipart on the channel call and
+        # reported here as a reference.
+        #
+        # Absent on a list read, which fetches identity but does not compute compliance
+        # documents per market. Absent and empty mean different things: absent says the
+        # documents were not fetched; empty says the market has been given none.
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Sentdm::ChannelEventPayload::Compliance::Document]
+            )
+          )
+        end
+        attr_accessor :documents
+
+        # What a market has been given: the identity it registers under, its programme,
+        # and any documents attached.
+        #
+        # What it does not carry is what the market asks for. That is the subject of GET
+        # /v3/compliance/requirements, and it is the same answer for every caller — a
+        # description of what a compliance regime wants, not a record of one customer's
+        # progress through it. It was reported here as well for a while, which put the
+        # same array in six response shapes and left a caller deciding which of two
+        # sources to believe.
+        #
+        # Present on a list read for markets that register (carrying brand and campaign),
+        # but with documents absent — documents are not fetched for a list, because a
+        # catalog lookup and a document read per market would multiply across a page.
+        # Absent documents is distinct from an empty list: absent says they were not
+        # fetched; empty says the market has been given none. The parent object is null
+        # only when the market registers with nobody and compliance was not computed —
+        # nothing to show at all.
+        sig do
+          params(
+            brand: T.nilable(T::Hash[Symbol, T.anything]),
+            campaign: T.nilable(T::Hash[Symbol, T.anything]),
+            documents:
+              T.nilable(
+                T::Array[
+                  Sentdm::ChannelEventPayload::Compliance::Document::OrHash
+                ]
+              )
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The identity this market registers under, with inherit saying whose it is.
+          #
+          # Reported here rather than on the profile because it belongs to the registration
+          # this market files, and only one market files one. It was a top-level block for a
+          # while, which put a per-registration value beside a list of markets and left a
+          # caller to work out which market it belonged to.
+          #
+          # Absent for a market that registers with nobody — such a market asks for no
+          # identity, so there is none to report. Absent and null mean different things:
+          # absent says this market does not ask, null would say it asks and nothing was
+          # supplied.
+          #
+          # Untyped, like the request side, because its members are declared by the market's
+          # own schema rather than by a C# class. A typed pair here would be a second
+          # definition of what a market wants, free to drift from the one that validates.
+          brand: nil,
+          # The programme this market registers, with inherit saying whose it is.
+          #
+          # One, not a list. TcrCampaigns permits several and an account built on the admin
+          # side may hold them, but this surface offers one — which is what lets the
+          # market's PATCH be an upsert rather than a collection with an addressable create
+          # behind it. An account holding several is reported as its first and refused on
+          # write, rather than half-edited.
+          #
+          # Carries no id. Nothing addresses a campaign, and an undeclared key would be
+          # refused if the caller sent this object back — which it is meant to be able to
+          # do.
+          campaign: nil,
+          # What has been supplied for this market.
+          #
+          # Files, not values — the declared halves above carry the values. A document
+          # cannot be a JSON value, so it is sent as multipart on the channel call and
+          # reported here as a reference.
+          #
+          # Absent on a list read, which fetches identity but does not compute compliance
+          # documents per market. Absent and empty mean different things: absent says the
+          # documents were not fetched; empty says the market has been given none.
+          documents: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              brand: T.nilable(T::Hash[Symbol, T.anything]),
+              campaign: T.nilable(T::Hash[Symbol, T.anything]),
+              documents:
+                T.nilable(
+                  T::Array[Sentdm::ChannelEventPayload::Compliance::Document]
+                )
+            }
+          )
+        end
+        def to_hash
+        end
+
+        class Document < Sentdm::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Sentdm::ChannelEventPayload::Compliance::Document,
+                Sentdm::Internal::AnyHash
+              )
+            end
+
+          # Identifier of the upload, for fetching it back through the documents endpoints.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :document_id
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :file_name
+
+          # The catalog's name for this document, matching the requirement it satisfies.
+          sig { returns(T.nilable(String)) }
+          attr_reader :key
+
+          sig { params(key: String).void }
+          attr_writer :key
+
+          # A document a market asked for and has been given.
+          sig do
+            params(
+              document_id: T.nilable(String),
+              file_name: T.nilable(String),
+              key: String
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Identifier of the upload, for fetching it back through the documents endpoints.
+            document_id: nil,
+            file_name: nil,
+            # The catalog's name for this document, matching the requirement it satisfies.
+            key: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                document_id: T.nilable(String),
+                file_name: T.nilable(String),
+                key: String
+              }
+            )
+          end
+          def to_hash
+          end
+        end
       end
     end
   end

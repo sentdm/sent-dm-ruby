@@ -5,6 +5,7 @@ module Sentdm
         country: String,
         account_id: String,
         channel: String,
+        compliance: Sentdm::ChannelEventPayload::Compliance?,
         number_type: String?,
         reason: String?,
         sender_value: String?,
@@ -22,6 +23,8 @@ module Sentdm
       attr_reader channel: String?
 
       def channel=: (String) -> String
+
+      attr_accessor compliance: Sentdm::ChannelEventPayload::Compliance?
 
       attr_accessor number_type: String?
 
@@ -41,6 +44,7 @@ module Sentdm
         country: String,
         ?account_id: String,
         ?channel: String,
+        ?compliance: Sentdm::ChannelEventPayload::Compliance?,
         ?number_type: String?,
         ?reason: String?,
         ?sender_value: String?,
@@ -52,12 +56,65 @@ module Sentdm
         country: String,
         account_id: String,
         channel: String,
+        compliance: Sentdm::ChannelEventPayload::Compliance?,
         number_type: String?,
         reason: String?,
         sender_value: String?,
         status: String,
         updated_at: String
       }
+
+      type compliance =
+        {
+          brand: ::Hash[Symbol, top]?,
+          campaign: ::Hash[Symbol, top]?,
+          documents: ::Array[Sentdm::ChannelEventPayload::Compliance::Document]?
+        }
+
+      class Compliance < Sentdm::Internal::Type::BaseModel
+        attr_accessor brand: ::Hash[Symbol, top]?
+
+        attr_accessor campaign: ::Hash[Symbol, top]?
+
+        attr_accessor documents: ::Array[Sentdm::ChannelEventPayload::Compliance::Document]?
+
+        def initialize: (
+          ?brand: ::Hash[Symbol, top]?,
+          ?campaign: ::Hash[Symbol, top]?,
+          ?documents: ::Array[Sentdm::ChannelEventPayload::Compliance::Document]?
+        ) -> void
+
+        def to_hash: -> {
+          brand: ::Hash[Symbol, top]?,
+          campaign: ::Hash[Symbol, top]?,
+          documents: ::Array[Sentdm::ChannelEventPayload::Compliance::Document]?
+        }
+
+        type document =
+          { document_id: String?, file_name: String?, key: String }
+
+        class Document < Sentdm::Internal::Type::BaseModel
+          attr_accessor document_id: String?
+
+          attr_accessor file_name: String?
+
+          attr_reader key: String?
+
+          def key=: (String) -> String
+
+          def initialize: (
+            ?document_id: String?,
+            ?file_name: String?,
+            ?key: String
+          ) -> void
+
+          def to_hash: -> {
+            document_id: String?,
+            file_name: String?,
+            key: String
+          }
+        end
+      end
     end
   end
 end
