@@ -51,6 +51,21 @@ module Sentdm
       #   @return [String, nil]
       optional :outbound_number, String
 
+      # @!attribute schedule_reason
+      #   message.scheduled only: why the message is held, either because you scheduled it
+      #   or because the recipient is inside a protected quiet-hours window. Omitted on
+      #   every other event.
+      #
+      #   @return [String, nil]
+      optional :schedule_reason, String, nil?: true
+
+      # @!attribute scheduled_at
+      #   message.scheduled only: when the held message will be released for delivery, in
+      #   UTC (yyyy-MM-ddTHH:mm:ssZ). Omitted on every other event.
+      #
+      #   @return [String, nil]
+      optional :scheduled_at, String, nil?: true
+
       # @!attribute template_id
       #   The template the message was sent from, when it was sent from one.
       #
@@ -70,7 +85,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, template_id: nil, template_name: nil, updated_at: nil)
+      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, schedule_reason: nil, scheduled_at: nil, template_id: nil, template_name: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::MessageEventPayload} for more details.
       #
@@ -91,6 +106,10 @@ module Sentdm
       #   @param message_id [String] The message this event describes. Stable across every event in the message's lif
       #
       #   @param outbound_number [String] The recipient's number in E.164 format.
+      #
+      #   @param schedule_reason [String, nil] message.scheduled only: why the message is held, either because you scheduled it
+      #
+      #   @param scheduled_at [String, nil] message.scheduled only: when the held message will be released for delivery, in
       #
       #   @param template_id [String, nil] The template the message was sent from, when it was sent from one.
       #

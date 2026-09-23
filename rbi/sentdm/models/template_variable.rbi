@@ -86,6 +86,11 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :media_type
 
+        # Example value substituted into the template when previewing it and when
+        # submitting it to Meta for review. Free text by nature, so the converter accepts
+        # a JSON number or boolean here and normalizes it — see
+        # JsonScalarToStringConverter for why — and guarantees it is always serialized
+        # back out as a JSON string.
         sig { returns(String) }
         attr_accessor :sample
 
@@ -117,6 +122,11 @@ module Sentdm
         end
         def self.new(
           media_type:,
+          # Example value substituted into the template when previewing it and when
+          # submitting it to Meta for review. Free text by nature, so the converter accepts
+          # a JSON number or boolean here and normalizes it — see
+          # JsonScalarToStringConverter for why — and guarantees it is always serialized
+          # back out as a JSON string.
           sample:,
           url:,
           variable_type:,

@@ -9,6 +9,8 @@ module Sentdm
         channel: String,
         message_id: String,
         outbound_number: String,
+        schedule_reason: String?,
+        scheduled_at: String?,
         template_id: String?,
         template_name: String?,
         updated_at: String
@@ -37,6 +39,10 @@ module Sentdm
 
       def outbound_number=: (String) -> String
 
+      attr_accessor schedule_reason: String?
+
+      attr_accessor scheduled_at: String?
+
       attr_accessor template_id: String?
 
       attr_accessor template_name: String?
@@ -53,6 +59,8 @@ module Sentdm
         ?channel: String,
         ?message_id: String,
         ?outbound_number: String,
+        ?schedule_reason: String?,
+        ?scheduled_at: String?,
         ?template_id: String?,
         ?template_name: String?,
         ?updated_at: String
@@ -66,6 +74,8 @@ module Sentdm
         channel: String,
         message_id: String,
         outbound_number: String,
+        schedule_reason: String?,
+        scheduled_at: String?,
         template_id: String?,
         template_name: String?,
         updated_at: String
