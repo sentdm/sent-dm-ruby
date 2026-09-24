@@ -3,6 +3,9 @@ module Sentdm
     type template_header =
       {
         template: String,
+        example_url: String?,
+        location: Sentdm::TemplateHeader::Location?,
+        static_resource: bool,
         type: String?,
         variables: ::Array[Sentdm::TemplateVariable]?
       }
@@ -10,21 +13,62 @@ module Sentdm
     class TemplateHeader < Sentdm::Internal::Type::BaseModel
       attr_accessor template: String
 
+      attr_accessor example_url: String?
+
+      attr_accessor location: Sentdm::TemplateHeader::Location?
+
+      attr_reader static_resource: bool?
+
+      def static_resource=: (bool) -> bool
+
       attr_accessor type: String?
 
       attr_accessor variables: ::Array[Sentdm::TemplateVariable]?
 
       def initialize: (
         template: String,
+        ?example_url: String?,
+        ?location: Sentdm::TemplateHeader::Location?,
+        ?static_resource: bool,
         ?type: String?,
         ?variables: ::Array[Sentdm::TemplateVariable]?
       ) -> void
 
       def to_hash: -> {
         template: String,
+        example_url: String?,
+        location: Sentdm::TemplateHeader::Location?,
+        static_resource: bool,
         type: String?,
         variables: ::Array[Sentdm::TemplateVariable]?
       }
+
+      type location =
+        { address: String, latitude: String, longitude: String, name: String }
+
+      class Location < Sentdm::Internal::Type::BaseModel
+        attr_accessor address: String
+
+        attr_accessor latitude: String
+
+        attr_accessor longitude: String
+
+        attr_accessor name: String
+
+        def initialize: (
+          address: String,
+          latitude: String,
+          longitude: String,
+          name: String
+        ) -> void
+
+        def to_hash: -> {
+          address: String,
+          latitude: String,
+          longitude: String,
+          name: String
+        }
+      end
     end
   end
 end
