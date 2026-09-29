@@ -48,7 +48,7 @@ module Sentdm
       #   handler that rejects an envelope it does not recognise will break on the next
       #   addition rather than ignore it.
       #
-      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload, nil]
+      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload, nil]
       optional :event_data, union: -> { Sentdm::Models::WebhookListEventsResponse::EventData }
 
       # @!attribute event_type
@@ -90,7 +90,7 @@ module Sentdm
       #
       #   @param error_message [String, nil]
       #
-      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload] The exact event body that was delivered, or attempted, for this record. One of t
+      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload] The exact event body that was delivered, or attempted, for this record. One of t
       #
       #   @param event_type [String]
       #
@@ -147,6 +147,10 @@ module Sentdm
         # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
         # varies only in Payload.
         variant -> { Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload }
+
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload }
 
         class SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload < Sentdm::Internal::Type::BaseModel
           # @!attribute event
@@ -433,8 +437,177 @@ module Sentdm
           end
         end
 
+        class SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload < Sentdm::Internal::Type::BaseModel
+          # @!attribute event
+          #   The specific event within the family, for example message.delivered,
+          #   message.received or contact.opt_out. Absent on events that have no subtype, so
+          #   treat it as optional.
+          #
+          #   @return [String, nil]
+          optional :event, String, nil?: true
+
+          # @!attribute field
+          #   The event family, for example message, templates or contact. Route on this
+          #   first, then on event for the specific change.
+          #
+          #   @return [String, nil]
+          optional :field, String
+
+          # @!attribute payload
+          #   Body of a call.initiated, call.answered, call.completed, call.failed or
+          #   call.recording_ready event. Which of them occurred is the envelope's event.
+          #
+          #   Shaped like the message, inbound, template and channel payloads: account_id
+          #   names the account the event is about, channel names the channel, and updated_at
+          #   is when the change happened on the call, in the same yyyy-MM-ddTHH:mm:ssZ form.
+          #   duration_seconds and price are added on call.completed, reason on call.failed
+          #   and recording_id on call.recording_ready; each is omitted rather than sent as
+          #   null when it does not apply.
+          #
+          #   Casing is snake_case because these ride the same webhook stream customers
+          #   already parse message_id from; the question/answer contract is a separate
+          #   surface and stays camelCase. Nothing here is provider-shaped: no provider call
+          #   id, no namespaced identity.
+          #
+          #   @return [Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload, nil]
+          optional :payload,
+                   -> { Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload },
+                   nil?: true
+
+          # @!attribute request_id
+          #   The event-specific body.
+          #
+          #   @return [String, nil]
+          optional :request_id, String, nil?: true
+
+          # @!attribute timestamp
+          #   When Sent emitted the event, in UTC (yyyy-MM-ddTHH:mm:ssZ). This is the emission
+          #   time, not the time the underlying change happened. Use the timestamp inside the
+          #   payload for the latter.
+          #
+          #   @return [String, nil]
+          optional :timestamp, String
+
+          # @!method initialize(event: nil, field: nil, payload: nil, request_id: nil, timestamp: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload}
+          #   for more details.
+          #
+          #   The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares
+          #   this shape and varies only in Payload.
+          #
+          #   @param event [String, nil] The specific event within the family, for example message.delivered,
+          #
+          #   @param field [String] The event family, for example message, templates or contact. Route on
+          #
+          #   @param payload [Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload, nil] Body of a call.initiated, call.answered, call.completed, call.failed
+          #
+          #   @param request_id [String, nil] The event-specific body.
+          #
+          #   @param timestamp [String] When Sent emitted the event, in UTC (yyyy-MM-ddTHH:mm:ssZ). This is the emission
+
+          # @see Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload#payload
+          class Payload < Sentdm::Internal::Type::BaseModel
+            # @!attribute call_id
+            #   Sent's call id, the same one the customer saw on the first question.
+            #
+            #   @return [String]
+            required :call_id, String
+
+            # @!attribute account_id
+            #   The account the call belongs to: the key's own customer, or the sender profile
+            #   it acted as.
+            #
+            #   @return [String, nil]
+            optional :account_id, String
+
+            # @!attribute channel
+            #   Always voice.
+            #
+            #   @return [String, nil]
+            optional :channel, String
+
+            # @!attribute duration_seconds
+            #   How long the call lasted. Only on call.completed.
+            #
+            #   @return [Integer, nil]
+            optional :duration_seconds, Integer, nil?: true
+
+            # @!attribute number
+            #   The customer number that owns the call, in E.164 format.
+            #
+            #   @return [String, nil]
+            optional :number, String
+
+            # @!attribute price
+            #   What the call was charged. Only on call.completed, and omitted there until
+            #   billing has recorded the charge.
+            #
+            #   @return [Float, nil]
+            optional :price, Float, nil?: true
+
+            # @!attribute reason
+            #   The machine-readable reason the call did not complete. Only on call.failed, and
+            #   omitted when no reason was recorded.
+            #
+            #   @return [String, nil]
+            optional :reason, String, nil?: true
+
+            # @!attribute recording_id
+            #   The recording that became available, the same id GET /v3/calls/{id}/recordings
+            #   lists it under. Only on call.recording_ready, which is sent once per recording.
+            #
+            #   @return [String, nil]
+            optional :recording_id, String, nil?: true
+
+            # @!attribute updated_at
+            #   When the change happened on the call, as opposed to when the event was emitted.
+            #
+            #   @return [String, nil]
+            optional :updated_at, String
+
+            # @!method initialize(call_id:, account_id: nil, channel: nil, duration_seconds: nil, number: nil, price: nil, reason: nil, recording_id: nil, updated_at: nil)
+            #   Some parameter documentations has been truncated, see
+            #   {Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload}
+            #   for more details.
+            #
+            #   Body of a call.initiated, call.answered, call.completed, call.failed or
+            #   call.recording_ready event. Which of them occurred is the envelope's event.
+            #
+            #   Shaped like the message, inbound, template and channel payloads: account_id
+            #   names the account the event is about, channel names the channel, and updated_at
+            #   is when the change happened on the call, in the same yyyy-MM-ddTHH:mm:ssZ form.
+            #   duration_seconds and price are added on call.completed, reason on call.failed
+            #   and recording_id on call.recording_ready; each is omitted rather than sent as
+            #   null when it does not apply.
+            #
+            #   Casing is snake_case because these ride the same webhook stream customers
+            #   already parse message_id from; the question/answer contract is a separate
+            #   surface and stays camelCase. Nothing here is provider-shaped: no provider call
+            #   id, no namespaced identity.
+            #
+            #   @param call_id [String] Sent's call id, the same one the customer saw on the first question.
+            #
+            #   @param account_id [String] The account the call belongs to: the key's own customer, or the sender profile i
+            #
+            #   @param channel [String] Always voice.
+            #
+            #   @param duration_seconds [Integer, nil] How long the call lasted. Only on call.completed.
+            #
+            #   @param number [String] The customer number that owns the call, in E.164 format.
+            #
+            #   @param price [Float, nil] What the call was charged. Only on call.completed, and omitted there until billi
+            #
+            #   @param reason [String, nil] The machine-readable reason the call did not complete. Only on call.failed, and
+            #
+            #   @param recording_id [String, nil] The recording that became available, the same id GET /v3/calls/{id}/recordings l
+            #
+            #   @param updated_at [String] When the change happened on the call, as opposed to when the event was emitted.
+          end
+        end
+
         # @!method self.variants
-        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload)]
+        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload, Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload)]
       end
     end
   end

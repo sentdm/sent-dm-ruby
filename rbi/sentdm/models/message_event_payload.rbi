@@ -54,6 +54,20 @@ module Sentdm
       sig { params(outbound_number: String).void }
       attr_writer :outbound_number
 
+      # A human-readable sentence for ReasonCode, for example "The recipient is not
+      # registered on this channel". Omitted whenever reason_code is.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :reason
+
+      # Why the message reached this status, as a stable platform code such as
+      # DELIVERY_007 or BUSINESS_003. Present on message.failed, message.filtered and
+      # message.blocked; omitted on every status that needs no explanation. Switch on
+      # this rather than on Reason: the code is stable, the wording may be improved. It
+      # is the platform's classification of the outcome and never a carrier or vendor
+      # code.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :reason_code
+
       # message.scheduled only: why the message is held, either because you scheduled it
       # or because the recipient is inside a protected quiet-hours window. Omitted on
       # every other event.
@@ -93,6 +107,8 @@ module Sentdm
           channel: String,
           message_id: String,
           outbound_number: String,
+          reason: T.nilable(String),
+          reason_code: T.nilable(String),
           schedule_reason: T.nilable(String),
           scheduled_at: T.nilable(String),
           template_id: T.nilable(String),
@@ -121,6 +137,16 @@ module Sentdm
         message_id: nil,
         # The recipient's number in E.164 format.
         outbound_number: nil,
+        # A human-readable sentence for ReasonCode, for example "The recipient is not
+        # registered on this channel". Omitted whenever reason_code is.
+        reason: nil,
+        # Why the message reached this status, as a stable platform code such as
+        # DELIVERY_007 or BUSINESS_003. Present on message.failed, message.filtered and
+        # message.blocked; omitted on every status that needs no explanation. Switch on
+        # this rather than on Reason: the code is stable, the wording may be improved. It
+        # is the platform's classification of the outcome and never a carrier or vendor
+        # code.
+        reason_code: nil,
         # message.scheduled only: why the message is held, either because you scheduled it
         # or because the recipient is inside a protected quiet-hours window. Omitted on
         # every other event.
@@ -148,6 +174,8 @@ module Sentdm
             channel: String,
             message_id: String,
             outbound_number: String,
+            reason: T.nilable(String),
+            reason_code: T.nilable(String),
             schedule_reason: T.nilable(String),
             scheduled_at: T.nilable(String),
             template_id: T.nilable(String),
