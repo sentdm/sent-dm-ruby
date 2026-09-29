@@ -225,7 +225,9 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookListEventsParams} for more details.
       #
-      # Retrieves a paginated list of delivery events for the specified webhook.
+      # Retrieves a paginated list of delivery events for the specified webhook. If the
+      # webhook is cloned onto your sender profiles, the list includes what those clones
+      # received; read payload.account_id to tell whose event it is.
       #
       # @overload list_events(id, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #

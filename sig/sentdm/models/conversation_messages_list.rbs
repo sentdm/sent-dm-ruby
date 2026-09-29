@@ -41,6 +41,8 @@ module Sentdm
           phone: String,
           phone_international: String,
           price: Float?,
+          reason: String?,
+          reason_code: String?,
           region_code: String,
           status: String,
           template_category: String?,
@@ -89,6 +91,10 @@ module Sentdm
 
         attr_accessor price: Float?
 
+        attr_accessor reason: String?
+
+        attr_accessor reason_code: String?
+
         attr_reader region_code: String?
 
         def region_code=: (String) -> String
@@ -116,6 +122,8 @@ module Sentdm
           ?phone: String,
           ?phone_international: String,
           ?price: Float?,
+          ?reason: String?,
+          ?reason_code: String?,
           ?region_code: String,
           ?status: String,
           ?template_category: String?,
@@ -136,6 +144,8 @@ module Sentdm
           phone: String,
           phone_international: String,
           price: Float?,
+          reason: String?,
+          reason_code: String?,
           region_code: String,
           status: String,
           template_category: String?,
@@ -143,7 +153,14 @@ module Sentdm
           template_name: String?
         }
 
-        type event = { status: String, timestamp: Time, description: String? }
+        type event =
+          {
+            status: String,
+            timestamp: Time,
+            description: String?,
+            reason: String?,
+            reason_code: String?
+          }
 
         class Event < Sentdm::Internal::Type::BaseModel
           attr_accessor status: String
@@ -152,16 +169,24 @@ module Sentdm
 
           attr_accessor description: String?
 
+          attr_accessor reason: String?
+
+          attr_accessor reason_code: String?
+
           def initialize: (
             status: String,
             timestamp: Time,
-            ?description: String?
+            ?description: String?,
+            ?reason: String?,
+            ?reason_code: String?
           ) -> void
 
           def to_hash: -> {
             status: String,
             timestamp: Time,
-            description: String?
+            description: String?,
+            reason: String?,
+            reason_code: String?
           }
         end
 
@@ -265,18 +290,41 @@ module Sentdm
             def to_hash: -> { type: String, url: String }
           end
 
-          type media = { media_type: String?, url: String }
+          type media =
+            {
+              media_type: String?,
+              mime_type: String?,
+              size_bytes: Integer?,
+              :source_hash_sha256 => String?,
+              url: String?
+            }
 
           class Media < Sentdm::Internal::Type::BaseModel
             attr_accessor media_type: String?
 
-            attr_reader url: String?
+            attr_accessor mime_type: String?
 
-            def url=: (String) -> String
+            attr_accessor size_bytes: Integer?
 
-            def initialize: (?media_type: String?, ?url: String) -> void
+            attr_accessor source_hash_sha256: String?
 
-            def to_hash: -> { media_type: String?, url: String }
+            attr_accessor url: String?
+
+            def initialize: (
+              ?media_type: String?,
+              ?mime_type: String?,
+              ?size_bytes: Integer?,
+              ?source_hash_sha256: String?,
+              ?url: String?
+            ) -> void
+
+            def to_hash: -> {
+              media_type: String?,
+              mime_type: String?,
+              size_bytes: Integer?,
+              :source_hash_sha256 => String?,
+              url: String?
+            }
           end
         end
       end
