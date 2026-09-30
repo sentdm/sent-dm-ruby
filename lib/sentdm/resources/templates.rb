@@ -19,7 +19,9 @@ module Sentdm
       # from the template's content and can be changed afterwards with
       # `PUT /v3/templates/{id}`.
       #
-      # @overload create(category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param auto_create_for_sp [Boolean] Body param: Create this template automatically on every sender profile of the or
       #
       # @param category [String, nil] Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional, aut
       #

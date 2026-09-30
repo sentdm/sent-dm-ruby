@@ -68,12 +68,18 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :number_type
 
-      # Why the market reached this state, when a reason was given — a correction
-      # explained, or a campaign lapse. Free text, passed through from the registry or
-      # carrier that wrote it, so treat it as a message to show a human rather than a
-      # value to branch on.
+      # Why the market reached this state, as a sentence to show a person: the specific
+      # explanation when one was given (a correction explained, a campaign lapse),
+      # otherwise what reason_code means for this market. Not a value to branch on.
       sig { returns(T.nilable(String)) }
       attr_accessor :reason
+
+      # Why the market is not ACTIVE, as a stable code: an ErrorCodes CHANNEL_xxx value
+      # such as CHANNEL_001 (something you owe) or CHANNEL_002 (a correction was
+      # requested). The same code the channels resource reports for the market. Switch
+      # on this rather than on reason. Omitted while ACTIVE.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :reason_code
 
       # The sender itself — a number in E.164, or an alphanumeric sender ID.
       #
@@ -142,6 +148,7 @@ module Sentdm
             T.nilable(Sentdm::ChannelEventPayload::Compliance::OrHash),
           number_type: T.nilable(String),
           reason: T.nilable(String),
+          reason_code: T.nilable(String),
           sender_value: T.nilable(String),
           status: String,
           updated_at: String
@@ -185,11 +192,15 @@ module Sentdm
         # The kind of sender the market uses, for example TEN_DLC, LOCAL, or ALPHANUMERIC.
         # Omitted when the subject has no sender type of its own.
         number_type: nil,
-        # Why the market reached this state, when a reason was given — a correction
-        # explained, or a campaign lapse. Free text, passed through from the registry or
-        # carrier that wrote it, so treat it as a message to show a human rather than a
-        # value to branch on.
+        # Why the market reached this state, as a sentence to show a person: the specific
+        # explanation when one was given (a correction explained, a campaign lapse),
+        # otherwise what reason_code means for this market. Not a value to branch on.
         reason: nil,
+        # Why the market is not ACTIVE, as a stable code: an ErrorCodes CHANNEL_xxx value
+        # such as CHANNEL_001 (something you owe) or CHANNEL_002 (a correction was
+        # requested). The same code the channels resource reports for the market. Switch
+        # on this rather than on reason. Omitted while ACTIVE.
+        reason_code: nil,
         # The sender itself — a number in E.164, or an alphanumeric sender ID.
         #
         # Always present, and null until a sender exists. The key is on every delivery so
@@ -228,6 +239,7 @@ module Sentdm
             compliance: T.nilable(Sentdm::ChannelEventPayload::Compliance),
             number_type: T.nilable(String),
             reason: T.nilable(String),
+            reason_code: T.nilable(String),
             sender_value: T.nilable(String),
             status: String,
             updated_at: String

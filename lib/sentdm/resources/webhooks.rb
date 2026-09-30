@@ -19,7 +19,7 @@ module Sentdm
       #
       # Creates a new webhook endpoint for the authenticated customer.
       #
-      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param display_name [String] Body param
       #
@@ -32,6 +32,8 @@ module Sentdm
       # @param retry_count [Integer] Body param
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
+      #
+      # @param sender_profile [Sentdm::Models::WebhookCreateParams::SenderProfile, nil] Body param: Request-only: the events an organization webhook's sender profile cl
       #
       # @param timeout_seconds [Integer] Body param
       #
@@ -89,7 +91,7 @@ module Sentdm
       #
       # Updates an existing webhook for the authenticated customer.
       #
-      # @overload update(id, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
       #
@@ -104,6 +106,8 @@ module Sentdm
       # @param retry_count [Integer] Body param
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
+      #
+      # @param sender_profile [Sentdm::Models::WebhookUpdateParams::SenderProfile, nil] Body param: Request-only: the events an organization webhook's sender profile cl
       #
       # @param timeout_seconds [Integer] Body param
       #
@@ -221,7 +225,9 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookListEventsParams} for more details.
       #
-      # Retrieves a paginated list of delivery events for the specified webhook.
+      # Retrieves a paginated list of delivery events for the specified webhook. If the
+      # webhook is cloned onto your sender profiles, the list includes what those clones
+      # received; read payload.account_id to tell whose event it is.
       #
       # @overload list_events(id, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #

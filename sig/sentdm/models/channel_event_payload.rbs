@@ -8,6 +8,7 @@ module Sentdm
         compliance: Sentdm::ChannelEventPayload::Compliance?,
         number_type: String?,
         reason: String?,
+        reason_code: String?,
         sender_value: String?,
         status: String,
         updated_at: String
@@ -30,6 +31,8 @@ module Sentdm
 
       attr_accessor reason: String?
 
+      attr_accessor reason_code: String?
+
       attr_accessor sender_value: String?
 
       attr_reader status: String?
@@ -47,6 +50,7 @@ module Sentdm
         ?compliance: Sentdm::ChannelEventPayload::Compliance?,
         ?number_type: String?,
         ?reason: String?,
+        ?reason_code: String?,
         ?sender_value: String?,
         ?status: String,
         ?updated_at: String
@@ -59,6 +63,7 @@ module Sentdm
         compliance: Sentdm::ChannelEventPayload::Compliance?,
         number_type: String?,
         reason: String?,
+        reason_code: String?,
         sender_value: String?,
         status: String,
         updated_at: String
