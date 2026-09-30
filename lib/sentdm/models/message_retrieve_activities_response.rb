@@ -98,6 +98,23 @@ module Sentdm
           #   @return [String, nil]
           optional :price, String, nil?: true
 
+          # @!attribute reason
+          #   A human-readable sentence for reason_code, for example "The recipient is not
+          #   registered on this channel" Omitted whenever reason_code is.
+          #
+          #   @return [String, nil]
+          optional :reason, String, nil?: true
+
+          # @!attribute reason_code
+          #   Why the message reached this status, as a stable platform code such as
+          #   DELIVERY_007 or BUSINESS_003. Present on FAILED, FILTERED and BLOCKED
+          #   activities; omitted on every status that needs no explanation. Switch on this
+          #   rather than on reason: the code is stable, the wording may be improved. Same
+          #   wire name and vocabulary as on the message and the webhook.
+          #
+          #   @return [String, nil]
+          optional :reason_code, String, nil?: true
+
           # @!attribute scheduled_at
           #   SCHEDULED activities only: when the held message will be released for delivery,
           #   in UTC. Same wire name as on the send response, the message and the webhook.
@@ -120,7 +137,7 @@ module Sentdm
           #   @return [Time, nil]
           optional :timestamp, Time
 
-          # @!method initialize(active_contact_price: nil, description: nil, from: nil, price: nil, scheduled_at: nil, status: nil, timestamp: nil)
+          # @!method initialize(active_contact_price: nil, description: nil, from: nil, price: nil, reason: nil, reason_code: nil, scheduled_at: nil, status: nil, timestamp: nil)
           #   Some parameter documentations has been truncated, see
           #   {Sentdm::Models::MessageRetrieveActivitiesResponse::Data::Activity} for more
           #   details.
@@ -138,6 +155,11 @@ module Sentdm
           #   @param from [String, nil] Sender phone number for this activity (the customer's sending number for outboun
           #
           #   @param price [String, nil] Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
+          #
+          #   @param reason [String, nil] A human-readable sentence for reason_code, for example "The recipient is not reg
+          #
+          #   @param reason_code [String, nil] Why the message reached this status, as a stable platform code such as
+          #   DELIVERY\_
           #
           #   @param scheduled_at [Time, nil] SCHEDULED activities only: when the held message will be released for delivery,
           #
