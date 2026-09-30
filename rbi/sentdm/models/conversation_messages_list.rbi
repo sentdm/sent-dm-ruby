@@ -152,6 +152,20 @@ module Sentdm
         sig { returns(T.nilable(Float)) }
         attr_accessor :price
 
+        # A human-readable sentence for reason_code, for example "Insufficient balance".
+        # Omitted whenever reason_code is.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :reason
+
+        # Why the message is at its current status, as a stable platform code such as
+        # DELIVERY_007, BUSINESS_003 or DELIVERY_003. Present when the current status is
+        # FAILED, FILTERED or BLOCKED and the lifecycle was loaded; omitted otherwise.
+        # Switch on this rather than on reason: the code is stable, the wording may be
+        # improved. It is the platform's classification of the outcome, never a carrier or
+        # vendor code.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :reason_code
+
         sig { returns(T.nilable(String)) }
         attr_reader :region_code
 
@@ -201,6 +215,8 @@ module Sentdm
             phone: String,
             phone_international: String,
             price: T.nilable(Float),
+            reason: T.nilable(String),
+            reason_code: T.nilable(String),
             region_code: String,
             status: String,
             template_category: T.nilable(String),
@@ -230,6 +246,16 @@ module Sentdm
           phone: nil,
           phone_international: nil,
           price: nil,
+          # A human-readable sentence for reason_code, for example "Insufficient balance".
+          # Omitted whenever reason_code is.
+          reason: nil,
+          # Why the message is at its current status, as a stable platform code such as
+          # DELIVERY_007, BUSINESS_003 or DELIVERY_003. Present when the current status is
+          # FAILED, FILTERED or BLOCKED and the lifecycle was loaded; omitted otherwise.
+          # Switch on this rather than on reason: the code is stable, the wording may be
+          # improved. It is the platform's classification of the outcome, never a carrier or
+          # vendor code.
+          reason_code: nil,
           region_code: nil,
           status: nil,
           template_category: nil,
@@ -259,6 +285,8 @@ module Sentdm
               phone: String,
               phone_international: String,
               price: T.nilable(Float),
+              reason: T.nilable(String),
+              reason_code: T.nilable(String),
               region_code: String,
               status: String,
               template_category: T.nilable(String),
@@ -288,15 +316,39 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :description
 
+          # A human-readable sentence for reason_code. Omitted whenever reason_code is.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :reason
+
+          # Why the message reached this status, as a stable platform code such as
+          # DELIVERY_007. Present on FAILED, FILTERED and BLOCKED events; omitted on every
+          # status that needs no explanation. Same wire name and vocabulary as on the
+          # activities list and the webhook.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :reason_code
+
           # Represents a status change event in a message's lifecycle (v3)
           sig do
             params(
               status: String,
               timestamp: Time,
-              description: T.nilable(String)
+              description: T.nilable(String),
+              reason: T.nilable(String),
+              reason_code: T.nilable(String)
             ).returns(T.attached_class)
           end
-          def self.new(status:, timestamp:, description: nil)
+          def self.new(
+            status:,
+            timestamp:,
+            description: nil,
+            # A human-readable sentence for reason_code. Omitted whenever reason_code is.
+            reason: nil,
+            # Why the message reached this status, as a stable platform code such as
+            # DELIVERY_007. Present on FAILED, FILTERED and BLOCKED events; omitted on every
+            # status that needs no explanation. Same wire name and vocabulary as on the
+            # activities list and the webhook.
+            reason_code: nil
+          )
           end
 
           sig do
@@ -304,7 +356,9 @@ module Sentdm
               {
                 status: String,
                 timestamp: Time,
-                description: T.nilable(String)
+                description: T.nilable(String),
+                reason: T.nilable(String),
+                reason_code: T.nilable(String)
               }
             )
           end
@@ -571,38 +625,87 @@ module Sentdm
                 )
               end
 
-            # One of Constants.MmsMediaTypes when known. Advisory — the carrier reads the
-            # fetched object's Content-Type, not this.
+            # One of MmsMediaTypes when the content type is known. Advisory — a reader should
+            # trust the fetched object's own Content-Type.
             sig { returns(T.nilable(String)) }
             attr_accessor :media_type
 
+            # Content type as the provider declared it. Null when it declared none.
             sig { returns(T.nilable(String)) }
-            attr_reader :url
+            attr_accessor :mime_type
 
-            sig { params(url: String).void }
-            attr_writer :url
+            # Size as the provider declared it. Never measured here — nothing downloads the
+            # file.
+            sig { returns(T.nilable(Integer)) }
+            attr_accessor :size_bytes
 
-            # One attachment on a message: a customer-supplied public URL handed to the
-            # carrier as-is.
+            # Inbound only: the SHA-256 the provider declared alongside the attachment, when
+            # it declared one. Relayed to the customer so they can verify what they fetch
+            # matches what the carrier said it sent. It is the only integrity signal available
+            # on an attachment nobody here has read.
+            sig { returns(T.nilable(String)) }
+            attr_accessor :source_hash_sha256
+
+            # Where the file lives. Outbound: the URL the customer gave us and the carrier
+            # fetched. Inbound: the URL the carrier hosts it at, relayed unchanged.
+            sig { returns(T.nilable(String)) }
+            attr_accessor :url
+
+            # One attachment on a message, in either direction — and in both, a URL somebody
+            # else hosts.
             #
-            #              A URL and nothing else. sent.dm never takes custody of MMS media — the customer hosts it and we
-            #              pass the link through at send time — so there is no storage key, size or expiry to record. If we ever
-            #              do host attachments, that belongs with the change that introduces the hosting, not here.
+            # Outbound: the customer supplied a public URL and we handed it to the carrier.
+            # Inbound: the carrier hosts the file and we record where. sent.dm never holds the
+            # bytes, so there is no key, no expiry bookkeeping and nothing minted per read —
+            # what is stored is what is served.
+            #
+            # An inbound link expires on the carrier's own schedule and is unauthenticated.
+            # That is the customer's to manage, and it is documented where they will see it
+            # rather than only here — a recipient who needs an attachment to outlive that
+            # window copies it on receipt.
+            #
+            # Storing a presigned URL is the specific mistake this shape still avoids:
+            # M260826130000 and M260826140000 exist because RCS assets were stored as signed
+            # URLs and went stale. Nothing here is signed.
             sig do
-              params(media_type: T.nilable(String), url: String).returns(
-                T.attached_class
-              )
+              params(
+                media_type: T.nilable(String),
+                mime_type: T.nilable(String),
+                size_bytes: T.nilable(Integer),
+                source_hash_sha256: T.nilable(String),
+                url: T.nilable(String)
+              ).returns(T.attached_class)
             end
             def self.new(
-              # One of Constants.MmsMediaTypes when known. Advisory — the carrier reads the
-              # fetched object's Content-Type, not this.
+              # One of MmsMediaTypes when the content type is known. Advisory — a reader should
+              # trust the fetched object's own Content-Type.
               media_type: nil,
+              # Content type as the provider declared it. Null when it declared none.
+              mime_type: nil,
+              # Size as the provider declared it. Never measured here — nothing downloads the
+              # file.
+              size_bytes: nil,
+              # Inbound only: the SHA-256 the provider declared alongside the attachment, when
+              # it declared one. Relayed to the customer so they can verify what they fetch
+              # matches what the carrier said it sent. It is the only integrity signal available
+              # on an attachment nobody here has read.
+              source_hash_sha256: nil,
+              # Where the file lives. Outbound: the URL the customer gave us and the carrier
+              # fetched. Inbound: the URL the carrier hosts it at, relayed unchanged.
               url: nil
             )
             end
 
             sig do
-              override.returns({ media_type: T.nilable(String), url: String })
+              override.returns(
+                {
+                  media_type: T.nilable(String),
+                  mime_type: T.nilable(String),
+                  size_bytes: T.nilable(Integer),
+                  source_hash_sha256: T.nilable(String),
+                  url: T.nilable(String)
+                }
+              )
             end
             def to_hash
             end

@@ -2,6 +2,7 @@ module Sentdm
   module Resources
     class Templates
       def create: (
+        ?auto_create_for_sp: bool,
         ?category: String?,
         ?creation_source: String?,
         ?definition: Sentdm::TemplateDefinition,

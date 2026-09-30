@@ -203,6 +203,19 @@ module Sentdm
           sig { returns(T.nilable(String)) }
           attr_accessor :price
 
+          # A human-readable sentence for reason_code, for example "The recipient is not
+          # registered on this channel" Omitted whenever reason_code is.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :reason
+
+          # Why the message reached this status, as a stable platform code such as
+          # DELIVERY_007 or BUSINESS_003. Present on FAILED, FILTERED and BLOCKED
+          # activities; omitted on every status that needs no explanation. Switch on this
+          # rather than on reason: the code is stable, the wording may be improved. Same
+          # wire name and vocabulary as on the message and the webhook.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :reason_code
+
           # SCHEDULED activities only: when the held message will be released for delivery,
           # in UTC. Same wire name as on the send response, the message and the webhook.
           # Omitted on every other activity. A message that quiet hours moved at release has
@@ -236,6 +249,8 @@ module Sentdm
               description: String,
               from: T.nilable(String),
               price: T.nilable(String),
+              reason: T.nilable(String),
+              reason_code: T.nilable(String),
               scheduled_at: T.nilable(Time),
               status: String,
               timestamp: Time
@@ -254,6 +269,15 @@ module Sentdm
             # Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
             # 4 decimal places.
             price: nil,
+            # A human-readable sentence for reason_code, for example "The recipient is not
+            # registered on this channel" Omitted whenever reason_code is.
+            reason: nil,
+            # Why the message reached this status, as a stable platform code such as
+            # DELIVERY_007 or BUSINESS_003. Present on FAILED, FILTERED and BLOCKED
+            # activities; omitted on every status that needs no explanation. Switch on this
+            # rather than on reason: the code is stable, the wording may be improved. Same
+            # wire name and vocabulary as on the message and the webhook.
+            reason_code: nil,
             # SCHEDULED activities only: when the held message will be released for delivery,
             # in UTC. Same wire name as on the send response, the message and the webhook.
             # Omitted on every other activity. A message that quiet hours moved at release has
@@ -274,6 +298,8 @@ module Sentdm
                 description: String,
                 from: T.nilable(String),
                 price: T.nilable(String),
+                reason: T.nilable(String),
+                reason_code: T.nilable(String),
                 scheduled_at: T.nilable(Time),
                 status: String,
                 timestamp: Time

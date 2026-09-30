@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type template_create_params =
       {
+        auto_create_for_sp: bool,
         category: String?,
         creation_source: String?,
         definition: Sentdm::TemplateDefinition,
@@ -16,6 +17,10 @@ module Sentdm
     class TemplateCreateParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader auto_create_for_sp: bool?
+
+      def auto_create_for_sp=: (bool) -> bool
 
       attr_accessor category: String?
 
@@ -46,6 +51,7 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
+        ?auto_create_for_sp: bool,
         ?category: String?,
         ?creation_source: String?,
         ?definition: Sentdm::TemplateDefinition,
@@ -58,6 +64,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        auto_create_for_sp: bool,
         category: String?,
         creation_source: String?,
         definition: Sentdm::TemplateDefinition,

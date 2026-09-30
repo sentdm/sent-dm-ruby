@@ -77,6 +77,24 @@ module Sentdm
         #   @return [String, nil]
         optional :email, String, nil?: true
 
+        # @!attribute enable_template_auto_creation_for_sp
+        #   Whether this account may mark a template for automatic creation on its sender
+        #   profiles. Granted by Sent per account and off by default, so it is what a
+        #   template-create form reads to decide whether to offer the option at all —
+        #   marking a template without it does nothing.
+        #
+        #   Top-level rather than inside settings, which is written for type: "profile" only
+        #   and so would never carry it to the account type that can act on it.
+        #
+        #   This is the capability, not the stored flag: a profile reports false whatever
+        #   its own row holds. A sender profile owns no sender profiles, so a template it
+        #   marked would have nothing to be created on and the fan-out would never read the
+        #   flag. The admin GET /customers/{id} reports the stored value instead, because
+        #   that is the one an operator granted.
+        #
+        #   @return [Boolean, nil]
+        optional :enable_template_auto_creation_for_sp, Sentdm::Internal::Type::Boolean
+
         # @!attribute icon
         #   Account icon URL
         #
@@ -155,7 +173,7 @@ module Sentdm
         #   @return [String, nil]
         optional :type, String
 
-        # @!method initialize(id: nil, channels: nil, created_at: nil, description: nil, email: nil, icon: nil, name: nil, organization_id: nil, profiles: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, settings: nil, short_name: nil, status: nil, type: nil)
+        # @!method initialize(id: nil, channels: nil, created_at: nil, description: nil, email: nil, enable_template_auto_creation_for_sp: nil, icon: nil, name: nil, organization_id: nil, profiles: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, settings: nil, short_name: nil, status: nil, type: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::MeRetrieveResponse::Data} for more details.
         #
@@ -172,6 +190,8 @@ module Sentdm
         #   @param description [String, nil] Account description
         #
         #   @param email [String, nil] Contact email address
+        #
+        #   @param enable_template_auto_creation_for_sp [Boolean] Whether this account may mark a template for automatic creation on its sender pr
         #
         #   @param icon [String, nil] Account icon URL
         #

@@ -49,6 +49,19 @@ module Sentdm
       sig { params(sandbox: T::Boolean).void }
       attr_writer :sandbox
 
+      # Request-only: the events an organization webhook's sender profile clones
+      # receive, one clone per existing and future profile. Responses never return it.
+      sig { returns(T.nilable(Sentdm::WebhookUpdateParams::SenderProfile)) }
+      attr_reader :sender_profile
+
+      sig do
+        params(
+          sender_profile:
+            T.nilable(Sentdm::WebhookUpdateParams::SenderProfile::OrHash)
+        ).void
+      end
+      attr_writer :sender_profile
+
       sig { returns(T.nilable(Integer)) }
       attr_reader :timeout_seconds
 
@@ -76,6 +89,8 @@ module Sentdm
           event_types: T::Array[String],
           retry_count: Integer,
           sandbox: T::Boolean,
+          sender_profile:
+            T.nilable(Sentdm::WebhookUpdateParams::SenderProfile::OrHash),
           timeout_seconds: Integer,
           idempotency_key: String,
           x_profile_id: String,
@@ -92,6 +107,9 @@ module Sentdm
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
         sandbox: nil,
+        # Request-only: the events an organization webhook's sender profile clones
+        # receive, one clone per existing and future profile. Responses never return it.
+        sender_profile: nil,
         timeout_seconds: nil,
         idempotency_key: nil,
         x_profile_id: nil,
@@ -109,6 +127,8 @@ module Sentdm
             event_types: T::Array[String],
             retry_count: Integer,
             sandbox: T::Boolean,
+            sender_profile:
+              T.nilable(Sentdm::WebhookUpdateParams::SenderProfile),
             timeout_seconds: Integer,
             idempotency_key: String,
             x_profile_id: String,
@@ -117,6 +137,47 @@ module Sentdm
         )
       end
       def to_hash
+      end
+
+      class SenderProfile < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::WebhookUpdateParams::SenderProfile,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
+        attr_accessor :event_filters
+
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :event_types
+
+        sig { params(event_types: T::Array[String]).void }
+        attr_writer :event_types
+
+        # Request-only: the events an organization webhook's sender profile clones
+        # receive, one clone per existing and future profile. Responses never return it.
+        sig do
+          params(
+            event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
+            event_types: T::Array[String]
+          ).returns(T.attached_class)
+        end
+        def self.new(event_filters: nil, event_types: nil)
+        end
+
+        sig do
+          override.returns(
+            {
+              event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
+              event_types: T::Array[String]
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

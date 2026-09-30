@@ -11,6 +11,15 @@ module Sentdm
           T.any(Sentdm::TemplateCreateParams, Sentdm::Internal::AnyHash)
         end
 
+      # Create this template automatically on every sender profile of the organization,
+      # now and in future (default: false). Accepted only from an organization that has
+      # been enabled for it, and only at creation — it cannot be changed afterwards.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :auto_create_for_sp
+
+      sig { params(auto_create_for_sp: T::Boolean).void }
+      attr_writer :auto_create_for_sp
+
       # Template category: MARKETING, UTILITY, AUTHENTICATION (optional, auto-detected
       # if not provided)
       sig { returns(T.nilable(String)) }
@@ -61,6 +70,7 @@ module Sentdm
 
       sig do
         params(
+          auto_create_for_sp: T::Boolean,
           category: T.nilable(String),
           creation_source: T.nilable(String),
           definition: Sentdm::TemplateDefinition::OrHash,
@@ -73,6 +83,10 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        # Create this template automatically on every sender profile of the organization,
+        # now and in future (default: false). Accepted only from an organization that has
+        # been enabled for it, and only at creation — it cannot be changed afterwards.
+        auto_create_for_sp: nil,
         # Template category: MARKETING, UTILITY, AUTHENTICATION (optional, auto-detected
         # if not provided)
         category: nil,
@@ -97,6 +111,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            auto_create_for_sp: T::Boolean,
             category: T.nilable(String),
             creation_source: T.nilable(String),
             definition: Sentdm::TemplateDefinition,

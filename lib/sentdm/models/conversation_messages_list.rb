@@ -94,6 +94,24 @@ module Sentdm
         #   @return [Float, nil]
         optional :price, Float, nil?: true
 
+        # @!attribute reason
+        #   A human-readable sentence for reason_code, for example "Insufficient balance".
+        #   Omitted whenever reason_code is.
+        #
+        #   @return [String, nil]
+        optional :reason, String, nil?: true
+
+        # @!attribute reason_code
+        #   Why the message is at its current status, as a stable platform code such as
+        #   DELIVERY_007, BUSINESS_003 or DELIVERY_003. Present when the current status is
+        #   FAILED, FILTERED or BLOCKED and the lifecycle was loaded; omitted otherwise.
+        #   Switch on this rather than on reason: the code is stable, the wording may be
+        #   improved. It is the platform's classification of the outcome, never a carrier or
+        #   vendor code.
+        #
+        #   @return [String, nil]
+        optional :reason_code, String, nil?: true
+
         # @!attribute region_code
         #
         #   @return [String, nil]
@@ -119,7 +137,7 @@ module Sentdm
         #   @return [String, nil]
         optional :template_name, String, nil?: true
 
-        # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, direction: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
+        # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, direction: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, reason: nil, reason_code: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::ConversationMessagesList::Message} for more details.
         #
@@ -154,6 +172,10 @@ module Sentdm
         #
         #   @param price [Float, nil]
         #
+        #   @param reason [String, nil] A human-readable sentence for reason_code, for example "Insufficient balance". O
+        #
+        #   @param reason_code [String, nil] Why the message is at its current status, as a stable platform code such as
+        #
         #   @param region_code [String]
         #
         #   @param status [String]
@@ -180,12 +202,37 @@ module Sentdm
           #   @return [String, nil]
           optional :description, String, nil?: true
 
-          # @!method initialize(status:, timestamp:, description: nil)
+          # @!attribute reason
+          #   A human-readable sentence for reason_code. Omitted whenever reason_code is.
+          #
+          #   @return [String, nil]
+          optional :reason, String, nil?: true
+
+          # @!attribute reason_code
+          #   Why the message reached this status, as a stable platform code such as
+          #   DELIVERY_007. Present on FAILED, FILTERED and BLOCKED events; omitted on every
+          #   status that needs no explanation. Same wire name and vocabulary as on the
+          #   activities list and the webhook.
+          #
+          #   @return [String, nil]
+          optional :reason_code, String, nil?: true
+
+          # @!method initialize(status:, timestamp:, description: nil, reason: nil, reason_code: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Sentdm::Models::ConversationMessagesList::Message::Event} for more details.
+          #
           #   Represents a status change event in a message's lifecycle (v3)
           #
           #   @param status [String]
+          #
           #   @param timestamp [Time]
+          #
           #   @param description [String, nil]
+          #
+          #   @param reason [String, nil] A human-readable sentence for reason_code. Omitted whenever reason_code is.
+          #
+          #   @param reason_code [String, nil] Why the message reached this status, as a stable platform code such as
+          #   DELIVERY\_
         end
 
         # @see Sentdm::Models::ConversationMessagesList::Message#message_body
@@ -332,32 +379,72 @@ module Sentdm
 
           class Media < Sentdm::Internal::Type::BaseModel
             # @!attribute media_type
-            #   One of Constants.MmsMediaTypes when known. Advisory — the carrier reads the
-            #   fetched object's Content-Type, not this.
+            #   One of MmsMediaTypes when the content type is known. Advisory — a reader should
+            #   trust the fetched object's own Content-Type.
             #
             #   @return [String, nil]
             optional :media_type, String, api_name: :mediaType, nil?: true
 
-            # @!attribute url
+            # @!attribute mime_type
+            #   Content type as the provider declared it. Null when it declared none.
             #
             #   @return [String, nil]
-            optional :url, String
+            optional :mime_type, String, api_name: :mimeType, nil?: true
 
-            # @!method initialize(media_type: nil, url: nil)
+            # @!attribute size_bytes
+            #   Size as the provider declared it. Never measured here — nothing downloads the
+            #   file.
+            #
+            #   @return [Integer, nil]
+            optional :size_bytes, Integer, api_name: :sizeBytes, nil?: true
+
+            # @!attribute source_hash_sha256
+            #   Inbound only: the SHA-256 the provider declared alongside the attachment, when
+            #   it declared one. Relayed to the customer so they can verify what they fetch
+            #   matches what the carrier said it sent. It is the only integrity signal available
+            #   on an attachment nobody here has read.
+            #
+            #   @return [String, nil]
+            optional :source_hash_sha256, String, api_name: :sourceHashSha256, nil?: true
+
+            # @!attribute url
+            #   Where the file lives. Outbound: the URL the customer gave us and the carrier
+            #   fetched. Inbound: the URL the carrier hosts it at, relayed unchanged.
+            #
+            #   @return [String, nil]
+            optional :url, String, nil?: true
+
+            # @!method initialize(media_type: nil, mime_type: nil, size_bytes: nil, source_hash_sha256: nil, url: nil)
             #   Some parameter documentations has been truncated, see
             #   {Sentdm::Models::ConversationMessagesList::Message::MessageBody::Media} for more
             #   details.
             #
-            #   One attachment on a message: a customer-supplied public URL handed to the
-            #   carrier as-is.
+            #   One attachment on a message, in either direction — and in both, a URL somebody
+            #   else hosts.
             #
-            #                A URL and nothing else. sent.dm never takes custody of MMS media — the customer hosts it and we
-            #                pass the link through at send time — so there is no storage key, size or expiry to record. If we ever
-            #                do host attachments, that belongs with the change that introduces the hosting, not here.
+            #   Outbound: the customer supplied a public URL and we handed it to the carrier.
+            #   Inbound: the carrier hosts the file and we record where. sent.dm never holds the
+            #   bytes, so there is no key, no expiry bookkeeping and nothing minted per read —
+            #   what is stored is what is served.
             #
-            #   @param media_type [String, nil] One of Constants.MmsMediaTypes when known. Advisory — the carrier reads the
+            #   An inbound link expires on the carrier's own schedule and is unauthenticated.
+            #   That is the customer's to manage, and it is documented where they will see it
+            #   rather than only here — a recipient who needs an attachment to outlive that
+            #   window copies it on receipt.
             #
-            #   @param url [String]
+            #   Storing a presigned URL is the specific mistake this shape still avoids:
+            #   M260826130000 and M260826140000 exist because RCS assets were stored as signed
+            #   URLs and went stale. Nothing here is signed.
+            #
+            #   @param media_type [String, nil] One of MmsMediaTypes when the content type is known. Advisory — a reader should
+            #
+            #   @param mime_type [String, nil] Content type as the provider declared it. Null when it declared none.
+            #
+            #   @param size_bytes [Integer, nil] Size as the provider declared it. Never measured here — nothing downloads the fi
+            #
+            #   @param source_hash_sha256 [String, nil] Inbound only: the SHA-256 the provider declared alongside the attachment, when i
+            #
+            #   @param url [String, nil] Where the file lives. Outbound: the URL the customer gave us and the carrier fet
           end
         end
       end

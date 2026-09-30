@@ -61,13 +61,21 @@ module Sentdm
       optional :number_type, String, nil?: true
 
       # @!attribute reason
-      #   Why the market reached this state, when a reason was given — a correction
-      #   explained, or a campaign lapse. Free text, passed through from the registry or
-      #   carrier that wrote it, so treat it as a message to show a human rather than a
-      #   value to branch on.
+      #   Why the market reached this state, as a sentence to show a person: the specific
+      #   explanation when one was given (a correction explained, a campaign lapse),
+      #   otherwise what reason_code means for this market. Not a value to branch on.
       #
       #   @return [String, nil]
       optional :reason, String, nil?: true
+
+      # @!attribute reason_code
+      #   Why the market is not ACTIVE, as a stable code: an ErrorCodes CHANNEL_xxx value
+      #   such as CHANNEL_001 (something you owe) or CHANNEL_002 (a correction was
+      #   requested). The same code the channels resource reports for the market. Switch
+      #   on this rather than on reason. Omitted while ACTIVE.
+      #
+      #   @return [String, nil]
+      optional :reason_code, String, nil?: true
 
       # @!attribute sender_value
       #   The sender itself — a number in E.164, or an alphanumeric sender ID.
@@ -107,7 +115,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(country:, account_id: nil, channel: nil, compliance: nil, number_type: nil, reason: nil, sender_value: nil, status: nil, updated_at: nil)
+      # @!method initialize(country:, account_id: nil, channel: nil, compliance: nil, number_type: nil, reason: nil, reason_code: nil, sender_value: nil, status: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ChannelEventPayload} for more details.
       #
@@ -142,7 +150,9 @@ module Sentdm
       #
       #   @param number_type [String, nil] The kind of sender the market uses, for example TEN_DLC, LOCAL, or
       #
-      #   @param reason [String, nil] Why the market reached this state, when a reason was given — a correction explai
+      #   @param reason [String, nil] Why the market reached this state, as a sentence to show a person: the specific
+      #
+      #   @param reason_code [String, nil] Why the market is not ACTIVE, as a stable code: an ErrorCodes CHANNEL_xxx value
       #
       #   @param sender_value [String, nil] The sender itself — a number in E.164, or an alphanumeric sender ID.
       #

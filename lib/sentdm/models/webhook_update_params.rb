@@ -46,6 +46,13 @@ module Sentdm
       #   @return [Boolean, nil]
       optional :sandbox, Sentdm::Internal::Type::Boolean
 
+      # @!attribute sender_profile
+      #   Request-only: the events an organization webhook's sender profile clones
+      #   receive, one clone per existing and future profile. Responses never return it.
+      #
+      #   @return [Sentdm::Models::WebhookUpdateParams::SenderProfile, nil]
+      optional :sender_profile, -> { Sentdm::WebhookUpdateParams::SenderProfile }, nil?: true
+
       # @!attribute timeout_seconds
       #
       #   @return [Integer, nil]
@@ -61,7 +68,7 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(id:, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(id:, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookUpdateParams} for more details.
       #
@@ -79,6 +86,8 @@ module Sentdm
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
+      #   @param sender_profile [Sentdm::Models::WebhookUpdateParams::SenderProfile, nil] Request-only: the events an organization webhook's sender profile clones receive
+      #
       #   @param timeout_seconds [Integer]
       #
       #   @param idempotency_key [String]
@@ -86,6 +95,27 @@ module Sentdm
       #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
+
+      class SenderProfile < Sentdm::Internal::Type::BaseModel
+        # @!attribute event_filters
+        #
+        #   @return [Hash{Symbol=>Array<String>}, nil]
+        optional :event_filters,
+                 Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]],
+                 nil?: true
+
+        # @!attribute event_types
+        #
+        #   @return [Array<String>, nil]
+        optional :event_types, Sentdm::Internal::Type::ArrayOf[String]
+
+        # @!method initialize(event_filters: nil, event_types: nil)
+        #   Request-only: the events an organization webhook's sender profile clones
+        #   receive, one clone per existing and future profile. Responses never return it.
+        #
+        #   @param event_filters [Hash{Symbol=>Array<String>}, nil]
+        #   @param event_types [Array<String>]
+      end
     end
   end
 end

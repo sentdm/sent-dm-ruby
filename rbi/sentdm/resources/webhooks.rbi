@@ -23,6 +23,8 @@ module Sentdm
           event_types: T::Array[String],
           retry_count: Integer,
           sandbox: T::Boolean,
+          sender_profile:
+            T.nilable(Sentdm::WebhookCreateParams::SenderProfile::OrHash),
           timeout_seconds: Integer,
           idempotency_key: String,
           x_profile_id: String,
@@ -43,6 +45,10 @@ module Sentdm
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
+        # Body param: Request-only: the events an organization webhook's sender profile
+        # clones receive, one clone per existing and future profile. Responses never
+        # return it.
+        sender_profile: nil,
         # Body param
         timeout_seconds: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
@@ -84,6 +90,8 @@ module Sentdm
           event_types: T::Array[String],
           retry_count: Integer,
           sandbox: T::Boolean,
+          sender_profile:
+            T.nilable(Sentdm::WebhookUpdateParams::SenderProfile::OrHash),
           timeout_seconds: Integer,
           idempotency_key: String,
           x_profile_id: String,
@@ -106,6 +114,10 @@ module Sentdm
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
+        # Body param: Request-only: the events an organization webhook's sender profile
+        # clones receive, one clone per existing and future profile. Responses never
+        # return it.
+        sender_profile: nil,
         # Body param
         timeout_seconds: nil,
         # Header param: Unique key to ensure idempotent request processing. Must be 1-255
@@ -180,7 +192,9 @@ module Sentdm
       )
       end
 
-      # Retrieves a paginated list of delivery events for the specified webhook.
+      # Retrieves a paginated list of delivery events for the specified webhook. If the
+      # webhook is cloned onto your sender profiles, the list includes what those clones
+      # received; read payload.account_id to tell whose event it is.
       sig do
         params(
           id: String,

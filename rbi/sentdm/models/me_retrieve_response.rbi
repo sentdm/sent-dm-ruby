@@ -123,6 +123,25 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :email
 
+        # Whether this account may mark a template for automatic creation on its sender
+        # profiles. Granted by Sent per account and off by default, so it is what a
+        # template-create form reads to decide whether to offer the option at all —
+        # marking a template without it does nothing.
+        #
+        # Top-level rather than inside settings, which is written for type: "profile" only
+        # and so would never carry it to the account type that can act on it.
+        #
+        # This is the capability, not the stored flag: a profile reports false whatever
+        # its own row holds. A sender profile owns no sender profiles, so a template it
+        # marked would have nothing to be created on and the fan-out would never read the
+        # flag. The admin GET /customers/{id} reports the stored value instead, because
+        # that is the one an operator granted.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :enable_template_auto_creation_for_sp
+
+        sig { params(enable_template_auto_creation_for_sp: T::Boolean).void }
+        attr_writer :enable_template_auto_creation_for_sp
+
         # Account icon URL
         sig { returns(T.nilable(String)) }
         attr_accessor :icon
@@ -218,6 +237,7 @@ module Sentdm
             created_at: Time,
             description: T.nilable(String),
             email: T.nilable(String),
+            enable_template_auto_creation_for_sp: T::Boolean,
             icon: T.nilable(String),
             name: String,
             organization_id: T.nilable(String),
@@ -245,6 +265,20 @@ module Sentdm
           description: nil,
           # Contact email address
           email: nil,
+          # Whether this account may mark a template for automatic creation on its sender
+          # profiles. Granted by Sent per account and off by default, so it is what a
+          # template-create form reads to decide whether to offer the option at all —
+          # marking a template without it does nothing.
+          #
+          # Top-level rather than inside settings, which is written for type: "profile" only
+          # and so would never carry it to the account type that can act on it.
+          #
+          # This is the capability, not the stored flag: a profile reports false whatever
+          # its own row holds. A sender profile owns no sender profiles, so a template it
+          # marked would have nothing to be created on and the fan-out would never read the
+          # flag. The admin GET /customers/{id} reports the stored value instead, because
+          # that is the one an operator granted.
+          enable_template_auto_creation_for_sp: nil,
           # Account icon URL
           icon: nil,
           # Account name
@@ -293,6 +327,7 @@ module Sentdm
               created_at: Time,
               description: T.nilable(String),
               email: T.nilable(String),
+              enable_template_auto_creation_for_sp: T::Boolean,
               icon: T.nilable(String),
               name: String,
               organization_id: T.nilable(String),

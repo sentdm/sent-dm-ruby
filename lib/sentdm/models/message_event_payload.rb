@@ -51,6 +51,24 @@ module Sentdm
       #   @return [String, nil]
       optional :outbound_number, String
 
+      # @!attribute reason
+      #   A human-readable sentence for ReasonCode, for example "The recipient is not
+      #   registered on this channel". Omitted whenever reason_code is.
+      #
+      #   @return [String, nil]
+      optional :reason, String, nil?: true
+
+      # @!attribute reason_code
+      #   Why the message reached this status, as a stable platform code such as
+      #   DELIVERY_007 or BUSINESS_003. Present on message.failed, message.filtered and
+      #   message.blocked; omitted on every status that needs no explanation. Switch on
+      #   this rather than on Reason: the code is stable, the wording may be improved. It
+      #   is the platform's classification of the outcome and never a carrier or vendor
+      #   code.
+      #
+      #   @return [String, nil]
+      optional :reason_code, String, nil?: true
+
       # @!attribute schedule_reason
       #   message.scheduled only: why the message is held, either because you scheduled it
       #   or because the recipient is inside a protected quiet-hours window. Omitted on
@@ -85,7 +103,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, schedule_reason: nil, scheduled_at: nil, template_id: nil, template_name: nil, updated_at: nil)
+      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, reason: nil, reason_code: nil, schedule_reason: nil, scheduled_at: nil, template_id: nil, template_name: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::MessageEventPayload} for more details.
       #
@@ -106,6 +124,10 @@ module Sentdm
       #   @param message_id [String] The message this event describes. Stable across every event in the message's lif
       #
       #   @param outbound_number [String] The recipient's number in E.164 format.
+      #
+      #   @param reason [String, nil] A human-readable sentence for ReasonCode, for example "The recipient is not regi
+      #
+      #   @param reason_code [String, nil] Why the message reached this status, as a stable platform code such as
       #
       #   @param schedule_reason [String, nil] message.scheduled only: why the message is held, either because you scheduled it
       #

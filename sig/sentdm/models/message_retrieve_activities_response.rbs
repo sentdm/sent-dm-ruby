@@ -75,6 +75,8 @@ module Sentdm
             description: String,
             from: String?,
             price: String?,
+            reason: String?,
+            reason_code: String?,
             scheduled_at: Time?,
             status: String,
             timestamp: Time
@@ -91,6 +93,10 @@ module Sentdm
 
           attr_accessor price: String?
 
+          attr_accessor reason: String?
+
+          attr_accessor reason_code: String?
+
           attr_accessor scheduled_at: Time?
 
           attr_reader status: String?
@@ -106,6 +112,8 @@ module Sentdm
             ?description: String,
             ?from: String?,
             ?price: String?,
+            ?reason: String?,
+            ?reason_code: String?,
             ?scheduled_at: Time?,
             ?status: String,
             ?timestamp: Time
@@ -116,6 +124,8 @@ module Sentdm
             description: String,
             from: String?,
             price: String?,
+            reason: String?,
+            reason_code: String?,
             scheduled_at: Time?,
             status: String,
             timestamp: Time

@@ -7,6 +7,14 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute auto_create_for_sp
+      #   Create this template automatically on every sender profile of the organization,
+      #   now and in future (default: false). Accepted only from an organization that has
+      #   been enabled for it, and only at creation — it cannot be changed afterwards.
+      #
+      #   @return [Boolean, nil]
+      optional :auto_create_for_sp, Sentdm::Internal::Type::Boolean
+
       # @!attribute category
       #   Template category: MARKETING, UTILITY, AUTHENTICATION (optional, auto-detected
       #   if not provided)
@@ -56,9 +64,11 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateCreateParams} for more details.
+      #
+      #   @param auto_create_for_sp [Boolean] Create this template automatically on every sender profile of the organization,
       #
       #   @param category [String, nil] Template category: MARKETING, UTILITY, AUTHENTICATION (optional, auto-detected i
       #

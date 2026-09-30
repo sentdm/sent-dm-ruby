@@ -42,6 +42,7 @@ module Sentdm
           created_at: Time,
           description: String?,
           email: String?,
+          enable_template_auto_creation_for_sp: bool,
           icon: String?,
           name: String,
           organization_id: String?,
@@ -72,6 +73,10 @@ module Sentdm
         attr_accessor description: String?
 
         attr_accessor email: String?
+
+        attr_reader enable_template_auto_creation_for_sp: bool?
+
+        def enable_template_auto_creation_for_sp=: (bool) -> bool
 
         attr_accessor icon: String?
 
@@ -107,6 +112,7 @@ module Sentdm
           ?created_at: Time,
           ?description: String?,
           ?email: String?,
+          ?enable_template_auto_creation_for_sp: bool,
           ?icon: String?,
           ?name: String,
           ?organization_id: String?,
@@ -125,6 +131,7 @@ module Sentdm
           created_at: Time,
           description: String?,
           email: String?,
+          enable_template_auto_creation_for_sp: bool,
           icon: String?,
           name: String,
           organization_id: String?,
