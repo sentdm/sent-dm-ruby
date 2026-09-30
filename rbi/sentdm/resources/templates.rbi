@@ -17,6 +17,7 @@ module Sentdm
       # `PUT /v3/templates/{id}`.
       sig do
         params(
+          auto_create_for_sp: T::Boolean,
           category: T.nilable(String),
           creation_source: T.nilable(String),
           definition: Sentdm::TemplateDefinition::OrHash,
@@ -29,6 +30,11 @@ module Sentdm
         ).returns(Sentdm::APIResponseTemplate)
       end
       def create(
+        # Body param: Create this template automatically on every sender profile of the
+        # organization, now and in future (default: false). Accepted only from an
+        # organization that has been enabled for it, and only at creation — it cannot be
+        # changed afterwards.
+        auto_create_for_sp: nil,
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION (optional,
         # auto-detected if not provided)
         category: nil,
