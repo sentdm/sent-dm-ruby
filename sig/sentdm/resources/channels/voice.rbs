@@ -4,8 +4,9 @@ module Sentdm
       class Voice
         def create: (
           callback_url: String,
-          number: String,
+          ?area_code: String?,
           ?default_for_app_calls: bool?,
+          ?number: String?,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,

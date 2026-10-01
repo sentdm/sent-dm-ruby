@@ -19,11 +19,14 @@ module Sentdm
         #   @return [String]
         required :callback_url, String
 
-        # @!attribute number
-        #   One of your phone numbers, in E.164 format.
+        # @!attribute area_code
+        #   The US area code a new number should be in, as 212. Only for a request that
+        #   leaves number out — sending both says two different things about which number to
+        #   use, and is refused. Omit it too and the number comes from anywhere in the
+        #   country.
         #
-        #   @return [String]
-        required :number, String
+        #   @return [String, nil]
+        optional :area_code, String, nil?: true
 
         # @!attribute default_for_app_calls
         #   Make this the line app-originated calls are placed from when a voice token names
@@ -32,6 +35,14 @@ module Sentdm
         #
         #   @return [Boolean, nil]
         optional :default_for_app_calls, Sentdm::Internal::Type::Boolean, nil?: true
+
+        # @!attribute number
+        #   One of your phone numbers, in E.164 format. Leave the field out entirely to be
+        #   given a new one instead; sending it empty is a refused request rather than a
+        #   request for a new number.
+        #
+        #   @return [String, nil]
+        optional :number, String, nil?: true
 
         # @!attribute sandbox
         #   Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -50,15 +61,17 @@ module Sentdm
         #   @return [String, nil]
         optional :x_profile_id, String
 
-        # @!method initialize(callback_url:, number:, default_for_app_calls: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @!method initialize(callback_url:, area_code: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::VoiceCreateParams} for more details.
         #
         #   @param callback_url [String] Where Sent asks what to do with each call on this number: an absolute HTTP or HT
         #
-        #   @param number [String] One of your phone numbers, in E.164 format.
+        #   @param area_code [String, nil] The US area code a new number should be in, as 212. Only for a request that leav
         #
         #   @param default_for_app_calls [Boolean, nil] Make this the line app-originated calls are placed from when a voice token names
+        #
+        #   @param number [String, nil] One of your phone numbers, in E.164 format. Leave the field out entirely to be g
         #
         #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
         #

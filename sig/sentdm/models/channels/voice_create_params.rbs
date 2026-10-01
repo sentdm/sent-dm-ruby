@@ -4,8 +4,9 @@ module Sentdm
       type voice_create_params =
         {
           callback_url: String,
-          number: String,
+          area_code: String?,
           default_for_app_calls: bool?,
+          number: String?,
           sandbox: bool,
           idempotency_key: String,
           x_profile_id: String
@@ -18,9 +19,11 @@ module Sentdm
 
         attr_accessor callback_url: String
 
-        attr_accessor number: String
+        attr_accessor area_code: String?
 
         attr_accessor default_for_app_calls: bool?
+
+        attr_accessor number: String?
 
         attr_reader sandbox: bool?
 
@@ -36,8 +39,9 @@ module Sentdm
 
         def initialize: (
           callback_url: String,
-          number: String,
+          ?area_code: String?,
           ?default_for_app_calls: bool?,
+          ?number: String?,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
@@ -46,8 +50,9 @@ module Sentdm
 
         def to_hash: -> {
           callback_url: String,
-          number: String,
+          area_code: String?,
           default_for_app_calls: bool?,
+          number: String?,
           sandbox: bool,
           idempotency_key: String,
           x_profile_id: String,

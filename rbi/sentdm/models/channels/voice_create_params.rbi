@@ -24,15 +24,24 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :callback_url
 
-        # One of your phone numbers, in E.164 format.
-        sig { returns(String) }
-        attr_accessor :number
+        # The US area code a new number should be in, as 212. Only for a request that
+        # leaves number out — sending both says two different things about which number to
+        # use, and is refused. Omit it too and the number comes from anywhere in the
+        # country.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :area_code
 
         # Make this the line app-originated calls are placed from when a voice token names
         # no number. Omit it and your first voice number takes that role; a later one
         # leaves it where it is.
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :default_for_app_calls
+
+        # One of your phone numbers, in E.164 format. Leave the field out entirely to be
+        # given a new one instead; sending it empty is a refused request rather than a
+        # request for a new number.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :number
 
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
@@ -57,8 +66,9 @@ module Sentdm
         sig do
           params(
             callback_url: String,
-            number: String,
+            area_code: T.nilable(String),
             default_for_app_calls: T.nilable(T::Boolean),
+            number: T.nilable(String),
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
@@ -73,12 +83,19 @@ module Sentdm
           # are signed. Turning the number on again with a different URL replaces it and
           # keeps the secret.
           callback_url:,
-          # One of your phone numbers, in E.164 format.
-          number:,
+          # The US area code a new number should be in, as 212. Only for a request that
+          # leaves number out — sending both says two different things about which number to
+          # use, and is refused. Omit it too and the number comes from anywhere in the
+          # country.
+          area_code: nil,
           # Make this the line app-originated calls are placed from when a voice token names
           # no number. Omit it and your first voice number takes that role; a later one
           # leaves it where it is.
           default_for_app_calls: nil,
+          # One of your phone numbers, in E.164 format. Leave the field out entirely to be
+          # given a new one instead; sending it empty is a refused request rather than a
+          # request for a new number.
+          number: nil,
           # Sandbox flag - when true, the operation is simulated without side effects Useful
           # for testing integrations without actual execution
           sandbox: nil,
@@ -92,8 +109,9 @@ module Sentdm
           override.returns(
             {
               callback_url: String,
-              number: String,
+              area_code: T.nilable(String),
               default_for_app_calls: T.nilable(T::Boolean),
+              number: T.nilable(String),
               sandbox: T::Boolean,
               idempotency_key: String,
               x_profile_id: String,

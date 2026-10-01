@@ -6,7 +6,7 @@ class Sentdm::Test::Resources::Channels::VoiceTest < Sentdm::Test::ResourceTest
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent.channels.voice.create(callback_url: "https://example.com/voice", number: "+12125550100")
+    response = @sent.channels.voice.create(callback_url: "https://example.com/voice")
 
     assert_pattern do
       response => Sentdm::Channels::APIResponseOfVoiceNumberCreated

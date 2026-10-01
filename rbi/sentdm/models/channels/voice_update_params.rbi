@@ -128,11 +128,14 @@ module Sentdm
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+          # Turns calls on for the number again. The callback URL and the signing secret it had are kept; send `callback_url` in the same call to replace the URL.
           ACTIVE =
             T.let(
               :ACTIVE,
               Sentdm::Channels::VoiceUpdateParams::Status::TaggedSymbol
             )
+
+          # Turns calls off for the number. Refused while the number is the default line for app calls and other active voice numbers remain; move the default first. The callback URL and the secret stay on the number.
           INACTIVE =
             T.let(
               :INACTIVE,

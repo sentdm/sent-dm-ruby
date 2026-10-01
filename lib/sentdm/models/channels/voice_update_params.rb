@@ -80,7 +80,10 @@ module Sentdm
         module Status
           extend Sentdm::Internal::Type::Enum
 
+          # Turns calls on for the number again. The callback URL and the signing secret it had are kept; send `callback_url` in the same call to replace the URL.
           ACTIVE = :ACTIVE
+
+          # Turns calls off for the number. Refused while the number is the default line for app calls and other active voice numbers remain; move the default first. The callback URL and the secret stay on the number.
           INACTIVE = :INACTIVE
 
           # @!method self.values
