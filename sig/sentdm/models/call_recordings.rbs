@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    type call_recordings = { recordings: ::Array[Sentdm::CallRecording] }
+
+    class CallRecordings < Sentdm::Internal::Type::BaseModel
+      attr_reader recordings: ::Array[Sentdm::CallRecording]?
+
+      def recordings=: (
+        ::Array[Sentdm::CallRecording]
+      ) -> ::Array[Sentdm::CallRecording]
+
+      def initialize: (?recordings: ::Array[Sentdm::CallRecording]) -> void
+
+      def to_hash: -> { recordings: ::Array[Sentdm::CallRecording] }
+    end
+  end
+end

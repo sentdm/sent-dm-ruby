@@ -110,6 +110,29 @@ module Sentdm
     sig { returns(Sentdm::Resources::Conversations) }
     attr_reader :conversations
 
+    # Phone calls from the numbers you hold, driven by your own callback URL.
+    #
+    # `POST /v3/channels/voice` enables a number for calls, with the callback URL Sent
+    # asks what to do with each call on it, and `POST /v3/channels/voice/tokens` mints
+    # a short-lived token that lets a user of your app place and receive calls as that
+    # number. When a call arrives or a caller presses a key, a signed question is
+    # POSTed to the callback URL and the answer decides the call;
+    # `POST /v3/channels/voice/{number}/test` checks the URL answers the way we need
+    # before a real call reaches it, and
+    # `POST /v3/channels/voice/{number}/rotate-secret` replaces the signing secret.
+    # The call events themselves (`call.completed` and the rest) arrive through your
+    # webhooks.
+    #
+    # Every call is a record under `/v3/calls`: read it, list its recordings once one
+    # is ready, hang it up, start or stop recording, and add, mute or remove
+    # conference participants while it is live. A leg to a phone number runs for at
+    # most what your balance affords at the destination's rate.
+    sig { returns(Sentdm::Resources::Calls) }
+    attr_reader :calls
+
+    sig { returns(Sentdm::Resources::Channels) }
+    attr_reader :channels
+
     # Who the current key is.
     #
     # `GET /v3/me` answers with the account the key authenticates as, which is the

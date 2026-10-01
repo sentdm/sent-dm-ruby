@@ -1,0 +1,51 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_callback_test =
+        {
+          answer: top?,
+          call_id: String,
+          error: Sentdm::Channels::VoiceCallbackTestErrorInfo?,
+          outcome: String,
+          request: Sentdm::Channels::VoiceCallbackTestRequestInfo?,
+          response: Sentdm::Channels::VoiceCallbackTestResponseInfo?
+        }
+
+      class VoiceCallbackTest < Sentdm::Internal::Type::BaseModel
+        attr_accessor answer: top?
+
+        attr_reader call_id: String?
+
+        def call_id=: (String) -> String
+
+        attr_accessor error: Sentdm::Channels::VoiceCallbackTestErrorInfo?
+
+        attr_reader outcome: String?
+
+        def outcome=: (String) -> String
+
+        attr_accessor request: Sentdm::Channels::VoiceCallbackTestRequestInfo?
+
+        attr_accessor response: Sentdm::Channels::VoiceCallbackTestResponseInfo?
+
+        def initialize: (
+          ?answer: top?,
+          ?call_id: String,
+          ?error: Sentdm::Channels::VoiceCallbackTestErrorInfo?,
+          ?outcome: String,
+          ?request: Sentdm::Channels::VoiceCallbackTestRequestInfo?,
+          ?response: Sentdm::Channels::VoiceCallbackTestResponseInfo?
+        ) -> void
+
+        def to_hash: -> {
+          answer: top?,
+          call_id: String,
+          error: Sentdm::Channels::VoiceCallbackTestErrorInfo?,
+          outcome: String,
+          request: Sentdm::Channels::VoiceCallbackTestRequestInfo?,
+          response: Sentdm::Channels::VoiceCallbackTestResponseInfo?
+        }
+      end
+    end
+  end
+end

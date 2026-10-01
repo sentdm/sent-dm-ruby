@@ -1,0 +1,50 @@
+module Sentdm
+  module Resources
+    class Calls
+      attr_reader participants: Sentdm::Resources::Calls::Participants
+
+      def retrieve: (
+        String id,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfCall
+
+      def list: (
+        ?direction: String?,
+        ?from: Time?,
+        ?number: String?,
+        ?page: Integer,
+        ?page_size: Integer,
+        ?status: String?,
+        ?to: Time?,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Internal::CallsPage[Sentdm::Call]
+
+      def hangup: (
+        String id,
+        ?sandbox: bool,
+        ?idempotency_key: String,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> nil
+
+      def list_recordings: (
+        String id,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfCallRecordings
+
+      def record: (
+        String id,
+        ?action: String,
+        ?sandbox: bool,
+        ?idempotency_key: String,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> nil
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end
