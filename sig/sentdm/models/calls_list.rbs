@@ -1,0 +1,26 @@
+module Sentdm
+  module Models
+    type calls_list =
+      { calls: ::Array[Sentdm::Call], pagination: Sentdm::PaginationMeta }
+
+    class CallsList < Sentdm::Internal::Type::BaseModel
+      attr_reader calls: ::Array[Sentdm::Call]?
+
+      def calls=: (::Array[Sentdm::Call]) -> ::Array[Sentdm::Call]
+
+      attr_reader pagination: Sentdm::PaginationMeta?
+
+      def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+      def initialize: (
+        ?calls: ::Array[Sentdm::Call],
+        ?pagination: Sentdm::PaginationMeta
+      ) -> void
+
+      def to_hash: -> {
+        calls: ::Array[Sentdm::Call],
+        pagination: Sentdm::PaginationMeta
+      }
+    end
+  end
+end
