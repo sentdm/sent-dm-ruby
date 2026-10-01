@@ -1,0 +1,19 @@
+module Sentdm
+  module Models
+    type call_timeline_entry = { status: String, timestamp: Time }
+
+    class CallTimelineEntry < Sentdm::Internal::Type::BaseModel
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_reader timestamp: Time?
+
+      def timestamp=: (Time) -> Time
+
+      def initialize: (?status: String, ?timestamp: Time) -> void
+
+      def to_hash: -> { status: String, timestamp: Time }
+    end
+  end
+end

@@ -87,7 +87,7 @@ module Sentdm
         | Sentdm::ChannelEvent
         | Sentdm::ContactEvent
         | Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfLinkWebhookPayload
-        | Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload
+        | Sentdm::CallEvent
 
       module EventData
         extend Sentdm::Internal::Type::Union
@@ -232,112 +232,6 @@ module Sentdm
               sender_profile_id: String?,
               status_code: Integer?,
               traffic_class: String?
-            }
-          end
-        end
-
-        type sent_dm_services_common_services_webhooks_contracts_webhook_event_of_call_webhook_payload =
-          {
-            event: String?,
-            field: String,
-            payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload?,
-            request_id: String?,
-            timestamp: String
-          }
-
-        class SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload < Sentdm::Internal::Type::BaseModel
-          attr_accessor event: String?
-
-          attr_reader field: String?
-
-          def field=: (String) -> String
-
-          attr_accessor payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload?
-
-          attr_accessor request_id: String?
-
-          attr_reader timestamp: String?
-
-          def timestamp=: (String) -> String
-
-          def initialize: (
-            ?event: String?,
-            ?field: String,
-            ?payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload?,
-            ?request_id: String?,
-            ?timestamp: String
-          ) -> void
-
-          def to_hash: -> {
-            event: String?,
-            field: String,
-            payload: Sentdm::Models::WebhookListEventsResponse::EventData::SentDmServicesCommonServicesWebhooksContractsWebhookEventOfCallWebhookPayload::Payload?,
-            request_id: String?,
-            timestamp: String
-          }
-
-          type payload =
-            {
-              call_id: String,
-              account_id: String,
-              channel: String,
-              duration_seconds: Integer?,
-              number: String,
-              price: Float?,
-              reason: String?,
-              recording_id: String?,
-              updated_at: String
-            }
-
-          class Payload < Sentdm::Internal::Type::BaseModel
-            attr_accessor call_id: String
-
-            attr_reader account_id: String?
-
-            def account_id=: (String) -> String
-
-            attr_reader channel: String?
-
-            def channel=: (String) -> String
-
-            attr_accessor duration_seconds: Integer?
-
-            attr_reader number: String?
-
-            def number=: (String) -> String
-
-            attr_accessor price: Float?
-
-            attr_accessor reason: String?
-
-            attr_accessor recording_id: String?
-
-            attr_reader updated_at: String?
-
-            def updated_at=: (String) -> String
-
-            def initialize: (
-              call_id: String,
-              ?account_id: String,
-              ?channel: String,
-              ?duration_seconds: Integer?,
-              ?number: String,
-              ?price: Float?,
-              ?reason: String?,
-              ?recording_id: String?,
-              ?updated_at: String
-            ) -> void
-
-            def to_hash: -> {
-              call_id: String,
-              account_id: String,
-              channel: String,
-              duration_seconds: Integer?,
-              number: String,
-              price: Float?,
-              reason: String?,
-              recording_id: String?,
-              updated_at: String
             }
           end
         end

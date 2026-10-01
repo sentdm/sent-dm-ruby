@@ -1,0 +1,9 @@
+module Sentdm
+  module Resources
+    class Channels
+      attr_reader voice: Sentdm::Resources::Channels::Voice
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

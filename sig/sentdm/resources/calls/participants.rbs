@@ -1,0 +1,50 @@
+module Sentdm
+  module Resources
+    class Calls
+      class Participants
+        def update: (
+          String participant_id,
+          id: String,
+          ?muted: bool,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> nil
+
+        def list: (
+          String id,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Calls::APIResponseOfListOfCallParticipant
+
+        def add: (
+          String id,
+          ?caller_id: String?,
+          ?sandbox: bool,
+          ?to: Sentdm::Calls::CallParticipantTarget,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::APIResponseOfCall
+
+        def remove: (
+          String participant_id,
+          id: String,
+          ?sandbox: bool,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> nil
+
+        def remove_all: (
+          String id,
+          ?sandbox: bool,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> nil
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

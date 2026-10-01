@@ -1,0 +1,68 @@
+module Sentdm
+  module Resources
+    class Channels
+      class Voice
+        def create: (
+          callback_url: String,
+          ?area_code: String?,
+          ?default_for_app_calls: bool?,
+          ?number: String?,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfVoiceNumberCreated
+
+        def retrieve: (
+          String number,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfVoiceNumber
+
+        def update: (
+          String number,
+          ?callback_url: String?,
+          ?default_for_app_calls: bool?,
+          ?sandbox: bool,
+          ?status: Sentdm::Models::Channels::VoiceUpdateParams::status?,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfVoiceNumber
+
+        def list: (
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfListOfVoiceNumber
+
+        def create_token: (
+          ?identity: String,
+          ?number: String?,
+          ?sandbox: bool,
+          ?ttl: Integer?,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfVoiceToken
+
+        def rotate_secret: (
+          String number,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfVoiceSecret
+
+        def test_: (
+          String number,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfVoiceCallbackTest
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

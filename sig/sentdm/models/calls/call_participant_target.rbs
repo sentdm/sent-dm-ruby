@@ -1,0 +1,23 @@
+module Sentdm
+  module Models
+    class CallParticipantTarget = Calls::CallParticipantTarget
+
+    module Calls
+      type call_participant_target = { kind: String, value: String }
+
+      class CallParticipantTarget < Sentdm::Internal::Type::BaseModel
+        attr_reader kind: String?
+
+        def kind=: (String) -> String
+
+        attr_reader value: String?
+
+        def value=: (String) -> String
+
+        def initialize: (?kind: String, ?value: String) -> void
+
+        def to_hash: -> { kind: String, value: String }
+      end
+    end
+  end
+end
