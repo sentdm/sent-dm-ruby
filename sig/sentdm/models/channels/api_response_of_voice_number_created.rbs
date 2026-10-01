@@ -1,0 +1,41 @@
+module Sentdm
+  module Models
+    module Channels
+      type api_response_of_voice_number_created =
+        {
+          data: Sentdm::Channels::VoiceNumberCreated?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+
+      class APIResponseOfVoiceNumberCreated < Sentdm::Internal::Type::BaseModel
+        attr_accessor data: Sentdm::Channels::VoiceNumberCreated?
+
+        attr_accessor error: Sentdm::ErrorDetail?
+
+        attr_reader meta: Sentdm::APIMeta?
+
+        def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (
+          ?data: Sentdm::Channels::VoiceNumberCreated?,
+          ?error: Sentdm::ErrorDetail?,
+          ?meta: Sentdm::APIMeta,
+          ?success: bool
+        ) -> void
+
+        def to_hash: -> {
+          data: Sentdm::Channels::VoiceNumberCreated?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+      end
+    end
+  end
+end
