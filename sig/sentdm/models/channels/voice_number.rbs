@@ -1,0 +1,57 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_number =
+        {
+          callback_url: String?,
+          created_at: Time,
+          default_for_app_calls: bool,
+          number: String,
+          status: String,
+          updated_at: Time
+        }
+
+      class VoiceNumber < Sentdm::Internal::Type::BaseModel
+        attr_accessor callback_url: String?
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader default_for_app_calls: bool?
+
+        def default_for_app_calls=: (bool) -> bool
+
+        attr_reader number: String?
+
+        def number=: (String) -> String
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        attr_reader updated_at: Time?
+
+        def updated_at=: (Time) -> Time
+
+        def initialize: (
+          ?callback_url: String?,
+          ?created_at: Time,
+          ?default_for_app_calls: bool,
+          ?number: String,
+          ?status: String,
+          ?updated_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          callback_url: String?,
+          created_at: Time,
+          default_for_app_calls: bool,
+          number: String,
+          status: String,
+          updated_at: Time
+        }
+      end
+    end
+  end
+end

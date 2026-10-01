@@ -41,6 +41,12 @@ module Sentdm
 
   APIMeta = Sentdm::Models::APIMeta
 
+  APIResponseOfCall = Sentdm::Models::APIResponseOfCall
+
+  APIResponseOfCallRecordings = Sentdm::Models::APIResponseOfCallRecordings
+
+  APIResponseOfCallsList = Sentdm::Models::APIResponseOfCallsList
+
   APIResponseOfContact = Sentdm::Models::APIResponseOfContact
 
   APIResponseOfContactMessageSummary = Sentdm::Models::APIResponseOfContactMessageSummary
@@ -67,9 +73,39 @@ module Sentdm
 
   BrandsBrandData = Sentdm::Models::BrandsBrandData
 
+  Call = Sentdm::Models::Call
+
+  CallEvent = Sentdm::Models::CallEvent
+
+  CallEventPayload = Sentdm::Models::CallEventPayload
+
+  CallHangupParams = Sentdm::Models::CallHangupParams
+
+  CallListParams = Sentdm::Models::CallListParams
+
+  CallListRecordingsParams = Sentdm::Models::CallListRecordingsParams
+
+  CallParty = Sentdm::Models::CallParty
+
+  CallRecording = Sentdm::Models::CallRecording
+
+  CallRecordings = Sentdm::Models::CallRecordings
+
+  CallRecordParams = Sentdm::Models::CallRecordParams
+
+  CallRetrieveParams = Sentdm::Models::CallRetrieveParams
+
+  Calls = Sentdm::Models::Calls
+
+  CallsList = Sentdm::Models::CallsList
+
+  CallTimelineEntry = Sentdm::Models::CallTimelineEntry
+
   ChannelEvent = Sentdm::Models::ChannelEvent
 
   ChannelEventPayload = Sentdm::Models::ChannelEventPayload
+
+  Channels = Sentdm::Models::Channels
 
   ContactCreateParams = Sentdm::Models::ContactCreateParams
 

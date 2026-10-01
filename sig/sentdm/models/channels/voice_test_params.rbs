@@ -1,0 +1,40 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_test_params =
+        { number: String, idempotency_key: String, x_profile_id: String }
+        & Sentdm::Internal::Type::request_parameters
+
+      class VoiceTestParams < Sentdm::Models::MutationRequest
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        def number: -> String
+
+        def number=: (String _) -> String
+
+        def idempotency_key: -> String?
+
+        def idempotency_key=: (String _) -> String
+
+        def x_profile_id: -> String?
+
+        def x_profile_id=: (String _) -> String
+
+        def initialize: (
+          number: String,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          number: String,
+          idempotency_key: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end

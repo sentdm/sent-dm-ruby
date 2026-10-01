@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_number_created = { callback_secret: String }
+
+      class VoiceNumberCreated < Sentdm::Models::Channels::VoiceNumber
+        def callback_secret: -> String?
+
+        def callback_secret=: (String _) -> String
+
+        def initialize: (?callback_secret: String) -> void
+
+        def to_hash: -> { callback_secret: String }
+      end
+    end
+  end
+end

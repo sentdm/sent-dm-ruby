@@ -1,0 +1,34 @@
+module Sentdm
+  module Models
+    module Calls
+      type participant_remove_all_params =
+        { id: String, x_profile_id: String }
+        & Sentdm::Internal::Type::request_parameters
+
+      class ParticipantRemoveAllParams < Sentdm::Models::MutationRequest
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        def id: -> String
+
+        def id=: (String _) -> String
+
+        def x_profile_id: -> String?
+
+        def x_profile_id=: (String _) -> String
+
+        def initialize: (
+          id: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end

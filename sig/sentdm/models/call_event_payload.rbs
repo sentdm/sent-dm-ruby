@@ -1,0 +1,68 @@
+module Sentdm
+  module Models
+    type call_event_payload =
+      {
+        call_id: String,
+        account_id: String,
+        channel: String,
+        duration_seconds: Integer?,
+        number: String,
+        price: Float?,
+        reason: String?,
+        recording_id: String?,
+        updated_at: String
+      }
+
+    class CallEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor call_id: String
+
+      attr_reader account_id: String?
+
+      def account_id=: (String) -> String
+
+      attr_reader channel: String?
+
+      def channel=: (String) -> String
+
+      attr_accessor duration_seconds: Integer?
+
+      attr_reader number: String?
+
+      def number=: (String) -> String
+
+      attr_accessor price: Float?
+
+      attr_accessor reason: String?
+
+      attr_accessor recording_id: String?
+
+      attr_reader updated_at: String?
+
+      def updated_at=: (String) -> String
+
+      def initialize: (
+        call_id: String,
+        ?account_id: String,
+        ?channel: String,
+        ?duration_seconds: Integer?,
+        ?number: String,
+        ?price: Float?,
+        ?reason: String?,
+        ?recording_id: String?,
+        ?updated_at: String
+      ) -> void
+
+      def to_hash: -> {
+        call_id: String,
+        account_id: String,
+        channel: String,
+        duration_seconds: Integer?,
+        number: String,
+        price: Float?,
+        reason: String?,
+        recording_id: String?,
+        updated_at: String
+      }
+    end
+  end
+end

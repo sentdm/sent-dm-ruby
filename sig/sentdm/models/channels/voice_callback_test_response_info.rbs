@@ -1,0 +1,20 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_callback_test_response_info =
+        { body: String?, status_code: Integer }
+
+      class VoiceCallbackTestResponseInfo < Sentdm::Internal::Type::BaseModel
+        attr_accessor body: String?
+
+        attr_reader status_code: Integer?
+
+        def status_code=: (Integer) -> Integer
+
+        def initialize: (?body: String?, ?status_code: Integer) -> void
+
+        def to_hash: -> { body: String?, status_code: Integer }
+      end
+    end
+  end
+end

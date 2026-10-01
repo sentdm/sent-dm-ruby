@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    type call_recording =
+      { download_url: String, recording_id: String, url_expires_at: Time }
+
+    class CallRecording < Sentdm::Internal::Type::BaseModel
+      attr_reader download_url: String?
+
+      def download_url=: (String) -> String
+
+      attr_reader recording_id: String?
+
+      def recording_id=: (String) -> String
+
+      attr_reader url_expires_at: Time?
+
+      def url_expires_at=: (Time) -> Time
+
+      def initialize: (
+        ?download_url: String,
+        ?recording_id: String,
+        ?url_expires_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        download_url: String,
+        recording_id: String,
+        url_expires_at: Time
+      }
+    end
+  end
+end

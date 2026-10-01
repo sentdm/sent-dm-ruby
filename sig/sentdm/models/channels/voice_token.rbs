@@ -1,0 +1,40 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_token =
+        { token: String, expires_at: Time, identity: String, number: String }
+
+      class VoiceToken < Sentdm::Internal::Type::BaseModel
+        attr_reader token: String?
+
+        def token=: (String) -> String
+
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
+        attr_reader identity: String?
+
+        def identity=: (String) -> String
+
+        attr_reader number: String?
+
+        def number=: (String) -> String
+
+        def initialize: (
+          ?token: String,
+          ?expires_at: Time,
+          ?identity: String,
+          ?number: String
+        ) -> void
+
+        def to_hash: -> {
+          token: String,
+          expires_at: Time,
+          identity: String,
+          number: String
+        }
+      end
+    end
+  end
+end

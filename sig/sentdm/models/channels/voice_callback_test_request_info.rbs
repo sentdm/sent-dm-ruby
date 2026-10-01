@@ -1,0 +1,34 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_callback_test_request_info =
+        { body: String, headers: ::Hash[Symbol, String], url: String }
+
+      class VoiceCallbackTestRequestInfo < Sentdm::Internal::Type::BaseModel
+        attr_reader body: String?
+
+        def body=: (String) -> String
+
+        attr_reader headers: ::Hash[Symbol, String]?
+
+        def headers=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          ?body: String,
+          ?headers: ::Hash[Symbol, String],
+          ?url: String
+        ) -> void
+
+        def to_hash: -> {
+          body: String,
+          headers: ::Hash[Symbol, String],
+          url: String
+        }
+      end
+    end
+  end
+end

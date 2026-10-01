@@ -1,0 +1,52 @@
+module Sentdm
+  module Models
+    class CallParticipant = Calls::CallParticipant
+
+    module Calls
+      type call_participant =
+        {
+          id: String,
+          duration_seconds: Integer,
+          kind: String,
+          muted: bool,
+          value: String?
+        }
+
+      class CallParticipant < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader duration_seconds: Integer?
+
+        def duration_seconds=: (Integer) -> Integer
+
+        attr_reader kind: String?
+
+        def kind=: (String) -> String
+
+        attr_reader muted: bool?
+
+        def muted=: (bool) -> bool
+
+        attr_accessor value: String?
+
+        def initialize: (
+          ?id: String,
+          ?duration_seconds: Integer,
+          ?kind: String,
+          ?muted: bool,
+          ?value: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          duration_seconds: Integer,
+          kind: String,
+          muted: bool,
+          value: String?
+        }
+      end
+    end
+  end
+end
