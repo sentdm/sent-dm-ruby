@@ -39,8 +39,9 @@ module Sentdm
 
       # @!attribute failure_reason
       #   Why the call did not complete: callback_timeout, invalid_answer,
-      #   insufficient_balance, destination_blocked, rejected or no_answer. Null while the
-      #   call is live, when it completed, and when it failed without a recorded reason
+      #   insufficient_balance, destination_blocked, callback_not_configured, rejected or
+      #   no_answer. Null while the call is live, when it completed, and when it failed
+      #   without a recorded reason
       #
       #   @return [String, nil]
       optional :failure_reason, String, nil?: true
@@ -77,7 +78,7 @@ module Sentdm
       optional :started_at, Time
 
       # @!attribute status
-      #   initiated, ringing, answered, completed, failed, no_answer or rejected
+      #   INITIATED, RINGING, ANSWERED, COMPLETED, FAILED, NO_ANSWER or REJECTED
       #
       #   @return [String, nil]
       optional :status, String
@@ -123,7 +124,7 @@ module Sentdm
       #
       #   @param started_at [Time] When the call was placed (UTC)
       #
-      #   @param status [String] initiated, ringing, answered, completed, failed, no_answer or rejected
+      #   @param status [String] INITIATED, RINGING, ANSWERED, COMPLETED, FAILED, NO_ANSWER or REJECTED
       #
       #   @param timeline [Array<Sentdm::Models::CallTimelineEntry>, nil] When the call entered each status, oldest first. Only returned when reading one
       #

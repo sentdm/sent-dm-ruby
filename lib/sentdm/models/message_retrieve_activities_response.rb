@@ -116,10 +116,12 @@ module Sentdm
           optional :reason_code, String, nil?: true
 
           # @!attribute scheduled_at
-          #   SCHEDULED activities only: when the held message will be released for delivery,
-          #   in UTC. Same wire name as on the send response, the message and the webhook.
-          #   Omitted on every other activity. A message that quiet hours moved at release has
-          #   two SCHEDULED entries, each carrying the instant as it stood at that moment.
+          #   SCHEDULED and CANCELLED activities only, in UTC: on a SCHEDULED entry, when the
+          #   held message will be released for delivery; on a CANCELLED entry, the instant
+          #   that was called off. Same wire name as on the send response, the message and the
+          #   webhook. Omitted on every other activity. A message that quiet hours moved at
+          #   release has two SCHEDULED entries, each carrying the instant as it stood at that
+          #   moment.
           #
           #   @return [Time, nil]
           optional :scheduled_at, Time, nil?: true
@@ -161,7 +163,7 @@ module Sentdm
           #   @param reason_code [String, nil] Why the message reached this status, as a stable platform code such as
           #   DELIVERY\_
           #
-          #   @param scheduled_at [Time, nil] SCHEDULED activities only: when the held message will be released for delivery,
+          #   @param scheduled_at [Time, nil] SCHEDULED and CANCELLED activities only, in UTC: on a SCHEDULED entry, when the
           #
           #   @param status [String] Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SCHEDULED, SENT, DELIVERED
           #

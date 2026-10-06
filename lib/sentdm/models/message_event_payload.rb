@@ -72,14 +72,19 @@ module Sentdm
       # @!attribute schedule_reason
       #   message.scheduled only: why the message is held, either because you scheduled it
       #   or because the recipient is inside a protected quiet-hours window. Omitted on
-      #   every other event.
+      #   every other event, including message.cancelled — that is a property of the hold,
+      #   not of the cancellation, and repeating it there would read as "why was this
+      #   cancelled", which it does not answer.
       #
       #   @return [String, nil]
       optional :schedule_reason, String, nil?: true
 
       # @!attribute scheduled_at
-      #   message.scheduled only: when the held message will be released for delivery, in
-      #   UTC (yyyy-MM-ddTHH:mm:ssZ). Omitted on every other event.
+      #   message.scheduled and message.cancelled only, in UTC (yyyy-MM-ddTHH:mm:ssZ): on
+      #   message.scheduled it is when the held message will be released for delivery, on
+      #   message.cancelled the release instant that was called off — the same instant,
+      #   before and after. A consumer that recorded a future send from the first event
+      #   has what it needs to un-record it from the second. Omitted on every other event.
       #
       #   @return [String, nil]
       optional :scheduled_at, String, nil?: true
@@ -131,7 +136,7 @@ module Sentdm
       #
       #   @param schedule_reason [String, nil] message.scheduled only: why the message is held, either because you scheduled it
       #
-      #   @param scheduled_at [String, nil] message.scheduled only: when the held message will be released for delivery, in
+      #   @param scheduled_at [String, nil] message.scheduled and message.cancelled only, in UTC (yyyy-MM-ddTHH:mm:ssZ): on
       #
       #   @param template_id [String, nil] The template the message was sent from, when it was sent from one.
       #

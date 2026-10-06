@@ -35,8 +35,9 @@ module Sentdm
       attr_accessor :ended_at
 
       # Why the call did not complete: callback_timeout, invalid_answer,
-      # insufficient_balance, destination_blocked, rejected or no_answer. Null while the
-      # call is live, when it completed, and when it failed without a recorded reason
+      # insufficient_balance, destination_blocked, callback_not_configured, rejected or
+      # no_answer. Null while the call is live, when it completed, and when it failed
+      # without a recorded reason
       sig { returns(T.nilable(String)) }
       attr_accessor :failure_reason
 
@@ -73,7 +74,7 @@ module Sentdm
       sig { params(started_at: Time).void }
       attr_writer :started_at
 
-      # initiated, ringing, answered, completed, failed, no_answer or rejected
+      # INITIATED, RINGING, ANSWERED, COMPLETED, FAILED, NO_ANSWER or REJECTED
       sig { returns(T.nilable(String)) }
       attr_reader :status
 
@@ -126,8 +127,9 @@ module Sentdm
         # When the call ended (UTC). Null while the call is live
         ended_at: nil,
         # Why the call did not complete: callback_timeout, invalid_answer,
-        # insufficient_balance, destination_blocked, rejected or no_answer. Null while the
-        # call is live, when it completed, and when it failed without a recorded reason
+        # insufficient_balance, destination_blocked, callback_not_configured, rejected or
+        # no_answer. Null while the call is live, when it completed, and when it failed
+        # without a recorded reason
         failure_reason: nil,
         # One end of a call
         from: nil,
@@ -140,7 +142,7 @@ module Sentdm
         recording_available: nil,
         # When the call was placed (UTC)
         started_at: nil,
-        # initiated, ringing, answered, completed, failed, no_answer or rejected
+        # INITIATED, RINGING, ANSWERED, COMPLETED, FAILED, NO_ANSWER or REJECTED
         status: nil,
         # When the call entered each status, oldest first. Only returned when reading one
         # call
