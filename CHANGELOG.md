@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.35.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.34.0...v0.35.0) (2026-10-01)
+
+
+### Features
+
+* **api:** add voice and calls endpoints to the SDKs ([53f68a7](https://github.com/sentdm/sent-dm-ruby/commit/53f68a7293095980d2674fd20bbcc6045883554d))
+* **api:** sync generated SDKs from the committed spec ([b6fbc5a](https://github.com/sentdm/sent-dm-ruby/commit/b6fbc5a4e562a8f0354c7e2a9c9a357d1207cb6b))
+
 ## [0.34.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.33.0...v0.34.0) (2026-09-30)
 
 

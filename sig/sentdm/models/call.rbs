@@ -1,0 +1,101 @@
+module Sentdm
+  module Models
+    type call =
+      {
+        id: String,
+        answered_at: Time?,
+        direction: String,
+        duration_seconds: Integer?,
+        ended_at: Time?,
+        failure_reason: String?,
+        from: Sentdm::CallParty,
+        number: String,
+        price: Float?,
+        recording_available: bool,
+        started_at: Time,
+        status: String,
+        timeline: ::Array[Sentdm::CallTimelineEntry]?,
+        to: Sentdm::CallParty
+      }
+
+    class Call < Sentdm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_accessor answered_at: Time?
+
+      attr_reader direction: String?
+
+      def direction=: (String) -> String
+
+      attr_accessor duration_seconds: Integer?
+
+      attr_accessor ended_at: Time?
+
+      attr_accessor failure_reason: String?
+
+      attr_reader from: Sentdm::CallParty?
+
+      def from=: (Sentdm::CallParty) -> Sentdm::CallParty
+
+      attr_reader number: String?
+
+      def number=: (String) -> String
+
+      attr_accessor price: Float?
+
+      attr_reader recording_available: bool?
+
+      def recording_available=: (bool) -> bool
+
+      attr_reader started_at: Time?
+
+      def started_at=: (Time) -> Time
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_accessor timeline: ::Array[Sentdm::CallTimelineEntry]?
+
+      attr_reader to: Sentdm::CallParty?
+
+      def to=: (Sentdm::CallParty) -> Sentdm::CallParty
+
+      def initialize: (
+        ?id: String,
+        ?answered_at: Time?,
+        ?direction: String,
+        ?duration_seconds: Integer?,
+        ?ended_at: Time?,
+        ?failure_reason: String?,
+        ?from: Sentdm::CallParty,
+        ?number: String,
+        ?price: Float?,
+        ?recording_available: bool,
+        ?started_at: Time,
+        ?status: String,
+        ?timeline: ::Array[Sentdm::CallTimelineEntry]?,
+        ?to: Sentdm::CallParty
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        answered_at: Time?,
+        direction: String,
+        duration_seconds: Integer?,
+        ended_at: Time?,
+        failure_reason: String?,
+        from: Sentdm::CallParty,
+        number: String,
+        price: Float?,
+        recording_available: bool,
+        started_at: Time,
+        status: String,
+        timeline: ::Array[Sentdm::CallTimelineEntry]?,
+        to: Sentdm::CallParty
+      }
+    end
+  end
+end

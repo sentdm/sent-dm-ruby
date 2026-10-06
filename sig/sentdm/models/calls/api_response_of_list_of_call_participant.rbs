@@ -1,0 +1,41 @@
+module Sentdm
+  module Models
+    module Calls
+      type api_response_of_list_of_call_participant =
+        {
+          data: ::Array[Sentdm::Calls::CallParticipant]?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+
+      class APIResponseOfListOfCallParticipant < Sentdm::Internal::Type::BaseModel
+        attr_accessor data: ::Array[Sentdm::Calls::CallParticipant]?
+
+        attr_accessor error: Sentdm::ErrorDetail?
+
+        attr_reader meta: Sentdm::APIMeta?
+
+        def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (
+          ?data: ::Array[Sentdm::Calls::CallParticipant]?,
+          ?error: Sentdm::ErrorDetail?,
+          ?meta: Sentdm::APIMeta,
+          ?success: bool
+        ) -> void
+
+        def to_hash: -> {
+          data: ::Array[Sentdm::Calls::CallParticipant]?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+      end
+    end
+  end
+end

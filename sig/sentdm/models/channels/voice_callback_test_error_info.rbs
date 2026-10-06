@@ -1,0 +1,28 @@
+module Sentdm
+  module Models
+    module Channels
+      type voice_callback_test_error_info =
+        { message: String, path: String?, reason: String }
+
+      class VoiceCallbackTestErrorInfo < Sentdm::Internal::Type::BaseModel
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_accessor path: String?
+
+        attr_reader reason: String?
+
+        def reason=: (String) -> String
+
+        def initialize: (
+          ?message: String,
+          ?path: String?,
+          ?reason: String
+        ) -> void
+
+        def to_hash: -> { message: String, path: String?, reason: String }
+      end
+    end
+  end
+end

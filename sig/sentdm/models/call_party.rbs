@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    type call_party = { kind: String, value: String? }
+
+    class CallParty < Sentdm::Internal::Type::BaseModel
+      attr_reader kind: String?
+
+      def kind=: (String) -> String
+
+      attr_accessor value: String?
+
+      def initialize: (?kind: String, ?value: String?) -> void
+
+      def to_hash: -> { kind: String, value: String? }
+    end
+  end
+end

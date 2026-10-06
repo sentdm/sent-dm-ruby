@@ -1,0 +1,39 @@
+module Sentdm
+  module Models
+    type api_response_of_call =
+      {
+        data: Sentdm::Call?,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class APIResponseOfCall < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Call?
+
+      attr_accessor error: Sentdm::ErrorDetail?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Call?,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Call?,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+    end
+  end
+end
