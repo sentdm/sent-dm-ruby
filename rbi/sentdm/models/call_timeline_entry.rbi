@@ -8,7 +8,7 @@ module Sentdm
           T.any(Sentdm::CallTimelineEntry, Sentdm::Internal::AnyHash)
         end
 
-      # initiated, ringing, answered, completed, failed, no_answer or rejected
+      # INITIATED, RINGING, ANSWERED, COMPLETED, FAILED, NO_ANSWER or REJECTED
       sig { returns(T.nilable(String)) }
       attr_reader :status
 
@@ -25,7 +25,7 @@ module Sentdm
       # When a call entered a status
       sig { params(status: String, timestamp: Time).returns(T.attached_class) }
       def self.new(
-        # initiated, ringing, answered, completed, failed, no_answer or rejected
+        # INITIATED, RINGING, ANSWERED, COMPLETED, FAILED, NO_ANSWER or REJECTED
         status: nil,
         # When the call entered this status (UTC)
         timestamp: nil
