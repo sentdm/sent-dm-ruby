@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type webhook_create_params =
       {
+        api_key: String,
         display_name: String,
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -18,6 +19,10 @@ module Sentdm
     class WebhookCreateParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader api_key: String?
+
+      def api_key=: (String) -> String
 
       attr_reader display_name: String?
 
@@ -56,6 +61,7 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
+        ?api_key: String,
         ?display_name: String,
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -70,6 +76,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        api_key: String,
         display_name: String,
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,

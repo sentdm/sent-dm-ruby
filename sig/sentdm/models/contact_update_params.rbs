@@ -3,6 +3,7 @@ module Sentdm
     type contact_update_params =
       {
         id: String,
+        api_key: String,
         default_channel: String?,
         opt_out: bool?,
         sandbox: bool,
@@ -16,6 +17,10 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor id: String
+
+      attr_reader api_key: String?
+
+      def api_key=: (String) -> String
 
       attr_accessor default_channel: String?
 
@@ -35,6 +40,7 @@ module Sentdm
 
       def initialize: (
         id: String,
+        ?api_key: String,
         ?default_channel: String?,
         ?opt_out: bool?,
         ?sandbox: bool,
@@ -45,6 +51,7 @@ module Sentdm
 
       def to_hash: -> {
         id: String,
+        api_key: String,
         default_channel: String?,
         opt_out: bool?,
         sandbox: bool,

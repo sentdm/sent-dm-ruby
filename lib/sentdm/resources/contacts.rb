@@ -18,9 +18,11 @@ module Sentdm
       # Creates a new contact by phone number and associates it with the authenticated
       # customer.
       #
-      # @overload create(phone_number:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(phone_number:, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param phone_number [String] Body param: Phone number of the contact to create
+      #
+      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -80,9 +82,11 @@ module Sentdm
       #
       # Updates a contact's default channel and/or opt-out status.
       #
-      # @overload update(id, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, api_key: nil, default_channel: nil, opt_out: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Contact ID from route parameter
+      #
+      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param default_channel [String, nil] Body param: Default messaging channel: "sms" or "whatsapp"
       #
@@ -168,9 +172,11 @@ module Sentdm
       #
       # Dissociates a contact from the authenticated customer.
       #
-      # @overload delete(id, sandbox: nil, x_profile_id: nil, request_options: {})
+      # @overload delete(id, api_key: nil, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Contact ID from route parameter
+      #
+      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #

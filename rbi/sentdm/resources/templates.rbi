@@ -17,6 +17,7 @@ module Sentdm
       # `PUT /v3/templates/{id}`.
       sig do
         params(
+          api_key: String,
           auto_create_for_sp: T::Boolean,
           category: T.nilable(String),
           creation_source: T.nilable(String),
@@ -30,6 +31,14 @@ module Sentdm
         ).returns(Sentdm::APIResponseTemplate)
       end
       def create(
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Create this template automatically on every sender profile of the
         # organization, now and in future (default: false). Accepted only from an
         # organization that has been enabled for it, and only at creation — it cannot be
@@ -112,6 +121,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          api_key: String,
           category: T.nilable(String),
           definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
           language: T.nilable(String),
@@ -126,6 +136,14 @@ module Sentdm
       def update(
         # Path param: Template ID from route parameter
         id,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
         # Body param: Complete definition of a message template including header, body,
@@ -197,6 +215,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          api_key: String,
           delete_from_meta: T.nilable(T::Boolean),
           sandbox: T::Boolean,
           x_profile_id: String,
@@ -206,6 +225,14 @@ module Sentdm
       def delete(
         # Path param: Template ID from route parameter
         id,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Whether to also delete the template from WhatsApp/Meta (optional,
         # defaults to false)
         delete_from_meta: nil,

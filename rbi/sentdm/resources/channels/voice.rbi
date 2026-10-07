@@ -58,6 +58,7 @@ module Sentdm
         sig do
           params(
             callback_url: String,
+            api_key: String,
             area_code: T.nilable(String),
             default_for_app_calls: T.nilable(T::Boolean),
             number: T.nilable(String),
@@ -75,6 +76,14 @@ module Sentdm
           # way your webhooks are signed. Turning the number on again with a different URL
           # replaces it and keeps the secret.
           callback_url:,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: The US area code a new number should be in, as 212. Only for a
           # request that leaves number out — sending both says two different things about
           # which number to use, and is refused. Omit it too and the number comes from
@@ -177,6 +186,7 @@ module Sentdm
         sig do
           params(
             number: String,
+            api_key: String,
             callback_url: T.nilable(String),
             default_for_app_calls: T.nilable(T::Boolean),
             sandbox: T::Boolean,
@@ -191,6 +201,14 @@ module Sentdm
           # Path param: The number in E.164 format with the plus sign URL-encoded, e.g.
           # %2B12125550100
           number,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: A new callback URL for the number, active or not: an absolute HTTP
           # or HTTPS URL on a public host, where Sent asks what to do with each call. The
           # signing secret is kept.
@@ -250,6 +268,7 @@ module Sentdm
         # between numbers.
         sig do
           params(
+            api_key: String,
             identity: String,
             number: T.nilable(String),
             sandbox: T::Boolean,
@@ -260,6 +279,14 @@ module Sentdm
           ).returns(Sentdm::Channels::APIResponseOfVoiceToken)
         end
         def create_token(
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: Your identifier for the app user, such as an agent or account id.
           # Letters, digits, hyphens and underscores only, up to 200 characters.
           identity: nil,
@@ -294,6 +321,7 @@ module Sentdm
         sig do
           params(
             number: String,
+            api_key: String,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
@@ -304,6 +332,14 @@ module Sentdm
           # Path param: The voice number from the route, in E.164 format with the plus sign
           # URL-encoded (%2B), for example /v3/channels/voice/%2B12025550123/rotate-secret.
           number,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,
@@ -334,6 +370,7 @@ module Sentdm
         sig do
           params(
             number: String,
+            api_key: String,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
@@ -346,6 +383,14 @@ module Sentdm
           # question goes to this number's callback URL and is signed with this number's
           # secret.
           number,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,
