@@ -4,7 +4,6 @@ module Sentdm
       class Voice
         def create: (
           callback_url: String,
-          ?api_key: String,
           ?area_code: String?,
           ?default_for_app_calls: bool?,
           ?number: String?,
@@ -22,7 +21,6 @@ module Sentdm
 
         def update: (
           String number,
-          ?api_key: String,
           ?callback_url: String?,
           ?default_for_app_calls: bool?,
           ?sandbox: bool,
@@ -38,7 +36,6 @@ module Sentdm
         ) -> Sentdm::Channels::APIResponseOfListOfVoiceNumber
 
         def create_token: (
-          ?api_key: String,
           ?identity: String,
           ?number: String?,
           ?sandbox: bool,
@@ -50,7 +47,6 @@ module Sentdm
 
         def rotate_secret: (
           String number,
-          ?api_key: String,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
@@ -59,7 +55,6 @@ module Sentdm
 
         def test_: (
           String number,
-          ?api_key: String,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,

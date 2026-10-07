@@ -34,19 +34,6 @@ module Sentdm
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :allow_template_sharing
 
-      # API key from the x-api-key header, or empty when the caller sent it as
-      # Authorization: Bearer instead.
-      #
-      # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-      # header, and [FromHeader] is required by default, so a Bearer-only request would
-      # authenticate and then be refused with a 400 for a header it never needed.
-      # Endpoints read the customer from the CustomerId claim, not from this value.
-      sig { returns(T.nilable(String)) }
-      attr_reader :api_key
-
-      sig { params(api_key: String).void }
-      attr_writer :api_key
-
       # Billing contact information for a profile. Required when billing_model is
       # "profile" or "profile_and_organization".
       sig { returns(T.nilable(Sentdm::BillingContactInfo)) }
@@ -178,7 +165,6 @@ module Sentdm
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_number_change_during_onboarding: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
-          api_key: String,
           billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
           brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
@@ -217,14 +203,6 @@ module Sentdm
         # Whether number changes are allowed during onboarding (optional)
         allow_number_change_during_onboarding: nil,
         allow_template_sharing: nil,
-        # API key from the x-api-key header, or empty when the caller sent it as
-        # Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Billing contact information for a profile. Required when billing_model is
         # "profile" or "profile_and_organization".
         billing_contact: nil,
@@ -299,7 +277,6 @@ module Sentdm
             allow_contact_sharing: T.nilable(T::Boolean),
             allow_number_change_during_onboarding: T.nilable(T::Boolean),
             allow_template_sharing: T.nilable(T::Boolean),
-            api_key: String,
             billing_contact: T.nilable(Sentdm::BillingContactInfo),
             billing_model: T.nilable(String),
             brand: T.nilable(Sentdm::BrandsBrandData),

@@ -19,9 +19,7 @@ module Sentdm
       #
       # Creates a new webhook endpoint for the authenticated customer.
       #
-      # @overload create(api_key: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
+      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param display_name [String] Body param
       #
@@ -93,11 +91,9 @@ module Sentdm
       #
       # Updates an existing webhook for the authenticated customer.
       #
-      # @overload update(id, api_key: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param display_name [String] Body param
       #
@@ -179,13 +175,11 @@ module Sentdm
       #
       # Deletes a webhook for the authenticated customer.
       #
-      # @overload delete(id, api_key: nil, x_profile_id: nil, request_options: {})
+      # @overload delete(id, x_profile_id: nil, request_options: {})
       #
-      # @param id [String] Path param
+      # @param id [String]
       #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
-      #
-      # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
+      # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -194,12 +188,10 @@ module Sentdm
       # @see Sentdm::Models::WebhookDeleteParams
       def delete(id, params = {})
         parsed, options = Sentdm::WebhookDeleteParams.dump_request(params)
-        header_params = {x_profile_id: "x-profile-id"}
         @client.request(
           method: :delete,
           path: ["v3/webhooks/%1$s", id],
-          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
-          body: parsed.except(*header_params.keys),
+          headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
           model: NilClass,
           options: options
         )
@@ -275,11 +267,9 @@ module Sentdm
       # Generates a new signing secret for the specified webhook. The old secret is
       # immediately invalidated.
       #
-      # @overload rotate_secret(id, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload rotate_secret(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -310,11 +300,9 @@ module Sentdm
       #
       # Sends a test event to the specified webhook endpoint to verify connectivity.
       #
-      # @overload test_(id, api_key: nil, event_type: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload test_(id, event_type: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param event_type [String] Body param
       #
@@ -347,11 +335,9 @@ module Sentdm
       #
       # Activates or deactivates a webhook for the authenticated customer.
       #
-      # @overload toggle_status(id, api_key: nil, is_active: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload toggle_status(id, is_active: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param is_active [Boolean] Body param
       #

@@ -25,13 +25,11 @@ module Sentdm
         # Creates a new campaign scoped under the brand of the specified profile. Each
         # campaign must include at least one use case with sample messages.
         #
-        # @overload create(profile_id, campaign:, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload create(profile_id, campaign:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param profile_id [String] Path param: Profile ID from route
         #
         # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data for create or update operation
-        #
-        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -71,15 +69,13 @@ module Sentdm
         # Updates an existing campaign under the brand of the specified profile. Cannot
         # update campaigns that have already been submitted to TCR.
         #
-        # @overload update(campaign_id, profile_id:, campaign:, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload update(campaign_id, profile_id:, campaign:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param campaign_id [String] Path param: Campaign ID from route
         #
         # @param profile_id [String] Path param: Profile ID from route
         #
         # @param campaign [Sentdm::Models::Profiles::CampaignData] Body param: Campaign data for create or update operation
-        #
-        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -159,13 +155,11 @@ module Sentdm
         # Deletes a campaign by ID from the brand of the specified profile. The profile
         # must belong to the authenticated organization.
         #
-        # @overload delete(campaign_id, profile_id:, api_key: nil, sandbox: nil, x_profile_id: nil, request_options: {})
+        # @overload delete(campaign_id, profile_id:, sandbox: nil, x_profile_id: nil, request_options: {})
         #
         # @param campaign_id [String] Path param: Campaign ID from route parameter
         #
         # @param profile_id [String] Path param: Profile ID from route parameter
-        #
-        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #

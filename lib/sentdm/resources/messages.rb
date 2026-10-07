@@ -112,9 +112,7 @@ module Sentdm
       # second message.scheduled webhook reports the new scheduled_at. An account may
       # hold at most 1,000,000 scheduled messages at once (429 LIMIT_001).
       #
-      # @overload send_(api_key: nil, channel: nil, media_urls: nil, sandbox: nil, scheduled_at: nil, subject: nil, template: nil, text: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
+      # @overload send_(channel: nil, media_urls: nil, sandbox: nil, scheduled_at: nil, subject: nil, template: nil, text: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param channel [Array<String>, nil] Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"].
       #

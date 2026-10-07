@@ -21,19 +21,6 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :participant_id
 
-        # API key from the x-api-key header, or empty when the caller sent it as
-        # Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        sig { returns(T.nilable(String)) }
-        attr_reader :api_key
-
-        sig { params(api_key: String).void }
-        attr_writer :api_key
-
         # true to mute the participant, false to unmute them
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :muted
@@ -65,7 +52,6 @@ module Sentdm
           params(
             id: String,
             participant_id: String,
-            api_key: String,
             muted: T::Boolean,
             sandbox: T::Boolean,
             idempotency_key: String,
@@ -76,14 +62,6 @@ module Sentdm
         def self.new(
           id:,
           participant_id:,
-          # API key from the x-api-key header, or empty when the caller sent it as
-          # Authorization: Bearer instead.
-          #
-          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-          # header, and [FromHeader] is required by default, so a Bearer-only request would
-          # authenticate and then be refused with a 400 for a header it never needed.
-          # Endpoints read the customer from the CustomerId claim, not from this value.
-          api_key: nil,
           # true to mute the participant, false to unmute them
           muted: nil,
           # Sandbox flag - when true, the operation is simulated without side effects Useful
@@ -100,7 +78,6 @@ module Sentdm
             {
               id: String,
               participant_id: String,
-              api_key: String,
               muted: T::Boolean,
               sandbox: T::Boolean,
               idempotency_key: String,

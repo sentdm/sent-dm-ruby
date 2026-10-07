@@ -2,7 +2,6 @@ module Sentdm
   module Models
     type message_send_params =
       {
-        api_key: String,
         channel: ::Array[String]?,
         media_urls: ::Array[String]?,
         sandbox: bool,
@@ -19,10 +18,6 @@ module Sentdm
     class MessageSendParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
-
-      attr_reader api_key: String?
-
-      def api_key=: (String) -> String
 
       attr_accessor channel: ::Array[String]?
 
@@ -53,7 +48,6 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
-        ?api_key: String,
         ?channel: ::Array[String]?,
         ?media_urls: ::Array[String]?,
         ?sandbox: bool,
@@ -68,7 +62,6 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
-        api_key: String,
         channel: ::Array[String]?,
         media_urls: ::Array[String]?,
         sandbox: bool,

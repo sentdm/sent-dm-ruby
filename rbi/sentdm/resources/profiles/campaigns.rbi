@@ -23,7 +23,6 @@ module Sentdm
           params(
             profile_id: String,
             campaign: Sentdm::Profiles::CampaignData::OrHash,
-            api_key: String,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
@@ -35,14 +34,6 @@ module Sentdm
           profile_id,
           # Body param: Campaign data for create or update operation
           campaign:,
-          # Body param: API key from the x-api-key header, or empty when the caller sent it
-          # as Authorization: Bearer instead.
-          #
-          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-          # header, and [FromHeader] is required by default, so a Bearer-only request would
-          # authenticate and then be refused with a 400 for a header it never needed.
-          # Endpoints read the customer from the CustomerId claim, not from this value.
-          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,
@@ -71,7 +62,6 @@ module Sentdm
             campaign_id: String,
             profile_id: String,
             campaign: Sentdm::Profiles::CampaignData::OrHash,
-            api_key: String,
             sandbox: T::Boolean,
             idempotency_key: String,
             x_profile_id: String,
@@ -85,14 +75,6 @@ module Sentdm
           profile_id:,
           # Body param: Campaign data for create or update operation
           campaign:,
-          # Body param: API key from the x-api-key header, or empty when the caller sent it
-          # as Authorization: Bearer instead.
-          #
-          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-          # header, and [FromHeader] is required by default, so a Bearer-only request would
-          # authenticate and then be refused with a 400 for a header it never needed.
-          # Endpoints read the customer from the CustomerId claim, not from this value.
-          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,
@@ -145,7 +127,6 @@ module Sentdm
           params(
             campaign_id: String,
             profile_id: String,
-            api_key: String,
             sandbox: T::Boolean,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
@@ -156,14 +137,6 @@ module Sentdm
           campaign_id,
           # Path param: Profile ID from route parameter
           profile_id:,
-          # Body param: API key from the x-api-key header, or empty when the caller sent it
-          # as Authorization: Bearer instead.
-          #
-          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-          # header, and [FromHeader] is required by default, so a Bearer-only request would
-          # authenticate and then be refused with a 400 for a header it never needed.
-          # Endpoints read the customer from the CustomerId claim, not from this value.
-          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,

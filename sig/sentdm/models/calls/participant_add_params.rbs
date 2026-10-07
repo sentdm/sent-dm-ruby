@@ -4,7 +4,6 @@ module Sentdm
       type participant_add_params =
         {
           id: String,
-          api_key: String,
           caller_id: String?,
           sandbox: bool,
           to: Sentdm::Calls::CallParticipantTarget,
@@ -18,10 +17,6 @@ module Sentdm
         include Sentdm::Internal::Type::RequestParameters
 
         attr_accessor id: String
-
-        attr_reader api_key: String?
-
-        def api_key=: (String) -> String
 
         attr_accessor caller_id: String?
 
@@ -45,7 +40,6 @@ module Sentdm
 
         def initialize: (
           id: String,
-          ?api_key: String,
           ?caller_id: String?,
           ?sandbox: bool,
           ?to: Sentdm::Calls::CallParticipantTarget,
@@ -56,7 +50,6 @@ module Sentdm
 
         def to_hash: -> {
           id: String,
-          api_key: String,
           caller_id: String?,
           sandbox: bool,
           to: Sentdm::Calls::CallParticipantTarget,

@@ -60,13 +60,11 @@ module Sentdm
       # and are forwarded directly to the payment processor. Providing `payment_details`
       # when `billing_model` is `"organization"` is not allowed.
       #
-      # @overload create(allow_contact_sharing: nil, allow_template_sharing: nil, api_key: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, short_name: nil, whatsapp_business_account: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(allow_contact_sharing: nil, allow_template_sharing: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, short_name: nil, whatsapp_business_account: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param allow_contact_sharing [Boolean, nil] Body param: Deprecated. Accepted and ignored. Contact and template sharing betwe
       #
       # @param allow_template_sharing [Boolean, nil] Body param
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact information for a profile.
       #
@@ -199,7 +197,7 @@ module Sentdm
       # Give the profile a sender of its own instead — `POST /v3/channels/sms` or
       # `POST /v3/channels/whatsapp`, sent with the `x-profile-id` header naming it.
       #
-      # @overload update(profile_id, allow_contact_sharing: nil, allow_number_change_during_onboarding: nil, allow_template_sharing: nil, api_key: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, sending_whatsapp_number_profile_id: nil, short_name: nil, whatsapp_phone_number: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(profile_id, allow_contact_sharing: nil, allow_number_change_during_onboarding: nil, allow_template_sharing: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, sending_phone_number: nil, sending_phone_number_profile_id: nil, sending_whatsapp_number_profile_id: nil, short_name: nil, whatsapp_phone_number: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param profile_id [String] Path param: Profile ID from route parameter
       #
@@ -208,8 +206,6 @@ module Sentdm
       # @param allow_number_change_during_onboarding [Boolean, nil] Body param: Whether number changes are allowed during onboarding (optional)
       #
       # @param allow_template_sharing [Boolean, nil] Body param
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Body param: Billing contact information for a profile.
       #
@@ -320,11 +316,9 @@ module Sentdm
       # deregistered, and its routing rules stop being used. Requires admin role in the
       # organization.
       #
-      # @overload delete(profile_id, api_key: nil, sandbox: nil, x_profile_id: nil, request_options: {})
+      # @overload delete(profile_id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param profile_id [String] Path param: Profile ID from route parameter
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -397,13 +391,11 @@ module Sentdm
       # - If background processing fails, the profile keeps the status it already had
       #   and the webhook reports the reason
       #
-      # @overload complete(profile_id, web_hook_url:, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload complete(profile_id, web_hook_url:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param profile_id [String] Path param: Profile ID from route
       #
       # @param web_hook_url [String] Body param: Webhook URL to call when profile completion finishes (success or fai
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #

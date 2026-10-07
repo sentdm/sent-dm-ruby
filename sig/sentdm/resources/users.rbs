@@ -13,7 +13,6 @@ module Sentdm
       ) -> Sentdm::Models::UserListResponse
 
       def invite: (
-        ?api_key: String,
         ?email: String,
         ?name: String,
         ?role: String,
@@ -25,7 +24,6 @@ module Sentdm
 
       def remove: (
         String user_id,
-        ?api_key: String,
         ?sandbox: bool,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
@@ -33,7 +31,6 @@ module Sentdm
 
       def update_role: (
         String user_id,
-        ?api_key: String,
         ?role: String,
         ?sandbox: bool,
         ?idempotency_key: String,

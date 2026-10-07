@@ -19,9 +19,7 @@ module Sentdm
       # from the template's content and can be changed afterwards with
       # `PUT /v3/templates/{id}`.
       #
-      # @overload create(api_key: nil, auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
+      # @overload create(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param auto_create_for_sp [Boolean] Body param: Create this template automatically on every sender profile of the or
       #
@@ -117,11 +115,9 @@ module Sentdm
       # review' is allowed.", and only `submit_for_review` is accepted. A `name`
       # starting with `sent*` is refused for the same reason — the prefix is reserved.
       #
-      # @overload update(id, api_key: nil, category: nil, definition: nil, language: nil, name: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, category: nil, definition: nil, language: nil, name: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Template ID from route parameter
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param category [String, nil] Body param: Template category: MARKETING, UTILITY, AUTHENTICATION
       #
@@ -205,11 +201,9 @@ module Sentdm
       # Deletes a template by ID. Optionally, you can also delete the template from
       # WhatsApp/Meta by setting delete_from_meta=true.
       #
-      # @overload delete(id, api_key: nil, delete_from_meta: nil, sandbox: nil, x_profile_id: nil, request_options: {})
+      # @overload delete(id, delete_from_meta: nil, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: Template ID from route parameter
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param delete_from_meta [Boolean, nil] Body param: Whether to also delete the template from WhatsApp/Meta (optional, de
       #

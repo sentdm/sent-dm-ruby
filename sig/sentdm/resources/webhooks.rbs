@@ -2,7 +2,6 @@ module Sentdm
   module Resources
     class Webhooks
       def create: (
-        ?api_key: String,
         ?display_name: String,
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -24,7 +23,6 @@ module Sentdm
 
       def update: (
         String id,
-        ?api_key: String,
         ?display_name: String,
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -49,7 +47,6 @@ module Sentdm
 
       def delete: (
         String id,
-        ?api_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> nil
@@ -70,7 +67,6 @@ module Sentdm
 
       def rotate_secret: (
         String id,
-        ?api_key: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,
@@ -79,7 +75,6 @@ module Sentdm
 
       def test_: (
         String id,
-        ?api_key: String,
         ?event_type: String,
         ?sandbox: bool,
         ?idempotency_key: String,
@@ -89,7 +84,6 @@ module Sentdm
 
       def toggle_status: (
         String id,
-        ?api_key: String,
         ?is_active: bool,
         ?sandbox: bool,
         ?idempotency_key: String,

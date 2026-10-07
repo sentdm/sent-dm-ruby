@@ -14,19 +14,6 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :id
 
-      # API key from the x-api-key header, or empty when the caller sent it as
-      # Authorization: Bearer instead.
-      #
-      # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-      # header, and [FromHeader] is required by default, so a Bearer-only request would
-      # authenticate and then be refused with a 400 for a header it never needed.
-      # Endpoints read the customer from the CustomerId claim, not from this value.
-      sig { returns(T.nilable(String)) }
-      attr_reader :api_key
-
-      sig { params(api_key: String).void }
-      attr_writer :api_key
-
       # Default messaging channel: "sms" or "whatsapp"
       sig { returns(T.nilable(String)) }
       attr_accessor :default_channel
@@ -59,7 +46,6 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           default_channel: T.nilable(String),
           opt_out: T.nilable(T::Boolean),
           sandbox: T::Boolean,
@@ -70,14 +56,6 @@ module Sentdm
       end
       def self.new(
         id:,
-        # API key from the x-api-key header, or empty when the caller sent it as
-        # Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Default messaging channel: "sms" or "whatsapp"
         default_channel: nil,
         # Whether the contact has opted out of messaging. Single source of truth — opt-out
@@ -96,7 +74,6 @@ module Sentdm
         override.returns(
           {
             id: String,
-            api_key: String,
             default_channel: T.nilable(String),
             opt_out: T.nilable(T::Boolean),
             sandbox: T::Boolean,

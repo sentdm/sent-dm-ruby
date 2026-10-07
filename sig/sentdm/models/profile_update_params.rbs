@@ -6,7 +6,6 @@ module Sentdm
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
-        api_key: String,
         billing_contact: Sentdm::BillingContactInfo?,
         billing_model: String?,
         brand: Sentdm::BrandsBrandData?,
@@ -40,10 +39,6 @@ module Sentdm
       attr_accessor allow_number_change_during_onboarding: bool?
 
       attr_accessor allow_template_sharing: bool?
-
-      attr_reader api_key: String?
-
-      def api_key=: (String) -> String
 
       attr_accessor billing_contact: Sentdm::BillingContactInfo?
 
@@ -94,7 +89,6 @@ module Sentdm
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
-        ?api_key: String,
         ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
         ?brand: Sentdm::BrandsBrandData?,
@@ -122,7 +116,6 @@ module Sentdm
         allow_contact_sharing: bool?,
         allow_number_change_during_onboarding: bool?,
         allow_template_sharing: bool?,
-        api_key: String,
         billing_contact: Sentdm::BillingContactInfo?,
         billing_model: String?,
         brand: Sentdm::BrandsBrandData?,

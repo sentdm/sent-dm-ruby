@@ -19,18 +19,6 @@ module Sentdm
         #   @return [String]
         required :callback_url, String
 
-        # @!attribute api_key
-        #   API key from the x-api-key header, or empty when the caller sent it as
-        #   Authorization: Bearer instead.
-        #
-        #   Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        #   header, and [FromHeader] is required by default, so a Bearer-only request would
-        #   authenticate and then be refused with a 400 for a header it never needed.
-        #   Endpoints read the customer from the CustomerId claim, not from this value.
-        #
-        #   @return [String, nil]
-        optional :api_key, String, api_name: :apiKey
-
         # @!attribute area_code
         #   The US area code a new number should be in, as 212. Only for a request that
         #   leaves number out — sending both says two different things about which number to
@@ -73,13 +61,11 @@ module Sentdm
         #   @return [String, nil]
         optional :x_profile_id, String
 
-        # @!method initialize(callback_url:, api_key: nil, area_code: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @!method initialize(callback_url:, area_code: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::VoiceCreateParams} for more details.
         #
         #   @param callback_url [String] Where Sent asks what to do with each call on this number: an absolute HTTP or HT
-        #
-        #   @param api_key [String] API key from the x-api-key header, or empty when the caller sent it as
         #
         #   @param area_code [String, nil] The US area code a new number should be in, as 212. Only for a request that leav
         #

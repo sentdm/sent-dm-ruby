@@ -3,7 +3,6 @@ module Sentdm
     type webhook_update_params =
       {
         id: String,
-        api_key: String,
         display_name: String,
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -22,10 +21,6 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor id: String
-
-      attr_reader api_key: String?
-
-      def api_key=: (String) -> String
 
       attr_reader display_name: String?
 
@@ -65,7 +60,6 @@ module Sentdm
 
       def initialize: (
         id: String,
-        ?api_key: String,
         ?display_name: String,
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -81,7 +75,6 @@ module Sentdm
 
       def to_hash: -> {
         id: String,
-        api_key: String,
         display_name: String,
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,

@@ -11,19 +11,6 @@ module Sentdm
           T.any(Sentdm::MessageSendParams, Sentdm::Internal::AnyHash)
         end
 
-      # API key from the x-api-key header, or empty when the caller sent it as
-      # Authorization: Bearer instead.
-      #
-      # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-      # header, and [FromHeader] is required by default, so a Bearer-only request would
-      # authenticate and then be refused with a 400 for a header it never needed.
-      # Endpoints read the customer from the CustomerId claim, not from this value.
-      sig { returns(T.nilable(String)) }
-      attr_reader :api_key
-
-      sig { params(api_key: String).void }
-      attr_writer :api_key
-
       # Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel produces a
       # separate message per recipient. "sent" = auto-detect. Defaults to ["sent"]
       # (auto-detect) if omitted.
@@ -111,7 +98,6 @@ module Sentdm
 
       sig do
         params(
-          api_key: String,
           channel: T.nilable(T::Array[String]),
           media_urls: T.nilable(T::Array[String]),
           sandbox: T::Boolean,
@@ -126,14 +112,6 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
-        # API key from the x-api-key header, or empty when the caller sent it as
-        # Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel produces a
         # separate message per recipient. "sent" = auto-detect. Defaults to ["sent"]
         # (auto-detect) if omitted.
@@ -187,7 +165,6 @@ module Sentdm
       sig do
         override.returns(
           {
-            api_key: String,
             channel: T.nilable(T::Array[String]),
             media_urls: T.nilable(T::Array[String]),
             sandbox: T::Boolean,

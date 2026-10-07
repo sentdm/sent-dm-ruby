@@ -14,19 +14,6 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :id
 
-      # API key from the x-api-key header, or empty when the caller sent it as
-      # Authorization: Bearer instead.
-      #
-      # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-      # header, and [FromHeader] is required by default, so a Bearer-only request would
-      # authenticate and then be refused with a 400 for a header it never needed.
-      # Endpoints read the customer from the CustomerId claim, not from this value.
-      sig { returns(T.nilable(String)) }
-      attr_reader :api_key
-
-      sig { params(api_key: String).void }
-      attr_writer :api_key
-
       sig { returns(T.nilable(String)) }
       attr_reader :event_type
 
@@ -56,7 +43,6 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           event_type: String,
           sandbox: T::Boolean,
           idempotency_key: String,
@@ -66,14 +52,6 @@ module Sentdm
       end
       def self.new(
         id:,
-        # API key from the x-api-key header, or empty when the caller sent it as
-        # Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         event_type: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
@@ -88,7 +66,6 @@ module Sentdm
         override.returns(
           {
             id: String,
-            api_key: String,
             event_type: String,
             sandbox: T::Boolean,
             idempotency_key: String,

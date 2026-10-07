@@ -3,7 +3,6 @@ module Sentdm
     class Contacts
       def create: (
         phone_number: String,
-        ?api_key: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,
@@ -18,7 +17,6 @@ module Sentdm
 
       def update: (
         String id,
-        ?api_key: String,
         ?default_channel: String?,
         ?opt_out: bool?,
         ?sandbox: bool,
@@ -39,7 +37,6 @@ module Sentdm
 
       def delete: (
         String id,
-        ?api_key: String,
         ?sandbox: bool,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts

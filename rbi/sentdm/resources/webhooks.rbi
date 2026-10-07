@@ -17,7 +17,6 @@ module Sentdm
       # Creates a new webhook endpoint for the authenticated customer.
       sig do
         params(
-          api_key: String,
           display_name: String,
           endpoint_url: String,
           event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
@@ -33,14 +32,6 @@ module Sentdm
         ).returns(Sentdm::APIResponseWebhook)
       end
       def create(
-        # Body param: API key from the x-api-key header, or empty when the caller sent it
-        # as Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Body param
         display_name: nil,
         # Body param
@@ -93,7 +84,6 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           display_name: String,
           endpoint_url: String,
           event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
@@ -111,14 +101,6 @@ module Sentdm
       def update(
         # Path param
         id,
-        # Body param: API key from the x-api-key header, or empty when the caller sent it
-        # as Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Body param
         display_name: nil,
         # Body param
@@ -182,25 +164,14 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
         ).void
       end
       def delete(
-        # Path param
         id,
-        # Body param: API key from the x-api-key header, or empty when the caller sent it
-        # as Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
-        # Header param: Profile UUID to scope the request to a child profile. Only
-        # organization API keys can use this header. The profile must belong to the
-        # calling organization.
+        # Profile UUID to scope the request to a child profile. Only organization API keys
+        # can use this header. The profile must belong to the calling organization.
         x_profile_id: nil,
         request_options: {}
       )
@@ -260,7 +231,6 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           sandbox: T::Boolean,
           idempotency_key: String,
           x_profile_id: String,
@@ -270,14 +240,6 @@ module Sentdm
       def rotate_secret(
         # Path param
         id,
-        # Body param: API key from the x-api-key header, or empty when the caller sent it
-        # as Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
@@ -297,7 +259,6 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           event_type: String,
           sandbox: T::Boolean,
           idempotency_key: String,
@@ -308,14 +269,6 @@ module Sentdm
       def test_(
         # Path param
         id,
-        # Body param: API key from the x-api-key header, or empty when the caller sent it
-        # as Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Body param
         event_type: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
@@ -337,7 +290,6 @@ module Sentdm
       sig do
         params(
           id: String,
-          api_key: String,
           is_active: T::Boolean,
           sandbox: T::Boolean,
           idempotency_key: String,
@@ -348,14 +300,6 @@ module Sentdm
       def toggle_status(
         # Path param
         id,
-        # Body param: API key from the x-api-key header, or empty when the caller sent it
-        # as Authorization: Bearer instead.
-        #
-        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-        # header, and [FromHeader] is required by default, so a Bearer-only request would
-        # authenticate and then be refused with a 400 for a header it never needed.
-        # Endpoints read the customer from the CustomerId claim, not from this value.
-        api_key: nil,
         # Body param
         is_active: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side

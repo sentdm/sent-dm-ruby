@@ -35,18 +35,6 @@ module Sentdm
       #   @return [Boolean, nil]
       optional :allow_template_sharing, Sentdm::Internal::Type::Boolean, nil?: true
 
-      # @!attribute api_key
-      #   API key from the x-api-key header, or empty when the caller sent it as
-      #   Authorization: Bearer instead.
-      #
-      #   Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
-      #   header, and [FromHeader] is required by default, so a Bearer-only request would
-      #   authenticate and then be refused with a 400 for a header it never needed.
-      #   Endpoints read the customer from the CustomerId claim, not from this value.
-      #
-      #   @return [String, nil]
-      optional :api_key, String, api_name: :apiKey
-
       # @!attribute billing_contact
       #   Billing contact information for a profile. Required when billing_model is
       #   "profile" or "profile_and_organization".
@@ -160,15 +148,13 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(allow_contact_sharing: nil, allow_template_sharing: nil, api_key: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, short_name: nil, whatsapp_business_account: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(allow_contact_sharing: nil, allow_template_sharing: nil, billing_contact: nil, billing_model: nil, brand: nil, description: nil, icon: nil, inherit_contacts: nil, inherit_tcr_brand: nil, inherit_tcr_campaign: nil, inherit_templates: nil, name: nil, payment_details: nil, sandbox: nil, short_name: nil, whatsapp_business_account: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ProfileCreateParams} for more details.
       #
       #   @param allow_contact_sharing [Boolean, nil] Deprecated. Accepted and ignored. Contact and template sharing between sender pr
       #
       #   @param allow_template_sharing [Boolean, nil]
-      #
-      #   @param api_key [String] API key from the x-api-key header, or empty when the caller sent it as
       #
       #   @param billing_contact [Sentdm::Models::BillingContactInfo, nil] Billing contact information for a profile.
       #

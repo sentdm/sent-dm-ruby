@@ -23,7 +23,6 @@ module Sentdm
 
       def hangup: (
         String id,
-        ?api_key: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,
@@ -39,7 +38,6 @@ module Sentdm
       def record: (
         String id,
         ?action: String,
-        ?api_key: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,

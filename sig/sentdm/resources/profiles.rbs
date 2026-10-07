@@ -6,7 +6,6 @@ module Sentdm
       def create: (
         ?allow_contact_sharing: bool?,
         ?allow_template_sharing: bool?,
-        ?api_key: String,
         ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
         ?brand: Sentdm::BrandsBrandData?,
@@ -37,7 +36,6 @@ module Sentdm
         ?allow_contact_sharing: bool?,
         ?allow_number_change_during_onboarding: bool?,
         ?allow_template_sharing: bool?,
-        ?api_key: String,
         ?billing_contact: Sentdm::BillingContactInfo?,
         ?billing_model: String?,
         ?brand: Sentdm::BrandsBrandData?,
@@ -67,7 +65,6 @@ module Sentdm
 
       def delete: (
         String profile_id,
-        ?api_key: String,
         ?sandbox: bool,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
@@ -76,7 +73,6 @@ module Sentdm
       def complete: (
         String profile_id,
         web_hook_url: String,
-        ?api_key: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,

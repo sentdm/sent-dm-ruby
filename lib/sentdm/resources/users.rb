@@ -71,9 +71,7 @@ module Sentdm
       # specific role. Requires admin role. The user will receive an invitation email
       # with a token to accept. Invitation tokens expire after 7 days.
       #
-      # @overload invite(api_key: nil, email: nil, name: nil, role: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
+      # @overload invite(email: nil, name: nil, role: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param email [String] Body param: User email address (required)
       #
@@ -111,11 +109,9 @@ module Sentdm
       # Removes a user's access to an organization or profile. Requires admin role. You
       # cannot remove yourself or remove the last admin.
       #
-      # @overload remove(user_id, api_key: nil, sandbox: nil, x_profile_id: nil, request_options: {})
+      # @overload remove(user_id, sandbox: nil, x_profile_id: nil, request_options: {})
       #
       # @param user_id [String] Path param: User ID from route parameter
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -145,11 +141,9 @@ module Sentdm
       # Updates a user's role in the organization or profile. Requires admin role. You
       # cannot change your own role or demote the last admin.
       #
-      # @overload update_role(user_id, api_key: nil, role: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update_role(user_id, role: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param user_id [String] Path param: User ID from route parameter
-      #
-      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param role [String] Body param: User role: admin, billing, or developer (required)
       #

@@ -2,7 +2,6 @@ module Sentdm
   module Resources
     class Templates
       def create: (
-        ?api_key: String,
         ?auto_create_for_sp: bool,
         ?category: String?,
         ?creation_source: String?,
@@ -23,7 +22,6 @@ module Sentdm
 
       def update: (
         String id,
-        ?api_key: String,
         ?category: String?,
         ?definition: Sentdm::TemplateDefinition?,
         ?language: String?,
@@ -48,7 +46,6 @@ module Sentdm
 
       def delete: (
         String id,
-        ?api_key: String,
         ?delete_from_meta: bool?,
         ?sandbox: bool,
         ?x_profile_id: String,

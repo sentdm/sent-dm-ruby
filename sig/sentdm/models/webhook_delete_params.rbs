@@ -1,7 +1,7 @@
 module Sentdm
   module Models
     type webhook_delete_params =
-      { id: String, api_key: String, x_profile_id: String }
+      { id: String, x_profile_id: String }
       & Sentdm::Internal::Type::request_parameters
 
     class WebhookDeleteParams < Sentdm::Internal::Type::BaseModel
@@ -10,24 +10,18 @@ module Sentdm
 
       attr_accessor id: String
 
-      attr_reader api_key: String?
-
-      def api_key=: (String) -> String
-
       attr_reader x_profile_id: String?
 
       def x_profile_id=: (String) -> String
 
       def initialize: (
         id: String,
-        ?api_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
       ) -> void
 
       def to_hash: -> {
         id: String,
-        api_key: String,
         x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
