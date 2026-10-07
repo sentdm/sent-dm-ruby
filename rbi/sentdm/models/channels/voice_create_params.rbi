@@ -24,6 +24,19 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :callback_url
 
+        # API key from the x-api-key header, or empty when the caller sent it as
+        # Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        sig { returns(T.nilable(String)) }
+        attr_reader :api_key
+
+        sig { params(api_key: String).void }
+        attr_writer :api_key
+
         # The US area code a new number should be in, as 212. Only for a request that
         # leaves number out — sending both says two different things about which number to
         # use, and is refused. Omit it too and the number comes from anywhere in the
@@ -66,6 +79,7 @@ module Sentdm
         sig do
           params(
             callback_url: String,
+            api_key: String,
             area_code: T.nilable(String),
             default_for_app_calls: T.nilable(T::Boolean),
             number: T.nilable(String),
@@ -83,6 +97,14 @@ module Sentdm
           # are signed. Turning the number on again with a different URL replaces it and
           # keeps the secret.
           callback_url:,
+          # API key from the x-api-key header, or empty when the caller sent it as
+          # Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # The US area code a new number should be in, as 212. Only for a request that
           # leaves number out — sending both says two different things about which number to
           # use, and is refused. Omit it too and the number comes from anywhere in the
@@ -109,6 +131,7 @@ module Sentdm
           override.returns(
             {
               callback_url: String,
+              api_key: String,
               area_code: T.nilable(String),
               default_for_app_calls: T.nilable(T::Boolean),
               number: T.nilable(String),

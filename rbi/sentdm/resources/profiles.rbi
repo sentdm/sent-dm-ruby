@@ -58,6 +58,7 @@ module Sentdm
         params(
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
+          api_key: String,
           billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
           brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
@@ -100,6 +101,14 @@ module Sentdm
         allow_contact_sharing: nil,
         # Body param
         allow_template_sharing: nil,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Billing contact information for a profile. Required when
         # billing_model is "profile" or "profile_and_organization".
         billing_contact: nil,
@@ -230,6 +239,7 @@ module Sentdm
           allow_contact_sharing: T.nilable(T::Boolean),
           allow_number_change_during_onboarding: T.nilable(T::Boolean),
           allow_template_sharing: T.nilable(T::Boolean),
+          api_key: String,
           billing_contact: T.nilable(Sentdm::BillingContactInfo::OrHash),
           billing_model: T.nilable(String),
           brand: T.nilable(Sentdm::BrandsBrandData::OrHash),
@@ -271,6 +281,14 @@ module Sentdm
         allow_number_change_during_onboarding: nil,
         # Body param
         allow_template_sharing: nil,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Billing contact information for a profile. Required when
         # billing_model is "profile" or "profile_and_organization".
         billing_contact: nil,
@@ -388,6 +406,7 @@ module Sentdm
       sig do
         params(
           profile_id: String,
+          api_key: String,
           sandbox: T::Boolean,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
@@ -396,6 +415,14 @@ module Sentdm
       def delete(
         # Path param: Profile ID from route parameter
         profile_id,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
@@ -454,6 +481,7 @@ module Sentdm
         params(
           profile_id: String,
           web_hook_url: String,
+          api_key: String,
           sandbox: T::Boolean,
           idempotency_key: String,
           x_profile_id: String,
@@ -466,6 +494,14 @@ module Sentdm
         # Body param: Webhook URL to call when profile completion finishes (success or
         # failure)
         web_hook_url:,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,

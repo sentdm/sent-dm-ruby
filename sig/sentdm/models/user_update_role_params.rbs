@@ -3,6 +3,7 @@ module Sentdm
     type user_update_role_params =
       {
         user_id: String,
+        api_key: String,
         role: String,
         sandbox: bool,
         idempotency_key: String,
@@ -15,6 +16,10 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor user_id: String
+
+      attr_reader api_key: String?
+
+      def api_key=: (String) -> String
 
       attr_reader role: String?
 
@@ -34,6 +39,7 @@ module Sentdm
 
       def initialize: (
         user_id: String,
+        ?api_key: String,
         ?role: String,
         ?sandbox: bool,
         ?idempotency_key: String,
@@ -43,6 +49,7 @@ module Sentdm
 
       def to_hash: -> {
         user_id: String,
+        api_key: String,
         role: String,
         sandbox: bool,
         idempotency_key: String,

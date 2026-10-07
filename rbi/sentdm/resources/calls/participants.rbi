@@ -31,6 +31,7 @@ module Sentdm
           params(
             participant_id: String,
             id: String,
+            api_key: String,
             muted: T::Boolean,
             sandbox: T::Boolean,
             idempotency_key: String,
@@ -45,6 +46,14 @@ module Sentdm
           # Path param: The call id from the route, as carried by call webhooks and the
           # calls list, for example call_9f2ab000-0000-4000-8000-000000000001
           id:,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: true to mute the participant, false to unmute them
           muted: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
@@ -98,6 +107,7 @@ module Sentdm
         sig do
           params(
             id: String,
+            api_key: String,
             caller_id: T.nilable(String),
             sandbox: T::Boolean,
             to: Sentdm::Calls::CallParticipantTarget::OrHash,
@@ -110,6 +120,14 @@ module Sentdm
           # Path param: The call id from the route, as carried by call webhooks and the
           # calls list, for example call_9f2ab000-0000-4000-8000-000000000001
           id,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: The number shown to a phone participant as the caller, in E.164
           # format. Must be one of your numbers. The call's owning number when omitted
           caller_id: nil,
@@ -139,6 +157,7 @@ module Sentdm
           params(
             participant_id: String,
             id: String,
+            api_key: String,
             sandbox: T::Boolean,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
@@ -151,6 +170,14 @@ module Sentdm
           # Path param: The call id from the route, as carried by call webhooks and the
           # calls list, for example call_9f2ab000-0000-4000-8000-000000000001
           id:,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,
@@ -169,6 +196,7 @@ module Sentdm
         sig do
           params(
             id: String,
+            api_key: String,
             sandbox: T::Boolean,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions::OrHash
@@ -178,6 +206,14 @@ module Sentdm
           # Path param: The call id from the route, as carried by call webhooks and the
           # calls list, for example call_9f2ab000-0000-4000-8000-000000000001
           id,
+          # Body param: API key from the x-api-key header, or empty when the caller sent it
+          # as Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Body param: Sandbox flag - when true, the operation is simulated without side
           # effects Useful for testing integrations without actual execution
           sandbox: nil,

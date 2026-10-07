@@ -124,9 +124,11 @@ module Sentdm
       # that has already ended answers 409, and so does a call with no phone leg, such
       # as one between two app users.
       #
-      # @overload hangup(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload hangup(id, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: The call id from the route, as carried by call webhooks and the call
+      #
+      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
@@ -194,11 +196,13 @@ module Sentdm
       # so does a call with no phone leg, such as one between two app users, which can't
       # be recorded.
       #
-      # @overload record(id, action: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload record(id, action: nil, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param: The call id from the route, as carried by call webhooks and the call
       #
       # @param action [String] Body param: start to begin recording, stop to end it
+      #
+      # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #

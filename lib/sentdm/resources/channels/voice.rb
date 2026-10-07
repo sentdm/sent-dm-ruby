@@ -59,9 +59,11 @@ module Sentdm
         # With `sandbox: true` the request is validated and a simulated number reported
         # with `202`; nothing is written and no number is bought.
         #
-        # @overload create(callback_url:, area_code: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload create(callback_url:, api_key: nil, area_code: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param callback_url [String] Body param: Where Sent asks what to do with each call on this number: an absolut
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param area_code [String, nil] Body param: The US area code a new number should be in, as 212. Only for a reque
         #
@@ -177,9 +179,11 @@ module Sentdm
         # stored number and the number is reported with `200` as it would read after the
         # change.
         #
-        # @overload update(number, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload update(number, api_key: nil, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param number [String] Path param: The number in E.164 format with the plus sign URL-encoded, e.g. %2B1
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param callback_url [String, nil] Body param: A new callback URL for the number, active or not: an absolute HTTP o
         #
@@ -254,7 +258,9 @@ module Sentdm
         # bound number. Minting again re-binds the identity, so an identity can move
         # between numbers.
         #
-        # @overload create_token(identity: nil, number: nil, sandbox: nil, ttl: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload create_token(api_key: nil, identity: nil, number: nil, sandbox: nil, ttl: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param identity [String] Body param: Your identifier for the app user, such as an agent or account id. Le
         #
@@ -297,9 +303,11 @@ module Sentdm
         # With `sandbox: true` a secret is generated and returned with `202`, and nothing
         # is written.
         #
-        # @overload rotate_secret(number, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload rotate_secret(number, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param number [String] Path param: The voice number from the route, in E.164 format with the plus sign
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -341,9 +349,11 @@ module Sentdm
         # With `sandbox: true` nothing is sent: the verdict comes back ok with `202` and
         # no request or response in it.
         #
-        # @overload test_(number, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload test_(number, api_key: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param number [String] Path param: The voice number from the route, in E.164 format with the plus sign
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #

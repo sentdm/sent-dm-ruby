@@ -31,11 +31,13 @@ module Sentdm
         # not in this call's room answers 404. A call that has ended answers 409, as does
         # a call that is not in a conference.
         #
-        # @overload update(participant_id, id:, muted: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload update(participant_id, id:, api_key: nil, muted: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param participant_id [String] Path param: The participant's own call id from the route, as listed by the parti
         #
         # @param id [String] Path param: The call id from the route, as carried by call webhooks and the call
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param muted [Boolean] Body param: true to mute the participant, false to unmute them
         #
@@ -112,9 +114,11 @@ module Sentdm
         # your answer connected to a conference can take participants: a call connected to
         # a user or a number answers 409.
         #
-        # @overload add(id, caller_id: nil, sandbox: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload add(id, api_key: nil, caller_id: nil, sandbox: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param id [String] Path param: The call id from the route, as carried by call webhooks and the call
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param caller_id [String, nil] Body param: The number shown to a phone participant as the caller, in E.164 form
         #
@@ -153,11 +157,13 @@ module Sentdm
         # connected. A participant who is not in this call's room answers 404. A call that
         # has ended answers 409, as does a call that is not in a conference.
         #
-        # @overload remove(participant_id, id:, sandbox: nil, x_profile_id: nil, request_options: {})
+        # @overload remove(participant_id, id:, api_key: nil, sandbox: nil, x_profile_id: nil, request_options: {})
         #
         # @param participant_id [String] Path param: The participant's own call id from the route, as listed by the parti
         #
         # @param id [String] Path param: The call id from the route, as carried by call webhooks and the call
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #
@@ -193,9 +199,11 @@ module Sentdm
         # other call. A room that is already empty answers 204 as well. A call that has
         # ended answers 409, as does a call that is not in a conference.
         #
-        # @overload remove_all(id, sandbox: nil, x_profile_id: nil, request_options: {})
+        # @overload remove_all(id, api_key: nil, sandbox: nil, x_profile_id: nil, request_options: {})
         #
         # @param id [String] Path param: The call id from the route, as carried by call webhooks and the call
+        #
+        # @param api_key [String] Body param: API key from the x-api-key header, or empty when the caller sent it
         #
         # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
         #

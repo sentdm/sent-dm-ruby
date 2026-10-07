@@ -5,6 +5,7 @@ module Sentdm
         {
           profile_id: String,
           campaign: Sentdm::Profiles::CampaignData,
+          api_key: String,
           sandbox: bool,
           idempotency_key: String,
           x_profile_id: String
@@ -18,6 +19,10 @@ module Sentdm
         attr_accessor profile_id: String
 
         attr_accessor campaign: Sentdm::Profiles::CampaignData
+
+        attr_reader api_key: String?
+
+        def api_key=: (String) -> String
 
         attr_reader sandbox: bool?
 
@@ -34,6 +39,7 @@ module Sentdm
         def initialize: (
           profile_id: String,
           campaign: Sentdm::Profiles::CampaignData,
+          ?api_key: String,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
@@ -43,6 +49,7 @@ module Sentdm
         def to_hash: -> {
           profile_id: String,
           campaign: Sentdm::Profiles::CampaignData,
+          api_key: String,
           sandbox: bool,
           idempotency_key: String,
           x_profile_id: String,

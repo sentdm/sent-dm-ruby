@@ -14,6 +14,19 @@ module Sentdm
       sig { returns(String) }
       attr_accessor :id
 
+      # API key from the x-api-key header, or empty when the caller sent it as
+      # Authorization: Bearer instead.
+      #
+      # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+      # header, and [FromHeader] is required by default, so a Bearer-only request would
+      # authenticate and then be refused with a 400 for a header it never needed.
+      # Endpoints read the customer from the CustomerId claim, not from this value.
+      sig { returns(T.nilable(String)) }
+      attr_reader :api_key
+
+      sig { params(api_key: String).void }
+      attr_writer :api_key
+
       # Template category: MARKETING, UTILITY, AUTHENTICATION
       sig { returns(T.nilable(String)) }
       attr_accessor :category
@@ -66,6 +79,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          api_key: String,
           category: T.nilable(String),
           definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
           language: T.nilable(String),
@@ -79,6 +93,14 @@ module Sentdm
       end
       def self.new(
         id:,
+        # API key from the x-api-key header, or empty when the caller sent it as
+        # Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Template category: MARKETING, UTILITY, AUTHENTICATION
         category: nil,
         # Complete definition of a message template including header, body, footer, and
@@ -103,6 +125,7 @@ module Sentdm
         override.returns(
           {
             id: String,
+            api_key: String,
             category: T.nilable(String),
             definition: T.nilable(Sentdm::TemplateDefinition),
             language: T.nilable(String),

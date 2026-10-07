@@ -5,6 +5,7 @@ module Sentdm
         def create: (
           String profile_id,
           campaign: Sentdm::Profiles::CampaignData,
+          ?api_key: String,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
@@ -15,6 +16,7 @@ module Sentdm
           String campaign_id,
           profile_id: String,
           campaign: Sentdm::Profiles::CampaignData,
+          ?api_key: String,
           ?sandbox: bool,
           ?idempotency_key: String,
           ?x_profile_id: String,
@@ -30,6 +32,7 @@ module Sentdm
         def delete: (
           String campaign_id,
           profile_id: String,
+          ?api_key: String,
           ?sandbox: bool,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts

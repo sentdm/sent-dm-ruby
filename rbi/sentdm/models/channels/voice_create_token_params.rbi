@@ -15,6 +15,19 @@ module Sentdm
             )
           end
 
+        # API key from the x-api-key header, or empty when the caller sent it as
+        # Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        sig { returns(T.nilable(String)) }
+        attr_reader :api_key
+
+        sig { params(api_key: String).void }
+        attr_writer :api_key
+
         # Your identifier for the app user, such as an agent or account id. Letters,
         # digits, hyphens and underscores only, up to 200 characters.
         sig { returns(T.nilable(String)) }
@@ -55,6 +68,7 @@ module Sentdm
 
         sig do
           params(
+            api_key: String,
             identity: String,
             number: T.nilable(String),
             sandbox: T::Boolean,
@@ -65,6 +79,14 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
+          # API key from the x-api-key header, or empty when the caller sent it as
+          # Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # Your identifier for the app user, such as an agent or account id. Letters,
           # digits, hyphens and underscores only, up to 200 characters.
           identity: nil,
@@ -86,6 +108,7 @@ module Sentdm
         sig do
           override.returns(
             {
+              api_key: String,
               identity: String,
               number: T.nilable(String),
               sandbox: T::Boolean,

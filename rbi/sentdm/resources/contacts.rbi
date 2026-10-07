@@ -17,6 +17,7 @@ module Sentdm
       sig do
         params(
           phone_number: String,
+          api_key: String,
           sandbox: T::Boolean,
           idempotency_key: String,
           x_profile_id: String,
@@ -26,6 +27,14 @@ module Sentdm
       def create(
         # Body param: Phone number of the contact to create
         phone_number:,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,
@@ -65,6 +74,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          api_key: String,
           default_channel: T.nilable(String),
           opt_out: T.nilable(T::Boolean),
           sandbox: T::Boolean,
@@ -76,6 +86,14 @@ module Sentdm
       def update(
         # Path param: Contact ID from route parameter
         id,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Default messaging channel: "sms" or "whatsapp"
         default_channel: nil,
         # Body param: Whether the contact has opted out of messaging. Single source of
@@ -141,6 +159,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          api_key: String,
           sandbox: T::Boolean,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
@@ -149,6 +168,14 @@ module Sentdm
       def delete(
         # Path param: Contact ID from route parameter
         id,
+        # Body param: API key from the x-api-key header, or empty when the caller sent it
+        # as Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        api_key: nil,
         # Body param: Sandbox flag - when true, the operation is simulated without side
         # effects Useful for testing integrations without actual execution
         sandbox: nil,

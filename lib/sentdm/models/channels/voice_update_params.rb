@@ -13,6 +13,18 @@ module Sentdm
         #   @return [String]
         required :number, String
 
+        # @!attribute api_key
+        #   API key from the x-api-key header, or empty when the caller sent it as
+        #   Authorization: Bearer instead.
+        #
+        #   Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        #   header, and [FromHeader] is required by default, so a Bearer-only request would
+        #   authenticate and then be refused with a 400 for a header it never needed.
+        #   Endpoints read the customer from the CustomerId claim, not from this value.
+        #
+        #   @return [String, nil]
+        optional :api_key, String, api_name: :apiKey
+
         # @!attribute callback_url
         #   A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
         #   on a public host, where Sent asks what to do with each call. The signing secret
@@ -54,11 +66,13 @@ module Sentdm
         #   @return [String, nil]
         optional :x_profile_id, String
 
-        # @!method initialize(number:, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @!method initialize(number:, api_key: nil, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::VoiceUpdateParams} for more details.
         #
         #   @param number [String]
+        #
+        #   @param api_key [String] API key from the x-api-key header, or empty when the caller sent it as
         #
         #   @param callback_url [String, nil] A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
         #

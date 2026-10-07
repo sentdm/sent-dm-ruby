@@ -3,6 +3,7 @@ module Sentdm
     type template_update_params =
       {
         id: String,
+        api_key: String,
         category: String?,
         definition: Sentdm::TemplateDefinition?,
         language: String?,
@@ -19,6 +20,10 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor id: String
+
+      attr_reader api_key: String?
+
+      def api_key=: (String) -> String
 
       attr_accessor category: String?
 
@@ -46,6 +51,7 @@ module Sentdm
 
       def initialize: (
         id: String,
+        ?api_key: String,
         ?category: String?,
         ?definition: Sentdm::TemplateDefinition?,
         ?language: String?,
@@ -59,6 +65,7 @@ module Sentdm
 
       def to_hash: -> {
         id: String,
+        api_key: String,
         category: String?,
         definition: Sentdm::TemplateDefinition?,
         language: String?,

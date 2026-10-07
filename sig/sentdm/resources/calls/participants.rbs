@@ -5,6 +5,7 @@ module Sentdm
         def update: (
           String participant_id,
           id: String,
+          ?api_key: String,
           ?muted: bool,
           ?sandbox: bool,
           ?idempotency_key: String,
@@ -20,6 +21,7 @@ module Sentdm
 
         def add: (
           String id,
+          ?api_key: String,
           ?caller_id: String?,
           ?sandbox: bool,
           ?to: Sentdm::Calls::CallParticipantTarget,
@@ -31,6 +33,7 @@ module Sentdm
         def remove: (
           String participant_id,
           id: String,
+          ?api_key: String,
           ?sandbox: bool,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts
@@ -38,6 +41,7 @@ module Sentdm
 
         def remove_all: (
           String id,
+          ?api_key: String,
           ?sandbox: bool,
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts

@@ -18,6 +18,19 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :number
 
+        # API key from the x-api-key header, or empty when the caller sent it as
+        # Authorization: Bearer instead.
+        #
+        # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+        # header, and [FromHeader] is required by default, so a Bearer-only request would
+        # authenticate and then be refused with a 400 for a header it never needed.
+        # Endpoints read the customer from the CustomerId claim, not from this value.
+        sig { returns(T.nilable(String)) }
+        attr_reader :api_key
+
+        sig { params(api_key: String).void }
+        attr_writer :api_key
+
         # A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
         # on a public host, where Sent asks what to do with each call. The signing secret
         # is kept.
@@ -63,6 +76,7 @@ module Sentdm
         sig do
           params(
             number: String,
+            api_key: String,
             callback_url: T.nilable(String),
             default_for_app_calls: T.nilable(T::Boolean),
             sandbox: T::Boolean,
@@ -75,6 +89,14 @@ module Sentdm
         end
         def self.new(
           number:,
+          # API key from the x-api-key header, or empty when the caller sent it as
+          # Authorization: Bearer instead.
+          #
+          # Optional on purpose. CustomerV3AuthenticationHandler accepts the key in either
+          # header, and [FromHeader] is required by default, so a Bearer-only request would
+          # authenticate and then be refused with a 400 for a header it never needed.
+          # Endpoints read the customer from the CustomerId claim, not from this value.
+          api_key: nil,
           # A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
           # on a public host, where Sent asks what to do with each call. The signing secret
           # is kept.
@@ -100,6 +122,7 @@ module Sentdm
           override.returns(
             {
               number: String,
+              api_key: String,
               callback_url: T.nilable(String),
               default_for_app_calls: T.nilable(T::Boolean),
               sandbox: T::Boolean,

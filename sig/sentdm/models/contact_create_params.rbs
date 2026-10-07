@@ -3,6 +3,7 @@ module Sentdm
     type contact_create_params =
       {
         phone_number: String,
+        api_key: String,
         sandbox: bool,
         idempotency_key: String,
         x_profile_id: String
@@ -14,6 +15,10 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor phone_number: String
+
+      attr_reader api_key: String?
+
+      def api_key=: (String) -> String
 
       attr_reader sandbox: bool?
 
@@ -29,6 +34,7 @@ module Sentdm
 
       def initialize: (
         phone_number: String,
+        ?api_key: String,
         ?sandbox: bool,
         ?idempotency_key: String,
         ?x_profile_id: String,
@@ -37,6 +43,7 @@ module Sentdm
 
       def to_hash: -> {
         phone_number: String,
+        api_key: String,
         sandbox: bool,
         idempotency_key: String,
         x_profile_id: String,

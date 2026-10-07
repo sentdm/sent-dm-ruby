@@ -14,6 +14,7 @@ module Sentdm
       ) -> Sentdm::Models::MessageRetrieveStatusResponse
 
       def send_: (
+        ?api_key: String,
         ?channel: ::Array[String]?,
         ?media_urls: ::Array[String]?,
         ?sandbox: bool,
