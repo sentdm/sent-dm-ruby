@@ -3,6 +3,7 @@ module Sentdm
     type message_send_params =
       {
         channel: ::Array[String]?,
+        channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
         media_urls: ::Array[String]?,
         sandbox: bool,
         scheduled_at: Time?,
@@ -20,6 +21,8 @@ module Sentdm
       include Sentdm::Internal::Type::RequestParameters
 
       attr_accessor channel: ::Array[String]?
+
+      attr_accessor channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?
 
       attr_accessor media_urls: ::Array[String]?
 
@@ -49,6 +52,7 @@ module Sentdm
 
       def initialize: (
         ?channel: ::Array[String]?,
+        ?channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
         ?media_urls: ::Array[String]?,
         ?sandbox: bool,
         ?scheduled_at: Time?,
@@ -63,6 +67,7 @@ module Sentdm
 
       def to_hash: -> {
         channel: ::Array[String]?,
+        channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
         media_urls: ::Array[String]?,
         sandbox: bool,
         scheduled_at: Time?,
@@ -74,6 +79,29 @@ module Sentdm
         x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
+
+      type channel =
+        { country: String?, from: ::Array[String]?, strategy: String? }
+
+      class Channel < Sentdm::Internal::Type::BaseModel
+        attr_accessor country: String?
+
+        attr_accessor from: ::Array[String]?
+
+        attr_accessor strategy: String?
+
+        def initialize: (
+          ?country: String?,
+          ?from: ::Array[String]?,
+          ?strategy: String?
+        ) -> void
+
+        def to_hash: -> {
+          country: String?,
+          from: ::Array[String]?,
+          strategy: String?
+        }
+      end
 
       type template =
         { id: String?, name: String?, parameters: ::Hash[Symbol, String]? }

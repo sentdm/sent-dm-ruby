@@ -15,6 +15,33 @@ module Sentdm
       #   @return [Array<String>, nil]
       optional :channel, Sentdm::Internal::Type::ArrayOf[String], nil?: true
 
+      # @!attribute channels
+      #   Which of your own numbers to send from, keyed by channel, each channel holding a
+      #   list of entries: {"sms": [{"country": "US", "from": ["+12125550000",
+      #   "+14155550000"]}, {"from": ["+447700800001"]}]}. Any real channel may be a key;
+      #   sent, which is auto-detect rather than a channel, is rejected. country and
+      #   strategy are accepted and stored but not acted on yet: every entry's numbers
+      #   apply to every recipient on that channel.
+      #
+      #   This does not choose channels — Channel does, and the two combine: "channel":
+      #   ["sms"] with an sms list sends on SMS from those numbers. Each list only narrows
+      #   which of its own channel's routes may win, so with Channel left at auto-detect a
+      #   recipient best served by a channel with no list still goes out on it. Routing
+      #   itself is unchanged: the same rules are scored and ranked the same way, with
+      #   routes pinned to numbers you did not list removed from the running.
+      #
+      #   Every number must be an active sender on your account. The request itself is
+      #   still accepted (202) if one is not — like every other send-time rule, that is
+      #   decided per message, so each affected message is recorded BLOCKED with error
+      #   code BUSINESS_029 and reported on GET /v3/messages and the status webhook.
+      #
+      #   @return [Hash{Symbol=>Array<Sentdm::Models::MessageSendParams::Channel>}, nil]
+      optional :channels,
+               -> {
+                 Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[Sentdm::MessageSendParams::Channel]]
+               },
+               nil?: true
+
       # @!attribute media_urls
       #   Attachments for this send, as publicly fetchable https URLs. Used by the MMS
       #   channel and ignored by every other one.
@@ -93,11 +120,13 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(channel: nil, media_urls: nil, sandbox: nil, scheduled_at: nil, subject: nil, template: nil, text: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(channel: nil, channels: nil, media_urls: nil, sandbox: nil, scheduled_at: nil, subject: nil, template: nil, text: nil, to: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::MessageSendParams} for more details.
       #
       #   @param channel [Array<String>, nil] Channels to broadcast on, e.g. ["whatsapp", "sms"].
+      #
+      #   @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageSendParams::Channel>}, nil] Which of your own numbers to send from, keyed by channel, each channel holding a
       #
       #   @param media_urls [Array<String>, nil] Attachments for this send, as publicly fetchable https URLs. Used by the MMS cha
       #
@@ -118,6 +147,44 @@ module Sentdm
       #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
+
+      class Channel < Sentdm::Internal::Type::BaseModel
+        # @!attribute country
+        #   Recipient country this entry is meant for (ISO 3166-1 alpha-2, e.g. US).
+        #   Optional. Accepted and stored, not acted on yet.
+        #
+        #   @return [String, nil]
+        optional :country, String, nil?: true
+
+        # @!attribute from
+        #   Sender numbers in E.164. Each must be an active sender on your account for this
+        #   channel. That is account state rather than request shape, so it is decided per
+        #   message: the request is accepted with 202 and a message naming an unusable
+        #   number is recorded BLOCKED with error code BUSINESS_029.
+        #
+        #   @return [Array<String>, nil]
+        optional :from, Sentdm::Internal::Type::ArrayOf[String], nil?: true
+
+        # @!attribute strategy
+        #   How to pick a number from From, e.g. sticky or geo. Optional. Accepted and
+        #   stored, not acted on yet.
+        #
+        #   @return [String, nil]
+        optional :strategy, String, nil?: true
+
+        # @!method initialize(country: nil, from: nil, strategy: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Sentdm::Models::MessageSendParams::Channel} for more details.
+        #
+        #   One entry of a channel's list in Channels, e.g. {"country": "US", "from":
+        #   ["+15559990002", "+15559990003"], "strategy": "sticky"}.
+        #
+        #   @param country [String, nil] Recipient country this entry is meant for (ISO 3166-1 alpha-2, e.g. US). Optiona
+        #
+        #   @param from [Array<String>, nil] Sender numbers in E.164. Each must be an active sender on your account for this
+        #
+        #   @param strategy [String, nil] How to pick a number from From, e.g. sticky or geo. Optional. Accepted
+      end
 
       class Template < Sentdm::Internal::Type::BaseModel
         # @!attribute id
