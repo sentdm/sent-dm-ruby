@@ -15,6 +15,7 @@ module Sentdm
 
       def send_: (
         ?channel: ::Array[String]?,
+        ?channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
         ?media_urls: ::Array[String]?,
         ?sandbox: bool,
         ?scheduled_at: Time?,
