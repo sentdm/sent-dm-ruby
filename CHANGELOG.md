@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.38.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.37.0...v0.38.0) (2026-10-20)
+
+
+### Features
+
+* **api:** sync generated SDKs from the committed spec ([0f635d5](https://github.com/sentdm/sent-dm-ruby/commit/0f635d57fa2ee924000ff7c6683ca505d00dc3e2))
+* **api:** sync OpenAPI spec from production ([dbd2131](https://github.com/sentdm/sent-dm-ruby/commit/dbd2131083dda1ff7b2cd11e41db535364881d65))
+
 ## [0.37.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.36.0...v0.37.0) (2026-10-09)
 
 
