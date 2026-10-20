@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.38.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.38.0...v0.38.1) (2026-10-20)
+
+
+### Chores
+
+* **ci:** merge the seal-back PR directly when auto-merge is refused ([9a7393d](https://github.com/sentdm/sent-dm-ruby/commit/9a7393dee833caf43136971d364bb74cb8b59bf8))
+
 ## [0.38.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.37.0...v0.38.0) (2026-10-20)
 
 
