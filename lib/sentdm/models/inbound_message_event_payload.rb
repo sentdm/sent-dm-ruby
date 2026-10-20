@@ -56,6 +56,20 @@ module Sentdm
       #   @return [String, nil]
       optional :outbound_number, String
 
+      # @!attribute referral
+      #   The ad the contact tapped to start the conversation, present only on whatsapp
+      #   messages sent from a Click to WhatsApp ad and omitted entirely otherwise.
+      #
+      #   This is Meta's referral object passed through unchanged, with Meta's field names
+      #   and nesting: source_url, source_id, source_type, headline, body, media_type,
+      #   image_url (image ads), video_url and thumbnail_url (video ads), ctwa_clid and
+      #   welcome_message.text. Which fields appear is Meta's decision: ctwa_clid in
+      #   particular is not sent for ads shown in WhatsApp Status, so treat every field as
+      #   optional.
+      #
+      #   @return [Object, nil]
+      optional :referral, Sentdm::Internal::Type::Unknown, nil?: true
+
       # @!attribute text
       #   The message body. Sent as null when the inbound message carried no text, for
       #   example a media-only message. The field is always present, so read it and check
@@ -71,7 +85,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(inbound_number:, received_at:, account_id: nil, channel: nil, media: nil, message_id: nil, outbound_number: nil, text: nil, updated_at: nil)
+      # @!method initialize(inbound_number:, received_at:, account_id: nil, channel: nil, media: nil, message_id: nil, outbound_number: nil, referral: nil, text: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::InboundMessageEventPayload} for more details.
       #
@@ -91,6 +105,8 @@ module Sentdm
       #   @param message_id [String] The inbound message.
       #
       #   @param outbound_number [String] Your number in E.164 format, meaning the number the message was addressed to.
+      #
+      #   @param referral [Object, nil] The ad the contact tapped to start the conversation, present only on whatsapp
       #
       #   @param text [String, nil] The message body. Sent as null when the inbound message carried no text, for
       #
