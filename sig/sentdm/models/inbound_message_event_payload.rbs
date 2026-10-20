@@ -9,6 +9,7 @@ module Sentdm
         media: ::Array[Sentdm::InboundMessageEventPayload::Media]?,
         message_id: String,
         outbound_number: String,
+        referral: top?,
         text: String?,
         updated_at: String
       }
@@ -36,6 +37,8 @@ module Sentdm
 
       def outbound_number=: (String) -> String
 
+      attr_accessor referral: top?
+
       attr_accessor text: String?
 
       attr_reader updated_at: String?
@@ -50,6 +53,7 @@ module Sentdm
         ?media: ::Array[Sentdm::InboundMessageEventPayload::Media]?,
         ?message_id: String,
         ?outbound_number: String,
+        ?referral: top?,
         ?text: String?,
         ?updated_at: String
       ) -> void
@@ -62,6 +66,7 @@ module Sentdm
         media: ::Array[Sentdm::InboundMessageEventPayload::Media]?,
         message_id: String,
         outbound_number: String,
+        referral: top?,
         text: String?,
         updated_at: String
       }
