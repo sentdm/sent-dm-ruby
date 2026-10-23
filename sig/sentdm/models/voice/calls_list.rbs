@@ -1,0 +1,33 @@
+module Sentdm
+  module Models
+    module Voice
+      type calls_list =
+        {
+          calls: ::Array[Sentdm::Voice::Call],
+          pagination: Sentdm::PaginationMeta
+        }
+
+      class CallsList < Sentdm::Internal::Type::BaseModel
+        attr_reader calls: ::Array[Sentdm::Voice::Call]?
+
+        def calls=: (
+          ::Array[Sentdm::Voice::Call]
+        ) -> ::Array[Sentdm::Voice::Call]
+
+        attr_reader pagination: Sentdm::PaginationMeta?
+
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+        def initialize: (
+          ?calls: ::Array[Sentdm::Voice::Call],
+          ?pagination: Sentdm::PaginationMeta
+        ) -> void
+
+        def to_hash: -> {
+          calls: ::Array[Sentdm::Voice::Call],
+          pagination: Sentdm::PaginationMeta
+        }
+      end
+    end
+  end
+end

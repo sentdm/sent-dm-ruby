@@ -26,7 +26,7 @@ module Sentdm
 
     attr_reader conversations: Sentdm::Resources::Conversations
 
-    attr_reader calls: Sentdm::Resources::Calls
+    attr_reader voice: Sentdm::Resources::Voice
 
     attr_reader channels: Sentdm::Resources::Channels
 
