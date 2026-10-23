@@ -48,8 +48,9 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :reason
 
-      # The recording that became available, the same id GET /v3/calls/{id}/recordings
-      # lists it under. Only on call.recording_ready, which is sent once per recording.
+      # The recording that became available, the same id GET
+      # /v3/voice/calls/{id}/recordings lists it under. Only on call.recording_ready,
+      # which is sent once per recording.
       sig { returns(T.nilable(String)) }
       attr_accessor :recording_id
 
@@ -105,8 +106,9 @@ module Sentdm
         # The machine-readable reason the call did not complete. Only on call.failed, and
         # omitted when no reason was recorded.
         reason: nil,
-        # The recording that became available, the same id GET /v3/calls/{id}/recordings
-        # lists it under. Only on call.recording_ready, which is sent once per recording.
+        # The recording that became available, the same id GET
+        # /v3/voice/calls/{id}/recordings lists it under. Only on call.recording_ready,
+        # which is sent once per recording.
         recording_id: nil,
         # When the change happened on the call, as opposed to when the event was emitted.
         updated_at: nil

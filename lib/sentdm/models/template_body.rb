@@ -7,10 +7,10 @@ module Sentdm
       #   MMS-specific content — subject, text and attachments.
       #
       #   Like Rcs, an override that cannot stand on its own: a template still needs a
-      #   MultiChannel body or the Sms + Whatsapp pair to be deliverable at all. Unlike
-      #   Rcs, it has no fallback at send time — MMS with no media is a more expensive
-      #   SMS, so a template without this slot is deliberately not MMS-capable and never
-      #   produces an MMS route candidate.
+      #   MultiChannel body or the Sms + Whatsapp pair to be deliverable at all. Without
+      #   this slot MMS renders the shared or SMS body, so it is only needed for
+      #   MMS-specific copy, a subject or attachments. When present it replaces that body
+      #   on MMS rather than adding to it.
       #
       #   @return [Sentdm::Models::TemplateBody::Mms, nil]
       optional :mms, -> { Sentdm::TemplateBody::Mms }, nil?: true
@@ -94,10 +94,10 @@ module Sentdm
         #   MMS-specific content — subject, text and attachments.
         #
         #   Like Rcs, an override that cannot stand on its own: a template still needs a
-        #   MultiChannel body or the Sms + Whatsapp pair to be deliverable at all. Unlike
-        #   Rcs, it has no fallback at send time — MMS with no media is a more expensive
-        #   SMS, so a template without this slot is deliberately not MMS-capable and never
-        #   produces an MMS route candidate.
+        #   MultiChannel body or the Sms + Whatsapp pair to be deliverable at all. Without
+        #   this slot MMS renders the shared or SMS body, so it is only needed for
+        #   MMS-specific copy, a subject or attachments. When present it replaces that body
+        #   on MMS rather than adding to it.
         #
         #   @param media [Array<Sentdm::Models::TemplateBody::Mms::Media>, nil] Attachments carried by every send on this template, in order. A per-send media_u
         #
