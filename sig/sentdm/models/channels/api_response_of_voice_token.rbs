@@ -3,14 +3,14 @@ module Sentdm
     module Channels
       type api_response_of_voice_token =
         {
-          data: Sentdm::Channels::VoiceToken?,
+          data: Sentdm::Channels::APIResponseOfVoiceToken::Data?,
           error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }
 
       class APIResponseOfVoiceToken < Sentdm::Internal::Type::BaseModel
-        attr_accessor data: Sentdm::Channels::VoiceToken?
+        attr_accessor data: Sentdm::Channels::APIResponseOfVoiceToken::Data?
 
         attr_accessor error: Sentdm::ErrorDetail?
 
@@ -23,18 +23,53 @@ module Sentdm
         def success=: (bool) -> bool
 
         def initialize: (
-          ?data: Sentdm::Channels::VoiceToken?,
+          ?data: Sentdm::Channels::APIResponseOfVoiceToken::Data?,
           ?error: Sentdm::ErrorDetail?,
           ?meta: Sentdm::APIMeta,
           ?success: bool
         ) -> void
 
         def to_hash: -> {
-          data: Sentdm::Channels::VoiceToken?,
+          data: Sentdm::Channels::APIResponseOfVoiceToken::Data?,
           error: Sentdm::ErrorDetail?,
           meta: Sentdm::APIMeta,
           success: bool
         }
+
+        type data =
+          { token: String, expires_at: Time, identity: String, number: String }
+
+        class Data < Sentdm::Internal::Type::BaseModel
+          attr_reader token: String?
+
+          def token=: (String) -> String
+
+          attr_reader expires_at: Time?
+
+          def expires_at=: (Time) -> Time
+
+          attr_reader identity: String?
+
+          def identity=: (String) -> String
+
+          attr_reader number: String?
+
+          def number=: (String) -> String
+
+          def initialize: (
+            ?token: String,
+            ?expires_at: Time,
+            ?identity: String,
+            ?number: String
+          ) -> void
+
+          def to_hash: -> {
+            token: String,
+            expires_at: Time,
+            identity: String,
+            number: String
+          }
+        end
       end
     end
   end

@@ -49,8 +49,9 @@ module Sentdm
       optional :reason, String, nil?: true
 
       # @!attribute recording_id
-      #   The recording that became available, the same id GET /v3/calls/{id}/recordings
-      #   lists it under. Only on call.recording_ready, which is sent once per recording.
+      #   The recording that became available, the same id GET
+      #   /v3/voice/calls/{id}/recordings lists it under. Only on call.recording_ready,
+      #   which is sent once per recording.
       #
       #   @return [String, nil]
       optional :recording_id, String, nil?: true
@@ -94,7 +95,7 @@ module Sentdm
       #
       #   @param reason [String, nil] The machine-readable reason the call did not complete. Only on call.failed, and
       #
-      #   @param recording_id [String, nil] The recording that became available, the same id GET /v3/calls/{id}/recordings l
+      #   @param recording_id [String, nil] The recording that became available, the same id GET /v3/voice/calls/{id}/record
       #
       #   @param updated_at [String] When the change happened on the call, as opposed to when the event was emitted.
     end
