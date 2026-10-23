@@ -12,8 +12,8 @@ module Sentdm
       # number**: each number you hold can carry phone calls on its own
       # (`POST /v3/channels/voice`), each with the callback URL Sent asks what to do
       # with its calls, one of them is the default line for calls placed from your app,
-      # and voice tokens are minted under `POST /v3/channels/voice/tokens`. Read your
-      # voice numbers with `GET /v3/channels/voice` and change one with
+      # and voice tokens are minted with `POST /v3/voice/tokens`. Read your voice
+      # numbers with `GET /v3/channels/voice` and change one with
       # `PATCH /v3/channels/voice/{number}`.
       #
       # ## Compliance lives on the market
@@ -134,18 +134,22 @@ module Sentdm
         #
         # ## What it changes
         #
-        # | Body                                          | Effect                                                                                                                                                     |
-        # | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-        # | `"status": "ACTIVE"`                          | turns calls on again for a number you turned off; the callback URL and the secret it had are kept                                                          |
-        # | `"status": "INACTIVE"`                        | turns calls off; the callback URL and the secret stay on the number                                                                                        |
-        # | `"default_for_app_calls": true`               | makes this the line app-originated calls are placed from when a voice token names no number                                                                |
-        # | `"callback_url": "https://example.com/voice"` | replaces where Sent asks what to do with each call on the number; the signing secret is kept, and a number that was waiting for its first URL is turned on |
-        # | key omitted                                   | left exactly as it is                                                                                                                                      |
+        # | Body                                          | Effect                                                                                                       |
+        # | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+        # | `"status": "ACTIVE"`                          | turns calls on again for a number you turned off; the callback URL and the secret it had are kept            |
+        # | `"status": "INACTIVE"`                        | turns calls off; the callback URL and the secret stay on the number                                          |
+        # | `"default_for_app_calls": true`               | makes this the line app-originated calls are placed from when a voice token names no number                  |
+        # | `"callback_url": "https://example.com/voice"` | replaces where Sent asks what to do with each call on the number; the signing secret and the status are kept |
+        # | key omitted                                   | left exactly as it is                                                                                        |
         #
         # `status` is matched ignoring case. Any combination is accepted:
         # `status: "ACTIVE"` with `default_for_app_calls: true` turns a number on as the
         # new default, and a `callback_url` sent with either status is written too. A body
         # that names none of the three is refused.
+        #
+        # A number can be on without a callback URL: calls placed from your app then
+        # connect straight to the number or user they dial, and calls to the number are
+        # declined.
         #
         # ## What it will refuse
         #
@@ -159,11 +163,6 @@ module Sentdm
         #
         # **Making an inactive number the default is `400`.** Send `status: "ACTIVE"` in
         # the same call.
-        #
-        # A number added without a `callback_url` is `INACTIVE` for that one reason, so
-        # sending it a `callback_url` turns it on by itself, and it becomes your default
-        # line if you have no other active voice number. A number you turned off while it
-        # had a URL stays off.
         #
         # **A number you never turned voice on for is `404`.** Add it with
         # `POST /v3/channels/voice`.
@@ -237,48 +236,6 @@ module Sentdm
         def list(
           # Profile UUID to scope the request to a child profile. Only organization API keys
           # can use this header. The profile must belong to the calling organization.
-          x_profile_id: nil,
-          request_options: {}
-        )
-        end
-
-        # Mints a short-lived token for one of your app users. Call this from your backend
-        # and return the token to your app, which passes it to the voice client SDK to
-        # register. The identity is bound to the given number, or to your default app-call
-        # number when omitted, and calls placed by that identity are routed through the
-        # bound number. Minting again re-binds the identity, so an identity can move
-        # between numbers.
-        sig do
-          params(
-            identity: String,
-            number: T.nilable(String),
-            sandbox: T::Boolean,
-            ttl: T.nilable(Integer),
-            idempotency_key: String,
-            x_profile_id: String,
-            request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Channels::APIResponseOfVoiceToken)
-        end
-        def create_token(
-          # Body param: Your identifier for the app user, such as an agent or account id.
-          # Letters, digits, hyphens and underscores only, up to 200 characters.
-          identity: nil,
-          # Body param: One of your voice-enabled phone numbers in E.164 format. Calls
-          # placed by this identity are routed through that number. Omit to use your default
-          # app-call number.
-          number: nil,
-          # Body param: Sandbox flag - when true, the operation is simulated without side
-          # effects Useful for testing integrations without actual execution
-          sandbox: nil,
-          # Body param: Token lifetime in seconds. Defaults to 600 and cannot exceed 3600.
-          ttl: nil,
-          # Header param: Unique key to ensure idempotent request processing. Must be 1-255
-          # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
-          # hours per key per customer.
-          idempotency_key: nil,
-          # Header param: Profile UUID to scope the request to a child profile. Only
-          # organization API keys can use this header. The profile must belong to the
-          # calling organization.
           x_profile_id: nil,
           request_options: {}
         )
