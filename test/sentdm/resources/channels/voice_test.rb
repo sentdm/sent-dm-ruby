@@ -79,25 +79,6 @@ class Sentdm::Test::Resources::Channels::VoiceTest < Sentdm::Test::ResourceTest
     end
   end
 
-  def test_create_token
-    skip("Mock server tests are disabled")
-
-    response = @sent.channels.voice.create_token
-
-    assert_pattern do
-      response => Sentdm::Channels::APIResponseOfVoiceToken
-    end
-
-    assert_pattern do
-      response => {
-        data: Sentdm::Channels::VoiceToken | nil,
-        error: Sentdm::ErrorDetail | nil,
-        meta: Sentdm::APIMeta | nil,
-        success: Sentdm::Internal::Type::Boolean | nil
-      }
-    end
-  end
-
   def test_rotate_secret
     skip("Mock server tests are disabled")
 
