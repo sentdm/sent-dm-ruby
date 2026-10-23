@@ -11,6 +11,11 @@ module Sentdm
 
       module Profiles
       end
+
+      module Voice
+        module Calls
+        end
+      end
     end
   end
 end

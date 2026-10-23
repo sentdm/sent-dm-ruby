@@ -35,16 +35,6 @@ module Sentdm
           ?request_options: Sentdm::request_opts
         ) -> Sentdm::Channels::APIResponseOfListOfVoiceNumber
 
-        def create_token: (
-          ?identity: String,
-          ?number: String?,
-          ?sandbox: bool,
-          ?ttl: Integer?,
-          ?idempotency_key: String,
-          ?x_profile_id: String,
-          ?request_options: Sentdm::request_opts
-        ) -> Sentdm::Channels::APIResponseOfVoiceToken
-
         def rotate_secret: (
           String number,
           ?sandbox: bool,
