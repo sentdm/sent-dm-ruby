@@ -1,0 +1,9 @@
+module Sentdm
+  module Resources
+    class Voice
+      class Voices
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end
