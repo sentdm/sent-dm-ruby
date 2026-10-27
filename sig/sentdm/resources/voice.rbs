@@ -5,6 +5,10 @@ module Sentdm
 
       attr_reader tokens: Sentdm::Resources::Voice::Tokens
 
+      attr_reader agents: Sentdm::Resources::Voice::Agents
+
+      attr_reader voices: Sentdm::Resources::Voice::Voices
+
       def initialize: (client: Sentdm::Client) -> void
     end
   end

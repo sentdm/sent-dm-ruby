@@ -43,6 +43,12 @@ module Sentdm
       # @return [Sentdm::Resources::Voice::Tokens]
       attr_reader :tokens
 
+      # @return [Sentdm::Resources::Voice::Agents]
+      attr_reader :agents
+
+      # @return [Sentdm::Resources::Voice::Voices]
+      attr_reader :voices
+
       # @api private
       #
       # @param client [Sentdm::Client]
@@ -50,6 +56,8 @@ module Sentdm
         @client = client
         @calls = Sentdm::Resources::Voice::Calls.new(client: client)
         @tokens = Sentdm::Resources::Voice::Tokens.new(client: client)
+        @agents = Sentdm::Resources::Voice::Agents.new(client: client)
+        @voices = Sentdm::Resources::Voice::Voices.new(client: client)
       end
     end
   end

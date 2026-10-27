@@ -43,6 +43,12 @@ module Sentdm
       sig { returns(Sentdm::Resources::Voice::Tokens) }
       attr_reader :tokens
 
+      sig { returns(Sentdm::Resources::Voice::Agents) }
+      attr_reader :agents
+
+      sig { returns(Sentdm::Resources::Voice::Voices) }
+      attr_reader :voices
+
       # @api private
       sig { params(client: Sentdm::Client).returns(T.attached_class) }
       def self.new(client:)
