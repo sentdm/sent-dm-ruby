@@ -1,0 +1,14 @@
+module Sentdm
+  module Resources
+    class Voice
+      class Catalogue
+        def list: (
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Voice::APIResponseOfVoiceCatalogue
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

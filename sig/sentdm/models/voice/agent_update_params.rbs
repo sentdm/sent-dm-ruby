@@ -1,0 +1,108 @@
+module Sentdm
+  module Models
+    module Voice
+      type agent_update_params =
+        {
+          id: String,
+          audio: Sentdm::Voice::VoiceAgentAudioSpec?,
+          fallback: Sentdm::Voice::VoiceAgentPartySpec?,
+          greeting: String?,
+          limits: Sentdm::Voice::VoiceAgentLimitsSpec?,
+          name: String,
+          sandbox: bool,
+          session_type: String,
+          speech: Sentdm::Voice::VoiceAgentSpeechSpec?,
+          tools: ::Array[String]?,
+          transcripts: Sentdm::Voice::VoiceAgentTranscriptsSpec?,
+          transfer_targets: ::Array[Sentdm::Voice::VoiceAgentPartySpec]?,
+          websocket_url: String?,
+          idempotency_key: String,
+          x_profile_id: String
+        }
+        & Sentdm::Internal::Type::request_parameters
+
+      class AgentUpdateParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor audio: Sentdm::Voice::VoiceAgentAudioSpec?
+
+        attr_accessor fallback: Sentdm::Voice::VoiceAgentPartySpec?
+
+        attr_accessor greeting: String?
+
+        attr_accessor limits: Sentdm::Voice::VoiceAgentLimitsSpec?
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader sandbox: bool?
+
+        def sandbox=: (bool) -> bool
+
+        attr_reader session_type: String?
+
+        def session_type=: (String) -> String
+
+        attr_accessor speech: Sentdm::Voice::VoiceAgentSpeechSpec?
+
+        attr_accessor tools: ::Array[String]?
+
+        attr_accessor transcripts: Sentdm::Voice::VoiceAgentTranscriptsSpec?
+
+        attr_accessor transfer_targets: ::Array[Sentdm::Voice::VoiceAgentPartySpec]?
+
+        attr_accessor websocket_url: String?
+
+        attr_reader idempotency_key: String?
+
+        def idempotency_key=: (String) -> String
+
+        attr_reader x_profile_id: String?
+
+        def x_profile_id=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?audio: Sentdm::Voice::VoiceAgentAudioSpec?,
+          ?fallback: Sentdm::Voice::VoiceAgentPartySpec?,
+          ?greeting: String?,
+          ?limits: Sentdm::Voice::VoiceAgentLimitsSpec?,
+          ?name: String,
+          ?sandbox: bool,
+          ?session_type: String,
+          ?speech: Sentdm::Voice::VoiceAgentSpeechSpec?,
+          ?tools: ::Array[String]?,
+          ?transcripts: Sentdm::Voice::VoiceAgentTranscriptsSpec?,
+          ?transfer_targets: ::Array[Sentdm::Voice::VoiceAgentPartySpec]?,
+          ?websocket_url: String?,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          audio: Sentdm::Voice::VoiceAgentAudioSpec?,
+          fallback: Sentdm::Voice::VoiceAgentPartySpec?,
+          greeting: String?,
+          limits: Sentdm::Voice::VoiceAgentLimitsSpec?,
+          name: String,
+          sandbox: bool,
+          session_type: String,
+          speech: Sentdm::Voice::VoiceAgentSpeechSpec?,
+          tools: ::Array[String]?,
+          transcripts: Sentdm::Voice::VoiceAgentTranscriptsSpec?,
+          transfer_targets: ::Array[Sentdm::Voice::VoiceAgentPartySpec]?,
+          websocket_url: String?,
+          idempotency_key: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end
