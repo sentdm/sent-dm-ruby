@@ -115,8 +115,8 @@ module Sentdm
     sig { returns(Sentdm::Resources::Conversations) }
     attr_reader :conversations
 
-    sig { returns(Sentdm::Resources::Calls) }
-    attr_reader :calls
+    sig { returns(Sentdm::Resources::Voice) }
+    attr_reader :voice
 
     sig { returns(Sentdm::Resources::Channels) }
     attr_reader :channels

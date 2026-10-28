@@ -10,8 +10,8 @@ module Sentdm
     #   end
     #
     # @example
-    #   calls_page.auto_paging_each do |item|
-    #     puts(item)
+    #   calls_page.auto_paging_each do |call|
+    #     puts(call)
     #   end
     class CallsPage
       include Sentdm::Internal::Type::BasePage

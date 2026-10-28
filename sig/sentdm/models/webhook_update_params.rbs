@@ -7,6 +7,7 @@ module Sentdm
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,
         event_types: ::Array[String],
+        is_inheritable: bool?,
         retry_count: Integer,
         sandbox: bool,
         sender_profile: Sentdm::WebhookUpdateParams::SenderProfile?,
@@ -36,6 +37,8 @@ module Sentdm
 
       def event_types=: (::Array[String]) -> ::Array[String]
 
+      attr_accessor is_inheritable: bool?
+
       attr_reader retry_count: Integer?
 
       def retry_count=: (Integer) -> Integer
@@ -64,6 +67,7 @@ module Sentdm
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
         ?event_types: ::Array[String],
+        ?is_inheritable: bool?,
         ?retry_count: Integer,
         ?sandbox: bool,
         ?sender_profile: Sentdm::WebhookUpdateParams::SenderProfile?,
@@ -79,6 +83,7 @@ module Sentdm
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,
         event_types: ::Array[String],
+        is_inheritable: bool?,
         retry_count: Integer,
         sandbox: bool,
         sender_profile: Sentdm::WebhookUpdateParams::SenderProfile?,

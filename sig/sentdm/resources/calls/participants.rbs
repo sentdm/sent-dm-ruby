@@ -1,9 +1,0 @@
-module Sentdm
-  module Resources
-    class Calls
-      class Participants
-        def initialize: (client: Sentdm::Client) -> void
-      end
-    end
-  end
-end

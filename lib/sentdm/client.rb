@@ -120,8 +120,8 @@ module Sentdm
     # @return [Sentdm::Resources::Conversations]
     attr_reader :conversations
 
-    # @return [Sentdm::Resources::Calls]
-    attr_reader :calls
+    # @return [Sentdm::Resources::Voice]
+    attr_reader :voice
 
     # @return [Sentdm::Resources::Channels]
     attr_reader :channels
@@ -204,7 +204,7 @@ module Sentdm
       @messages = Sentdm::Resources::Messages.new(client: self)
       @contacts = Sentdm::Resources::Contacts.new(client: self)
       @conversations = Sentdm::Resources::Conversations.new(client: self)
-      @calls = Sentdm::Resources::Calls.new(client: self)
+      @voice = Sentdm::Resources::Voice.new(client: self)
       @channels = Sentdm::Resources::Channels.new(client: self)
       @me = Sentdm::Resources::Me.new(client: self)
     end

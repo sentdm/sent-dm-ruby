@@ -1,9 +1,0 @@
-module Sentdm
-  module Resources
-    class Calls
-      attr_reader participants: Sentdm::Resources::Calls::Participants
-
-      def initialize: (client: Sentdm::Client) -> void
-    end
-  end
-end

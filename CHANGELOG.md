@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.39.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.38.1...v0.39.0) (2026-10-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** move calls and voice tokens under the voice resource
+
+### Features
+
+* **api:** move calls and voice tokens under the voice resource ([a49f63f](https://github.com/sentdm/sent-dm-ruby/commit/a49f63f03c8ab24f342811916cf886f0bf8e85fa))
+* **api:** sync generated SDKs from the committed spec ([8201d6f](https://github.com/sentdm/sent-dm-ruby/commit/8201d6f1770931232a0ca73d1887a7e08df58ba0))
+
 ## [0.38.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.38.0...v0.38.1) (2026-10-20)
 
 

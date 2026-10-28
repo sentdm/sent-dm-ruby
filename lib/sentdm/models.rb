@@ -41,12 +41,6 @@ module Sentdm
 
   APIMeta = Sentdm::Models::APIMeta
 
-  APIResponseOfCall = Sentdm::Models::APIResponseOfCall
-
-  APIResponseOfCallRecordings = Sentdm::Models::APIResponseOfCallRecordings
-
-  APIResponseOfCallsList = Sentdm::Models::APIResponseOfCallsList
-
   APIResponseOfContact = Sentdm::Models::APIResponseOfContact
 
   APIResponseOfContactMessageSummary = Sentdm::Models::APIResponseOfContactMessageSummary
@@ -76,8 +70,6 @@ module Sentdm
   CallEvent = Sentdm::Models::CallEvent
 
   CallEventPayload = Sentdm::Models::CallEventPayload
-
-  Calls = Sentdm::Models::Calls
 
   ChannelEvent = Sentdm::Models::ChannelEvent
 
@@ -204,6 +196,8 @@ module Sentdm
   UserRetrieveParams = Sentdm::Models::UserRetrieveParams
 
   UserUpdateRoleParams = Sentdm::Models::UserUpdateRoleParams
+
+  Voice = Sentdm::Models::Voice
 
   WebhookCreateParams = Sentdm::Models::WebhookCreateParams
 

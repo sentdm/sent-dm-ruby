@@ -13,6 +13,15 @@ module Sentdm
         #   @return [String]
         required :number, String
 
+        # @!attribute agent_id
+        #   One of your voice agents, such as agent_9f2ab000-0000-4000-8000-000000000001, to
+        #   answer calls to the number, or null to unbind it so the callback URL answers
+        #   them again. The agent wins over callback_url for calls to the number; calls your
+        #   app places from it still follow your app.
+        #
+        #   @return [String, nil]
+        optional :agent_id, String, nil?: true
+
         # @!attribute callback_url
         #   A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
         #   on a public host, where Sent asks what to do with each call. The signing secret
@@ -54,11 +63,13 @@ module Sentdm
         #   @return [String, nil]
         optional :x_profile_id, String
 
-        # @!method initialize(number:, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @!method initialize(number:, agent_id: nil, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::VoiceUpdateParams} for more details.
         #
         #   @param number [String]
+        #
+        #   @param agent_id [String, nil] One of your voice agents, such as agent_9f2ab000-0000-4000-8000-000000000001, to
         #
         #   @param callback_url [String, nil] A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
         #

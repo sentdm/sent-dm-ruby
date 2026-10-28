@@ -16,6 +16,12 @@ module Sentdm
       #   @return [String, nil]
       optional :account_id, String
 
+      # @!attribute agent_id
+      #   The voice agent that answers the call, agent\_…. Only on an agent call.
+      #
+      #   @return [String, nil]
+      optional :agent_id, String, nil?: true
+
       # @!attribute channel
       #   Always voice.
       #
@@ -27,6 +33,13 @@ module Sentdm
       #
       #   @return [Integer, nil]
       optional :duration_seconds, Integer, nil?: true
+
+      # @!attribute mode
+      #   inapp, a call routed by the number's callback URL, or agent, a call one of the
+      #   account's voice agents answers. The same value GET /v3/voice/calls returns.
+      #
+      #   @return [String, nil]
+      optional :mode, String
 
       # @!attribute number
       #   The customer number that owns the call, in E.164 format.
@@ -62,19 +75,21 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(call_id:, account_id: nil, channel: nil, duration_seconds: nil, number: nil, price: nil, reason: nil, recording_id: nil, updated_at: nil)
+      # @!method initialize(call_id:, account_id: nil, agent_id: nil, channel: nil, duration_seconds: nil, mode: nil, number: nil, price: nil, reason: nil, recording_id: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::CallEventPayload} for more details.
       #
-      #   Body of a call.initiated, call.answered, call.completed, call.failed or
-      #   call.recording_ready event. Which of them occurred is the envelope's event.
+      #   Body of a call.initiated, call.answered, call.agent_connected, call.completed,
+      #   call.failed or call.recording_ready event. Which of them occurred is the
+      #   envelope's event.
       #
       #   Shaped like the message, inbound, template and channel payloads: account_id
       #   names the account the event is about, channel names the channel, and updated_at
       #   is when the change happened on the call, in the same yyyy-MM-ddTHH:mm:ssZ form.
-      #   duration_seconds and price are added on call.completed, reason on call.failed
-      #   and recording_id on call.recording_ready; each is omitted rather than sent as
-      #   null when it does not apply.
+      #   Every event says how the call is handled in mode, and an agent call names its
+      #   agent in agent_id. duration_seconds and price are added on call.completed,
+      #   reason on call.failed and recording_id on call.recording_ready; each is omitted
+      #   rather than sent as null when it does not apply.
       #
       #   Casing is snake_case because these ride the same webhook stream customers
       #   already parse message_id from; the question/answer contract is a separate
@@ -85,9 +100,13 @@ module Sentdm
       #
       #   @param account_id [String] The account the call belongs to: the key's own customer, or the sender profile i
       #
+      #   @param agent_id [String, nil] The voice agent that answers the call, agent\_…. Only on an agent call.
+      #
       #   @param channel [String] Always voice.
       #
       #   @param duration_seconds [Integer, nil] How long the call lasted. Only on call.completed.
+      #
+      #   @param mode [String] inapp, a call routed by the number's callback URL, or agent, a call one of the a
       #
       #   @param number [String] The customer number that owns the call, in E.164 format.
       #

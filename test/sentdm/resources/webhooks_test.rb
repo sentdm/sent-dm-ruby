@@ -87,12 +87,15 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
         event_filters: ^(Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]]) | nil,
         event_types: ^(Sentdm::Internal::Type::ArrayOf[String]) | nil,
         is_active: Sentdm::Internal::Type::Boolean | nil,
+        is_inheritable: Sentdm::Internal::Type::Boolean | nil,
         last_delivery_attempt_at: Time | nil,
         last_successful_delivery_at: Time | nil,
         retry_count: Integer | nil,
+        sender_profile: Sentdm::WebhookResponse::SenderProfile | nil,
         signing_secret: String | nil,
         timeout_seconds: Integer | nil,
-        updated_at: Time | nil
+        updated_at: Time | nil,
+        webhook_version: Integer | nil
       }
     end
   end
