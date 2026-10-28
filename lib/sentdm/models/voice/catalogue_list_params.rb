@@ -3,8 +3,8 @@
 module Sentdm
   module Models
     module Voice
-      # @see Sentdm::Resources::Voice::Voices#list
-      class VoiceListParams < Sentdm::Internal::Type::BaseModel
+      # @see Sentdm::Resources::Voice::Catalogue#list
+      class CatalogueListParams < Sentdm::Internal::Type::BaseModel
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 

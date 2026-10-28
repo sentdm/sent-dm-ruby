@@ -2,11 +2,11 @@
 
 require_relative "../../test_helper"
 
-class Sentdm::Test::Resources::Voice::VoicesTest < Sentdm::Test::ResourceTest
+class Sentdm::Test::Resources::Voice::CatalogueTest < Sentdm::Test::ResourceTest
   def test_list
     skip("Mock server tests are disabled")
 
-    response = @sent.voice.voices.list
+    response = @sent.voice.catalogue.list
 
     assert_pattern do
       response => Sentdm::Voice::APIResponseOfVoiceCatalogue

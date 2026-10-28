@@ -1,4 +1,4 @@
-# typed: strong
+# frozen_string_literal: true
 
 module Sentdm
   module Resources
@@ -31,27 +31,39 @@ module Sentdm
       # `POST /v3/voice/agents/{id}/rotate-secret` only. Voices and languages for text
       # sessions come from `GET /v3/voice/voices`. A number takes calls to an agent once
       # it is bound to it on `/v3/channels/voice`.
-      class Voices
+      class Catalogue
+        # Some parameter documentations has been truncated, see
+        # {Sentdm::Models::Voice::CatalogueListParams} for more details.
+        #
         # The names a voice agent's `speech.voice` and `speech.language` accept, with the
         # default marked. The list grows as voices are added; a name is never removed
         # without notice.
-        sig do
-          params(
-            x_profile_id: String,
-            request_options: Sentdm::RequestOptions::OrHash
-          ).returns(Sentdm::Voice::APIResponseOfVoiceCatalogue)
-        end
-        def list(
-          # Profile UUID to scope the request to a child profile. Only organization API keys
-          # can use this header. The profile must belong to the calling organization.
-          x_profile_id: nil,
-          request_options: {}
-        )
+        #
+        # @overload list(x_profile_id: nil, request_options: {})
+        #
+        # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
+        #
+        # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Sentdm::Models::Voice::APIResponseOfVoiceCatalogue]
+        #
+        # @see Sentdm::Models::Voice::CatalogueListParams
+        def list(params = {})
+          parsed, options = Sentdm::Voice::CatalogueListParams.dump_request(params)
+          @client.request(
+            method: :get,
+            path: "v3/voice/voices",
+            headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
+            model: Sentdm::Voice::APIResponseOfVoiceCatalogue,
+            options: options
+          )
         end
 
         # @api private
-        sig { params(client: Sentdm::Client).returns(T.attached_class) }
-        def self.new(client:)
+        #
+        # @param client [Sentdm::Client]
+        def initialize(client:)
+          @client = client
         end
       end
     end

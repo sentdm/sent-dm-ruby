@@ -3,7 +3,7 @@
 module Sentdm
   module Models
     module Voice
-      # @see Sentdm::Resources::Voice::Voices#list
+      # @see Sentdm::Resources::Voice::Catalogue#list
       class APIResponseOfVoiceCatalogue < Sentdm::Internal::Type::BaseModel
         # @!attribute data
         #   The voices and languages a text-session agent may name in its speech settings:

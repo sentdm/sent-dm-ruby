@@ -1,7 +1,7 @@
 module Sentdm
   module Resources
     class Voice
-      class Voices
+      class Catalogue
         def list: (
           ?x_profile_id: String,
           ?request_options: Sentdm::request_opts

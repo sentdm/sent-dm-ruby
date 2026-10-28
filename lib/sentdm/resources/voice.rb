@@ -124,8 +124,8 @@ module Sentdm
       # `POST /v3/voice/agents/{id}/rotate-secret` only. Voices and languages for text
       # sessions come from `GET /v3/voice/voices`. A number takes calls to an agent once
       # it is bound to it on `/v3/channels/voice`.
-      # @return [Sentdm::Resources::Voice::Voices]
-      attr_reader :voices
+      # @return [Sentdm::Resources::Voice::Catalogue]
+      attr_reader :catalogue
 
       # @api private
       #
@@ -135,7 +135,7 @@ module Sentdm
         @calls = Sentdm::Resources::Voice::Calls.new(client: client)
         @tokens = Sentdm::Resources::Voice::Tokens.new(client: client)
         @agents = Sentdm::Resources::Voice::Agents.new(client: client)
-        @voices = Sentdm::Resources::Voice::Voices.new(client: client)
+        @catalogue = Sentdm::Resources::Voice::Catalogue.new(client: client)
       end
     end
   end

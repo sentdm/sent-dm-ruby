@@ -3,13 +3,13 @@
 module Sentdm
   module Models
     module Voice
-      class VoiceListParams < Sentdm::Internal::Type::BaseModel
+      class CatalogueListParams < Sentdm::Internal::Type::BaseModel
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
         OrHash =
           T.type_alias do
-            T.any(Sentdm::Voice::VoiceListParams, Sentdm::Internal::AnyHash)
+            T.any(Sentdm::Voice::CatalogueListParams, Sentdm::Internal::AnyHash)
           end
 
         sig { returns(T.nilable(String)) }
