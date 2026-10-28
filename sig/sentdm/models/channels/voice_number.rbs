@@ -3,15 +3,19 @@ module Sentdm
     module Channels
       type voice_number =
         {
+          agent_id: String?,
           callback_url: String?,
           created_at: Time,
           default_for_app_calls: bool,
           number: String,
+          routes_to: String,
           status: String,
           updated_at: Time
         }
 
       class VoiceNumber < Sentdm::Internal::Type::BaseModel
+        attr_accessor agent_id: String?
+
         attr_accessor callback_url: String?
 
         attr_reader created_at: Time?
@@ -26,6 +30,10 @@ module Sentdm
 
         def number=: (String) -> String
 
+        attr_reader routes_to: String?
+
+        def routes_to=: (String) -> String
+
         attr_reader status: String?
 
         def status=: (String) -> String
@@ -35,19 +43,23 @@ module Sentdm
         def updated_at=: (Time) -> Time
 
         def initialize: (
+          ?agent_id: String?,
           ?callback_url: String?,
           ?created_at: Time,
           ?default_for_app_calls: bool,
           ?number: String,
+          ?routes_to: String,
           ?status: String,
           ?updated_at: Time
         ) -> void
 
         def to_hash: -> {
+          agent_id: String?,
           callback_url: String?,
           created_at: Time,
           default_for_app_calls: bool,
           number: String,
+          routes_to: String,
           status: String,
           updated_at: Time
         }

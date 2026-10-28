@@ -1,0 +1,23 @@
+module Sentdm
+  module Models
+    class VoiceAgentTranscripts = Voice::VoiceAgentTranscripts
+
+    module Voice
+      type voice_agent_transcripts = { retention_days: Integer, store: bool }
+
+      class VoiceAgentTranscripts < Sentdm::Internal::Type::BaseModel
+        attr_reader retention_days: Integer?
+
+        def retention_days=: (Integer) -> Integer
+
+        attr_reader store: bool?
+
+        def store=: (bool) -> bool
+
+        def initialize: (?retention_days: Integer, ?store: bool) -> void
+
+        def to_hash: -> { retention_days: Integer, store: bool }
+      end
+    end
+  end
+end

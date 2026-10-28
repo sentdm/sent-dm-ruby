@@ -1,0 +1,116 @@
+module Sentdm
+  module Models
+    class VoiceAgent = Voice::VoiceAgent
+
+    module Voice
+      type voice_agent =
+        {
+          id: String,
+          audio: Sentdm::Voice::VoiceAgentAudio?,
+          created_at: Time,
+          fallback: Sentdm::Voice::VoiceAgentParty?,
+          greeting: String?,
+          limits: Sentdm::Voice::VoiceAgentLimits,
+          name: String,
+          session_type: String,
+          signing_secret: String?,
+          speech: Sentdm::Voice::VoiceAgentSpeech?,
+          tools: ::Array[String],
+          transcripts: Sentdm::Voice::VoiceAgentTranscripts,
+          transfer_targets: ::Array[Sentdm::Voice::VoiceAgentParty],
+          updated_at: Time?,
+          websocket_url: String?
+        }
+
+      class VoiceAgent < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_accessor audio: Sentdm::Voice::VoiceAgentAudio?
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_accessor fallback: Sentdm::Voice::VoiceAgentParty?
+
+        attr_accessor greeting: String?
+
+        attr_reader limits: Sentdm::Voice::VoiceAgentLimits?
+
+        def limits=: (
+          Sentdm::Voice::VoiceAgentLimits
+        ) -> Sentdm::Voice::VoiceAgentLimits
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader session_type: String?
+
+        def session_type=: (String) -> String
+
+        attr_accessor signing_secret: String?
+
+        attr_accessor speech: Sentdm::Voice::VoiceAgentSpeech?
+
+        attr_reader tools: ::Array[String]?
+
+        def tools=: (::Array[String]) -> ::Array[String]
+
+        attr_reader transcripts: Sentdm::Voice::VoiceAgentTranscripts?
+
+        def transcripts=: (
+          Sentdm::Voice::VoiceAgentTranscripts
+        ) -> Sentdm::Voice::VoiceAgentTranscripts
+
+        attr_reader transfer_targets: ::Array[Sentdm::Voice::VoiceAgentParty]?
+
+        def transfer_targets=: (
+          ::Array[Sentdm::Voice::VoiceAgentParty]
+        ) -> ::Array[Sentdm::Voice::VoiceAgentParty]
+
+        attr_accessor updated_at: Time?
+
+        attr_accessor websocket_url: String?
+
+        def initialize: (
+          ?id: String,
+          ?audio: Sentdm::Voice::VoiceAgentAudio?,
+          ?created_at: Time,
+          ?fallback: Sentdm::Voice::VoiceAgentParty?,
+          ?greeting: String?,
+          ?limits: Sentdm::Voice::VoiceAgentLimits,
+          ?name: String,
+          ?session_type: String,
+          ?signing_secret: String?,
+          ?speech: Sentdm::Voice::VoiceAgentSpeech?,
+          ?tools: ::Array[String],
+          ?transcripts: Sentdm::Voice::VoiceAgentTranscripts,
+          ?transfer_targets: ::Array[Sentdm::Voice::VoiceAgentParty],
+          ?updated_at: Time?,
+          ?websocket_url: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          audio: Sentdm::Voice::VoiceAgentAudio?,
+          created_at: Time,
+          fallback: Sentdm::Voice::VoiceAgentParty?,
+          greeting: String?,
+          limits: Sentdm::Voice::VoiceAgentLimits,
+          name: String,
+          session_type: String,
+          signing_secret: String?,
+          speech: Sentdm::Voice::VoiceAgentSpeech?,
+          tools: ::Array[String],
+          transcripts: Sentdm::Voice::VoiceAgentTranscripts,
+          transfer_targets: ::Array[Sentdm::Voice::VoiceAgentParty],
+          updated_at: Time?,
+          websocket_url: String?
+        }
+      end
+    end
+  end
+end

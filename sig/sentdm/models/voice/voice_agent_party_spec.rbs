@@ -1,0 +1,19 @@
+module Sentdm
+  module Models
+    class VoiceAgentPartySpec = Voice::VoiceAgentPartySpec
+
+    module Voice
+      type voice_agent_party_spec = { kind: String?, value: String? }
+
+      class VoiceAgentPartySpec < Sentdm::Internal::Type::BaseModel
+        attr_accessor kind: String?
+
+        attr_accessor value: String?
+
+        def initialize: (?kind: String?, ?value: String?) -> void
+
+        def to_hash: -> { kind: String?, value: String? }
+      end
+    end
+  end
+end

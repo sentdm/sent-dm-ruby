@@ -3,10 +3,10 @@
 require_relative "../../test_helper"
 
 class Sentdm::Test::Resources::Channels::VoiceTest < Sentdm::Test::ResourceTest
-  def test_create_required_params
+  def test_create
     skip("Mock server tests are disabled")
 
-    response = @sent.channels.voice.create(callback_url: "https://example.com/voice")
+    response = @sent.channels.voice.create
 
     assert_pattern do
       response => Sentdm::Channels::APIResponseOfVoiceNumberCreated
@@ -44,7 +44,7 @@ class Sentdm::Test::Resources::Channels::VoiceTest < Sentdm::Test::ResourceTest
   def test_update
     skip("Mock server tests are disabled")
 
-    response = @sent.channels.voice.update("+12125550100")
+    response = @sent.channels.voice.update("number")
 
     assert_pattern do
       response => Sentdm::Channels::APIResponseOfVoiceNumber

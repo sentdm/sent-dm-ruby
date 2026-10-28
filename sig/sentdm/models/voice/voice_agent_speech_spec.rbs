@@ -1,0 +1,26 @@
+module Sentdm
+  module Models
+    class VoiceAgentSpeechSpec = Voice::VoiceAgentSpeechSpec
+
+    module Voice
+      type voice_agent_speech_spec =
+        { language: String?, setting: String?, voice: String? }
+
+      class VoiceAgentSpeechSpec < Sentdm::Internal::Type::BaseModel
+        attr_accessor language: String?
+
+        attr_accessor setting: String?
+
+        attr_accessor voice: String?
+
+        def initialize: (
+          ?language: String?,
+          ?setting: String?,
+          ?voice: String?
+        ) -> void
+
+        def to_hash: -> { language: String?, setting: String?, voice: String? }
+      end
+    end
+  end
+end

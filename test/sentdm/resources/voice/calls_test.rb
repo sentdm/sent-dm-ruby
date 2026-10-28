@@ -41,12 +41,16 @@ class Sentdm::Test::Resources::Voice::CallsTest < Sentdm::Test::ResourceTest
     assert_pattern do
       row => {
         id: String | nil,
+        agent_id: String | nil,
         answered_at: Time | nil,
+        caller_id_used: String | nil,
+        connected_number: String | nil,
         direction: String | nil,
         duration_seconds: Integer | nil,
         ended_at: Time | nil,
         failure_reason: String | nil,
         from: Sentdm::Voice::CallParty | nil,
+        legs: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Voice::Call::Leg]) | nil,
         mode: String | nil,
         number: String | nil,
         price: Float | nil,

@@ -4,8 +4,10 @@ module Sentdm
       {
         call_id: String,
         account_id: String,
+        agent_id: String?,
         channel: String,
         duration_seconds: Integer?,
+        mode: String,
         number: String,
         price: Float?,
         reason: String?,
@@ -20,11 +22,17 @@ module Sentdm
 
       def account_id=: (String) -> String
 
+      attr_accessor agent_id: String?
+
       attr_reader channel: String?
 
       def channel=: (String) -> String
 
       attr_accessor duration_seconds: Integer?
+
+      attr_reader mode: String?
+
+      def mode=: (String) -> String
 
       attr_reader number: String?
 
@@ -43,8 +51,10 @@ module Sentdm
       def initialize: (
         call_id: String,
         ?account_id: String,
+        ?agent_id: String?,
         ?channel: String,
         ?duration_seconds: Integer?,
+        ?mode: String,
         ?number: String,
         ?price: Float?,
         ?reason: String?,
@@ -55,8 +65,10 @@ module Sentdm
       def to_hash: -> {
         call_id: String,
         account_id: String,
+        agent_id: String?,
         channel: String,
         duration_seconds: Integer?,
+        mode: String,
         number: String,
         price: Float?,
         reason: String?,
