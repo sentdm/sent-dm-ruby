@@ -32,6 +32,18 @@ module Sentdm
       sig { params(event_types: T::Array[String]).void }
       attr_writer :event_types
 
+      # Also delivers every sender profile's events to this webhook, at the same URL and
+      # with the same signing secret, and lets each profile see the webhook and read the
+      # events about itself. Off by default: the organization's own events only. Only an
+      # organization's version 2 webhook can set it.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :is_inheritable
+
+      sig { params(is_inheritable: T::Boolean).void }
+      attr_writer :is_inheritable
+
+      # Delivery retries. Applies to version 1 only: Svix retries a version 2 webhook on
+      # its own schedule.
       sig { returns(T.nilable(Integer)) }
       attr_reader :retry_count
 
@@ -47,7 +59,8 @@ module Sentdm
       attr_writer :sandbox
 
       # Request-only: the events an organization webhook's sender profile clones
-      # receive, one clone per existing and future profile. Responses never return it.
+      # receive, one clone per existing and future profile. A version 1 webhook's
+      # responses report it as WebhookSenderProfileV3Response.
       sig { returns(T.nilable(Sentdm::WebhookCreateParams::SenderProfile)) }
       attr_reader :sender_profile
 
@@ -59,11 +72,18 @@ module Sentdm
       end
       attr_writer :sender_profile
 
+      # Delivery timeout. Applies to version 1 only.
       sig { returns(T.nilable(Integer)) }
       attr_reader :timeout_seconds
 
       sig { params(timeout_seconds: Integer).void }
       attr_writer :timeout_seconds
+
+      # Who delivers the webhook: 2, the default, is delivered by Svix and signed with
+      # the webhook-id, webhook-timestamp and webhook-signature headers; 1 is the older
+      # delivery, signed with the X-Webhook-\* headers, which will be retired.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :webhook_version
 
       sig { returns(T.nilable(String)) }
       attr_reader :idempotency_key
@@ -83,11 +103,13 @@ module Sentdm
           endpoint_url: String,
           event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
           event_types: T::Array[String],
+          is_inheritable: T::Boolean,
           retry_count: Integer,
           sandbox: T::Boolean,
           sender_profile:
             T.nilable(Sentdm::WebhookCreateParams::SenderProfile::OrHash),
           timeout_seconds: Integer,
+          webhook_version: T.nilable(Integer),
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
@@ -98,14 +120,27 @@ module Sentdm
         endpoint_url: nil,
         event_filters: nil,
         event_types: nil,
+        # Also delivers every sender profile's events to this webhook, at the same URL and
+        # with the same signing secret, and lets each profile see the webhook and read the
+        # events about itself. Off by default: the organization's own events only. Only an
+        # organization's version 2 webhook can set it.
+        is_inheritable: nil,
+        # Delivery retries. Applies to version 1 only: Svix retries a version 2 webhook on
+        # its own schedule.
         retry_count: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
         sandbox: nil,
         # Request-only: the events an organization webhook's sender profile clones
-        # receive, one clone per existing and future profile. Responses never return it.
+        # receive, one clone per existing and future profile. A version 1 webhook's
+        # responses report it as WebhookSenderProfileV3Response.
         sender_profile: nil,
+        # Delivery timeout. Applies to version 1 only.
         timeout_seconds: nil,
+        # Who delivers the webhook: 2, the default, is delivered by Svix and signed with
+        # the webhook-id, webhook-timestamp and webhook-signature headers; 1 is the older
+        # delivery, signed with the X-Webhook-\* headers, which will be retired.
+        webhook_version: nil,
         idempotency_key: nil,
         x_profile_id: nil,
         request_options: {}
@@ -119,11 +154,13 @@ module Sentdm
             endpoint_url: String,
             event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
             event_types: T::Array[String],
+            is_inheritable: T::Boolean,
             retry_count: Integer,
             sandbox: T::Boolean,
             sender_profile:
               T.nilable(Sentdm::WebhookCreateParams::SenderProfile),
             timeout_seconds: Integer,
+            webhook_version: T.nilable(Integer),
             idempotency_key: String,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions
@@ -152,7 +189,8 @@ module Sentdm
         attr_writer :event_types
 
         # Request-only: the events an organization webhook's sender profile clones
-        # receive, one clone per existing and future profile. Responses never return it.
+        # receive, one clone per existing and future profile. A version 1 webhook's
+        # responses report it as WebhookSenderProfileV3Response.
         sig do
           params(
             event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),

@@ -8,6 +8,13 @@ module Sentdm
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
+        # @!attribute agent_id
+        #   Optional filter on the voice agent that answered the call, such as
+        #   agent_9f2ab000-0000-4000-8000-000000000001
+        #
+        #   @return [String, nil]
+        optional :agent_id, String, nil?: true
+
         # @!attribute direction
         #   Optional direction filter: outbound for calls placed from your app, inbound for
         #   calls to one of your numbers
@@ -20,6 +27,13 @@ module Sentdm
         #
         #   @return [Time, nil]
         optional :from, Time, nil?: true
+
+        # @!attribute mode
+        #   Optional mode filter: inapp for calls routed by your number's callback URL,
+        #   agent for calls one of your voice agents answered
+        #
+        #   @return [String, nil]
+        optional :mode, String, nil?: true
 
         # @!attribute number
         #   Optional filter on the number that owns the call, one of your voice-enabled
@@ -58,13 +72,17 @@ module Sentdm
         #   @return [String, nil]
         optional :x_profile_id, String
 
-        # @!method initialize(direction: nil, from: nil, number: nil, page: nil, page_size: nil, status: nil, to: nil, x_profile_id: nil, request_options: {})
+        # @!method initialize(agent_id: nil, direction: nil, from: nil, mode: nil, number: nil, page: nil, page_size: nil, status: nil, to: nil, x_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Voice::CallListParams} for more details.
+        #
+        #   @param agent_id [String, nil] Optional filter on the voice agent that answered the call, such as agent_9f2ab00
         #
         #   @param direction [String, nil] Optional direction filter: outbound for calls placed from your app, inbound for
         #
         #   @param from [Time, nil] Only calls started at or after this time (ISO 8601)
+        #
+        #   @param mode [String, nil] Optional mode filter: inapp for calls routed by your number's callback URL, agen
         #
         #   @param number [String, nil] Optional filter on the number that owns the call, one of your voice-enabled numb
         #

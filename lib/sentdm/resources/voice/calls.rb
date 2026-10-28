@@ -20,6 +20,17 @@ module Sentdm
       # once one is ready, hang it up, start or stop recording, and add, mute or remove
       # conference participants while it is live. A leg to a phone number runs for at
       # most what your balance affords at the destination's rate.
+      #
+      # **Voice agents.** `POST /v3/voice/agents` creates an agent that answers calls
+      # through the Sent Voice Gateway: `session_type` says whether Sent carries the
+      # call as text (speech recognised and spoken for the agent) or as audio,
+      # `websocket_url` is where the gateway dials the agent for each call (leave it out
+      # and the agent dials in with your API key), and `tools`, `transfer_targets`,
+      # `fallback` and `limits` say what it may do on a call. The agent's
+      # `signing_secret` is shown on create and on
+      # `POST /v3/voice/agents/{id}/rotate-secret` only. Voices and languages for text
+      # sessions come from `GET /v3/voice/voices`. A number takes calls to an agent once
+      # it is bound to it on `/v3/channels/voice`.
       class Calls
         # Phone calls from the numbers you hold, driven by your own callback URL.
         #
@@ -38,15 +49,28 @@ module Sentdm
         # once one is ready, hang it up, start or stop recording, and add, mute or remove
         # conference participants while it is live. A leg to a phone number runs for at
         # most what your balance affords at the destination's rate.
+        #
+        # **Voice agents.** `POST /v3/voice/agents` creates an agent that answers calls
+        # through the Sent Voice Gateway: `session_type` says whether Sent carries the
+        # call as text (speech recognised and spoken for the agent) or as audio,
+        # `websocket_url` is where the gateway dials the agent for each call (leave it out
+        # and the agent dials in with your API key), and `tools`, `transfer_targets`,
+        # `fallback` and `limits` say what it may do on a call. The agent's
+        # `signing_secret` is shown on create and on
+        # `POST /v3/voice/agents/{id}/rotate-secret` only. Voices and languages for text
+        # sessions come from `GET /v3/voice/voices`. A number takes calls to an agent once
+        # it is bound to it on `/v3/channels/voice`.
         # @return [Sentdm::Resources::Voice::Calls::Participants]
         attr_reader :participants
 
         # Some parameter documentations has been truncated, see
         # {Sentdm::Models::Voice::CallRetrieveParams} for more details.
         #
-        # Retrieves one of your calls by id: the parties, the owning number, the current
-        # status with its failure reason, duration, price, recording availability, and a
-        # timeline of when the call entered each status.
+        # Retrieves one of your calls by id: the parties, the owning number, the phone
+        # number the call was connected to and the caller id it showed, the current status
+        # with its failure reason, duration, price with the billed legs and what each
+        # cost, recording availability, and a timeline of when the call entered each
+        # status.
         #
         # @overload retrieve(id, x_profile_id: nil, request_options: {})
         #
@@ -74,15 +98,22 @@ module Sentdm
         # {Sentdm::Models::Voice::CallListParams} for more details.
         #
         # Retrieves a paginated list of your calls, most recent first. Filter by
-        # direction, status, the owning number, and the time the call started (from and to
-        # are inclusive). Use the call webhooks for real-time updates; this list is for
-        # looking calls up afterwards.
+        # direction, status, the owning number, the mode (inapp, or agent for calls your
+        # voice agents answered), the agent that answered, and the time the call started
+        # (from and to are inclusive). Each call carries the phone number it was connected
+        # to, the caller id it showed, and the billed legs with what each cost. Use the
+        # call webhooks for real-time updates; this list is for looking calls up
+        # afterwards.
         #
-        # @overload list(direction: nil, from: nil, number: nil, page: nil, page_size: nil, status: nil, to: nil, x_profile_id: nil, request_options: {})
+        # @overload list(agent_id: nil, direction: nil, from: nil, mode: nil, number: nil, page: nil, page_size: nil, status: nil, to: nil, x_profile_id: nil, request_options: {})
+        #
+        # @param agent_id [String, nil] Query param: Optional filter on the voice agent that answered the call, such as
         #
         # @param direction [String, nil] Query param: Optional direction filter: outbound for calls placed from your app,
         #
         # @param from [Time, nil] Query param: Only calls started at or after this time (ISO 8601)
+        #
+        # @param mode [String, nil] Query param: Optional mode filter: inapp for calls routed by your number's callb
         #
         # @param number [String, nil] Query param: Optional filter on the number that owns the call, one of your voice
         #
@@ -102,7 +133,7 @@ module Sentdm
         #
         # @see Sentdm::Models::Voice::CallListParams
         def list(params = {})
-          query_params = [:direction, :from, :number, :page, :page_size, :status, :to]
+          query_params = [:agent_id, :direction, :from, :mode, :number, :page, :page_size, :status, :to]
           parsed, options = Sentdm::Voice::CallListParams.dump_request(params)
           query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
@@ -122,8 +153,8 @@ module Sentdm
         # Ends one of your live calls. The call then ends the way any other call does once
         # the disconnect is reported: an answered call as COMPLETED with call.completed, a
         # call still ringing as NO_ANSWER, REJECTED or FAILED with call.failed. A call
-        # that has already ended answers 409, and so does a call with no phone leg, such
-        # as one between two app users.
+        # that has already ended answers 409, as do a call with no phone leg, such as one
+        # between two app users, and a call one of your voice agents answers.
         #
         # @overload hangup(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
@@ -191,9 +222,9 @@ module Sentdm
         #
         # Starts or stops recording one of your live calls. Use start to begin recording
         # mid-call, or stop to end a recording, whether it was started here or by a
-        # connect answer with record set. A call that has already ended answers 409, and
-        # so does a call with no phone leg, such as one between two app users, which can't
-        # be recorded.
+        # connect answer with record set. A call that has already ended answers 409, as do
+        # a call with no phone leg, such as one between two app users, and a call one of
+        # your voice agents answers, neither of which can be recorded this way.
         #
         # @overload record(id, action: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #

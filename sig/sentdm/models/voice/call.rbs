@@ -4,12 +4,16 @@ module Sentdm
       type call =
         {
           id: String,
+          agent_id: String?,
           answered_at: Time?,
+          caller_id_used: String?,
+          connected_number: String?,
           direction: String,
           duration_seconds: Integer?,
           ended_at: Time?,
           failure_reason: String?,
           from: Sentdm::Voice::CallParty,
+          legs: ::Array[Sentdm::Voice::Call::Leg]?,
           mode: String,
           number: String,
           price: Float?,
@@ -25,7 +29,13 @@ module Sentdm
 
         def id=: (String) -> String
 
+        attr_accessor agent_id: String?
+
         attr_accessor answered_at: Time?
+
+        attr_accessor caller_id_used: String?
+
+        attr_accessor connected_number: String?
 
         attr_reader direction: String?
 
@@ -40,6 +50,8 @@ module Sentdm
         attr_reader from: Sentdm::Voice::CallParty?
 
         def from=: (Sentdm::Voice::CallParty) -> Sentdm::Voice::CallParty
+
+        attr_accessor legs: ::Array[Sentdm::Voice::Call::Leg]?
 
         attr_reader mode: String?
 
@@ -71,12 +83,16 @@ module Sentdm
 
         def initialize: (
           ?id: String,
+          ?agent_id: String?,
           ?answered_at: Time?,
+          ?caller_id_used: String?,
+          ?connected_number: String?,
           ?direction: String,
           ?duration_seconds: Integer?,
           ?ended_at: Time?,
           ?failure_reason: String?,
           ?from: Sentdm::Voice::CallParty,
+          ?legs: ::Array[Sentdm::Voice::Call::Leg]?,
           ?mode: String,
           ?number: String,
           ?price: Float?,
@@ -89,12 +105,16 @@ module Sentdm
 
         def to_hash: -> {
           id: String,
+          agent_id: String?,
           answered_at: Time?,
+          caller_id_used: String?,
+          connected_number: String?,
           direction: String,
           duration_seconds: Integer?,
           ended_at: Time?,
           failure_reason: String?,
           from: Sentdm::Voice::CallParty,
+          legs: ::Array[Sentdm::Voice::Call::Leg]?,
           mode: String,
           number: String,
           price: Float?,
@@ -104,6 +124,51 @@ module Sentdm
           timeline: ::Array[Sentdm::Voice::CallTimelineEntry]?,
           to: Sentdm::Voice::CallParty
         }
+
+        type leg =
+          {
+            billed_minutes: Integer,
+            cost: Float,
+            currency: String,
+            direction: String,
+            number: String?
+          }
+
+        class Leg < Sentdm::Internal::Type::BaseModel
+          attr_reader billed_minutes: Integer?
+
+          def billed_minutes=: (Integer) -> Integer
+
+          attr_reader cost: Float?
+
+          def cost=: (Float) -> Float
+
+          attr_reader currency: String?
+
+          def currency=: (String) -> String
+
+          attr_reader direction: String?
+
+          def direction=: (String) -> String
+
+          attr_accessor number: String?
+
+          def initialize: (
+            ?billed_minutes: Integer,
+            ?cost: Float,
+            ?currency: String,
+            ?direction: String,
+            ?number: String?
+          ) -> void
+
+          def to_hash: -> {
+            billed_minutes: Integer,
+            cost: Float,
+            currency: String,
+            direction: String,
+            number: String?
+          }
+        end
       end
     end
   end

@@ -17,9 +17,17 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookCreateParams} for more details.
       #
-      # Creates a new webhook endpoint for the authenticated customer.
+      # Creates a new webhook endpoint for the authenticated customer. A webhook is
+      # version 2 unless the request sets webhook_version to 1: Svix delivers it, signed
+      # with the webhook-id, webhook-timestamp and webhook-signature headers, and
+      # retries it on its own schedule, so retry_count and timeout_seconds apply to
+      # version 1 only. sender_profile applies to version 1 only and is ignored on
+      # version 2; is_inheritable applies to version 2 only. A version 1 webhook's
+      # response returns its sender_profile selection, with an empty event_types when it
+      # is not cloned onto sender profiles; a version 2 webhook's response leaves
+      # sender_profile out.
       #
-      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, webhook_version: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param display_name [String] Body param
       #
@@ -29,13 +37,17 @@ module Sentdm
       #
       # @param event_types [Array<String>] Body param
       #
-      # @param retry_count [Integer] Body param
+      # @param is_inheritable [Boolean] Body param: Also delivers every sender profile's events to this webhook, at the
+      #
+      # @param retry_count [Integer] Body param: Delivery retries. Applies to version 1 only: Svix retries a version
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
       # @param sender_profile [Sentdm::Models::WebhookCreateParams::SenderProfile, nil] Body param: Request-only: the events an organization webhook's sender profile cl
       #
-      # @param timeout_seconds [Integer] Body param
+      # @param timeout_seconds [Integer] Body param: Delivery timeout. Applies to version 1 only.
+      #
+      # @param webhook_version [Integer, nil] Body param: Who delivers the webhook: 2, the default, is delivered by Svix and s
       #
       # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
       #
@@ -62,7 +74,8 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookRetrieveParams} for more details.
       #
-      # Retrieves a single webhook by ID for the authenticated customer.
+      # Retrieves a single webhook by ID for the authenticated customer. A version 1
+      # webhook includes its sender_profile selection.
       #
       # @overload retrieve(id, x_profile_id: nil, request_options: {})
       #
@@ -89,9 +102,13 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookUpdateParams} for more details.
       #
-      # Updates an existing webhook for the authenticated customer.
+      # Updates an existing webhook for the authenticated customer. Its version does not
+      # change. sender_profile applies to a version 1 webhook and is_inheritable to a
+      # version 2 one; retry_count and timeout_seconds apply to version 1 only. A
+      # version 1 webhook's response returns its sender_profile selection as saved; a
+      # version 2 webhook's response leaves sender_profile out.
       #
-      # @overload update(id, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload update(id, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param id [String] Path param
       #
@@ -102,6 +119,8 @@ module Sentdm
       # @param event_filters [Hash{Symbol=>Array<String>}, nil] Body param
       #
       # @param event_types [Array<String>] Body param
+      #
+      # @param is_inheritable [Boolean, nil] Body param: Makes this webhook inheritable by the organization's sender profiles
       #
       # @param retry_count [Integer] Body param
       #
@@ -136,7 +155,8 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookListParams} for more details.
       #
-      # Retrieves a paginated list of webhooks for the authenticated customer.
+      # Retrieves a paginated list of webhooks for the authenticated customer. Each
+      # version 1 webhook includes its sender_profile selection.
       #
       # @overload list(is_active: nil, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #
@@ -225,9 +245,11 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookListEventsParams} for more details.
       #
-      # Retrieves a paginated list of delivery events for the specified webhook. If the
-      # webhook is cloned onto your sender profiles, the list includes what those clones
-      # received; read payload.account_id to tell whose event it is.
+      # Retrieves a paginated list of delivery events for the specified webhook, newest
+      # first. If the webhook is cloned onto your sender profiles (version 1) or
+      # inheritable by them (version 2, is_inheritable), the list includes their events;
+      # read payload.account_id to tell whose event it is. A sender profile may read its
+      # organization's inheritable webhook too, and gets the events about itself.
       #
       # @overload list_events(id, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
       #
@@ -264,8 +286,11 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookRotateSecretParams} for more details.
       #
-      # Generates a new signing secret for the specified webhook. The old secret is
-      # immediately invalidated.
+      # Generates a new signing secret for the specified webhook. A version 1 webhook's
+      # old secret stops verifying at once. A version 2 webhook's deliveries are signed
+      # with the new secret at once, and with the old one as well for the next 24 hours,
+      # so a receiver can switch over without rejecting any; after that the old secret
+      # no longer verifies.
       #
       # @overload rotate_secret(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
@@ -298,7 +323,10 @@ module Sentdm
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::WebhookTestParams} for more details.
       #
-      # Sends a test event to the specified webhook endpoint to verify connectivity.
+      # Sends a test event to the specified webhook endpoint to verify connectivity. A
+      # version 1 webhook is tested at once and the answer says whether it was
+      # delivered; a version 2 webhook's test is queued with Svix, which delivers it
+      # right after, and the answer says it was queued.
       #
       # @overload test_(id, event_type: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
