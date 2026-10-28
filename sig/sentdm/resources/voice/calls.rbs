@@ -11,8 +11,10 @@ module Sentdm
         ) -> Sentdm::Voice::APIResponseOfCall
 
         def list: (
+          ?agent_id: String?,
           ?direction: String?,
           ?from: Time?,
+          ?mode: String?,
           ?number: String?,
           ?page: Integer,
           ?page_size: Integer,

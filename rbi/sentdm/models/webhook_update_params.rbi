@@ -35,6 +35,12 @@ module Sentdm
       sig { params(event_types: T::Array[String]).void }
       attr_writer :event_types
 
+      # Makes this webhook inheritable by the organization's sender profiles (see
+      # create), or stops it being inheritable. Omit or pass null to keep it as it is.
+      # Only a version 2 webhook can be inheritable.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :is_inheritable
+
       sig { returns(T.nilable(Integer)) }
       attr_reader :retry_count
 
@@ -50,7 +56,8 @@ module Sentdm
       attr_writer :sandbox
 
       # Request-only: the events an organization webhook's sender profile clones
-      # receive, one clone per existing and future profile. Responses never return it.
+      # receive, one clone per existing and future profile. A version 1 webhook's
+      # responses report it as WebhookSenderProfileV3Response.
       sig { returns(T.nilable(Sentdm::WebhookUpdateParams::SenderProfile)) }
       attr_reader :sender_profile
 
@@ -87,6 +94,7 @@ module Sentdm
           endpoint_url: String,
           event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
           event_types: T::Array[String],
+          is_inheritable: T.nilable(T::Boolean),
           retry_count: Integer,
           sandbox: T::Boolean,
           sender_profile:
@@ -103,12 +111,17 @@ module Sentdm
         endpoint_url: nil,
         event_filters: nil,
         event_types: nil,
+        # Makes this webhook inheritable by the organization's sender profiles (see
+        # create), or stops it being inheritable. Omit or pass null to keep it as it is.
+        # Only a version 2 webhook can be inheritable.
+        is_inheritable: nil,
         retry_count: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
         sandbox: nil,
         # Request-only: the events an organization webhook's sender profile clones
-        # receive, one clone per existing and future profile. Responses never return it.
+        # receive, one clone per existing and future profile. A version 1 webhook's
+        # responses report it as WebhookSenderProfileV3Response.
         sender_profile: nil,
         timeout_seconds: nil,
         idempotency_key: nil,
@@ -125,6 +138,7 @@ module Sentdm
             endpoint_url: String,
             event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
             event_types: T::Array[String],
+            is_inheritable: T.nilable(T::Boolean),
             retry_count: Integer,
             sandbox: T::Boolean,
             sender_profile:
@@ -158,7 +172,8 @@ module Sentdm
         attr_writer :event_types
 
         # Request-only: the events an organization webhook's sender profile clones
-        # receive, one clone per existing and future profile. Responses never return it.
+        # receive, one clone per existing and future profile. A version 1 webhook's
+        # responses report it as WebhookSenderProfileV3Response.
         sig do
           params(
             event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),

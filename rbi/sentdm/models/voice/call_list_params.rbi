@@ -12,6 +12,11 @@ module Sentdm
             T.any(Sentdm::Voice::CallListParams, Sentdm::Internal::AnyHash)
           end
 
+        # Optional filter on the voice agent that answered the call, such as
+        # agent_9f2ab000-0000-4000-8000-000000000001
+        sig { returns(T.nilable(String)) }
+        attr_accessor :agent_id
+
         # Optional direction filter: outbound for calls placed from your app, inbound for
         # calls to one of your numbers
         sig { returns(T.nilable(String)) }
@@ -20,6 +25,11 @@ module Sentdm
         # Only calls started at or after this time (ISO 8601)
         sig { returns(T.nilable(Time)) }
         attr_accessor :from
+
+        # Optional mode filter: inapp for calls routed by your number's callback URL,
+        # agent for calls one of your voice agents answered
+        sig { returns(T.nilable(String)) }
+        attr_accessor :mode
 
         # Optional filter on the number that owns the call, one of your voice-enabled
         # numbers in E.164 format
@@ -57,8 +67,10 @@ module Sentdm
 
         sig do
           params(
+            agent_id: T.nilable(String),
             direction: T.nilable(String),
             from: T.nilable(Time),
+            mode: T.nilable(String),
             number: T.nilable(String),
             page: Integer,
             page_size: Integer,
@@ -69,11 +81,17 @@ module Sentdm
           ).returns(T.attached_class)
         end
         def self.new(
+          # Optional filter on the voice agent that answered the call, such as
+          # agent_9f2ab000-0000-4000-8000-000000000001
+          agent_id: nil,
           # Optional direction filter: outbound for calls placed from your app, inbound for
           # calls to one of your numbers
           direction: nil,
           # Only calls started at or after this time (ISO 8601)
           from: nil,
+          # Optional mode filter: inapp for calls routed by your number's callback URL,
+          # agent for calls one of your voice agents answered
+          mode: nil,
           # Optional filter on the number that owns the call, one of your voice-enabled
           # numbers in E.164 format
           number: nil,
@@ -94,8 +112,10 @@ module Sentdm
         sig do
           override.returns(
             {
+              agent_id: T.nilable(String),
               direction: T.nilable(String),
               from: T.nilable(Time),
+              mode: T.nilable(String),
               number: T.nilable(String),
               page: Integer,
               page_size: Integer,

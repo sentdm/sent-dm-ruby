@@ -20,6 +20,10 @@ module Sentdm
       sig { params(account_id: String).void }
       attr_writer :account_id
 
+      # The voice agent that answers the call, agent\_…. Only on an agent call.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_id
+
       # Always voice.
       sig { returns(T.nilable(String)) }
       attr_reader :channel
@@ -30,6 +34,14 @@ module Sentdm
       # How long the call lasted. Only on call.completed.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :duration_seconds
+
+      # inapp, a call routed by the number's callback URL, or agent, a call one of the
+      # account's voice agents answers. The same value GET /v3/voice/calls returns.
+      sig { returns(T.nilable(String)) }
+      attr_reader :mode
+
+      sig { params(mode: String).void }
+      attr_writer :mode
 
       # The customer number that owns the call, in E.164 format.
       sig { returns(T.nilable(String)) }
@@ -61,15 +73,17 @@ module Sentdm
       sig { params(updated_at: String).void }
       attr_writer :updated_at
 
-      # Body of a call.initiated, call.answered, call.completed, call.failed or
-      # call.recording_ready event. Which of them occurred is the envelope's event.
+      # Body of a call.initiated, call.answered, call.agent_connected, call.completed,
+      # call.failed or call.recording_ready event. Which of them occurred is the
+      # envelope's event.
       #
       # Shaped like the message, inbound, template and channel payloads: account_id
       # names the account the event is about, channel names the channel, and updated_at
       # is when the change happened on the call, in the same yyyy-MM-ddTHH:mm:ssZ form.
-      # duration_seconds and price are added on call.completed, reason on call.failed
-      # and recording_id on call.recording_ready; each is omitted rather than sent as
-      # null when it does not apply.
+      # Every event says how the call is handled in mode, and an agent call names its
+      # agent in agent_id. duration_seconds and price are added on call.completed,
+      # reason on call.failed and recording_id on call.recording_ready; each is omitted
+      # rather than sent as null when it does not apply.
       #
       # Casing is snake_case because these ride the same webhook stream customers
       # already parse message_id from; the question/answer contract is a separate
@@ -79,8 +93,10 @@ module Sentdm
         params(
           call_id: String,
           account_id: String,
+          agent_id: T.nilable(String),
           channel: String,
           duration_seconds: T.nilable(Integer),
+          mode: String,
           number: String,
           price: T.nilable(Float),
           reason: T.nilable(String),
@@ -94,10 +110,15 @@ module Sentdm
         # The account the call belongs to: the key's own customer, or the sender profile
         # it acted as.
         account_id: nil,
+        # The voice agent that answers the call, agent\_…. Only on an agent call.
+        agent_id: nil,
         # Always voice.
         channel: nil,
         # How long the call lasted. Only on call.completed.
         duration_seconds: nil,
+        # inapp, a call routed by the number's callback URL, or agent, a call one of the
+        # account's voice agents answers. The same value GET /v3/voice/calls returns.
+        mode: nil,
         # The customer number that owns the call, in E.164 format.
         number: nil,
         # What the call was charged. Only on call.completed, and omitted there until
@@ -120,8 +141,10 @@ module Sentdm
           {
             call_id: String,
             account_id: String,
+            agent_id: T.nilable(String),
             channel: String,
             duration_seconds: T.nilable(Integer),
+            mode: String,
             number: String,
             price: T.nilable(Float),
             reason: T.nilable(String),

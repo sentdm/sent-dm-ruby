@@ -20,6 +20,17 @@ module Sentdm
       # once one is ready, hang it up, start or stop recording, and add, mute or remove
       # conference participants while it is live. A leg to a phone number runs for at
       # most what your balance affords at the destination's rate.
+      #
+      # **Voice agents.** `POST /v3/voice/agents` creates an agent that answers calls
+      # through the Sent Voice Gateway: `session_type` says whether Sent carries the
+      # call as text (speech recognised and spoken for the agent) or as audio,
+      # `websocket_url` is where the gateway dials the agent for each call (leave it out
+      # and the agent dials in with your API key), and `tools`, `transfer_targets`,
+      # `fallback` and `limits` say what it may do on a call. The agent's
+      # `signing_secret` is shown on create and on
+      # `POST /v3/voice/agents/{id}/rotate-secret` only. Voices and languages for text
+      # sessions come from `GET /v3/voice/voices`. A number takes calls to an agent once
+      # it is bound to it on `/v3/channels/voice`.
       class Calls
         # Phone calls from the numbers you hold, driven by your own callback URL.
         #
@@ -38,12 +49,25 @@ module Sentdm
         # once one is ready, hang it up, start or stop recording, and add, mute or remove
         # conference participants while it is live. A leg to a phone number runs for at
         # most what your balance affords at the destination's rate.
+        #
+        # **Voice agents.** `POST /v3/voice/agents` creates an agent that answers calls
+        # through the Sent Voice Gateway: `session_type` says whether Sent carries the
+        # call as text (speech recognised and spoken for the agent) or as audio,
+        # `websocket_url` is where the gateway dials the agent for each call (leave it out
+        # and the agent dials in with your API key), and `tools`, `transfer_targets`,
+        # `fallback` and `limits` say what it may do on a call. The agent's
+        # `signing_secret` is shown on create and on
+        # `POST /v3/voice/agents/{id}/rotate-secret` only. Voices and languages for text
+        # sessions come from `GET /v3/voice/voices`. A number takes calls to an agent once
+        # it is bound to it on `/v3/channels/voice`.
         sig { returns(Sentdm::Resources::Voice::Calls::Participants) }
         attr_reader :participants
 
-        # Retrieves one of your calls by id: the parties, the owning number, the current
-        # status with its failure reason, duration, price, recording availability, and a
-        # timeline of when the call entered each status.
+        # Retrieves one of your calls by id: the parties, the owning number, the phone
+        # number the call was connected to and the caller id it showed, the current status
+        # with its failure reason, duration, price with the billed legs and what each
+        # cost, recording availability, and a timeline of when the call entered each
+        # status.
         sig do
           params(
             id: String,
@@ -63,13 +87,18 @@ module Sentdm
         end
 
         # Retrieves a paginated list of your calls, most recent first. Filter by
-        # direction, status, the owning number, and the time the call started (from and to
-        # are inclusive). Use the call webhooks for real-time updates; this list is for
-        # looking calls up afterwards.
+        # direction, status, the owning number, the mode (inapp, or agent for calls your
+        # voice agents answered), the agent that answered, and the time the call started
+        # (from and to are inclusive). Each call carries the phone number it was connected
+        # to, the caller id it showed, and the billed legs with what each cost. Use the
+        # call webhooks for real-time updates; this list is for looking calls up
+        # afterwards.
         sig do
           params(
+            agent_id: T.nilable(String),
             direction: T.nilable(String),
             from: T.nilable(Time),
+            mode: T.nilable(String),
             number: T.nilable(String),
             page: Integer,
             page_size: Integer,
@@ -80,11 +109,17 @@ module Sentdm
           ).returns(Sentdm::Internal::CallsPage[Sentdm::Voice::Call])
         end
         def list(
+          # Query param: Optional filter on the voice agent that answered the call, such as
+          # agent_9f2ab000-0000-4000-8000-000000000001
+          agent_id: nil,
           # Query param: Optional direction filter: outbound for calls placed from your app,
           # inbound for calls to one of your numbers
           direction: nil,
           # Query param: Only calls started at or after this time (ISO 8601)
           from: nil,
+          # Query param: Optional mode filter: inapp for calls routed by your number's
+          # callback URL, agent for calls one of your voice agents answered
+          mode: nil,
           # Query param: Optional filter on the number that owns the call, one of your
           # voice-enabled numbers in E.164 format
           number: nil,
@@ -108,8 +143,8 @@ module Sentdm
         # Ends one of your live calls. The call then ends the way any other call does once
         # the disconnect is reported: an answered call as COMPLETED with call.completed, a
         # call still ringing as NO_ANSWER, REJECTED or FAILED with call.failed. A call
-        # that has already ended answers 409, and so does a call with no phone leg, such
-        # as one between two app users.
+        # that has already ended answers 409, as do a call with no phone leg, such as one
+        # between two app users, and a call one of your voice agents answers.
         sig do
           params(
             id: String,
@@ -165,9 +200,9 @@ module Sentdm
 
         # Starts or stops recording one of your live calls. Use start to begin recording
         # mid-call, or stop to end a recording, whether it was started here or by a
-        # connect answer with record set. A call that has already ended answers 409, and
-        # so does a call with no phone leg, such as one between two app users, which can't
-        # be recorded.
+        # connect answer with record set. A call that has already ended answers 409, as do
+        # a call with no phone leg, such as one between two app users, and a call one of
+        # your voice agents answers, neither of which can be recorded this way.
         sig do
           params(
             id: String,

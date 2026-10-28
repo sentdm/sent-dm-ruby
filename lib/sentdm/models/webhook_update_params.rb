@@ -34,6 +34,14 @@ module Sentdm
       #   @return [Array<String>, nil]
       optional :event_types, Sentdm::Internal::Type::ArrayOf[String]
 
+      # @!attribute is_inheritable
+      #   Makes this webhook inheritable by the organization's sender profiles (see
+      #   create), or stops it being inheritable. Omit or pass null to keep it as it is.
+      #   Only a version 2 webhook can be inheritable.
+      #
+      #   @return [Boolean, nil]
+      optional :is_inheritable, Sentdm::Internal::Type::Boolean, nil?: true
+
       # @!attribute retry_count
       #
       #   @return [Integer, nil]
@@ -48,7 +56,8 @@ module Sentdm
 
       # @!attribute sender_profile
       #   Request-only: the events an organization webhook's sender profile clones
-      #   receive, one clone per existing and future profile. Responses never return it.
+      #   receive, one clone per existing and future profile. A version 1 webhook's
+      #   responses report it as WebhookSenderProfileV3Response.
       #
       #   @return [Sentdm::Models::WebhookUpdateParams::SenderProfile, nil]
       optional :sender_profile, -> { Sentdm::WebhookUpdateParams::SenderProfile }, nil?: true
@@ -68,7 +77,7 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(id:, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(id:, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookUpdateParams} for more details.
       #
@@ -81,6 +90,8 @@ module Sentdm
       #   @param event_filters [Hash{Symbol=>Array<String>}, nil]
       #
       #   @param event_types [Array<String>]
+      #
+      #   @param is_inheritable [Boolean, nil] Makes this webhook inheritable by the organization's sender profiles (see create
       #
       #   @param retry_count [Integer]
       #
@@ -111,7 +122,8 @@ module Sentdm
 
         # @!method initialize(event_filters: nil, event_types: nil)
         #   Request-only: the events an organization webhook's sender profile clones
-        #   receive, one clone per existing and future profile. Responses never return it.
+        #   receive, one clone per existing and future profile. A version 1 webhook's
+        #   responses report it as WebhookSenderProfileV3Response.
         #
         #   @param event_filters [Hash{Symbol=>Array<String>}, nil]
         #   @param event_types [Array<String>]
