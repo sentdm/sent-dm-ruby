@@ -1,0 +1,23 @@
+module Sentdm
+  module Models
+    class VoiceAgentParty = Voice::VoiceAgentParty
+
+    module Voice
+      type voice_agent_party = { kind: String, value: String }
+
+      class VoiceAgentParty < Sentdm::Internal::Type::BaseModel
+        attr_reader kind: String?
+
+        def kind=: (String) -> String
+
+        attr_reader value: String?
+
+        def value=: (String) -> String
+
+        def initialize: (?kind: String, ?value: String) -> void
+
+        def to_hash: -> { kind: String, value: String }
+      end
+    end
+  end
+end

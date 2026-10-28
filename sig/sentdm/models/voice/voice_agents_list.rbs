@@ -1,0 +1,35 @@
+module Sentdm
+  module Models
+    class VoiceAgentsList = Voice::VoiceAgentsList
+
+    module Voice
+      type voice_agents_list =
+        {
+          agents: ::Array[Sentdm::Voice::VoiceAgent],
+          pagination: Sentdm::PaginationMeta
+        }
+
+      class VoiceAgentsList < Sentdm::Internal::Type::BaseModel
+        attr_reader agents: ::Array[Sentdm::Voice::VoiceAgent]?
+
+        def agents=: (
+          ::Array[Sentdm::Voice::VoiceAgent]
+        ) -> ::Array[Sentdm::Voice::VoiceAgent]
+
+        attr_reader pagination: Sentdm::PaginationMeta?
+
+        def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+        def initialize: (
+          ?agents: ::Array[Sentdm::Voice::VoiceAgent],
+          ?pagination: Sentdm::PaginationMeta
+        ) -> void
+
+        def to_hash: -> {
+          agents: ::Array[Sentdm::Voice::VoiceAgent],
+          pagination: Sentdm::PaginationMeta
+        }
+      end
+    end
+  end
+end
