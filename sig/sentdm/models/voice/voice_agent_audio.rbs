@@ -1,0 +1,19 @@
+module Sentdm
+  module Models
+    class VoiceAgentAudio = Voice::VoiceAgentAudio
+
+    module Voice
+      type voice_agent_audio = { sample_rate: Integer }
+
+      class VoiceAgentAudio < Sentdm::Internal::Type::BaseModel
+        attr_reader sample_rate: Integer?
+
+        def sample_rate=: (Integer) -> Integer
+
+        def initialize: (?sample_rate: Integer) -> void
+
+        def to_hash: -> { sample_rate: Integer }
+      end
+    end
+  end
+end

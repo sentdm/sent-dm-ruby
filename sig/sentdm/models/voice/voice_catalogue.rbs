@@ -1,0 +1,35 @@
+module Sentdm
+  module Models
+    class VoiceCatalogue = Voice::VoiceCatalogue
+
+    module Voice
+      type voice_catalogue =
+        {
+          languages: ::Array[String],
+          voices: ::Array[Sentdm::Voice::VoiceCatalogueVoice]
+        }
+
+      class VoiceCatalogue < Sentdm::Internal::Type::BaseModel
+        attr_reader languages: ::Array[String]?
+
+        def languages=: (::Array[String]) -> ::Array[String]
+
+        attr_reader voices: ::Array[Sentdm::Voice::VoiceCatalogueVoice]?
+
+        def voices=: (
+          ::Array[Sentdm::Voice::VoiceCatalogueVoice]
+        ) -> ::Array[Sentdm::Voice::VoiceCatalogueVoice]
+
+        def initialize: (
+          ?languages: ::Array[String],
+          ?voices: ::Array[Sentdm::Voice::VoiceCatalogueVoice]
+        ) -> void
+
+        def to_hash: -> {
+          languages: ::Array[String],
+          voices: ::Array[Sentdm::Voice::VoiceCatalogueVoice]
+        }
+      end
+    end
+  end
+end

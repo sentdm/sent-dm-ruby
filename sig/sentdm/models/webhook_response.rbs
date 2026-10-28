@@ -11,12 +11,15 @@ module Sentdm
         event_filters: ::Hash[Symbol, ::Array[String]]?,
         event_types: ::Array[String],
         is_active: bool,
+        is_inheritable: bool,
         last_delivery_attempt_at: Time?,
         last_successful_delivery_at: Time?,
         retry_count: Integer,
+        sender_profile: Sentdm::WebhookResponse::SenderProfile?,
         signing_secret: String?,
         timeout_seconds: Integer,
-        updated_at: Time?
+        updated_at: Time?,
+        webhook_version: Integer
       }
 
     class WebhookResponse < Sentdm::Internal::Type::BaseModel
@@ -54,6 +57,10 @@ module Sentdm
 
       def is_active=: (bool) -> bool
 
+      attr_reader is_inheritable: bool?
+
+      def is_inheritable=: (bool) -> bool
+
       attr_accessor last_delivery_attempt_at: Time?
 
       attr_accessor last_successful_delivery_at: Time?
@@ -62,6 +69,8 @@ module Sentdm
 
       def retry_count=: (Integer) -> Integer
 
+      attr_accessor sender_profile: Sentdm::WebhookResponse::SenderProfile?
+
       attr_accessor signing_secret: String?
 
       attr_reader timeout_seconds: Integer?
@@ -69,6 +78,10 @@ module Sentdm
       def timeout_seconds=: (Integer) -> Integer
 
       attr_accessor updated_at: Time?
+
+      attr_reader webhook_version: Integer?
+
+      def webhook_version=: (Integer) -> Integer
 
       def initialize: (
         ?id: String,
@@ -80,12 +93,15 @@ module Sentdm
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
         ?event_types: ::Array[String],
         ?is_active: bool,
+        ?is_inheritable: bool,
         ?last_delivery_attempt_at: Time?,
         ?last_successful_delivery_at: Time?,
         ?retry_count: Integer,
+        ?sender_profile: Sentdm::WebhookResponse::SenderProfile?,
         ?signing_secret: String?,
         ?timeout_seconds: Integer,
-        ?updated_at: Time?
+        ?updated_at: Time?,
+        ?webhook_version: Integer
       ) -> void
 
       def to_hash: -> {
@@ -98,13 +114,40 @@ module Sentdm
         event_filters: ::Hash[Symbol, ::Array[String]]?,
         event_types: ::Array[String],
         is_active: bool,
+        is_inheritable: bool,
         last_delivery_attempt_at: Time?,
         last_successful_delivery_at: Time?,
         retry_count: Integer,
+        sender_profile: Sentdm::WebhookResponse::SenderProfile?,
         signing_secret: String?,
         timeout_seconds: Integer,
-        updated_at: Time?
+        updated_at: Time?,
+        webhook_version: Integer
       }
+
+      type sender_profile =
+        {
+          event_filters: ::Hash[Symbol, ::Array[String]]?,
+          event_types: ::Array[String]
+        }
+
+      class SenderProfile < Sentdm::Internal::Type::BaseModel
+        attr_accessor event_filters: ::Hash[Symbol, ::Array[String]]?
+
+        attr_reader event_types: ::Array[String]?
+
+        def event_types=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?event_filters: ::Hash[Symbol, ::Array[String]]?,
+          ?event_types: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          event_filters: ::Hash[Symbol, ::Array[String]]?,
+          event_types: ::Array[String]
+        }
+      end
     end
   end
 end

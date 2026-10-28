@@ -3,8 +3,10 @@ module Sentdm
     module Voice
       type call_list_params =
         {
+          agent_id: String?,
           direction: String?,
           from: Time?,
+          mode: String?,
           number: String?,
           page: Integer,
           page_size: Integer,
@@ -18,9 +20,13 @@ module Sentdm
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
+        attr_accessor agent_id: String?
+
         attr_accessor direction: String?
 
         attr_accessor from: Time?
+
+        attr_accessor mode: String?
 
         attr_accessor number: String?
 
@@ -41,8 +47,10 @@ module Sentdm
         def x_profile_id=: (String) -> String
 
         def initialize: (
+          ?agent_id: String?,
           ?direction: String?,
           ?from: Time?,
+          ?mode: String?,
           ?number: String?,
           ?page: Integer,
           ?page_size: Integer,
@@ -53,8 +61,10 @@ module Sentdm
         ) -> void
 
         def to_hash: -> {
+          agent_id: String?,
           direction: String?,
           from: Time?,
+          mode: String?,
           number: String?,
           page: Integer,
           page_size: Integer,

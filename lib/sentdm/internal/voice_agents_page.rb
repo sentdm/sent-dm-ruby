@@ -10,8 +10,8 @@ module Sentdm
     #   end
     #
     # @example
-    #   voice_agents_page.auto_paging_each do |item|
-    #     puts(item)
+    #   voice_agents_page.auto_paging_each do |agent|
+    #     puts(agent)
     #   end
     class VoiceAgentsPage
       include Sentdm::Internal::Type::BasePage

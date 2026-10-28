@@ -1,0 +1,42 @@
+module Sentdm
+  module Models
+    class VoiceCatalogueVoice = Voice::VoiceCatalogueVoice
+
+    module Voice
+      type voice_catalogue_voice =
+        { default: bool, description: String, language: String, name: String }
+
+      class VoiceCatalogueVoice < Sentdm::Internal::Type::BaseModel
+        attr_reader default: bool?
+
+        def default=: (bool) -> bool
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader language: String?
+
+        def language=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        def initialize: (
+          ?default: bool,
+          ?description: String,
+          ?language: String,
+          ?name: String
+        ) -> void
+
+        def to_hash: -> {
+          default: bool,
+          description: String,
+          language: String,
+          name: String
+        }
+      end
+    end
+  end
+end

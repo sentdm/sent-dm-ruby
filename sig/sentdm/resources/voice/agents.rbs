@@ -2,6 +2,71 @@ module Sentdm
   module Resources
     class Voice
       class Agents
+        def create: (
+          ?audio: Sentdm::Voice::VoiceAgentAudioSpec?,
+          ?fallback: Sentdm::Voice::VoiceAgentPartySpec?,
+          ?greeting: String?,
+          ?limits: Sentdm::Voice::VoiceAgentLimitsSpec?,
+          ?name: String?,
+          ?sandbox: bool,
+          ?session_type: String?,
+          ?speech: Sentdm::Voice::VoiceAgentSpeechSpec?,
+          ?tools: ::Array[String]?,
+          ?transcripts: Sentdm::Voice::VoiceAgentTranscriptsSpec?,
+          ?transfer_targets: ::Array[Sentdm::Voice::VoiceAgentPartySpec]?,
+          ?websocket_url: String?,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Voice::APIResponseOfVoiceAgent
+
+        def retrieve: (
+          String id,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Voice::APIResponseOfVoiceAgent
+
+        def update: (
+          String id,
+          ?audio: Sentdm::Voice::VoiceAgentAudioSpec?,
+          ?fallback: Sentdm::Voice::VoiceAgentPartySpec?,
+          ?greeting: String?,
+          ?limits: Sentdm::Voice::VoiceAgentLimitsSpec?,
+          ?name: String,
+          ?sandbox: bool,
+          ?session_type: String,
+          ?speech: Sentdm::Voice::VoiceAgentSpeechSpec?,
+          ?tools: ::Array[String]?,
+          ?transcripts: Sentdm::Voice::VoiceAgentTranscriptsSpec?,
+          ?transfer_targets: ::Array[Sentdm::Voice::VoiceAgentPartySpec]?,
+          ?websocket_url: String?,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Voice::APIResponseOfVoiceAgent
+
+        def list: (
+          ?page: Integer,
+          ?page_size: Integer,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Internal::VoiceAgentsPage[Sentdm::Voice::VoiceAgent]
+
+        def delete: (
+          String id,
+          ?sandbox: bool,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> nil
+
+        def rotate_secret: (
+          String id,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Voice::APIResponseOfVoiceAgentSecret
+
         def initialize: (client: Sentdm::Client) -> void
       end
     end
