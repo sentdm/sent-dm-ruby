@@ -1,0 +1,38 @@
+module Sentdm
+  module Models
+    class VoiceAgentLimits = Voice::VoiceAgentLimits
+
+    module Voice
+      type voice_agent_limits =
+        {
+          allowed_countries: ::Array[String]?,
+          max_call_seconds: Integer,
+          max_concurrent_calls: Integer
+        }
+
+      class VoiceAgentLimits < Sentdm::Internal::Type::BaseModel
+        attr_accessor allowed_countries: ::Array[String]?
+
+        attr_reader max_call_seconds: Integer?
+
+        def max_call_seconds=: (Integer) -> Integer
+
+        attr_reader max_concurrent_calls: Integer?
+
+        def max_concurrent_calls=: (Integer) -> Integer
+
+        def initialize: (
+          ?allowed_countries: ::Array[String]?,
+          ?max_call_seconds: Integer,
+          ?max_concurrent_calls: Integer
+        ) -> void
+
+        def to_hash: -> {
+          allowed_countries: ::Array[String]?,
+          max_call_seconds: Integer,
+          max_concurrent_calls: Integer
+        }
+      end
+    end
+  end
+end

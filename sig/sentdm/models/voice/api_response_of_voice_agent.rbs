@@ -1,0 +1,41 @@
+module Sentdm
+  module Models
+    module Voice
+      type api_response_of_voice_agent =
+        {
+          data: Sentdm::Voice::VoiceAgent?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+
+      class APIResponseOfVoiceAgent < Sentdm::Internal::Type::BaseModel
+        attr_accessor data: Sentdm::Voice::VoiceAgent?
+
+        attr_accessor error: Sentdm::ErrorDetail?
+
+        attr_reader meta: Sentdm::APIMeta?
+
+        def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (
+          ?data: Sentdm::Voice::VoiceAgent?,
+          ?error: Sentdm::ErrorDetail?,
+          ?meta: Sentdm::APIMeta,
+          ?success: bool
+        ) -> void
+
+        def to_hash: -> {
+          data: Sentdm::Voice::VoiceAgent?,
+          error: Sentdm::ErrorDetail?,
+          meta: Sentdm::APIMeta,
+          success: bool
+        }
+      end
+    end
+  end
+end
