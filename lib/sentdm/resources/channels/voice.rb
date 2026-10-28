@@ -47,6 +47,16 @@ module Sentdm
         # question the way you verify a webhook. `POST /v3/channels/voice/{number}/test`
         # sends a test question and reports the verdict.
         #
+        # Send `agent_id` instead of `callback_url`, or with it, to have one of your voice
+        # agents (`GET /v3/voice/agents`) answer calls to the number. The agent wins over
+        # the callback URL for calls to the number; calls your app places from it still
+        # follow your app. `routes_to` in the response says which answers, and reads
+        # `agent_pending` while the number is still being moved to the agent. Calls follow
+        # the move within about an hour, as the provider applies it on its own clock.
+        # While numbers cannot be bound to agents, a request with `agent_id` is refused
+        # with `502` before any number is obtained or anything is written; send
+        # `callback_url` instead.
+        #
         # Your first voice number becomes the line app-originated calls are placed from
         # when a voice token names no number; send `default_for_app_calls: true` to give
         # that role to another number. A number you turned off earlier is turned back on,
@@ -59,11 +69,13 @@ module Sentdm
         # With `sandbox: true` the request is validated and a simulated number reported
         # with `202`; nothing is written and no number is bought.
         #
-        # @overload create(callback_url:, area_code: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload create(agent_id: nil, area_code: nil, callback_url: nil, default_for_app_calls: nil, number: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
-        # @param callback_url [String] Body param: Where Sent asks what to do with each call on this number: an absolut
+        # @param agent_id [String, nil] Body param: One of your voice agents (GET /v3/voice/agents), such as
         #
         # @param area_code [String, nil] Body param: The US area code a new number should be in, as 212. Only for a reque
+        #
+        # @param callback_url [String, nil] Body param: Where Sent asks what to do with each call on this number: an absolut
         #
         # @param default_for_app_calls [Boolean, nil] Body param: Make this the line app-originated calls are placed from when a voice
         #
@@ -80,7 +92,7 @@ module Sentdm
         # @return [Sentdm::Models::Channels::APIResponseOfVoiceNumberCreated]
         #
         # @see Sentdm::Models::Channels::VoiceCreateParams
-        def create(params)
+        def create(params = {})
           parsed, options = Sentdm::Channels::VoiceCreateParams.dump_request(params)
           header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
           @client.request(
@@ -136,18 +148,23 @@ module Sentdm
         #
         # ## What it changes
         #
-        # | Body                                          | Effect                                                                                                       |
-        # | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-        # | `"status": "ACTIVE"`                          | turns calls on again for a number you turned off; the callback URL and the secret it had are kept            |
-        # | `"status": "INACTIVE"`                        | turns calls off; the callback URL and the secret stay on the number                                          |
-        # | `"default_for_app_calls": true`               | makes this the line app-originated calls are placed from when a voice token names no number                  |
-        # | `"callback_url": "https://example.com/voice"` | replaces where Sent asks what to do with each call on the number; the signing secret and the status are kept |
-        # | key omitted                                   | left exactly as it is                                                                                        |
+        # | Body                                          | Effect                                                                                                                                                                                                                                                                                                                                                                                                     |
+        # | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        # | `"status": "ACTIVE"`                          | turns calls on again for a number you turned off; the callback URL and the secret it had are kept                                                                                                                                                                                                                                                                                                          |
+        # | `"status": "INACTIVE"`                        | turns calls off; the callback URL and the secret stay on the number                                                                                                                                                                                                                                                                                                                                        |
+        # | `"default_for_app_calls": true`               | makes this the line app-originated calls are placed from when a voice token names no number                                                                                                                                                                                                                                                                                                                |
+        # | `"callback_url": "https://example.com/voice"` | replaces where Sent asks what to do with each call on the number; the signing secret and the status are kept                                                                                                                                                                                                                                                                                               |
+        # | `"agent_id": "agent_…"`                       | one of your voice agents answers calls to the number, within about an hour of the change (the provider applies the move on its own clock, and `routes_to` reads `agent` as soon as it has recorded it); it wins over `callback_url` for calls to the number, and calls your app places from it still follow your app. `routes_to` reads `agent_pending` while the number is still being moved to the agent |
+        # | `"agent_id": null`                            | unbinds the agent, so `callback_url` answers calls to the number again                                                                                                                                                                                                                                                                                                                                     |
+        # | key omitted                                   | left exactly as it is                                                                                                                                                                                                                                                                                                                                                                                      |
         #
         # `status` is matched ignoring case. Any combination is accepted:
         # `status: "ACTIVE"` with `default_for_app_calls: true` turns a number on as the
-        # new default, and a `callback_url` sent with either status is written too. A body
-        # that names none of the three is refused.
+        # new default, and a `callback_url` sent with either status is written too.
+        # `agent_id` is applied first, so a refusal to move the number to or from the
+        # agent leaves everything as it was, and the `409` and `400` refusals below are
+        # decided before anything is written, so they leave everything as it was too. A
+        # body that names none of them is refused.
         #
         # A number can be on without a callback URL: calls placed from your app then
         # connect straight to the number or user they dial, and calls to the number are
@@ -166,8 +183,12 @@ module Sentdm
         # **Making an inactive number the default is `400`.** Send `status: "ACTIVE"` in
         # the same call.
         #
-        # **A number you never turned voice on for is `404`.** Add it with
-        # `POST /v3/channels/voice`.
+        # **A number you never turned voice on for is `404`**, and so is an `agent_id`
+        # that is not one of your agents. Add the number with `POST /v3/channels/voice`.
+        #
+        # **`502` means the number could not be moved to or from the agent**, or an
+        # `agent_id` was sent while numbers cannot be bound to agents; nothing was
+        # written.
         #
         # The number is the E.164 value in the path with the plus sign URL-encoded
         # (`%2B`).
@@ -176,9 +197,11 @@ module Sentdm
         # stored number and the number is reported with `200` as it would read after the
         # change.
         #
-        # @overload update(number, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @overload update(number, agent_id: nil, callback_url: nil, default_for_app_calls: nil, sandbox: nil, status: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #
         # @param number [String] Path param: The number in E.164 format with the plus sign URL-encoded, e.g. %2B1
+        #
+        # @param agent_id [String, nil] Body param: One of your voice agents, such as agent_9f2ab000-0000-4000-8000-0000
         #
         # @param callback_url [String, nil] Body param: A new callback URL for the number, active or not: an absolute HTTP o
         #

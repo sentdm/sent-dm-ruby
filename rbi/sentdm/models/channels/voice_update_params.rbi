@@ -18,6 +18,13 @@ module Sentdm
         sig { returns(String) }
         attr_accessor :number
 
+        # One of your voice agents, such as agent_9f2ab000-0000-4000-8000-000000000001, to
+        # answer calls to the number, or null to unbind it so the callback URL answers
+        # them again. The agent wins over callback_url for calls to the number; calls your
+        # app places from it still follow your app.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :agent_id
+
         # A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
         # on a public host, where Sent asks what to do with each call. The signing secret
         # is kept.
@@ -63,6 +70,7 @@ module Sentdm
         sig do
           params(
             number: String,
+            agent_id: T.nilable(String),
             callback_url: T.nilable(String),
             default_for_app_calls: T.nilable(T::Boolean),
             sandbox: T::Boolean,
@@ -75,6 +83,11 @@ module Sentdm
         end
         def self.new(
           number:,
+          # One of your voice agents, such as agent_9f2ab000-0000-4000-8000-000000000001, to
+          # answer calls to the number, or null to unbind it so the callback URL answers
+          # them again. The agent wins over callback_url for calls to the number; calls your
+          # app places from it still follow your app.
+          agent_id: nil,
           # A new callback URL for the number, active or not: an absolute HTTP or HTTPS URL
           # on a public host, where Sent asks what to do with each call. The signing secret
           # is kept.
@@ -100,6 +113,7 @@ module Sentdm
           override.returns(
             {
               number: String,
+              agent_id: T.nilable(String),
               callback_url: T.nilable(String),
               default_for_app_calls: T.nilable(T::Boolean),
               sandbox: T::Boolean,

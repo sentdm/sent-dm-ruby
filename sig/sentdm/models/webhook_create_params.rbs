@@ -6,10 +6,12 @@ module Sentdm
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,
         event_types: ::Array[String],
+        is_inheritable: bool,
         retry_count: Integer,
         sandbox: bool,
         sender_profile: Sentdm::WebhookCreateParams::SenderProfile?,
         timeout_seconds: Integer,
+        webhook_version: Integer?,
         idempotency_key: String,
         x_profile_id: String
       }
@@ -33,6 +35,10 @@ module Sentdm
 
       def event_types=: (::Array[String]) -> ::Array[String]
 
+      attr_reader is_inheritable: bool?
+
+      def is_inheritable=: (bool) -> bool
+
       attr_reader retry_count: Integer?
 
       def retry_count=: (Integer) -> Integer
@@ -47,6 +53,8 @@ module Sentdm
 
       def timeout_seconds=: (Integer) -> Integer
 
+      attr_accessor webhook_version: Integer?
+
       attr_reader idempotency_key: String?
 
       def idempotency_key=: (String) -> String
@@ -60,10 +68,12 @@ module Sentdm
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
         ?event_types: ::Array[String],
+        ?is_inheritable: bool,
         ?retry_count: Integer,
         ?sandbox: bool,
         ?sender_profile: Sentdm::WebhookCreateParams::SenderProfile?,
         ?timeout_seconds: Integer,
+        ?webhook_version: Integer?,
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
@@ -74,10 +84,12 @@ module Sentdm
         endpoint_url: String,
         event_filters: ::Hash[Symbol, ::Array[String]]?,
         event_types: ::Array[String],
+        is_inheritable: bool,
         retry_count: Integer,
         sandbox: bool,
         sender_profile: Sentdm::WebhookCreateParams::SenderProfile?,
         timeout_seconds: Integer,
+        webhook_version: Integer?,
         idempotency_key: String,
         x_profile_id: String,
         request_options: Sentdm::RequestOptions

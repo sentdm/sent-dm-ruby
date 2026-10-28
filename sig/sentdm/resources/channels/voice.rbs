@@ -3,8 +3,9 @@ module Sentdm
     class Channels
       class Voice
         def create: (
-          callback_url: String,
+          ?agent_id: String?,
           ?area_code: String?,
+          ?callback_url: String?,
           ?default_for_app_calls: bool?,
           ?number: String?,
           ?sandbox: bool,
@@ -21,6 +22,7 @@ module Sentdm
 
         def update: (
           String number,
+          ?agent_id: String?,
           ?callback_url: String?,
           ?default_for_app_calls: bool?,
           ?sandbox: bool,

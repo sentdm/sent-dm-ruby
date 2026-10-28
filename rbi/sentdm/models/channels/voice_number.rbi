@@ -9,6 +9,13 @@ module Sentdm
             T.any(Sentdm::Channels::VoiceNumber, Sentdm::Internal::AnyHash)
           end
 
+        # The voice agent calls to this number go to, such as
+        # agent_9f2ab000-0000-4000-8000-000000000001. It wins over callback_url for calls
+        # to the number; calls your app places from the number still follow your app. Null
+        # when no agent answers the number.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :agent_id
+
         # Where Sent asks what to do with each call on this number: a signed question is
         # POSTed here when a call arrives or a caller presses a key, and the answer
         # decides the call. The signing secret is not on this read; it is shown when voice
@@ -38,6 +45,16 @@ module Sentdm
         sig { params(number: String).void }
         attr_writer :number
 
+        # Who answers calls to this number: agent, the voice agent in agent_id;
+        # agent_pending, that agent once the number has finished moving to it, with calls
+        # possibly unanswered until then; callback, your callback_url; or none, in which
+        # case calls to it are declined.
+        sig { returns(T.nilable(String)) }
+        attr_reader :routes_to
+
+        sig { params(routes_to: String).void }
+        attr_writer :routes_to
+
         # ACTIVE while the number carries calls, INACTIVE once it was turned off. Nothing
         # provisions: a number the customer holds can carry calls the moment voice is
         # turned on for it.
@@ -56,15 +73,22 @@ module Sentdm
         # One number the profile carries phone calls on.
         sig do
           params(
+            agent_id: T.nilable(String),
             callback_url: T.nilable(String),
             created_at: Time,
             default_for_app_calls: T::Boolean,
             number: String,
+            routes_to: String,
             status: String,
             updated_at: Time
           ).returns(T.attached_class)
         end
         def self.new(
+          # The voice agent calls to this number go to, such as
+          # agent_9f2ab000-0000-4000-8000-000000000001. It wins over callback_url for calls
+          # to the number; calls your app places from the number still follow your app. Null
+          # when no agent answers the number.
+          agent_id: nil,
           # Where Sent asks what to do with each call on this number: a signed question is
           # POSTed here when a call arrives or a caller presses a key, and the answer
           # decides the call. The signing secret is not on this read; it is shown when voice
@@ -77,6 +101,11 @@ module Sentdm
           default_for_app_calls: nil,
           # The number, in E.164.
           number: nil,
+          # Who answers calls to this number: agent, the voice agent in agent_id;
+          # agent_pending, that agent once the number has finished moving to it, with calls
+          # possibly unanswered until then; callback, your callback_url; or none, in which
+          # case calls to it are declined.
+          routes_to: nil,
           # ACTIVE while the number carries calls, INACTIVE once it was turned off. Nothing
           # provisions: a number the customer holds can carry calls the moment voice is
           # turned on for it.
@@ -88,10 +117,12 @@ module Sentdm
         sig do
           override.returns(
             {
+              agent_id: T.nilable(String),
               callback_url: T.nilable(String),
               created_at: Time,
               default_for_app_calls: T::Boolean,
               number: String,
+              routes_to: String,
               status: String,
               updated_at: Time
             }

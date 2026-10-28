@@ -3,8 +3,9 @@ module Sentdm
     module Channels
       type voice_create_params =
         {
-          callback_url: String,
+          agent_id: String?,
           area_code: String?,
+          callback_url: String?,
           default_for_app_calls: bool?,
           number: String?,
           sandbox: bool,
@@ -17,9 +18,11 @@ module Sentdm
         extend Sentdm::Internal::Type::RequestParameters::Converter
         include Sentdm::Internal::Type::RequestParameters
 
-        attr_accessor callback_url: String
+        attr_accessor agent_id: String?
 
         attr_accessor area_code: String?
+
+        attr_accessor callback_url: String?
 
         attr_accessor default_for_app_calls: bool?
 
@@ -38,8 +41,9 @@ module Sentdm
         def x_profile_id=: (String) -> String
 
         def initialize: (
-          callback_url: String,
+          ?agent_id: String?,
           ?area_code: String?,
+          ?callback_url: String?,
           ?default_for_app_calls: bool?,
           ?number: String?,
           ?sandbox: bool,
@@ -49,8 +53,9 @@ module Sentdm
         ) -> void
 
         def to_hash: -> {
-          callback_url: String,
+          agent_id: String?,
           area_code: String?,
+          callback_url: String?,
           default_for_app_calls: bool?,
           number: String?,
           sandbox: bool,
