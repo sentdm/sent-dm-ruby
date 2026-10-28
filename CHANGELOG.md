@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.40.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.39.0...v0.40.0) (2026-10-28)
+
+
+### Features
+
+* **api:** add voice agents, the voice catalogue and agent_id ([abd31b9](https://github.com/sentdm/sent-dm-ruby/commit/abd31b96b520c10bd3ac67bb1c2b243c3a75b5fd))
+* **api:** sync generated SDKs from the committed spec ([30477ca](https://github.com/sentdm/sent-dm-ruby/commit/30477cacd760dccdf6ce8c5112267d75197746a6))
+* **api:** sync OpenAPI spec from production ([fa5b9f1](https://github.com/sentdm/sent-dm-ruby/commit/fa5b9f12f44e770a7aa6f2382585755fd9935acf))
+
 ## [0.39.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.38.1...v0.39.0) (2026-10-23)
 
 
