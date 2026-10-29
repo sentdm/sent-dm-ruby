@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "sentdm", "~> 0.40.0"
+gem "sentdm", "~> 0.41.0"
 ```
 
 <!-- x-release-please-end -->

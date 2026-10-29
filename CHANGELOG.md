@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.41.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.40.0...v0.41.0) (2026-10-29)
+
+
+### Features
+
+* **api:** sync generated SDKs from the committed spec ([0d06178](https://github.com/sentdm/sent-dm-ruby/commit/0d0617831c4874c9bc3b8c356c0ca2c2ec07e6f8))
+* **api:** sync generated SDKs from the committed spec ([bd2eede](https://github.com/sentdm/sent-dm-ruby/commit/bd2eedeb18e8bdfc915f8be9d9d0a9b6fe9b6cf2))
+
+
+### Chores
+
+* **repo:** add the contributor contract and review rubric ([af9f2c1](https://github.com/sentdm/sent-dm-ruby/commit/af9f2c19aa9e4c1477f1040fe8dce56704f9ac58))
+* **repo:** add the contributor contract and the review workflow ([40958bd](https://github.com/sentdm/sent-dm-ruby/commit/40958bdffafdf38625a09193b53c54073b21e0dd))
+* **repo:** rely on the managed Claude Code Review, drop the workflow ([328a930](https://github.com/sentdm/sent-dm-ruby/commit/328a930161ac09ee9fdabcec603461416b10a834))
+* **repo:** restore the contributor contract and review rubric ([2df217d](https://github.com/sentdm/sent-dm-ruby/commit/2df217dbac2a5ab00db01f610a713a4324f1c6f9))
+* **repo:** restore the contributor contract and review rubric ([16c49d9](https://github.com/sentdm/sent-dm-ruby/commit/16c49d94e365b42bd06c67903abf5c77428b34c2))
+
 ## [0.40.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.39.0...v0.40.0) (2026-10-28)
 
 
