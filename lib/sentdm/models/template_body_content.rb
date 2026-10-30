@@ -31,9 +31,9 @@ module Sentdm
       required :template, String
 
       # @!attribute type
-      #   The type of body content — send "text". It is dropped from the stored definition
-      #   when null, so a body posted without it is saved with no type key at all and the
-      #   template editor has nothing to render the block from.
+      #   The type of body content. Defaults to "text" when omitted, which also fills it
+      #   in when reading stored bodies saved without it; the template editor refuses to
+      #   load a body with no type.
       #
       #   @return [String, nil]
       optional :type, String, nil?: true
@@ -51,7 +51,7 @@ module Sentdm
       #
       #   @param template [String] The body copy, with variables written as {{index:variable}}.
       #
-      #   @param type [String, nil] The type of body content — send "text". It is dropped from the stored definition
+      #   @param type [String, nil] The type of body content. Defaults to "text" when omitted, which also fills it i
       #
       #   @param variables [Array<Sentdm::Models::TemplateVariable>, nil] The variables referenced by the body copy, one entry per {{index:variable}} plac
     end
