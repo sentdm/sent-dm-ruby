@@ -58,15 +58,6 @@ module Sentdm
     sig { returns(Sentdm::Resources::Profiles) }
     attr_reader :profiles
 
-    # What a phone number actually is, before you send to it.
-    #
-    # A lookup returns the number's country, line type and carrier, which is what
-    # decides whether it is reachable on a channel and what it costs. Worth doing on
-    # import rather than on send: a landline in a contact list is a message that can
-    # never be delivered.
-    sig { returns(Sentdm::Resources::Numbers) }
-    attr_reader :numbers
-
     # Send a message and follow what happened to it.
     #
     # One endpoint sends on any channel: pass `channel: "sent"` and we pick between
