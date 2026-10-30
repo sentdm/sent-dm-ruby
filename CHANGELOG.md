@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.42.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.42.0...v0.42.1) (2026-10-30)
+
+
+### Documentation
+
+* **api:** describe the default body type on template bodies ([39e5ddd](https://github.com/sentdm/sent-dm-ruby/commit/39e5ddd45ee5ca7dce4938cdbaa75b4cbe23e196))
+
 ## [0.42.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.41.0...v0.42.0) (2026-10-30)
 
 
