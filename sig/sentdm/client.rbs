@@ -18,8 +18,6 @@ module Sentdm
 
     attr_reader profiles: Sentdm::Resources::Profiles
 
-    attr_reader numbers: Sentdm::Resources::Numbers
-
     attr_reader messages: Sentdm::Resources::Messages
 
     attr_reader contacts: Sentdm::Resources::Contacts
