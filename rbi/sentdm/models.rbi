@@ -92,8 +92,6 @@ module Sentdm
 
   MutationRequest = Sentdm::Models::MutationRequest
 
-  NumberLookupParams = Sentdm::Models::NumberLookupParams
-
   PaginationMeta = Sentdm::Models::PaginationMeta
 
   PaymentDetails = Sentdm::Models::PaymentDetails
