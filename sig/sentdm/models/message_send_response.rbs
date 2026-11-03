@@ -2,14 +2,14 @@ module Sentdm
   module Models
     type message_send_response =
       {
-        data: Sentdm::Models::MessageSendResponse::Data?,
+        data: Sentdm::MessageSendResponse::Data?,
         error: Sentdm::ErrorDetail?,
         meta: Sentdm::APIMeta,
         success: bool
       }
 
     class MessageSendResponse < Sentdm::Internal::Type::BaseModel
-      attr_accessor data: Sentdm::Models::MessageSendResponse::Data?
+      attr_accessor data: Sentdm::MessageSendResponse::Data?
 
       attr_accessor error: Sentdm::ErrorDetail?
 
@@ -22,14 +22,14 @@ module Sentdm
       def success=: (bool) -> bool
 
       def initialize: (
-        ?data: Sentdm::Models::MessageSendResponse::Data?,
+        ?data: Sentdm::MessageSendResponse::Data?,
         ?error: Sentdm::ErrorDetail?,
         ?meta: Sentdm::APIMeta,
         ?success: bool
       ) -> void
 
       def to_hash: -> {
-        data: Sentdm::Models::MessageSendResponse::Data?,
+        data: Sentdm::MessageSendResponse::Data?,
         error: Sentdm::ErrorDetail?,
         meta: Sentdm::APIMeta,
         success: bool
@@ -37,18 +37,18 @@ module Sentdm
 
       type data =
         {
-          recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+          recipients: ::Array[Sentdm::MessageSendResponse::Data::Recipient],
           status: String,
           template_id: String,
           template_name: String
         }
 
       class Data < Sentdm::Internal::Type::BaseModel
-        attr_reader recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]?
+        attr_reader recipients: ::Array[Sentdm::MessageSendResponse::Data::Recipient]?
 
         def recipients=: (
-          ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]
-        ) -> ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]
+          ::Array[Sentdm::MessageSendResponse::Data::Recipient]
+        ) -> ::Array[Sentdm::MessageSendResponse::Data::Recipient]
 
         attr_reader status: String?
 
@@ -63,14 +63,14 @@ module Sentdm
         def template_name=: (String) -> String
 
         def initialize: (
-          ?recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+          ?recipients: ::Array[Sentdm::MessageSendResponse::Data::Recipient],
           ?status: String,
           ?template_id: String,
           ?template_name: String
         ) -> void
 
         def to_hash: -> {
-          recipients: ::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+          recipients: ::Array[Sentdm::MessageSendResponse::Data::Recipient],
           status: String,
           template_id: String,
           template_name: String
