@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.42.1...v0.43.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add messages.resend to resend a message on its id ([9a2f65f](https://github.com/sentdm/sent-dm-ruby/commit/9a2f65f47bee3c3dc784eb32fcb9a081f242ef50))
+
 ## [0.42.1](https://github.com/sentdm/sent-dm-ruby/compare/v0.42.0...v0.42.1) (2026-10-30)
 
 
