@@ -5,7 +5,7 @@ module Sentdm
     class MessageSendResponse < Sentdm::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(Sentdm::Models::MessageSendResponse, Sentdm::Internal::AnyHash)
+          T.any(Sentdm::MessageSendResponse, Sentdm::Internal::AnyHash)
         end
 
       # The result of a multi-recipient send.
@@ -20,13 +20,11 @@ module Sentdm
       # The shape of an immediate send: it never has a scheduled_at key. A send that
       # carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
       # which of the two to answer with. From always returns this type.
-      sig { returns(T.nilable(Sentdm::Models::MessageSendResponse::Data)) }
+      sig { returns(T.nilable(Sentdm::MessageSendResponse::Data)) }
       attr_reader :data
 
       sig do
-        params(
-          data: T.nilable(Sentdm::Models::MessageSendResponse::Data::OrHash)
-        ).void
+        params(data: T.nilable(Sentdm::MessageSendResponse::Data::OrHash)).void
       end
       attr_writer :data
 
@@ -54,7 +52,7 @@ module Sentdm
       # Standard API response envelope for all v3 endpoints
       sig do
         params(
-          data: T.nilable(Sentdm::Models::MessageSendResponse::Data::OrHash),
+          data: T.nilable(Sentdm::MessageSendResponse::Data::OrHash),
           error: T.nilable(Sentdm::ErrorDetail::OrHash),
           meta: Sentdm::APIMeta::OrHash,
           success: T::Boolean
@@ -86,7 +84,7 @@ module Sentdm
       sig do
         override.returns(
           {
-            data: T.nilable(Sentdm::Models::MessageSendResponse::Data),
+            data: T.nilable(Sentdm::MessageSendResponse::Data),
             error: T.nilable(Sentdm::ErrorDetail),
             meta: Sentdm::APIMeta,
             success: T::Boolean
@@ -99,17 +97,12 @@ module Sentdm
       class Data < Sentdm::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
-            T.any(
-              Sentdm::Models::MessageSendResponse::Data,
-              Sentdm::Internal::AnyHash
-            )
+            T.any(Sentdm::MessageSendResponse::Data, Sentdm::Internal::AnyHash)
           end
 
         sig do
           returns(
-            T.nilable(
-              T::Array[Sentdm::Models::MessageSendResponse::Data::Recipient]
-            )
+            T.nilable(T::Array[Sentdm::MessageSendResponse::Data::Recipient])
           )
         end
         attr_reader :recipients
@@ -117,9 +110,7 @@ module Sentdm
         sig do
           params(
             recipients:
-              T::Array[
-                Sentdm::Models::MessageSendResponse::Data::Recipient::OrHash
-              ]
+              T::Array[Sentdm::MessageSendResponse::Data::Recipient::OrHash]
           ).void
         end
         attr_writer :recipients
@@ -160,9 +151,7 @@ module Sentdm
         sig do
           params(
             recipients:
-              T::Array[
-                Sentdm::Models::MessageSendResponse::Data::Recipient::OrHash
-              ],
+              T::Array[Sentdm::MessageSendResponse::Data::Recipient::OrHash],
             status: String,
             template_id: String,
             template_name: String
@@ -183,7 +172,7 @@ module Sentdm
           override.returns(
             {
               recipients:
-                T::Array[Sentdm::Models::MessageSendResponse::Data::Recipient],
+                T::Array[Sentdm::MessageSendResponse::Data::Recipient],
               status: String,
               template_id: String,
               template_name: String
@@ -197,7 +186,7 @@ module Sentdm
           OrHash =
             T.type_alias do
               T.any(
-                Sentdm::Models::MessageSendResponse::Data::Recipient,
+                Sentdm::MessageSendResponse::Data::Recipient,
                 Sentdm::Internal::AnyHash
               )
             end

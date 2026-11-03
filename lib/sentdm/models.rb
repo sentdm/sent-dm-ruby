@@ -125,6 +125,8 @@ module Sentdm
 
   MessageSendParams = Sentdm::Models::MessageSendParams
 
+  MessageSendResponse = Sentdm::Models::MessageSendResponse
+
   MutationRequest = Sentdm::Models::MutationRequest
 
   NumberLookupParams = Sentdm::Models::NumberLookupParams

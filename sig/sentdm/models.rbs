@@ -85,6 +85,8 @@ module Sentdm
 
   class MessageSendParams = Sentdm::Models::MessageSendParams
 
+  class MessageSendResponse = Sentdm::Models::MessageSendResponse
+
   class MutationRequest = Sentdm::Models::MutationRequest
 
   class NumberLookupParams = Sentdm::Models::NumberLookupParams

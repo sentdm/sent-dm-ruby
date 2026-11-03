@@ -61,7 +61,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageResendResponse)
+        ).returns(Sentdm::MessageSendResponse)
       end
       def resend(
         # Path param: Message ID
@@ -180,7 +180,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageSendResponse)
+        ).returns(Sentdm::MessageSendResponse)
       end
       def send_(
         # Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"]. Each channel

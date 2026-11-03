@@ -7,7 +7,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::MessageResendResponse
+      ) -> Sentdm::MessageSendResponse
 
       def retrieve_activities: (
         String id,
@@ -34,7 +34,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::MessageSendResponse
+      ) -> Sentdm::MessageSendResponse
 
       def initialize: (client: Sentdm::Client) -> void
     end

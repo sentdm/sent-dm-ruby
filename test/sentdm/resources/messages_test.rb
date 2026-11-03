@@ -9,12 +9,12 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
     response = @sent.messages.resend("8ba7b830-9dad-11d1-80b4-00c04fd430c8")
 
     assert_pattern do
-      response => Sentdm::Models::MessageResendResponse
+      response => Sentdm::MessageSendResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::MessageResendResponse::Data | nil,
+        data: Sentdm::MessageSendResponse::Data | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -66,12 +66,12 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
     response = @sent.messages.send_
 
     assert_pattern do
-      response => Sentdm::Models::MessageSendResponse
+      response => Sentdm::MessageSendResponse
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::MessageSendResponse::Data | nil,
+        data: Sentdm::MessageSendResponse::Data | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

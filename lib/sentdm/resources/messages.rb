@@ -70,7 +70,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageResendResponse]
+      # @return [Sentdm::Models::MessageSendResponse]
       #
       # @see Sentdm::Models::MessageResendParams
       def resend(id, params = {})
@@ -81,7 +81,7 @@ module Sentdm
           path: ["v3/messages/%1$s/resend", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::MessageResendResponse,
+          model: Sentdm::MessageSendResponse,
           options: options
         )
       end
@@ -224,7 +224,7 @@ module Sentdm
           path: "v3/messages",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::MessageSendResponse,
+          model: Sentdm::MessageSendResponse,
           options: options
         )
       end
