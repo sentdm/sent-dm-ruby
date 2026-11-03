@@ -1,0 +1,161 @@
+# typed: strong
+
+module Sentdm
+  module Models
+    class MessageResendResponseData < Sentdm::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(Sentdm::MessageResendResponseData, Sentdm::Internal::AnyHash)
+        end
+
+      sig do
+        returns(
+          T.nilable(T::Array[Sentdm::MessageResendResponseData::Recipient])
+        )
+      end
+      attr_reader :recipients
+
+      sig do
+        params(
+          recipients:
+            T::Array[Sentdm::MessageResendResponseData::Recipient::OrHash]
+        ).void
+      end
+      attr_writer :recipients
+
+      # QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED
+      # here too; each message moves to SCHEDULED once it is held, as GET
+      # /v3/messages/{id} and the message.scheduled webhook report.
+      sig { returns(T.nilable(String)) }
+      attr_reader :status
+
+      sig { params(status: String).void }
+      attr_writer :status
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :template_id
+
+      sig { params(template_id: String).void }
+      attr_writer :template_id
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :template_name
+
+      sig { params(template_name: String).void }
+      attr_writer :template_name
+
+      # The result of a multi-recipient send.
+      #
+      # Declared here rather than in the service layer. POST /v3/messages used to
+      # publish MessageSendResult — a type in Common.Services.Messaging.Contracts — so
+      # the public contract was whatever the send service happened to return, and
+      # changing that service for an internal reason changed the API. The service keeps
+      # its result; this is what a caller sees, and the mapping between them is a
+      # decision the endpoint makes.
+      #
+      # The shape of an immediate send: it never has a scheduled_at key. A send that
+      # carried scheduled_at is a ScheduledSendMessageResponse, and the endpoint decides
+      # which of the two to answer with. From always returns this type.
+      sig do
+        params(
+          recipients:
+            T::Array[Sentdm::MessageResendResponseData::Recipient::OrHash],
+          status: String,
+          template_id: String,
+          template_name: String
+        ).returns(T.attached_class)
+      end
+      def self.new(
+        recipients: nil,
+        # QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED
+        # here too; each message moves to SCHEDULED once it is held, as GET
+        # /v3/messages/{id} and the message.scheduled webhook report.
+        status: nil,
+        template_id: nil,
+        template_name: nil
+      )
+      end
+
+      sig do
+        override.returns(
+          {
+            recipients: T::Array[Sentdm::MessageResendResponseData::Recipient],
+            status: String,
+            template_id: String,
+            template_name: String
+          }
+        )
+      end
+      def to_hash
+      end
+
+      class Recipient < Sentdm::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Sentdm::MessageResendResponseData::Recipient,
+              Sentdm::Internal::AnyHash
+            )
+          end
+
+        # Resolved template body for this recipient's channel, or null when the channel is
+        # auto-detected.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :body
+
+        # Channel this message will be sent on — sms, whatsapp — or null to auto-detect.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :channel
+
+        # Identifier for tracking this recipient's message.
+        sig { returns(T.nilable(String)) }
+        attr_reader :message_id
+
+        sig { params(message_id: String).void }
+        attr_writer :message_id
+
+        # Phone number in E.164 format.
+        sig { returns(T.nilable(String)) }
+        attr_reader :to
+
+        sig { params(to: String).void }
+        attr_writer :to
+
+        # What one recipient of a send got, as the API reports it.
+        sig do
+          params(
+            body: T.nilable(String),
+            channel: T.nilable(String),
+            message_id: String,
+            to: String
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Resolved template body for this recipient's channel, or null when the channel is
+          # auto-detected.
+          body: nil,
+          # Channel this message will be sent on — sms, whatsapp — or null to auto-detect.
+          channel: nil,
+          # Identifier for tracking this recipient's message.
+          message_id: nil,
+          # Phone number in E.164 format.
+          to: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              body: T.nilable(String),
+              channel: T.nilable(String),
+              message_id: String,
+              to: String
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+    end
+  end
+end

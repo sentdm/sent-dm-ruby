@@ -85,6 +85,8 @@ module Sentdm
 
   MessageResendParams = Sentdm::Models::MessageResendParams
 
+  MessageResendResponseData = Sentdm::Models::MessageResendResponseData
+
   MessageRetrieveActivitiesParams =
     Sentdm::Models::MessageRetrieveActivitiesParams
 

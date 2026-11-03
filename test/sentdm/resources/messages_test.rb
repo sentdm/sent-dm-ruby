@@ -14,7 +14,7 @@ class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::MessageResendResponse::Data | nil,
+        data: Sentdm::MessageResendResponseData | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
