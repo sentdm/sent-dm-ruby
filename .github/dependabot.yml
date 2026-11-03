@@ -15,6 +15,9 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # rubocop minors add cops that flag the generated code (1.92 brought
+      # Style/DirectiveScope), so its bumps keep failing lint.
+      - dependency-name: "rubocop"
     groups:
       lockfile:
         patterns: ["*"]
