@@ -27,16 +27,51 @@ module Sentdm
           templates: ::Array[top]
         }
 
-        type pagination = { has_more: bool }
+        type pagination =
+          {
+            has_more: bool,
+            page: Integer,
+            page_size: Integer,
+            total_count: Integer,
+            total_pages: Integer
+          }
 
         class Pagination < Sentdm::Internal::Type::BaseModel
           attr_reader has_more: bool?
 
           def has_more=: (bool) -> bool
 
-          def initialize: (?has_more: bool) -> void
+          attr_reader page: Integer?
 
-          def to_hash: -> { has_more: bool }
+          def page=: (Integer) -> Integer
+
+          attr_reader page_size: Integer?
+
+          def page_size=: (Integer) -> Integer
+
+          attr_reader total_count: Integer?
+
+          def total_count=: (Integer) -> Integer
+
+          attr_reader total_pages: Integer?
+
+          def total_pages=: (Integer) -> Integer
+
+          def initialize: (
+            ?has_more: bool,
+            ?page: Integer,
+            ?page_size: Integer,
+            ?total_count: Integer,
+            ?total_pages: Integer
+          ) -> void
+
+          def to_hash: -> {
+            has_more: bool,
+            page: Integer,
+            page_size: Integer,
+            total_count: Integer,
+            total_pages: Integer
+          }
         end
       end
     end
