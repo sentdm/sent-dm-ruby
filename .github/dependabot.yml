@@ -15,9 +15,14 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-      # rubocop minors add cops that flag the generated code (1.92 brought
-      # Style/DirectiveScope), so its bumps keep failing lint.
+      # The tools that check the generated code outgrow the generator: rubocop
+      # 1.92 brought Style/DirectiveScope, sorbet 0.6.13612 rejects the
+      # generated rbi. Their bumps fail lint until the generator changes.
       - dependency-name: "rubocop"
+      - dependency-name: "sorbet"
+      - dependency-name: "tapioca"
+      - dependency-name: "rbs"
+      - dependency-name: "steep"
     groups:
       lockfile:
         patterns: ["*"]
