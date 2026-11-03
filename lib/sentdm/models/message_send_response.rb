@@ -2,7 +2,7 @@
 
 module Sentdm
   module Models
-    # @see Sentdm::Resources::Messages#send_
+    # @see Sentdm::Resources::Messages#resend
     class MessageSendResponse < Sentdm::Internal::Type::BaseModel
       # @!attribute data
       #   The result of a multi-recipient send.
@@ -19,7 +19,7 @@ module Sentdm
       #   which of the two to answer with. From always returns this type.
       #
       #   @return [Sentdm::Models::MessageSendResponse::Data, nil]
-      optional :data, -> { Sentdm::Models::MessageSendResponse::Data }, nil?: true
+      optional :data, -> { Sentdm::MessageSendResponse::Data }, nil?: true
 
       # @!attribute error
       #   Error information
@@ -58,8 +58,7 @@ module Sentdm
         # @!attribute recipients
         #
         #   @return [Array<Sentdm::Models::MessageSendResponse::Data::Recipient>, nil]
-        optional :recipients,
-                 -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Models::MessageSendResponse::Data::Recipient] }
+        optional :recipients, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::MessageSendResponse::Data::Recipient] }
 
         # @!attribute status
         #   QUEUED: the batch is accepted. A request that carried scheduled_at is QUEUED

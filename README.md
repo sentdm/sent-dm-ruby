@@ -32,7 +32,7 @@ sent = Sentdm::Client.new(
   api_key: ENV["SENT_DM_API_KEY"] # This is the default and can be omitted
 )
 
-response = sent.messages.send_(
+message_send_response = sent.messages.send_(
   channel: ["sms", "whatsapp"],
   template: {
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
@@ -42,7 +42,7 @@ response = sent.messages.send_(
   to: ["+14155551234", "+14155555678"]
 )
 
-puts(response.data)
+puts(message_send_response.data)
 ```
 
 ### Pagination
@@ -192,7 +192,7 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-response =
+message_send_response =
   sent.messages.send_(
     channel: ["sms"],
     template: {
@@ -208,7 +208,7 @@ response =
     }
   )
 
-puts(response[:my_undocumented_property])
+puts(message_send_response[:my_undocumented_property])
 ```
 
 #### Undocumented request params
