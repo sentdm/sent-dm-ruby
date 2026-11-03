@@ -83,6 +83,10 @@ module Sentdm
 
   MessageEventPayload = Sentdm::Models::MessageEventPayload
 
+  MessageResendParams = Sentdm::Models::MessageResendParams
+
+  MessageResendResponseData = Sentdm::Models::MessageResendResponseData
+
   MessageRetrieveActivitiesParams =
     Sentdm::Models::MessageRetrieveActivitiesParams
 

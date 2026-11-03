@@ -1,6 +1,14 @@
 module Sentdm
   module Resources
     class Messages
+      def resend: (
+        String id,
+        ?sandbox: bool,
+        ?idempotency_key: String,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::MessageResendResponse
+
       def retrieve_activities: (
         String id,
         ?x_profile_id: String,

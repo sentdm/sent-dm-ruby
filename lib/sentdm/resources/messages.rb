@@ -26,6 +26,67 @@ module Sentdm
     # cancelled message cannot be resent.
     class Messages
       # Some parameter documentations has been truncated, see
+      # {Sentdm::Models::MessageResendParams} for more details.
+      #
+      # Resends a message you already sent, on the same message id, without rebuilding
+      # the request. The typical use is recovering a BLOCKED message — for example one
+      # refused for insufficient balance — after the account has been topped up.
+      #
+      # **A resend bills again.** Each accepted resend is a new delivery attempt and
+      # records a new charge against the same message id; a client that resends on every
+      # failure is charged on every loop.
+      #
+      # **Every policy runs again.** The resend goes back through the full send pipeline
+      # — consent, balance, KYC and channel quota, template approval, quiet hours and
+      # channel health — so it can land on BLOCKED, FILTERED or SCHEDULED again rather
+      # than being sent, exactly as a fresh send would. Status webhooks (message.sent,
+      # message.blocked, message.filtered, message.failed) fire again for the same
+      # message id, so consumers keyed on the id will see repeated transitions.
+      #
+      # **What can be resent.** A message in a terminal state — DELIVERED, FAILED, READ
+      # or BLOCKED — or one stuck at SENT for more than 15 minutes. A FILTERED message
+      # can never be resent: the recipient opted out or a routing rule refused the send.
+      # A message still in flight (QUEUED, PROCESSED, ROUTED), held for quiet hours
+      # (SCHEDULED), or SENT less than 15 minutes ago returns 409. Two concurrent
+      # resends of one id are serialised: one is accepted, the other gets 409.
+      #
+      # The resend keeps the channel the message was originally requested on; the
+      # channel cannot be changed on a resend — send a new message instead.
+      # `Idempotency-Key` is honoured, so a retried request replays the first accepted
+      # response instead of resending twice.
+      #
+      # The response has the same shape as `POST /v3/messages`: `recipients` has a
+      # single entry whose `message_id` is the id you resent.
+      #
+      # @overload resend(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param id [String] Path param: Message ID
+      #
+      # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
+      #
+      # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
+      #
+      # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
+      #
+      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Sentdm::Models::MessageResendResponse]
+      #
+      # @see Sentdm::Models::MessageResendParams
+      def resend(id, params = {})
+        parsed, options = Sentdm::MessageResendParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
+        @client.request(
+          method: :post,
+          path: ["v3/messages/%1$s/resend", id],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
+          model: Sentdm::Models::MessageResendResponse,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
       # {Sentdm::Models::MessageRetrieveActivitiesParams} for more details.
       #
       # Retrieves the activity log for a specific message. Activities track the message
