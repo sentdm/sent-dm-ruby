@@ -106,8 +106,32 @@ module Sentdm
           #   @return [Boolean, nil]
           optional :has_more, Sentdm::Internal::Type::Boolean
 
-          # @!method initialize(has_more: nil)
+          # @!attribute page
+          #
+          #   @return [Integer, nil]
+          optional :page, Integer
+
+          # @!attribute page_size
+          #
+          #   @return [Integer, nil]
+          optional :page_size, Integer
+
+          # @!attribute total_count
+          #
+          #   @return [Integer, nil]
+          optional :total_count, Integer
+
+          # @!attribute total_pages
+          #
+          #   @return [Integer, nil]
+          optional :total_pages, Integer
+
+          # @!method initialize(has_more: nil, page: nil, page_size: nil, total_count: nil, total_pages: nil)
           #   @param has_more [Boolean]
+          #   @param page [Integer]
+          #   @param page_size [Integer]
+          #   @param total_count [Integer]
+          #   @param total_pages [Integer]
         end
       end
     end
