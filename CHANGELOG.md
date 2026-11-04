@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.43.0...v0.44.0) (2026-11-04)
+
+
+### Features
+
+* **pagination:** expose page, page_size, total_count and total_pages on every page model ([2403928](https://github.com/sentdm/sent-dm-ruby/commit/24039285c1ed89e4e7b3ec22e71ac984b590dcf3))
+
 ## [0.43.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.42.1...v0.43.0) (2026-11-03)
 
 
