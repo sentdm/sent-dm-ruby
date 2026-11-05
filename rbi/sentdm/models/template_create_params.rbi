@@ -41,6 +41,12 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :language
 
+      # Template display name (optional). When omitted or blank, a name is generated
+      # from the template's content. It can be changed afterwards with PUT
+      # /v3/templates/{id}.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :name
+
       # Sandbox flag - when true, the operation is simulated without side effects Useful
       # for testing integrations without actual execution
       sig { returns(T.nilable(T::Boolean)) }
@@ -75,6 +81,7 @@ module Sentdm
           creation_source: T.nilable(String),
           definition: Sentdm::TemplateDefinition::OrHash,
           language: T.nilable(String),
+          name: T.nilable(String),
           sandbox: T::Boolean,
           submit_for_review: T::Boolean,
           idempotency_key: String,
@@ -97,6 +104,10 @@ module Sentdm
         definition: nil,
         # Template language code (e.g., en_US) (optional, auto-detected if not provided)
         language: nil,
+        # Template display name (optional). When omitted or blank, a name is generated
+        # from the template's content. It can be changed afterwards with PUT
+        # /v3/templates/{id}.
+        name: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
         # for testing integrations without actual execution
         sandbox: nil,
@@ -116,6 +127,7 @@ module Sentdm
             creation_source: T.nilable(String),
             definition: Sentdm::TemplateDefinition,
             language: T.nilable(String),
+            name: T.nilable(String),
             sandbox: T::Boolean,
             submit_for_review: T::Boolean,
             idempotency_key: String,

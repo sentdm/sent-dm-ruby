@@ -41,6 +41,14 @@ module Sentdm
       #   @return [String, nil]
       optional :language, String, nil?: true
 
+      # @!attribute name
+      #   Template display name (optional). When omitted or blank, a name is generated
+      #   from the template's content. It can be changed afterwards with PUT
+      #   /v3/templates/{id}.
+      #
+      #   @return [String, nil]
+      optional :name, String, nil?: true
+
       # @!attribute sandbox
       #   Sandbox flag - when true, the operation is simulated without side effects Useful
       #   for testing integrations without actual execution
@@ -64,7 +72,7 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, name: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::TemplateCreateParams} for more details.
       #
@@ -77,6 +85,8 @@ module Sentdm
       #   @param definition [Sentdm::Models::TemplateDefinition] Complete definition of a message template including header, body, footer, and bu
       #
       #   @param language [String, nil] Template language code (e.g., en_US) (optional, auto-detected if not provided)
+      #
+      #   @param name [String, nil] Template display name (optional). When omitted or blank, a name is generated fro
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
