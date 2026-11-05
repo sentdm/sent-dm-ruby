@@ -15,11 +15,11 @@ module Sentdm
       #
       # Creates a new message template with header, body, footer, and buttons. The
       # template can be submitted for review immediately or saved as draft for later
-      # submission. There is no `name` field on create — the display name is derived
-      # from the template's content and can be changed afterwards with
+      # submission. `name` is optional: when omitted or blank, a name is generated from
+      # the template's content. It can be changed afterwards with
       # `PUT /v3/templates/{id}`.
       #
-      # @overload create(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(auto_create_for_sp: nil, category: nil, creation_source: nil, definition: nil, language: nil, name: nil, sandbox: nil, submit_for_review: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #
       # @param auto_create_for_sp [Boolean] Body param: Create this template automatically on every sender profile of the or
       #
@@ -30,6 +30,8 @@ module Sentdm
       # @param definition [Sentdm::Models::TemplateDefinition] Body param: Complete definition of a message template including header, body, fo
       #
       # @param language [String, nil] Body param: Template language code (e.g., en_US) (optional, auto-detected if not
+      #
+      # @param name [String, nil] Body param: Template display name (optional). When omitted or blank, a name is g
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
