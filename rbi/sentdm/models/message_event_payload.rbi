@@ -93,7 +93,8 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :template_name
 
-      # When the message reached MessageStatusEnum, in UTC (yyyy-MM-ddTHH:mm:ssZ).
+      # When the message reached the status this event reports, in UTC
+      # (yyyy-MM-ddTHH:mm:ssZ).
       sig { returns(T.nilable(String)) }
       attr_reader :updated_at
 
@@ -169,7 +170,8 @@ module Sentdm
         # Name of the template the message was sent from. Omitted when the message wasn't
         # template-based.
         template_name: nil,
-        # When the message reached MessageStatusEnum, in UTC (yyyy-MM-ddTHH:mm:ssZ).
+        # When the message reached the status this event reports, in UTC
+        # (yyyy-MM-ddTHH:mm:ssZ).
         updated_at: nil
       )
       end

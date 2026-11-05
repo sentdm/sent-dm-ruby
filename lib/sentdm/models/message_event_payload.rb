@@ -103,7 +103,8 @@ module Sentdm
       optional :template_name, String, nil?: true
 
       # @!attribute updated_at
-      #   When the message reached MessageStatusEnum, in UTC (yyyy-MM-ddTHH:mm:ssZ).
+      #   When the message reached the status this event reports, in UTC
+      #   (yyyy-MM-ddTHH:mm:ssZ).
       #
       #   @return [String, nil]
       optional :updated_at, String
@@ -142,7 +143,7 @@ module Sentdm
       #
       #   @param template_name [String, nil] Name of the template the message was sent from. Omitted when the message wasn't
       #
-      #   @param updated_at [String] When the message reached MessageStatusEnum, in UTC
+      #   @param updated_at [String] When the message reached the status this event reports, in UTC
     end
   end
 end
