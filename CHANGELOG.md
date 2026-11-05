@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.44.0...v0.45.0) (2026-11-05)
+
+
+### Features
+
+* **api:** sync OpenAPI spec from production ([850cfec](https://github.com/sentdm/sent-dm-ruby/commit/850cfec93cf24d63cc4be16f61a61b14587fe7cc))
+
 ## [0.44.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.43.0...v0.44.0) (2026-11-04)
 
 
