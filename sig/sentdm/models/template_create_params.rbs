@@ -7,6 +7,7 @@ module Sentdm
         creation_source: String?,
         definition: Sentdm::TemplateDefinition,
         language: String?,
+        name: String?,
         sandbox: bool,
         submit_for_review: bool,
         idempotency_key: String,
@@ -34,6 +35,8 @@ module Sentdm
 
       attr_accessor language: String?
 
+      attr_accessor name: String?
+
       attr_reader sandbox: bool?
 
       def sandbox=: (bool) -> bool
@@ -56,6 +59,7 @@ module Sentdm
         ?creation_source: String?,
         ?definition: Sentdm::TemplateDefinition,
         ?language: String?,
+        ?name: String?,
         ?sandbox: bool,
         ?submit_for_review: bool,
         ?idempotency_key: String,
@@ -69,6 +73,7 @@ module Sentdm
         creation_source: String?,
         definition: Sentdm::TemplateDefinition,
         language: String?,
+        name: String?,
         sandbox: bool,
         submit_for_review: bool,
         idempotency_key: String,
