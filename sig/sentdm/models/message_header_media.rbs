@@ -1,0 +1,19 @@
+module Sentdm
+  module Models
+    type message_header_media = { type: String, url: String }
+
+    class MessageHeaderMedia < Sentdm::Internal::Type::BaseModel
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      def initialize: (?type: String, ?url: String) -> void
+
+      def to_hash: -> { type: String, url: String }
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type cancelled_message = { scheduled_at: Time? }
+
+    class CancelledMessage < Sentdm::Models::Message
+      def scheduled_at: -> Time?
+
+      def scheduled_at=: (Time? _) -> Time?
+
+      def initialize: (?scheduled_at: Time?) -> void
+
+      def to_hash: -> { scheduled_at: Time? }
+    end
+  end
+end

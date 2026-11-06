@@ -1,0 +1,41 @@
+module Sentdm
+  module Resources
+    class Channels
+      class Rcs
+        def create: (
+          ?agent_use_case: Sentdm::Models::Channels::RcCreateParams::agent_use_case,
+          ?banner_url: String,
+          ?brand_color: String,
+          ?brand_email: String,
+          ?brand_name: String,
+          ?brand_phone_number: String,
+          ?brief_company_description: String,
+          ?company_ein: String,
+          ?contact_name_and_title: String,
+          ?customer_support_email: String,
+          ?customer_support_phone_number: String,
+          ?description: String,
+          ?display_name: String,
+          ?entity_type: String,
+          ?help_message: String,
+          ?logo_url: String,
+          ?official_address: Sentdm::Channels::RcsAddress,
+          ?opt_in_process_description: String,
+          ?opt_in_screenshot_url: String?,
+          ?privacy_policy_url: String,
+          ?sample_messages: ::Array[String],
+          ?sandbox: bool,
+          ?start_message: String,
+          ?stop_message: String,
+          ?terms_and_conditions_url: String,
+          ?website_url: String,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfRcsAgent
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

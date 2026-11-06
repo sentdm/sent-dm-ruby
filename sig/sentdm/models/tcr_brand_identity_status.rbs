@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    type tcr_brand_identity_status =
+      :SELF_DECLARED | :UNVERIFIED | :VERIFIED | :VETTED_VERIFIED
+
+    module TcrBrandIdentityStatus
+      extend Sentdm::Internal::Type::Enum
+
+      SELF_DECLARED: :SELF_DECLARED
+      UNVERIFIED: :UNVERIFIED
+      VERIFIED: :VERIFIED
+      VETTED_VERIFIED: :VETTED_VERIFIED
+
+      def self?.values: -> ::Array[Sentdm::Models::tcr_brand_identity_status]
+    end
+  end
+end

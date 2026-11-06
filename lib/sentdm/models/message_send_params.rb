@@ -40,10 +40,10 @@ module Sentdm
       #   decided per message, so each affected message is recorded BLOCKED with error
       #   code BUSINESS_029 and reported on GET /v3/messages and the status webhook.
       #
-      #   @return [Hash{Symbol=>Array<Sentdm::Models::MessageSendParams::Channel>}, nil]
+      #   @return [Hash{Symbol=>Array<Sentdm::Models::MessageChannelOptions>}, nil]
       optional :channels,
                -> {
-                 Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[Sentdm::MessageSendParams::Channel]]
+                 Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[Sentdm::MessageChannelOptions]]
                },
                nil?: true
 
@@ -102,8 +102,8 @@ module Sentdm
       #   SDK-style template reference: resolve by ID or by name, with optional
       #   parameters.
       #
-      #   @return [Sentdm::Models::MessageSendParams::Template, nil]
-      optional :template, -> { Sentdm::MessageSendParams::Template }, nil?: true
+      #   @return [Sentdm::Models::TemplateRef, nil]
+      optional :template, -> { Sentdm::TemplateRef }, nil?: true
 
       # @!attribute text
       #   Plain-text (free-form) message body. Provide either Template or this.
@@ -133,7 +133,7 @@ module Sentdm
       #
       #   @param channel [Array<String>, nil] Channels to broadcast on, e.g. ["whatsapp", "sms"].
       #
-      #   @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageSendParams::Channel>}, nil] Which of your own numbers to send from, keyed by channel, each channel holding a
+      #   @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageChannelOptions>}, nil] Which of your own numbers to send from, keyed by channel, each channel holding a
       #
       #   @param media_urls [Array<String>, nil] Attachments for this send, as publicly fetchable https URLs. Used by the MMS cha
       #
@@ -143,7 +143,7 @@ module Sentdm
       #
       #   @param subject [String, nil] Subject line for this send, overriding the template's. MMS only; ignored on ever
       #
-      #   @param template [Sentdm::Models::MessageSendParams::Template, nil] SDK-style template reference: resolve by ID or by name, with optional parameters
+      #   @param template [Sentdm::Models::TemplateRef, nil] SDK-style template reference: resolve by ID or by name, with optional parameters
       #
       #   @param text [String, nil] Plain-text (free-form) message body. Provide either Template or this.
       #
@@ -154,90 +154,6 @@ module Sentdm
       #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
-
-      class Channel < Sentdm::Internal::Type::BaseModel
-        # @!attribute country
-        #   Recipient country this entry is meant for (ISO 3166-1 alpha-2, e.g. US).
-        #   Optional. Accepted and stored, not acted on yet.
-        #
-        #   @return [String, nil]
-        optional :country, String, nil?: true
-
-        # @!attribute from
-        #   Sender numbers in E.164. Each must be an active sender on your account for this
-        #   channel. That is account state rather than request shape, so it is decided per
-        #   message: the request is accepted with 202 and a message naming an unusable
-        #   number is recorded BLOCKED with error code BUSINESS_029.
-        #
-        #   @return [Array<String>, nil]
-        optional :from, Sentdm::Internal::Type::ArrayOf[String], nil?: true
-
-        # @!attribute strategy
-        #   How to pick a number from From, e.g. sticky or geo. Optional. Accepted and
-        #   stored, not acted on yet.
-        #
-        #   @return [String, nil]
-        optional :strategy, String, nil?: true
-
-        # @!method initialize(country: nil, from: nil, strategy: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Sentdm::Models::MessageSendParams::Channel} for more details.
-        #
-        #   One entry of a channel's list in Channels, e.g. {"country": "US", "from":
-        #   ["+15559990002", "+15559990003"], "strategy": "sticky"}.
-        #
-        #   @param country [String, nil] Recipient country this entry is meant for (ISO 3166-1 alpha-2, e.g. US). Optiona
-        #
-        #   @param from [Array<String>, nil] Sender numbers in E.164. Each must be an active sender on your account for this
-        #
-        #   @param strategy [String, nil] How to pick a number from From, e.g. sticky or geo. Optional. Accepted
-      end
-
-      class Template < Sentdm::Internal::Type::BaseModel
-        # @!attribute id
-        #   Template ID (mutually exclusive with name)
-        #
-        #   @return [String, nil]
-        optional :id, String, nil?: true
-
-        # @!attribute name
-        #   Template name (mutually exclusive with id)
-        #
-        #   @return [String, nil]
-        optional :name, String, nil?: true
-
-        # @!attribute parameters
-        #   Template variable parameters for personalization, keyed by variable name.
-        #
-        #   Every variable the template declares is required; GET /v3/templates/{id} lists
-        #   them. Supplying a key the template does not declare is ignored.
-        #
-        #   Media headers. A template whose header is an image (designed in WhatsApp Manager
-        #   and imported into Sent) declares a reserved header_image key. Its value is a
-        #   publicly reachable https URL that Meta fetches at send time — Sent does not host
-        #   the asset, and the sample approved with the template is not reused. The key is
-        #   derived from the header's media type, so header_video and header_document follow
-        #   the same shape when those formats ship.
-        #
-        #   "parameters": { "header_image": "https://cdn.example.com/banner.jpg", "name":
-        #   "John Doe" }
-        #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :parameters, Sentdm::Internal::Type::HashOf[String], nil?: true
-
-        # @!method initialize(id: nil, name: nil, parameters: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Sentdm::Models::MessageSendParams::Template} for more details.
-        #
-        #   SDK-style template reference: resolve by ID or by name, with optional
-        #   parameters.
-        #
-        #   @param id [String, nil] Template ID (mutually exclusive with name)
-        #
-        #   @param name [String, nil] Template name (mutually exclusive with id)
-        #
-        #   @param parameters [Hash{Symbol=>String}, nil] Template variable parameters for personalization, keyed by variable name.
-      end
     end
   end
 end

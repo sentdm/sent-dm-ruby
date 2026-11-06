@@ -1,0 +1,70 @@
+module Sentdm
+  module Models
+    type brand_business =
+      {
+        city: String?,
+        country: String?,
+        country_of_registration: String?,
+        entity_type: String?,
+        legal_name: String?,
+        postal_code: String?,
+        state: String?,
+        street: String?,
+        tax_id: String?,
+        tax_id_type: String?,
+        url: String?
+      }
+
+    class BrandBusiness < Sentdm::Internal::Type::BaseModel
+      attr_accessor city: String?
+
+      attr_accessor country: String?
+
+      attr_accessor country_of_registration: String?
+
+      attr_accessor entity_type: String?
+
+      attr_accessor legal_name: String?
+
+      attr_accessor postal_code: String?
+
+      attr_accessor state: String?
+
+      attr_accessor street: String?
+
+      attr_accessor tax_id: String?
+
+      attr_accessor tax_id_type: String?
+
+      attr_accessor url: String?
+
+      def initialize: (
+        ?city: String?,
+        ?country: String?,
+        ?country_of_registration: String?,
+        ?entity_type: String?,
+        ?legal_name: String?,
+        ?postal_code: String?,
+        ?state: String?,
+        ?street: String?,
+        ?tax_id: String?,
+        ?tax_id_type: String?,
+        ?url: String?
+      ) -> void
+
+      def to_hash: -> {
+        city: String?,
+        country: String?,
+        country_of_registration: String?,
+        entity_type: String?,
+        legal_name: String?,
+        postal_code: String?,
+        state: String?,
+        street: String?,
+        tax_id: String?,
+        tax_id_type: String?,
+        url: String?
+      }
+    end
+  end
+end

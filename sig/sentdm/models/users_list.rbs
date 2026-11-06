@@ -1,0 +1,31 @@
+module Sentdm
+  module Models
+    type users_list =
+      {
+        pagination: Sentdm::PaginationMeta,
+        users: ::Array[Sentdm::UserResponse]
+      }
+
+    class UsersList < Sentdm::Internal::Type::BaseModel
+      attr_reader pagination: Sentdm::PaginationMeta?
+
+      def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+      attr_reader users: ::Array[Sentdm::UserResponse]?
+
+      def users=: (
+        ::Array[Sentdm::UserResponse]
+      ) -> ::Array[Sentdm::UserResponse]
+
+      def initialize: (
+        ?pagination: Sentdm::PaginationMeta,
+        ?users: ::Array[Sentdm::UserResponse]
+      ) -> void
+
+      def to_hash: -> {
+        pagination: Sentdm::PaginationMeta,
+        users: ::Array[Sentdm::UserResponse]
+      }
+    end
+  end
+end

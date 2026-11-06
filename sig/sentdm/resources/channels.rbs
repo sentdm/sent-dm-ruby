@@ -1,7 +1,18 @@
 module Sentdm
   module Resources
     class Channels
+      attr_reader sms: Sentdm::Resources::Channels::SMS
+
+      attr_reader rcs: Sentdm::Resources::Channels::Rcs
+
+      attr_reader whatsapp: Sentdm::Resources::Channels::Whatsapp
+
       attr_reader voice: Sentdm::Resources::Channels::Voice
+
+      def list: (
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfChannelsState
 
       def initialize: (client: Sentdm::Client) -> void
     end

@@ -1,0 +1,50 @@
+module Sentdm
+  module Models
+    module Voice
+      type call_leg =
+        {
+          billed_minutes: Integer,
+          cost: Float,
+          currency: String,
+          direction: String,
+          number: String?
+        }
+
+      class CallLeg < Sentdm::Internal::Type::BaseModel
+        attr_reader billed_minutes: Integer?
+
+        def billed_minutes=: (Integer) -> Integer
+
+        attr_reader cost: Float?
+
+        def cost=: (Float) -> Float
+
+        attr_reader currency: String?
+
+        def currency=: (String) -> String
+
+        attr_reader direction: String?
+
+        def direction=: (String) -> String
+
+        attr_accessor number: String?
+
+        def initialize: (
+          ?billed_minutes: Integer,
+          ?cost: Float,
+          ?currency: String,
+          ?direction: String,
+          ?number: String?
+        ) -> void
+
+        def to_hash: -> {
+          billed_minutes: Integer,
+          cost: Float,
+          currency: String,
+          direction: String,
+          number: String?
+        }
+      end
+    end
+  end
+end

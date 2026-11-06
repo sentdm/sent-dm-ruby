@@ -9,12 +9,12 @@ class Sentdm::Test::Resources::MeTest < Sentdm::Test::ResourceTest
     response = @sent.me.retrieve
 
     assert_pattern do
-      response => Sentdm::Models::MeRetrieveResponse
+      response => Sentdm::APIResponseOfAccount
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::MeRetrieveResponse::Data | nil,
+        data: Sentdm::Account | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

@@ -2,7 +2,7 @@ module Sentdm
   module Models
     type pagination_meta =
       {
-        cursors: Sentdm::PaginationMeta::Cursors?,
+        cursors: Sentdm::PaginationCursors?,
         has_more: bool,
         page: Integer,
         page_size: Integer,
@@ -11,7 +11,7 @@ module Sentdm
       }
 
     class PaginationMeta < Sentdm::Internal::Type::BaseModel
-      attr_accessor cursors: Sentdm::PaginationMeta::Cursors?
+      attr_accessor cursors: Sentdm::PaginationCursors?
 
       attr_reader has_more: bool?
 
@@ -34,7 +34,7 @@ module Sentdm
       def total_pages=: (Integer) -> Integer
 
       def initialize: (
-        ?cursors: Sentdm::PaginationMeta::Cursors?,
+        ?cursors: Sentdm::PaginationCursors?,
         ?has_more: bool,
         ?page: Integer,
         ?page_size: Integer,
@@ -43,25 +43,13 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
-        cursors: Sentdm::PaginationMeta::Cursors?,
+        cursors: Sentdm::PaginationCursors?,
         has_more: bool,
         page: Integer,
         page_size: Integer,
         total_count: Integer,
         total_pages: Integer
       }
-
-      type cursors = { after: String?, before: String? }
-
-      class Cursors < Sentdm::Internal::Type::BaseModel
-        attr_accessor after: String?
-
-        attr_accessor before: String?
-
-        def initialize: (?after: String?, ?before: String?) -> void
-
-        def to_hash: -> { after: String?, before: String? }
-      end
     end
   end
 end

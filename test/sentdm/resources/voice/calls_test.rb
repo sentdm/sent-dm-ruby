@@ -50,7 +50,7 @@ class Sentdm::Test::Resources::Voice::CallsTest < Sentdm::Test::ResourceTest
         ended_at: Time | nil,
         failure_reason: String | nil,
         from: Sentdm::Voice::CallParty | nil,
-        legs: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Voice::Call::Leg]) | nil,
+        legs: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::Voice::CallLeg]) | nil,
         mode: String | nil,
         number: String | nil,
         price: Float | nil,
