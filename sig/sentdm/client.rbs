@@ -18,6 +18,8 @@ module Sentdm
 
     attr_reader profiles: Sentdm::Resources::Profiles
 
+    attr_reader sender_profiles: Sentdm::Resources::SenderProfiles
+
     attr_reader numbers: Sentdm::Resources::Numbers
 
     attr_reader messages: Sentdm::Resources::Messages
@@ -29,6 +31,8 @@ module Sentdm
     attr_reader voice: Sentdm::Resources::Voice
 
     attr_reader channels: Sentdm::Resources::Channels
+
+    attr_reader compliance: Sentdm::Resources::Compliance
 
     attr_reader me: Sentdm::Resources::Me
 

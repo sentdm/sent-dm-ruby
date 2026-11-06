@@ -57,8 +57,8 @@ module Sentdm
       #   receive, one clone per existing and future profile. A version 1 webhook's
       #   responses report it as WebhookSenderProfileV3Response.
       #
-      #   @return [Sentdm::Models::WebhookCreateParams::SenderProfile, nil]
-      optional :sender_profile, -> { Sentdm::WebhookCreateParams::SenderProfile }, nil?: true
+      #   @return [Sentdm::Models::WebhookSenderProfileConfig, nil]
+      optional :sender_profile, -> { Sentdm::WebhookSenderProfileConfig }, nil?: true
 
       # @!attribute timeout_seconds
       #   Delivery timeout. Applies to version 1 only.
@@ -102,7 +102,7 @@ module Sentdm
       #
       #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
       #
-      #   @param sender_profile [Sentdm::Models::WebhookCreateParams::SenderProfile, nil] Request-only: the events an organization webhook's sender profile clones receive
+      #   @param sender_profile [Sentdm::Models::WebhookSenderProfileConfig, nil] Request-only: the events an organization webhook's sender profile clones receive
       #
       #   @param timeout_seconds [Integer] Delivery timeout. Applies to version 1 only.
       #
@@ -113,28 +113,6 @@ module Sentdm
       #   @param x_profile_id [String]
       #
       #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
-
-      class SenderProfile < Sentdm::Internal::Type::BaseModel
-        # @!attribute event_filters
-        #
-        #   @return [Hash{Symbol=>Array<String>}, nil]
-        optional :event_filters,
-                 Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::ArrayOf[String]],
-                 nil?: true
-
-        # @!attribute event_types
-        #
-        #   @return [Array<String>, nil]
-        optional :event_types, Sentdm::Internal::Type::ArrayOf[String]
-
-        # @!method initialize(event_filters: nil, event_types: nil)
-        #   Request-only: the events an organization webhook's sender profile clones
-        #   receive, one clone per existing and future profile. A version 1 webhook's
-        #   responses report it as WebhookSenderProfileV3Response.
-        #
-        #   @param event_filters [Hash{Symbol=>Array<String>}, nil]
-        #   @param event_types [Array<String>]
-      end
     end
   end
 end

@@ -1,0 +1,22 @@
+module Sentdm
+  module Models
+    type entity_type =
+      :PRIVATE_PROFIT
+      | :PUBLIC_PROFIT
+      | :NON_PROFIT
+      | :SOLE_PROPRIETOR
+      | :GOVERNMENT
+
+    module EntityType
+      extend Sentdm::Internal::Type::Enum
+
+      PRIVATE_PROFIT: :PRIVATE_PROFIT
+      PUBLIC_PROFIT: :PUBLIC_PROFIT
+      NON_PROFIT: :NON_PROFIT
+      SOLE_PROPRIETOR: :SOLE_PROPRIETOR
+      GOVERNMENT: :GOVERNMENT
+
+      def self?.values: -> ::Array[Sentdm::Models::entity_type]
+    end
+  end
+end

@@ -1,0 +1,26 @@
+module Sentdm
+  module Models
+    type message_channel_options =
+      { country: String?, from: ::Array[String]?, strategy: String? }
+
+    class MessageChannelOptions < Sentdm::Internal::Type::BaseModel
+      attr_accessor country: String?
+
+      attr_accessor from: ::Array[String]?
+
+      attr_accessor strategy: String?
+
+      def initialize: (
+        ?country: String?,
+        ?from: ::Array[String]?,
+        ?strategy: String?
+      ) -> void
+
+      def to_hash: -> {
+        country: String?,
+        from: ::Array[String]?,
+        strategy: String?
+      }
+    end
+  end
+end

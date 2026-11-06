@@ -1,0 +1,27 @@
+module Sentdm
+  module Models
+    type webhook_sender_profile_config =
+      {
+        event_filters: ::Hash[Symbol, ::Array[String]]?,
+        event_types: ::Array[String]
+      }
+
+    class WebhookSenderProfileConfig < Sentdm::Internal::Type::BaseModel
+      attr_accessor event_filters: ::Hash[Symbol, ::Array[String]]?
+
+      attr_reader event_types: ::Array[String]?
+
+      def event_types=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?event_filters: ::Hash[Symbol, ::Array[String]]?,
+        ?event_types: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        event_filters: ::Hash[Symbol, ::Array[String]]?,
+        event_types: ::Array[String]
+      }
+    end
+  end
+end

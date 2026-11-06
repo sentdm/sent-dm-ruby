@@ -1,0 +1,26 @@
+module Sentdm
+  module Models
+    type template_ref =
+      { id: String?, name: String?, parameters: ::Hash[Symbol, String]? }
+
+    class TemplateRef < Sentdm::Internal::Type::BaseModel
+      attr_accessor id: String?
+
+      attr_accessor name: String?
+
+      attr_accessor parameters: ::Hash[Symbol, String]?
+
+      def initialize: (
+        ?id: String?,
+        ?name: String?,
+        ?parameters: ::Hash[Symbol, String]?
+      ) -> void
+
+      def to_hash: -> {
+        id: String?,
+        name: String?,
+        parameters: ::Hash[Symbol, String]?
+      }
+    end
+  end
+end

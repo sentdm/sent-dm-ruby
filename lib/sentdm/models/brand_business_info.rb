@@ -23,11 +23,8 @@ module Sentdm
 
       # @!attribute entity_type
       #
-      #   @return [Symbol, Sentdm::Models::BrandBusinessInfo::EntityType, nil]
-      optional :entity_type,
-               enum: -> { Sentdm::BrandBusinessInfo::EntityType },
-               api_name: :entityType,
-               nil?: true
+      #   @return [Symbol, Sentdm::Models::EntityType, nil]
+      optional :entity_type, enum: -> { Sentdm::EntityType }, api_name: :entityType, nil?: true
 
       # @!attribute legal_name
       #   Legal business name
@@ -80,7 +77,7 @@ module Sentdm
       #
       #   @param country_of_registration [String, nil] Country where the business is registered
       #
-      #   @param entity_type [Symbol, Sentdm::Models::BrandBusinessInfo::EntityType, nil]
+      #   @param entity_type [Symbol, Sentdm::Models::EntityType, nil]
       #
       #   @param legal_name [String, nil] Legal business name
       #
@@ -95,20 +92,6 @@ module Sentdm
       #   @param tax_id_type [String, nil] Type of tax ID (e.g., us_ein, ca_bn)
       #
       #   @param url [String, nil] Business website URL
-
-      # @see Sentdm::Models::BrandBusinessInfo#entity_type
-      module EntityType
-        extend Sentdm::Internal::Type::Enum
-
-        PRIVATE_PROFIT = :PRIVATE_PROFIT
-        PUBLIC_PROFIT = :PUBLIC_PROFIT
-        NON_PROFIT = :NON_PROFIT
-        SOLE_PROPRIETOR = :SOLE_PROPRIETOR
-        GOVERNMENT = :GOVERNMENT
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

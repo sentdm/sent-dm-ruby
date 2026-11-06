@@ -1,0 +1,76 @@
+module Sentdm
+  module Models
+    type sender_profile =
+      {
+        id: String,
+        api_key: String?,
+        billing: Sentdm::SenderProfileBilling?,
+        channels: Sentdm::ChannelsState?,
+        compliance: Sentdm::Channels::SuppliedCompliance?,
+        created_at: Time,
+        description: String?,
+        name: String,
+        notifications: String?,
+        organization_id: String?,
+        short_name: String?
+      }
+
+    class SenderProfile < Sentdm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_accessor api_key: String?
+
+      attr_accessor billing: Sentdm::SenderProfileBilling?
+
+      attr_accessor channels: Sentdm::ChannelsState?
+
+      attr_accessor compliance: Sentdm::Channels::SuppliedCompliance?
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_accessor description: String?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor notifications: String?
+
+      attr_accessor organization_id: String?
+
+      attr_accessor short_name: String?
+
+      def initialize: (
+        ?id: String,
+        ?api_key: String?,
+        ?billing: Sentdm::SenderProfileBilling?,
+        ?channels: Sentdm::ChannelsState?,
+        ?compliance: Sentdm::Channels::SuppliedCompliance?,
+        ?created_at: Time,
+        ?description: String?,
+        ?name: String,
+        ?notifications: String?,
+        ?organization_id: String?,
+        ?short_name: String?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        api_key: String?,
+        billing: Sentdm::SenderProfileBilling?,
+        channels: Sentdm::ChannelsState?,
+        compliance: Sentdm::Channels::SuppliedCompliance?,
+        created_at: Time,
+        description: String?,
+        name: String,
+        notifications: String?,
+        organization_id: String?,
+        short_name: String?
+      }
+    end
+  end
+end

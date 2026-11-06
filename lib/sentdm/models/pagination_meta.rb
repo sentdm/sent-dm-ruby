@@ -8,8 +8,8 @@ module Sentdm
       #
       #   Cursor-based pagination. Never populated — see Cursors.
       #
-      #   @return [Sentdm::Models::PaginationMeta::Cursors, nil]
-      optional :cursors, -> { Sentdm::PaginationMeta::Cursors }, nil?: true
+      #   @return [Sentdm::Models::PaginationCursors, nil]
+      optional :cursors, -> { Sentdm::PaginationCursors }, nil?: true
 
       # @!attribute has_more
       #   Whether there are more pages after this one
@@ -44,7 +44,7 @@ module Sentdm
       # @!method initialize(cursors: nil, has_more: nil, page: nil, page_size: nil, total_count: nil, total_pages: nil)
       #   Pagination metadata for list responses
       #
-      #   @param cursors [Sentdm::Models::PaginationMeta::Cursors, nil] Cursor-based pagination. Never populated — see Cursors.
+      #   @param cursors [Sentdm::Models::PaginationCursors, nil] Cursor-based pagination. Never populated — see Cursors.
       #
       #   @param has_more [Boolean] Whether there are more pages after this one
       #
@@ -55,30 +55,6 @@ module Sentdm
       #   @param total_count [Integer] Total number of items across all pages
       #
       #   @param total_pages [Integer] Total number of pages
-
-      # @deprecated
-      #
-      # @see Sentdm::Models::PaginationMeta#cursors
-      class Cursors < Sentdm::Internal::Type::BaseModel
-        # @!attribute after
-        #   Cursor to fetch the next page.
-        #
-        #   @return [String, nil]
-        optional :after, String, nil?: true
-
-        # @!attribute before
-        #   Cursor to fetch the previous page.
-        #
-        #   @return [String, nil]
-        optional :before, String, nil?: true
-
-        # @!method initialize(after: nil, before: nil)
-        #   Cursor-based pagination. Never populated — see Cursors.
-        #
-        #   @param after [String, nil] Cursor to fetch the next page.
-        #
-        #   @param before [String, nil] Cursor to fetch the previous page.
-      end
     end
   end
 end

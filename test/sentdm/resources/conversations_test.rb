@@ -16,7 +16,7 @@ class Sentdm::Test::Resources::ConversationsTest < Sentdm::Test::ResourceTest
     return if row.nil?
 
     assert_pattern do
-      row => Sentdm::ConversationMessagesList::Message
+      row => Sentdm::Message
     end
 
     assert_pattern do
@@ -28,8 +28,8 @@ class Sentdm::Test::Resources::ConversationsTest < Sentdm::Test::ResourceTest
         created_at: Time | nil,
         customer_id: String | nil,
         direction: String | nil,
-        events: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::ConversationMessagesList::Message::Event]) | nil,
-        message_body: Sentdm::ConversationMessagesList::Message::MessageBody | nil,
+        events: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::MessageStatusEvent]) | nil,
+        message_body: Sentdm::MessageBody | nil,
         phone: String | nil,
         phone_international: String | nil,
         price: Float | nil,
@@ -57,7 +57,7 @@ class Sentdm::Test::Resources::ConversationsTest < Sentdm::Test::ResourceTest
     return if row.nil?
 
     assert_pattern do
-      row => Sentdm::ConversationMessagesList::Message
+      row => Sentdm::Message
     end
 
     assert_pattern do
@@ -69,8 +69,8 @@ class Sentdm::Test::Resources::ConversationsTest < Sentdm::Test::ResourceTest
         created_at: Time | nil,
         customer_id: String | nil,
         direction: String | nil,
-        events: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::ConversationMessagesList::Message::Event]) | nil,
-        message_body: Sentdm::ConversationMessagesList::Message::MessageBody | nil,
+        events: ^(Sentdm::Internal::Type::ArrayOf[Sentdm::MessageStatusEvent]) | nil,
+        message_body: Sentdm::MessageBody | nil,
         phone: String | nil,
         phone_international: String | nil,
         price: Float | nil,

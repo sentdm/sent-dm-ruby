@@ -1,0 +1,47 @@
+module Sentdm
+  module Models
+    type brand_contact =
+      {
+        business_name: String?,
+        email: String?,
+        name: String,
+        phone: String?,
+        phone_country_code: String?,
+        role: String?
+      }
+
+    class BrandContact < Sentdm::Internal::Type::BaseModel
+      attr_accessor business_name: String?
+
+      attr_accessor email: String?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor phone: String?
+
+      attr_accessor phone_country_code: String?
+
+      attr_accessor role: String?
+
+      def initialize: (
+        ?business_name: String?,
+        ?email: String?,
+        ?name: String,
+        ?phone: String?,
+        ?phone_country_code: String?,
+        ?role: String?
+      ) -> void
+
+      def to_hash: -> {
+        business_name: String?,
+        email: String?,
+        name: String,
+        phone: String?,
+        phone_country_code: String?,
+        role: String?
+      }
+    end
+  end
+end

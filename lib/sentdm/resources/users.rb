@@ -50,7 +50,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::UserListResponse]
+      # @return [Sentdm::Models::APIResponseOfUsersList]
       #
       # @see Sentdm::Models::UserListParams
       def list(params = {})
@@ -59,7 +59,7 @@ module Sentdm
           method: :get,
           path: "v3/users",
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::UserListResponse,
+          model: Sentdm::APIResponseOfUsersList,
           options: options
         )
       end

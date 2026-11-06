@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type sender_profile_channels =
+      {
+        rcs: Sentdm::SenderProfileRcs?,
+        sms: Sentdm::SenderProfileSMS?,
+        whatsapp: Sentdm::SenderProfileWhatsapp?
+      }
+
+    class SenderProfileChannels < Sentdm::Internal::Type::BaseModel
+      attr_accessor rcs: Sentdm::SenderProfileRcs?
+
+      attr_accessor sms: Sentdm::SenderProfileSMS?
+
+      attr_accessor whatsapp: Sentdm::SenderProfileWhatsapp?
+
+      def initialize: (
+        ?rcs: Sentdm::SenderProfileRcs?,
+        ?sms: Sentdm::SenderProfileSMS?,
+        ?whatsapp: Sentdm::SenderProfileWhatsapp?
+      ) -> void
+
+      def to_hash: -> {
+        rcs: Sentdm::SenderProfileRcs?,
+        sms: Sentdm::SenderProfileSMS?,
+        whatsapp: Sentdm::SenderProfileWhatsapp?
+      }
+    end
+  end
+end

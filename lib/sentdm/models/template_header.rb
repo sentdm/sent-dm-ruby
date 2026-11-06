@@ -32,8 +32,8 @@ module Sentdm
       #   for Sent: a preview, and the default a StaticResource header falls back to at
       #   send.
       #
-      #   @return [Sentdm::Models::TemplateHeader::Location, nil]
-      optional :location, -> { Sentdm::TemplateHeader::Location }, nil?: true
+      #   @return [Sentdm::Models::TemplateHeaderLocation, nil]
+      optional :location, -> { Sentdm::TemplateHeaderLocation }, nil?: true
 
       # @!attribute static_resource
       #   Whether the asset registered at creation is reused when a caller omits the
@@ -80,47 +80,13 @@ module Sentdm
       #
       #   @param example_url [String, nil] Request-only. The s.dm URL of the asset Meta's reviewers see — https://s.dm/s/{I
       #
-      #   @param location [Sentdm::Models::TemplateHeader::Location, nil] The map pin a location header drops. Meta wants none of this at creation — the c
+      #   @param location [Sentdm::Models::TemplateHeaderLocation, nil] The map pin a location header drops. Meta wants none of this at creation — the c
       #
       #   @param static_resource [Boolean] Whether the asset registered at creation is reused when a caller omits the heade
       #
       #   @param type [String, nil] The kind of header. One of:
       #
       #   @param variables [Array<Sentdm::Models::TemplateVariable>, nil] List of variables used in the header template
-
-      # @see Sentdm::Models::TemplateHeader#location
-      class Location < Sentdm::Internal::Type::BaseModel
-        # @!attribute address
-        #
-        #   @return [String]
-        required :address, String
-
-        # @!attribute latitude
-        #
-        #   @return [String]
-        required :latitude, String
-
-        # @!attribute longitude
-        #
-        #   @return [String]
-        required :longitude, String
-
-        # @!attribute name
-        #
-        #   @return [String]
-        required :name, String
-
-        # @!method initialize(address:, latitude:, longitude:, name:)
-        #   The map pin a location header drops. Meta wants none of this at creation — the
-        #   component is just {"type":"header","format":"location"} — so these values exist
-        #   for Sent: a preview, and the default a StaticResource header falls back to at
-        #   send.
-        #
-        #   @param address [String]
-        #   @param latitude [String]
-        #   @param longitude [String]
-        #   @param name [String]
-      end
     end
   end
 end

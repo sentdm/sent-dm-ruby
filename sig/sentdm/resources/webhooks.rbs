@@ -9,7 +9,7 @@ module Sentdm
         ?is_inheritable: bool,
         ?retry_count: Integer,
         ?sandbox: bool,
-        ?sender_profile: Sentdm::WebhookCreateParams::SenderProfile?,
+        ?sender_profile: Sentdm::WebhookSenderProfileConfig?,
         ?timeout_seconds: Integer,
         ?webhook_version: Integer?,
         ?idempotency_key: String,
@@ -32,7 +32,7 @@ module Sentdm
         ?is_inheritable: bool?,
         ?retry_count: Integer,
         ?sandbox: bool,
-        ?sender_profile: Sentdm::WebhookUpdateParams::SenderProfile?,
+        ?sender_profile: Sentdm::WebhookSenderProfileConfig?,
         ?timeout_seconds: Integer,
         ?idempotency_key: String,
         ?x_profile_id: String,
@@ -57,7 +57,7 @@ module Sentdm
       def list_event_types: (
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::WebhookListEventTypesResponse
+      ) -> Sentdm::APIResponseOfWebhookEventTypesList
 
       def list_events: (
         String id,
@@ -66,7 +66,7 @@ module Sentdm
         ?search: String?,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Internal::WebhookEventsPage[Sentdm::Models::WebhookListEventsResponse]
+      ) -> Sentdm::Internal::WebhookEventsPage[Sentdm::WebhookDelivery]
 
       def rotate_secret: (
         String id,
@@ -74,7 +74,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::WebhookRotateSecretResponse
+      ) -> Sentdm::APIResponseOfWebhookSecret
 
       def test_: (
         String id,
@@ -83,7 +83,7 @@ module Sentdm
         ?idempotency_key: String,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::WebhookTestResponse
+      ) -> Sentdm::APIResponseOfWebhookTest
 
       def toggle_status: (
         String id,

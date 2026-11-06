@@ -26,6 +26,71 @@ module Sentdm
     # cancelled message cannot be resent.
     class Messages
       # Some parameter documentations has been truncated, see
+      # {Sentdm::Models::MessageCancelParams} for more details.
+      #
+      # Calls off a message you scheduled with `scheduled_at`, before it is released for
+      # sending. The message moves to `CANCELLED`, which is terminal, and it is never
+      # sent.
+      #
+      # **Only a SCHEDULED message can be cancelled.** A message that has already been
+      # released — queued, in flight, or finished — returns 409. The release sweeper
+      # runs continuously, so a cancellation sent within about a minute of the scheduled
+      # instant can lose that race and be refused; cancel with time to spare.
+      #
+      # **One message per call.** A send to many recipients, or on several channels,
+      # becomes one message per recipient × channel, each with its own id; cancel the
+      # ones you want stopped. There is no bulk cancellation.
+      #
+      # **Cancelling is free**, and nothing was charged for the hold in the first place
+      # — a scheduled message is only priced and billed at release.
+      #
+      # **A cancellation fires `message.cancelled`** on your webhook, exactly once,
+      # carrying the `scheduled_at` that was called off so a consumer can un-record the
+      # send it was expecting. Cancelling the same message again returns this same
+      # response and fires no second event. `Idempotency-Key` is honoured.
+      #
+      # A cancelled message cannot be resent — send a new one.
+      #
+      # The response is the message itself, in the same shape `GET /v3/messages/{id}`
+      # returns, so the `status` you read back is the one now stored on the row, and
+      # `scheduled_at` is the time it would have gone out. `GET /v3/messages/{id}` keeps
+      # reporting both afterwards.
+      #
+      # `events` is the message lifecycle as it stood immediately before the
+      # cancellation: the CANCELLED entry is written asynchronously and lands a moment
+      # later, so read `status` for the outcome. If you need the entry itself, re-fetch
+      # the message after a few seconds — `GET /v3/messages/{id}` is cached briefly, so
+      # an immediate re-fetch can still show the pre-cancellation state.
+      #
+      # @overload cancel(id, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param id [String] Path param: Message ID
+      #
+      # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
+      #
+      # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
+      #
+      # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
+      #
+      # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Sentdm::Models::APIResponseOfCancelledMessage]
+      #
+      # @see Sentdm::Models::MessageCancelParams
+      def cancel(id, params = {})
+        parsed, options = Sentdm::MessageCancelParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
+        @client.request(
+          method: :post,
+          path: ["v3/messages/%1$s/cancel", id],
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
+          model: Sentdm::APIResponseOfCancelledMessage,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
       # {Sentdm::Models::MessageResendParams} for more details.
       #
       # Resends a message you already sent, on the same message id, without rebuilding
@@ -102,7 +167,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageRetrieveActivitiesResponse]
+      # @return [Sentdm::Models::APIResponseOfMessageActivities]
       #
       # @see Sentdm::Models::MessageRetrieveActivitiesParams
       def retrieve_activities(id, params = {})
@@ -111,7 +176,7 @@ module Sentdm
           method: :get,
           path: ["v3/messages/%1$s/activities", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::MessageRetrieveActivitiesResponse,
+          model: Sentdm::APIResponseOfMessageActivities,
           options: options
         )
       end
@@ -135,7 +200,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageRetrieveStatusResponse]
+      # @return [Sentdm::Models::APIResponseOfMessage]
       #
       # @see Sentdm::Models::MessageRetrieveStatusParams
       def retrieve_status(id, params = {})
@@ -144,7 +209,7 @@ module Sentdm
           method: :get,
           path: ["v3/messages/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::MessageRetrieveStatusResponse,
+          model: Sentdm::APIResponseOfMessage,
           options: options
         )
       end
@@ -192,7 +257,7 @@ module Sentdm
       #
       # @param channel [Array<String>, nil] Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"].
       #
-      # @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageSendParams::Channel>}, nil] Body param: Which of your own numbers to send from, keyed by channel, each chann
+      # @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageChannelOptions>}, nil] Body param: Which of your own numbers to send from, keyed by channel, each chann
       #
       # @param media_urls [Array<String>, nil] Body param: Attachments for this send, as publicly fetchable https URLs. Used by
       #
@@ -202,7 +267,7 @@ module Sentdm
       #
       # @param subject [String, nil] Body param: Subject line for this send, overriding the template's. MMS only; ign
       #
-      # @param template [Sentdm::Models::MessageSendParams::Template, nil] Body param: SDK-style template reference: resolve by ID or by name, with optiona
+      # @param template [Sentdm::Models::TemplateRef, nil] Body param: SDK-style template reference: resolve by ID or by name, with optiona
       #
       # @param text [String, nil] Body param: Plain-text (free-form) message body. Provide either Template or this
       #

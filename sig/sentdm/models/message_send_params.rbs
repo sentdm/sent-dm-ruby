@@ -3,12 +3,12 @@ module Sentdm
     type message_send_params =
       {
         channel: ::Array[String]?,
-        channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
+        channels: ::Hash[Symbol, ::Array[Sentdm::MessageChannelOptions]]?,
         media_urls: ::Array[String]?,
         sandbox: bool,
         scheduled_at: Time?,
         subject: String?,
-        template: Sentdm::MessageSendParams::Template?,
+        template: Sentdm::TemplateRef?,
         text: String?,
         to: ::Array[String],
         idempotency_key: String,
@@ -22,7 +22,7 @@ module Sentdm
 
       attr_accessor channel: ::Array[String]?
 
-      attr_accessor channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?
+      attr_accessor channels: ::Hash[Symbol, ::Array[Sentdm::MessageChannelOptions]]?
 
       attr_accessor media_urls: ::Array[String]?
 
@@ -34,7 +34,7 @@ module Sentdm
 
       attr_accessor subject: String?
 
-      attr_accessor template: Sentdm::MessageSendParams::Template?
+      attr_accessor template: Sentdm::TemplateRef?
 
       attr_accessor text: String?
 
@@ -52,12 +52,12 @@ module Sentdm
 
       def initialize: (
         ?channel: ::Array[String]?,
-        ?channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
+        ?channels: ::Hash[Symbol, ::Array[Sentdm::MessageChannelOptions]]?,
         ?media_urls: ::Array[String]?,
         ?sandbox: bool,
         ?scheduled_at: Time?,
         ?subject: String?,
-        ?template: Sentdm::MessageSendParams::Template?,
+        ?template: Sentdm::TemplateRef?,
         ?text: String?,
         ?to: ::Array[String],
         ?idempotency_key: String,
@@ -67,64 +67,18 @@ module Sentdm
 
       def to_hash: -> {
         channel: ::Array[String]?,
-        channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
+        channels: ::Hash[Symbol, ::Array[Sentdm::MessageChannelOptions]]?,
         media_urls: ::Array[String]?,
         sandbox: bool,
         scheduled_at: Time?,
         subject: String?,
-        template: Sentdm::MessageSendParams::Template?,
+        template: Sentdm::TemplateRef?,
         text: String?,
         to: ::Array[String],
         idempotency_key: String,
         x_profile_id: String,
         request_options: Sentdm::RequestOptions
       }
-
-      type channel =
-        { country: String?, from: ::Array[String]?, strategy: String? }
-
-      class Channel < Sentdm::Internal::Type::BaseModel
-        attr_accessor country: String?
-
-        attr_accessor from: ::Array[String]?
-
-        attr_accessor strategy: String?
-
-        def initialize: (
-          ?country: String?,
-          ?from: ::Array[String]?,
-          ?strategy: String?
-        ) -> void
-
-        def to_hash: -> {
-          country: String?,
-          from: ::Array[String]?,
-          strategy: String?
-        }
-      end
-
-      type template =
-        { id: String?, name: String?, parameters: ::Hash[Symbol, String]? }
-
-      class Template < Sentdm::Internal::Type::BaseModel
-        attr_accessor id: String?
-
-        attr_accessor name: String?
-
-        attr_accessor parameters: ::Hash[Symbol, String]?
-
-        def initialize: (
-          ?id: String?,
-          ?name: String?,
-          ?parameters: ::Hash[Symbol, String]?
-        ) -> void
-
-        def to_hash: -> {
-          id: String?,
-          name: String?,
-          parameters: ::Hash[Symbol, String]?
-        }
-      end
     end
   end
 end
