@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.46.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.45.0...v0.46.0) (2026-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** stable names for shared models; typed methods for sender profiles, channels, compliance requirements and message cancel
+
+### Features
+
+* **api:** stable names for shared models; typed methods for sender profiles, channels, compliance requirements and message cancel ([7cb0e2c](https://github.com/sentdm/sent-dm-ruby/commit/7cb0e2c11b4dce51a7832d4ae4352224957f0224))
+
 ## [0.45.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.44.0...v0.45.0) (2026-11-05)
 
 
