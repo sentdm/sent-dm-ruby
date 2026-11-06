@@ -109,8 +109,8 @@ module Sentdm
 
         # @!attribute status
         #
-        #   @return [Symbol, Sentdm::Models::Profiles::BrandCampaign::Status, nil]
-        optional :status, enum: -> { Sentdm::Profiles::BrandCampaign::Status }, nil?: true
+        #   @return [Symbol, Sentdm::Models::TcrCampaignStatus, nil]
+        optional :status, enum: -> { Sentdm::TcrCampaignStatus }, nil?: true
 
         # @!attribute submitted_at
         #
@@ -210,7 +210,7 @@ module Sentdm
         #
         #   @param privacy_policy_link [String, nil]
         #
-        #   @param status [Symbol, Sentdm::Models::Profiles::BrandCampaign::Status, nil]
+        #   @param status [Symbol, Sentdm::Models::TcrCampaignStatus, nil]
         #
         #   @param submitted_at [Time, nil]
         #
@@ -229,18 +229,6 @@ module Sentdm
         #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignUseCase>]
         #
         #   @param volume [String, nil] Expected messaging volume for this campaign — customer-supplied on create/update
-
-        # @see Sentdm::Models::Profiles::BrandCampaign#status
-        module Status
-          extend Sentdm::Internal::Type::Enum
-
-          SENT_CREATED = :SENT_CREATED
-          ACTIVE = :ACTIVE
-          EXPIRED = :EXPIRED
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
       end
     end
   end

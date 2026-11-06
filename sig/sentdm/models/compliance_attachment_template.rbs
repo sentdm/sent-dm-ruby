@@ -1,0 +1,26 @@
+module Sentdm
+  module Models
+    type compliance_attachment_template =
+      { field_name: String, label: String?, required: bool }
+
+    class ComplianceAttachmentTemplate < Sentdm::Internal::Type::BaseModel
+      attr_reader field_name: String?
+
+      def field_name=: (String) -> String
+
+      attr_accessor label: String?
+
+      attr_reader required: bool?
+
+      def required=: (bool) -> bool
+
+      def initialize: (
+        ?field_name: String,
+        ?label: String?,
+        ?required: bool
+      ) -> void
+
+      def to_hash: -> { field_name: String, label: String?, required: bool }
+    end
+  end
+end

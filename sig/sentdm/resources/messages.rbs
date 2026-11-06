@@ -1,6 +1,14 @@
 module Sentdm
   module Resources
     class Messages
+      def cancel: (
+        String id,
+        ?sandbox: bool,
+        ?idempotency_key: String,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfCancelledMessage
+
       def resend: (
         String id,
         ?sandbox: bool,
@@ -13,22 +21,22 @@ module Sentdm
         String id,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::MessageRetrieveActivitiesResponse
+      ) -> Sentdm::APIResponseOfMessageActivities
 
       def retrieve_status: (
         String id,
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::MessageRetrieveStatusResponse
+      ) -> Sentdm::APIResponseOfMessage
 
       def send_: (
         ?channel: ::Array[String]?,
-        ?channels: ::Hash[Symbol, ::Array[Sentdm::MessageSendParams::Channel]]?,
+        ?channels: ::Hash[Symbol, ::Array[Sentdm::MessageChannelOptions]]?,
         ?media_urls: ::Array[String]?,
         ?sandbox: bool,
         ?scheduled_at: Time?,
         ?subject: String?,
-        ?template: Sentdm::MessageSendParams::Template?,
+        ?template: Sentdm::TemplateRef?,
         ?text: String?,
         ?to: ::Array[String],
         ?idempotency_key: String,

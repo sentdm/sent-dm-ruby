@@ -1,0 +1,34 @@
+module Sentdm
+  module Models
+    type message_button =
+      { postback_data: String?, text: String?, type: String, value: String }
+
+    class MessageButton < Sentdm::Internal::Type::BaseModel
+      attr_accessor postback_data: String?
+
+      attr_accessor text: String?
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      attr_reader value: String?
+
+      def value=: (String) -> String
+
+      def initialize: (
+        ?postback_data: String?,
+        ?text: String?,
+        ?type: String,
+        ?value: String
+      ) -> void
+
+      def to_hash: -> {
+        postback_data: String?,
+        text: String?,
+        type: String,
+        value: String
+      }
+    end
+  end
+end

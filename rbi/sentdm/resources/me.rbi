@@ -44,7 +44,7 @@ module Sentdm
         params(
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MeRetrieveResponse)
+        ).returns(Sentdm::APIResponseOfAccount)
       end
       def retrieve(
         # Profile UUID to scope the request to a child profile. Only organization API keys

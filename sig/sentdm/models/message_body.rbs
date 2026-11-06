@@ -1,0 +1,52 @@
+module Sentdm
+  module Models
+    type message_body =
+      {
+        buttons: ::Array[Sentdm::MessageButton]?,
+        content: String,
+        footer: String?,
+        header: String?,
+        header_media: Sentdm::MessageHeaderMedia?,
+        media: ::Array[Sentdm::MessageMedia]?,
+        subject: String?
+      }
+
+    class MessageBody < Sentdm::Internal::Type::BaseModel
+      attr_accessor buttons: ::Array[Sentdm::MessageButton]?
+
+      attr_reader content: String?
+
+      def content=: (String) -> String
+
+      attr_accessor footer: String?
+
+      attr_accessor header: String?
+
+      attr_accessor header_media: Sentdm::MessageHeaderMedia?
+
+      attr_accessor media: ::Array[Sentdm::MessageMedia]?
+
+      attr_accessor subject: String?
+
+      def initialize: (
+        ?buttons: ::Array[Sentdm::MessageButton]?,
+        ?content: String,
+        ?footer: String?,
+        ?header: String?,
+        ?header_media: Sentdm::MessageHeaderMedia?,
+        ?media: ::Array[Sentdm::MessageMedia]?,
+        ?subject: String?
+      ) -> void
+
+      def to_hash: -> {
+        buttons: ::Array[Sentdm::MessageButton]?,
+        content: String,
+        footer: String?,
+        header: String?,
+        header_media: Sentdm::MessageHeaderMedia?,
+        media: ::Array[Sentdm::MessageMedia]?,
+        subject: String?
+      }
+    end
+  end
+end

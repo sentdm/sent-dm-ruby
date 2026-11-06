@@ -25,6 +25,66 @@ module Sentdm
     # released yet. Cancelling is free, fires `message.cancelled`, and is final — a
     # cancelled message cannot be resent.
     class Messages
+      # Calls off a message you scheduled with `scheduled_at`, before it is released for
+      # sending. The message moves to `CANCELLED`, which is terminal, and it is never
+      # sent.
+      #
+      # **Only a SCHEDULED message can be cancelled.** A message that has already been
+      # released — queued, in flight, or finished — returns 409. The release sweeper
+      # runs continuously, so a cancellation sent within about a minute of the scheduled
+      # instant can lose that race and be refused; cancel with time to spare.
+      #
+      # **One message per call.** A send to many recipients, or on several channels,
+      # becomes one message per recipient × channel, each with its own id; cancel the
+      # ones you want stopped. There is no bulk cancellation.
+      #
+      # **Cancelling is free**, and nothing was charged for the hold in the first place
+      # — a scheduled message is only priced and billed at release.
+      #
+      # **A cancellation fires `message.cancelled`** on your webhook, exactly once,
+      # carrying the `scheduled_at` that was called off so a consumer can un-record the
+      # send it was expecting. Cancelling the same message again returns this same
+      # response and fires no second event. `Idempotency-Key` is honoured.
+      #
+      # A cancelled message cannot be resent — send a new one.
+      #
+      # The response is the message itself, in the same shape `GET /v3/messages/{id}`
+      # returns, so the `status` you read back is the one now stored on the row, and
+      # `scheduled_at` is the time it would have gone out. `GET /v3/messages/{id}` keeps
+      # reporting both afterwards.
+      #
+      # `events` is the message lifecycle as it stood immediately before the
+      # cancellation: the CANCELLED entry is written asynchronously and lands a moment
+      # later, so read `status` for the outcome. If you need the entry itself, re-fetch
+      # the message after a few seconds — `GET /v3/messages/{id}` is cached briefly, so
+      # an immediate re-fetch can still show the pre-cancellation state.
+      sig do
+        params(
+          id: String,
+          sandbox: T::Boolean,
+          idempotency_key: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions::OrHash
+        ).returns(Sentdm::APIResponseOfCancelledMessage)
+      end
+      def cancel(
+        # Path param: Message ID
+        id,
+        # Body param: Sandbox flag - when true, the operation is simulated without side
+        # effects Useful for testing integrations without actual execution
+        sandbox: nil,
+        # Header param: Unique key to ensure idempotent request processing. Must be 1-255
+        # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
+        # hours per key per customer.
+        idempotency_key: nil,
+        # Header param: Profile UUID to scope the request to a child profile. Only
+        # organization API keys can use this header. The profile must belong to the
+        # calling organization.
+        x_profile_id: nil,
+        request_options: {}
+      )
+      end
+
       # Resends a message you already sent, on the same message id, without rebuilding
       # the request. The typical use is recovering a BLOCKED message — for example one
       # refused for insufficient balance — after the account has been topped up.
@@ -90,7 +150,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageRetrieveActivitiesResponse)
+        ).returns(Sentdm::APIResponseOfMessageActivities)
       end
       def retrieve_activities(
         # Message ID from route parameter
@@ -114,7 +174,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageRetrieveStatusResponse)
+        ).returns(Sentdm::APIResponseOfMessage)
       end
       def retrieve_status(
         # Message ID
@@ -166,16 +226,13 @@ module Sentdm
           channel: T.nilable(T::Array[String]),
           channels:
             T.nilable(
-              T::Hash[
-                Symbol,
-                T::Array[Sentdm::MessageSendParams::Channel::OrHash]
-              ]
+              T::Hash[Symbol, T::Array[Sentdm::MessageChannelOptions::OrHash]]
             ),
           media_urls: T.nilable(T::Array[String]),
           sandbox: T::Boolean,
           scheduled_at: T.nilable(Time),
           subject: T.nilable(String),
-          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash),
+          template: T.nilable(Sentdm::TemplateRef::OrHash),
           text: T.nilable(String),
           to: T::Array[String],
           idempotency_key: String,

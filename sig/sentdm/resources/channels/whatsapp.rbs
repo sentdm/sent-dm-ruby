@@ -1,0 +1,18 @@
+module Sentdm
+  module Resources
+    class Channels
+      class Whatsapp
+        def create: (
+          ?phone_number_id: String?,
+          ?sandbox: bool,
+          ?waba_id: String,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfWhatsappChannel
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

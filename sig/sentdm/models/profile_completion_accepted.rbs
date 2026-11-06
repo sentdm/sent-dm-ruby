@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type profile_completion_accepted = { message: String }
+
+    class ProfileCompletionAccepted < Sentdm::Internal::Type::BaseModel
+      attr_reader message: String?
+
+      def message=: (String) -> String
+
+      def initialize: (?message: String) -> void
+
+      def to_hash: -> { message: String }
+    end
+  end
+end

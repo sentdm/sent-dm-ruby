@@ -1,0 +1,78 @@
+module Sentdm
+  module Models
+    class WhatsappChannel = Channels::WhatsappChannel
+
+    module Channels
+      type whatsapp_channel =
+        {
+          owner_business_id: String?,
+          phone_number_id: String?,
+          reason: String?,
+          reason_code: String?,
+          solution_id: String?,
+          status: Sentdm::Models::Channels::WhatsappChannel::status?,
+          waba_id: String?
+        }
+
+      class WhatsappChannel < Sentdm::Internal::Type::BaseModel
+        attr_accessor owner_business_id: String?
+
+        attr_accessor phone_number_id: String?
+
+        attr_accessor reason: String?
+
+        attr_accessor reason_code: String?
+
+        attr_accessor solution_id: String?
+
+        attr_accessor status: Sentdm::Models::Channels::WhatsappChannel::status?
+
+        attr_accessor waba_id: String?
+
+        def initialize: (
+          ?owner_business_id: String?,
+          ?phone_number_id: String?,
+          ?reason: String?,
+          ?reason_code: String?,
+          ?solution_id: String?,
+          ?status: Sentdm::Models::Channels::WhatsappChannel::status?,
+          ?waba_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          owner_business_id: String?,
+          phone_number_id: String?,
+          reason: String?,
+          reason_code: String?,
+          solution_id: String?,
+          status: Sentdm::Models::Channels::WhatsappChannel::status?,
+          waba_id: String?
+        }
+
+        type status =
+          :PROVISIONING | :ACTION_NEEDED | :PENDING_REVIEW | :ACTIVE | :INACTIVE
+
+        module Status
+          extend Sentdm::Internal::Type::Enum
+
+          # We are working on it and there is nothing for you to do — a number is being procured, or a registration is being assembled. Minutes to hours.
+          PROVISIONING: :PROVISIONING
+
+          # **Waiting on you.** Something the market asks for has not been supplied, a regulator rejected what was, or we have asked you to correct and resubmit your identity data. Nothing progresses until you act. For an SMS market, `GET /v3/channels/sms/{country}/{type}` names what it wants and `PATCH` on the same path supplies it — compliance values, documents and numbers alike.
+          ACTION_NEEDED: :ACTION_NEEDED
+
+          # With a regulator or carrier — filed, or assembled and queued for us to file — and their answer is what moves it, to `ACTIVE` or back to `ACTION_NEEDED`. Nothing on your side changes it. Days for SMS, weeks for RCS.
+          PENDING_REVIEW: :PENDING_REVIEW
+
+          # Can carry traffic now. A channel a sender profile runs on its organization's reads `ACTIVE` too — it sends, which is what the field is about.
+          ACTIVE: :ACTIVE
+
+          # **It had a working sender and no longer does** — the number was released, or the campaign it carried lapsed. Distinct from `PROVISIONING`, which means it has never sent yet: the same absence of a sender, opposite news. Sends will fail until it returns to `ACTIVE`.
+          INACTIVE: :INACTIVE
+
+          def self?.values: -> ::Array[Sentdm::Models::Channels::WhatsappChannel::status]
+        end
+      end
+    end
+  end
+end

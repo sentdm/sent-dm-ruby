@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type tcr_campaign_status = :SENT_CREATED | :ACTIVE | :EXPIRED
+
+    module TcrCampaignStatus
+      extend Sentdm::Internal::Type::Enum
+
+      SENT_CREATED: :SENT_CREATED
+      ACTIVE: :ACTIVE
+      EXPIRED: :EXPIRED
+
+      def self?.values: -> ::Array[Sentdm::Models::tcr_campaign_status]
+    end
+  end
+end

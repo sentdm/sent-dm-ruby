@@ -43,7 +43,7 @@ module Sentdm
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
-      # @param sender_profile [Sentdm::Models::WebhookCreateParams::SenderProfile, nil] Body param: Request-only: the events an organization webhook's sender profile cl
+      # @param sender_profile [Sentdm::Models::WebhookSenderProfileConfig, nil] Body param: Request-only: the events an organization webhook's sender profile cl
       #
       # @param timeout_seconds [Integer] Body param: Delivery timeout. Applies to version 1 only.
       #
@@ -126,7 +126,7 @@ module Sentdm
       #
       # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
       #
-      # @param sender_profile [Sentdm::Models::WebhookUpdateParams::SenderProfile, nil] Body param: Request-only: the events an organization webhook's sender profile cl
+      # @param sender_profile [Sentdm::Models::WebhookSenderProfileConfig, nil] Body param: Request-only: the events an organization webhook's sender profile cl
       #
       # @param timeout_seconds [Integer] Body param
       #
@@ -228,7 +228,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookListEventTypesResponse]
+      # @return [Sentdm::Models::APIResponseOfWebhookEventTypesList]
       #
       # @see Sentdm::Models::WebhookListEventTypesParams
       def list_event_types(params = {})
@@ -237,7 +237,7 @@ module Sentdm
           method: :get,
           path: "v3/webhooks/event-types",
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::WebhookListEventTypesResponse,
+          model: Sentdm::APIResponseOfWebhookEventTypesList,
           options: options
         )
       end
@@ -265,7 +265,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Internal::WebhookEventsPage<Sentdm::Models::WebhookListEventsResponse>]
+      # @return [Sentdm::Internal::WebhookEventsPage<Sentdm::Models::WebhookDelivery>]
       #
       # @see Sentdm::Models::WebhookListEventsParams
       def list_events(id, params = {})
@@ -278,7 +278,7 @@ module Sentdm
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
           page: Sentdm::Internal::WebhookEventsPage,
-          model: Sentdm::Models::WebhookListEventsResponse,
+          model: Sentdm::WebhookDelivery,
           options: options
         )
       end
@@ -304,7 +304,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookRotateSecretResponse]
+      # @return [Sentdm::Models::APIResponseOfWebhookSecret]
       #
       # @see Sentdm::Models::WebhookRotateSecretParams
       def rotate_secret(id, params = {})
@@ -315,7 +315,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s/rotate-secret", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::WebhookRotateSecretResponse,
+          model: Sentdm::APIResponseOfWebhookSecret,
           options: options
         )
       end
@@ -342,7 +342,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::WebhookTestResponse]
+      # @return [Sentdm::Models::APIResponseOfWebhookTest]
       #
       # @see Sentdm::Models::WebhookTestParams
       def test_(id, params = {})
@@ -353,7 +353,7 @@ module Sentdm
           path: ["v3/webhooks/%1$s/test", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::WebhookTestResponse,
+          model: Sentdm::APIResponseOfWebhookTest,
           options: options
         )
       end

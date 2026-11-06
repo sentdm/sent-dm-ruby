@@ -31,13 +31,11 @@ module Sentdm
       # component is just {"type":"header","format":"location"} — so these values exist
       # for Sent: a preview, and the default a StaticResource header falls back to at
       # send.
-      sig { returns(T.nilable(Sentdm::TemplateHeader::Location)) }
+      sig { returns(T.nilable(Sentdm::TemplateHeaderLocation)) }
       attr_reader :location
 
       sig do
-        params(
-          location: T.nilable(Sentdm::TemplateHeader::Location::OrHash)
-        ).void
+        params(location: T.nilable(Sentdm::TemplateHeaderLocation::OrHash)).void
       end
       attr_writer :location
 
@@ -78,7 +76,7 @@ module Sentdm
         params(
           template: String,
           example_url: T.nilable(String),
-          location: T.nilable(Sentdm::TemplateHeader::Location::OrHash),
+          location: T.nilable(Sentdm::TemplateHeaderLocation::OrHash),
           static_resource: T::Boolean,
           type: T.nilable(String),
           variables: T.nilable(T::Array[Sentdm::TemplateVariable::OrHash])
@@ -136,7 +134,7 @@ module Sentdm
           {
             template: String,
             example_url: T.nilable(String),
-            location: T.nilable(Sentdm::TemplateHeader::Location),
+            location: T.nilable(Sentdm::TemplateHeaderLocation),
             static_resource: T::Boolean,
             type: T.nilable(String),
             variables: T.nilable(T::Array[Sentdm::TemplateVariable])
@@ -144,53 +142,6 @@ module Sentdm
         )
       end
       def to_hash
-      end
-
-      class Location < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(Sentdm::TemplateHeader::Location, Sentdm::Internal::AnyHash)
-          end
-
-        sig { returns(String) }
-        attr_accessor :address
-
-        sig { returns(String) }
-        attr_accessor :latitude
-
-        sig { returns(String) }
-        attr_accessor :longitude
-
-        sig { returns(String) }
-        attr_accessor :name
-
-        # The map pin a location header drops. Meta wants none of this at creation — the
-        # component is just {"type":"header","format":"location"} — so these values exist
-        # for Sent: a preview, and the default a StaticResource header falls back to at
-        # send.
-        sig do
-          params(
-            address: String,
-            latitude: String,
-            longitude: String,
-            name: String
-          ).returns(T.attached_class)
-        end
-        def self.new(address:, latitude:, longitude:, name:)
-        end
-
-        sig do
-          override.returns(
-            {
-              address: String,
-              latitude: String,
-              longitude: String,
-              name: String
-            }
-          )
-        end
-        def to_hash
-        end
       end
     end
   end

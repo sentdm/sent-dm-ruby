@@ -1,0 +1,31 @@
+module Sentdm
+  module Models
+    type profiles_list =
+      {
+        pagination: Sentdm::PaginationMeta,
+        profiles: ::Array[Sentdm::ProfileDetail]
+      }
+
+    class ProfilesList < Sentdm::Internal::Type::BaseModel
+      attr_reader pagination: Sentdm::PaginationMeta?
+
+      def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+      attr_reader profiles: ::Array[Sentdm::ProfileDetail]?
+
+      def profiles=: (
+        ::Array[Sentdm::ProfileDetail]
+      ) -> ::Array[Sentdm::ProfileDetail]
+
+      def initialize: (
+        ?pagination: Sentdm::PaginationMeta,
+        ?profiles: ::Array[Sentdm::ProfileDetail]
+      ) -> void
+
+      def to_hash: -> {
+        pagination: Sentdm::PaginationMeta,
+        profiles: ::Array[Sentdm::ProfileDetail]
+      }
+    end
+  end
+end

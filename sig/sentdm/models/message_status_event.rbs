@@ -1,0 +1,40 @@
+module Sentdm
+  module Models
+    type message_status_event =
+      {
+        status: String,
+        timestamp: Time,
+        description: String?,
+        reason: String?,
+        reason_code: String?
+      }
+
+    class MessageStatusEvent < Sentdm::Internal::Type::BaseModel
+      attr_accessor status: String
+
+      attr_accessor timestamp: Time
+
+      attr_accessor description: String?
+
+      attr_accessor reason: String?
+
+      attr_accessor reason_code: String?
+
+      def initialize: (
+        status: String,
+        timestamp: Time,
+        ?description: String?,
+        ?reason: String?,
+        ?reason_code: String?
+      ) -> void
+
+      def to_hash: -> {
+        status: String,
+        timestamp: Time,
+        description: String?,
+        reason: String?,
+        reason_code: String?
+      }
+    end
+  end
+end

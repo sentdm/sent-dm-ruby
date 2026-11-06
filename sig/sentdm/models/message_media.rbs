@@ -1,0 +1,40 @@
+module Sentdm
+  module Models
+    type message_media =
+      {
+        media_type: String?,
+        mime_type: String?,
+        size_bytes: Integer?,
+        :source_hash_sha256 => String?,
+        url: String?
+      }
+
+    class MessageMedia < Sentdm::Internal::Type::BaseModel
+      attr_accessor media_type: String?
+
+      attr_accessor mime_type: String?
+
+      attr_accessor size_bytes: Integer?
+
+      attr_accessor source_hash_sha256: String?
+
+      attr_accessor url: String?
+
+      def initialize: (
+        ?media_type: String?,
+        ?mime_type: String?,
+        ?size_bytes: Integer?,
+        ?source_hash_sha256: String?,
+        ?url: String?
+      ) -> void
+
+      def to_hash: -> {
+        media_type: String?,
+        mime_type: String?,
+        size_bytes: Integer?,
+        :source_hash_sha256 => String?,
+        url: String?
+      }
+    end
+  end
+end

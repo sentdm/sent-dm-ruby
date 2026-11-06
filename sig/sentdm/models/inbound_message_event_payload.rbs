@@ -6,7 +6,7 @@ module Sentdm
         received_at: String,
         account_id: String,
         channel: String,
-        media: ::Array[Sentdm::InboundMessageEventPayload::Media]?,
+        media: ::Array[Sentdm::InboundMedia]?,
         message_id: String,
         outbound_number: String,
         referral: top?,
@@ -27,7 +27,7 @@ module Sentdm
 
       def channel=: (String) -> String
 
-      attr_accessor media: ::Array[Sentdm::InboundMessageEventPayload::Media]?
+      attr_accessor media: ::Array[Sentdm::InboundMedia]?
 
       attr_reader message_id: String?
 
@@ -50,7 +50,7 @@ module Sentdm
         received_at: String,
         ?account_id: String,
         ?channel: String,
-        ?media: ::Array[Sentdm::InboundMessageEventPayload::Media]?,
+        ?media: ::Array[Sentdm::InboundMedia]?,
         ?message_id: String,
         ?outbound_number: String,
         ?referral: top?,
@@ -63,45 +63,13 @@ module Sentdm
         received_at: String,
         account_id: String,
         channel: String,
-        media: ::Array[Sentdm::InboundMessageEventPayload::Media]?,
+        media: ::Array[Sentdm::InboundMedia]?,
         message_id: String,
         outbound_number: String,
         referral: top?,
         text: String?,
         updated_at: String
       }
-
-      type media =
-        {
-          :hash_sha256 => String?,
-          mime_type: String?,
-          size_bytes: Integer?,
-          url: String?
-        }
-
-      class Media < Sentdm::Internal::Type::BaseModel
-        attr_accessor hash_sha256: String?
-
-        attr_accessor mime_type: String?
-
-        attr_accessor size_bytes: Integer?
-
-        attr_accessor url: String?
-
-        def initialize: (
-          ?hash_sha256: String?,
-          ?mime_type: String?,
-          ?size_bytes: Integer?,
-          ?url: String?
-        ) -> void
-
-        def to_hash: -> {
-          :hash_sha256 => String?,
-          mime_type: String?,
-          size_bytes: Integer?,
-          url: String?
-        }
-      end
     end
   end
 end

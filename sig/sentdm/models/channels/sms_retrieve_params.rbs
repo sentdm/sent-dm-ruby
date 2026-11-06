@@ -1,0 +1,36 @@
+module Sentdm
+  module Models
+    module Channels
+      type sms_retrieve_params =
+        { country: String, type: String, x_profile_id: String }
+        & Sentdm::Internal::Type::request_parameters
+
+      class SMSRetrieveParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor country: String
+
+        attr_accessor type: String
+
+        attr_reader x_profile_id: String?
+
+        def x_profile_id=: (String) -> String
+
+        def initialize: (
+          country: String,
+          type: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          country: String,
+          type: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end

@@ -4,7 +4,7 @@ module Sentdm
       def retrieve: (
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::MeRetrieveResponse
+      ) -> Sentdm::APIResponseOfAccount
 
       def initialize: (client: Sentdm::Client) -> void
     end

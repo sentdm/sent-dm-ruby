@@ -364,7 +364,7 @@ module Sentdm
         params(
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ProfileListResponse)
+        ).returns(Sentdm::APIResponseOfProfilesList)
       end
       def list(
         # Profile UUID to scope the request to a child profile. Only organization API keys
@@ -465,7 +465,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::ProfileCompleteResponse)
+        ).returns(Sentdm::APIResponseOfProfileCompletionResult)
       end
       def complete(
         # Path param: Profile ID from route
