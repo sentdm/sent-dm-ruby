@@ -3,6 +3,25 @@
 require_relative "../test_helper"
 
 class Sentdm::Test::Resources::MessagesTest < Sentdm::Test::ResourceTest
+  def test_cancel
+    skip("Mock server tests are disabled")
+
+    response = @sent.messages.cancel("8ba7b830-9dad-11d1-80b4-00c04fd430c8")
+
+    assert_pattern do
+      response => Sentdm::Models::MessageCancelResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: Sentdm::Models::MessageCancelResponse::Data | nil,
+        error: Sentdm::ErrorDetail | nil,
+        meta: Sentdm::APIMeta | nil,
+        success: Sentdm::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
   def test_resend
     skip("Mock server tests are disabled")
 

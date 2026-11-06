@@ -1,6 +1,10 @@
 module Sentdm
   class APIMeta = Sentdm::Models::APIMeta
 
+  class APIResponseOfChannelsState = Sentdm::Models::APIResponseOfChannelsState
+
+  class APIResponseOfComplianceRequirements = Sentdm::Models::APIResponseOfComplianceRequirements
+
   class APIResponseOfContact = Sentdm::Models::APIResponseOfContact
 
   class APIResponseOfContactMessageSummary = Sentdm::Models::APIResponseOfContactMessageSummary
@@ -8,6 +12,10 @@ module Sentdm
   class APIResponseOfConversationMessagesList = Sentdm::Models::APIResponseOfConversationMessagesList
 
   class APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
+
+  class APIResponseOfSenderProfile = Sentdm::Models::APIResponseOfSenderProfile
+
+  class APIResponseOfSenderProfilesList = Sentdm::Models::APIResponseOfSenderProfilesList
 
   class APIResponseOfUser = Sentdm::Models::APIResponseOfUser
 
@@ -35,7 +43,21 @@ module Sentdm
 
   class ChannelEventPayload = Sentdm::Models::ChannelEventPayload
 
+  class ChannelListParams = Sentdm::Models::ChannelListParams
+
   module Channels = Sentdm::Models::Channels
+
+  class ChannelsState = Sentdm::Models::ChannelsState
+
+  class ComplianceAttachmentTemplate = Sentdm::Models::ComplianceAttachmentTemplate
+
+  class ComplianceRequirement = Sentdm::Models::ComplianceRequirement
+
+  class ComplianceRequirements = Sentdm::Models::ComplianceRequirements
+
+  class ComplianceRetrieveRequirementsParams = Sentdm::Models::ComplianceRetrieveRequirementsParams
+
+  class ComplianceSetupStep = Sentdm::Models::ComplianceSetupStep
 
   class ContactCreateParams = Sentdm::Models::ContactCreateParams
 
@@ -73,6 +95,8 @@ module Sentdm
 
   class MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
+  class MessageCancelParams = Sentdm::Models::MessageCancelParams
+
   class MessageEvent = Sentdm::Models::MessageEvent
 
   class MessageEventPayload = Sentdm::Models::MessageEventPayload
@@ -86,6 +110,8 @@ module Sentdm
   class MessageSendParams = Sentdm::Models::MessageSendParams
 
   class MessageSendResponse = Sentdm::Models::MessageSendResponse
+
+  class MmsMarket = Sentdm::Models::MmsMarket
 
   class MutationRequest = Sentdm::Models::MutationRequest
 
@@ -112,6 +138,32 @@ module Sentdm
   class ProfileSettings = Sentdm::Models::ProfileSettings
 
   class ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
+
+  class SenderProfile = Sentdm::Models::SenderProfile
+
+  class SenderProfileBilling = Sentdm::Models::SenderProfileBilling
+
+  class SenderProfileBillingRequest = Sentdm::Models::SenderProfileBillingRequest
+
+  class SenderProfileChannels = Sentdm::Models::SenderProfileChannels
+
+  class SenderProfileCreateParams = Sentdm::Models::SenderProfileCreateParams
+
+  class SenderProfileDeleteParams = Sentdm::Models::SenderProfileDeleteParams
+
+  class SenderProfileListParams = Sentdm::Models::SenderProfileListParams
+
+  class SenderProfileRcs = Sentdm::Models::SenderProfileRcs
+
+  class SenderProfileRetrieveParams = Sentdm::Models::SenderProfileRetrieveParams
+
+  class SenderProfilesList = Sentdm::Models::SenderProfilesList
+
+  class SenderProfileSMS = Sentdm::Models::SenderProfileSMS
+
+  class SenderProfileUpdateParams = Sentdm::Models::SenderProfileUpdateParams
+
+  class SenderProfileWhatsapp = Sentdm::Models::SenderProfileWhatsapp
 
   module TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
 

@@ -1,0 +1,15 @@
+module Sentdm
+  module Resources
+    class Compliance
+      def retrieve_requirements: (
+        ?channel: String?,
+        ?country: String?,
+        ?type: String?,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfComplianceRequirements
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

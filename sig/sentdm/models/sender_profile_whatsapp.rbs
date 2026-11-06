@@ -1,0 +1,16 @@
+module Sentdm
+  module Models
+    type sender_profile_whatsapp =
+      { phone_number_id: String?, waba_id: String? }
+
+    class SenderProfileWhatsapp < Sentdm::Internal::Type::BaseModel
+      attr_accessor phone_number_id: String?
+
+      attr_accessor waba_id: String?
+
+      def initialize: (?phone_number_id: String?, ?waba_id: String?) -> void
+
+      def to_hash: -> { phone_number_id: String?, waba_id: String? }
+    end
+  end
+end
