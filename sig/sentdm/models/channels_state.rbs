@@ -1,0 +1,55 @@
+module Sentdm
+  module Models
+    type channels_state =
+      {
+        customer_id: String?,
+        mms: ::Array[Sentdm::MmsMarket],
+        rcs: Sentdm::Channels::RcsAgent?,
+        sms: ::Array[Sentdm::Channels::SMSMarket],
+        voice: ::Array[Sentdm::Channels::VoiceNumber],
+        whatsapp: Sentdm::Channels::WhatsappChannel?
+      }
+
+    class ChannelsState < Sentdm::Internal::Type::BaseModel
+      attr_accessor customer_id: String?
+
+      attr_reader mms: ::Array[Sentdm::MmsMarket]?
+
+      def mms=: (::Array[Sentdm::MmsMarket]) -> ::Array[Sentdm::MmsMarket]
+
+      attr_accessor rcs: Sentdm::Channels::RcsAgent?
+
+      attr_reader sms: ::Array[Sentdm::Channels::SMSMarket]?
+
+      def sms=: (
+        ::Array[Sentdm::Channels::SMSMarket]
+      ) -> ::Array[Sentdm::Channels::SMSMarket]
+
+      attr_reader voice: ::Array[Sentdm::Channels::VoiceNumber]?
+
+      def voice=: (
+        ::Array[Sentdm::Channels::VoiceNumber]
+      ) -> ::Array[Sentdm::Channels::VoiceNumber]
+
+      attr_accessor whatsapp: Sentdm::Channels::WhatsappChannel?
+
+      def initialize: (
+        ?customer_id: String?,
+        ?mms: ::Array[Sentdm::MmsMarket],
+        ?rcs: Sentdm::Channels::RcsAgent?,
+        ?sms: ::Array[Sentdm::Channels::SMSMarket],
+        ?voice: ::Array[Sentdm::Channels::VoiceNumber],
+        ?whatsapp: Sentdm::Channels::WhatsappChannel?
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String?,
+        mms: ::Array[Sentdm::MmsMarket],
+        rcs: Sentdm::Channels::RcsAgent?,
+        sms: ::Array[Sentdm::Channels::SMSMarket],
+        voice: ::Array[Sentdm::Channels::VoiceNumber],
+        whatsapp: Sentdm::Channels::WhatsappChannel?
+      }
+    end
+  end
+end

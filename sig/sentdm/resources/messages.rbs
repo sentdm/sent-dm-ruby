@@ -1,6 +1,14 @@
 module Sentdm
   module Resources
     class Messages
+      def cancel: (
+        String id,
+        ?sandbox: bool,
+        ?idempotency_key: String,
+        ?x_profile_id: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Models::MessageCancelResponse
+
       def resend: (
         String id,
         ?sandbox: bool,

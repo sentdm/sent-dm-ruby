@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type sender_profile_billing_request = { inherit: bool }
+
+    class SenderProfileBillingRequest < Sentdm::Internal::Type::BaseModel
+      attr_reader inherit: bool?
+
+      def inherit=: (bool) -> bool
+
+      def initialize: (?inherit: bool) -> void
+
+      def to_hash: -> { inherit: bool }
+    end
+  end
+end

@@ -1,0 +1,346 @@
+module Sentdm
+  module Models
+    type message_cancel_response =
+      {
+        data: Sentdm::Models::MessageCancelResponse::Data?,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+    class MessageCancelResponse < Sentdm::Internal::Type::BaseModel
+      attr_accessor data: Sentdm::Models::MessageCancelResponse::Data?
+
+      attr_accessor error: Sentdm::ErrorDetail?
+
+      attr_reader meta: Sentdm::APIMeta?
+
+      def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Sentdm::Models::MessageCancelResponse::Data?,
+        ?error: Sentdm::ErrorDetail?,
+        ?meta: Sentdm::APIMeta,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Sentdm::Models::MessageCancelResponse::Data?,
+        error: Sentdm::ErrorDetail?,
+        meta: Sentdm::APIMeta,
+        success: bool
+      }
+
+      type data =
+        {
+          id: String,
+          active_contact_price: Float?,
+          channel: String,
+          contact_id: String,
+          created_at: Time,
+          customer_id: String,
+          direction: String,
+          events: ::Array[Sentdm::Models::MessageCancelResponse::Data::Event]?,
+          message_body: Sentdm::Models::MessageCancelResponse::Data::MessageBody?,
+          phone: String,
+          phone_international: String,
+          price: Float?,
+          reason: String?,
+          reason_code: String?,
+          region_code: String,
+          scheduled_at: Time?,
+          status: String,
+          template_category: String?,
+          template_id: String?,
+          template_name: String?
+        }
+
+      class Data < Sentdm::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_accessor active_contact_price: Float?
+
+        attr_reader channel: String?
+
+        def channel=: (String) -> String
+
+        attr_reader contact_id: String?
+
+        def contact_id=: (String) -> String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader customer_id: String?
+
+        def customer_id=: (String) -> String
+
+        attr_reader direction: String?
+
+        def direction=: (String) -> String
+
+        attr_accessor events: ::Array[Sentdm::Models::MessageCancelResponse::Data::Event]?
+
+        attr_accessor message_body: Sentdm::Models::MessageCancelResponse::Data::MessageBody?
+
+        attr_reader phone: String?
+
+        def phone=: (String) -> String
+
+        attr_reader phone_international: String?
+
+        def phone_international=: (String) -> String
+
+        attr_accessor price: Float?
+
+        attr_accessor reason: String?
+
+        attr_accessor reason_code: String?
+
+        attr_reader region_code: String?
+
+        def region_code=: (String) -> String
+
+        attr_accessor scheduled_at: Time?
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        attr_accessor template_category: String?
+
+        attr_accessor template_id: String?
+
+        attr_accessor template_name: String?
+
+        def initialize: (
+          ?id: String,
+          ?active_contact_price: Float?,
+          ?channel: String,
+          ?contact_id: String,
+          ?created_at: Time,
+          ?customer_id: String,
+          ?direction: String,
+          ?events: ::Array[Sentdm::Models::MessageCancelResponse::Data::Event]?,
+          ?message_body: Sentdm::Models::MessageCancelResponse::Data::MessageBody?,
+          ?phone: String,
+          ?phone_international: String,
+          ?price: Float?,
+          ?reason: String?,
+          ?reason_code: String?,
+          ?region_code: String,
+          ?scheduled_at: Time?,
+          ?status: String,
+          ?template_category: String?,
+          ?template_id: String?,
+          ?template_name: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          active_contact_price: Float?,
+          channel: String,
+          contact_id: String,
+          created_at: Time,
+          customer_id: String,
+          direction: String,
+          events: ::Array[Sentdm::Models::MessageCancelResponse::Data::Event]?,
+          message_body: Sentdm::Models::MessageCancelResponse::Data::MessageBody?,
+          phone: String,
+          phone_international: String,
+          price: Float?,
+          reason: String?,
+          reason_code: String?,
+          region_code: String,
+          scheduled_at: Time?,
+          status: String,
+          template_category: String?,
+          template_id: String?,
+          template_name: String?
+        }
+
+        type event =
+          {
+            status: String,
+            timestamp: Time,
+            description: String?,
+            reason: String?,
+            reason_code: String?
+          }
+
+        class Event < Sentdm::Internal::Type::BaseModel
+          attr_accessor status: String
+
+          attr_accessor timestamp: Time
+
+          attr_accessor description: String?
+
+          attr_accessor reason: String?
+
+          attr_accessor reason_code: String?
+
+          def initialize: (
+            status: String,
+            timestamp: Time,
+            ?description: String?,
+            ?reason: String?,
+            ?reason_code: String?
+          ) -> void
+
+          def to_hash: -> {
+            status: String,
+            timestamp: Time,
+            description: String?,
+            reason: String?,
+            reason_code: String?
+          }
+        end
+
+        type message_body =
+          {
+            buttons: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Button]?,
+            content: String,
+            footer: String?,
+            header: String?,
+            header_media: Sentdm::Models::MessageCancelResponse::Data::MessageBody::HeaderMedia?,
+            media: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Media]?,
+            subject: String?
+          }
+
+        class MessageBody < Sentdm::Internal::Type::BaseModel
+          attr_accessor buttons: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Button]?
+
+          attr_reader content: String?
+
+          def content=: (String) -> String
+
+          attr_accessor footer: String?
+
+          attr_accessor header: String?
+
+          attr_accessor header_media: Sentdm::Models::MessageCancelResponse::Data::MessageBody::HeaderMedia?
+
+          attr_accessor media: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Media]?
+
+          attr_accessor subject: String?
+
+          def initialize: (
+            ?buttons: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Button]?,
+            ?content: String,
+            ?footer: String?,
+            ?header: String?,
+            ?header_media: Sentdm::Models::MessageCancelResponse::Data::MessageBody::HeaderMedia?,
+            ?media: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Media]?,
+            ?subject: String?
+          ) -> void
+
+          def to_hash: -> {
+            buttons: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Button]?,
+            content: String,
+            footer: String?,
+            header: String?,
+            header_media: Sentdm::Models::MessageCancelResponse::Data::MessageBody::HeaderMedia?,
+            media: ::Array[Sentdm::Models::MessageCancelResponse::Data::MessageBody::Media]?,
+            subject: String?
+          }
+
+          type button =
+            {
+              postback_data: String?,
+              text: String?,
+              type: String,
+              value: String
+            }
+
+          class Button < Sentdm::Internal::Type::BaseModel
+            attr_accessor postback_data: String?
+
+            attr_accessor text: String?
+
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            attr_reader value: String?
+
+            def value=: (String) -> String
+
+            def initialize: (
+              ?postback_data: String?,
+              ?text: String?,
+              ?type: String,
+              ?value: String
+            ) -> void
+
+            def to_hash: -> {
+              postback_data: String?,
+              text: String?,
+              type: String,
+              value: String
+            }
+          end
+
+          type header_media = { type: String, url: String }
+
+          class HeaderMedia < Sentdm::Internal::Type::BaseModel
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            attr_reader url: String?
+
+            def url=: (String) -> String
+
+            def initialize: (?type: String, ?url: String) -> void
+
+            def to_hash: -> { type: String, url: String }
+          end
+
+          type media =
+            {
+              media_type: String?,
+              mime_type: String?,
+              size_bytes: Integer?,
+              :source_hash_sha256 => String?,
+              url: String?
+            }
+
+          class Media < Sentdm::Internal::Type::BaseModel
+            attr_accessor media_type: String?
+
+            attr_accessor mime_type: String?
+
+            attr_accessor size_bytes: Integer?
+
+            attr_accessor source_hash_sha256: String?
+
+            attr_accessor url: String?
+
+            def initialize: (
+              ?media_type: String?,
+              ?mime_type: String?,
+              ?size_bytes: Integer?,
+              ?source_hash_sha256: String?,
+              ?url: String?
+            ) -> void
+
+            def to_hash: -> {
+              media_type: String?,
+              mime_type: String?,
+              size_bytes: Integer?,
+              :source_hash_sha256 => String?,
+              url: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

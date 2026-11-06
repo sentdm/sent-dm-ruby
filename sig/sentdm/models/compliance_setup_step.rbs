@@ -1,0 +1,62 @@
+module Sentdm
+  module Models
+    type compliance_setup_step =
+      {
+        attachments: ::Array[Sentdm::ComplianceAttachmentTemplate]?,
+        body: top,
+        method_: String,
+        path: String,
+        resource: String,
+        step: Integer,
+        why: String
+      }
+
+    class ComplianceSetupStep < Sentdm::Internal::Type::BaseModel
+      attr_accessor attachments: ::Array[Sentdm::ComplianceAttachmentTemplate]?
+
+      attr_reader body: top?
+
+      def body=: (top) -> top
+
+      attr_reader method_: String?
+
+      def method_=: (String) -> String
+
+      attr_reader path: String?
+
+      def path=: (String) -> String
+
+      attr_reader resource: String?
+
+      def resource=: (String) -> String
+
+      attr_reader step: Integer?
+
+      def step=: (Integer) -> Integer
+
+      attr_reader why: String?
+
+      def why=: (String) -> String
+
+      def initialize: (
+        ?attachments: ::Array[Sentdm::ComplianceAttachmentTemplate]?,
+        ?body: top,
+        ?method_: String,
+        ?path: String,
+        ?resource: String,
+        ?step: Integer,
+        ?why: String
+      ) -> void
+
+      def to_hash: -> {
+        attachments: ::Array[Sentdm::ComplianceAttachmentTemplate]?,
+        body: top,
+        method_: String,
+        path: String,
+        resource: String,
+        step: Integer,
+        why: String
+      }
+    end
+  end
+end

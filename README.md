@@ -289,25 +289,25 @@ sent.messages.send_(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :ACTIVE
-puts(Sentdm::Channels::VoiceUpdateParams::Status::ACTIVE)
+# :LOCAL
+puts(Sentdm::Channels::SMSCreateParams::NumberType::LOCAL)
 
-# Revealed type: `T.all(Sentdm::Channels::VoiceUpdateParams::Status, Symbol)`
-T.reveal_type(Sentdm::Channels::VoiceUpdateParams::Status::ACTIVE)
+# Revealed type: `T.all(Sentdm::Channels::SMSCreateParams::NumberType, Symbol)`
+T.reveal_type(Sentdm::Channels::SMSCreateParams::NumberType::LOCAL)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-sent.channels.voice.update(
-  status: Sentdm::Channels::VoiceUpdateParams::Status::ACTIVE,
+sent.channels.sms.create(
+  number_type: Sentdm::Channels::SMSCreateParams::NumberType::LOCAL,
   # …
 )
 
 # Literal values are also permissible:
-sent.channels.voice.update(
-  status: :ACTIVE,
+sent.channels.sms.create(
+  number_type: :LOCAL,
   # …
 )
 ```

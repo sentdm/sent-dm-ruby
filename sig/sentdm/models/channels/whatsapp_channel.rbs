@@ -1,0 +1,69 @@
+module Sentdm
+  module Models
+    class WhatsappChannel = Channels::WhatsappChannel
+
+    module Channels
+      type whatsapp_channel =
+        {
+          owner_business_id: String?,
+          phone_number_id: String?,
+          reason: String?,
+          reason_code: String?,
+          solution_id: String?,
+          status: Sentdm::Models::Channels::WhatsappChannel::status?,
+          waba_id: String?
+        }
+
+      class WhatsappChannel < Sentdm::Internal::Type::BaseModel
+        attr_accessor owner_business_id: String?
+
+        attr_accessor phone_number_id: String?
+
+        attr_accessor reason: String?
+
+        attr_accessor reason_code: String?
+
+        attr_accessor solution_id: String?
+
+        attr_accessor status: Sentdm::Models::Channels::WhatsappChannel::status?
+
+        attr_accessor waba_id: String?
+
+        def initialize: (
+          ?owner_business_id: String?,
+          ?phone_number_id: String?,
+          ?reason: String?,
+          ?reason_code: String?,
+          ?solution_id: String?,
+          ?status: Sentdm::Models::Channels::WhatsappChannel::status?,
+          ?waba_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          owner_business_id: String?,
+          phone_number_id: String?,
+          reason: String?,
+          reason_code: String?,
+          solution_id: String?,
+          status: Sentdm::Models::Channels::WhatsappChannel::status?,
+          waba_id: String?
+        }
+
+        type status =
+          :PROVISIONING | :ACTION_NEEDED | :PENDING_REVIEW | :ACTIVE | :INACTIVE
+
+        module Status
+          extend Sentdm::Internal::Type::Enum
+
+          PROVISIONING: :PROVISIONING
+          ACTION_NEEDED: :ACTION_NEEDED
+          PENDING_REVIEW: :PENDING_REVIEW
+          ACTIVE: :ACTIVE
+          INACTIVE: :INACTIVE
+
+          def self?.values: -> ::Array[Sentdm::Models::Channels::WhatsappChannel::status]
+        end
+      end
+    end
+  end
+end
