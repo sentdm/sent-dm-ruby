@@ -1,0 +1,29 @@
+module Sentdm
+  module Models
+    type templates_list =
+      {
+        pagination: Sentdm::PaginationMeta,
+        templates: ::Array[Sentdm::Template]
+      }
+
+    class TemplatesList < Sentdm::Internal::Type::BaseModel
+      attr_reader pagination: Sentdm::PaginationMeta?
+
+      def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+      attr_reader templates: ::Array[Sentdm::Template]?
+
+      def templates=: (::Array[Sentdm::Template]) -> ::Array[Sentdm::Template]
+
+      def initialize: (
+        ?pagination: Sentdm::PaginationMeta,
+        ?templates: ::Array[Sentdm::Template]
+      ) -> void
+
+      def to_hash: -> {
+        pagination: Sentdm::PaginationMeta,
+        templates: ::Array[Sentdm::Template]
+      }
+    end
+  end
+end

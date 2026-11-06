@@ -1,0 +1,106 @@
+module Sentdm
+  module Models
+    type link_event_payload =
+      {
+        record_id: String,
+        access_country: String?,
+        access_outcome: String?,
+        browser: String?,
+        bytes_served: Integer?,
+        channel: String?,
+        customer_id: String,
+        device: String?,
+        link_kind: String,
+        message_id: String?,
+        occurred_at: String,
+        reference_key: String?,
+        referrer_host: String?,
+        request_method: String?,
+        sender_profile_id: String?,
+        status_code: Integer?,
+        traffic_class: String?
+      }
+
+    class LinkEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor record_id: String
+
+      attr_accessor access_country: String?
+
+      attr_accessor access_outcome: String?
+
+      attr_accessor browser: String?
+
+      attr_accessor bytes_served: Integer?
+
+      attr_accessor channel: String?
+
+      attr_reader customer_id: String?
+
+      def customer_id=: (String) -> String
+
+      attr_accessor device: String?
+
+      attr_reader link_kind: String?
+
+      def link_kind=: (String) -> String
+
+      attr_accessor message_id: String?
+
+      attr_reader occurred_at: String?
+
+      def occurred_at=: (String) -> String
+
+      attr_accessor reference_key: String?
+
+      attr_accessor referrer_host: String?
+
+      attr_accessor request_method: String?
+
+      attr_accessor sender_profile_id: String?
+
+      attr_accessor status_code: Integer?
+
+      attr_accessor traffic_class: String?
+
+      def initialize: (
+        record_id: String,
+        ?access_country: String?,
+        ?access_outcome: String?,
+        ?browser: String?,
+        ?bytes_served: Integer?,
+        ?channel: String?,
+        ?customer_id: String,
+        ?device: String?,
+        ?link_kind: String,
+        ?message_id: String?,
+        ?occurred_at: String,
+        ?reference_key: String?,
+        ?referrer_host: String?,
+        ?request_method: String?,
+        ?sender_profile_id: String?,
+        ?status_code: Integer?,
+        ?traffic_class: String?
+      ) -> void
+
+      def to_hash: -> {
+        record_id: String,
+        access_country: String?,
+        access_outcome: String?,
+        browser: String?,
+        bytes_served: Integer?,
+        channel: String?,
+        customer_id: String,
+        device: String?,
+        link_kind: String,
+        message_id: String?,
+        occurred_at: String,
+        reference_key: String?,
+        referrer_host: String?,
+        request_method: String?,
+        sender_profile_id: String?,
+        status_code: Integer?,
+        traffic_class: String?
+      }
+    end
+  end
+end

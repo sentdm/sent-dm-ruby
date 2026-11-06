@@ -1,0 +1,44 @@
+module Sentdm
+  module Resources
+    class Channels
+      class SMS
+        def create: (
+          number_type: Sentdm::Models::Channels::SMSCreateParams::number_type,
+          ?area_codes: ::Array[String]?,
+          ?compliance: Sentdm::Channels::MarketCompliance,
+          ?country: String,
+          ?numbers: ::Array[Sentdm::Channels::SMSNumberRequest]?,
+          ?sandbox: bool,
+          ?sender_value: String?,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+        def retrieve: (
+          String `type`,
+          country: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+        def update: (
+          String `type`,
+          country: String,
+          ?compliance: Sentdm::Channels::MarketCompliance,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+        def list: (
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfListOfSMSMarket
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

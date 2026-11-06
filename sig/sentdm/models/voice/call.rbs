@@ -13,7 +13,7 @@ module Sentdm
           ended_at: Time?,
           failure_reason: String?,
           from: Sentdm::Voice::CallParty,
-          legs: ::Array[Sentdm::Voice::Call::Leg]?,
+          legs: ::Array[Sentdm::Voice::CallLeg]?,
           mode: String,
           number: String,
           price: Float?,
@@ -51,7 +51,7 @@ module Sentdm
 
         def from=: (Sentdm::Voice::CallParty) -> Sentdm::Voice::CallParty
 
-        attr_accessor legs: ::Array[Sentdm::Voice::Call::Leg]?
+        attr_accessor legs: ::Array[Sentdm::Voice::CallLeg]?
 
         attr_reader mode: String?
 
@@ -92,7 +92,7 @@ module Sentdm
           ?ended_at: Time?,
           ?failure_reason: String?,
           ?from: Sentdm::Voice::CallParty,
-          ?legs: ::Array[Sentdm::Voice::Call::Leg]?,
+          ?legs: ::Array[Sentdm::Voice::CallLeg]?,
           ?mode: String,
           ?number: String,
           ?price: Float?,
@@ -114,7 +114,7 @@ module Sentdm
           ended_at: Time?,
           failure_reason: String?,
           from: Sentdm::Voice::CallParty,
-          legs: ::Array[Sentdm::Voice::Call::Leg]?,
+          legs: ::Array[Sentdm::Voice::CallLeg]?,
           mode: String,
           number: String,
           price: Float?,
@@ -124,51 +124,6 @@ module Sentdm
           timeline: ::Array[Sentdm::Voice::CallTimelineEntry]?,
           to: Sentdm::Voice::CallParty
         }
-
-        type leg =
-          {
-            billed_minutes: Integer,
-            cost: Float,
-            currency: String,
-            direction: String,
-            number: String?
-          }
-
-        class Leg < Sentdm::Internal::Type::BaseModel
-          attr_reader billed_minutes: Integer?
-
-          def billed_minutes=: (Integer) -> Integer
-
-          attr_reader cost: Float?
-
-          def cost=: (Float) -> Float
-
-          attr_reader currency: String?
-
-          def currency=: (String) -> String
-
-          attr_reader direction: String?
-
-          def direction=: (String) -> String
-
-          attr_accessor number: String?
-
-          def initialize: (
-            ?billed_minutes: Integer,
-            ?cost: Float,
-            ?currency: String,
-            ?direction: String,
-            ?number: String?
-          ) -> void
-
-          def to_hash: -> {
-            billed_minutes: Integer,
-            cost: Float,
-            currency: String,
-            direction: String,
-            number: String?
-          }
-        end
       end
     end
   end

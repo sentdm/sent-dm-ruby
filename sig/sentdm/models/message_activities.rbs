@@ -1,0 +1,38 @@
+module Sentdm
+  module Models
+    type message_activities =
+      {
+        activities: ::Array[Sentdm::MessageActivity],
+        message_id: String,
+        pagination: Sentdm::PaginationMeta
+      }
+
+    class MessageActivities < Sentdm::Internal::Type::BaseModel
+      attr_reader activities: ::Array[Sentdm::MessageActivity]?
+
+      def activities=: (
+        ::Array[Sentdm::MessageActivity]
+      ) -> ::Array[Sentdm::MessageActivity]
+
+      attr_reader message_id: String?
+
+      def message_id=: (String) -> String
+
+      attr_reader pagination: Sentdm::PaginationMeta?
+
+      def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+      def initialize: (
+        ?activities: ::Array[Sentdm::MessageActivity],
+        ?message_id: String,
+        ?pagination: Sentdm::PaginationMeta
+      ) -> void
+
+      def to_hash: -> {
+        activities: ::Array[Sentdm::MessageActivity],
+        message_id: String,
+        pagination: Sentdm::PaginationMeta
+      }
+    end
+  end
+end

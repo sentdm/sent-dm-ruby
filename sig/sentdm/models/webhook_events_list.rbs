@@ -1,0 +1,31 @@
+module Sentdm
+  module Models
+    type webhook_events_list =
+      {
+        events: ::Array[Sentdm::WebhookDelivery],
+        pagination: Sentdm::PaginationMeta
+      }
+
+    class WebhookEventsList < Sentdm::Internal::Type::BaseModel
+      attr_reader events: ::Array[Sentdm::WebhookDelivery]?
+
+      def events=: (
+        ::Array[Sentdm::WebhookDelivery]
+      ) -> ::Array[Sentdm::WebhookDelivery]
+
+      attr_reader pagination: Sentdm::PaginationMeta?
+
+      def pagination=: (Sentdm::PaginationMeta) -> Sentdm::PaginationMeta
+
+      def initialize: (
+        ?events: ::Array[Sentdm::WebhookDelivery],
+        ?pagination: Sentdm::PaginationMeta
+      ) -> void
+
+      def to_hash: -> {
+        events: ::Array[Sentdm::WebhookDelivery],
+        pagination: Sentdm::PaginationMeta
+      }
+    end
+  end
+end

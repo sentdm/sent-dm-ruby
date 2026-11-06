@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    type sender_profile_list_params =
+      { page: Integer, page_size: Integer }
+      & Sentdm::Internal::Type::request_parameters
+
+    class SenderProfileListParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      def initialize: (
+        ?page: Integer,
+        ?page_size: Integer,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        page: Integer,
+        page_size: Integer,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

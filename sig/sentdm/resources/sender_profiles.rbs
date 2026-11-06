@@ -1,0 +1,44 @@
+module Sentdm
+  module Resources
+    class SenderProfiles
+      def create: (
+        ?billing: Sentdm::SenderProfileBillingRequest?,
+        ?channels: Sentdm::SenderProfileChannels?,
+        ?compliance: Sentdm::Channels::MarketCompliance,
+        ?description: String?,
+        ?name: String,
+        ?notifications: String?,
+        ?sandbox: bool,
+        ?short_name: String,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfSenderProfile
+
+      def retrieve: (
+        String id,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfSenderProfile
+
+      def update: (
+        String id,
+        ?description: String?,
+        ?name: String,
+        ?notifications: String?,
+        ?sandbox: bool,
+        ?short_name: String?,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::APIResponseOfSenderProfile
+
+      def list: (
+        ?page: Integer,
+        ?page_size: Integer,
+        ?request_options: Sentdm::request_opts
+      ) -> Sentdm::Internal::SenderProfilesPage[Sentdm::SenderProfile]
+
+      def delete: (String id, ?request_options: Sentdm::request_opts) -> nil
+
+      def initialize: (client: Sentdm::Client) -> void
+    end
+  end
+end

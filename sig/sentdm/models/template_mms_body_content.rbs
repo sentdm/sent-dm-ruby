@@ -1,0 +1,28 @@
+module Sentdm
+  module Models
+    type template_mms_body_content =
+      { media: ::Array[Sentdm::TemplateMediaItem]?, subject: String? }
+
+    class TemplateMmsBodyContent < Sentdm::Models::TemplateBodyContent
+      def media: -> ::Array[Sentdm::TemplateMediaItem]?
+
+      def media=: (
+        ::Array[Sentdm::TemplateMediaItem]? _
+      ) -> ::Array[Sentdm::TemplateMediaItem]?
+
+      def subject: -> String?
+
+      def subject=: (String? _) -> String?
+
+      def initialize: (
+        ?media: ::Array[Sentdm::TemplateMediaItem]?,
+        ?subject: String?
+      ) -> void
+
+      def to_hash: -> {
+        media: ::Array[Sentdm::TemplateMediaItem]?,
+        subject: String?
+      }
+    end
+  end
+end

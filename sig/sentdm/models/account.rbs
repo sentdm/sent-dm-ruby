@@ -1,0 +1,111 @@
+module Sentdm
+  module Models
+    type account =
+      {
+        id: String,
+        channels: Sentdm::AccountChannels,
+        created_at: Time,
+        description: String?,
+        email: String?,
+        enable_template_auto_creation_for_sp: bool,
+        icon: String?,
+        name: String,
+        organization_id: String?,
+        profiles: ::Array[Sentdm::AccountProfile],
+        sending_phone_number: String?,
+        sending_phone_number_profile_id: String?,
+        settings: Sentdm::ProfileSettings?,
+        short_name: String?,
+        status: String?,
+        type: String
+      }
+
+    class Account < Sentdm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader channels: Sentdm::AccountChannels?
+
+      def channels=: (Sentdm::AccountChannels) -> Sentdm::AccountChannels
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_accessor description: String?
+
+      attr_accessor email: String?
+
+      attr_reader enable_template_auto_creation_for_sp: bool?
+
+      def enable_template_auto_creation_for_sp=: (bool) -> bool
+
+      attr_accessor icon: String?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor organization_id: String?
+
+      attr_reader profiles: ::Array[Sentdm::AccountProfile]?
+
+      def profiles=: (
+        ::Array[Sentdm::AccountProfile]
+      ) -> ::Array[Sentdm::AccountProfile]
+
+      attr_accessor sending_phone_number: String?
+
+      attr_accessor sending_phone_number_profile_id: String?
+
+      attr_accessor settings: Sentdm::ProfileSettings?
+
+      attr_accessor short_name: String?
+
+      attr_accessor status: String?
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      def initialize: (
+        ?id: String,
+        ?channels: Sentdm::AccountChannels,
+        ?created_at: Time,
+        ?description: String?,
+        ?email: String?,
+        ?enable_template_auto_creation_for_sp: bool,
+        ?icon: String?,
+        ?name: String,
+        ?organization_id: String?,
+        ?profiles: ::Array[Sentdm::AccountProfile],
+        ?sending_phone_number: String?,
+        ?sending_phone_number_profile_id: String?,
+        ?settings: Sentdm::ProfileSettings?,
+        ?short_name: String?,
+        ?status: String?,
+        ?type: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        channels: Sentdm::AccountChannels,
+        created_at: Time,
+        description: String?,
+        email: String?,
+        enable_template_auto_creation_for_sp: bool,
+        icon: String?,
+        name: String,
+        organization_id: String?,
+        profiles: ::Array[Sentdm::AccountProfile],
+        sending_phone_number: String?,
+        sending_phone_number_profile_id: String?,
+        settings: Sentdm::ProfileSettings?,
+        short_name: String?,
+        status: String?,
+        type: String
+      }
+    end
+  end
+end

@@ -10,7 +10,7 @@ module Sentdm
       def list: (
         ?x_profile_id: String,
         ?request_options: Sentdm::request_opts
-      ) -> Sentdm::Models::UserListResponse
+      ) -> Sentdm::APIResponseOfUsersList
 
       def invite: (
         ?email: String,

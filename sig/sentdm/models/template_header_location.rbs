@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    type template_header_location =
+      { address: String, latitude: String, longitude: String, name: String }
+
+    class TemplateHeaderLocation < Sentdm::Internal::Type::BaseModel
+      attr_accessor address: String
+
+      attr_accessor latitude: String
+
+      attr_accessor longitude: String
+
+      attr_accessor name: String
+
+      def initialize: (
+        address: String,
+        latitude: String,
+        longitude: String,
+        name: String
+      ) -> void
+
+      def to_hash: -> {
+        address: String,
+        latitude: String,
+        longitude: String,
+        name: String
+      }
+    end
+  end
+end

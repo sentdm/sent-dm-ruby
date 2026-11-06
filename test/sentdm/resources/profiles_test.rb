@@ -66,12 +66,12 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
     response = @sent.profiles.list
 
     assert_pattern do
-      response => Sentdm::Models::ProfileListResponse
+      response => Sentdm::APIResponseOfProfilesList
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ProfileListResponse::Data | nil,
+        data: Sentdm::ProfilesList | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -99,12 +99,12 @@ class Sentdm::Test::Resources::ProfilesTest < Sentdm::Test::ResourceTest
       )
 
     assert_pattern do
-      response => Sentdm::Models::ProfileCompleteResponse
+      response => Sentdm::APIResponseOfProfileCompletionResult
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::ProfileCompleteResponse::Data | nil,
+        data: Sentdm::ProfileCompletionResult | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

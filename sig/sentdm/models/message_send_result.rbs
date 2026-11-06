@@ -1,0 +1,45 @@
+module Sentdm
+  module Models
+    type message_send_result =
+      {
+        recipients: ::Array[Sentdm::MessageRecipient],
+        status: String,
+        template_id: String,
+        template_name: String
+      }
+
+    class MessageSendResult < Sentdm::Internal::Type::BaseModel
+      attr_reader recipients: ::Array[Sentdm::MessageRecipient]?
+
+      def recipients=: (
+        ::Array[Sentdm::MessageRecipient]
+      ) -> ::Array[Sentdm::MessageRecipient]
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_reader template_id: String?
+
+      def template_id=: (String) -> String
+
+      attr_reader template_name: String?
+
+      def template_name=: (String) -> String
+
+      def initialize: (
+        ?recipients: ::Array[Sentdm::MessageRecipient],
+        ?status: String,
+        ?template_id: String,
+        ?template_name: String
+      ) -> void
+
+      def to_hash: -> {
+        recipients: ::Array[Sentdm::MessageRecipient],
+        status: String,
+        template_id: String,
+        template_name: String
+      }
+    end
+  end
+end

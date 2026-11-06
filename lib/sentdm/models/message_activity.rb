@@ -1,0 +1,105 @@
+# frozen_string_literal: true
+
+module Sentdm
+  module Models
+    class MessageActivity < Sentdm::Internal::Type::BaseModel
+      # @!attribute active_contact_price
+      #   Active contact markup applied on top of the channel cost, formatted to 4 decimal
+      #   places.
+      #
+      #   @return [String, nil]
+      optional :active_contact_price, String, nil?: true
+
+      # @!attribute description
+      #   Human-readable description of the activity
+      #
+      #   @return [String, nil]
+      optional :description, String
+
+      # @!attribute from
+      #   Sender phone number for this activity (the customer's sending number for
+      #   outbound, the external sender for inbound). Null when not reported by the
+      #   provider.
+      #
+      #   @return [String, nil]
+      optional :from, String, nil?: true
+
+      # @!attribute price
+      #   Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
+      #   4 decimal places.
+      #
+      #   @return [String, nil]
+      optional :price, String, nil?: true
+
+      # @!attribute reason
+      #   A human-readable sentence for reason_code, for example "The recipient is not
+      #   registered on this channel" Omitted whenever reason_code is.
+      #
+      #   @return [String, nil]
+      optional :reason, String, nil?: true
+
+      # @!attribute reason_code
+      #   Why the message reached this status, as a stable platform code such as
+      #   DELIVERY_007 or BUSINESS_003. Present on FAILED, FILTERED and BLOCKED
+      #   activities; omitted on every status that needs no explanation. Switch on this
+      #   rather than on reason: the code is stable, the wording may be improved. Same
+      #   wire name and vocabulary as on the message and the webhook.
+      #
+      #   @return [String, nil]
+      optional :reason_code, String, nil?: true
+
+      # @!attribute scheduled_at
+      #   SCHEDULED and CANCELLED activities only, in UTC: on a SCHEDULED entry, when the
+      #   held message will be released for delivery; on a CANCELLED entry, the instant
+      #   that was called off. Same wire name as on the send response, the message and the
+      #   webhook. Omitted on every other activity. A message that quiet hours moved at
+      #   release has two SCHEDULED entries, each carrying the instant as it stood at that
+      #   moment.
+      #
+      #   @return [Time, nil]
+      optional :scheduled_at, Time, nil?: true
+
+      # @!attribute status
+      #   Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SCHEDULED, SENT,
+      #   DELIVERED, READ, FAILED. Inbound (from contact): RECEIVED (terminal).
+      #
+      #   @return [String, nil]
+      optional :status, String
+
+      # @!attribute timestamp
+      #   When this activity occurred
+      #
+      #   @return [Time, nil]
+      optional :timestamp, Time
+
+      # @!method initialize(active_contact_price: nil, description: nil, from: nil, price: nil, reason: nil, reason_code: nil, scheduled_at: nil, status: nil, timestamp: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Sentdm::Models::MessageActivity} for more details.
+      #
+      #   A single message activity event for v3 API.
+      #
+      #   The activity list mixes statuses, so unlike a message it is one shape rather
+      #   than two: a SCHEDULED entry carries scheduled_at, and every other entry has no
+      #   such key.
+      #
+      #   @param active_contact_price [String, nil] Active contact markup applied on top of the channel cost, formatted to 4 decimal
+      #
+      #   @param description [String] Human-readable description of the activity
+      #
+      #   @param from [String, nil] Sender phone number for this activity (the customer's sending number for outboun
+      #
+      #   @param price [String, nil] Channel cost for this activity (e.g., SMS/WhatsApp provider cost), formatted to
+      #
+      #   @param reason [String, nil] A human-readable sentence for reason_code, for example "The recipient is not reg
+      #
+      #   @param reason_code [String, nil] Why the message reached this status, as a stable platform code such as
+      #   DELIVERY\_
+      #
+      #   @param scheduled_at [Time, nil] SCHEDULED and CANCELLED activities only, in UTC: on a SCHEDULED entry, when the
+      #
+      #   @param status [String] Activity status. Outbound: QUEUED, PROCESSED, ROUTED, SCHEDULED, SENT, DELIVERED
+      #
+      #   @param timestamp [Time] When this activity occurred
+    end
+  end
+end

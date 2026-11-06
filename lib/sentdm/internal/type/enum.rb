@@ -17,28 +17,28 @@ module Sentdm
       # values safely.
       #
       # @example
-      #   # `tcr_brand_relationship` is a `Sentdm::TcrBrandRelationship`
-      #   case tcr_brand_relationship
-      #   when Sentdm::TcrBrandRelationship::BASIC_ACCOUNT
+      #   # `entity_type` is a `Sentdm::EntityType`
+      #   case entity_type
+      #   when Sentdm::EntityType::PRIVATE_PROFIT
       #     # ...
-      #   when Sentdm::TcrBrandRelationship::MEDIUM_ACCOUNT
+      #   when Sentdm::EntityType::PUBLIC_PROFIT
       #     # ...
-      #   when Sentdm::TcrBrandRelationship::LARGE_ACCOUNT
+      #   when Sentdm::EntityType::NON_PROFIT
       #     # ...
       #   else
-      #     puts(tcr_brand_relationship)
+      #     puts(entity_type)
       #   end
       #
       # @example
-      #   case tcr_brand_relationship
-      #   in :BASIC_ACCOUNT
+      #   case entity_type
+      #   in :PRIVATE_PROFIT
       #     # ...
-      #   in :MEDIUM_ACCOUNT
+      #   in :PUBLIC_PROFIT
       #     # ...
-      #   in :LARGE_ACCOUNT
+      #   in :NON_PROFIT
       #     # ...
       #   else
-      #     puts(tcr_brand_relationship)
+      #     puts(entity_type)
       #   end
       module Enum
         include Sentdm::Internal::Type::Converter

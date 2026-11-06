@@ -50,7 +50,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MeRetrieveResponse]
+      # @return [Sentdm::Models::APIResponseOfAccount]
       #
       # @see Sentdm::Models::MeRetrieveParams
       def retrieve(params = {})
@@ -59,7 +59,7 @@ module Sentdm
           method: :get,
           path: "v3/me",
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::MeRetrieveResponse,
+          model: Sentdm::APIResponseOfAccount,
           options: options
         )
       end

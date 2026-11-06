@@ -1,0 +1,34 @@
+module Sentdm
+  module Models
+    type message_recipient =
+      { body: String?, channel: String?, message_id: String, to: String }
+
+    class MessageRecipient < Sentdm::Internal::Type::BaseModel
+      attr_accessor body: String?
+
+      attr_accessor channel: String?
+
+      attr_reader message_id: String?
+
+      def message_id=: (String) -> String
+
+      attr_reader to: String?
+
+      def to=: (String) -> String
+
+      def initialize: (
+        ?body: String?,
+        ?channel: String?,
+        ?message_id: String,
+        ?to: String
+      ) -> void
+
+      def to_hash: -> {
+        body: String?,
+        channel: String?,
+        message_id: String,
+        to: String
+      }
+    end
+  end
+end
