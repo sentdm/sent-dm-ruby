@@ -1,0 +1,35 @@
+module Sentdm
+  module Models
+    type mms_market =
+      {
+        country: String?,
+        number_type: String?,
+        sender_value: String?,
+        status: String?
+      }
+
+    class MmsMarket < Sentdm::Internal::Type::BaseModel
+      attr_accessor country: String?
+
+      attr_accessor number_type: String?
+
+      attr_accessor sender_value: String?
+
+      attr_accessor status: String?
+
+      def initialize: (
+        ?country: String?,
+        ?number_type: String?,
+        ?sender_value: String?,
+        ?status: String?
+      ) -> void
+
+      def to_hash: -> {
+        country: String?,
+        number_type: String?,
+        sender_value: String?,
+        status: String?
+      }
+    end
+  end
+end
