@@ -65,7 +65,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageCancelResponse)
+        ).returns(Sentdm::APIResponseOfCancelledMessage)
       end
       def cancel(
         # Path param: Message ID
@@ -150,7 +150,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageRetrieveActivitiesResponse)
+        ).returns(Sentdm::APIResponseOfMessageActivities)
       end
       def retrieve_activities(
         # Message ID from route parameter
@@ -174,7 +174,7 @@ module Sentdm
           id: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::MessageRetrieveStatusResponse)
+        ).returns(Sentdm::APIResponseOfMessage)
       end
       def retrieve_status(
         # Message ID
@@ -226,16 +226,13 @@ module Sentdm
           channel: T.nilable(T::Array[String]),
           channels:
             T.nilable(
-              T::Hash[
-                Symbol,
-                T::Array[Sentdm::MessageSendParams::Channel::OrHash]
-              ]
+              T::Hash[Symbol, T::Array[Sentdm::MessageChannelOptions::OrHash]]
             ),
           media_urls: T.nilable(T::Array[String]),
           sandbox: T::Boolean,
           scheduled_at: T.nilable(Time),
           subject: T.nilable(String),
-          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash),
+          template: T.nilable(Sentdm::TemplateRef::OrHash),
           text: T.nilable(String),
           to: T::Array[String],
           idempotency_key: String,

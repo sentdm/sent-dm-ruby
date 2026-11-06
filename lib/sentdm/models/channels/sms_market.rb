@@ -23,8 +23,8 @@ module Sentdm
         #   only when the market registers with nobody and compliance was not computed —
         #   nothing to show at all.
         #
-        #   @return [Sentdm::Models::Channels::SMSMarket::Compliance, nil]
-        optional :compliance, -> { Sentdm::Channels::SMSMarket::Compliance }, nil?: true
+        #   @return [Sentdm::Models::Channels::SuppliedCompliance, nil]
+        optional :compliance, -> { Sentdm::Channels::SuppliedCompliance }, nil?: true
 
         # @!attribute country
         #
@@ -100,7 +100,7 @@ module Sentdm
         #   another — and each carries what it still owes, rather than that being reported
         #   in a separate array a caller has to join on.
         #
-        #   @param compliance [Sentdm::Models::Channels::SMSMarket::Compliance, nil] What a market has been given: the identity it registers under, its programme, an
+        #   @param compliance [Sentdm::Models::Channels::SuppliedCompliance, nil] What a market has been given: the identity it registers under, its programme, an
         #
         #   @param country [String, nil]
         #
@@ -115,117 +115,6 @@ module Sentdm
         #   @param sender_value [String, nil] The sender itself. Null until a carrier-assigned number is procured. For a marke
         #
         #   @param status [Symbol, Sentdm::Models::Channels::SMSMarket::Status, nil] Where this market's sender stands, in terms of who is holding it up — PROVISIONI
-
-        # @see Sentdm::Models::Channels::SMSMarket#compliance
-        class Compliance < Sentdm::Internal::Type::BaseModel
-          # @!attribute brand
-          #   The identity this market registers under, with inherit saying whose it is.
-          #
-          #   Reported here rather than on the profile because it belongs to the registration
-          #   this market files, and only one market files one. It was a top-level block for a
-          #   while, which put a per-registration value beside a list of markets and left a
-          #   caller to work out which market it belonged to.
-          #
-          #   Absent for a market that registers with nobody — such a market asks for no
-          #   identity, so there is none to report. Absent and null mean different things:
-          #   absent says this market does not ask, null would say it asks and nothing was
-          #   supplied.
-          #
-          #   Untyped, like the request side, because its members are declared by the market's
-          #   own schema rather than by a C# class. A typed pair here would be a second
-          #   definition of what a market wants, free to drift from the one that validates.
-          #
-          #   @return [Hash{Symbol=>Object}, nil]
-          optional :brand, Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::Unknown], nil?: true
-
-          # @!attribute campaign
-          #   The programme this market registers, with inherit saying whose it is.
-          #
-          #   One, not a list. TcrCampaigns permits several and an account built on the admin
-          #   side may hold them, but this surface offers one — which is what lets the
-          #   market's PATCH be an upsert rather than a collection with an addressable create
-          #   behind it. An account holding several is reported as its first and refused on
-          #   write, rather than half-edited.
-          #
-          #   Carries no id. Nothing addresses a campaign, and an undeclared key would be
-          #   refused if the caller sent this object back — which it is meant to be able to
-          #   do.
-          #
-          #   @return [Hash{Symbol=>Object}, nil]
-          optional :campaign, Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::Unknown], nil?: true
-
-          # @!attribute documents
-          #   What has been supplied for this market.
-          #
-          #   Files, not values — the declared halves above carry the values. A document
-          #   cannot be a JSON value, so it is sent as multipart on the channel call and
-          #   reported here as a reference.
-          #
-          #   Absent on a list read, which fetches identity but does not compute compliance
-          #   documents per market. Absent and empty mean different things: absent says the
-          #   documents were not fetched; empty says the market has been given none.
-          #
-          #   @return [Array<Sentdm::Models::Channels::SMSMarket::Compliance::Document>, nil]
-          optional :documents,
-                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMSMarket::Compliance::Document] },
-                   nil?: true
-
-          # @!method initialize(brand: nil, campaign: nil, documents: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {Sentdm::Models::Channels::SMSMarket::Compliance} for more details.
-          #
-          #   What a market has been given: the identity it registers under, its programme,
-          #   and any documents attached.
-          #
-          #   What it does not carry is what the market asks for. That is the subject of GET
-          #   /v3/compliance/requirements, and it is the same answer for every caller — a
-          #   description of what a compliance regime wants, not a record of one customer's
-          #   progress through it. It was reported here as well for a while, which put the
-          #   same array in six response shapes and left a caller deciding which of two
-          #   sources to believe.
-          #
-          #   Present on a list read for markets that register (carrying brand and campaign),
-          #   but with documents absent — documents are not fetched for a list, because a
-          #   catalog lookup and a document read per market would multiply across a page.
-          #   Absent documents is distinct from an empty list: absent says they were not
-          #   fetched; empty says the market has been given none. The parent object is null
-          #   only when the market registers with nobody and compliance was not computed —
-          #   nothing to show at all.
-          #
-          #   @param brand [Hash{Symbol=>Object}, nil] The identity this market registers under, with inherit saying whose it is.
-          #
-          #   @param campaign [Hash{Symbol=>Object}, nil] The programme this market registers, with inherit saying whose it is.
-          #
-          #   @param documents [Array<Sentdm::Models::Channels::SMSMarket::Compliance::Document>, nil] What has been supplied for this market.
-
-          class Document < Sentdm::Internal::Type::BaseModel
-            # @!attribute document_id
-            #   Identifier of the upload, for fetching it back through the documents endpoints.
-            #
-            #   @return [String, nil]
-            optional :document_id, String, nil?: true
-
-            # @!attribute file_name
-            #
-            #   @return [String, nil]
-            optional :file_name, String, nil?: true
-
-            # @!attribute key
-            #   The catalog's name for this document, matching the requirement it satisfies.
-            #
-            #   @return [String, nil]
-            optional :key, String
-
-            # @!method initialize(document_id: nil, file_name: nil, key: nil)
-            #   A document a market asked for and has been given.
-            #
-            #   @param document_id [String, nil] Identifier of the upload, for fetching it back through the documents endpoints.
-            #
-            #   @param file_name [String, nil]
-            #
-            #   @param key [String] The catalog's name for this document, matching the requirement it satisfies.
-          end
-        end
 
         # Where this market's sender stands, in terms of who is holding it up —
         # PROVISIONING, ACTION_NEEDED, PENDING_REVIEW or ACTIVE. Read-only.

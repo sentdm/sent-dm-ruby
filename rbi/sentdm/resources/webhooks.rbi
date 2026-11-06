@@ -32,8 +32,7 @@ module Sentdm
           is_inheritable: T::Boolean,
           retry_count: Integer,
           sandbox: T::Boolean,
-          sender_profile:
-            T.nilable(Sentdm::WebhookCreateParams::SenderProfile::OrHash),
+          sender_profile: T.nilable(Sentdm::WebhookSenderProfileConfig::OrHash),
           timeout_seconds: Integer,
           webhook_version: T.nilable(Integer),
           idempotency_key: String,
@@ -117,8 +116,7 @@ module Sentdm
           is_inheritable: T.nilable(T::Boolean),
           retry_count: Integer,
           sandbox: T::Boolean,
-          sender_profile:
-            T.nilable(Sentdm::WebhookUpdateParams::SenderProfile::OrHash),
+          sender_profile: T.nilable(Sentdm::WebhookSenderProfileConfig::OrHash),
           timeout_seconds: Integer,
           idempotency_key: String,
           x_profile_id: String,
@@ -214,7 +212,7 @@ module Sentdm
         params(
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookListEventTypesResponse)
+        ).returns(Sentdm::APIResponseOfWebhookEventTypesList)
       end
       def list_event_types(
         # Profile UUID to scope the request to a child profile. Only organization API keys
@@ -237,11 +235,7 @@ module Sentdm
           search: T.nilable(String),
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(
-          Sentdm::Internal::WebhookEventsPage[
-            Sentdm::Models::WebhookListEventsResponse
-          ]
-        )
+        ).returns(Sentdm::Internal::WebhookEventsPage[Sentdm::WebhookDelivery])
       end
       def list_events(
         # Path param
@@ -272,7 +266,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookRotateSecretResponse)
+        ).returns(Sentdm::APIResponseOfWebhookSecret)
       end
       def rotate_secret(
         # Path param
@@ -304,7 +298,7 @@ module Sentdm
           idempotency_key: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::WebhookTestResponse)
+        ).returns(Sentdm::APIResponseOfWebhookTest)
       end
       def test_(
         # Path param

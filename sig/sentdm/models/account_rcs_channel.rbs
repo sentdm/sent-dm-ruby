@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    type account_rcs_channel = { configured: bool, phone_number: String? }
+
+    class AccountRcsChannel < Sentdm::Internal::Type::BaseModel
+      attr_reader configured: bool?
+
+      def configured=: (bool) -> bool
+
+      attr_accessor phone_number: String?
+
+      def initialize: (?configured: bool, ?phone_number: String?) -> void
+
+      def to_hash: -> { configured: bool, phone_number: String? }
+    end
+  end
+end

@@ -9,12 +9,10 @@ module Sentdm
         end
 
       # Cursor-based pagination. Never populated — see Cursors.
-      sig { returns(T.nilable(Sentdm::PaginationMeta::Cursors)) }
+      sig { returns(T.nilable(Sentdm::PaginationCursors)) }
       attr_reader :cursors
 
-      sig do
-        params(cursors: T.nilable(Sentdm::PaginationMeta::Cursors::OrHash)).void
-      end
+      sig { params(cursors: T.nilable(Sentdm::PaginationCursors::OrHash)).void }
       attr_writer :cursors
 
       # Whether there are more pages after this one
@@ -55,7 +53,7 @@ module Sentdm
       # Pagination metadata for list responses
       sig do
         params(
-          cursors: T.nilable(Sentdm::PaginationMeta::Cursors::OrHash),
+          cursors: T.nilable(Sentdm::PaginationCursors::OrHash),
           has_more: T::Boolean,
           page: Integer,
           page_size: Integer,
@@ -82,7 +80,7 @@ module Sentdm
       sig do
         override.returns(
           {
-            cursors: T.nilable(Sentdm::PaginationMeta::Cursors),
+            cursors: T.nilable(Sentdm::PaginationCursors),
             has_more: T::Boolean,
             page: Integer,
             page_size: Integer,
@@ -92,43 +90,6 @@ module Sentdm
         )
       end
       def to_hash
-      end
-
-      class Cursors < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(Sentdm::PaginationMeta::Cursors, Sentdm::Internal::AnyHash)
-          end
-
-        # Cursor to fetch the next page.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :after
-
-        # Cursor to fetch the previous page.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :before
-
-        # Cursor-based pagination. Never populated — see Cursors.
-        sig do
-          params(after: T.nilable(String), before: T.nilable(String)).returns(
-            T.attached_class
-          )
-        end
-        def self.new(
-          # Cursor to fetch the next page.
-          after: nil,
-          # Cursor to fetch the previous page.
-          before: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            { after: T.nilable(String), before: T.nilable(String) }
-          )
-        end
-        def to_hash
-        end
       end
     end
   end

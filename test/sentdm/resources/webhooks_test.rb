@@ -91,7 +91,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
         last_delivery_attempt_at: Time | nil,
         last_successful_delivery_at: Time | nil,
         retry_count: Integer | nil,
-        sender_profile: Sentdm::WebhookResponse::SenderProfile | nil,
+        sender_profile: Sentdm::WebhookSenderProfile | nil,
         signing_secret: String | nil,
         timeout_seconds: Integer | nil,
         updated_at: Time | nil,
@@ -116,12 +116,12 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.list_event_types
 
     assert_pattern do
-      response => Sentdm::Models::WebhookListEventTypesResponse
+      response => Sentdm::APIResponseOfWebhookEventTypesList
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::WebhookListEventTypesResponse::Data | nil,
+        data: Sentdm::WebhookEventTypesList | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -142,7 +142,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     return if row.nil?
 
     assert_pattern do
-      row => Sentdm::Models::WebhookListEventsResponse
+      row => Sentdm::WebhookDelivery
     end
 
     assert_pattern do
@@ -152,7 +152,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
         delivery_attempts: Integer | nil,
         delivery_status: String | nil,
         error_message: String | nil,
-        event_data: Sentdm::Models::WebhookListEventsResponse::EventData | nil,
+        event_data: Sentdm::WebhookDelivery::EventData | nil,
         event_type: String | nil,
         http_status_code: Integer | nil,
         processing_completed_at: Time | nil,
@@ -168,12 +168,12 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.rotate_secret("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
-      response => Sentdm::Models::WebhookRotateSecretResponse
+      response => Sentdm::APIResponseOfWebhookSecret
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::WebhookRotateSecretResponse::Data | nil,
+        data: Sentdm::WebhookSecret | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil
@@ -187,12 +187,12 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     response = @sent.webhooks.test_("d4f5a6b7-c8d9-4e0f-a1b2-c3d4e5f6a7b8")
 
     assert_pattern do
-      response => Sentdm::Models::WebhookTestResponse
+      response => Sentdm::APIResponseOfWebhookTest
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::WebhookTestResponse::Data | nil,
+        data: Sentdm::WebhookTest | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

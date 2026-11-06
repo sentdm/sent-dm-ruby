@@ -6,7 +6,7 @@ module Sentdm
         api_key: String?,
         billing: Sentdm::SenderProfileBilling?,
         channels: Sentdm::ChannelsState?,
-        compliance: Sentdm::SenderProfile::Compliance?,
+        compliance: Sentdm::Channels::SuppliedCompliance?,
         created_at: Time,
         description: String?,
         name: String,
@@ -26,7 +26,7 @@ module Sentdm
 
       attr_accessor channels: Sentdm::ChannelsState?
 
-      attr_accessor compliance: Sentdm::SenderProfile::Compliance?
+      attr_accessor compliance: Sentdm::Channels::SuppliedCompliance?
 
       attr_reader created_at: Time?
 
@@ -49,7 +49,7 @@ module Sentdm
         ?api_key: String?,
         ?billing: Sentdm::SenderProfileBilling?,
         ?channels: Sentdm::ChannelsState?,
-        ?compliance: Sentdm::SenderProfile::Compliance?,
+        ?compliance: Sentdm::Channels::SuppliedCompliance?,
         ?created_at: Time,
         ?description: String?,
         ?name: String,
@@ -63,7 +63,7 @@ module Sentdm
         api_key: String?,
         billing: Sentdm::SenderProfileBilling?,
         channels: Sentdm::ChannelsState?,
-        compliance: Sentdm::SenderProfile::Compliance?,
+        compliance: Sentdm::Channels::SuppliedCompliance?,
         created_at: Time,
         description: String?,
         name: String,
@@ -71,58 +71,6 @@ module Sentdm
         organization_id: String?,
         short_name: String?
       }
-
-      type compliance =
-        {
-          brand: ::Hash[Symbol, top]?,
-          campaign: ::Hash[Symbol, top]?,
-          documents: ::Array[Sentdm::SenderProfile::Compliance::Document]?
-        }
-
-      class Compliance < Sentdm::Internal::Type::BaseModel
-        attr_accessor brand: ::Hash[Symbol, top]?
-
-        attr_accessor campaign: ::Hash[Symbol, top]?
-
-        attr_accessor documents: ::Array[Sentdm::SenderProfile::Compliance::Document]?
-
-        def initialize: (
-          ?brand: ::Hash[Symbol, top]?,
-          ?campaign: ::Hash[Symbol, top]?,
-          ?documents: ::Array[Sentdm::SenderProfile::Compliance::Document]?
-        ) -> void
-
-        def to_hash: -> {
-          brand: ::Hash[Symbol, top]?,
-          campaign: ::Hash[Symbol, top]?,
-          documents: ::Array[Sentdm::SenderProfile::Compliance::Document]?
-        }
-
-        type document =
-          { document_id: String?, file_name: String?, key: String }
-
-        class Document < Sentdm::Internal::Type::BaseModel
-          attr_accessor document_id: String?
-
-          attr_accessor file_name: String?
-
-          attr_reader key: String?
-
-          def key=: (String) -> String
-
-          def initialize: (
-            ?document_id: String?,
-            ?file_name: String?,
-            ?key: String
-          ) -> void
-
-          def to_hash: -> {
-            document_id: String?,
-            file_name: String?,
-            key: String
-          }
-        end
-      end
     end
   end
 end

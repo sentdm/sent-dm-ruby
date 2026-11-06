@@ -1,0 +1,15 @@
+module Sentdm
+  module Models
+    type tcr_brand_status = :ACTIVE | :INACTIVE | :SUSPENDED
+
+    module TcrBrandStatus
+      extend Sentdm::Internal::Type::Enum
+
+      ACTIVE: :ACTIVE
+      INACTIVE: :INACTIVE
+      SUSPENDED: :SUSPENDED
+
+      def self?.values: -> ::Array[Sentdm::Models::tcr_brand_status]
+    end
+  end
+end

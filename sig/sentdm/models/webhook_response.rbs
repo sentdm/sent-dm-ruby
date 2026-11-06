@@ -15,7 +15,7 @@ module Sentdm
         last_delivery_attempt_at: Time?,
         last_successful_delivery_at: Time?,
         retry_count: Integer,
-        sender_profile: Sentdm::WebhookResponse::SenderProfile?,
+        sender_profile: Sentdm::WebhookSenderProfile?,
         signing_secret: String?,
         timeout_seconds: Integer,
         updated_at: Time?,
@@ -69,7 +69,7 @@ module Sentdm
 
       def retry_count=: (Integer) -> Integer
 
-      attr_accessor sender_profile: Sentdm::WebhookResponse::SenderProfile?
+      attr_accessor sender_profile: Sentdm::WebhookSenderProfile?
 
       attr_accessor signing_secret: String?
 
@@ -97,7 +97,7 @@ module Sentdm
         ?last_delivery_attempt_at: Time?,
         ?last_successful_delivery_at: Time?,
         ?retry_count: Integer,
-        ?sender_profile: Sentdm::WebhookResponse::SenderProfile?,
+        ?sender_profile: Sentdm::WebhookSenderProfile?,
         ?signing_secret: String?,
         ?timeout_seconds: Integer,
         ?updated_at: Time?,
@@ -118,36 +118,12 @@ module Sentdm
         last_delivery_attempt_at: Time?,
         last_successful_delivery_at: Time?,
         retry_count: Integer,
-        sender_profile: Sentdm::WebhookResponse::SenderProfile?,
+        sender_profile: Sentdm::WebhookSenderProfile?,
         signing_secret: String?,
         timeout_seconds: Integer,
         updated_at: Time?,
         webhook_version: Integer
       }
-
-      type sender_profile =
-        {
-          event_filters: ::Hash[Symbol, ::Array[String]]?,
-          event_types: ::Array[String]
-        }
-
-      class SenderProfile < Sentdm::Internal::Type::BaseModel
-        attr_accessor event_filters: ::Hash[Symbol, ::Array[String]]?
-
-        attr_reader event_types: ::Array[String]?
-
-        def event_types=: (::Array[String]) -> ::Array[String]
-
-        def initialize: (
-          ?event_filters: ::Hash[Symbol, ::Array[String]]?,
-          ?event_types: ::Array[String]
-        ) -> void
-
-        def to_hash: -> {
-          event_filters: ::Hash[Symbol, ::Array[String]]?,
-          event_types: ::Array[String]
-        }
-      end
     end
   end
 end

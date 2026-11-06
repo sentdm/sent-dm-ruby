@@ -82,7 +82,7 @@ class Sentdm::Test::Resources::SenderProfilesTest < Sentdm::Test::ResourceTest
         api_key: String | nil,
         billing: Sentdm::SenderProfileBilling | nil,
         channels: Sentdm::ChannelsState | nil,
-        compliance: Sentdm::SenderProfile::Compliance | nil,
+        compliance: Sentdm::Channels::SuppliedCompliance | nil,
         created_at: Time | nil,
         description: String | nil,
         name: String | nil,

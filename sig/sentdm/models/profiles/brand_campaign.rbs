@@ -22,7 +22,7 @@ module Sentdm
           optout_keywords: String?,
           optout_message: String?,
           privacy_policy_link: String?,
-          status: Sentdm::Models::Profiles::BrandCampaign::status?,
+          status: Sentdm::Models::tcr_campaign_status?,
           submitted_at: Time?,
           submitted_to_tcr: bool,
           tcr_campaign_id: String?,
@@ -85,7 +85,7 @@ module Sentdm
 
         attr_accessor privacy_policy_link: String?
 
-        attr_accessor status: Sentdm::Models::Profiles::BrandCampaign::status?
+        attr_accessor status: Sentdm::Models::tcr_campaign_status?
 
         attr_accessor submitted_at: Time?
 
@@ -133,7 +133,7 @@ module Sentdm
           ?optout_keywords: String?,
           ?optout_message: String?,
           ?privacy_policy_link: String?,
-          ?status: Sentdm::Models::Profiles::BrandCampaign::status?,
+          ?status: Sentdm::Models::tcr_campaign_status?,
           ?submitted_at: Time?,
           ?submitted_to_tcr: bool,
           ?tcr_campaign_id: String?,
@@ -165,7 +165,7 @@ module Sentdm
           optout_keywords: String?,
           optout_message: String?,
           privacy_policy_link: String?,
-          status: Sentdm::Models::Profiles::BrandCampaign::status?,
+          status: Sentdm::Models::tcr_campaign_status?,
           submitted_at: Time?,
           submitted_to_tcr: bool,
           tcr_campaign_id: String?,
@@ -176,18 +176,6 @@ module Sentdm
           use_cases: ::Array[Sentdm::Profiles::CampaignUseCase],
           volume: String?
         }
-
-        type status = :SENT_CREATED | :ACTIVE | :EXPIRED
-
-        module Status
-          extend Sentdm::Internal::Type::Enum
-
-          SENT_CREATED: :SENT_CREATED
-          ACTIVE: :ACTIVE
-          EXPIRED: :EXPIRED
-
-          def self?.values: -> ::Array[Sentdm::Models::Profiles::BrandCampaign::status]
-        end
       end
     end
   end

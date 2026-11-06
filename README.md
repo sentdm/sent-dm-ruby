@@ -248,7 +248,7 @@ You can provide typesafe request parameters like so:
 ```ruby
 sent.messages.send_(
   channel: ["sms", "whatsapp"],
-  template: Sentdm::MessageSendParams::Template.new(
+  template: Sentdm::TemplateRef.new(
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
     name: "order_confirmation",
     parameters: {name: "John Doe", order_id: "12345"}
@@ -274,7 +274,7 @@ sent.messages.send_(
 # You can also splat a full Params class:
 params = Sentdm::MessageSendParams.new(
   channel: ["sms", "whatsapp"],
-  template: Sentdm::MessageSendParams::Template.new(
+  template: Sentdm::TemplateRef.new(
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
     name: "order_confirmation",
     parameters: {name: "John Doe", order_id: "12345"}

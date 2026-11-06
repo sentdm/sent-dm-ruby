@@ -1,0 +1,38 @@
+module Sentdm
+  module Models
+    type account_channels =
+      {
+        rcs: Sentdm::AccountRcsChannel,
+        sms: Sentdm::AccountSMSChannel,
+        whatsapp: Sentdm::AccountWhatsappChannel
+      }
+
+    class AccountChannels < Sentdm::Internal::Type::BaseModel
+      attr_reader rcs: Sentdm::AccountRcsChannel?
+
+      def rcs=: (Sentdm::AccountRcsChannel) -> Sentdm::AccountRcsChannel
+
+      attr_reader sms: Sentdm::AccountSMSChannel?
+
+      def sms=: (Sentdm::AccountSMSChannel) -> Sentdm::AccountSMSChannel
+
+      attr_reader whatsapp: Sentdm::AccountWhatsappChannel?
+
+      def whatsapp=: (
+        Sentdm::AccountWhatsappChannel
+      ) -> Sentdm::AccountWhatsappChannel
+
+      def initialize: (
+        ?rcs: Sentdm::AccountRcsChannel,
+        ?sms: Sentdm::AccountSMSChannel,
+        ?whatsapp: Sentdm::AccountWhatsappChannel
+      ) -> void
+
+      def to_hash: -> {
+        rcs: Sentdm::AccountRcsChannel,
+        sms: Sentdm::AccountSMSChannel,
+        whatsapp: Sentdm::AccountWhatsappChannel
+      }
+    end
+  end
+end

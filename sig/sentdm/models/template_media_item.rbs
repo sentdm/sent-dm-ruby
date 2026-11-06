@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    type template_media_item = { media_type: String?, url: String }
+
+    class TemplateMediaItem < Sentdm::Internal::Type::BaseModel
+      attr_accessor media_type: String?
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      def initialize: (?media_type: String?, ?url: String) -> void
+
+      def to_hash: -> { media_type: String?, url: String }
+    end
+  end
+end

@@ -42,9 +42,7 @@ module Sentdm
       # code BUSINESS_029 and reported on GET /v3/messages and the status webhook.
       sig do
         returns(
-          T.nilable(
-            T::Hash[Symbol, T::Array[Sentdm::MessageSendParams::Channel]]
-          )
+          T.nilable(T::Hash[Symbol, T::Array[Sentdm::MessageChannelOptions]])
         )
       end
       attr_accessor :channels
@@ -97,14 +95,10 @@ module Sentdm
 
       # SDK-style template reference: resolve by ID or by name, with optional
       # parameters.
-      sig { returns(T.nilable(Sentdm::MessageSendParams::Template)) }
+      sig { returns(T.nilable(Sentdm::TemplateRef)) }
       attr_reader :template
 
-      sig do
-        params(
-          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash)
-        ).void
-      end
+      sig { params(template: T.nilable(Sentdm::TemplateRef::OrHash)).void }
       attr_writer :template
 
       # Plain-text (free-form) message body. Provide either Template or this.
@@ -135,16 +129,13 @@ module Sentdm
           channel: T.nilable(T::Array[String]),
           channels:
             T.nilable(
-              T::Hash[
-                Symbol,
-                T::Array[Sentdm::MessageSendParams::Channel::OrHash]
-              ]
+              T::Hash[Symbol, T::Array[Sentdm::MessageChannelOptions::OrHash]]
             ),
           media_urls: T.nilable(T::Array[String]),
           sandbox: T::Boolean,
           scheduled_at: T.nilable(Time),
           subject: T.nilable(String),
-          template: T.nilable(Sentdm::MessageSendParams::Template::OrHash),
+          template: T.nilable(Sentdm::TemplateRef::OrHash),
           text: T.nilable(String),
           to: T::Array[String],
           idempotency_key: String,
@@ -235,13 +226,13 @@ module Sentdm
             channel: T.nilable(T::Array[String]),
             channels:
               T.nilable(
-                T::Hash[Symbol, T::Array[Sentdm::MessageSendParams::Channel]]
+                T::Hash[Symbol, T::Array[Sentdm::MessageChannelOptions]]
               ),
             media_urls: T.nilable(T::Array[String]),
             sandbox: T::Boolean,
             scheduled_at: T.nilable(Time),
             subject: T.nilable(String),
-            template: T.nilable(Sentdm::MessageSendParams::Template),
+            template: T.nilable(Sentdm::TemplateRef),
             text: T.nilable(String),
             to: T::Array[String],
             idempotency_key: String,
@@ -251,145 +242,6 @@ module Sentdm
         )
       end
       def to_hash
-      end
-
-      class Channel < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(Sentdm::MessageSendParams::Channel, Sentdm::Internal::AnyHash)
-          end
-
-        # Recipient country this entry is meant for (ISO 3166-1 alpha-2, e.g. US).
-        # Optional. Accepted and stored, not acted on yet.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :country
-
-        # Sender numbers in E.164. Each must be an active sender on your account for this
-        # channel. That is account state rather than request shape, so it is decided per
-        # message: the request is accepted with 202 and a message naming an unusable
-        # number is recorded BLOCKED with error code BUSINESS_029.
-        sig { returns(T.nilable(T::Array[String])) }
-        attr_accessor :from
-
-        # How to pick a number from From, e.g. sticky or geo. Optional. Accepted and
-        # stored, not acted on yet.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :strategy
-
-        # One entry of a channel's list in Channels, e.g. {"country": "US", "from":
-        # ["+15559990002", "+15559990003"], "strategy": "sticky"}.
-        sig do
-          params(
-            country: T.nilable(String),
-            from: T.nilable(T::Array[String]),
-            strategy: T.nilable(String)
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # Recipient country this entry is meant for (ISO 3166-1 alpha-2, e.g. US).
-          # Optional. Accepted and stored, not acted on yet.
-          country: nil,
-          # Sender numbers in E.164. Each must be an active sender on your account for this
-          # channel. That is account state rather than request shape, so it is decided per
-          # message: the request is accepted with 202 and a message naming an unusable
-          # number is recorded BLOCKED with error code BUSINESS_029.
-          from: nil,
-          # How to pick a number from From, e.g. sticky or geo. Optional. Accepted and
-          # stored, not acted on yet.
-          strategy: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              country: T.nilable(String),
-              from: T.nilable(T::Array[String]),
-              strategy: T.nilable(String)
-            }
-          )
-        end
-        def to_hash
-        end
-      end
-
-      class Template < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Sentdm::MessageSendParams::Template,
-              Sentdm::Internal::AnyHash
-            )
-          end
-
-        # Template ID (mutually exclusive with name)
-        sig { returns(T.nilable(String)) }
-        attr_accessor :id
-
-        # Template name (mutually exclusive with id)
-        sig { returns(T.nilable(String)) }
-        attr_accessor :name
-
-        # Template variable parameters for personalization, keyed by variable name.
-        #
-        # Every variable the template declares is required; GET /v3/templates/{id} lists
-        # them. Supplying a key the template does not declare is ignored.
-        #
-        # Media headers. A template whose header is an image (designed in WhatsApp Manager
-        # and imported into Sent) declares a reserved header_image key. Its value is a
-        # publicly reachable https URL that Meta fetches at send time — Sent does not host
-        # the asset, and the sample approved with the template is not reused. The key is
-        # derived from the header's media type, so header_video and header_document follow
-        # the same shape when those formats ship.
-        #
-        # "parameters": { "header_image": "https://cdn.example.com/banner.jpg", "name":
-        # "John Doe" }
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
-        attr_accessor :parameters
-
-        # SDK-style template reference: resolve by ID or by name, with optional
-        # parameters.
-        sig do
-          params(
-            id: T.nilable(String),
-            name: T.nilable(String),
-            parameters: T.nilable(T::Hash[Symbol, String])
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # Template ID (mutually exclusive with name)
-          id: nil,
-          # Template name (mutually exclusive with id)
-          name: nil,
-          # Template variable parameters for personalization, keyed by variable name.
-          #
-          # Every variable the template declares is required; GET /v3/templates/{id} lists
-          # them. Supplying a key the template does not declare is ignored.
-          #
-          # Media headers. A template whose header is an image (designed in WhatsApp Manager
-          # and imported into Sent) declares a reserved header_image key. Its value is a
-          # publicly reachable https URL that Meta fetches at send time — Sent does not host
-          # the asset, and the sample approved with the template is not reused. The key is
-          # derived from the header's media type, so header_video and header_document follow
-          # the same shape when those formats ship.
-          #
-          # "parameters": { "header_image": "https://cdn.example.com/banner.jpg", "name":
-          # "John Doe" }
-          parameters: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              id: T.nilable(String),
-              name: T.nilable(String),
-              parameters: T.nilable(T::Hash[Symbol, String])
-            }
-          )
-        end
-        def to_hash
-        end
       end
     end
   end

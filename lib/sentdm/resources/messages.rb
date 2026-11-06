@@ -74,7 +74,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageCancelResponse]
+      # @return [Sentdm::Models::APIResponseOfCancelledMessage]
       #
       # @see Sentdm::Models::MessageCancelParams
       def cancel(id, params = {})
@@ -85,7 +85,7 @@ module Sentdm
           path: ["v3/messages/%1$s/cancel", id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::MessageCancelResponse,
+          model: Sentdm::APIResponseOfCancelledMessage,
           options: options
         )
       end
@@ -167,7 +167,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageRetrieveActivitiesResponse]
+      # @return [Sentdm::Models::APIResponseOfMessageActivities]
       #
       # @see Sentdm::Models::MessageRetrieveActivitiesParams
       def retrieve_activities(id, params = {})
@@ -176,7 +176,7 @@ module Sentdm
           method: :get,
           path: ["v3/messages/%1$s/activities", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::MessageRetrieveActivitiesResponse,
+          model: Sentdm::APIResponseOfMessageActivities,
           options: options
         )
       end
@@ -200,7 +200,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::MessageRetrieveStatusResponse]
+      # @return [Sentdm::Models::APIResponseOfMessage]
       #
       # @see Sentdm::Models::MessageRetrieveStatusParams
       def retrieve_status(id, params = {})
@@ -209,7 +209,7 @@ module Sentdm
           method: :get,
           path: ["v3/messages/%1$s", id],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::MessageRetrieveStatusResponse,
+          model: Sentdm::APIResponseOfMessage,
           options: options
         )
       end
@@ -257,7 +257,7 @@ module Sentdm
       #
       # @param channel [Array<String>, nil] Body param: Channels to broadcast on, e.g. ["whatsapp", "sms"].
       #
-      # @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageSendParams::Channel>}, nil] Body param: Which of your own numbers to send from, keyed by channel, each chann
+      # @param channels [Hash{Symbol=>Array<Sentdm::Models::MessageChannelOptions>}, nil] Body param: Which of your own numbers to send from, keyed by channel, each chann
       #
       # @param media_urls [Array<String>, nil] Body param: Attachments for this send, as publicly fetchable https URLs. Used by
       #
@@ -267,7 +267,7 @@ module Sentdm
       #
       # @param subject [String, nil] Body param: Subject line for this send, overriding the template's. MMS only; ign
       #
-      # @param template [Sentdm::Models::MessageSendParams::Template, nil] Body param: SDK-style template reference: resolve by ID or by name, with optiona
+      # @param template [Sentdm::Models::TemplateRef, nil] Body param: SDK-style template reference: resolve by ID or by name, with optiona
       #
       # @param text [String, nil] Body param: Plain-text (free-form) message body. Provide either Template or this
       #

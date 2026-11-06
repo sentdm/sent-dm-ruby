@@ -28,12 +28,12 @@ class Sentdm::Test::Resources::UsersTest < Sentdm::Test::ResourceTest
     response = @sent.users.list
 
     assert_pattern do
-      response => Sentdm::Models::UserListResponse
+      response => Sentdm::APIResponseOfUsersList
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::UserListResponse::Data | nil,
+        data: Sentdm::UsersList | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

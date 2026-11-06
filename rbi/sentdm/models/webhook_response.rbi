@@ -93,13 +93,12 @@ module Sentdm
       #
       # Its own type, field for field the same as the request's sender_profile. A
       # response is not a request, whatever it carries.
-      sig { returns(T.nilable(Sentdm::WebhookResponse::SenderProfile)) }
+      sig { returns(T.nilable(Sentdm::WebhookSenderProfile)) }
       attr_reader :sender_profile
 
       sig do
         params(
-          sender_profile:
-            T.nilable(Sentdm::WebhookResponse::SenderProfile::OrHash)
+          sender_profile: T.nilable(Sentdm::WebhookSenderProfile::OrHash)
         ).void
       end
       attr_writer :sender_profile
@@ -139,8 +138,7 @@ module Sentdm
           last_delivery_attempt_at: T.nilable(Time),
           last_successful_delivery_at: T.nilable(Time),
           retry_count: Integer,
-          sender_profile:
-            T.nilable(Sentdm::WebhookResponse::SenderProfile::OrHash),
+          sender_profile: T.nilable(Sentdm::WebhookSenderProfile::OrHash),
           signing_secret: T.nilable(String),
           timeout_seconds: Integer,
           updated_at: T.nilable(Time),
@@ -203,7 +201,7 @@ module Sentdm
             last_delivery_attempt_at: T.nilable(Time),
             last_successful_delivery_at: T.nilable(Time),
             retry_count: Integer,
-            sender_profile: T.nilable(Sentdm::WebhookResponse::SenderProfile),
+            sender_profile: T.nilable(Sentdm::WebhookSenderProfile),
             signing_secret: T.nilable(String),
             timeout_seconds: Integer,
             updated_at: T.nilable(Time),
@@ -212,50 +210,6 @@ module Sentdm
         )
       end
       def to_hash
-      end
-
-      class SenderProfile < Sentdm::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Sentdm::WebhookResponse::SenderProfile,
-              Sentdm::Internal::AnyHash
-            )
-          end
-
-        sig { returns(T.nilable(T::Hash[Symbol, T::Array[String]])) }
-        attr_accessor :event_filters
-
-        sig { returns(T.nilable(T::Array[String])) }
-        attr_reader :event_types
-
-        sig { params(event_types: T::Array[String]).void }
-        attr_writer :event_types
-
-        # The events a version 1 webhook's sender profile clones receive, as a response
-        # reports them.
-        #
-        # Its own type, field for field the same as the request's sender_profile. A
-        # response is not a request, whatever it carries.
-        sig do
-          params(
-            event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
-            event_types: T::Array[String]
-          ).returns(T.attached_class)
-        end
-        def self.new(event_filters: nil, event_types: nil)
-        end
-
-        sig do
-          override.returns(
-            {
-              event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
-              event_types: T::Array[String]
-            }
-          )
-        end
-        def to_hash
-        end
       end
     end
   end

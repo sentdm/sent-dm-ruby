@@ -3,7 +3,7 @@ module Sentdm
     module Channels
       type sms_market =
         {
-          compliance: Sentdm::Channels::SMSMarket::Compliance?,
+          compliance: Sentdm::Channels::SuppliedCompliance?,
           country: String?,
           number_type: String?,
           numbers: ::Array[Sentdm::Channels::SMSNumber],
@@ -14,7 +14,7 @@ module Sentdm
         }
 
       class SMSMarket < Sentdm::Internal::Type::BaseModel
-        attr_accessor compliance: Sentdm::Channels::SMSMarket::Compliance?
+        attr_accessor compliance: Sentdm::Channels::SuppliedCompliance?
 
         attr_accessor country: String?
 
@@ -35,7 +35,7 @@ module Sentdm
         attr_accessor status: Sentdm::Models::Channels::SMSMarket::status?
 
         def initialize: (
-          ?compliance: Sentdm::Channels::SMSMarket::Compliance?,
+          ?compliance: Sentdm::Channels::SuppliedCompliance?,
           ?country: String?,
           ?number_type: String?,
           ?numbers: ::Array[Sentdm::Channels::SMSNumber],
@@ -46,7 +46,7 @@ module Sentdm
         ) -> void
 
         def to_hash: -> {
-          compliance: Sentdm::Channels::SMSMarket::Compliance?,
+          compliance: Sentdm::Channels::SuppliedCompliance?,
           country: String?,
           number_type: String?,
           numbers: ::Array[Sentdm::Channels::SMSNumber],
@@ -55,58 +55,6 @@ module Sentdm
           sender_value: String?,
           status: Sentdm::Models::Channels::SMSMarket::status?
         }
-
-        type compliance =
-          {
-            brand: ::Hash[Symbol, top]?,
-            campaign: ::Hash[Symbol, top]?,
-            documents: ::Array[Sentdm::Channels::SMSMarket::Compliance::Document]?
-          }
-
-        class Compliance < Sentdm::Internal::Type::BaseModel
-          attr_accessor brand: ::Hash[Symbol, top]?
-
-          attr_accessor campaign: ::Hash[Symbol, top]?
-
-          attr_accessor documents: ::Array[Sentdm::Channels::SMSMarket::Compliance::Document]?
-
-          def initialize: (
-            ?brand: ::Hash[Symbol, top]?,
-            ?campaign: ::Hash[Symbol, top]?,
-            ?documents: ::Array[Sentdm::Channels::SMSMarket::Compliance::Document]?
-          ) -> void
-
-          def to_hash: -> {
-            brand: ::Hash[Symbol, top]?,
-            campaign: ::Hash[Symbol, top]?,
-            documents: ::Array[Sentdm::Channels::SMSMarket::Compliance::Document]?
-          }
-
-          type document =
-            { document_id: String?, file_name: String?, key: String }
-
-          class Document < Sentdm::Internal::Type::BaseModel
-            attr_accessor document_id: String?
-
-            attr_accessor file_name: String?
-
-            attr_reader key: String?
-
-            def key=: (String) -> String
-
-            def initialize: (
-              ?document_id: String?,
-              ?file_name: String?,
-              ?key: String
-            ) -> void
-
-            def to_hash: -> {
-              document_id: String?,
-              file_name: String?,
-              key: String
-            }
-          end
-        end
 
         type status =
           :PROVISIONING | :ACTION_NEEDED | :PENDING_REVIEW | :ACTIVE | :INACTIVE

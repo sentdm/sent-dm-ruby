@@ -27,7 +27,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
+      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::Message>]
       #
       # @see Sentdm::Models::ConversationListParams
       def list(params = {})
@@ -40,7 +40,7 @@ module Sentdm
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
           page: Sentdm::Internal::ConversationsPage,
-          model: Sentdm::ConversationMessagesList::Message,
+          model: Sentdm::Message,
           options: options
         )
       end
@@ -63,7 +63,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::ConversationMessagesList::Message>]
+      # @return [Sentdm::Internal::ConversationsPage<Sentdm::Models::Message>]
       #
       # @see Sentdm::Models::ConversationListMessagesParams
       def list_messages(id, params = {})
@@ -76,7 +76,7 @@ module Sentdm
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_profile_id: "x-profile-id"),
           page: Sentdm::Internal::ConversationsPage,
-          model: Sentdm::ConversationMessagesList::Message,
+          model: Sentdm::Message,
           options: options
         )
       end

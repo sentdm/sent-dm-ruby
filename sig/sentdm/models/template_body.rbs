@@ -2,7 +2,7 @@ module Sentdm
   module Models
     type template_body =
       {
-        mms: Sentdm::TemplateBody::Mms?,
+        mms: Sentdm::TemplateMmsBodyContent?,
         multi_channel: Sentdm::TemplateBodyContent?,
         rcs: Sentdm::TemplateBodyContent?,
         sms: Sentdm::TemplateBodyContent?,
@@ -10,7 +10,7 @@ module Sentdm
       }
 
     class TemplateBody < Sentdm::Internal::Type::BaseModel
-      attr_accessor mms: Sentdm::TemplateBody::Mms?
+      attr_accessor mms: Sentdm::TemplateMmsBodyContent?
 
       attr_accessor multi_channel: Sentdm::TemplateBodyContent?
 
@@ -21,7 +21,7 @@ module Sentdm
       attr_accessor whatsapp: Sentdm::TemplateBodyContent?
 
       def initialize: (
-        ?mms: Sentdm::TemplateBody::Mms?,
+        ?mms: Sentdm::TemplateMmsBodyContent?,
         ?multi_channel: Sentdm::TemplateBodyContent?,
         ?rcs: Sentdm::TemplateBodyContent?,
         ?sms: Sentdm::TemplateBodyContent?,
@@ -29,51 +29,12 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
-        mms: Sentdm::TemplateBody::Mms?,
+        mms: Sentdm::TemplateMmsBodyContent?,
         multi_channel: Sentdm::TemplateBodyContent?,
         rcs: Sentdm::TemplateBodyContent?,
         sms: Sentdm::TemplateBodyContent?,
         whatsapp: Sentdm::TemplateBodyContent?
       }
-
-      type mms =
-        { media: ::Array[Sentdm::TemplateBody::Mms::Media]?, subject: String? }
-
-      class Mms < Sentdm::Models::TemplateBodyContent
-        def media: -> ::Array[Sentdm::TemplateBody::Mms::Media]?
-
-        def media=: (
-          ::Array[Sentdm::TemplateBody::Mms::Media]? _
-        ) -> ::Array[Sentdm::TemplateBody::Mms::Media]?
-
-        def subject: -> String?
-
-        def subject=: (String? _) -> String?
-
-        def initialize: (
-          ?media: ::Array[Sentdm::TemplateBody::Mms::Media]?,
-          ?subject: String?
-        ) -> void
-
-        def to_hash: -> {
-          media: ::Array[Sentdm::TemplateBody::Mms::Media]?,
-          subject: String?
-        }
-
-        type media = { media_type: String?, url: String }
-
-        class Media < Sentdm::Internal::Type::BaseModel
-          attr_accessor media_type: String?
-
-          attr_reader url: String?
-
-          def url=: (String) -> String
-
-          def initialize: (?media_type: String?, ?url: String) -> void
-
-          def to_hash: -> { media_type: String?, url: String }
-        end
-      end
     end
   end
 end

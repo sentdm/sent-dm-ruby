@@ -1,5 +1,21 @@
 module Sentdm
+  class Account = Sentdm::Models::Account
+
+  class AccountChannels = Sentdm::Models::AccountChannels
+
+  class AccountProfile = Sentdm::Models::AccountProfile
+
+  class AccountRcsChannel = Sentdm::Models::AccountRcsChannel
+
+  class AccountSMSChannel = Sentdm::Models::AccountSMSChannel
+
+  class AccountWhatsappChannel = Sentdm::Models::AccountWhatsappChannel
+
   class APIMeta = Sentdm::Models::APIMeta
+
+  class APIResponseOfAccount = Sentdm::Models::APIResponseOfAccount
+
+  class APIResponseOfCancelledMessage = Sentdm::Models::APIResponseOfCancelledMessage
 
   class APIResponseOfChannelsState = Sentdm::Models::APIResponseOfChannelsState
 
@@ -9,15 +25,43 @@ module Sentdm
 
   class APIResponseOfContactMessageSummary = Sentdm::Models::APIResponseOfContactMessageSummary
 
+  class APIResponseOfContactsList = Sentdm::Models::APIResponseOfContactsList
+
   class APIResponseOfConversationMessagesList = Sentdm::Models::APIResponseOfConversationMessagesList
 
+  class APIResponseOfMessage = Sentdm::Models::APIResponseOfMessage
+
+  class APIResponseOfMessageActivities = Sentdm::Models::APIResponseOfMessageActivities
+
+  class APIResponseOfNumberLookupResult = Sentdm::Models::APIResponseOfNumberLookupResult
+
+  class APIResponseOfProfileCompletionAccepted = Sentdm::Models::APIResponseOfProfileCompletionAccepted
+
+  class APIResponseOfProfileCompletionResult = Sentdm::Models::APIResponseOfProfileCompletionResult
+
   class APIResponseOfProfileDetail = Sentdm::Models::APIResponseOfProfileDetail
+
+  class APIResponseOfProfilesList = Sentdm::Models::APIResponseOfProfilesList
 
   class APIResponseOfSenderProfile = Sentdm::Models::APIResponseOfSenderProfile
 
   class APIResponseOfSenderProfilesList = Sentdm::Models::APIResponseOfSenderProfilesList
 
+  class APIResponseOfTemplatesList = Sentdm::Models::APIResponseOfTemplatesList
+
   class APIResponseOfUser = Sentdm::Models::APIResponseOfUser
+
+  class APIResponseOfUsersList = Sentdm::Models::APIResponseOfUsersList
+
+  class APIResponseOfWebhookEventsList = Sentdm::Models::APIResponseOfWebhookEventsList
+
+  class APIResponseOfWebhookEventTypesList = Sentdm::Models::APIResponseOfWebhookEventTypesList
+
+  class APIResponseOfWebhookSecret = Sentdm::Models::APIResponseOfWebhookSecret
+
+  class APIResponseOfWebhooksList = Sentdm::Models::APIResponseOfWebhooksList
+
+  class APIResponseOfWebhookTest = Sentdm::Models::APIResponseOfWebhookTest
 
   class APIResponseTemplate = Sentdm::Models::APIResponseTemplate
 
@@ -25,19 +69,31 @@ module Sentdm
 
   class AuthenticationConfig = Sentdm::Models::AuthenticationConfig
 
+  class BillingContact = Sentdm::Models::BillingContact
+
   class BillingContactInfo = Sentdm::Models::BillingContactInfo
+
+  class BrandBusiness = Sentdm::Models::BrandBusiness
 
   class BrandBusinessInfo = Sentdm::Models::BrandBusinessInfo
 
+  class BrandCompliance = Sentdm::Models::BrandCompliance
+
   class BrandComplianceInfo = Sentdm::Models::BrandComplianceInfo
+
+  class BrandContact = Sentdm::Models::BrandContact
 
   class BrandContactInfo = Sentdm::Models::BrandContactInfo
 
   class BrandsBrandData = Sentdm::Models::BrandsBrandData
 
+  class BrandWithKYC = Sentdm::Models::BrandWithKYC
+
   class CallEvent = Sentdm::Models::CallEvent
 
   class CallEventPayload = Sentdm::Models::CallEventPayload
+
+  class CancelledMessage = Sentdm::Models::CancelledMessage
 
   class ChannelEvent = Sentdm::Models::ChannelEvent
 
@@ -46,6 +102,8 @@ module Sentdm
   class ChannelListParams = Sentdm::Models::ChannelListParams
 
   module Channels = Sentdm::Models::Channels
+
+  class ChannelScore = Sentdm::Models::ChannelScore
 
   class ChannelsState = Sentdm::Models::ChannelsState
 
@@ -77,6 +135,8 @@ module Sentdm
 
   class ContactRetrieveParams = Sentdm::Models::ContactRetrieveParams
 
+  class ContactsList = Sentdm::Models::ContactsList
+
   class ContactUpdateParams = Sentdm::Models::ContactUpdateParams
 
   class ConversationListMessagesParams = Sentdm::Models::ConversationListMessagesParams
@@ -87,19 +147,45 @@ module Sentdm
 
   class DestinationCountry = Sentdm::Models::DestinationCountry
 
+  module EntityType = Sentdm::Models::EntityType
+
   class ErrorDetail = Sentdm::Models::ErrorDetail
+
+  class InboundMedia = Sentdm::Models::InboundMedia
 
   class InboundMessageEvent = Sentdm::Models::InboundMessageEvent
 
   class InboundMessageEventPayload = Sentdm::Models::InboundMessageEventPayload
 
+  class LinkEvent = Sentdm::Models::LinkEvent
+
+  class LinkEventPayload = Sentdm::Models::LinkEventPayload
+
   class MeRetrieveParams = Sentdm::Models::MeRetrieveParams
 
+  class Message = Sentdm::Models::Message
+
+  class MessageActivities = Sentdm::Models::MessageActivities
+
+  class MessageActivity = Sentdm::Models::MessageActivity
+
+  class MessageBody = Sentdm::Models::MessageBody
+
+  class MessageButton = Sentdm::Models::MessageButton
+
   class MessageCancelParams = Sentdm::Models::MessageCancelParams
+
+  class MessageChannelOptions = Sentdm::Models::MessageChannelOptions
 
   class MessageEvent = Sentdm::Models::MessageEvent
 
   class MessageEventPayload = Sentdm::Models::MessageEventPayload
+
+  class MessageHeaderMedia = Sentdm::Models::MessageHeaderMedia
+
+  class MessageMedia = Sentdm::Models::MessageMedia
+
+  class MessageRecipient = Sentdm::Models::MessageRecipient
 
   class MessageResendParams = Sentdm::Models::MessageResendParams
 
@@ -111,17 +197,29 @@ module Sentdm
 
   class MessageSendResponse = Sentdm::Models::MessageSendResponse
 
+  class MessageSendResult = Sentdm::Models::MessageSendResult
+
+  class MessageStatusEvent = Sentdm::Models::MessageStatusEvent
+
   class MmsMarket = Sentdm::Models::MmsMarket
 
   class MutationRequest = Sentdm::Models::MutationRequest
 
   class NumberLookupParams = Sentdm::Models::NumberLookupParams
 
+  class NumberLookupResult = Sentdm::Models::NumberLookupResult
+
+  class PaginationCursors = Sentdm::Models::PaginationCursors
+
   class PaginationMeta = Sentdm::Models::PaginationMeta
 
   class PaymentDetails = Sentdm::Models::PaymentDetails
 
   class ProfileCompleteParams = Sentdm::Models::ProfileCompleteParams
+
+  class ProfileCompletionAccepted = Sentdm::Models::ProfileCompletionAccepted
+
+  class ProfileCompletionResult = Sentdm::Models::ProfileCompletionResult
 
   class ProfileCreateParams = Sentdm::Models::ProfileCreateParams
 
@@ -136,6 +234,8 @@ module Sentdm
   module Profiles = Sentdm::Models::Profiles
 
   class ProfileSettings = Sentdm::Models::ProfileSettings
+
+  class ProfilesList = Sentdm::Models::ProfilesList
 
   class ProfileUpdateParams = Sentdm::Models::ProfileUpdateParams
 
@@ -165,7 +265,13 @@ module Sentdm
 
   class SenderProfileWhatsapp = Sentdm::Models::SenderProfileWhatsapp
 
+  module TcrBrandIdentityStatus = Sentdm::Models::TcrBrandIdentityStatus
+
   module TcrBrandRelationship = Sentdm::Models::TcrBrandRelationship
+
+  module TcrBrandStatus = Sentdm::Models::TcrBrandStatus
+
+  module TcrCampaignStatus = Sentdm::Models::TcrCampaignStatus
 
   module TcrVertical = Sentdm::Models::TcrVertical
 
@@ -193,13 +299,25 @@ module Sentdm
 
   class TemplateHeader = Sentdm::Models::TemplateHeader
 
+  class TemplateHeaderLocation = Sentdm::Models::TemplateHeaderLocation
+
   class TemplateListParams = Sentdm::Models::TemplateListParams
 
+  class TemplateMediaItem = Sentdm::Models::TemplateMediaItem
+
+  class TemplateMmsBodyContent = Sentdm::Models::TemplateMmsBodyContent
+
+  class TemplateRef = Sentdm::Models::TemplateRef
+
   class TemplateRetrieveParams = Sentdm::Models::TemplateRetrieveParams
+
+  class TemplatesList = Sentdm::Models::TemplatesList
 
   class TemplateUpdateParams = Sentdm::Models::TemplateUpdateParams
 
   class TemplateVariable = Sentdm::Models::TemplateVariable
+
+  class TemplateVariableProps = Sentdm::Models::TemplateVariableProps
 
   class UserInviteParams = Sentdm::Models::UserInviteParams
 
@@ -211,6 +329,8 @@ module Sentdm
 
   class UserRetrieveParams = Sentdm::Models::UserRetrieveParams
 
+  class UsersList = Sentdm::Models::UsersList
+
   class UserUpdateRoleParams = Sentdm::Models::UserUpdateRoleParams
 
   module Voice = Sentdm::Models::Voice
@@ -219,7 +339,13 @@ module Sentdm
 
   class WebhookDeleteParams = Sentdm::Models::WebhookDeleteParams
 
+  class WebhookDelivery = Sentdm::Models::WebhookDelivery
+
+  class WebhookEventsList = Sentdm::Models::WebhookEventsList
+
   class WebhookEventType = Sentdm::Models::WebhookEventType
+
+  class WebhookEventTypesList = Sentdm::Models::WebhookEventTypesList
 
   class WebhookListEventsParams = Sentdm::Models::WebhookListEventsParams
 
@@ -232,6 +358,16 @@ module Sentdm
   class WebhookRetrieveParams = Sentdm::Models::WebhookRetrieveParams
 
   class WebhookRotateSecretParams = Sentdm::Models::WebhookRotateSecretParams
+
+  class WebhookSecret = Sentdm::Models::WebhookSecret
+
+  class WebhookSenderProfile = Sentdm::Models::WebhookSenderProfile
+
+  class WebhookSenderProfileConfig = Sentdm::Models::WebhookSenderProfileConfig
+
+  class WebhooksList = Sentdm::Models::WebhooksList
+
+  class WebhookTest = Sentdm::Models::WebhookTest
 
   class WebhookTestParams = Sentdm::Models::WebhookTestParams
 

@@ -285,7 +285,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::ProfileListResponse]
+      # @return [Sentdm::Models::APIResponseOfProfilesList]
       #
       # @see Sentdm::Models::ProfileListParams
       def list(params = {})
@@ -294,7 +294,7 @@ module Sentdm
           method: :get,
           path: "v3/profiles",
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::ProfileListResponse,
+          model: Sentdm::APIResponseOfProfilesList,
           options: options
         )
       end
@@ -412,7 +412,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::ProfileCompleteResponse]
+      # @return [Sentdm::Models::APIResponseOfProfileCompletionResult]
       #
       # @see Sentdm::Models::ProfileCompleteParams
       def complete(profile_id, params)
@@ -423,7 +423,7 @@ module Sentdm
           path: ["v3/profiles/%1$s/complete", profile_id],
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Sentdm::Models::ProfileCompleteResponse,
+          model: Sentdm::APIResponseOfProfileCompletionResult,
           options: options
         )
       end
