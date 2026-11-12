@@ -1,0 +1,42 @@
+module Sentdm
+  module Resources
+    class Channels
+      class SMS
+        class TenDlc
+          def add_campaign: (
+            ?compliance: Sentdm::Channels::MarketCompliance,
+            ?sandbox: bool,
+            ?idempotency_key: String,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+          def add_numbers: (
+            campaign_id: String,
+            numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
+            ?sandbox: bool,
+            ?idempotency_key: String,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+          def retrieve_compliance: (
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::SMS::APIResponseOfSuppliedCompliance
+
+          def update_campaign: (
+            String campaign_id,
+            ?compliance: Sentdm::Channels::MarketCompliance,
+            ?sandbox: bool,
+            ?idempotency_key: String,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+          def initialize: (client: Sentdm::Client) -> void
+        end
+      end
+    end
+  end
+end

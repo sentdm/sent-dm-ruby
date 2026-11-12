@@ -7,9 +7,14 @@ module Sentdm
       end
 
       module Channels
+        module SMS
+        end
       end
 
       module Profiles
+      end
+
+      module SMS
       end
 
       module Voice
