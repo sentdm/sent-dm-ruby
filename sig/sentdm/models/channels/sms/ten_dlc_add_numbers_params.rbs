@@ -6,8 +6,8 @@ module Sentdm
           {
             campaign_id: String,
             numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
-            sandbox: bool,
             idempotency_key: String,
+            sandbox: bool,
             x_profile_id: String
           }
           & Sentdm::Internal::Type::request_parameters
@@ -20,13 +20,11 @@ module Sentdm
 
           attr_accessor numbers: ::Array[Sentdm::Channels::SMSNumberRequest?]
 
+          attr_accessor idempotency_key: String
+
           attr_reader sandbox: bool?
 
           def sandbox=: (bool) -> bool
-
-          attr_reader idempotency_key: String?
-
-          def idempotency_key=: (String) -> String
 
           attr_reader x_profile_id: String?
 
@@ -35,8 +33,8 @@ module Sentdm
           def initialize: (
             campaign_id: String,
             numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
+            idempotency_key: String,
             ?sandbox: bool,
-            ?idempotency_key: String,
             ?x_profile_id: String,
             ?request_options: Sentdm::request_opts
           ) -> void
@@ -44,8 +42,8 @@ module Sentdm
           def to_hash: -> {
             campaign_id: String,
             numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
-            sandbox: bool,
             idempotency_key: String,
+            sandbox: bool,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }

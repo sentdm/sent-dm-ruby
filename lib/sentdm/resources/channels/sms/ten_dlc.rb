@@ -74,13 +74,35 @@ module Sentdm
           # Returns **the market**, in the shape `GET /v3/channels/sms/US/TEN_DLC` returns,
           # with `202`.
           #
-          # @overload add_campaign(compliance: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
-          #
-          # @param compliance [Sentdm::Models::Channels::MarketCompliance] Body param: The compliance values a market registers with. `brand` and `campaign
-          #
-          # @param sandbox [Boolean] Body param
+          # @overload add_campaign(idempotency_key:, description: nil, help_keywords: nil, help_message: nil, message_flow: nil, opt_in_keywords: nil, opt_in_message: nil, opt_out_keywords: nil, opt_out_message: nil, privacy_policy_link: nil, sandbox: nil, terms_and_conditions_link: nil, use_cases: nil, volume: nil, x_profile_id: nil, request_options: {})
           #
           # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
+          #
+          # @param description [String] Body param: What this programme sends. TCR description: what recipients will get
+          #
+          # @param help_keywords [String] Body param: Help keywords. TCR helpKeywords, comma separated, e.g. HELP,INFO. Re
+          #
+          # @param help_message [String] Body param: Help reply. TCR helpMessage. Its presence is what sets subscriberHel
+          #
+          # @param message_flow [String] Body param: Consent narrative. TCR messageFlow: how recipients opt in, in prose.
+          #
+          # @param opt_in_keywords [String] Body param: Opt-in keywords. TCR optinKeywords, comma separated, e.g. START,YES.
+          #
+          # @param opt_in_message [String] Body param: Opt-in confirmation. TCR optinMessage. Should state message frequenc
+          #
+          # @param opt_out_keywords [String] Body param: Opt-out keywords. TCR optoutKeywords, comma separated. STOP, END, CA
+          #
+          # @param opt_out_message [String] Body param: Opt-out confirmation. TCR optoutMessage. Its presence is what sets s
+          #
+          # @param privacy_policy_link [String] Body param: Privacy policy URL. TCR privacyPolicyLink. Required when `compliance
+          #
+          # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
+          #
+          # @param terms_and_conditions_link [String] Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
+          #
+          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
+          #
+          # @param volume [String] Body param: Expected monthly volume. Decides how the campaign registers and whic
           #
           # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
           #
@@ -89,7 +111,7 @@ module Sentdm
           # @return [Sentdm::Models::Channels::APIResponseOfSMSMarket]
           #
           # @see Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams
-          def add_campaign(params = {})
+          def add_campaign(params)
             parsed, options = Sentdm::Channels::SMS::TenDlcAddCampaignParams.dump_request(params)
             header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
             @client.request(
@@ -128,15 +150,15 @@ module Sentdm
           # Returns **the market**, in the shape `GET /v3/channels/sms/US/TEN_DLC` returns,
           # with `202`.
           #
-          # @overload add_numbers(campaign_id:, numbers:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+          # @overload add_numbers(campaign_id:, numbers:, idempotency_key:, sandbox: nil, x_profile_id: nil, request_options: {})
           #
           # @param campaign_id [String] Body param: The campaign to add the numbers to, as compliance.campaigns[].id rep
           #
           # @param numbers [Array<Sentdm::Models::Channels::SMSNumberRequest, nil>] Body param: The numbers to add, one entry per area code, e.g. [{"area_code": "41
           #
-          # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
-          #
           # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
+          #
+          # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
           #
           # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
           #
@@ -223,13 +245,35 @@ module Sentdm
           #
           # Returns **the market**, in the shape `GET /v3/channels/sms/US/TEN_DLC` returns.
           #
-          # @overload update_campaign(campaign_id, compliance: nil, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+          # @overload update_campaign(campaign_id, description: nil, help_keywords: nil, help_message: nil, message_flow: nil, opt_in_keywords: nil, opt_in_message: nil, opt_out_keywords: nil, opt_out_message: nil, privacy_policy_link: nil, sandbox: nil, terms_and_conditions_link: nil, use_cases: nil, volume: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
           #
           # @param campaign_id [String] Path param: The campaign: its id in the market's compliance.campaigns.
           #
-          # @param compliance [Sentdm::Models::Channels::MarketCompliance] Body param: The compliance values a market registers with. `brand` and `campaign
+          # @param description [String] Body param: What this programme sends. TCR description: what recipients will get
           #
-          # @param sandbox [Boolean] Body param
+          # @param help_keywords [String] Body param: Help keywords. TCR helpKeywords, comma separated, e.g. HELP,INFO. Re
+          #
+          # @param help_message [String] Body param: Help reply. TCR helpMessage. Its presence is what sets subscriberHel
+          #
+          # @param message_flow [String] Body param: Consent narrative. TCR messageFlow: how recipients opt in, in prose.
+          #
+          # @param opt_in_keywords [String] Body param: Opt-in keywords. TCR optinKeywords, comma separated, e.g. START,YES.
+          #
+          # @param opt_in_message [String] Body param: Opt-in confirmation. TCR optinMessage. Should state message frequenc
+          #
+          # @param opt_out_keywords [String] Body param: Opt-out keywords. TCR optoutKeywords, comma separated. STOP, END, CA
+          #
+          # @param opt_out_message [String] Body param: Opt-out confirmation. TCR optoutMessage. Its presence is what sets s
+          #
+          # @param privacy_policy_link [String] Body param: Privacy policy URL. TCR privacyPolicyLink. Required when `compliance
+          #
+          # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
+          #
+          # @param terms_and_conditions_link [String] Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
+          #
+          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
+          #
+          # @param volume [String] Body param: Expected monthly volume. Decides how the campaign registers and whic
           #
           # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
           #

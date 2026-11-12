@@ -26,6 +26,11 @@ module Sentdm
           #   @return [Array<Sentdm::Models::Channels::SMSNumberRequest, nil>]
           required :numbers, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMSNumberRequest, nil?: true] }
 
+          # @!attribute idempotency_key
+          #
+          #   @return [String]
+          required :idempotency_key, String
+
           # @!attribute sandbox
           #   Sandbox flag - when true, the operation is simulated without side effects Useful
           #   for testing integrations without actual execution
@@ -33,17 +38,12 @@ module Sentdm
           #   @return [Boolean, nil]
           optional :sandbox, Sentdm::Internal::Type::Boolean
 
-          # @!attribute idempotency_key
-          #
-          #   @return [String, nil]
-          optional :idempotency_key, String
-
           # @!attribute x_profile_id
           #
           #   @return [String, nil]
           optional :x_profile_id, String
 
-          # @!method initialize(campaign_id:, numbers:, sandbox: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+          # @!method initialize(campaign_id:, numbers:, idempotency_key:, sandbox: nil, x_profile_id: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Sentdm::Models::Channels::SMS::TenDlcAddNumbersParams} for more details.
           #
@@ -51,9 +51,9 @@ module Sentdm
           #
           #   @param numbers [Array<Sentdm::Models::Channels::SMSNumberRequest, nil>] The numbers to add, one entry per area code, e.g. [{"area_code": "415", "quantit
           #
-          #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
-          #
           #   @param idempotency_key [String]
+          #
+          #   @param sandbox [Boolean] Sandbox flag - when true, the operation is simulated without side effects
           #
           #   @param x_profile_id [String]
           #

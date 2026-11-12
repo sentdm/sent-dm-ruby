@@ -3,10 +3,10 @@
 require_relative "../../../test_helper"
 
 class Sentdm::Test::Resources::Channels::SMS::TenDlcTest < Sentdm::Test::ResourceTest
-  def test_add_campaign
+  def test_add_campaign_required_params
     skip("Mock server tests are disabled")
 
-    response = @sent.channels.sms.ten_dlc.add_campaign
+    response = @sent.channels.sms.ten_dlc.add_campaign(idempotency_key: "req_abc123_retry1")
 
     assert_pattern do
       response => Sentdm::Channels::APIResponseOfSMSMarket
@@ -28,7 +28,8 @@ class Sentdm::Test::Resources::Channels::SMS::TenDlcTest < Sentdm::Test::Resourc
     response =
       @sent.channels.sms.ten_dlc.add_numbers(
         campaign_id: "8f14e45f-ceea-467f-a8f0-7c2a3d1b9e01",
-        numbers: [{}]
+        numbers: [{}],
+        idempotency_key: "req_abc123_retry1"
       )
 
     assert_pattern do

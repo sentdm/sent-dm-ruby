@@ -72,24 +72,81 @@ module Sentdm
           # with `202`.
           sig do
             params(
-              compliance: Sentdm::Channels::MarketCompliance::OrHash,
-              sandbox: T::Boolean,
               idempotency_key: String,
+              description: String,
+              help_keywords: String,
+              help_message: String,
+              message_flow: String,
+              opt_in_keywords: String,
+              opt_in_message: String,
+              opt_out_keywords: String,
+              opt_out_message: String,
+              privacy_policy_link: String,
+              sandbox: T::Boolean,
+              terms_and_conditions_link: String,
+              use_cases:
+                T::Array[
+                  Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase::OrHash
+                ],
+              volume: String,
               x_profile_id: String,
               request_options: Sentdm::RequestOptions::OrHash
             ).returns(Sentdm::Channels::APIResponseOfSMSMarket)
           end
           def add_campaign(
-            # Body param: The compliance values a market registers with. `brand` and
-            # `campaign` apply to US `TEN_DLC`; other markets fill this map with the document
-            # keys their own requirements name.
-            compliance: nil,
-            # Body param
-            sandbox: nil,
             # Header param: Unique key to ensure idempotent request processing. Must be 1-255
             # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
             # hours per key per customer.
-            idempotency_key: nil,
+            idempotency_key:,
+            # Body param: What this programme sends. TCR description: what recipients will get
+            # and why, in a sentence. The only one of these TCR takes verbatim as a
+            # description of the programme, which is why it is asked for rather than derived
+            # from the customer's name. Required when `compliance.campaign.inherit != true`.
+            description: nil,
+            # Body param: Help keywords. TCR helpKeywords, comma separated, e.g. HELP,INFO.
+            # Required when `compliance.campaign.inherit != true`.
+            help_keywords: nil,
+            # Body param: Help reply. TCR helpMessage. Its presence is what sets
+            # subscriberHelp. Required when `compliance.campaign.inherit != true`.
+            help_message: nil,
+            # Body param: Consent narrative. TCR messageFlow: how recipients opt in, in prose.
+            # Under 40 characters is refused, and carriers reject vague descriptions — say
+            # where opt-in happens, that the box is unchecked by default, and that consent is
+            # not a condition of purchase. Required when
+            # `compliance.campaign.inherit != true`.
+            message_flow: nil,
+            # Body param: Opt-in keywords. TCR optinKeywords, comma separated, e.g. START,YES.
+            # Required when `compliance.campaign.inherit != true`.
+            opt_in_keywords: nil,
+            # Body param: Opt-in confirmation. TCR optinMessage. Should state message
+            # frequency and that rates may apply. Its presence is what sets subscriberOptin.
+            # Required when `compliance.campaign.inherit != true`.
+            opt_in_message: nil,
+            # Body param: Opt-out keywords. TCR optoutKeywords, comma separated. STOP, END,
+            # CANCEL, UNSUBSCRIBE and QUIT are honoured regardless of what is declared.
+            # Required when `compliance.campaign.inherit != true`.
+            opt_out_keywords: nil,
+            # Body param: Opt-out confirmation. TCR optoutMessage. Its presence is what sets
+            # subscriberOptout. Required when `compliance.campaign.inherit != true`.
+            opt_out_message: nil,
+            # Body param: Privacy policy URL. TCR privacyPolicyLink. Required when
+            # `compliance.campaign.inherit != true`.
+            privacy_policy_link: nil,
+            # Body param: Sandbox flag - when true, the operation is simulated without side
+            # effects Useful for testing integrations without actual execution
+            sandbox: nil,
+            # Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
+            # `compliance.campaign.inherit != true`.
+            terms_and_conditions_link: nil,
+            # Body param: Use cases. What the campaign sends, and an example of each. One to
+            # five entries; how they register is decided by volume, never declared. Required
+            # when `compliance.campaign.inherit != true`.
+            use_cases: nil,
+            # Body param: Expected monthly volume. Decides how the campaign registers and
+            # which fee tier applies: below the low-volume threshold it registers as
+            # LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+            # it registers the campaign at the higher-fee standard tier.
+            volume: nil,
             # Header param: Profile UUID to scope the request to a child profile. Only
             # organization API keys can use this header. The profile must belong to the
             # calling organization.
@@ -125,8 +182,8 @@ module Sentdm
               campaign_id: String,
               numbers:
                 T::Array[T.nilable(Sentdm::Channels::SMSNumberRequest::OrHash)],
-              sandbox: T::Boolean,
               idempotency_key: String,
+              sandbox: T::Boolean,
               x_profile_id: String,
               request_options: Sentdm::RequestOptions::OrHash
             ).returns(Sentdm::Channels::APIResponseOfSMSMarket)
@@ -141,13 +198,13 @@ module Sentdm
             #
             # Added to what the campaign already asks for, never replacing it.
             numbers:,
-            # Body param: Sandbox flag - when true, the operation is simulated without side
-            # effects Useful for testing integrations without actual execution
-            sandbox: nil,
             # Header param: Unique key to ensure idempotent request processing. Must be 1-255
             # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
             # hours per key per customer.
-            idempotency_key: nil,
+            idempotency_key:,
+            # Body param: Sandbox flag - when true, the operation is simulated without side
+            # effects Useful for testing integrations without actual execution
+            sandbox: nil,
             # Header param: Profile UUID to scope the request to a child profile. Only
             # organization API keys can use this header. The profile must belong to the
             # calling organization.
@@ -209,8 +266,22 @@ module Sentdm
           sig do
             params(
               campaign_id: String,
-              compliance: Sentdm::Channels::MarketCompliance::OrHash,
+              description: String,
+              help_keywords: String,
+              help_message: String,
+              message_flow: String,
+              opt_in_keywords: String,
+              opt_in_message: String,
+              opt_out_keywords: String,
+              opt_out_message: String,
+              privacy_policy_link: String,
               sandbox: T::Boolean,
+              terms_and_conditions_link: String,
+              use_cases:
+                T::Array[
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::OrHash
+                ],
+              volume: String,
               idempotency_key: String,
               x_profile_id: String,
               request_options: Sentdm::RequestOptions::OrHash
@@ -219,12 +290,55 @@ module Sentdm
           def update_campaign(
             # Path param: The campaign: its id in the market's compliance.campaigns.
             campaign_id,
-            # Body param: The compliance values a market registers with. `brand` and
-            # `campaign` apply to US `TEN_DLC`; other markets fill this map with the document
-            # keys their own requirements name.
-            compliance: nil,
-            # Body param
+            # Body param: What this programme sends. TCR description: what recipients will get
+            # and why, in a sentence. The only one of these TCR takes verbatim as a
+            # description of the programme, which is why it is asked for rather than derived
+            # from the customer's name. Required when `compliance.campaign.inherit != true`.
+            description: nil,
+            # Body param: Help keywords. TCR helpKeywords, comma separated, e.g. HELP,INFO.
+            # Required when `compliance.campaign.inherit != true`.
+            help_keywords: nil,
+            # Body param: Help reply. TCR helpMessage. Its presence is what sets
+            # subscriberHelp. Required when `compliance.campaign.inherit != true`.
+            help_message: nil,
+            # Body param: Consent narrative. TCR messageFlow: how recipients opt in, in prose.
+            # Under 40 characters is refused, and carriers reject vague descriptions — say
+            # where opt-in happens, that the box is unchecked by default, and that consent is
+            # not a condition of purchase. Required when
+            # `compliance.campaign.inherit != true`.
+            message_flow: nil,
+            # Body param: Opt-in keywords. TCR optinKeywords, comma separated, e.g. START,YES.
+            # Required when `compliance.campaign.inherit != true`.
+            opt_in_keywords: nil,
+            # Body param: Opt-in confirmation. TCR optinMessage. Should state message
+            # frequency and that rates may apply. Its presence is what sets subscriberOptin.
+            # Required when `compliance.campaign.inherit != true`.
+            opt_in_message: nil,
+            # Body param: Opt-out keywords. TCR optoutKeywords, comma separated. STOP, END,
+            # CANCEL, UNSUBSCRIBE and QUIT are honoured regardless of what is declared.
+            # Required when `compliance.campaign.inherit != true`.
+            opt_out_keywords: nil,
+            # Body param: Opt-out confirmation. TCR optoutMessage. Its presence is what sets
+            # subscriberOptout. Required when `compliance.campaign.inherit != true`.
+            opt_out_message: nil,
+            # Body param: Privacy policy URL. TCR privacyPolicyLink. Required when
+            # `compliance.campaign.inherit != true`.
+            privacy_policy_link: nil,
+            # Body param: Sandbox flag - when true, the operation is simulated without side
+            # effects Useful for testing integrations without actual execution
             sandbox: nil,
+            # Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
+            # `compliance.campaign.inherit != true`.
+            terms_and_conditions_link: nil,
+            # Body param: Use cases. What the campaign sends, and an example of each. One to
+            # five entries; how they register is decided by volume, never declared. Required
+            # when `compliance.campaign.inherit != true`.
+            use_cases: nil,
+            # Body param: Expected monthly volume. Decides how the campaign registers and
+            # which fee tier applies: below the low-volume threshold it registers as
+            # LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+            # it registers the campaign at the higher-fee standard tier.
+            volume: nil,
             # Header param: Unique key to ensure idempotent request processing. Must be 1-255
             # alphanumeric characters, hyphens, or underscores. Responses are cached for 24
             # hours per key per customer.

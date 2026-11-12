@@ -31,6 +31,9 @@ module Sentdm
           end
           attr_accessor :numbers
 
+          sig { returns(String) }
+          attr_accessor :idempotency_key
+
           # Sandbox flag - when true, the operation is simulated without side effects Useful
           # for testing integrations without actual execution
           sig { returns(T.nilable(T::Boolean)) }
@@ -38,12 +41,6 @@ module Sentdm
 
           sig { params(sandbox: T::Boolean).void }
           attr_writer :sandbox
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :idempotency_key
-
-          sig { params(idempotency_key: String).void }
-          attr_writer :idempotency_key
 
           sig { returns(T.nilable(String)) }
           attr_reader :x_profile_id
@@ -56,8 +53,8 @@ module Sentdm
               campaign_id: String,
               numbers:
                 T::Array[T.nilable(Sentdm::Channels::SMSNumberRequest::OrHash)],
-              sandbox: T::Boolean,
               idempotency_key: String,
+              sandbox: T::Boolean,
               x_profile_id: String,
               request_options: Sentdm::RequestOptions::OrHash
             ).returns(T.attached_class)
@@ -72,10 +69,10 @@ module Sentdm
             #
             # Added to what the campaign already asks for, never replacing it.
             numbers:,
+            idempotency_key:,
             # Sandbox flag - when true, the operation is simulated without side effects Useful
             # for testing integrations without actual execution
             sandbox: nil,
-            idempotency_key: nil,
             x_profile_id: nil,
             request_options: {}
           )
@@ -87,8 +84,8 @@ module Sentdm
                 campaign_id: String,
                 numbers:
                   T::Array[T.nilable(Sentdm::Channels::SMSNumberRequest)],
-                sandbox: T::Boolean,
                 idempotency_key: String,
+                sandbox: T::Boolean,
                 x_profile_id: String,
                 request_options: Sentdm::RequestOptions
               }
