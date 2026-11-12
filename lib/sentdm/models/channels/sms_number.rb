@@ -11,6 +11,15 @@ module Sentdm
         #   @return [String, nil]
         optional :area_code, String, nil?: true
 
+        # @!attribute campaign_id
+        #   The campaign the number is on, or is owed for: the id of its entry in
+        #   compliance.campaigns. Omitted for a market that registers no campaigns, and
+        #   where the campaign is not known — a number recorded without one, or one owed on
+        #   a campaign inherited from the organization.
+        #
+        #   @return [String, nil]
+        optional :campaign_id, String, nil?: true
+
         # @!attribute sender_value
         #   The number, or null while it is still to be assigned.
         #
@@ -24,13 +33,15 @@ module Sentdm
         #   @return [String, nil]
         optional :status, String, nil?: true
 
-        # @!method initialize(area_code: nil, sender_value: nil, status: nil)
+        # @!method initialize(area_code: nil, campaign_id: nil, sender_value: nil, status: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::SMSNumber} for more details.
         #
         #   One number of an SMS market.
         #
         #   @param area_code [String, nil] The number's area code, e.g. 212. While the number is still to be assigned, the
+        #
+        #   @param campaign_id [String, nil] The campaign the number is on, or is owed for: the id of its entry in compliance
         #
         #   @param sender_value [String, nil] The number, or null while it is still to be assigned.
         #

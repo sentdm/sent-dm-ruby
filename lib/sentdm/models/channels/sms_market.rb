@@ -62,14 +62,6 @@ module Sentdm
         #   @return [String, nil]
         optional :reason_code, String, nil?: true
 
-        # @!attribute sender_value
-        #   The sender itself. Null until a carrier-assigned number is procured. For a
-        #   market holding several numbers, the first active one (the first assigned while
-        #   none is active) — every number is in numbers.
-        #
-        #   @return [String, nil]
-        optional :sender_value, String, nil?: true
-
         # @!attribute status
         #   Where this market's sender stands, in terms of who is holding it up —
         #   PROVISIONING, ACTION_NEEDED, PENDING_REVIEW or ACTIVE. Read-only.
@@ -88,7 +80,7 @@ module Sentdm
         #   @return [Symbol, Sentdm::Models::Channels::SMSMarket::Status, nil]
         optional :status, enum: -> { Sentdm::Channels::SMSMarket::Status }, nil?: true
 
-        # @!method initialize(compliance: nil, country: nil, number_type: nil, numbers: nil, reason: nil, reason_code: nil, sender_value: nil, status: nil)
+        # @!method initialize(compliance: nil, country: nil, number_type: nil, numbers: nil, reason: nil, reason_code: nil, status: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::SMSMarket} for more details.
         #
@@ -111,8 +103,6 @@ module Sentdm
         #   @param reason [String, nil] A sentence for reason_code: this market's own explanation, naming what is outsta
         #
         #   @param reason_code [String, nil] Why the market is not ACTIVE, as a stable code: an ErrorCodes CHANNEL_xxx value
-        #
-        #   @param sender_value [String, nil] The sender itself. Null until a carrier-assigned number is procured. For a marke
         #
         #   @param status [Symbol, Sentdm::Models::Channels::SMSMarket::Status, nil] Where this market's sender stands, in terms of who is holding it up — PROVISIONI
 

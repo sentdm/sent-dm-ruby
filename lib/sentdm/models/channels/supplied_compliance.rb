@@ -40,6 +40,30 @@ module Sentdm
         #   @return [Hash{Symbol=>Object}, nil]
         optional :campaign, Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::Unknown], nil?: true
 
+        # @!attribute campaigns
+        #   Every campaign this market registers, each with inherit saying whose it is —
+        #   oldest first.
+        #
+        #   A list, because a market can now be on more than one. POST
+        #   /v3/channels/sms/compliances/US/TEN_DLC/campaigns adds a campaign of the
+        #   customer's own beside the one it has, and a profile running on its
+        #   organization's campaign keeps that one when it adds its own. Campaign can only
+        #   show one of them, so it stays as it was, for callers that read it, and this is
+        #   where the rest are.
+        #
+        #   The organization's campaign reads "inherit": true and the customer's own read
+        #   "inherit": false. Each entry is the shape of Campaign plus id, the campaign's
+        #   own id, so several can be told apart. Campaign carries no id, because it is sent
+        #   back to PATCH, which refuses a key it does not declare; this list is read-only.
+        #
+        #   Absent for a market that registers with nobody; empty for one that registers and
+        #   has no campaign yet.
+        #
+        #   @return [Array<Hash{Symbol=>Object}>, nil]
+        optional :campaigns,
+                 Sentdm::Internal::Type::ArrayOf[Sentdm::Internal::Type::HashOf[Sentdm::Internal::Type::Unknown]],
+                 nil?: true
+
         # @!attribute documents
         #   What has been supplied for this market.
         #
@@ -56,7 +80,7 @@ module Sentdm
                  -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SuppliedDocument] },
                  nil?: true
 
-        # @!method initialize(brand: nil, campaign: nil, documents: nil)
+        # @!method initialize(brand: nil, campaign: nil, campaigns: nil, documents: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::SuppliedCompliance} for more details.
         #
@@ -81,6 +105,8 @@ module Sentdm
         #   @param brand [Hash{Symbol=>Object}, nil] The identity this market registers under, with inherit saying whose it is.
         #
         #   @param campaign [Hash{Symbol=>Object}, nil] The programme this market registers, with inherit saying whose it is.
+        #
+        #   @param campaigns [Array<Hash{Symbol=>Object}>, nil] Every campaign this market registers, each with inherit saying whose it is — old
         #
         #   @param documents [Array<Sentdm::Models::Channels::SuppliedDocument>, nil] What has been supplied for this market.
       end
