@@ -54,9 +54,10 @@ module Sentdm
         attr_accessor :ended_at
 
         # Why the call did not complete: callback_timeout, invalid_answer,
-        # insufficient_balance, destination_blocked, callback_not_configured, rejected,
-        # no_answer, or for an agent call agent_busy or agent_unreachable. Null while the
-        # call is live, when it completed, and when it failed without a recorded reason
+        # insufficient_balance, payment_method_missing, destination_blocked,
+        # callback_not_configured, rejected, no_answer, or for an agent call agent_busy or
+        # agent_unreachable. Null while the call is live, when it completed, and when it
+        # failed without a recorded reason
         sig { returns(T.nilable(String)) }
         attr_accessor :failure_reason
 
@@ -179,9 +180,10 @@ module Sentdm
           # When the call ended (UTC). Null while the call is live
           ended_at: nil,
           # Why the call did not complete: callback_timeout, invalid_answer,
-          # insufficient_balance, destination_blocked, callback_not_configured, rejected,
-          # no_answer, or for an agent call agent_busy or agent_unreachable. Null while the
-          # call is live, when it completed, and when it failed without a recorded reason
+          # insufficient_balance, payment_method_missing, destination_blocked,
+          # callback_not_configured, rejected, no_answer, or for an agent call agent_busy or
+          # agent_unreachable. Null while the call is live, when it completed, and when it
+          # failed without a recorded reason
           failure_reason: nil,
           # One end of a call
           from: nil,

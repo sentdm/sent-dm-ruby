@@ -67,12 +67,6 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :reason_code
 
-        # The sender itself. Null until a carrier-assigned number is procured. For a
-        # market holding several numbers, the first active one (the first assigned while
-        # none is active) — every number is in numbers.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :sender_value
-
         # Where this market's sender stands, in terms of who is holding it up —
         # PROVISIONING, ACTION_NEEDED, PENDING_REVIEW or ACTIVE. Read-only.
         #
@@ -106,7 +100,6 @@ module Sentdm
             numbers: T::Array[Sentdm::Channels::SMSNumber::OrHash],
             reason: T.nilable(String),
             reason_code: T.nilable(String),
-            sender_value: T.nilable(String),
             status: T.nilable(Sentdm::Channels::SMSMarket::Status::OrSymbol)
           ).returns(T.attached_class)
         end
@@ -145,10 +138,6 @@ module Sentdm
           # this rather than on reason. Omitted while ACTIVE. Read-only; when nothing more
           # specific is known it is the generic reason for the status.
           reason_code: nil,
-          # The sender itself. Null until a carrier-assigned number is procured. For a
-          # market holding several numbers, the first active one (the first assigned while
-          # none is active) — every number is in numbers.
-          sender_value: nil,
           # Where this market's sender stands, in terms of who is holding it up —
           # PROVISIONING, ACTION_NEEDED, PENDING_REVIEW or ACTIVE. Read-only.
           #
@@ -175,7 +164,6 @@ module Sentdm
               numbers: T::Array[Sentdm::Channels::SMSNumber],
               reason: T.nilable(String),
               reason_code: T.nilable(String),
-              sender_value: T.nilable(String),
               status:
                 T.nilable(Sentdm::Channels::SMSMarket::Status::TaggedSymbol)
             }
