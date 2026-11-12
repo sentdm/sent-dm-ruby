@@ -1,0 +1,9 @@
+module Sentdm
+  module Models
+    module Channels
+      type supplied_campaign = ::Hash[Symbol, top]
+
+      SuppliedCampaign: Sentdm::Internal::Type::Converter
+    end
+  end
+end

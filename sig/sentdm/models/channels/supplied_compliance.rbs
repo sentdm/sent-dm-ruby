@@ -5,6 +5,7 @@ module Sentdm
         {
           brand: ::Hash[Symbol, top]?,
           campaign: ::Hash[Symbol, top]?,
+          campaigns: ::Array[Sentdm::Models::Channels::supplied_campaign]?,
           documents: ::Array[Sentdm::Channels::SuppliedDocument]?
         }
 
@@ -13,17 +14,21 @@ module Sentdm
 
         attr_accessor campaign: ::Hash[Symbol, top]?
 
+        attr_accessor campaigns: ::Array[Sentdm::Models::Channels::supplied_campaign]?
+
         attr_accessor documents: ::Array[Sentdm::Channels::SuppliedDocument]?
 
         def initialize: (
           ?brand: ::Hash[Symbol, top]?,
           ?campaign: ::Hash[Symbol, top]?,
+          ?campaigns: ::Array[Sentdm::Models::Channels::supplied_campaign]?,
           ?documents: ::Array[Sentdm::Channels::SuppliedDocument]?
         ) -> void
 
         def to_hash: -> {
           brand: ::Hash[Symbol, top]?,
           campaign: ::Hash[Symbol, top]?,
+          campaigns: ::Array[Sentdm::Models::Channels::supplied_campaign]?,
           documents: ::Array[Sentdm::Channels::SuppliedDocument]?
         }
       end
