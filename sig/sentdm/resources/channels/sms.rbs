@@ -2,6 +2,8 @@ module Sentdm
   module Resources
     class Channels
       class SMS
+        attr_reader ten_dlc: Sentdm::Resources::Channels::SMS::TenDlc
+
         def create: (
           number_type: Sentdm::Models::Channels::SMSCreateParams::number_type,
           ?area_codes: ::Array[String]?,
