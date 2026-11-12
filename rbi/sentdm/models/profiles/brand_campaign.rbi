@@ -63,6 +63,15 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :help_message
 
+        # Whether the campaign is the organization's, which the profile runs on, rather
+        # than one of the profile's own. A profile running on its organization's campaign
+        # can hold campaigns of its own beside it, and the list returns both.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_inherited
+
+        sig { params(is_inherited: T::Boolean).void }
+        attr_writer :is_inherited
+
         sig { returns(T.nilable(String)) }
         attr_accessor :message_flow
 
@@ -152,6 +161,7 @@ module Sentdm
             has_submission_transaction: T::Boolean,
             help_keywords: T.nilable(String),
             help_message: T.nilable(String),
+            is_inherited: T::Boolean,
             message_flow: T.nilable(String),
             name: String,
             optin_keywords: T.nilable(String),
@@ -187,6 +197,10 @@ module Sentdm
           has_submission_transaction: nil,
           help_keywords: nil,
           help_message: nil,
+          # Whether the campaign is the organization's, which the profile runs on, rather
+          # than one of the profile's own. A profile running on its organization's campaign
+          # can hold campaigns of its own beside it, and the list returns both.
+          is_inherited: nil,
           message_flow: nil,
           name: nil,
           optin_keywords: nil,
@@ -229,6 +243,7 @@ module Sentdm
               has_submission_transaction: T::Boolean,
               help_keywords: T.nilable(String),
               help_message: T.nilable(String),
+              is_inherited: T::Boolean,
               message_flow: T.nilable(String),
               name: String,
               optin_keywords: T.nilable(String),
