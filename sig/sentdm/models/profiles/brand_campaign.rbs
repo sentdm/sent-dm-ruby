@@ -15,6 +15,7 @@ module Sentdm
           has_submission_transaction: bool,
           help_keywords: String?,
           help_message: String?,
+          is_inherited: bool,
           message_flow: String?,
           name: String,
           optin_keywords: String?,
@@ -68,6 +69,10 @@ module Sentdm
         attr_accessor help_keywords: String?
 
         attr_accessor help_message: String?
+
+        attr_reader is_inherited: bool?
+
+        def is_inherited=: (bool) -> bool
 
         attr_accessor message_flow: String?
 
@@ -126,6 +131,7 @@ module Sentdm
           ?has_submission_transaction: bool,
           ?help_keywords: String?,
           ?help_message: String?,
+          ?is_inherited: bool,
           ?message_flow: String?,
           ?name: String,
           ?optin_keywords: String?,
@@ -158,6 +164,7 @@ module Sentdm
           has_submission_transaction: bool,
           help_keywords: String?,
           help_message: String?,
+          is_inherited: bool,
           message_flow: String?,
           name: String,
           optin_keywords: String?,
