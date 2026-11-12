@@ -3,7 +3,7 @@ module Sentdm
     type template_variable =
       {
         name: String,
-        props: Sentdm::TemplateVariable::Props,
+        props: Sentdm::TemplateVariableProps,
         type: String,
         id: Integer
       }
@@ -11,7 +11,7 @@ module Sentdm
     class TemplateVariable < Sentdm::Internal::Type::BaseModel
       attr_accessor name: String
 
-      attr_accessor props: Sentdm::TemplateVariable::Props
+      attr_accessor props: Sentdm::TemplateVariableProps
 
       attr_accessor type: String
 
@@ -21,64 +21,17 @@ module Sentdm
 
       def initialize: (
         name: String,
-        props: Sentdm::TemplateVariable::Props,
+        props: Sentdm::TemplateVariableProps,
         type: String,
         ?id: Integer
       ) -> void
 
       def to_hash: -> {
         name: String,
-        props: Sentdm::TemplateVariable::Props,
+        props: Sentdm::TemplateVariableProps,
         type: String,
         id: Integer
       }
-
-      type props =
-        {
-          media_type: String,
-          sample: String,
-          url: String,
-          variable_type: String,
-          alt: String?,
-          regex: String?,
-          short_url: String?
-        }
-
-      class Props < Sentdm::Internal::Type::BaseModel
-        attr_accessor media_type: String
-
-        attr_accessor sample: String
-
-        attr_accessor url: String
-
-        attr_accessor variable_type: String
-
-        attr_accessor alt: String?
-
-        attr_accessor regex: String?
-
-        attr_accessor short_url: String?
-
-        def initialize: (
-          media_type: String,
-          sample: String,
-          url: String,
-          variable_type: String,
-          ?alt: String?,
-          ?regex: String?,
-          ?short_url: String?
-        ) -> void
-
-        def to_hash: -> {
-          media_type: String,
-          sample: String,
-          url: String,
-          variable_type: String,
-          alt: String?,
-          regex: String?,
-          short_url: String?
-        }
-      end
     end
   end
 end

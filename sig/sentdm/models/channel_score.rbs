@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    type channel_score =
+      { channel: String, fail_score: Integer, success_score: Integer }
+
+    class ChannelScore < Sentdm::Internal::Type::BaseModel
+      attr_reader channel: String?
+
+      def channel=: (String) -> String
+
+      attr_reader fail_score: Integer?
+
+      def fail_score=: (Integer) -> Integer
+
+      attr_reader success_score: Integer?
+
+      def success_score=: (Integer) -> Integer
+
+      def initialize: (
+        ?channel: String,
+        ?fail_score: Integer,
+        ?success_score: Integer
+      ) -> void
+
+      def to_hash: -> {
+        channel: String,
+        fail_score: Integer,
+        success_score: Integer
+      }
+    end
+  end
+end

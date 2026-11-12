@@ -1,0 +1,37 @@
+module Sentdm
+  module Models
+    module Channels
+      type supplied_compliance =
+        {
+          brand: ::Hash[Symbol, top]?,
+          campaign: ::Hash[Symbol, top]?,
+          campaigns: ::Array[::Hash[Symbol, top]]?,
+          documents: ::Array[Sentdm::Channels::SuppliedDocument]?
+        }
+
+      class SuppliedCompliance < Sentdm::Internal::Type::BaseModel
+        attr_accessor brand: ::Hash[Symbol, top]?
+
+        attr_accessor campaign: ::Hash[Symbol, top]?
+
+        attr_accessor campaigns: ::Array[::Hash[Symbol, top]]?
+
+        attr_accessor documents: ::Array[Sentdm::Channels::SuppliedDocument]?
+
+        def initialize: (
+          ?brand: ::Hash[Symbol, top]?,
+          ?campaign: ::Hash[Symbol, top]?,
+          ?campaigns: ::Array[::Hash[Symbol, top]]?,
+          ?documents: ::Array[Sentdm::Channels::SuppliedDocument]?
+        ) -> void
+
+        def to_hash: -> {
+          brand: ::Hash[Symbol, top]?,
+          campaign: ::Hash[Symbol, top]?,
+          campaigns: ::Array[::Hash[Symbol, top]]?,
+          documents: ::Array[Sentdm::Channels::SuppliedDocument]?
+        }
+      end
+    end
+  end
+end

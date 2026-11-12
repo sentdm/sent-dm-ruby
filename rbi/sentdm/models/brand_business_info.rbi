@@ -20,9 +20,7 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :country_of_registration
 
-      sig do
-        returns(T.nilable(Sentdm::BrandBusinessInfo::EntityType::OrSymbol))
-      end
+      sig { returns(T.nilable(Sentdm::EntityType::OrSymbol)) }
       attr_accessor :entity_type
 
       # Legal business name
@@ -59,8 +57,7 @@ module Sentdm
           city: T.nilable(String),
           country: T.nilable(String),
           country_of_registration: T.nilable(String),
-          entity_type:
-            T.nilable(Sentdm::BrandBusinessInfo::EntityType::OrSymbol),
+          entity_type: T.nilable(Sentdm::EntityType::OrSymbol),
           legal_name: T.nilable(String),
           postal_code: T.nilable(String),
           state: T.nilable(String),
@@ -101,8 +98,7 @@ module Sentdm
             city: T.nilable(String),
             country: T.nilable(String),
             country_of_registration: T.nilable(String),
-            entity_type:
-              T.nilable(Sentdm::BrandBusinessInfo::EntityType::OrSymbol),
+            entity_type: T.nilable(Sentdm::EntityType::OrSymbol),
             legal_name: T.nilable(String),
             postal_code: T.nilable(String),
             state: T.nilable(String),
@@ -114,48 +110,6 @@ module Sentdm
         )
       end
       def to_hash
-      end
-
-      module EntityType
-        extend Sentdm::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Sentdm::BrandBusinessInfo::EntityType) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        PRIVATE_PROFIT =
-          T.let(
-            :PRIVATE_PROFIT,
-            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
-          )
-        PUBLIC_PROFIT =
-          T.let(
-            :PUBLIC_PROFIT,
-            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
-          )
-        NON_PROFIT =
-          T.let(
-            :NON_PROFIT,
-            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
-          )
-        SOLE_PROPRIETOR =
-          T.let(
-            :SOLE_PROPRIETOR,
-            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
-          )
-        GOVERNMENT =
-          T.let(
-            :GOVERNMENT,
-            Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[Sentdm::BrandBusinessInfo::EntityType::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

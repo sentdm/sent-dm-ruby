@@ -1,0 +1,242 @@
+module Sentdm
+  module Models
+    module Channels
+      type rc_create_params =
+        {
+          agent_use_case: Sentdm::Models::Channels::RcCreateParams::agent_use_case,
+          banner_url: String,
+          brand_color: String,
+          brand_email: String,
+          brand_name: String,
+          brand_phone_number: String,
+          brief_company_description: String,
+          company_ein: String,
+          contact_name_and_title: String,
+          customer_support_email: String,
+          customer_support_phone_number: String,
+          description: String,
+          display_name: String,
+          entity_type: String,
+          help_message: String,
+          logo_url: String,
+          official_address: Sentdm::Channels::RcsAddress,
+          opt_in_process_description: String,
+          opt_in_screenshot_url: String?,
+          privacy_policy_url: String,
+          sample_messages: ::Array[String],
+          sandbox: bool,
+          start_message: String,
+          stop_message: String,
+          terms_and_conditions_url: String,
+          website_url: String,
+          idempotency_key: String,
+          x_profile_id: String
+        }
+        & Sentdm::Internal::Type::request_parameters
+
+      class RcCreateParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_reader agent_use_case: Sentdm::Models::Channels::RcCreateParams::agent_use_case?
+
+        def agent_use_case=: (
+          Sentdm::Models::Channels::RcCreateParams::agent_use_case
+        ) -> Sentdm::Models::Channels::RcCreateParams::agent_use_case
+
+        attr_reader banner_url: String?
+
+        def banner_url=: (String) -> String
+
+        attr_reader brand_color: String?
+
+        def brand_color=: (String) -> String
+
+        attr_reader brand_email: String?
+
+        def brand_email=: (String) -> String
+
+        attr_reader brand_name: String?
+
+        def brand_name=: (String) -> String
+
+        attr_reader brand_phone_number: String?
+
+        def brand_phone_number=: (String) -> String
+
+        attr_reader brief_company_description: String?
+
+        def brief_company_description=: (String) -> String
+
+        attr_reader company_ein: String?
+
+        def company_ein=: (String) -> String
+
+        attr_reader contact_name_and_title: String?
+
+        def contact_name_and_title=: (String) -> String
+
+        attr_reader customer_support_email: String?
+
+        def customer_support_email=: (String) -> String
+
+        attr_reader customer_support_phone_number: String?
+
+        def customer_support_phone_number=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader display_name: String?
+
+        def display_name=: (String) -> String
+
+        attr_reader entity_type: String?
+
+        def entity_type=: (String) -> String
+
+        attr_reader help_message: String?
+
+        def help_message=: (String) -> String
+
+        attr_reader logo_url: String?
+
+        def logo_url=: (String) -> String
+
+        attr_reader official_address: Sentdm::Channels::RcsAddress?
+
+        def official_address=: (
+          Sentdm::Channels::RcsAddress
+        ) -> Sentdm::Channels::RcsAddress
+
+        attr_reader opt_in_process_description: String?
+
+        def opt_in_process_description=: (String) -> String
+
+        attr_accessor opt_in_screenshot_url: String?
+
+        attr_reader privacy_policy_url: String?
+
+        def privacy_policy_url=: (String) -> String
+
+        attr_reader sample_messages: ::Array[String]?
+
+        def sample_messages=: (::Array[String]) -> ::Array[String]
+
+        attr_reader sandbox: bool?
+
+        def sandbox=: (bool) -> bool
+
+        attr_reader start_message: String?
+
+        def start_message=: (String) -> String
+
+        attr_reader stop_message: String?
+
+        def stop_message=: (String) -> String
+
+        attr_reader terms_and_conditions_url: String?
+
+        def terms_and_conditions_url=: (String) -> String
+
+        attr_reader website_url: String?
+
+        def website_url=: (String) -> String
+
+        attr_reader idempotency_key: String?
+
+        def idempotency_key=: (String) -> String
+
+        attr_reader x_profile_id: String?
+
+        def x_profile_id=: (String) -> String
+
+        def initialize: (
+          ?agent_use_case: Sentdm::Models::Channels::RcCreateParams::agent_use_case,
+          ?banner_url: String,
+          ?brand_color: String,
+          ?brand_email: String,
+          ?brand_name: String,
+          ?brand_phone_number: String,
+          ?brief_company_description: String,
+          ?company_ein: String,
+          ?contact_name_and_title: String,
+          ?customer_support_email: String,
+          ?customer_support_phone_number: String,
+          ?description: String,
+          ?display_name: String,
+          ?entity_type: String,
+          ?help_message: String,
+          ?logo_url: String,
+          ?official_address: Sentdm::Channels::RcsAddress,
+          ?opt_in_process_description: String,
+          ?opt_in_screenshot_url: String?,
+          ?privacy_policy_url: String,
+          ?sample_messages: ::Array[String],
+          ?sandbox: bool,
+          ?start_message: String,
+          ?stop_message: String,
+          ?terms_and_conditions_url: String,
+          ?website_url: String,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          agent_use_case: Sentdm::Models::Channels::RcCreateParams::agent_use_case,
+          banner_url: String,
+          brand_color: String,
+          brand_email: String,
+          brand_name: String,
+          brand_phone_number: String,
+          brief_company_description: String,
+          company_ein: String,
+          contact_name_and_title: String,
+          customer_support_email: String,
+          customer_support_phone_number: String,
+          description: String,
+          display_name: String,
+          entity_type: String,
+          help_message: String,
+          logo_url: String,
+          official_address: Sentdm::Channels::RcsAddress,
+          opt_in_process_description: String,
+          opt_in_screenshot_url: String?,
+          privacy_policy_url: String,
+          sample_messages: ::Array[String],
+          sandbox: bool,
+          start_message: String,
+          stop_message: String,
+          terms_and_conditions_url: String,
+          website_url: String,
+          idempotency_key: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+
+        type agent_use_case =
+          :VERIFICATION | :NOTIFICATIONS | :MARKETING | :MULTI_USE
+
+        module AgentUseCase
+          extend Sentdm::Internal::Type::Enum
+
+          # One-time passcodes and identity checks. Expects no reply, and is held to the strictest delivery review.
+          VERIFICATION: :VERIFICATION
+
+          # Transactional updates the recipient asked for — orders, deliveries, appointments, account activity.
+          NOTIFICATIONS: :NOTIFICATIONS
+
+          # Promotional content. Requires the clearest opt-in evidence of the four, because the carriers review consent hardest here.
+          MARKETING: :MARKETING
+
+          # More than one of the above from a single agent. Vetted against the strictest use case it covers, so declare it only if you genuinely need one agent to do several jobs.
+          MULTI_USE: :MULTI_USE
+
+          def self?.values: -> ::Array[Sentdm::Models::Channels::RcCreateParams::agent_use_case]
+        end
+      end
+    end
+  end
+end

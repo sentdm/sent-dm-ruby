@@ -1,0 +1,37 @@
+module Sentdm
+  module Models
+    module Channels
+      type sms_number =
+        {
+          area_code: String?,
+          campaign_id: String?,
+          sender_value: String?,
+          status: String?
+        }
+
+      class SMSNumber < Sentdm::Internal::Type::BaseModel
+        attr_accessor area_code: String?
+
+        attr_accessor campaign_id: String?
+
+        attr_accessor sender_value: String?
+
+        attr_accessor status: String?
+
+        def initialize: (
+          ?area_code: String?,
+          ?campaign_id: String?,
+          ?sender_value: String?,
+          ?status: String?
+        ) -> void
+
+        def to_hash: -> {
+          area_code: String?,
+          campaign_id: String?,
+          sender_value: String?,
+          status: String?
+        }
+      end
+    end
+  end
+end

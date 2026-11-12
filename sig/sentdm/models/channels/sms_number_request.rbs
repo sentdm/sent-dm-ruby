@@ -1,0 +1,17 @@
+module Sentdm
+  module Models
+    module Channels
+      type sms_number_request = { area_code: String?, quantity: Integer? }
+
+      class SMSNumberRequest < Sentdm::Internal::Type::BaseModel
+        attr_accessor area_code: String?
+
+        attr_accessor quantity: Integer?
+
+        def initialize: (?area_code: String?, ?quantity: Integer?) -> void
+
+        def to_hash: -> { area_code: String?, quantity: Integer? }
+      end
+    end
+  end
+end

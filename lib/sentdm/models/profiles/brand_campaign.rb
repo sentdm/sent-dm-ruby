@@ -72,6 +72,14 @@ module Sentdm
         #   @return [String, nil]
         optional :help_message, String, api_name: :helpMessage, nil?: true
 
+        # @!attribute is_inherited
+        #   Whether the campaign is the organization's, which the profile runs on, rather
+        #   than one of the profile's own. A profile running on its organization's campaign
+        #   can hold campaigns of its own beside it, and the list returns both.
+        #
+        #   @return [Boolean, nil]
+        optional :is_inherited, Sentdm::Internal::Type::Boolean, api_name: :isInherited
+
         # @!attribute message_flow
         #
         #   @return [String, nil]
@@ -109,8 +117,8 @@ module Sentdm
 
         # @!attribute status
         #
-        #   @return [Symbol, Sentdm::Models::Profiles::BrandCampaign::Status, nil]
-        optional :status, enum: -> { Sentdm::Profiles::BrandCampaign::Status }, nil?: true
+        #   @return [Symbol, Sentdm::Models::TcrCampaignStatus, nil]
+        optional :status, enum: -> { Sentdm::TcrCampaignStatus }, nil?: true
 
         # @!attribute submitted_at
         #
@@ -166,7 +174,7 @@ module Sentdm
         #   @return [String, nil]
         optional :volume, String, nil?: true
 
-        # @!method initialize(id: nil, billed_date: nil, brand_id: nil, cost: nil, created_at: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, terms_and_conditions_link: nil, type: nil, updated_at: nil, use_cases: nil, volume: nil)
+        # @!method initialize(id: nil, billed_date: nil, brand_id: nil, cost: nil, created_at: nil, customer_id: nil, dca_elections_complete: nil, dca_elections_completed_at: nil, description: nil, has_submission_transaction: nil, help_keywords: nil, help_message: nil, is_inherited: nil, message_flow: nil, name: nil, optin_keywords: nil, optin_message: nil, optout_keywords: nil, optout_message: nil, privacy_policy_link: nil, status: nil, submitted_at: nil, submitted_to_tcr: nil, tcr_campaign_id: nil, tcr_sync_error: nil, terms_and_conditions_link: nil, type: nil, updated_at: nil, use_cases: nil, volume: nil)
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Profiles::BrandCampaign} for more details.
         #
@@ -196,6 +204,8 @@ module Sentdm
         #
         #   @param help_message [String, nil]
         #
+        #   @param is_inherited [Boolean] Whether the campaign is the organization's, which the profile runs on, rather th
+        #
         #   @param message_flow [String, nil]
         #
         #   @param name [String]
@@ -210,7 +220,7 @@ module Sentdm
         #
         #   @param privacy_policy_link [String, nil]
         #
-        #   @param status [Symbol, Sentdm::Models::Profiles::BrandCampaign::Status, nil]
+        #   @param status [Symbol, Sentdm::Models::TcrCampaignStatus, nil]
         #
         #   @param submitted_at [Time, nil]
         #
@@ -229,18 +239,6 @@ module Sentdm
         #   @param use_cases [Array<Sentdm::Models::Profiles::CampaignUseCase>]
         #
         #   @param volume [String, nil] Expected messaging volume for this campaign — customer-supplied on create/update
-
-        # @see Sentdm::Models::Profiles::BrandCampaign#status
-        module Status
-          extend Sentdm::Internal::Type::Enum
-
-          SENT_CREATED = :SENT_CREATED
-          ACTIVE = :ACTIVE
-          EXPIRED = :EXPIRED
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
       end
     end
   end

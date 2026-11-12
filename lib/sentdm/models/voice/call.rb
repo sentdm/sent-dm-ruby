@@ -63,9 +63,10 @@ module Sentdm
 
         # @!attribute failure_reason
         #   Why the call did not complete: callback_timeout, invalid_answer,
-        #   insufficient_balance, destination_blocked, callback_not_configured, rejected,
-        #   no_answer, or for an agent call agent_busy or agent_unreachable. Null while the
-        #   call is live, when it completed, and when it failed without a recorded reason
+        #   insufficient_balance, payment_method_missing, destination_blocked,
+        #   callback_not_configured, rejected, no_answer, or for an agent call agent_busy or
+        #   agent_unreachable. Null while the call is live, when it completed, and when it
+        #   failed without a recorded reason
         #
         #   @return [String, nil]
         optional :failure_reason, String, nil?: true
@@ -82,8 +83,8 @@ module Sentdm
         #   and the leg to the connected number at once, and both are billed. Null until the
         #   call has been priced
         #
-        #   @return [Array<Sentdm::Models::Voice::Call::Leg>, nil]
-        optional :legs, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Voice::Call::Leg] }, nil?: true
+        #   @return [Array<Sentdm::Models::Voice::CallLeg>, nil]
+        optional :legs, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Voice::CallLeg] }, nil?: true
 
         # @!attribute mode
         #   The calling mode: inapp for a call between people in your app and phone numbers,
@@ -167,7 +168,7 @@ module Sentdm
         #
         #   @param from [Sentdm::Models::Voice::CallParty] One end of a call
         #
-        #   @param legs [Array<Sentdm::Models::Voice::Call::Leg>, nil] The legs the price covers, one entry per billed leg, each with its own cost: a c
+        #   @param legs [Array<Sentdm::Models::Voice::CallLeg>, nil] The legs the price covers, one entry per billed leg, each with its own cost: a c
         #
         #   @param mode [String] The calling mode: inapp for a call between people in your app and phone numbers,
         #
@@ -184,57 +185,6 @@ module Sentdm
         #   @param timeline [Array<Sentdm::Models::Voice::CallTimelineEntry>, nil] When the call entered each status, oldest first. Only returned when reading one
         #
         #   @param to [Sentdm::Models::Voice::CallParty] One end of a call
-
-        class Leg < Sentdm::Internal::Type::BaseModel
-          # @!attribute billed_minutes
-          #   The whole minutes the leg was billed for
-          #
-          #   @return [Integer, nil]
-          optional :billed_minutes, Integer
-
-          # @!attribute cost
-          #   What the leg cost, in the same unit as the call's price
-          #
-          #   @return [Float, nil]
-          optional :cost, Float
-
-          # @!attribute currency
-          #   The currency of the cost: USD
-          #
-          #   @return [String, nil]
-          optional :currency, String
-
-          # @!attribute direction
-          #   inbound for the caller's leg to your number, outbound for a leg placed on your
-          #   behalf
-          #
-          #   @return [String, nil]
-          optional :direction, String
-
-          # @!attribute number
-          #   The phone number the leg reached, in E.164 format: your number for the inbound
-          #   leg, the number dialed for an outbound one. Null for a leg to one of your app
-          #   users or a room
-          #
-          #   @return [String, nil]
-          optional :number, String, nil?: true
-
-          # @!method initialize(billed_minutes: nil, cost: nil, currency: nil, direction: nil, number: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {Sentdm::Models::Voice::Call::Leg} for more details.
-          #
-          #   One leg of a call the price covers
-          #
-          #   @param billed_minutes [Integer] The whole minutes the leg was billed for
-          #
-          #   @param cost [Float] What the leg cost, in the same unit as the call's price
-          #
-          #   @param currency [String] The currency of the cost: USD
-          #
-          #   @param direction [String] inbound for the caller's leg to your number, outbound for a leg placed on your b
-          #
-          #   @param number [String, nil] The phone number the leg reached, in E.164 format: your number for the inbound l
-        end
       end
     end
   end

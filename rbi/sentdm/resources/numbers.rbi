@@ -17,7 +17,7 @@ module Sentdm
           phone_number: String,
           x_profile_id: String,
           request_options: Sentdm::RequestOptions::OrHash
-        ).returns(Sentdm::Models::NumberLookupResponse)
+        ).returns(Sentdm::APIResponseOfNumberLookupResult)
       end
       def lookup(
         phone_number,

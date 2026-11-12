@@ -5,7 +5,7 @@ module Sentdm
         city: String?,
         country: String?,
         country_of_registration: String?,
-        entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?,
+        entity_type: Sentdm::Models::entity_type?,
         legal_name: String?,
         postal_code: String?,
         state: String?,
@@ -22,7 +22,7 @@ module Sentdm
 
       attr_accessor country_of_registration: String?
 
-      attr_accessor entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?
+      attr_accessor entity_type: Sentdm::Models::entity_type?
 
       attr_accessor legal_name: String?
 
@@ -42,7 +42,7 @@ module Sentdm
         ?city: String?,
         ?country: String?,
         ?country_of_registration: String?,
-        ?entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?,
+        ?entity_type: Sentdm::Models::entity_type?,
         ?legal_name: String?,
         ?postal_code: String?,
         ?state: String?,
@@ -56,7 +56,7 @@ module Sentdm
         city: String?,
         country: String?,
         country_of_registration: String?,
-        entity_type: Sentdm::Models::BrandBusinessInfo::entity_type?,
+        entity_type: Sentdm::Models::entity_type?,
         legal_name: String?,
         postal_code: String?,
         state: String?,
@@ -65,25 +65,6 @@ module Sentdm
         tax_id_type: String?,
         url: String?
       }
-
-      type entity_type =
-        :PRIVATE_PROFIT
-        | :PUBLIC_PROFIT
-        | :NON_PROFIT
-        | :SOLE_PROPRIETOR
-        | :GOVERNMENT
-
-      module EntityType
-        extend Sentdm::Internal::Type::Enum
-
-        PRIVATE_PROFIT: :PRIVATE_PROFIT
-        PUBLIC_PROFIT: :PUBLIC_PROFIT
-        NON_PROFIT: :NON_PROFIT
-        SOLE_PROPRIETOR: :SOLE_PROPRIETOR
-        GOVERNMENT: :GOVERNMENT
-
-        def self?.values: -> ::Array[Sentdm::Models::BrandBusinessInfo::entity_type]
-      end
     end
   end
 end

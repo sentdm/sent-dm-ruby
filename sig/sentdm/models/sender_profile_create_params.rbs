@@ -1,0 +1,78 @@
+module Sentdm
+  module Models
+    type sender_profile_create_params =
+      {
+        billing: Sentdm::SenderProfileBillingRequest?,
+        channels: Sentdm::SenderProfileChannels?,
+        compliance: Sentdm::Channels::MarketCompliance,
+        description: String?,
+        name: String,
+        notifications: String?,
+        sandbox: bool,
+        short_name: String,
+        idempotency_key: String
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class SenderProfileCreateParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor billing: Sentdm::SenderProfileBillingRequest?
+
+      attr_accessor channels: Sentdm::SenderProfileChannels?
+
+      attr_reader compliance: Sentdm::Channels::MarketCompliance?
+
+      def compliance=: (
+        Sentdm::Channels::MarketCompliance
+      ) -> Sentdm::Channels::MarketCompliance
+
+      attr_accessor description: String?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor notifications: String?
+
+      attr_reader sandbox: bool?
+
+      def sandbox=: (bool) -> bool
+
+      attr_reader short_name: String?
+
+      def short_name=: (String) -> String
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        ?billing: Sentdm::SenderProfileBillingRequest?,
+        ?channels: Sentdm::SenderProfileChannels?,
+        ?compliance: Sentdm::Channels::MarketCompliance,
+        ?description: String?,
+        ?name: String,
+        ?notifications: String?,
+        ?sandbox: bool,
+        ?short_name: String,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        billing: Sentdm::SenderProfileBillingRequest?,
+        channels: Sentdm::SenderProfileChannels?,
+        compliance: Sentdm::Channels::MarketCompliance,
+        description: String?,
+        name: String,
+        notifications: String?,
+        sandbox: bool,
+        short_name: String,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

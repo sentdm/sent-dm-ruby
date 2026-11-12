@@ -1,0 +1,130 @@
+module Sentdm
+  module Models
+    type message =
+      {
+        id: String,
+        active_contact_price: Float?,
+        channel: String,
+        contact_id: String,
+        created_at: Time,
+        customer_id: String,
+        direction: String,
+        events: ::Array[Sentdm::MessageStatusEvent]?,
+        message_body: Sentdm::MessageBody?,
+        phone: String,
+        phone_international: String,
+        price: Float?,
+        reason: String?,
+        reason_code: String?,
+        region_code: String,
+        status: String,
+        template_category: String?,
+        template_id: String?,
+        template_name: String?
+      }
+
+    class Message < Sentdm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_accessor active_contact_price: Float?
+
+      attr_reader channel: String?
+
+      def channel=: (String) -> String
+
+      attr_reader contact_id: String?
+
+      def contact_id=: (String) -> String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader customer_id: String?
+
+      def customer_id=: (String) -> String
+
+      attr_reader direction: String?
+
+      def direction=: (String) -> String
+
+      attr_accessor events: ::Array[Sentdm::MessageStatusEvent]?
+
+      attr_accessor message_body: Sentdm::MessageBody?
+
+      attr_reader phone: String?
+
+      def phone=: (String) -> String
+
+      attr_reader phone_international: String?
+
+      def phone_international=: (String) -> String
+
+      attr_accessor price: Float?
+
+      attr_accessor reason: String?
+
+      attr_accessor reason_code: String?
+
+      attr_reader region_code: String?
+
+      def region_code=: (String) -> String
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_accessor template_category: String?
+
+      attr_accessor template_id: String?
+
+      attr_accessor template_name: String?
+
+      def initialize: (
+        ?id: String,
+        ?active_contact_price: Float?,
+        ?channel: String,
+        ?contact_id: String,
+        ?created_at: Time,
+        ?customer_id: String,
+        ?direction: String,
+        ?events: ::Array[Sentdm::MessageStatusEvent]?,
+        ?message_body: Sentdm::MessageBody?,
+        ?phone: String,
+        ?phone_international: String,
+        ?price: Float?,
+        ?reason: String?,
+        ?reason_code: String?,
+        ?region_code: String,
+        ?status: String,
+        ?template_category: String?,
+        ?template_id: String?,
+        ?template_name: String?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        active_contact_price: Float?,
+        channel: String,
+        contact_id: String,
+        created_at: Time,
+        customer_id: String,
+        direction: String,
+        events: ::Array[Sentdm::MessageStatusEvent]?,
+        message_body: Sentdm::MessageBody?,
+        phone: String,
+        phone_international: String,
+        price: Float?,
+        reason: String?,
+        reason_code: String?,
+        region_code: String,
+        status: String,
+        template_category: String?,
+        template_id: String?,
+        template_name: String?
+      }
+    end
+  end
+end

@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "sentdm", "~> 0.45.0"
+gem "sentdm", "~> 0.46.0"
 ```
 
 <!-- x-release-please-end -->
@@ -248,7 +248,7 @@ You can provide typesafe request parameters like so:
 ```ruby
 sent.messages.send_(
   channel: ["sms", "whatsapp"],
-  template: Sentdm::MessageSendParams::Template.new(
+  template: Sentdm::TemplateRef.new(
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
     name: "order_confirmation",
     parameters: {name: "John Doe", order_id: "12345"}
@@ -274,7 +274,7 @@ sent.messages.send_(
 # You can also splat a full Params class:
 params = Sentdm::MessageSendParams.new(
   channel: ["sms", "whatsapp"],
-  template: Sentdm::MessageSendParams::Template.new(
+  template: Sentdm::TemplateRef.new(
     id: "7ba7b820-9dad-11d1-80b4-00c04fd430c8",
     name: "order_confirmation",
     parameters: {name: "John Doe", order_id: "12345"}
@@ -289,25 +289,25 @@ sent.messages.send_(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :ACTIVE
-puts(Sentdm::Channels::VoiceUpdateParams::Status::ACTIVE)
+# :LOCAL
+puts(Sentdm::Channels::SMSCreateParams::NumberType::LOCAL)
 
-# Revealed type: `T.all(Sentdm::Channels::VoiceUpdateParams::Status, Symbol)`
-T.reveal_type(Sentdm::Channels::VoiceUpdateParams::Status::ACTIVE)
+# Revealed type: `T.all(Sentdm::Channels::SMSCreateParams::NumberType, Symbol)`
+T.reveal_type(Sentdm::Channels::SMSCreateParams::NumberType::LOCAL)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-sent.channels.voice.update(
-  status: Sentdm::Channels::VoiceUpdateParams::Status::ACTIVE,
+sent.channels.sms.create(
+  number_type: Sentdm::Channels::SMSCreateParams::NumberType::LOCAL,
   # …
 )
 
 # Literal values are also permissible:
-sent.channels.voice.update(
-  status: :ACTIVE,
+sent.channels.sms.create(
+  number_type: :LOCAL,
   # …
 )
 ```

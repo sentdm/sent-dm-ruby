@@ -1,0 +1,28 @@
+module Sentdm
+  module Models
+    type account_whatsapp_channel =
+      { business_name: String?, configured: bool, phone_number: String? }
+
+    class AccountWhatsappChannel < Sentdm::Internal::Type::BaseModel
+      attr_accessor business_name: String?
+
+      attr_reader configured: bool?
+
+      def configured=: (bool) -> bool
+
+      attr_accessor phone_number: String?
+
+      def initialize: (
+        ?business_name: String?,
+        ?configured: bool,
+        ?phone_number: String?
+      ) -> void
+
+      def to_hash: -> {
+        business_name: String?,
+        configured: bool,
+        phone_number: String?
+      }
+    end
+  end
+end

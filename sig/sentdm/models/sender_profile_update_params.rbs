@@ -1,0 +1,62 @@
+module Sentdm
+  module Models
+    type sender_profile_update_params =
+      {
+        id: String,
+        description: String?,
+        name: String,
+        notifications: String?,
+        sandbox: bool,
+        short_name: String?,
+        idempotency_key: String
+      }
+      & Sentdm::Internal::Type::request_parameters
+
+    class SenderProfileUpdateParams < Sentdm::Internal::Type::BaseModel
+      extend Sentdm::Internal::Type::RequestParameters::Converter
+      include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor description: String?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor notifications: String?
+
+      attr_reader sandbox: bool?
+
+      def sandbox=: (bool) -> bool
+
+      attr_accessor short_name: String?
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        id: String,
+        ?description: String?,
+        ?name: String,
+        ?notifications: String?,
+        ?sandbox: bool,
+        ?short_name: String?,
+        ?idempotency_key: String,
+        ?request_options: Sentdm::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        description: String?,
+        name: String,
+        notifications: String?,
+        sandbox: bool,
+        short_name: String?,
+        idempotency_key: String,
+        request_options: Sentdm::RequestOptions
+      }
+    end
+  end
+end

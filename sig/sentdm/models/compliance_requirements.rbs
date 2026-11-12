@@ -1,0 +1,66 @@
+module Sentdm
+  module Models
+    type compliance_requirements =
+      {
+        channel: String,
+        country: String,
+        required: bool,
+        requirements: ::Array[Sentdm::ComplianceRequirement],
+        sender_id_pattern: String?,
+        setup: ::Array[Sentdm::ComplianceSetupStep],
+        type: String
+      }
+
+    class ComplianceRequirements < Sentdm::Internal::Type::BaseModel
+      attr_reader channel: String?
+
+      def channel=: (String) -> String
+
+      attr_reader country: String?
+
+      def country=: (String) -> String
+
+      attr_reader required: bool?
+
+      def required=: (bool) -> bool
+
+      attr_reader requirements: ::Array[Sentdm::ComplianceRequirement]?
+
+      def requirements=: (
+        ::Array[Sentdm::ComplianceRequirement]
+      ) -> ::Array[Sentdm::ComplianceRequirement]
+
+      attr_accessor sender_id_pattern: String?
+
+      attr_reader setup: ::Array[Sentdm::ComplianceSetupStep]?
+
+      def setup=: (
+        ::Array[Sentdm::ComplianceSetupStep]
+      ) -> ::Array[Sentdm::ComplianceSetupStep]
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      def initialize: (
+        ?channel: String,
+        ?country: String,
+        ?required: bool,
+        ?requirements: ::Array[Sentdm::ComplianceRequirement],
+        ?sender_id_pattern: String?,
+        ?setup: ::Array[Sentdm::ComplianceSetupStep],
+        ?type: String
+      ) -> void
+
+      def to_hash: -> {
+        channel: String,
+        country: String,
+        required: bool,
+        requirements: ::Array[Sentdm::ComplianceRequirement],
+        sender_id_pattern: String?,
+        setup: ::Array[Sentdm::ComplianceSetupStep],
+        type: String
+      }
+    end
+  end
+end

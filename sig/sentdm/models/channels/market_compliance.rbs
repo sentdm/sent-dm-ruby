@@ -1,0 +1,338 @@
+module Sentdm
+  module Models
+    module Channels
+      type market_compliance =
+        {
+          brand: Sentdm::Channels::MarketCompliance::Brand,
+          campaign: Sentdm::Channels::MarketCompliance::Campaign
+        }
+
+      class MarketCompliance < Sentdm::Internal::Type::BaseModel
+        attr_reader brand: Sentdm::Channels::MarketCompliance::Brand?
+
+        def brand=: (
+          Sentdm::Channels::MarketCompliance::Brand
+        ) -> Sentdm::Channels::MarketCompliance::Brand
+
+        attr_reader campaign: Sentdm::Channels::MarketCompliance::Campaign?
+
+        def campaign=: (
+          Sentdm::Channels::MarketCompliance::Campaign
+        ) -> Sentdm::Channels::MarketCompliance::Campaign
+
+        def initialize: (
+          ?brand: Sentdm::Channels::MarketCompliance::Brand,
+          ?campaign: Sentdm::Channels::MarketCompliance::Campaign
+        ) -> void
+
+        def to_hash: -> {
+          brand: Sentdm::Channels::MarketCompliance::Brand,
+          campaign: Sentdm::Channels::MarketCompliance::Campaign
+        }
+
+        type brand =
+          {
+            business_name: String,
+            city: String,
+            contact_email: String,
+            contact_name: String,
+            contact_phone: String,
+            country: String,
+            ein_issuing_country: String,
+            entity_type: Sentdm::Models::Channels::MarketCompliance::Brand::entity_type,
+            inherit: bool,
+            legal_name: String,
+            postal_code: String,
+            state: String,
+            street: String,
+            tax_id: String,
+            tax_id_type: String,
+            website: String
+          }
+
+        class Brand < Sentdm::Internal::Type::BaseModel
+          attr_reader business_name: String?
+
+          def business_name=: (String) -> String
+
+          attr_reader city: String?
+
+          def city=: (String) -> String
+
+          attr_reader contact_email: String?
+
+          def contact_email=: (String) -> String
+
+          attr_reader contact_name: String?
+
+          def contact_name=: (String) -> String
+
+          attr_reader contact_phone: String?
+
+          def contact_phone=: (String) -> String
+
+          attr_reader country: String?
+
+          def country=: (String) -> String
+
+          attr_reader ein_issuing_country: String?
+
+          def ein_issuing_country=: (String) -> String
+
+          attr_reader entity_type: Sentdm::Models::Channels::MarketCompliance::Brand::entity_type?
+
+          def entity_type=: (
+            Sentdm::Models::Channels::MarketCompliance::Brand::entity_type
+          ) -> Sentdm::Models::Channels::MarketCompliance::Brand::entity_type
+
+          attr_reader inherit: bool?
+
+          def inherit=: (bool) -> bool
+
+          attr_reader legal_name: String?
+
+          def legal_name=: (String) -> String
+
+          attr_reader postal_code: String?
+
+          def postal_code=: (String) -> String
+
+          attr_reader state: String?
+
+          def state=: (String) -> String
+
+          attr_reader street: String?
+
+          def street=: (String) -> String
+
+          attr_reader tax_id: String?
+
+          def tax_id=: (String) -> String
+
+          attr_reader tax_id_type: String?
+
+          def tax_id_type=: (String) -> String
+
+          attr_reader website: String?
+
+          def website=: (String) -> String
+
+          def initialize: (
+            ?business_name: String,
+            ?city: String,
+            ?contact_email: String,
+            ?contact_name: String,
+            ?contact_phone: String,
+            ?country: String,
+            ?ein_issuing_country: String,
+            ?entity_type: Sentdm::Models::Channels::MarketCompliance::Brand::entity_type,
+            ?inherit: bool,
+            ?legal_name: String,
+            ?postal_code: String,
+            ?state: String,
+            ?street: String,
+            ?tax_id: String,
+            ?tax_id_type: String,
+            ?website: String
+          ) -> void
+
+          def to_hash: -> {
+            business_name: String,
+            city: String,
+            contact_email: String,
+            contact_name: String,
+            contact_phone: String,
+            country: String,
+            ein_issuing_country: String,
+            entity_type: Sentdm::Models::Channels::MarketCompliance::Brand::entity_type,
+            inherit: bool,
+            legal_name: String,
+            postal_code: String,
+            state: String,
+            street: String,
+            tax_id: String,
+            tax_id_type: String,
+            website: String
+          }
+
+          type entity_type =
+            :PRIVATE_PROFIT
+            | :PUBLIC_PROFIT
+            | :NON_PROFIT
+            | :SOLE_PROPRIETOR
+            | :GOVERNMENT
+
+          module EntityType
+            extend Sentdm::Internal::Type::Enum
+
+            PRIVATE_PROFIT: :PRIVATE_PROFIT
+            PUBLIC_PROFIT: :PUBLIC_PROFIT
+            NON_PROFIT: :NON_PROFIT
+            SOLE_PROPRIETOR: :SOLE_PROPRIETOR
+            GOVERNMENT: :GOVERNMENT
+
+            def self?.values: -> ::Array[Sentdm::Models::Channels::MarketCompliance::Brand::entity_type]
+          end
+        end
+
+        type campaign =
+          {
+            description: String,
+            help_keywords: String,
+            help_message: String,
+            inherit: bool,
+            message_flow: String,
+            opt_in_keywords: String,
+            opt_in_message: String,
+            opt_out_keywords: String,
+            opt_out_message: String,
+            privacy_policy_link: String,
+            terms_and_conditions_link: String,
+            use_cases: ::Array[Sentdm::Channels::MarketCompliance::Campaign::UseCase],
+            volume: String
+          }
+
+        class Campaign < Sentdm::Internal::Type::BaseModel
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader help_keywords: String?
+
+          def help_keywords=: (String) -> String
+
+          attr_reader help_message: String?
+
+          def help_message=: (String) -> String
+
+          attr_reader inherit: bool?
+
+          def inherit=: (bool) -> bool
+
+          attr_reader message_flow: String?
+
+          def message_flow=: (String) -> String
+
+          attr_reader opt_in_keywords: String?
+
+          def opt_in_keywords=: (String) -> String
+
+          attr_reader opt_in_message: String?
+
+          def opt_in_message=: (String) -> String
+
+          attr_reader opt_out_keywords: String?
+
+          def opt_out_keywords=: (String) -> String
+
+          attr_reader opt_out_message: String?
+
+          def opt_out_message=: (String) -> String
+
+          attr_reader privacy_policy_link: String?
+
+          def privacy_policy_link=: (String) -> String
+
+          attr_reader terms_and_conditions_link: String?
+
+          def terms_and_conditions_link=: (String) -> String
+
+          attr_reader use_cases: ::Array[Sentdm::Channels::MarketCompliance::Campaign::UseCase]?
+
+          def use_cases=: (
+            ::Array[Sentdm::Channels::MarketCompliance::Campaign::UseCase]
+          ) -> ::Array[Sentdm::Channels::MarketCompliance::Campaign::UseCase]
+
+          attr_reader volume: String?
+
+          def volume=: (String) -> String
+
+          def initialize: (
+            ?description: String,
+            ?help_keywords: String,
+            ?help_message: String,
+            ?inherit: bool,
+            ?message_flow: String,
+            ?opt_in_keywords: String,
+            ?opt_in_message: String,
+            ?opt_out_keywords: String,
+            ?opt_out_message: String,
+            ?privacy_policy_link: String,
+            ?terms_and_conditions_link: String,
+            ?use_cases: ::Array[Sentdm::Channels::MarketCompliance::Campaign::UseCase],
+            ?volume: String
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            help_keywords: String,
+            help_message: String,
+            inherit: bool,
+            message_flow: String,
+            opt_in_keywords: String,
+            opt_in_message: String,
+            opt_out_keywords: String,
+            opt_out_message: String,
+            privacy_policy_link: String,
+            terms_and_conditions_link: String,
+            use_cases: ::Array[Sentdm::Channels::MarketCompliance::Campaign::UseCase],
+            volume: String
+          }
+
+          type use_case =
+            {
+              sample_messages: ::Array[top],
+              use_case: Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase::use_case
+            }
+
+          class UseCase < Sentdm::Internal::Type::BaseModel
+            attr_accessor sample_messages: ::Array[top]
+
+            attr_accessor use_case: Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase::use_case
+
+            def initialize: (
+              sample_messages: ::Array[top],
+              use_case: Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase::use_case
+            ) -> void
+
+            def to_hash: -> {
+              sample_messages: ::Array[top],
+              use_case: Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase::use_case
+            }
+
+            type use_case =
+              :MARKETING
+              | :ACCOUNT_NOTIFICATION
+              | :CUSTOMER_CARE
+              | :FRAUD_ALERT
+              | :"2FA"
+              | :DELIVERY_NOTIFICATION
+              | :SECURITY_ALERT
+              | :M2M
+              | :HIGHER_EDUCATION
+              | :POLLING_VOTING
+              | :PUBLIC_SERVICE_ANNOUNCEMENT
+
+            module UseCase
+              extend Sentdm::Internal::Type::Enum
+
+              MARKETING: :MARKETING
+              ACCOUNT_NOTIFICATION: :ACCOUNT_NOTIFICATION
+              CUSTOMER_CARE: :CUSTOMER_CARE
+              FRAUD_ALERT: :FRAUD_ALERT
+              USE_CASE_2_FA: :"2FA"
+              DELIVERY_NOTIFICATION: :DELIVERY_NOTIFICATION
+              SECURITY_ALERT: :SECURITY_ALERT
+              M2_M: :M2M
+              HIGHER_EDUCATION: :HIGHER_EDUCATION
+              POLLING_VOTING: :POLLING_VOTING
+              PUBLIC_SERVICE_ANNOUNCEMENT: :PUBLIC_SERVICE_ANNOUNCEMENT
+
+              def self?.values: -> ::Array[Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase::use_case]
+            end
+          end
+        end
+      end
+    end
+  end
+end

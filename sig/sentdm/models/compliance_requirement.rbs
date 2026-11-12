@@ -1,0 +1,76 @@
+module Sentdm
+  module Models
+    type compliance_requirement =
+      {
+        format_: String?,
+        item_fields: ::Array[Sentdm::ComplianceRequirement]?,
+        key: String,
+        label: String?,
+        max_items: Integer?,
+        min_length: Integer?,
+        notes: String?,
+        options: ::Array[String]?,
+        required: bool,
+        required_when: String?,
+        type: String
+      }
+
+    class ComplianceRequirement < Sentdm::Internal::Type::BaseModel
+      attr_accessor format_: String?
+
+      attr_accessor item_fields: ::Array[Sentdm::ComplianceRequirement]?
+
+      attr_reader key: String?
+
+      def key=: (String) -> String
+
+      attr_accessor label: String?
+
+      attr_accessor max_items: Integer?
+
+      attr_accessor min_length: Integer?
+
+      attr_accessor notes: String?
+
+      attr_accessor options: ::Array[String]?
+
+      attr_reader required: bool?
+
+      def required=: (bool) -> bool
+
+      attr_accessor required_when: String?
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      def initialize: (
+        ?format_: String?,
+        ?item_fields: ::Array[Sentdm::ComplianceRequirement]?,
+        ?key: String,
+        ?label: String?,
+        ?max_items: Integer?,
+        ?min_length: Integer?,
+        ?notes: String?,
+        ?options: ::Array[String]?,
+        ?required: bool,
+        ?required_when: String?,
+        ?type: String
+      ) -> void
+
+      def to_hash: -> {
+        format_: String?,
+        item_fields: ::Array[Sentdm::ComplianceRequirement]?,
+        key: String,
+        label: String?,
+        max_items: Integer?,
+        min_length: Integer?,
+        notes: String?,
+        options: ::Array[String]?,
+        required: bool,
+        required_when: String?,
+        type: String
+      }
+    end
+  end
+end

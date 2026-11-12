@@ -24,7 +24,7 @@ module Sentdm
       #
       # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Sentdm::Models::NumberLookupResponse]
+      # @return [Sentdm::Models::APIResponseOfNumberLookupResult]
       #
       # @see Sentdm::Models::NumberLookupParams
       def lookup(phone_number, params = {})
@@ -33,7 +33,7 @@ module Sentdm
           method: :get,
           path: ["v3/numbers/lookup/%1$s", phone_number],
           headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-          model: Sentdm::Models::NumberLookupResponse,
+          model: Sentdm::APIResponseOfNumberLookupResult,
           options: options
         )
       end

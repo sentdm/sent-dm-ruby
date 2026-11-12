@@ -1,0 +1,42 @@
+module Sentdm
+  module Models
+    module Channels
+      type rcs_address =
+        {
+          city: String?,
+          country: String?,
+          postal_code: String?,
+          state: String?,
+          street: String?
+        }
+
+      class RcsAddress < Sentdm::Internal::Type::BaseModel
+        attr_accessor city: String?
+
+        attr_accessor country: String?
+
+        attr_accessor postal_code: String?
+
+        attr_accessor state: String?
+
+        attr_accessor street: String?
+
+        def initialize: (
+          ?city: String?,
+          ?country: String?,
+          ?postal_code: String?,
+          ?state: String?,
+          ?street: String?
+        ) -> void
+
+        def to_hash: -> {
+          city: String?,
+          country: String?,
+          postal_code: String?,
+          state: String?,
+          street: String?
+        }
+      end
+    end
+  end
+end

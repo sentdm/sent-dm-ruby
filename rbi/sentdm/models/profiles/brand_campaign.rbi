@@ -63,6 +63,15 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :help_message
 
+        # Whether the campaign is the organization's, which the profile runs on, rather
+        # than one of the profile's own. A profile running on its organization's campaign
+        # can hold campaigns of its own beside it, and the list returns both.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_inherited
+
+        sig { params(is_inherited: T::Boolean).void }
+        attr_writer :is_inherited
+
         sig { returns(T.nilable(String)) }
         attr_accessor :message_flow
 
@@ -87,11 +96,7 @@ module Sentdm
         sig { returns(T.nilable(String)) }
         attr_accessor :privacy_policy_link
 
-        sig do
-          returns(
-            T.nilable(Sentdm::Profiles::BrandCampaign::Status::TaggedSymbol)
-          )
-        end
+        sig { returns(T.nilable(Sentdm::TcrCampaignStatus::TaggedSymbol)) }
         attr_accessor :status
 
         sig { returns(T.nilable(Time)) }
@@ -156,6 +161,7 @@ module Sentdm
             has_submission_transaction: T::Boolean,
             help_keywords: T.nilable(String),
             help_message: T.nilable(String),
+            is_inherited: T::Boolean,
             message_flow: T.nilable(String),
             name: String,
             optin_keywords: T.nilable(String),
@@ -163,8 +169,7 @@ module Sentdm
             optout_keywords: T.nilable(String),
             optout_message: T.nilable(String),
             privacy_policy_link: T.nilable(String),
-            status:
-              T.nilable(Sentdm::Profiles::BrandCampaign::Status::OrSymbol),
+            status: T.nilable(Sentdm::TcrCampaignStatus::OrSymbol),
             submitted_at: T.nilable(Time),
             submitted_to_tcr: T::Boolean,
             tcr_campaign_id: T.nilable(String),
@@ -192,6 +197,10 @@ module Sentdm
           has_submission_transaction: nil,
           help_keywords: nil,
           help_message: nil,
+          # Whether the campaign is the organization's, which the profile runs on, rather
+          # than one of the profile's own. A profile running on its organization's campaign
+          # can hold campaigns of its own beside it, and the list returns both.
+          is_inherited: nil,
           message_flow: nil,
           name: nil,
           optin_keywords: nil,
@@ -234,6 +243,7 @@ module Sentdm
               has_submission_transaction: T::Boolean,
               help_keywords: T.nilable(String),
               help_message: T.nilable(String),
+              is_inherited: T::Boolean,
               message_flow: T.nilable(String),
               name: String,
               optin_keywords: T.nilable(String),
@@ -241,10 +251,7 @@ module Sentdm
               optout_keywords: T.nilable(String),
               optout_message: T.nilable(String),
               privacy_policy_link: T.nilable(String),
-              status:
-                T.nilable(
-                  Sentdm::Profiles::BrandCampaign::Status::TaggedSymbol
-                ),
+              status: T.nilable(Sentdm::TcrCampaignStatus::TaggedSymbol),
               submitted_at: T.nilable(Time),
               submitted_to_tcr: T::Boolean,
               tcr_campaign_id: T.nilable(String),
@@ -258,40 +265,6 @@ module Sentdm
           )
         end
         def to_hash
-        end
-
-        module Status
-          extend Sentdm::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Sentdm::Profiles::BrandCampaign::Status)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SENT_CREATED =
-            T.let(
-              :SENT_CREATED,
-              Sentdm::Profiles::BrandCampaign::Status::TaggedSymbol
-            )
-          ACTIVE =
-            T.let(
-              :ACTIVE,
-              Sentdm::Profiles::BrandCampaign::Status::TaggedSymbol
-            )
-          EXPIRED =
-            T.let(
-              :EXPIRED,
-              Sentdm::Profiles::BrandCampaign::Status::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[Sentdm::Profiles::BrandCampaign::Status::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

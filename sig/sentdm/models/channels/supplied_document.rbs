@@ -1,0 +1,30 @@
+module Sentdm
+  module Models
+    module Channels
+      type supplied_document =
+        { document_id: String?, file_name: String?, key: String }
+
+      class SuppliedDocument < Sentdm::Internal::Type::BaseModel
+        attr_accessor document_id: String?
+
+        attr_accessor file_name: String?
+
+        attr_reader key: String?
+
+        def key=: (String) -> String
+
+        def initialize: (
+          ?document_id: String?,
+          ?file_name: String?,
+          ?key: String
+        ) -> void
+
+        def to_hash: -> {
+          document_id: String?,
+          file_name: String?,
+          key: String
+        }
+      end
+    end
+  end
+end

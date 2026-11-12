@@ -1,0 +1,93 @@
+module Sentdm
+  module Models
+    type brand_with_kyc =
+      {
+        id: String,
+        business: Sentdm::BrandBusiness?,
+        compliance: Sentdm::BrandCompliance?,
+        contact: Sentdm::BrandContact?,
+        created_at: Time,
+        csp_id: String?,
+        identity_status: Sentdm::Models::tcr_brand_identity_status?,
+        is_inherited: bool,
+        status: Sentdm::Models::tcr_brand_status?,
+        submitted_at: Time?,
+        submitted_to_tcr: bool,
+        tcr_brand_id: String?,
+        universal_ein: String?,
+        updated_at: Time?
+      }
+
+    class BrandWithKYC < Sentdm::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_accessor business: Sentdm::BrandBusiness?
+
+      attr_accessor compliance: Sentdm::BrandCompliance?
+
+      attr_accessor contact: Sentdm::BrandContact?
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_accessor csp_id: String?
+
+      attr_accessor identity_status: Sentdm::Models::tcr_brand_identity_status?
+
+      attr_reader is_inherited: bool?
+
+      def is_inherited=: (bool) -> bool
+
+      attr_accessor status: Sentdm::Models::tcr_brand_status?
+
+      attr_accessor submitted_at: Time?
+
+      attr_reader submitted_to_tcr: bool?
+
+      def submitted_to_tcr=: (bool) -> bool
+
+      attr_accessor tcr_brand_id: String?
+
+      attr_accessor universal_ein: String?
+
+      attr_accessor updated_at: Time?
+
+      def initialize: (
+        ?id: String,
+        ?business: Sentdm::BrandBusiness?,
+        ?compliance: Sentdm::BrandCompliance?,
+        ?contact: Sentdm::BrandContact?,
+        ?created_at: Time,
+        ?csp_id: String?,
+        ?identity_status: Sentdm::Models::tcr_brand_identity_status?,
+        ?is_inherited: bool,
+        ?status: Sentdm::Models::tcr_brand_status?,
+        ?submitted_at: Time?,
+        ?submitted_to_tcr: bool,
+        ?tcr_brand_id: String?,
+        ?universal_ein: String?,
+        ?updated_at: Time?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        business: Sentdm::BrandBusiness?,
+        compliance: Sentdm::BrandCompliance?,
+        contact: Sentdm::BrandContact?,
+        created_at: Time,
+        csp_id: String?,
+        identity_status: Sentdm::Models::tcr_brand_identity_status?,
+        is_inherited: bool,
+        status: Sentdm::Models::tcr_brand_status?,
+        submitted_at: Time?,
+        submitted_to_tcr: bool,
+        tcr_brand_id: String?,
+        universal_ein: String?,
+        updated_at: Time?
+      }
+    end
+  end
+end

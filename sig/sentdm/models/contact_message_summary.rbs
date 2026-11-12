@@ -2,7 +2,7 @@ module Sentdm
   module Models
     type contact_message_summary =
       {
-        channel_scores: ::Array[Sentdm::ContactMessageSummary::ChannelScore],
+        channel_scores: ::Array[Sentdm::ChannelScore],
         channels_used: ::Array[String],
         contact_id: String,
         first_message_at: Time?,
@@ -11,11 +11,11 @@ module Sentdm
       }
 
     class ContactMessageSummary < Sentdm::Internal::Type::BaseModel
-      attr_reader channel_scores: ::Array[Sentdm::ContactMessageSummary::ChannelScore]?
+      attr_reader channel_scores: ::Array[Sentdm::ChannelScore]?
 
       def channel_scores=: (
-        ::Array[Sentdm::ContactMessageSummary::ChannelScore]
-      ) -> ::Array[Sentdm::ContactMessageSummary::ChannelScore]
+        ::Array[Sentdm::ChannelScore]
+      ) -> ::Array[Sentdm::ChannelScore]
 
       attr_reader channels_used: ::Array[String]?
 
@@ -34,7 +34,7 @@ module Sentdm
       def message_count=: (Integer) -> Integer
 
       def initialize: (
-        ?channel_scores: ::Array[Sentdm::ContactMessageSummary::ChannelScore],
+        ?channel_scores: ::Array[Sentdm::ChannelScore],
         ?channels_used: ::Array[String],
         ?contact_id: String,
         ?first_message_at: Time?,
@@ -43,42 +43,13 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
-        channel_scores: ::Array[Sentdm::ContactMessageSummary::ChannelScore],
+        channel_scores: ::Array[Sentdm::ChannelScore],
         channels_used: ::Array[String],
         contact_id: String,
         first_message_at: Time?,
         last_message_at: Time?,
         message_count: Integer
       }
-
-      type channel_score =
-        { channel: String, fail_score: Integer, success_score: Integer }
-
-      class ChannelScore < Sentdm::Internal::Type::BaseModel
-        attr_reader channel: String?
-
-        def channel=: (String) -> String
-
-        attr_reader fail_score: Integer?
-
-        def fail_score=: (Integer) -> Integer
-
-        attr_reader success_score: Integer?
-
-        def success_score=: (Integer) -> Integer
-
-        def initialize: (
-          ?channel: String,
-          ?fail_score: Integer,
-          ?success_score: Integer
-        ) -> void
-
-        def to_hash: -> {
-          channel: String,
-          fail_score: Integer,
-          success_score: Integer
-        }
-      end
     end
   end
 end
