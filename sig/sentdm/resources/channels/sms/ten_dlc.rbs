@@ -1,0 +1,64 @@
+module Sentdm
+  module Resources
+    class Channels
+      class SMS
+        class TenDlc
+          def add_campaign: (
+            idempotency_key: String,
+            ?description: String,
+            ?help_keywords: String,
+            ?help_message: String,
+            ?message_flow: String,
+            ?opt_in_keywords: String,
+            ?opt_in_message: String,
+            ?opt_out_keywords: String,
+            ?opt_out_message: String,
+            ?privacy_policy_link: String,
+            ?sandbox: bool,
+            ?terms_and_conditions_link: String,
+            ?use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
+            ?volume: String,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+          def add_numbers: (
+            campaign_id: String,
+            numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
+            idempotency_key: String,
+            ?sandbox: bool,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+          def retrieve_compliance: (
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::SMS::APIResponseOfSuppliedCompliance
+
+          def update_campaign: (
+            String campaign_id,
+            ?description: String,
+            ?help_keywords: String,
+            ?help_message: String,
+            ?message_flow: String,
+            ?opt_in_keywords: String,
+            ?opt_in_message: String,
+            ?opt_out_keywords: String,
+            ?opt_out_message: String,
+            ?privacy_policy_link: String,
+            ?sandbox: bool,
+            ?terms_and_conditions_link: String,
+            ?use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
+            ?volume: String,
+            ?idempotency_key: String,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> Sentdm::Channels::APIResponseOfSMSMarket
+
+          def initialize: (client: Sentdm::Client) -> void
+        end
+      end
+    end
+  end
+end

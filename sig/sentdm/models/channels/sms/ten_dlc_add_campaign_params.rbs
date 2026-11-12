@@ -1,0 +1,130 @@
+module Sentdm
+  module Models
+    module Channels
+      module SMS
+        type ten_dlc_add_campaign_params =
+          {
+            idempotency_key: String,
+            description: String,
+            help_keywords: String,
+            help_message: String,
+            message_flow: String,
+            opt_in_keywords: String,
+            opt_in_message: String,
+            opt_out_keywords: String,
+            opt_out_message: String,
+            privacy_policy_link: String,
+            sandbox: bool,
+            terms_and_conditions_link: String,
+            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
+            volume: String,
+            x_profile_id: String
+          }
+          & Sentdm::Internal::Type::request_parameters
+
+        class TenDlcAddCampaignParams < Sentdm::Internal::Type::BaseModel
+          extend Sentdm::Internal::Type::RequestParameters::Converter
+          include Sentdm::Internal::Type::RequestParameters
+
+          attr_accessor idempotency_key: String
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader help_keywords: String?
+
+          def help_keywords=: (String) -> String
+
+          attr_reader help_message: String?
+
+          def help_message=: (String) -> String
+
+          attr_reader message_flow: String?
+
+          def message_flow=: (String) -> String
+
+          attr_reader opt_in_keywords: String?
+
+          def opt_in_keywords=: (String) -> String
+
+          attr_reader opt_in_message: String?
+
+          def opt_in_message=: (String) -> String
+
+          attr_reader opt_out_keywords: String?
+
+          def opt_out_keywords=: (String) -> String
+
+          attr_reader opt_out_message: String?
+
+          def opt_out_message=: (String) -> String
+
+          attr_reader privacy_policy_link: String?
+
+          def privacy_policy_link=: (String) -> String
+
+          attr_reader sandbox: bool?
+
+          def sandbox=: (bool) -> bool
+
+          attr_reader terms_and_conditions_link: String?
+
+          def terms_and_conditions_link=: (String) -> String
+
+          attr_reader use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase]?
+
+          def use_cases=: (
+            ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase]
+          ) -> ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase]
+
+          attr_reader volume: String?
+
+          def volume=: (String) -> String
+
+          attr_reader x_profile_id: String?
+
+          def x_profile_id=: (String) -> String
+
+          def initialize: (
+            idempotency_key: String,
+            ?description: String,
+            ?help_keywords: String,
+            ?help_message: String,
+            ?message_flow: String,
+            ?opt_in_keywords: String,
+            ?opt_in_message: String,
+            ?opt_out_keywords: String,
+            ?opt_out_message: String,
+            ?privacy_policy_link: String,
+            ?sandbox: bool,
+            ?terms_and_conditions_link: String,
+            ?use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
+            ?volume: String,
+            ?x_profile_id: String,
+            ?request_options: Sentdm::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            idempotency_key: String,
+            description: String,
+            help_keywords: String,
+            help_message: String,
+            message_flow: String,
+            opt_in_keywords: String,
+            opt_in_message: String,
+            opt_out_keywords: String,
+            opt_out_message: String,
+            privacy_policy_link: String,
+            sandbox: bool,
+            terms_and_conditions_link: String,
+            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
+            volume: String,
+            x_profile_id: String,
+            request_options: Sentdm::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end
