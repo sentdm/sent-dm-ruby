@@ -102,9 +102,8 @@ module Sentdm
           #   how they register is decided by volume, never declared. Required when
           #   `compliance.campaign.inherit != true`.
           #
-          #   @return [Array<Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase>, nil]
-          optional :use_cases,
-                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase] }
+          #   @return [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>, nil]
+          optional :use_cases, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMS::TenDlcCampaignUseCase] }
 
           # @!attribute volume
           #   Expected monthly volume. Decides how the campaign registers and which fee tier
@@ -153,7 +152,7 @@ module Sentdm
           #
           #   @param terms_and_conditions_link [String] Terms and conditions URL. TCR termsAndConditionsLink. Required when `compliance.
           #
-          #   @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase>] Use cases. What the campaign sends, and an example of each. One to five entries;
+          #   @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Use cases. What the campaign sends, and an example of each. One to five entries;
           #
           #   @param volume [String] Expected monthly volume. Decides how the campaign registers and which fee tier a
           #
@@ -162,54 +161,6 @@ module Sentdm
           #   @param x_profile_id [String]
           #
           #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
-
-          class UseCase < Sentdm::Internal::Type::BaseModel
-            # @!attribute sample_messages
-            #   Sample messages. TCR sample1..sample5 for this use case. One to five, each
-            #   carrying the brand name and an opt-out instruction.
-            #
-            #   @return [Array<Object>]
-            required :sample_messages, Sentdm::Internal::Type::ArrayOf[Sentdm::Internal::Type::Unknown]
-
-            # @!attribute use_case
-            #   Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
-            #   decides those.
-            #
-            #   @return [Symbol, Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase]
-            required :use_case, enum: -> { Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase }
-
-            # @!method initialize(sample_messages:, use_case:)
-            #   Some parameter documentations has been truncated, see
-            #   {Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase} for more
-            #   details.
-            #
-            #   @param sample_messages [Array<Object>] Sample messages. TCR sample1..sample5 for this use case. One to five, each carry
-            #
-            #   @param use_case [Symbol, Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase] Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume decid
-
-            # Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
-            # decides those.
-            #
-            # @see Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase#use_case
-            module UseCase
-              extend Sentdm::Internal::Type::Enum
-
-              MARKETING = :MARKETING
-              ACCOUNT_NOTIFICATION = :ACCOUNT_NOTIFICATION
-              CUSTOMER_CARE = :CUSTOMER_CARE
-              FRAUD_ALERT = :FRAUD_ALERT
-              USE_CASE_2_FA = :"2FA"
-              DELIVERY_NOTIFICATION = :DELIVERY_NOTIFICATION
-              SECURITY_ALERT = :SECURITY_ALERT
-              M2_M = :M2M
-              HIGHER_EDUCATION = :HIGHER_EDUCATION
-              POLLING_VOTING = :POLLING_VOTING
-              PUBLIC_SERVICE_ANNOUNCEMENT = :PUBLIC_SERVICE_ANNOUNCEMENT
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
-          end
         end
       end
     end

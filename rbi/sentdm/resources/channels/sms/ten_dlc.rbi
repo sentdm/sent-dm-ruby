@@ -85,9 +85,7 @@ module Sentdm
               sandbox: T::Boolean,
               terms_and_conditions_link: String,
               use_cases:
-                T::Array[
-                  Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase::OrHash
-                ],
+                T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase::OrHash],
               volume: String,
               x_profile_id: String,
               request_options: Sentdm::RequestOptions::OrHash
@@ -278,9 +276,7 @@ module Sentdm
               sandbox: T::Boolean,
               terms_and_conditions_link: String,
               use_cases:
-                T::Array[
-                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::OrHash
-                ],
+                T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase::OrHash],
               volume: String,
               idempotency_key: String,
               x_profile_id: String,
