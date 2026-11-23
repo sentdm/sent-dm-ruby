@@ -25,6 +25,7 @@ module Sentdm
       # sender_profile out.
       sig do
         params(
+          agent_id: T.nilable(String),
           display_name: String,
           endpoint_url: String,
           event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
@@ -41,6 +42,11 @@ module Sentdm
         ).returns(Sentdm::APIResponseWebhook)
       end
       def create(
+        # Body param: One of your Sent agents: the webhook then receives only that agent's
+        # events, its agent events and the messages it sent or received, and is never
+        # inheritable: is_inheritable set with it is refused. Only the account the agent
+        # runs on can set it, and only on a version 2 webhook.
+        agent_id: nil,
         # Body param
         display_name: nil,
         # Body param
@@ -136,7 +142,7 @@ module Sentdm
         event_types: nil,
         # Body param: Makes this webhook inheritable by the organization's sender profiles
         # (see create), or stops it being inheritable. Omit or pass null to keep it as it
-        # is. Only a version 2 webhook can be inheritable.
+        # is. Only a version 2 webhook can be inheritable, and never an agent's.
         is_inheritable: nil,
         # Body param
         retry_count: nil,
@@ -165,6 +171,7 @@ module Sentdm
       # version 1 webhook includes its sender_profile selection.
       sig do
         params(
+          agent_id: T.nilable(String),
           is_active: T.nilable(T::Boolean),
           page: Integer,
           page_size: Integer,
@@ -174,6 +181,8 @@ module Sentdm
         ).returns(Sentdm::Internal::WebhooksPage[Sentdm::WebhookResponse])
       end
       def list(
+        # Query param: Only the webhooks of this Sent agent.
+        agent_id: nil,
         # Query param
         is_active: nil,
         # Query param

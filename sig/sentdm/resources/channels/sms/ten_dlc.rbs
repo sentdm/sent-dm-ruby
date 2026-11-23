@@ -1,0 +1,11 @@
+module Sentdm
+  module Resources
+    class Channels
+      class SMS
+        class TenDlc
+          def initialize: (client: Sentdm::Client) -> void
+        end
+      end
+    end
+  end
+end

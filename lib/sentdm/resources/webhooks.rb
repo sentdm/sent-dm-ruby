@@ -27,7 +27,9 @@ module Sentdm
       # is not cloned onto sender profiles; a version 2 webhook's response leaves
       # sender_profile out.
       #
-      # @overload create(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, webhook_version: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @overload create(agent_id: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, webhook_version: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param agent_id [String, nil] Body param: One of your Sent agents: the webhook then receives only that agent's
       #
       # @param display_name [String] Body param
       #
@@ -158,7 +160,9 @@ module Sentdm
       # Retrieves a paginated list of webhooks for the authenticated customer. Each
       # version 1 webhook includes its sender_profile selection.
       #
-      # @overload list(is_active: nil, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
+      # @overload list(agent_id: nil, is_active: nil, page: nil, page_size: nil, search: nil, x_profile_id: nil, request_options: {})
+      #
+      # @param agent_id [String, nil] Query param: Only the webhooks of this Sent agent.
       #
       # @param is_active [Boolean, nil] Query param
       #
@@ -176,7 +180,7 @@ module Sentdm
       #
       # @see Sentdm::Models::WebhookListParams
       def list(params = {})
-        query_params = [:is_active, :page, :page_size, :search]
+        query_params = [:agent_id, :is_active, :page, :page_size, :search]
         parsed, options = Sentdm::WebhookListParams.dump_request(params)
         query = Sentdm::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(

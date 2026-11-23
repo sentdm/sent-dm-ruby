@@ -11,6 +11,10 @@ module Sentdm
           T.any(Sentdm::WebhookListParams, Sentdm::Internal::AnyHash)
         end
 
+      # Only the webhooks of this Sent agent.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_id
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :is_active
 
@@ -37,6 +41,7 @@ module Sentdm
 
       sig do
         params(
+          agent_id: T.nilable(String),
           is_active: T.nilable(T::Boolean),
           page: Integer,
           page_size: Integer,
@@ -46,6 +51,8 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        # Only the webhooks of this Sent agent.
+        agent_id: nil,
         is_active: nil,
         page: nil,
         page_size: nil,
@@ -58,6 +65,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            agent_id: T.nilable(String),
             is_active: T.nilable(T::Boolean),
             page: Integer,
             page_size: Integer,
