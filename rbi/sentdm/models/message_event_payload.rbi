@@ -54,6 +54,13 @@ module Sentdm
       sig { params(outbound_number: String).void }
       attr_writer :outbound_number
 
+      # When this message is another send of a message you sent earlier, the id of that
+      # original message; omitted for every other message. The new send has its own
+      # message_id, so this ties its events back to the message you sent. Always the
+      # first message, however many sends lie between them.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :parent_message_id
+
       # A human-readable sentence for ReasonCode, for example "The recipient is not
       # registered on this channel". Omitted whenever reason_code is.
       sig { returns(T.nilable(String)) }
@@ -84,6 +91,17 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :scheduled_at
 
+      # The Sent agent (Sent Agents) that sent this message, when one did. Not the RCS
+      # agent_id above: that names the RCS sender agent, this names the autonomous agent
+      # running on the account.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :sent_agent_id
+
+      # The conversation (agent × contact) the message belongs to, when a Sent agent
+      # sent it.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :sent_instance_id
+
       # The template the message was sent from, when it was sent from one.
       sig { returns(T.nilable(String)) }
       attr_accessor :template_id
@@ -113,10 +131,13 @@ module Sentdm
           channel: String,
           message_id: String,
           outbound_number: String,
+          parent_message_id: T.nilable(String),
           reason: T.nilable(String),
           reason_code: T.nilable(String),
           schedule_reason: T.nilable(String),
           scheduled_at: T.nilable(String),
+          sent_agent_id: T.nilable(String),
+          sent_instance_id: T.nilable(String),
           template_id: T.nilable(String),
           template_name: T.nilable(String),
           updated_at: String
@@ -143,6 +164,11 @@ module Sentdm
         message_id: nil,
         # The recipient's number in E.164 format.
         outbound_number: nil,
+        # When this message is another send of a message you sent earlier, the id of that
+        # original message; omitted for every other message. The new send has its own
+        # message_id, so this ties its events back to the message you sent. Always the
+        # first message, however many sends lie between them.
+        parent_message_id: nil,
         # A human-readable sentence for ReasonCode, for example "The recipient is not
         # registered on this channel". Omitted whenever reason_code is.
         reason: nil,
@@ -165,6 +191,13 @@ module Sentdm
         # before and after. A consumer that recorded a future send from the first event
         # has what it needs to un-record it from the second. Omitted on every other event.
         scheduled_at: nil,
+        # The Sent agent (Sent Agents) that sent this message, when one did. Not the RCS
+        # agent_id above: that names the RCS sender agent, this names the autonomous agent
+        # running on the account.
+        sent_agent_id: nil,
+        # The conversation (agent × contact) the message belongs to, when a Sent agent
+        # sent it.
+        sent_instance_id: nil,
         # The template the message was sent from, when it was sent from one.
         template_id: nil,
         # Name of the template the message was sent from. Omitted when the message wasn't
@@ -186,10 +219,13 @@ module Sentdm
             channel: String,
             message_id: String,
             outbound_number: String,
+            parent_message_id: T.nilable(String),
             reason: T.nilable(String),
             reason_code: T.nilable(String),
             schedule_reason: T.nilable(String),
             scheduled_at: T.nilable(String),
+            sent_agent_id: T.nilable(String),
+            sent_instance_id: T.nilable(String),
             template_id: T.nilable(String),
             template_name: T.nilable(String),
             updated_at: String

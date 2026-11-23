@@ -2,6 +2,7 @@ module Sentdm
   module Models
     type webhook_list_params =
       {
+        agent_id: String?,
         is_active: bool?,
         page: Integer,
         page_size: Integer,
@@ -13,6 +14,8 @@ module Sentdm
     class WebhookListParams < Sentdm::Internal::Type::BaseModel
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
+
+      attr_accessor agent_id: String?
 
       attr_accessor is_active: bool?
 
@@ -31,6 +34,7 @@ module Sentdm
       def x_profile_id=: (String) -> String
 
       def initialize: (
+        ?agent_id: String?,
         ?is_active: bool?,
         ?page: Integer,
         ?page_size: Integer,
@@ -40,6 +44,7 @@ module Sentdm
       ) -> void
 
       def to_hash: -> {
+        agent_id: String?,
         is_active: bool?,
         page: Integer,
         page_size: Integer,

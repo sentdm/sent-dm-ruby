@@ -68,6 +68,19 @@ module Sentdm
       #   @return [Object, nil]
       optional :referral, Sentdm::Internal::Type::Unknown, nil?: true
 
+      # @!attribute sent_agent_id
+      #   The Sent agent whose conversation this reply arrived in, when the contact is in
+      #   one, as on the messages it sent. Absent otherwise.
+      #
+      #   @return [String, nil]
+      optional :sent_agent_id, String, nil?: true
+
+      # @!attribute sent_instance_id
+      #   The conversation (agent × contact) the reply belongs to, when it belongs to one.
+      #
+      #   @return [String, nil]
+      optional :sent_instance_id, String, nil?: true
+
       # @!attribute text
       #   The message body. Sent as null when the inbound message carried no text, for
       #   example a media-only message. The field is always present, so read it and check
@@ -83,7 +96,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(inbound_number:, received_at:, account_id: nil, channel: nil, media: nil, message_id: nil, outbound_number: nil, referral: nil, text: nil, updated_at: nil)
+      # @!method initialize(inbound_number:, received_at:, account_id: nil, channel: nil, media: nil, message_id: nil, outbound_number: nil, referral: nil, sent_agent_id: nil, sent_instance_id: nil, text: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::InboundMessageEventPayload} for more details.
       #
@@ -105,6 +118,10 @@ module Sentdm
       #   @param outbound_number [String] Your number in E.164 format, meaning the number the message was addressed to.
       #
       #   @param referral [Object, nil] The ad the contact tapped to start the conversation, present only on whatsapp
+      #
+      #   @param sent_agent_id [String, nil] The Sent agent whose conversation this reply arrived in, when the contact is in
+      #
+      #   @param sent_instance_id [String, nil] The conversation (agent × contact) the reply belongs to, when it belongs to one.
       #
       #   @param text [String, nil] The message body. Sent as null when the inbound message carried no text, for
       #

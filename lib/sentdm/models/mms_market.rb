@@ -30,11 +30,11 @@ module Sentdm
       # @!method initialize(country: nil, number_type: nil, sender_value: nil, status: nil)
       #   One market the profile can send MMS in.
       #
-      #   Deliberately not SmsMarketState: an MMS market carries no compliance of its own.
-      #   It is the same number, carrier and registration as the SMS market on it in that
-      #   country — MMS files nothing separately — so a compliance block here would always
-      #   be null and would invite the question of what an MMS market owes. It owes what
-      #   the SMS market owes, reported there.
+      #   Deliberately not ChannelMarketState: an MMS market carries no compliance of its
+      #   own. It is the same number, carrier and registration as the SMS market on it in
+      #   that country — MMS files nothing separately — so a compliance block here would
+      #   always be null and would invite the question of what an MMS market owes. It owes
+      #   what the SMS market owes, reported there.
       #
       #   @param country [String, nil] ISO-3166 alpha-2 of the market.
       #

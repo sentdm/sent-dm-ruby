@@ -40,6 +40,19 @@ module Sentdm
       #   @return [Integer, nil]
       optional :max_items, Integer, nil?: true
 
+      # @!attribute max_length
+      #   Longest acceptable value, where the market caps it. On a list of strings, each
+      #   item's.
+      #
+      #   @return [Integer, nil]
+      optional :max_length, Integer, nil?: true
+
+      # @!attribute min_items
+      #   Fewest entries this value accepts, where the market sets a minimum.
+      #
+      #   @return [Integer, nil]
+      optional :min_items, Integer, nil?: true
+
       # @!attribute min_length
       #   Shortest acceptable value, where the market sets one. TCR refuses a consent
       #   narrative under 40 characters, and finding that out at submission time is the
@@ -80,7 +93,7 @@ module Sentdm
       #   @return [String, nil]
       optional :type, String
 
-      # @!method initialize(format_: nil, item_fields: nil, key: nil, label: nil, max_items: nil, min_length: nil, notes: nil, options: nil, required: nil, required_when: nil, type: nil)
+      # @!method initialize(format_: nil, item_fields: nil, key: nil, label: nil, max_items: nil, max_length: nil, min_items: nil, min_length: nil, notes: nil, options: nil, required: nil, required_when: nil, type: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::ComplianceRequirement} for more details.
       #
@@ -95,6 +108,10 @@ module Sentdm
       #   @param label [String, nil] Human label, suitable for a form field.
       #
       #   @param max_items [Integer, nil] Most entries this value accepts, where the market caps it.
+      #
+      #   @param max_length [Integer, nil] Longest acceptable value, where the market caps it. On a list of strings, each i
+      #
+      #   @param min_items [Integer, nil] Fewest entries this value accepts, where the market sets a minimum.
       #
       #   @param min_length [Integer, nil] Shortest acceptable value, where the market sets one. TCR refuses a consent narr
       #

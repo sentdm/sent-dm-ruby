@@ -63,6 +63,12 @@ module Sentdm
       sig { params(message_body: T.nilable(Sentdm::MessageBody::OrHash)).void }
       attr_writer :message_body
 
+      # When this message is another send of a message you sent earlier, the id of that
+      # original message; null for every other message. Always the first message,
+      # however many sends lie between them.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :parent_message_id
+
       sig { returns(T.nilable(String)) }
       attr_reader :phone
 
@@ -130,6 +136,7 @@ module Sentdm
           direction: String,
           events: T.nilable(T::Array[Sentdm::MessageStatusEvent::OrHash]),
           message_body: T.nilable(Sentdm::MessageBody::OrHash),
+          parent_message_id: T.nilable(String),
           phone: String,
           phone_international: String,
           price: T.nilable(Float),
@@ -161,6 +168,10 @@ module Sentdm
         # MessageUtils.BuildSegmentBody — has to carry every member, or that member is
         # silently dropped on whichever path forgot it.
         message_body: nil,
+        # When this message is another send of a message you sent earlier, the id of that
+        # original message; null for every other message. Always the first message,
+        # however many sends lie between them.
+        parent_message_id: nil,
         phone: nil,
         phone_international: nil,
         price: nil,
@@ -194,6 +205,7 @@ module Sentdm
             direction: String,
             events: T.nilable(T::Array[Sentdm::MessageStatusEvent]),
             message_body: T.nilable(Sentdm::MessageBody),
+            parent_message_id: T.nilable(String),
             phone: String,
             phone_international: String,
             price: T.nilable(Float),

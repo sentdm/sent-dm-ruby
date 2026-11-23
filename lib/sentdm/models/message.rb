@@ -57,6 +57,14 @@ module Sentdm
       #   @return [Sentdm::Models::MessageBody, nil]
       optional :message_body, -> { Sentdm::MessageBody }, nil?: true
 
+      # @!attribute parent_message_id
+      #   When this message is another send of a message you sent earlier, the id of that
+      #   original message; null for every other message. Always the first message,
+      #   however many sends lie between them.
+      #
+      #   @return [String, nil]
+      optional :parent_message_id, String, nil?: true
+
       # @!attribute phone
       #
       #   @return [String, nil]
@@ -115,7 +123,7 @@ module Sentdm
       #   @return [String, nil]
       optional :template_name, String, nil?: true
 
-      # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, direction: nil, events: nil, message_body: nil, phone: nil, phone_international: nil, price: nil, reason: nil, reason_code: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
+      # @!method initialize(id: nil, active_contact_price: nil, channel: nil, contact_id: nil, created_at: nil, customer_id: nil, direction: nil, events: nil, message_body: nil, parent_message_id: nil, phone: nil, phone_international: nil, price: nil, reason: nil, reason_code: nil, region_code: nil, status: nil, template_category: nil, template_id: nil, template_name: nil)
       #   Some parameter documentations has been truncated, see {Sentdm::Models::Message}
       #   for more details.
       #
@@ -143,6 +151,8 @@ module Sentdm
       #   @param events [Array<Sentdm::Models::MessageStatusEvent>, nil]
       #
       #   @param message_body [Sentdm::Models::MessageBody, nil] Structured message body format for database storage.
+      #
+      #   @param parent_message_id [String, nil] When this message is another send of a message you sent earlier, the id of that
       #
       #   @param phone [String]
       #

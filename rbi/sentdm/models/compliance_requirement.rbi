@@ -38,6 +38,15 @@ module Sentdm
       sig { returns(T.nilable(Integer)) }
       attr_accessor :max_items
 
+      # Longest acceptable value, where the market caps it. On a list of strings, each
+      # item's.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :max_length
+
+      # Fewest entries this value accepts, where the market sets a minimum.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :min_items
+
       # Shortest acceptable value, where the market sets one. TCR refuses a consent
       # narrative under 40 characters, and finding that out at submission time is the
       # round trip this exists to save.
@@ -80,6 +89,8 @@ module Sentdm
           key: String,
           label: T.nilable(String),
           max_items: T.nilable(Integer),
+          max_length: T.nilable(Integer),
+          min_items: T.nilable(Integer),
           min_length: T.nilable(Integer),
           notes: T.nilable(String),
           options: T.nilable(T::Array[String]),
@@ -106,6 +117,11 @@ module Sentdm
         label: nil,
         # Most entries this value accepts, where the market caps it.
         max_items: nil,
+        # Longest acceptable value, where the market caps it. On a list of strings, each
+        # item's.
+        max_length: nil,
+        # Fewest entries this value accepts, where the market sets a minimum.
+        min_items: nil,
         # Shortest acceptable value, where the market sets one. TCR refuses a consent
         # narrative under 40 characters, and finding that out at submission time is the
         # round trip this exists to save.
@@ -133,6 +149,8 @@ module Sentdm
             key: String,
             label: T.nilable(String),
             max_items: T.nilable(Integer),
+            max_length: T.nilable(Integer),
+            min_items: T.nilable(Integer),
             min_length: T.nilable(Integer),
             notes: T.nilable(String),
             options: T.nilable(T::Array[String]),

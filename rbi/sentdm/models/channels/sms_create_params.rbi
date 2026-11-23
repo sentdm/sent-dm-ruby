@@ -61,13 +61,6 @@ module Sentdm
         end
         attr_writer :compliance
 
-        # ISO 3166-1 alpha-2 country the sender operates in.
-        sig { returns(T.nilable(String)) }
-        attr_reader :country
-
-        sig { params(country: String).void }
-        attr_writer :country
-
         # The numbers to assign, one entry per area code, e.g. [{"area_code": "212",
         # "quantity": 2}, {"area_code": "415"}, {"quantity": 1}]: two numbers in 212, one
         # in 415 and one in any area code. quantity defaults to 1, and an entry without
@@ -114,7 +107,6 @@ module Sentdm
               Sentdm::Channels::SMSCreateParams::NumberType::OrSymbol,
             area_codes: T.nilable(T::Array[String]),
             compliance: Sentdm::Channels::MarketCompliance::OrHash,
-            country: String,
             numbers:
               T.nilable(T::Array[Sentdm::Channels::SMSNumberRequest::OrHash]),
             sandbox: T::Boolean,
@@ -163,8 +155,6 @@ module Sentdm
           # US `TEN_DLC`; other markets fill this map with the document keys their own
           # requirements name.
           compliance: nil,
-          # ISO 3166-1 alpha-2 country the sender operates in.
-          country: nil,
           # The numbers to assign, one entry per area code, e.g. [{"area_code": "212",
           # "quantity": 2}, {"area_code": "415"}, {"quantity": 1}]: two numbers in 212, one
           # in 415 and one in any area code. quantity defaults to 1, and an entry without
@@ -197,7 +187,6 @@ module Sentdm
                 Sentdm::Channels::SMSCreateParams::NumberType::OrSymbol,
               area_codes: T.nilable(T::Array[String]),
               compliance: Sentdm::Channels::MarketCompliance,
-              country: String,
               numbers: T.nilable(T::Array[Sentdm::Channels::SMSNumberRequest]),
               sandbox: T::Boolean,
               sender_value: T.nilable(String),
