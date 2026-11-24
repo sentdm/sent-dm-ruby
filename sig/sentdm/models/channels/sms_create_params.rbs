@@ -6,7 +6,6 @@ module Sentdm
           number_type: Sentdm::Models::Channels::SMSCreateParams::number_type,
           area_codes: ::Array[String]?,
           compliance: Sentdm::Channels::MarketCompliance,
-          country: String,
           numbers: ::Array[Sentdm::Channels::SMSNumberRequest]?,
           sandbox: bool,
           sender_value: String?,
@@ -29,10 +28,6 @@ module Sentdm
           Sentdm::Channels::MarketCompliance
         ) -> Sentdm::Channels::MarketCompliance
 
-        attr_reader country: String?
-
-        def country=: (String) -> String
-
         attr_accessor numbers: ::Array[Sentdm::Channels::SMSNumberRequest]?
 
         attr_reader sandbox: bool?
@@ -53,7 +48,6 @@ module Sentdm
           number_type: Sentdm::Models::Channels::SMSCreateParams::number_type,
           ?area_codes: ::Array[String]?,
           ?compliance: Sentdm::Channels::MarketCompliance,
-          ?country: String,
           ?numbers: ::Array[Sentdm::Channels::SMSNumberRequest]?,
           ?sandbox: bool,
           ?sender_value: String?,
@@ -66,7 +60,6 @@ module Sentdm
           number_type: Sentdm::Models::Channels::SMSCreateParams::number_type,
           area_codes: ::Array[String]?,
           compliance: Sentdm::Channels::MarketCompliance,
-          country: String,
           numbers: ::Array[Sentdm::Channels::SMSNumberRequest]?,
           sandbox: bool,
           sender_value: String?,

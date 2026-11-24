@@ -58,12 +58,6 @@ module Sentdm
         #   @return [Sentdm::Models::Channels::MarketCompliance, nil]
         optional :compliance, -> { Sentdm::Channels::MarketCompliance }
 
-        # @!attribute country
-        #   ISO 3166-1 alpha-2 country the sender operates in.
-        #
-        #   @return [String, nil]
-        optional :country, String
-
         # @!attribute numbers
         #   The numbers to assign, one entry per area code, e.g. [{"area_code": "212",
         #   "quantity": 2}, {"area_code": "415"}, {"quantity": 1}]: two numbers in 212, one
@@ -109,7 +103,7 @@ module Sentdm
         #   @return [String, nil]
         optional :x_profile_id, String
 
-        # @!method initialize(number_type:, area_codes: nil, compliance: nil, country: nil, numbers: nil, sandbox: nil, sender_value: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+        # @!method initialize(number_type:, area_codes: nil, compliance: nil, numbers: nil, sandbox: nil, sender_value: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Sentdm::Models::Channels::SMSCreateParams} for more details.
         #
@@ -118,8 +112,6 @@ module Sentdm
         #   @param area_codes [Array<String>, nil] The area codes to put this sender in, in your own order of preference, e.g. ["41
         #
         #   @param compliance [Sentdm::Models::Channels::MarketCompliance] The compliance values a market registers with. `brand` and `campaign` apply to U
-        #
-        #   @param country [String] ISO 3166-1 alpha-2 country the sender operates in.
         #
         #   @param numbers [Array<Sentdm::Models::Channels::SMSNumberRequest>, nil] The numbers to assign, one entry per area code, e.g.
         #

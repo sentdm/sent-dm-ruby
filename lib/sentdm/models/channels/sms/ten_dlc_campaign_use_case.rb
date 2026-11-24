@@ -6,8 +6,10 @@ module Sentdm
       module SMS
         class TenDlcCampaignUseCase < Sentdm::Internal::Type::BaseModel
           # @!attribute sample_messages
-          #   Sample messages. TCR sample1..sample5 for this use case. One to five, each
-          #   carrying the brand name and an opt-out instruction.
+          #   Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
+          #   1024 characters and carrying the brand name and an opt-out instruction. At most
+          #   five across the campaign, and at least two when a high-volume campaign has a
+          #   single use case.
           #
           #   @return [Array<Object>]
           required :sample_messages, Sentdm::Internal::Type::ArrayOf[Sentdm::Internal::Type::Unknown]
@@ -23,7 +25,7 @@ module Sentdm
           #   Some parameter documentations has been truncated, see
           #   {Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase} for more details.
           #
-          #   @param sample_messages [Array<Object>] Sample messages. TCR sample1..sample5 for this use case. One to five, each carry
+          #   @param sample_messages [Array<Object>] Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
           #
           #   @param use_case [Symbol, Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase::UseCase] Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume decid
 

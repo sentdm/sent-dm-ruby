@@ -44,12 +44,10 @@ module Sentdm
           # ## What to send
           #
           # The new campaign's fields, at the top level of the body: use cases, consent
-          # narrative, volume, sample messages and keywords, under the
-          # `compliance.campaign.*` keys
-          # `GET /v3/compliance/requirements?country=US&type=TEN_DLC` lists, without that
-          # prefix. It has to be complete. A rejected field is keyed by its name
-          # (`description`). `id` and `inherit` are ignored, so an entry of
-          # `compliance.campaigns` can be sent as read.
+          # narrative, volume, sample messages and keywords, under their keys
+          # (`description`, `message_flow`, `use_cases`, `volume`, …). It has to be
+          # complete. A rejected field is keyed by its name (`description`). `id` and
+          # `inherit` are ignored, so an entry of `campaigns` can be sent as read.
           #
           # The identity is the market's and is not sent here. A market whose identity has
           # no registration yet, or one not yet submitted for review, is `400`.
@@ -58,25 +56,22 @@ module Sentdm
           #
           # The campaign is recorded and goes for review; it is not filed with The Campaign
           # Registry by this call. **It comes without numbers**: send its `id` from
-          # `compliance.campaigns` to `POST /v3/channels/sms/numbers/US/TEN_DLC` to give it
-          # some. **The campaign you already have, and its numbers, are not touched** —
-          # including a campaign you run on from your organization.
+          # `compliance.campaigns` to `POST /v3/channels/sms/{country}/{type}/numbers` to
+          # give it some. **The campaign you already have, and its numbers, are not
+          # touched** — including a campaign you run on from your organization.
           #
           # **Each call files a new campaign**, which is charged when it is submitted. Send
           # an `Idempotency-Key` so a retried request does not file a second one.
           #
-          # To change the campaign a market already has, use
-          # `PATCH /v3/channels/sms/US/TEN_DLC`. Once a market holds more than one campaign,
-          # that `PATCH` refuses a campaign or numbers change (`409`) rather than guess
-          # which campaign is meant; numbers are added to a named campaign with
-          # `POST /v3/channels/sms/numbers/US/TEN_DLC`.
+          # To change a campaign, use
+          # `PATCH /v3/channels/sms/US/TEN_DLC/campaigns/{campaignId}`;
+          # `PATCH /v3/channels/sms/US/TEN_DLC` changes the brand and documents only, and
+          # refuses a campaign or numbers (`400`).
           #
           # Returns **the market**, in the shape `GET /v3/channels/sms/US/TEN_DLC` returns,
           # with `202`.
           #
-          # @overload add_campaign(idempotency_key:, description: nil, help_keywords: nil, help_message: nil, message_flow: nil, opt_in_keywords: nil, opt_in_message: nil, opt_out_keywords: nil, opt_out_message: nil, privacy_policy_link: nil, sandbox: nil, terms_and_conditions_link: nil, use_cases: nil, volume: nil, x_profile_id: nil, request_options: {})
-          #
-          # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
+          # @overload add_campaign(description:, help_keywords:, help_message:, message_flow:, opt_in_keywords:, opt_in_message:, opt_out_keywords:, opt_out_message:, privacy_policy_link:, terms_and_conditions_link:, use_cases:, volume:, idempotency_key:, sandbox: nil, x_profile_id: nil, request_options: {})
           #
           # @param description [String] Body param: What this programme sends. TCR description: what recipients will get
           #
@@ -96,65 +91,11 @@ module Sentdm
           #
           # @param privacy_policy_link [String] Body param: Privacy policy URL. TCR privacyPolicyLink. Required when `compliance
           #
-          # @param sandbox [Boolean] Body param: Sandbox flag - when true, the operation is simulated without side ef
-          #
           # @param terms_and_conditions_link [String] Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
           #
-          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
+          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
           #
-          # @param volume [String] Body param: Expected monthly volume. Decides how the campaign registers and whic
-          #
-          # @param x_profile_id [String] Header param: Profile UUID to scope the request to a child profile. Only organiz
-          #
-          # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
-          #
-          # @return [Sentdm::Models::Channels::APIResponseOfSMSMarket]
-          #
-          # @see Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams
-          def add_campaign(params)
-            parsed, options = Sentdm::Channels::SMS::TenDlcAddCampaignParams.dump_request(params)
-            header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
-            @client.request(
-              method: :post,
-              path: "v3/channels/sms/compliances/US/TEN_DLC/campaigns",
-              headers: parsed.slice(*header_params.keys).transform_keys(header_params),
-              body: parsed.except(*header_params.keys),
-              model: Sentdm::Channels::APIResponseOfSMSMarket,
-              options: options
-            )
-          end
-
-          # Some parameter documentations has been truncated, see
-          # {Sentdm::Models::Channels::SMS::TenDlcAddNumbersParams} for more details.
-          #
-          # Adds numbers to **one campaign of your own** on the US `TEN_DLC` market you
-          # hold, named by `campaign_id` — the `id` of an entry in the market's
-          # `compliance.campaigns`.
-          #
-          # ## What to send
-          #
-          # - `campaign_id` — the campaign. One you inherit from your organization is `400`:
-          #   its numbers are the organization's. One out of service — expired, deactivated
-          #   or released — is `409`.
-          # - `numbers` — the list `POST /v3/channels/sms` takes, one entry per area code.
-          #
-          # ## What happens
-          #
-          # The entries are **added** to what the campaign already asks for. With everything
-          # it asks for, a campaign holds at most 49 numbers, counting one for each sender
-          # profile inheriting it. A campaign the carriers have not approved yet gets its
-          # numbers when they do; an approved one gets them now. Until a number is assigned
-          # it reads as `PROVISIONING` in the market's `numbers`, with the area code it was
-          # asked for.
-          #
-          # Returns **the market**, in the shape `GET /v3/channels/sms/US/TEN_DLC` returns,
-          # with `202`.
-          #
-          # @overload add_numbers(campaign_id:, numbers:, idempotency_key:, sandbox: nil, x_profile_id: nil, request_options: {})
-          #
-          # @param campaign_id [String] Body param: The campaign to add the numbers to, as compliance.campaigns[].id rep
-          #
-          # @param numbers [Array<Sentdm::Models::Channels::SMSNumberRequest, nil>] Body param: The numbers to add, one entry per area code, e.g. [{"area_code": "41
+          # @param volume [String] Body param: Expected monthly volume. Required whenever the campaign's fields are
           #
           # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
           #
@@ -164,54 +105,56 @@ module Sentdm
           #
           # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Sentdm::Models::Channels::APIResponseOfSMSMarket]
+          # @return [Sentdm::Models::Channels::APIResponseOfChannelMarket]
           #
-          # @see Sentdm::Models::Channels::SMS::TenDlcAddNumbersParams
-          def add_numbers(params)
-            parsed, options = Sentdm::Channels::SMS::TenDlcAddNumbersParams.dump_request(params)
+          # @see Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams
+          def add_campaign(params)
+            parsed, options = Sentdm::Channels::SMS::TenDlcAddCampaignParams.dump_request(params)
             header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
             @client.request(
               method: :post,
-              path: "v3/channels/sms/numbers/US/TEN_DLC",
+              path: "v3/channels/sms/US/TEN_DLC/campaigns",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
-              model: Sentdm::Channels::APIResponseOfSMSMarket,
+              model: Sentdm::Channels::APIResponseOfChannelMarket,
               options: options
             )
           end
 
           # Some parameter documentations has been truncated, see
-          # {Sentdm::Models::Channels::SMS::TenDlcRetrieveComplianceParams} for more
-          # details.
+          # {Sentdm::Models::Channels::SMS::TenDlcListCampaignsParams} for more details.
           #
-          # Reads what the US `TEN_DLC` market you hold has registered: the `brand` it files
-          # under, **every campaign** under `campaigns` (each with its `id` and `inherit`),
-          # and its `documents`. It is the `compliance` object
-          # `GET /v3/channels/sms/US/TEN_DLC` returns, without the sender and numbers.
+          # Every campaign your US `TEN_DLC` market registers, oldest first, each with its
+          # `id`, where it stands and `inherit` (`true` for your organization's) beside its
+          # fields — the list `GET /v3/channels/sms/US/TEN_DLC` reports under
+          # `compliance.campaigns`. Add one with `POST` on this path, and change one of your
+          # own with `PATCH /v3/channels/sms/US/TEN_DLC/campaigns/{id}`.
           #
-          # Use a campaign's `id` to change it with
-          # `PATCH /v3/channels/sms/compliances/US/TEN_DLC/campaigns/{campaignId}`, or to
-          # add numbers to it with `POST /v3/channels/sms/numbers/US/TEN_DLC`.
+          # Each campaign has a `status` of its own, so a market on several says which is
+          # approved: `ACTIVE` once the carriers have elected it, `PENDING_REVIEW` until
+          # then, `ACTION_NEEDED` when it came back for correction, `DECLINED` when the
+          # carriers refused it, `INACTIVE` once it has ended. Why the market is held up is
+          # the market's own `reason`, which names the campaign concerned. `status` is
+          # read-only and ignored when the entry is sent back.
           #
-          # Send `x-profile-id` with an organization key to read one of your profiles'
-          # markets.
+          # A customer without a US `TEN_DLC` market is `404`.
           #
-          # @overload retrieve_compliance(x_profile_id: nil, request_options: {})
+          # @overload list_campaigns(x_profile_id: nil, request_options: {})
           #
           # @param x_profile_id [String] Profile UUID to scope the request to a child profile. Only organization API keys
           #
           # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Sentdm::Models::Channels::SMS::APIResponseOfSuppliedCompliance]
+          # @return [Sentdm::Models::Channels::SMS::TenDlcListCampaignsResponse]
           #
-          # @see Sentdm::Models::Channels::SMS::TenDlcRetrieveComplianceParams
-          def retrieve_compliance(params = {})
-            parsed, options = Sentdm::Channels::SMS::TenDlcRetrieveComplianceParams.dump_request(params)
+          # @see Sentdm::Models::Channels::SMS::TenDlcListCampaignsParams
+          def list_campaigns(params = {})
+            parsed, options = Sentdm::Channels::SMS::TenDlcListCampaignsParams.dump_request(params)
             @client.request(
               method: :get,
-              path: "v3/channels/sms/compliances/US/TEN_DLC",
+              path: "v3/channels/sms/US/TEN_DLC/campaigns",
               headers: parsed.transform_keys(x_profile_id: "x-profile-id"),
-              model: Sentdm::Channels::SMS::APIResponseOfSuppliedCompliance,
+              model: Sentdm::Models::Channels::SMS::TenDlcListCampaignsResponse,
               options: options
             )
           end
@@ -224,15 +167,14 @@ module Sentdm
           #
           # ## What to send
           #
-          # The fields to change, at the top level of the body, under the
-          # `compliance.campaign.*` keys
-          # `GET /v3/compliance/requirements?country=US&type=TEN_DLC` lists, without that
-          # prefix. A field you leave out keeps its value, and a rejected one is keyed by
-          # its name. `id` and `"inherit": false` are ignored, so an entry of
-          # `compliance.campaigns` can be sent as read; `"inherit": true` is `400`, because
-          # this call changes a campaign's fields, not whose campaign you run on. The
-          # campaign only: add numbers with `POST /v3/channels/sms/numbers/US/TEN_DLC`, and
-          # change the brand or documents with `PATCH /v3/channels/sms/US/TEN_DLC`.
+          # The fields to change, at the top level of the body, under their keys
+          # (`description`, `message_flow`, `use_cases`, `help_message`, …). A field you
+          # leave out keeps its value, and a rejected one is keyed by its name. `id` and
+          # `"inherit": false` are ignored, so an entry of `campaigns` can be sent as read;
+          # `"inherit": true` is `400`, because this call changes a campaign's fields, not
+          # whose campaign you run on. The campaign only: add numbers with
+          # `POST /v3/channels/sms/US/TEN_DLC/numbers`, and change the brand or documents
+          # with `PATCH /v3/channels/sms/US/TEN_DLC`.
           #
           # ## When it can be changed
           #
@@ -271,9 +213,9 @@ module Sentdm
           #
           # @param terms_and_conditions_link [String] Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
           #
-          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
+          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
           #
-          # @param volume [String] Body param: Expected monthly volume. Decides how the campaign registers and whic
+          # @param volume [String] Body param: Expected monthly volume. Required whenever the campaign's fields are
           #
           # @param idempotency_key [String] Header param: Unique key to ensure idempotent request processing. Must be 1-255
           #
@@ -281,7 +223,7 @@ module Sentdm
           #
           # @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Sentdm::Models::Channels::APIResponseOfSMSMarket]
+          # @return [Sentdm::Models::Channels::APIResponseOfChannelMarket]
           #
           # @see Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams
           def update_campaign(campaign_id, params = {})
@@ -289,10 +231,10 @@ module Sentdm
             header_params = {idempotency_key: "idempotency-key", x_profile_id: "x-profile-id"}
             @client.request(
               method: :patch,
-              path: ["v3/channels/sms/compliances/US/TEN_DLC/campaigns/%1$s", campaign_id],
+              path: ["v3/channels/sms/US/TEN_DLC/campaigns/%1$s", campaign_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
-              model: Sentdm::Channels::APIResponseOfSMSMarket,
+              model: Sentdm::Channels::APIResponseOfChannelMarket,
               options: options
             )
           end
