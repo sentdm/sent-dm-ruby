@@ -1,0 +1,67 @@
+module Sentdm
+  module Resources
+    class Channels
+      class Markets
+        def retrieve: (
+          String `type`,
+          channel: String,
+          country: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfChannelMarket
+
+        def update: (
+          String `type`,
+          channel: String,
+          country: String,
+          ?compliance: Sentdm::Channels::MarketCompliance,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfChannelMarket
+
+        def list: (
+          String channel,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfListOfChannelMarket
+
+        def add_numbers: (
+          String `type`,
+          channel: String,
+          country: String,
+          numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
+          idempotency_key: String,
+          ?campaign_id: String?,
+          ?sandbox: bool,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfChannelMarket
+
+        def list_numbers: (
+          String `type`,
+          channel: String,
+          country: String,
+          ?campaign_id: String?,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfMarketNumbers
+
+        def replace_numbers: (
+          String `type`,
+          channel: String,
+          country: String,
+          numbers: ::Array[Sentdm::Channels::SMSNumberRequest?],
+          ?campaign_id: String?,
+          ?sandbox: bool,
+          ?idempotency_key: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> Sentdm::Channels::APIResponseOfChannelMarket
+
+        def initialize: (client: Sentdm::Client) -> void
+      end
+    end
+  end
+end

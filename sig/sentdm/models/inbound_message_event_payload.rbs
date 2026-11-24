@@ -10,6 +10,8 @@ module Sentdm
         message_id: String,
         outbound_number: String,
         referral: top?,
+        sent_agent_id: String?,
+        sent_instance_id: String?,
         text: String?,
         updated_at: String
       }
@@ -39,6 +41,10 @@ module Sentdm
 
       attr_accessor referral: top?
 
+      attr_accessor sent_agent_id: String?
+
+      attr_accessor sent_instance_id: String?
+
       attr_accessor text: String?
 
       attr_reader updated_at: String?
@@ -54,6 +60,8 @@ module Sentdm
         ?message_id: String,
         ?outbound_number: String,
         ?referral: top?,
+        ?sent_agent_id: String?,
+        ?sent_instance_id: String?,
         ?text: String?,
         ?updated_at: String
       ) -> void
@@ -67,6 +75,8 @@ module Sentdm
         message_id: String,
         outbound_number: String,
         referral: top?,
+        sent_agent_id: String?,
+        sent_instance_id: String?,
         text: String?,
         updated_at: String
       }

@@ -118,7 +118,11 @@ module Sentdm
           # `compliance.campaign.inherit != true`.
           sig do
             returns(
-              T.nilable(T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase])
+              T.nilable(
+                T::Array[
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase
+                ]
+              )
             )
           end
           attr_reader :use_cases
@@ -126,15 +130,19 @@ module Sentdm
           sig do
             params(
               use_cases:
-                T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase::OrHash]
+                T::Array[
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::OrHash
+                ]
             ).void
           end
           attr_writer :use_cases
 
-          # Expected monthly volume. Decides how the campaign registers and which fee tier
-          # applies: below the low-volume threshold it registers as LOW_VOLUME with
-          # sub-use-cases, above it as a single use case or MIXED. Omitting it registers the
-          # campaign at the higher-fee standard tier.
+          # Expected monthly volume. Required whenever the campaign's fields are written. A
+          # whole number of messages, e.g. 1000 or 10000. Decides how the campaign registers
+          # and which fee tier applies: below the low-volume threshold it registers as
+          # LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+          # it registers the campaign at the higher-fee standard tier. Required when
+          # `compliance.campaign.inherit != true`, whenever its block is written.
           sig { returns(T.nilable(String)) }
           attr_reader :volume
 
@@ -168,7 +176,9 @@ module Sentdm
               sandbox: T::Boolean,
               terms_and_conditions_link: String,
               use_cases:
-                T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase::OrHash],
+                T::Array[
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::OrHash
+                ],
               volume: String,
               idempotency_key: String,
               x_profile_id: String,
@@ -220,10 +230,12 @@ module Sentdm
             # how they register is decided by volume, never declared. Required when
             # `compliance.campaign.inherit != true`.
             use_cases: nil,
-            # Expected monthly volume. Decides how the campaign registers and which fee tier
-            # applies: below the low-volume threshold it registers as LOW_VOLUME with
-            # sub-use-cases, above it as a single use case or MIXED. Omitting it registers the
-            # campaign at the higher-fee standard tier.
+            # Expected monthly volume. Required whenever the campaign's fields are written. A
+            # whole number of messages, e.g. 1000 or 10000. Decides how the campaign registers
+            # and which fee tier applies: below the low-volume threshold it registers as
+            # LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+            # it registers the campaign at the higher-fee standard tier. Required when
+            # `compliance.campaign.inherit != true`, whenever its block is written.
             volume: nil,
             idempotency_key: nil,
             x_profile_id: nil,
@@ -247,7 +259,9 @@ module Sentdm
                 sandbox: T::Boolean,
                 terms_and_conditions_link: String,
                 use_cases:
-                  T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
+                  T::Array[
+                    Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase
+                  ],
                 volume: String,
                 idempotency_key: String,
                 x_profile_id: String,
@@ -256,6 +270,144 @@ module Sentdm
             )
           end
           def to_hash
+          end
+
+          class UseCase < Sentdm::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase,
+                  Sentdm::Internal::AnyHash
+                )
+              end
+
+            # Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
+            # 1024 characters and carrying the brand name and an opt-out instruction. At most
+            # five across the campaign, and at least two when a high-volume campaign has a
+            # single use case.
+            sig { returns(T::Array[T.anything]) }
+            attr_accessor :sample_messages
+
+            # Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
+            # decides those.
+            sig do
+              returns(
+                Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::OrSymbol
+              )
+            end
+            attr_accessor :use_case
+
+            sig do
+              params(
+                sample_messages: T::Array[T.anything],
+                use_case:
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::OrSymbol
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
+              # 1024 characters and carrying the brand name and an opt-out instruction. At most
+              # five across the campaign, and at least two when a high-volume campaign has a
+              # single use case.
+              sample_messages:,
+              # Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
+              # decides those.
+              use_case:
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  sample_messages: T::Array[T.anything],
+                  use_case:
+                    Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::OrSymbol
+                }
+              )
+            end
+            def to_hash
+            end
+
+            # Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
+            # decides those.
+            module UseCase
+              extend Sentdm::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              MARKETING =
+                T.let(
+                  :MARKETING,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              ACCOUNT_NOTIFICATION =
+                T.let(
+                  :ACCOUNT_NOTIFICATION,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              CUSTOMER_CARE =
+                T.let(
+                  :CUSTOMER_CARE,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              FRAUD_ALERT =
+                T.let(
+                  :FRAUD_ALERT,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              USE_CASE_2_FA =
+                T.let(
+                  :"2FA",
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              DELIVERY_NOTIFICATION =
+                T.let(
+                  :DELIVERY_NOTIFICATION,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              SECURITY_ALERT =
+                T.let(
+                  :SECURITY_ALERT,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              M2_M =
+                T.let(
+                  :M2M,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              HIGHER_EDUCATION =
+                T.let(
+                  :HIGHER_EDUCATION,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              POLLING_VOTING =
+                T.let(
+                  :POLLING_VOTING,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+              PUBLIC_SERVICE_ANNOUNCEMENT =
+                T.let(
+                  :PUBLIC_SERVICE_ANNOUNCEMENT,
+                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::UseCase::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
           end
         end
       end

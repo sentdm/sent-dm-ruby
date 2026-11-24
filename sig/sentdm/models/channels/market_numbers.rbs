@@ -1,0 +1,40 @@
+module Sentdm
+  module Models
+    module Channels
+      type market_numbers =
+        {
+          channel: String,
+          country: String,
+          numbers: ::Array[Sentdm::Channels::MarketNumber]
+        }
+
+      class MarketNumbers < Sentdm::Internal::Type::BaseModel
+        attr_reader channel: String?
+
+        def channel=: (String) -> String
+
+        attr_reader country: String?
+
+        def country=: (String) -> String
+
+        attr_reader numbers: ::Array[Sentdm::Channels::MarketNumber]?
+
+        def numbers=: (
+          ::Array[Sentdm::Channels::MarketNumber]
+        ) -> ::Array[Sentdm::Channels::MarketNumber]
+
+        def initialize: (
+          ?channel: String,
+          ?country: String,
+          ?numbers: ::Array[Sentdm::Channels::MarketNumber]
+        ) -> void
+
+        def to_hash: -> {
+          channel: String,
+          country: String,
+          numbers: ::Array[Sentdm::Channels::MarketNumber]
+        }
+      end
+    end
+  end
+end

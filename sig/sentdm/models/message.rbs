@@ -11,6 +11,7 @@ module Sentdm
         direction: String,
         events: ::Array[Sentdm::MessageStatusEvent]?,
         message_body: Sentdm::MessageBody?,
+        parent_message_id: String?,
         phone: String,
         phone_international: String,
         price: Float?,
@@ -54,6 +55,8 @@ module Sentdm
 
       attr_accessor message_body: Sentdm::MessageBody?
 
+      attr_accessor parent_message_id: String?
+
       attr_reader phone: String?
 
       def phone=: (String) -> String
@@ -92,6 +95,7 @@ module Sentdm
         ?direction: String,
         ?events: ::Array[Sentdm::MessageStatusEvent]?,
         ?message_body: Sentdm::MessageBody?,
+        ?parent_message_id: String?,
         ?phone: String,
         ?phone_international: String,
         ?price: Float?,
@@ -114,6 +118,7 @@ module Sentdm
         direction: String,
         events: ::Array[Sentdm::MessageStatusEvent]?,
         message_body: Sentdm::MessageBody?,
+        parent_message_id: String?,
         phone: String,
         phone_international: String,
         price: Float?,
