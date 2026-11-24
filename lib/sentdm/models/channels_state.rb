@@ -47,8 +47,8 @@ module Sentdm
 
       # @!attribute sms
       #
-      #   @return [Array<Sentdm::Models::Channels::SMSMarket>, nil]
-      optional :sms, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMSMarket] }
+      #   @return [Array<Sentdm::Models::Channels::ChannelMarket>, nil]
+      optional :sms, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::ChannelMarket] }
 
       # @!attribute voice
       #   The numbers this profile carries phone calls on, one entry per number, or empty
@@ -79,7 +79,7 @@ module Sentdm
       #
       #   @param rcs [Sentdm::Models::Channels::RcsAgent, nil] An RCS agent as its owner sees it: the order form back, plus where the submissio
       #
-      #   @param sms [Array<Sentdm::Models::Channels::SMSMarket>]
+      #   @param sms [Array<Sentdm::Models::Channels::ChannelMarket>]
       #
       #   @param voice [Array<Sentdm::Models::Channels::VoiceNumber>] The numbers this profile carries phone calls on, one entry per number, or empty
       #

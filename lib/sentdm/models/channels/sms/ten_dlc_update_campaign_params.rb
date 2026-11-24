@@ -106,10 +106,12 @@ module Sentdm
           optional :use_cases, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMS::TenDlcCampaignUseCase] }
 
           # @!attribute volume
-          #   Expected monthly volume. Decides how the campaign registers and which fee tier
-          #   applies: below the low-volume threshold it registers as LOW_VOLUME with
-          #   sub-use-cases, above it as a single use case or MIXED. Omitting it registers the
-          #   campaign at the higher-fee standard tier.
+          #   Expected monthly volume. Required whenever the campaign's fields are written. A
+          #   whole number of messages, e.g. 1000 or 10000. Decides how the campaign registers
+          #   and which fee tier applies: below the low-volume threshold it registers as
+          #   LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+          #   it registers the campaign at the higher-fee standard tier. Required when
+          #   `compliance.campaign.inherit != true`, whenever its block is written.
           #
           #   @return [String, nil]
           optional :volume, String
@@ -154,7 +156,7 @@ module Sentdm
           #
           #   @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Use cases. What the campaign sends, and an example of each. One to five entries;
           #
-          #   @param volume [String] Expected monthly volume. Decides how the campaign registers and which fee tier a
+          #   @param volume [String] Expected monthly volume. Required whenever the campaign's fields are written. A
           #
           #   @param idempotency_key [String]
           #

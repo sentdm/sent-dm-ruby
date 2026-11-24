@@ -1,6 +1,8 @@
 module Sentdm
   module Resources
     class Channels
+      attr_reader markets: Sentdm::Resources::Channels::Markets
+
       attr_reader sms: Sentdm::Resources::Channels::SMS
 
       attr_reader rcs: Sentdm::Resources::Channels::Rcs

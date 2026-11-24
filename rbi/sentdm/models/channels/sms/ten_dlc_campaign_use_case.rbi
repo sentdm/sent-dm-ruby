@@ -13,8 +13,10 @@ module Sentdm
               )
             end
 
-          # Sample messages. TCR sample1..sample5 for this use case. One to five, each
-          # carrying the brand name and an opt-out instruction.
+          # Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
+          # 1024 characters and carrying the brand name and an opt-out instruction. At most
+          # five across the campaign, and at least two when a high-volume campaign has a
+          # single use case.
           sig { returns(T::Array[T.anything]) }
           attr_accessor :sample_messages
 
@@ -35,8 +37,10 @@ module Sentdm
             ).returns(T.attached_class)
           end
           def self.new(
-            # Sample messages. TCR sample1..sample5 for this use case. One to five, each
-            # carrying the brand name and an opt-out instruction.
+            # Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
+            # 1024 characters and carrying the brand name and an opt-out instruction. At most
+            # five across the campaign, and at least two when a high-volume campaign has a
+            # single use case.
             sample_messages:,
             # Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
             # decides those.

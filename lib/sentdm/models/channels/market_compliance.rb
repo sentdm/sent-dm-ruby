@@ -115,7 +115,8 @@ module Sentdm
           optional :legal_name, String
 
           # @!attribute postal_code
-          #   Postal code. Required when `compliance.brand.inherit != true`.
+          #   Postal code. Five digits for a US registration. Required when
+          #   `compliance.brand.inherit != true`.
           #
           #   @return [String, nil]
           optional :postal_code, String
@@ -150,9 +151,11 @@ module Sentdm
           optional :tax_id_type, String
 
           # @!attribute website
-          #   Website. TCR website. Optional, and worth sending: carriers weigh it when
-          #   vetting, so a brand that has one and omits it is vetted on less than it could
-          #   be.
+          #   Website. TCR website. Required whenever the identity's fields are sent, as the
+          #   dashboard requires it: carriers weigh it when vetting. Not reported as
+          #   outstanding on an identity already stored without one, which may be filed and no
+          #   longer changeable. Required when `compliance.brand.inherit != true`, whenever
+          #   its block is written.
           #
           #   @return [String, nil]
           optional :website, String
@@ -184,7 +187,7 @@ module Sentdm
           #
           #   @param legal_name [String] Registered legal name. TCR companyName — the name on the incorporation documents
           #
-          #   @param postal_code [String] Postal code. Required when `compliance.brand.inherit != true`.
+          #   @param postal_code [String] Postal code. Five digits for a US registration. Required when `compliance.brand.
           #
           #   @param state [String] State or region. TCR state. Two letters for a US registration. Required when `co
           #
@@ -194,7 +197,7 @@ module Sentdm
           #
           #   @param tax_id_type [String] Kind of tax identifier. Which kind of identifier `tax_id` is, e.g. us_ein. Deriv
           #
-          #   @param website [String] Website. TCR website. Optional, and worth sending: carriers weigh it when vettin
+          #   @param website [String] Website. TCR website. Required whenever the identity's fields are sent, as the d
 
           # Entity type. TCR entityType. Decides which vetting TCR applies and, for
           # SOLE_PROPRIETOR, fixes the campaign fee regardless of volume. Also refused at
@@ -313,10 +316,12 @@ module Sentdm
                    -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::MarketCompliance::Campaign::UseCase] }
 
           # @!attribute volume
-          #   Expected monthly volume. Decides how the campaign registers and which fee tier
-          #   applies: below the low-volume threshold it registers as LOW_VOLUME with
-          #   sub-use-cases, above it as a single use case or MIXED. Omitting it registers the
-          #   campaign at the higher-fee standard tier.
+          #   Expected monthly volume. Required whenever the campaign's fields are written. A
+          #   whole number of messages, e.g. 1000 or 10000. Decides how the campaign registers
+          #   and which fee tier applies: below the low-volume threshold it registers as
+          #   LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+          #   it registers the campaign at the higher-fee standard tier. Required when
+          #   `compliance.campaign.inherit != true`, whenever its block is written.
           #
           #   @return [String, nil]
           optional :volume, String
@@ -353,12 +358,14 @@ module Sentdm
           #
           #   @param use_cases [Array<Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase>] Use cases. What the campaign sends, and an example of each. One to five entries;
           #
-          #   @param volume [String] Expected monthly volume. Decides how the campaign registers and which fee tier a
+          #   @param volume [String] Expected monthly volume. Required whenever the campaign's fields are written. A
 
           class UseCase < Sentdm::Internal::Type::BaseModel
             # @!attribute sample_messages
-            #   Sample messages. TCR sample1..sample5 for this use case. One to five, each
-            #   carrying the brand name and an opt-out instruction.
+            #   Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
+            #   1024 characters and carrying the brand name and an opt-out instruction. At most
+            #   five across the campaign, and at least two when a high-volume campaign has a
+            #   single use case.
             #
             #   @return [Array<Object>]
             required :sample_messages, Sentdm::Internal::Type::ArrayOf[Sentdm::Internal::Type::Unknown]
@@ -375,7 +382,7 @@ module Sentdm
             #   {Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase} for more
             #   details.
             #
-            #   @param sample_messages [Array<Object>] Sample messages. TCR sample1..sample5 for this use case. One to five, each carry
+            #   @param sample_messages [Array<Object>] Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
             #
             #   @param use_case [Symbol, Sentdm::Models::Channels::MarketCompliance::Campaign::UseCase::UseCase] Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume decid
 

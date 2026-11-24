@@ -48,7 +48,7 @@ module Sentdm
       #   handler that rejects an envelope it does not recognise will break on the next
       #   addition rather than ignore it.
       #
-      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::LinkEvent, Sentdm::Models::CallEvent, nil]
+      #   @return [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::LinkEvent, Sentdm::Models::CallEvent, Sentdm::Models::AgentEvent, nil]
       optional :event_data, union: -> { Sentdm::WebhookDelivery::EventData }
 
       # @!attribute event_type
@@ -90,7 +90,7 @@ module Sentdm
       #
       #   @param error_message [String, nil]
       #
-      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::LinkEvent, Sentdm::Models::CallEvent] The exact event body that was delivered, or attempted, for this record. One of t
+      #   @param event_data [Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::LinkEvent, Sentdm::Models::CallEvent, Sentdm::Models::AgentEvent] The exact event body that was delivered, or attempted, for this record. One of t
       #
       #   @param event_type [String]
       #
@@ -152,8 +152,12 @@ module Sentdm
         # varies only in Payload.
         variant -> { Sentdm::CallEvent }
 
+        # The envelope Sent POSTs to a subscribed webhook endpoint. Every event shares this shape and
+        # varies only in Payload.
+        variant -> { Sentdm::AgentEvent }
+
         # @!method self.variants
-        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::LinkEvent, Sentdm::Models::CallEvent)]
+        #   @return [Array(Sentdm::Models::MessageEvent, Sentdm::Models::InboundMessageEvent, Sentdm::Models::TemplateEvent, Sentdm::Models::ChannelEvent, Sentdm::Models::ContactEvent, Sentdm::Models::LinkEvent, Sentdm::Models::CallEvent, Sentdm::Models::AgentEvent)]
       end
     end
   end

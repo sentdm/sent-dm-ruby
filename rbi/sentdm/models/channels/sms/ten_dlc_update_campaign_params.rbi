@@ -131,10 +131,12 @@ module Sentdm
           end
           attr_writer :use_cases
 
-          # Expected monthly volume. Decides how the campaign registers and which fee tier
-          # applies: below the low-volume threshold it registers as LOW_VOLUME with
-          # sub-use-cases, above it as a single use case or MIXED. Omitting it registers the
-          # campaign at the higher-fee standard tier.
+          # Expected monthly volume. Required whenever the campaign's fields are written. A
+          # whole number of messages, e.g. 1000 or 10000. Decides how the campaign registers
+          # and which fee tier applies: below the low-volume threshold it registers as
+          # LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+          # it registers the campaign at the higher-fee standard tier. Required when
+          # `compliance.campaign.inherit != true`, whenever its block is written.
           sig { returns(T.nilable(String)) }
           attr_reader :volume
 
@@ -220,10 +222,12 @@ module Sentdm
             # how they register is decided by volume, never declared. Required when
             # `compliance.campaign.inherit != true`.
             use_cases: nil,
-            # Expected monthly volume. Decides how the campaign registers and which fee tier
-            # applies: below the low-volume threshold it registers as LOW_VOLUME with
-            # sub-use-cases, above it as a single use case or MIXED. Omitting it registers the
-            # campaign at the higher-fee standard tier.
+            # Expected monthly volume. Required whenever the campaign's fields are written. A
+            # whole number of messages, e.g. 1000 or 10000. Decides how the campaign registers
+            # and which fee tier applies: below the low-volume threshold it registers as
+            # LOW_VOLUME with sub-use-cases, above it as a single use case or MIXED. Omitting
+            # it registers the campaign at the higher-fee standard tier. Required when
+            # `compliance.campaign.inherit != true`, whenever its block is written.
             volume: nil,
             idempotency_key: nil,
             x_profile_id: nil,

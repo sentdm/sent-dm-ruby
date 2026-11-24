@@ -1,0 +1,81 @@
+module Sentdm
+  module Models
+    type agent_event_payload =
+      {
+        event_id: String,
+        occurred_at: String,
+        account_id: String,
+        actor: String?,
+        agent_id: String,
+        agent_name: String?,
+        agent_version: Integer?,
+        contact_id: String?,
+        contact_phone_number: String?,
+        data: top,
+        instance_id: String?,
+        sequence: Integer?
+      }
+
+    class AgentEventPayload < Sentdm::Internal::Type::BaseModel
+      attr_accessor event_id: String
+
+      attr_accessor occurred_at: String
+
+      attr_reader account_id: String?
+
+      def account_id=: (String) -> String
+
+      attr_accessor actor: String?
+
+      attr_reader agent_id: String?
+
+      def agent_id=: (String) -> String
+
+      attr_accessor agent_name: String?
+
+      attr_accessor agent_version: Integer?
+
+      attr_accessor contact_id: String?
+
+      attr_accessor contact_phone_number: String?
+
+      attr_reader data: top?
+
+      def data=: (top) -> top
+
+      attr_accessor instance_id: String?
+
+      attr_accessor sequence: Integer?
+
+      def initialize: (
+        event_id: String,
+        occurred_at: String,
+        ?account_id: String,
+        ?actor: String?,
+        ?agent_id: String,
+        ?agent_name: String?,
+        ?agent_version: Integer?,
+        ?contact_id: String?,
+        ?contact_phone_number: String?,
+        ?data: top,
+        ?instance_id: String?,
+        ?sequence: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        event_id: String,
+        occurred_at: String,
+        account_id: String,
+        actor: String?,
+        agent_id: String,
+        agent_name: String?,
+        agent_version: Integer?,
+        contact_id: String?,
+        contact_phone_number: String?,
+        data: top,
+        instance_id: String?,
+        sequence: Integer?
+      }
+    end
+  end
+end

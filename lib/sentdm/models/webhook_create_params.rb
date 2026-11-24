@@ -7,6 +7,15 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute agent_id
+      #   One of your Sent agents: the webhook then receives only that agent's events, its
+      #   agent events and the messages it sent or received, and is never inheritable:
+      #   is_inheritable set with it is refused. Only the account the agent runs on can
+      #   set it, and only on a version 2 webhook.
+      #
+      #   @return [String, nil]
+      optional :agent_id, String, nil?: true
+
       # @!attribute display_name
       #
       #   @return [String, nil]
@@ -84,9 +93,11 @@ module Sentdm
       #   @return [String, nil]
       optional :x_profile_id, String
 
-      # @!method initialize(display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, webhook_version: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
+      # @!method initialize(agent_id: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_inheritable: nil, retry_count: nil, sandbox: nil, sender_profile: nil, timeout_seconds: nil, webhook_version: nil, idempotency_key: nil, x_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookCreateParams} for more details.
+      #
+      #   @param agent_id [String, nil] One of your Sent agents: the webhook then receives only that agent's events, its
       #
       #   @param display_name [String]
       #

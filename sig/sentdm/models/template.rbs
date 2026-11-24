@@ -8,9 +8,11 @@ module Sentdm
         category: String,
         channels: ::Array[String]?,
         created_at: Time,
+        definition: Sentdm::TemplateDefinition?,
         is_published: bool,
         language: String,
         name: String,
+        slug: String?,
         status: String,
         updated_at: Time?,
         variables: ::Array[String]?
@@ -35,6 +37,8 @@ module Sentdm
 
       def created_at=: (Time) -> Time
 
+      attr_accessor definition: Sentdm::TemplateDefinition?
+
       attr_reader is_published: bool?
 
       def is_published=: (bool) -> bool
@@ -46,6 +50,8 @@ module Sentdm
       attr_reader name: String?
 
       def name=: (String) -> String
+
+      attr_accessor slug: String?
 
       attr_reader status: String?
 
@@ -62,9 +68,11 @@ module Sentdm
         ?category: String,
         ?channels: ::Array[String]?,
         ?created_at: Time,
+        ?definition: Sentdm::TemplateDefinition?,
         ?is_published: bool,
         ?language: String,
         ?name: String,
+        ?slug: String?,
         ?status: String,
         ?updated_at: Time?,
         ?variables: ::Array[String]?
@@ -77,9 +85,11 @@ module Sentdm
         category: String,
         channels: ::Array[String]?,
         created_at: Time,
+        definition: Sentdm::TemplateDefinition?,
         is_published: bool,
         language: String,
         name: String,
+        slug: String?,
         status: String,
         updated_at: Time?,
         variables: ::Array[String]?

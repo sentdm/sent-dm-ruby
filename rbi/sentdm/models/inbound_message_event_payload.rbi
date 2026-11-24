@@ -69,6 +69,15 @@ module Sentdm
       sig { returns(T.nilable(T.anything)) }
       attr_accessor :referral
 
+      # The Sent agent whose conversation this reply arrived in, when the contact is in
+      # one, as on the messages it sent. Absent otherwise.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :sent_agent_id
+
+      # The conversation (agent × contact) the reply belongs to, when it belongs to one.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :sent_instance_id
+
       # The message body. Sent as null when the inbound message carried no text, for
       # example a media-only message. The field is always present, so read it and check
       # for null rather than checking whether the key exists.
@@ -95,6 +104,8 @@ module Sentdm
           message_id: String,
           outbound_number: String,
           referral: T.nilable(T.anything),
+          sent_agent_id: T.nilable(String),
+          sent_instance_id: T.nilable(String),
           text: T.nilable(String),
           updated_at: String
         ).returns(T.attached_class)
@@ -133,6 +144,11 @@ module Sentdm
         # particular is not sent for ads shown in WhatsApp Status, so treat every field as
         # optional.
         referral: nil,
+        # The Sent agent whose conversation this reply arrived in, when the contact is in
+        # one, as on the messages it sent. Absent otherwise.
+        sent_agent_id: nil,
+        # The conversation (agent × contact) the reply belongs to, when it belongs to one.
+        sent_instance_id: nil,
         # The message body. Sent as null when the inbound message carried no text, for
         # example a media-only message. The field is always present, so read it and check
         # for null rather than checking whether the key exists.
@@ -154,6 +170,8 @@ module Sentdm
             message_id: String,
             outbound_number: String,
             referral: T.nilable(T.anything),
+            sent_agent_id: T.nilable(String),
+            sent_instance_id: T.nilable(String),
             text: T.nilable(String),
             updated_at: String
           }
