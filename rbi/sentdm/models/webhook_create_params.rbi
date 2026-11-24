@@ -11,6 +11,13 @@ module Sentdm
           T.any(Sentdm::WebhookCreateParams, Sentdm::Internal::AnyHash)
         end
 
+      # One of your Sent agents: the webhook then receives only that agent's events, its
+      # agent events and the messages it sent or received, and is never inheritable:
+      # is_inheritable set with it is refused. Only the account the agent runs on can
+      # set it, and only on a version 2 webhook.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_id
+
       sig { returns(T.nilable(String)) }
       attr_reader :display_name
 
@@ -98,6 +105,7 @@ module Sentdm
 
       sig do
         params(
+          agent_id: T.nilable(String),
           display_name: String,
           endpoint_url: String,
           event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),
@@ -114,6 +122,11 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        # One of your Sent agents: the webhook then receives only that agent's events, its
+        # agent events and the messages it sent or received, and is never inheritable:
+        # is_inheritable set with it is refused. Only the account the agent runs on can
+        # set it, and only on a version 2 webhook.
+        agent_id: nil,
         display_name: nil,
         endpoint_url: nil,
         event_filters: nil,
@@ -148,6 +161,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            agent_id: T.nilable(String),
             display_name: String,
             endpoint_url: String,
             event_filters: T.nilable(T::Hash[Symbol, T::Array[String]]),

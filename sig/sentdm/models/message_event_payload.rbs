@@ -9,10 +9,13 @@ module Sentdm
         channel: String,
         message_id: String,
         outbound_number: String,
+        parent_message_id: String?,
         reason: String?,
         reason_code: String?,
         schedule_reason: String?,
         scheduled_at: String?,
+        sent_agent_id: String?,
+        sent_instance_id: String?,
         template_id: String?,
         template_name: String?,
         updated_at: String
@@ -41,6 +44,8 @@ module Sentdm
 
       def outbound_number=: (String) -> String
 
+      attr_accessor parent_message_id: String?
+
       attr_accessor reason: String?
 
       attr_accessor reason_code: String?
@@ -48,6 +53,10 @@ module Sentdm
       attr_accessor schedule_reason: String?
 
       attr_accessor scheduled_at: String?
+
+      attr_accessor sent_agent_id: String?
+
+      attr_accessor sent_instance_id: String?
 
       attr_accessor template_id: String?
 
@@ -65,10 +74,13 @@ module Sentdm
         ?channel: String,
         ?message_id: String,
         ?outbound_number: String,
+        ?parent_message_id: String?,
         ?reason: String?,
         ?reason_code: String?,
         ?schedule_reason: String?,
         ?scheduled_at: String?,
+        ?sent_agent_id: String?,
+        ?sent_instance_id: String?,
         ?template_id: String?,
         ?template_name: String?,
         ?updated_at: String
@@ -82,10 +94,13 @@ module Sentdm
         channel: String,
         message_id: String,
         outbound_number: String,
+        parent_message_id: String?,
         reason: String?,
         reason_code: String?,
         schedule_reason: String?,
         scheduled_at: String?,
+        sent_agent_id: String?,
+        sent_instance_id: String?,
         template_id: String?,
         template_name: String?,
         updated_at: String

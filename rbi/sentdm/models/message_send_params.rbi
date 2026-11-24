@@ -93,8 +93,8 @@ module Sentdm
       sig { returns(T.nilable(String)) }
       attr_accessor :subject
 
-      # SDK-style template reference: resolve by ID or by name, with optional
-      # parameters.
+      # SDK-style template reference: resolve by id, by slug or by name (exactly one),
+      # with optional parameters.
       sig { returns(T.nilable(Sentdm::TemplateRef)) }
       attr_reader :template
 
@@ -207,8 +207,8 @@ module Sentdm
         # every other channel. Most handsets render it above the body, some ignore it
         # entirely.
         subject: nil,
-        # SDK-style template reference: resolve by ID or by name, with optional
-        # parameters.
+        # SDK-style template reference: resolve by id, by slug or by name (exactly one),
+        # with optional parameters.
         template: nil,
         # Plain-text (free-form) message body. Provide either Template or this.
         text: nil,
