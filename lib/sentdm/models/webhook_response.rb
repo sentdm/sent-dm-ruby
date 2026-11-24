@@ -9,6 +9,13 @@ module Sentdm
       #   @return [String, nil]
       optional :id, String
 
+      # @!attribute agent_id
+      #   The Sent agent whose events alone this webhook receives; absent on a webhook of
+      #   the whole account.
+      #
+      #   @return [String, nil]
+      optional :agent_id, String, nil?: true
+
       # @!attribute consecutive_failures
       #   Failed attempts since the last success. Version 1 only: always 0 on a version 2
       #   webhook, whose deliveries are in its events (GET /v3/webhooks/{id}/events).
@@ -114,11 +121,13 @@ module Sentdm
       #   @return [Integer, nil]
       optional :webhook_version, Integer
 
-      # @!method initialize(id: nil, consecutive_failures: nil, created_at: nil, customer_id: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_active: nil, is_inheritable: nil, last_delivery_attempt_at: nil, last_successful_delivery_at: nil, retry_count: nil, sender_profile: nil, signing_secret: nil, timeout_seconds: nil, updated_at: nil, webhook_version: nil)
+      # @!method initialize(id: nil, agent_id: nil, consecutive_failures: nil, created_at: nil, customer_id: nil, display_name: nil, endpoint_url: nil, event_filters: nil, event_types: nil, is_active: nil, is_inheritable: nil, last_delivery_attempt_at: nil, last_successful_delivery_at: nil, retry_count: nil, sender_profile: nil, signing_secret: nil, timeout_seconds: nil, updated_at: nil, webhook_version: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::WebhookResponse} for more details.
       #
       #   @param id [String]
+      #
+      #   @param agent_id [String, nil] The Sent agent whose events alone this webhook receives; absent on a webhook of
       #
       #   @param consecutive_failures [Integer] Failed attempts since the last success. Version 1 only: always 0 on a version 2
       #

@@ -63,6 +63,16 @@ module Sentdm
       sig { params(created_at: Time).void }
       attr_writer :created_at
 
+      # Complete definition of a message template including header, body, footer, and
+      # buttons
+      sig { returns(T.nilable(Sentdm::TemplateDefinition)) }
+      attr_reader :definition
+
+      sig do
+        params(definition: T.nilable(Sentdm::TemplateDefinition::OrHash)).void
+      end
+      attr_writer :definition
+
       # Whether the template is published and active
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :is_published
@@ -83,6 +93,12 @@ module Sentdm
 
       sig { params(name: String).void }
       attr_writer :name
+
+      # The template's slug: a stable, URL-safe name a send can use in place of the id
+      # (template.slug on POST /v3/messages). Given at creation from the name and never
+      # changed.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :slug
 
       # Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
       # submit_for_review: false starts as DRAFT and stays there until it is submitted.
@@ -109,9 +125,11 @@ module Sentdm
           category: String,
           channels: T.nilable(T::Array[String]),
           created_at: Time,
+          definition: T.nilable(Sentdm::TemplateDefinition::OrHash),
           is_published: T::Boolean,
           language: String,
           name: String,
+          slug: T.nilable(String),
           status: String,
           updated_at: T.nilable(Time),
           variables: T.nilable(T::Array[String])
@@ -154,12 +172,19 @@ module Sentdm
         channels: nil,
         # When the template was created
         created_at: nil,
+        # Complete definition of a message template including header, body, footer, and
+        # buttons
+        definition: nil,
         # Whether the template is published and active
         is_published: nil,
         # Template language code (e.g., en_US)
         language: nil,
         # Template display name
         name: nil,
+        # The template's slug: a stable, URL-safe name a send can use in place of the id
+        # (template.slug on POST /v3/messages). Given at creation from the name and never
+        # changed.
+        slug: nil,
         # Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
         # submit_for_review: false starts as DRAFT and stays there until it is submitted.
         status: nil,
@@ -179,9 +204,11 @@ module Sentdm
             category: String,
             channels: T.nilable(T::Array[String]),
             created_at: Time,
+            definition: T.nilable(Sentdm::TemplateDefinition),
             is_published: T::Boolean,
             language: String,
             name: String,
+            slug: T.nilable(String),
             status: String,
             updated_at: T.nilable(Time),
             variables: T.nilable(T::Array[String])

@@ -14,6 +14,11 @@ module Sentdm
       sig { params(id: String).void }
       attr_writer :id
 
+      # The Sent agent whose events alone this webhook receives; absent on a webhook of
+      # the whole account.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_id
+
       # Failed attempts since the last success. Version 1 only: always 0 on a version 2
       # webhook, whose deliveries are in its events (GET /v3/webhooks/{id}/events).
       sig { returns(T.nilable(Integer)) }
@@ -126,6 +131,7 @@ module Sentdm
       sig do
         params(
           id: String,
+          agent_id: T.nilable(String),
           consecutive_failures: Integer,
           created_at: Time,
           customer_id: String,
@@ -147,6 +153,9 @@ module Sentdm
       end
       def self.new(
         id: nil,
+        # The Sent agent whose events alone this webhook receives; absent on a webhook of
+        # the whole account.
+        agent_id: nil,
         # Failed attempts since the last success. Version 1 only: always 0 on a version 2
         # webhook, whose deliveries are in its events (GET /v3/webhooks/{id}/events).
         consecutive_failures: nil,
@@ -189,6 +198,7 @@ module Sentdm
         override.returns(
           {
             id: String,
+            agent_id: T.nilable(String),
             consecutive_failures: Integer,
             created_at: Time,
             customer_id: String,
