@@ -13,6 +13,10 @@ module Sentdm
 
   AccountWhatsappChannel = Sentdm::Models::AccountWhatsappChannel
 
+  AgentEvent = Sentdm::Models::AgentEvent
+
+  AgentEventPayload = Sentdm::Models::AgentEventPayload
+
   APIMeta = Sentdm::Models::APIMeta
 
   APIResponseOfAccount = Sentdm::Models::APIResponseOfAccount

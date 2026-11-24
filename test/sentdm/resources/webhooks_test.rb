@@ -79,6 +79,7 @@ class Sentdm::Test::Resources::WebhooksTest < Sentdm::Test::ResourceTest
     assert_pattern do
       row => {
         id: String | nil,
+        agent_id: String | nil,
         consecutive_failures: Integer | nil,
         created_at: Time | nil,
         customer_id: String | nil,

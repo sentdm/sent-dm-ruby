@@ -1,0 +1,43 @@
+module Sentdm
+  module Models
+    module Channels
+      module SMS
+        type ten_dlc_list_campaigns_response =
+          {
+            data: ::Array[::Hash[Symbol, top]]?,
+            error: Sentdm::ErrorDetail?,
+            meta: Sentdm::APIMeta,
+            success: bool
+          }
+
+        class TenDlcListCampaignsResponse < Sentdm::Internal::Type::BaseModel
+          attr_accessor data: ::Array[::Hash[Symbol, top]]?
+
+          attr_accessor error: Sentdm::ErrorDetail?
+
+          attr_reader meta: Sentdm::APIMeta?
+
+          def meta=: (Sentdm::APIMeta) -> Sentdm::APIMeta
+
+          attr_reader success: bool?
+
+          def success=: (bool) -> bool
+
+          def initialize: (
+            ?data: ::Array[::Hash[Symbol, top]]?,
+            ?error: Sentdm::ErrorDetail?,
+            ?meta: Sentdm::APIMeta,
+            ?success: bool
+          ) -> void
+
+          def to_hash: -> {
+            data: ::Array[::Hash[Symbol, top]]?,
+            error: Sentdm::ErrorDetail?,
+            meta: Sentdm::APIMeta,
+            success: bool
+          }
+        end
+      end
+    end
+  end
+end

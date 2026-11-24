@@ -99,8 +99,8 @@ module Sentdm
       optional :subject, String, nil?: true
 
       # @!attribute template
-      #   SDK-style template reference: resolve by ID or by name, with optional
-      #   parameters.
+      #   SDK-style template reference: resolve by id, by slug or by name (exactly one),
+      #   with optional parameters.
       #
       #   @return [Sentdm::Models::TemplateRef, nil]
       optional :template, -> { Sentdm::TemplateRef }, nil?: true
@@ -143,7 +143,7 @@ module Sentdm
       #
       #   @param subject [String, nil] Subject line for this send, overriding the template's. MMS only; ignored on ever
       #
-      #   @param template [Sentdm::Models::TemplateRef, nil] SDK-style template reference: resolve by ID or by name, with optional parameters
+      #   @param template [Sentdm::Models::TemplateRef, nil] SDK-style template reference: resolve by id, by slug or by name (exactly one), w
       #
       #   @param text [String, nil] Plain-text (free-form) message body. Provide either Template or this.
       #
