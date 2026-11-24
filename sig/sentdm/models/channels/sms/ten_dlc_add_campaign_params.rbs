@@ -14,7 +14,7 @@ module Sentdm
             opt_out_message: String,
             privacy_policy_link: String,
             terms_and_conditions_link: String,
-            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase],
+            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
             volume: String,
             idempotency_key: String,
             sandbox: bool,
@@ -46,7 +46,7 @@ module Sentdm
 
           attr_accessor terms_and_conditions_link: String
 
-          attr_accessor use_cases: ::Array[Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase]
+          attr_accessor use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase]
 
           attr_accessor volume: String
 
@@ -71,7 +71,7 @@ module Sentdm
             opt_out_message: String,
             privacy_policy_link: String,
             terms_and_conditions_link: String,
-            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase],
+            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
             volume: String,
             idempotency_key: String,
             ?sandbox: bool,
@@ -90,66 +90,13 @@ module Sentdm
             opt_out_message: String,
             privacy_policy_link: String,
             terms_and_conditions_link: String,
-            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase],
+            use_cases: ::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase],
             volume: String,
             idempotency_key: String,
             sandbox: bool,
             x_profile_id: String,
             request_options: Sentdm::RequestOptions
           }
-
-          type use_case =
-            {
-              sample_messages: ::Array[top],
-              use_case: Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::use_case
-            }
-
-          class UseCase < Sentdm::Internal::Type::BaseModel
-            attr_accessor sample_messages: ::Array[top]
-
-            attr_accessor use_case: Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::use_case
-
-            def initialize: (
-              sample_messages: ::Array[top],
-              use_case: Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::use_case
-            ) -> void
-
-            def to_hash: -> {
-              sample_messages: ::Array[top],
-              use_case: Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::use_case
-            }
-
-            type use_case =
-              :MARKETING
-              | :ACCOUNT_NOTIFICATION
-              | :CUSTOMER_CARE
-              | :FRAUD_ALERT
-              | :"2FA"
-              | :DELIVERY_NOTIFICATION
-              | :SECURITY_ALERT
-              | :M2M
-              | :HIGHER_EDUCATION
-              | :POLLING_VOTING
-              | :PUBLIC_SERVICE_ANNOUNCEMENT
-
-            module UseCase
-              extend Sentdm::Internal::Type::Enum
-
-              MARKETING: :MARKETING
-              ACCOUNT_NOTIFICATION: :ACCOUNT_NOTIFICATION
-              CUSTOMER_CARE: :CUSTOMER_CARE
-              FRAUD_ALERT: :FRAUD_ALERT
-              USE_CASE_2_FA: :"2FA"
-              DELIVERY_NOTIFICATION: :DELIVERY_NOTIFICATION
-              SECURITY_ALERT: :SECURITY_ALERT
-              M2_M: :M2M
-              HIGHER_EDUCATION: :HIGHER_EDUCATION
-              POLLING_VOTING: :POLLING_VOTING
-              PUBLIC_SERVICE_ANNOUNCEMENT: :PUBLIC_SERVICE_ANNOUNCEMENT
-
-              def self?.values: -> ::Array[Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::use_case]
-            end
-          end
         end
       end
     end

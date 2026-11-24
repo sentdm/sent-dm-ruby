@@ -80,9 +80,7 @@ module Sentdm
               privacy_policy_link: String,
               terms_and_conditions_link: String,
               use_cases:
-                T::Array[
-                  Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase::OrHash
-                ],
+                T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase::OrHash],
               volume: String,
               idempotency_key: String,
               sandbox: T::Boolean,
@@ -224,9 +222,7 @@ module Sentdm
               sandbox: T::Boolean,
               terms_and_conditions_link: String,
               use_cases:
-                T::Array[
-                  Sentdm::Channels::SMS::TenDlcUpdateCampaignParams::UseCase::OrHash
-                ],
+                T::Array[Sentdm::Channels::SMS::TenDlcCampaignUseCase::OrHash],
               volume: String,
               idempotency_key: String,
               x_profile_id: String,

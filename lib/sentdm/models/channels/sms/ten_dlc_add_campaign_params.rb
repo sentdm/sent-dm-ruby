@@ -90,9 +90,8 @@ module Sentdm
           #   how they register is decided by volume, never declared. Required when
           #   `compliance.campaign.inherit != true`.
           #
-          #   @return [Array<Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase>]
-          required :use_cases,
-                   -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase] }
+          #   @return [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>]
+          required :use_cases, -> { Sentdm::Internal::Type::ArrayOf[Sentdm::Channels::SMS::TenDlcCampaignUseCase] }
 
           # @!attribute volume
           #   Expected monthly volume. Required whenever the campaign's fields are written. A
@@ -146,7 +145,7 @@ module Sentdm
           #
           #   @param terms_and_conditions_link [String] Terms and conditions URL. TCR termsAndConditionsLink. Required when `compliance.
           #
-          #   @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase>] Use cases. What the campaign sends, and an example of each. One to five entries;
+          #   @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Use cases. What the campaign sends, and an example of each. One to five entries;
           #
           #   @param volume [String] Expected monthly volume. Required whenever the campaign's fields are written. A
           #
@@ -157,56 +156,6 @@ module Sentdm
           #   @param x_profile_id [String]
           #
           #   @param request_options [Sentdm::RequestOptions, Hash{Symbol=>Object}]
-
-          class UseCase < Sentdm::Internal::Type::BaseModel
-            # @!attribute sample_messages
-            #   Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
-            #   1024 characters and carrying the brand name and an opt-out instruction. At most
-            #   five across the campaign, and at least two when a high-volume campaign has a
-            #   single use case.
-            #
-            #   @return [Array<Object>]
-            required :sample_messages, Sentdm::Internal::Type::ArrayOf[Sentdm::Internal::Type::Unknown]
-
-            # @!attribute use_case
-            #   Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
-            #   decides those.
-            #
-            #   @return [Symbol, Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::UseCase]
-            required :use_case, enum: -> { Sentdm::Channels::SMS::TenDlcAddCampaignParams::UseCase::UseCase }
-
-            # @!method initialize(sample_messages:, use_case:)
-            #   Some parameter documentations has been truncated, see
-            #   {Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase} for more
-            #   details.
-            #
-            #   @param sample_messages [Array<Object>] Sample messages. TCR sample1..sample5 for this use case. One to five, each 20 to
-            #
-            #   @param use_case [Symbol, Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase::UseCase] Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume decid
-
-            # Use case. What this entry sends. MIXED and LOW_VOLUME are refused — volume
-            # decides those.
-            #
-            # @see Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase#use_case
-            module UseCase
-              extend Sentdm::Internal::Type::Enum
-
-              MARKETING = :MARKETING
-              ACCOUNT_NOTIFICATION = :ACCOUNT_NOTIFICATION
-              CUSTOMER_CARE = :CUSTOMER_CARE
-              FRAUD_ALERT = :FRAUD_ALERT
-              USE_CASE_2_FA = :"2FA"
-              DELIVERY_NOTIFICATION = :DELIVERY_NOTIFICATION
-              SECURITY_ALERT = :SECURITY_ALERT
-              M2_M = :M2M
-              HIGHER_EDUCATION = :HIGHER_EDUCATION
-              POLLING_VOTING = :POLLING_VOTING
-              PUBLIC_SERVICE_ANNOUNCEMENT = :PUBLIC_SERVICE_ANNOUNCEMENT
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
-          end
         end
       end
     end

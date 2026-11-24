@@ -93,7 +93,7 @@ module Sentdm
           #
           # @param terms_and_conditions_link [String] Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
           #
-          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcAddCampaignParams::UseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
+          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
           #
           # @param volume [String] Body param: Expected monthly volume. Required whenever the campaign's fields are
           #
@@ -213,7 +213,7 @@ module Sentdm
           #
           # @param terms_and_conditions_link [String] Body param: Terms and conditions URL. TCR termsAndConditionsLink. Required when
           #
-          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcUpdateCampaignParams::UseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
+          # @param use_cases [Array<Sentdm::Models::Channels::SMS::TenDlcCampaignUseCase>] Body param: Use cases. What the campaign sends, and an example of each. One to f
           #
           # @param volume [String] Body param: Expected monthly volume. Required whenever the campaign's fields are
           #
