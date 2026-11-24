@@ -2,6 +2,7 @@ module Sentdm
   module Resources
     class Webhooks
       def create: (
+        ?agent_id: String?,
         ?display_name: String,
         ?endpoint_url: String,
         ?event_filters: ::Hash[Symbol, ::Array[String]]?,
@@ -40,6 +41,7 @@ module Sentdm
       ) -> Sentdm::APIResponseWebhook
 
       def list: (
+        ?agent_id: String?,
         ?is_active: bool?,
         ?page: Integer,
         ?page_size: Integer,

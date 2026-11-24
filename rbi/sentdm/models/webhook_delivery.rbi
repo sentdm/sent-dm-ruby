@@ -65,7 +65,8 @@ module Sentdm
               Sentdm::ChannelEvent::OrHash,
               Sentdm::ContactEvent::OrHash,
               Sentdm::LinkEvent::OrHash,
-              Sentdm::CallEvent::OrHash
+              Sentdm::CallEvent::OrHash,
+              Sentdm::AgentEvent::OrHash
             )
         ).void
       end
@@ -104,7 +105,8 @@ module Sentdm
               Sentdm::ChannelEvent::OrHash,
               Sentdm::ContactEvent::OrHash,
               Sentdm::LinkEvent::OrHash,
-              Sentdm::CallEvent::OrHash
+              Sentdm::CallEvent::OrHash,
+              Sentdm::AgentEvent::OrHash
             ),
           event_type: String,
           http_status_code: T.nilable(Integer),
@@ -194,7 +196,8 @@ module Sentdm
               Sentdm::ChannelEvent,
               Sentdm::ContactEvent,
               Sentdm::LinkEvent,
-              Sentdm::CallEvent
+              Sentdm::CallEvent,
+              Sentdm::AgentEvent
             )
           end
 

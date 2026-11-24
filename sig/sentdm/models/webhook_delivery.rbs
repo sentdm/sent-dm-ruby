@@ -88,6 +88,7 @@ module Sentdm
         | Sentdm::ContactEvent
         | Sentdm::LinkEvent
         | Sentdm::CallEvent
+        | Sentdm::AgentEvent
 
       module EventData
         extend Sentdm::Internal::Type::Union

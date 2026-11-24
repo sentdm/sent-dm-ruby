@@ -84,9 +84,11 @@ class Sentdm::Test::Resources::TemplatesTest < Sentdm::Test::ResourceTest
         category: String | nil,
         channels: ^(Sentdm::Internal::Type::ArrayOf[String]) | nil,
         created_at: Time | nil,
+        definition: Sentdm::TemplateDefinition | nil,
         is_published: Sentdm::Internal::Type::Boolean | nil,
         language: String | nil,
         name: String | nil,
+        slug: String | nil,
         status: String | nil,
         updated_at: Time | nil,
         variables: ^(Sentdm::Internal::Type::ArrayOf[String]) | nil

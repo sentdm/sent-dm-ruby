@@ -1,0 +1,32 @@
+module Sentdm
+  module Models
+    module Channels
+      type market_list_params =
+        { channel: String, x_profile_id: String }
+        & Sentdm::Internal::Type::request_parameters
+
+      class MarketListParams < Sentdm::Internal::Type::BaseModel
+        extend Sentdm::Internal::Type::RequestParameters::Converter
+        include Sentdm::Internal::Type::RequestParameters
+
+        attr_accessor channel: String
+
+        attr_reader x_profile_id: String?
+
+        def x_profile_id=: (String) -> String
+
+        def initialize: (
+          channel: String,
+          ?x_profile_id: String,
+          ?request_options: Sentdm::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          channel: String,
+          x_profile_id: String,
+          request_options: Sentdm::RequestOptions
+        }
+      end
+    end
+  end
+end

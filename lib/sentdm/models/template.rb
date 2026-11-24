@@ -64,6 +64,13 @@ module Sentdm
       #   @return [Time, nil]
       optional :created_at, Time
 
+      # @!attribute definition
+      #   Complete definition of a message template including header, body, footer, and
+      #   buttons
+      #
+      #   @return [Sentdm::Models::TemplateDefinition, nil]
+      optional :definition, -> { Sentdm::TemplateDefinition }, nil?: true
+
       # @!attribute is_published
       #   Whether the template is published and active
       #
@@ -81,6 +88,14 @@ module Sentdm
       #
       #   @return [String, nil]
       optional :name, String
+
+      # @!attribute slug
+      #   The template's slug: a stable, URL-safe name a send can use in place of the id
+      #   (template.slug on POST /v3/messages). Given at creation from the name and never
+      #   changed.
+      #
+      #   @return [String, nil]
+      optional :slug, String, nil?: true
 
       # @!attribute status
       #   Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
@@ -101,7 +116,7 @@ module Sentdm
       #   @return [Array<String>, nil]
       optional :variables, Sentdm::Internal::Type::ArrayOf[String], nil?: true
 
-      # @!method initialize(customer_id:, id: nil, auto_reply_action: nil, category: nil, channels: nil, created_at: nil, is_published: nil, language: nil, name: nil, status: nil, updated_at: nil, variables: nil)
+      # @!method initialize(customer_id:, id: nil, auto_reply_action: nil, category: nil, channels: nil, created_at: nil, definition: nil, is_published: nil, language: nil, name: nil, slug: nil, status: nil, updated_at: nil, variables: nil)
       #   Some parameter documentations has been truncated, see {Sentdm::Models::Template}
       #   for more details.
       #
@@ -119,11 +134,15 @@ module Sentdm
       #
       #   @param created_at [Time] When the template was created
       #
+      #   @param definition [Sentdm::Models::TemplateDefinition, nil] Complete definition of a message template including header, body, footer, and bu
+      #
       #   @param is_published [Boolean] Whether the template is published and active
       #
       #   @param language [String] Template language code (e.g., en_US)
       #
       #   @param name [String] Template display name
+      #
+      #   @param slug [String, nil] The template's slug: a stable, URL-safe name a send can use in place of the id (
       #
       #   @param status [String] Template status: DRAFT, PENDING, APPROVED, REJECTED. A template created with
       #

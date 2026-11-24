@@ -3,6 +3,7 @@ module Sentdm
     type webhook_response =
       {
         id: String,
+        agent_id: String?,
         consecutive_failures: Integer,
         created_at: Time,
         customer_id: String,
@@ -26,6 +27,8 @@ module Sentdm
       attr_reader id: String?
 
       def id=: (String) -> String
+
+      attr_accessor agent_id: String?
 
       attr_reader consecutive_failures: Integer?
 
@@ -85,6 +88,7 @@ module Sentdm
 
       def initialize: (
         ?id: String,
+        ?agent_id: String?,
         ?consecutive_failures: Integer,
         ?created_at: Time,
         ?customer_id: String,
@@ -106,6 +110,7 @@ module Sentdm
 
       def to_hash: -> {
         id: String,
+        agent_id: String?,
         consecutive_failures: Integer,
         created_at: Time,
         customer_id: String,

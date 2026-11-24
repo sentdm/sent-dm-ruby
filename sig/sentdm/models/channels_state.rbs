@@ -5,7 +5,7 @@ module Sentdm
         customer_id: String?,
         mms: ::Array[Sentdm::MmsMarket],
         rcs: Sentdm::Channels::RcsAgent?,
-        sms: ::Array[Sentdm::Channels::SMSMarket],
+        sms: ::Array[Sentdm::Channels::ChannelMarket],
         voice: ::Array[Sentdm::Channels::VoiceNumber],
         whatsapp: Sentdm::Channels::WhatsappChannel?
       }
@@ -19,11 +19,11 @@ module Sentdm
 
       attr_accessor rcs: Sentdm::Channels::RcsAgent?
 
-      attr_reader sms: ::Array[Sentdm::Channels::SMSMarket]?
+      attr_reader sms: ::Array[Sentdm::Channels::ChannelMarket]?
 
       def sms=: (
-        ::Array[Sentdm::Channels::SMSMarket]
-      ) -> ::Array[Sentdm::Channels::SMSMarket]
+        ::Array[Sentdm::Channels::ChannelMarket]
+      ) -> ::Array[Sentdm::Channels::ChannelMarket]
 
       attr_reader voice: ::Array[Sentdm::Channels::VoiceNumber]?
 
@@ -37,7 +37,7 @@ module Sentdm
         ?customer_id: String?,
         ?mms: ::Array[Sentdm::MmsMarket],
         ?rcs: Sentdm::Channels::RcsAgent?,
-        ?sms: ::Array[Sentdm::Channels::SMSMarket],
+        ?sms: ::Array[Sentdm::Channels::ChannelMarket],
         ?voice: ::Array[Sentdm::Channels::VoiceNumber],
         ?whatsapp: Sentdm::Channels::WhatsappChannel?
       ) -> void
@@ -46,7 +46,7 @@ module Sentdm
         customer_id: String?,
         mms: ::Array[Sentdm::MmsMarket],
         rcs: Sentdm::Channels::RcsAgent?,
-        sms: ::Array[Sentdm::Channels::SMSMarket],
+        sms: ::Array[Sentdm::Channels::ChannelMarket],
         voice: ::Array[Sentdm::Channels::VoiceNumber],
         whatsapp: Sentdm::Channels::WhatsappChannel?
       }

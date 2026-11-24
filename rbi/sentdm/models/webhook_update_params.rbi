@@ -37,7 +37,7 @@ module Sentdm
 
       # Makes this webhook inheritable by the organization's sender profiles (see
       # create), or stops it being inheritable. Omit or pass null to keep it as it is.
-      # Only a version 2 webhook can be inheritable.
+      # Only a version 2 webhook can be inheritable, and never an agent's.
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :is_inheritable
 
@@ -111,7 +111,7 @@ module Sentdm
         event_types: nil,
         # Makes this webhook inheritable by the organization's sender profiles (see
         # create), or stops it being inheritable. Omit or pass null to keep it as it is.
-        # Only a version 2 webhook can be inheritable.
+        # Only a version 2 webhook can be inheritable, and never an agent's.
         is_inheritable: nil,
         retry_count: nil,
         # Sandbox flag - when true, the operation is simulated without side effects Useful
