@@ -51,6 +51,15 @@ module Sentdm
       #   @return [String, nil]
       optional :outbound_number, String
 
+      # @!attribute parent_message_id
+      #   When this message is another send of a message you sent earlier, the id of that
+      #   original message; omitted for every other message. The new send has its own
+      #   message_id, so this ties its events back to the message you sent. Always the
+      #   first message, however many sends lie between them.
+      #
+      #   @return [String, nil]
+      optional :parent_message_id, String, nil?: true
+
       # @!attribute reason
       #   A human-readable sentence for ReasonCode, for example "The recipient is not
       #   registered on this channel". Omitted whenever reason_code is.
@@ -89,6 +98,21 @@ module Sentdm
       #   @return [String, nil]
       optional :scheduled_at, String, nil?: true
 
+      # @!attribute sent_agent_id
+      #   The Sent agent (Sent Agents) that sent this message, when one did. Not the RCS
+      #   agent_id above: that names the RCS sender agent, this names the autonomous agent
+      #   running on the account.
+      #
+      #   @return [String, nil]
+      optional :sent_agent_id, String, nil?: true
+
+      # @!attribute sent_instance_id
+      #   The conversation (agent × contact) the message belongs to, when a Sent agent
+      #   sent it.
+      #
+      #   @return [String, nil]
+      optional :sent_instance_id, String, nil?: true
+
       # @!attribute template_id
       #   The template the message was sent from, when it was sent from one.
       #
@@ -109,7 +133,7 @@ module Sentdm
       #   @return [String, nil]
       optional :updated_at, String
 
-      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, reason: nil, reason_code: nil, schedule_reason: nil, scheduled_at: nil, template_id: nil, template_name: nil, updated_at: nil)
+      # @!method initialize(message_status:, account_id: nil, agent_id: nil, body: nil, channel: nil, message_id: nil, outbound_number: nil, parent_message_id: nil, reason: nil, reason_code: nil, schedule_reason: nil, scheduled_at: nil, sent_agent_id: nil, sent_instance_id: nil, template_id: nil, template_name: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::MessageEventPayload} for more details.
       #
@@ -131,6 +155,8 @@ module Sentdm
       #
       #   @param outbound_number [String] The recipient's number in E.164 format.
       #
+      #   @param parent_message_id [String, nil] When this message is another send of a message you sent earlier, the id of that
+      #
       #   @param reason [String, nil] A human-readable sentence for ReasonCode, for example "The recipient is not regi
       #
       #   @param reason_code [String, nil] Why the message reached this status, as a stable platform code such as
@@ -138,6 +164,10 @@ module Sentdm
       #   @param schedule_reason [String, nil] message.scheduled only: why the message is held, either because you scheduled it
       #
       #   @param scheduled_at [String, nil] message.scheduled and message.cancelled only, in UTC (yyyy-MM-ddTHH:mm:ssZ): on
+      #
+      #   @param sent_agent_id [String, nil] The Sent agent (Sent Agents) that sent this message, when one did. Not the RCS a
+      #
+      #   @param sent_instance_id [String, nil] The conversation (agent × contact) the message belongs to, when a Sent agent sen
       #
       #   @param template_id [String, nil] The template the message was sent from, when it was sent from one.
       #

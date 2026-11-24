@@ -17,8 +17,14 @@ module Sentdm
     # What you supplied, as opposed to what is asked of you, is reported on the market
     # under **Channels**.
     class Compliance
+      # @deprecated
+      #
       # Some parameter documentations has been truncated, see
       # {Sentdm::Models::ComplianceRetrieveRequirementsParams} for more details.
+      #
+      # **Deprecated.** Use `GET /v3/channels/{channel}/{country}/compliance` instead,
+      # and expect this to be removed in a future release. It answers exactly as before,
+      # so nothing needs to change today.
       #
       # **Call this first.** It returns what a channel, country and sender type demand
       # before you can send there — and `setup[]`, the calls that satisfy those demands,

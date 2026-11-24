@@ -1,0 +1,44 @@
+module Sentdm
+  module Models
+    module Channels
+      type market_number =
+        {
+          area_code: String?,
+          campaign_id: String?,
+          sender_value: String?,
+          status: String?,
+          type: String
+        }
+
+      class MarketNumber < Sentdm::Internal::Type::BaseModel
+        attr_accessor area_code: String?
+
+        attr_accessor campaign_id: String?
+
+        attr_accessor sender_value: String?
+
+        attr_accessor status: String?
+
+        attr_reader type: String?
+
+        def type=: (String) -> String
+
+        def initialize: (
+          ?area_code: String?,
+          ?campaign_id: String?,
+          ?sender_value: String?,
+          ?status: String?,
+          ?type: String
+        ) -> void
+
+        def to_hash: -> {
+          area_code: String?,
+          campaign_id: String?,
+          sender_value: String?,
+          status: String?,
+          type: String
+        }
+      end
+    end
+  end
+end

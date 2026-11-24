@@ -48,10 +48,12 @@ module Sentdm
       sig { params(rcs: T.nilable(Sentdm::Channels::RcsAgent::OrHash)).void }
       attr_writer :rcs
 
-      sig { returns(T.nilable(T::Array[Sentdm::Channels::SMSMarket])) }
+      sig { returns(T.nilable(T::Array[Sentdm::Channels::ChannelMarket])) }
       attr_reader :sms
 
-      sig { params(sms: T::Array[Sentdm::Channels::SMSMarket::OrHash]).void }
+      sig do
+        params(sms: T::Array[Sentdm::Channels::ChannelMarket::OrHash]).void
+      end
       attr_writer :sms
 
       # The numbers this profile carries phone calls on, one entry per number, or empty
@@ -85,7 +87,7 @@ module Sentdm
           customer_id: T.nilable(String),
           mms: T::Array[Sentdm::MmsMarket::OrHash],
           rcs: T.nilable(Sentdm::Channels::RcsAgent::OrHash),
-          sms: T::Array[Sentdm::Channels::SMSMarket::OrHash],
+          sms: T::Array[Sentdm::Channels::ChannelMarket::OrHash],
           voice: T::Array[Sentdm::Channels::VoiceNumber::OrHash],
           whatsapp: T.nilable(Sentdm::Channels::WhatsappChannel::OrHash)
         ).returns(T.attached_class)
@@ -138,7 +140,7 @@ module Sentdm
             customer_id: T.nilable(String),
             mms: T::Array[Sentdm::MmsMarket],
             rcs: T.nilable(Sentdm::Channels::RcsAgent),
-            sms: T::Array[Sentdm::Channels::SMSMarket],
+            sms: T::Array[Sentdm::Channels::ChannelMarket],
             voice: T::Array[Sentdm::Channels::VoiceNumber],
             whatsapp: T.nilable(Sentdm::Channels::WhatsappChannel)
           }

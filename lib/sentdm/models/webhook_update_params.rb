@@ -37,7 +37,7 @@ module Sentdm
       # @!attribute is_inheritable
       #   Makes this webhook inheritable by the organization's sender profiles (see
       #   create), or stops it being inheritable. Omit or pass null to keep it as it is.
-      #   Only a version 2 webhook can be inheritable.
+      #   Only a version 2 webhook can be inheritable, and never an agent's.
       #
       #   @return [Boolean, nil]
       optional :is_inheritable, Sentdm::Internal::Type::Boolean, nil?: true
