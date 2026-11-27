@@ -2,6 +2,7 @@ module Sentdm
   module Resources
     class SenderProfiles
       def create: (
+        ?agent_template_id: String?,
         ?billing: Sentdm::SenderProfileBillingRequest?,
         ?channels: Sentdm::SenderProfileChannels?,
         ?compliance: Sentdm::Channels::MarketCompliance,

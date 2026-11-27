@@ -9,6 +9,21 @@ module Sentdm
       #   @return [String, nil]
       optional :id, String
 
+      # @!attribute agent_error
+      #   Why no agent was made from agent_template_id, when the profile was created and
+      #   the agent could not be: the profile stands, and the agent can be made with POST
+      #   /v3/agents and template_id.
+      #
+      #   @return [String, nil]
+      optional :agent_error, String, nil?: true
+
+      # @!attribute agent_id
+      #   The draft agent made from agent_template_id when the profile was created. Only
+      #   on that answer, and left out when none was asked for.
+      #
+      #   @return [String, nil]
+      optional :agent_id, String, nil?: true
+
       # @!attribute api_key
       #   The API key for this profile.
       #
@@ -98,7 +113,7 @@ module Sentdm
       #   @return [String, nil]
       optional :short_name, String, nil?: true
 
-      # @!method initialize(id: nil, api_key: nil, billing: nil, channels: nil, compliance: nil, created_at: nil, description: nil, name: nil, notifications: nil, organization_id: nil, short_name: nil)
+      # @!method initialize(id: nil, agent_error: nil, agent_id: nil, api_key: nil, billing: nil, channels: nil, compliance: nil, created_at: nil, description: nil, name: nil, notifications: nil, organization_id: nil, short_name: nil)
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::SenderProfile} for more details.
       #
@@ -113,6 +128,10 @@ module Sentdm
       #   into one.
       #
       #   @param id [String]
+      #
+      #   @param agent_error [String, nil] Why no agent was made from agent_template_id, when the profile was created and t
+      #
+      #   @param agent_id [String, nil] The draft agent made from agent_template_id when the profile was created. Only o
       #
       #   @param api_key [String, nil] The API key for this profile.
       #
