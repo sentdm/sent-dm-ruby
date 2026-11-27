@@ -11,6 +11,15 @@ module Sentdm
           T.any(Sentdm::SenderProfileCreateParams, Sentdm::Internal::AnyHash)
         end
 
+      # One of the organization's agent templates (GET /v3/agents/templates with the
+      # organization's key) to make an agent from on the new profile as soon as it
+      # exists. The agent is a draft with the template's definition; give it the
+      # profile's numbers and activate it through /v3/agents with the profile's
+      # x-profile-id. Agents must be enabled for the organization. A sender profile's
+      # own template cannot be used: it is that profile's alone.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_template_id
+
       # Who pays for what a sender profile sends.
       #
       # Ownership reads the same way as BrandRequest and CampaignRequest: inherit: true
@@ -105,6 +114,7 @@ module Sentdm
 
       sig do
         params(
+          agent_template_id: T.nilable(String),
           billing: T.nilable(Sentdm::SenderProfileBillingRequest::OrHash),
           channels: T.nilable(Sentdm::SenderProfileChannels::OrHash),
           compliance: Sentdm::Channels::MarketCompliance::OrHash,
@@ -118,6 +128,13 @@ module Sentdm
         ).returns(T.attached_class)
       end
       def self.new(
+        # One of the organization's agent templates (GET /v3/agents/templates with the
+        # organization's key) to make an agent from on the new profile as soon as it
+        # exists. The agent is a draft with the template's definition; give it the
+        # profile's numbers and activate it through /v3/agents with the profile's
+        # x-profile-id. Agents must be enabled for the organization. A sender profile's
+        # own template cannot be used: it is that profile's alone.
+        agent_template_id: nil,
         # Who pays for what a sender profile sends.
         #
         # Ownership reads the same way as BrandRequest and CampaignRequest: inherit: true
@@ -170,6 +187,7 @@ module Sentdm
       sig do
         override.returns(
           {
+            agent_template_id: T.nilable(String),
             billing: T.nilable(Sentdm::SenderProfileBillingRequest),
             channels: T.nilable(Sentdm::SenderProfileChannels),
             compliance: Sentdm::Channels::MarketCompliance,

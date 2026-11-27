@@ -3,6 +3,8 @@ module Sentdm
     type sender_profile =
       {
         id: String,
+        agent_error: String?,
+        agent_id: String?,
         api_key: String?,
         billing: Sentdm::SenderProfileBilling?,
         channels: Sentdm::ChannelsState?,
@@ -19,6 +21,10 @@ module Sentdm
       attr_reader id: String?
 
       def id=: (String) -> String
+
+      attr_accessor agent_error: String?
+
+      attr_accessor agent_id: String?
 
       attr_accessor api_key: String?
 
@@ -46,6 +52,8 @@ module Sentdm
 
       def initialize: (
         ?id: String,
+        ?agent_error: String?,
+        ?agent_id: String?,
         ?api_key: String?,
         ?billing: Sentdm::SenderProfileBilling?,
         ?channels: Sentdm::ChannelsState?,
@@ -60,6 +68,8 @@ module Sentdm
 
       def to_hash: -> {
         id: String,
+        agent_error: String?,
+        agent_id: String?,
         api_key: String?,
         billing: Sentdm::SenderProfileBilling?,
         channels: Sentdm::ChannelsState?,
