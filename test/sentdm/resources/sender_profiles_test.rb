@@ -79,6 +79,8 @@ class Sentdm::Test::Resources::SenderProfilesTest < Sentdm::Test::ResourceTest
     assert_pattern do
       row => {
         id: String | nil,
+        agent_error: String | nil,
+        agent_id: String | nil,
         api_key: String | nil,
         billing: Sentdm::SenderProfileBilling | nil,
         channels: Sentdm::ChannelsState | nil,
