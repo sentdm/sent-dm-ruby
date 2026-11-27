@@ -7,6 +7,17 @@ module Sentdm
       extend Sentdm::Internal::Type::RequestParameters::Converter
       include Sentdm::Internal::Type::RequestParameters
 
+      # @!attribute agent_template_id
+      #   One of the organization's agent templates (GET /v3/agents/templates with the
+      #   organization's key) to make an agent from on the new profile as soon as it
+      #   exists. The agent is a draft with the template's definition; give it the
+      #   profile's numbers and activate it through /v3/agents with the profile's
+      #   x-profile-id. Agents must be enabled for the organization. A sender profile's
+      #   own template cannot be used: it is that profile's alone.
+      #
+      #   @return [String, nil]
+      optional :agent_template_id, String, nil?: true
+
       # @!attribute billing
       #   Who pays for what a sender profile sends.
       #
@@ -88,9 +99,11 @@ module Sentdm
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(billing: nil, channels: nil, compliance: nil, description: nil, name: nil, notifications: nil, sandbox: nil, short_name: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(agent_template_id: nil, billing: nil, channels: nil, compliance: nil, description: nil, name: nil, notifications: nil, sandbox: nil, short_name: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Sentdm::Models::SenderProfileCreateParams} for more details.
+      #
+      #   @param agent_template_id [String, nil] One of the organization's agent templates (GET /v3/agents/templates with the org
       #
       #   @param billing [Sentdm::Models::SenderProfileBillingRequest, nil] Who pays for what a sender profile sends.
       #

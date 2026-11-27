@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.49.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.48.0...v0.49.0) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** markets move to channels.markets and 10DLC numbers to markets.add_numbers
+
+### Features
+
+* **api:** markets move to channels.markets and 10DLC numbers to markets.add_numbers ([5d61108](https://github.com/sentdm/sent-dm-ruby/commit/5d6110899821312ba6cf25f6369b6c6ded498738))
+
 ## [0.48.0](https://github.com/sentdm/sent-dm-ruby/compare/v0.47.0...v0.48.0) (2026-11-12)
 
 

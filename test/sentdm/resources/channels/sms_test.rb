@@ -9,12 +9,12 @@ class Sentdm::Test::Resources::Channels::SMSTest < Sentdm::Test::ResourceTest
     response = @sent.channels.sms.create(number_type: :TEN_DLC)
 
     assert_pattern do
-      response => Sentdm::Models::Channels::SMSCreateResponse
+      response => Sentdm::Channels::APIResponseOfChannelMarket
     end
 
     assert_pattern do
       response => {
-        data: Sentdm::Models::Channels::SMSCreateResponse::Data | nil,
+        data: Sentdm::Channels::ChannelMarket | nil,
         error: Sentdm::ErrorDetail | nil,
         meta: Sentdm::APIMeta | nil,
         success: Sentdm::Internal::Type::Boolean | nil

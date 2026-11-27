@@ -216,6 +216,17 @@ module Sentdm
       # needs. A carrier approval no API call can trigger is arranged offline, so the
       # status reports `PROVISIONING` until it is.
       #
+      # ## An agent
+      #
+      # `agent_template_id` (optional) names one of your organization's agent templates
+      # (`GET /v3/agents/templates`). As soon as the profile exists, a draft agent is
+      # made from it on the profile, and the answer's `agent_id` is that agent: give it
+      # the profile's numbers and activate it through `/v3/agents` with the profile's
+      # `x-profile-id`. The template is checked before the profile is made: one that is
+      # not your organization's is a `404`, agents not enabled a `403`, and no profile
+      # is made. Should the agent fail once the profile exists, the profile stands and
+      # `agent_error` says why; make the agent with `POST /v3/agents` and `template_id`.
+      #
       # ## Responses
       #
       # `201` when the profile is complete on return — the fully-inherited case, where
@@ -229,7 +240,9 @@ module Sentdm
       # rejects. `502` when Meta could not be reached to verify the WhatsApp account;
       # nothing was created, so retry.
       #
-      # @overload create(billing: nil, channels: nil, compliance: nil, description: nil, name: nil, notifications: nil, sandbox: nil, short_name: nil, idempotency_key: nil, request_options: {})
+      # @overload create(agent_template_id: nil, billing: nil, channels: nil, compliance: nil, description: nil, name: nil, notifications: nil, sandbox: nil, short_name: nil, idempotency_key: nil, request_options: {})
+      #
+      # @param agent_template_id [String, nil] Body param: One of the organization's agent templates (GET /v3/agents/templates
       #
       # @param billing [Sentdm::Models::SenderProfileBillingRequest, nil] Body param: Who pays for what a sender profile sends.
       #

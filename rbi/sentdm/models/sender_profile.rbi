@@ -12,6 +12,17 @@ module Sentdm
       sig { params(id: String).void }
       attr_writer :id
 
+      # Why no agent was made from agent_template_id, when the profile was created and
+      # the agent could not be: the profile stands, and the agent can be made with POST
+      # /v3/agents and template_id.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_error
+
+      # The draft agent made from agent_template_id when the profile was created. Only
+      # on that answer, and left out when none was asked for.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :agent_id
+
       # The API key for this profile.
       #
       # Returned by create and by nothing else. It is shown once; a read that repeated
@@ -114,6 +125,8 @@ module Sentdm
       sig do
         params(
           id: String,
+          agent_error: T.nilable(String),
+          agent_id: T.nilable(String),
           api_key: T.nilable(String),
           billing: T.nilable(Sentdm::SenderProfileBilling::OrHash),
           channels: T.nilable(Sentdm::ChannelsState::OrHash),
@@ -128,6 +141,13 @@ module Sentdm
       end
       def self.new(
         id: nil,
+        # Why no agent was made from agent_template_id, when the profile was created and
+        # the agent could not be: the profile stands, and the agent can be made with POST
+        # /v3/agents and template_id.
+        agent_error: nil,
+        # The draft agent made from agent_template_id when the profile was created. Only
+        # on that answer, and left out when none was asked for.
+        agent_id: nil,
         # The API key for this profile.
         #
         # Returned by create and by nothing else. It is shown once; a read that repeated
@@ -184,6 +204,8 @@ module Sentdm
         override.returns(
           {
             id: String,
+            agent_error: T.nilable(String),
+            agent_id: T.nilable(String),
             api_key: T.nilable(String),
             billing: T.nilable(Sentdm::SenderProfileBilling),
             channels: T.nilable(Sentdm::ChannelsState),
